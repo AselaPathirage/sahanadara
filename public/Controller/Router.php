@@ -12,7 +12,7 @@ class Router{
                                     'DivisionalSecratarists'=>array(),
                                     'DMC'=>array(),
                                     'GramaNiladari'=>array(),
-                                    'InventoryManager'=>array('SafeHouse','Inventory','Report'),
+                                    'InventoryManager'=>array('SafeHouse','Inventory','Report','Notice'),
                                     'ResponsiblePerson'=>array(),
                                 );
     protected $currentController;
@@ -27,7 +27,7 @@ class Router{
             }
         }else if(array_key_exists($url[0],Router::$routes)){
             //print_r($url);
-            if(count($url)>=2){
+            if(count($url)>2){
                 if(in_array($url[1],Router::$routes[$url[0]])){
                     if(file_exists('public/Views/'.$url[0].'/'.$url[1].'/'.$url[2].'.php')){
                         $this->currentController = 'public/Views/'.$url[0].'/'.$url[1].'/'.$url[2].'.php';
@@ -43,6 +43,13 @@ class Router{
                         $this->currentController = 'public/Views/404.php';
                     }                    
                 }
+            }else if(count($url)==2){
+                if(file_exists('public/Views/'.$url[0].'/'.$url[1].'.php')){
+                        
+                    $this->currentController = 'public/Views/'.$url[0].'/'.$url[1].'.php';
+                }else{
+                    $this->currentController = 'public/Views/'.$url[0].'/'.$url[1].'/index.php';
+                }   
             }else{
                 $this->currentController = 'public/Views/'.$url[0].'/index.php';
             }

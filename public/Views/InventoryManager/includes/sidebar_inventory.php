@@ -5,32 +5,32 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="#" class="active">
+            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/" id="Dashboard">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="#">
+            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/maintain" id="Maintain">
                 <i class='bx bx-box'></i>
                 <span class="links_name">Maintain</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-list-ul'></i>
+            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/AddNewItem" id="Add">
+                <i class='bx bx-add-to-queue' ></i>
                 <span class="links_name">Add New Item</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-pie-chart-alt-2'></i>
+            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/AidRequests" id="Aid">
+                <i class='bx bx-first-aid'></i>
                 <span class="links_name">Aid Requests</span>
             </a>
         </li>
         <li>
-            <a href="#">
-                <i class='bx bx-coin-stack'></i>
+            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/ServiceRequests" id="Service">
+                <i class='bx bxs-cog' ></i>
                 <span class="links_name">Service Requests</span>
             </a>
         </li>

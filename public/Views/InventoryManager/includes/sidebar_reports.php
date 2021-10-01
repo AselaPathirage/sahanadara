@@ -5,14 +5,14 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="#" class="active">
-                <i class='bx bx-grid-alt'></i>
+            <a href="#">
+                <i class='bx bxs-report' ></i>
                 <span class="links_name">Inventory Report</span>
             </a>
         </li>
         <li>
             <a href="#">
-                <i class='bx bx-box'></i>
+                <i class='bx bxs-report' ></i>
                 <span class="links_name">Safe House Report</span>
             </a>
         </li>

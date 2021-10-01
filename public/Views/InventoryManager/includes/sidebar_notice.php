@@ -5,14 +5,14 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="#" class="active">
-                <i class='bx bx-grid-alt'></i>
+            <a href="#">
+                <i class='bx bx-search-alt-2' ></i>
                 <span class="links_name">Search Notice</span>
             </a>
         </li>
         <li>
             <a href="#">
-                <i class='bx bx-box'></i>
+                <i class='bx bx-note' ></i>
                 <span class="links_name">Add Notice</span>
             </a>
         </li>

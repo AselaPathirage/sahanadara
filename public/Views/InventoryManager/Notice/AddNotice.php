@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Inventory Manager - Inventory </title>
+    <title> Inventory Manager - Notice </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -15,7 +15,7 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/InventoryManager/includes/sidebar_inventory.php');
+        include_once('./public/Views/InventoryManager/includes/sidebar_notice.php');
      ?>
     <section class="dashboard-section">
         <?php 
@@ -26,13 +26,12 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
-
         </div>
     </section>
     <script>
-        var thisPage = "#Aid";
+        var thisPage = "#add";
         $(document).ready(function() {
-            $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
+            $("#search,#add").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

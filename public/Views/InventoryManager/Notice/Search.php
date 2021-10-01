@@ -29,6 +29,17 @@
         </div>
     </section>
     <script>
+        var thisPage = "#search";
+        $(document).ready(function() {
+            $("#search,#add").each(function() {
+                if ($(this).hasClass('active')){
+                    $(this).removeClass("active");
+                }
+                $(thisPage).addClass("active");
+            });
+
+        });
+
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {

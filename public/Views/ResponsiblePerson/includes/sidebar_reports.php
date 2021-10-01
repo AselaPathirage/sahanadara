@@ -7,15 +7,15 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/InventoryManager/Report/InventoryReport" id="inventory">
+            <a href="/<?php echo baseUrl; ?>/ResponsiblePerson/Report/InventoryReport" id="inventory">
                 <i class='bx bxs-report' ></i>
-                <span class="links_name">Inventory Report</span>
+                <span class="links_name">Safe House Report</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/InventoryManager/Report/SafeHouseReport" id="safe">
+            <a href="/<?php echo baseUrl; ?>/ResponsiblePerson/Report/SafeHouseReport" id="safe">
                 <i class='bx bxs-report' ></i>
-                <span class="links_name">Safe House Report</span>
+                <span class="links_name">AID Requests Report</span>
             </a>
         </li>
     </ul>

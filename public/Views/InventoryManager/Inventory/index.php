@@ -74,9 +74,6 @@
     <script>
         var thisPage = "#Dashboard";
         $(document).ready(function() {
-            if ($("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").is(".active")){
-                console.log($(this));
-            }
             $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");

@@ -33,9 +33,9 @@ this is home<br>
 function getCompany(){
     var output = $.parseJSON($.ajax({
         type: "POST",
-        url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=Home&method=viewDonations",
+        url: "localhost/<?php echo baseUrl; ?>/Home_viewDonations/1234",
         dataType: "json",
-        data : {'key': 'ABCD'},
+        data : JSON.stringify({'key': 'ABCD'}),
         cache: false,
         async: false
     }).responseText);

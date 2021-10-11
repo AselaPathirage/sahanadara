@@ -13,25 +13,6 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-#contextMenu {
-  position: absolute;
-  display: none
-}
-
-.wrap{
-  width:90%;
-  display:block;
-  margin:0 auto;
-}
-
-table{border:1px solid rgba(221, 221, 221, 1);}
-
-tr:nth-child(even) {background: #F5F5F5}
-
-tr{
-  position:relative;
-}
-
 tr:hover{
   background:#c9e8f7;
   position:relative;
@@ -107,6 +88,7 @@ tr:hover{
                         </tbody>
                     </table>
                 </div>
+        </div>
         </div>
         </div>
     </section>

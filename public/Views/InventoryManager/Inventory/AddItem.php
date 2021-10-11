@@ -15,9 +15,8 @@ this is add item<br>
 <a href="/<?php echo baseUrl; ?>/b">b</a><br>
 <br><br>
 <form id='add' name="add" method="POST">
-    
+    <input type="text" name="company">
     <input type="text" name="email">
-    <input type="hidden" name="key" value="ABCD">
     <input type="submit" value="submit">   
 </form>
 <br>
@@ -37,6 +36,8 @@ var output;
             $("#add").submit(function(e) {
                 e.preventDefault();
                 var str = $("form").serialize();
+                str = str.concat('&key=ABCD');
+                //var array = {'key':'ABCD'}
                 console.log(str);
                 $.ajax({
 					type: "POST",
@@ -65,6 +66,7 @@ var output;
                 cache: false,
                 async: false
             }).responseText);
+            console.log(output);
             var table = document.getElementById("trow");
             for (var i = 0; i < output.length; i++){
                 let obj = output[i];

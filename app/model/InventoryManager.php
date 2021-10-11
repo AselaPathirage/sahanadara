@@ -4,10 +4,12 @@ class InventoryManager extends Noticer{
         parent::__construct($con);
     }
 
-    public function addCompany($companyName,$email){
+    public function addCompany($data){
+        $companyName = $data[''];
+        $email = $data[''];
         $sql = "INSERT INTO `company` (`consumerId`, `caompanyName`, `email`, `web`, `pass`, `companyState`, `authcode`, `username`) VALUES (NULL, '$companyName', '$email', NULL, NULL, NULL, NULL, NULL);";
         $this->connection->query($sql);
-        echo json_encode("{'code':200}");
+        echo json_encode("{'code':$sql}");
     }
     public function updateCompany($newValue,$id){
         $sql = "UPDATE company set caompanyName='$newValue' WHERE  consumerId = $id";

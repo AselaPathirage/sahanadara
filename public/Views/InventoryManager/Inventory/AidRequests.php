@@ -80,12 +80,13 @@
                                     <option>Roger</option>
                                 </select>
                             </th>
-                            <th>Time Period
-                                <select id="status-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Ascending</option>
-                                    <option>Descending </option>
-                                </select>
+                            <th>
+                                        <label for="birthday">Starting:</label>
+                                        <input type="date" id="birthday" name="birthday">
+                            </th>
+                            <th>
+                                        <label for="birthday">Ending:</label>
+                                        <input type="date" id="birthday" name="birthday">   
                             </th>
                             <th>Status
                                 <select id="milestone-filter" class="form-control">
@@ -98,7 +99,7 @@
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
                             <th>
-                                <input type="submit" id="search" class="form-control">
+                                <input type="submit" id="search" class="form-control" value="View">
                             </th>
                         </tr>
                     </thead>

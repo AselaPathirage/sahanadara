@@ -15,8 +15,9 @@ this is add item<br>
 <a href="/<?php echo baseUrl; ?>/b">b</a><br>
 <br><br>
 <form id='add' name="add" method="POST">
-    <input type="text" name="company">
+    
     <input type="text" name="email">
+    <input type="hidden" name="key" value="ABCD">
     <input type="submit" value="submit">   
 </form>
 <br>
@@ -60,6 +61,7 @@ var output;
                 type: "POST",
                 url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=Home&method=viewDonations",
                 dataType: "json", 
+                data : {'key': 'ABCD'}, 
                 cache: false,
                 async: false
             }).responseText);
@@ -87,7 +89,7 @@ var output;
                 $.ajax({
 					type: "POST",
 					url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=InventoryManager&method=updateCompany",
-					data: {person,id}, 
+					data: {'key': 'ABCD',person,id}, 
                     //data:JSON.stringify(str),
 					cache: false,
 					success: function(result) {

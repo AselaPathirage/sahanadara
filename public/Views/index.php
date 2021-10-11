@@ -34,10 +34,13 @@ function getCompany(){
     var output = $.parseJSON($.ajax({
         type: "POST",
         url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=Home&method=viewDonations",
-        dataType: "json", 
+        dataType: "json",
+        data : {'key': 'ABCD'},
         cache: false,
         async: false
     }).responseText);
+    console.log(output);
+    //debugger;
     var table = document.getElementById("myTable");
     for (var i = 0; i < output.length; i++){
         let obj = output[i];

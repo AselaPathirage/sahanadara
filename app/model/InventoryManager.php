@@ -14,4 +14,14 @@ class InventoryManager extends Noticer{
         $this->connection->query($sql);
         echo json_encode("{'code':$sql}");
     }
+    public function getItem(){
+        $sql = "SELECT * FROM `item`";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
 }

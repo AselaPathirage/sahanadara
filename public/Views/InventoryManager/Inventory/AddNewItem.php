@@ -95,7 +95,6 @@ tr:hover{
     <script>
         var thisPage = "#Add";
         $(document).ready(function() {
-            getItem();
             $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
@@ -109,34 +108,6 @@ tr:hover{
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
-        }
-        
-        function getItem(){
-            output = $.parseJSON($.ajax({
-                type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=InventoryManager&method=getItem",
-                dataType: "json", 
-                data : {'key': 'ABCD'}, 
-                cache: false,
-                async: false
-            }).responseText);
-            console.log(output);
-            var table = document.getElementById("item-list-tbl");
-            for (var i = 0; i < output.length; i++){
-                let obj = output[i];
-                let row = table.insertRow(-1);
-                let cell0 = row.insertCell(-1);
-                let cell1 = row.insertCell(-1);
-                let cell2 = row.insertCell(-1);
-                let cell3 = row.insertCell(-1);
-                let cell4 = row.insertCell(-1);
-                var attribute = document.createElement("button");
-                attribute.innerHTML = "update";
-                attribute.setAttribute("onclick", "updateCompany("+ i +")");
-                cell1.innerHTML = obj['itemName'];
-                cell2.innerHTML = obj['itemType'];
-                //cell3.appendChild(attribute);
-            }
         }
     </script>
 </body>

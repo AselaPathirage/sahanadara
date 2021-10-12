@@ -19,7 +19,8 @@ class Core{
             if (count($parameters)==0) {
                 $this->params = [];
             }
-            call_user_func_array([$this->currentModel, $this->currentMethod], $this->params);
+            
+            call_user_func_array([$this->currentModel, $this->currentMethod], array($this->params));
         }
         public function filterRequest(){
             global $errorCode;
@@ -55,8 +56,14 @@ class Core{
             }
         }
         public function  setParams(){
+            global $errorCode;
             $json = file_get_contents('php://input');
+            //echo $json;exit();
 		    $this->params = json_decode($json,true);
+            if(count($this->params)<1){
+                echo json_encode("{'code':".$errorCode['unknownError']."}");
+                exit();    
+            }
         }
         public function  setClass($class){
             $this->currentModel = $class;

@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -73,6 +74,7 @@ var output;
                 async: false
             }).responseText);
             console.log(output);
+            console.log(JSON.stringify({'key': 'ABCD'}));
             var table = document.getElementById("trow");
             for (var i = 0; i < output.length; i++){
                 let obj = output[i];

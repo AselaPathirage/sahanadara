@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Inventory Manager - Notice </title>
+    <title> Inventory Manager - Inventory </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -13,6 +13,43 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+    .radio-custom {
+        opacity: 0;
+        position: absolute;   
+    }
+    .radio-custom, .radio-custom-label {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 5px;
+        cursor: pointer;
+    }
+    .radio-custom-label {
+        position: relative;
+    }
+    .radio-custom + .radio-custom-label:before {
+        content: '';
+        background: #fff;
+        border: 2px solid rgb(0, 0, 0);
+        display: inline-block;
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        padding: 2px;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .radio-custom + .radio-custom-label:before {
+        border-radius: 10%;
+    }
+
+    .radio-custom:checked + .radio-custom-label:before {
+        content: "\E9A4";
+        font-family: 'boxicons';
+        color: #000;
+    }
+    .radio-custom:focus + .radio-custom-label {
+    outline: 1px solid #ddd; /* focus style */
+    }
     .create{
         background-color: rgb(148, 215, 190);
         height: 50px;
@@ -51,7 +88,7 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/InventoryManager/includes/sidebar_notice.php');
+        include_once('./public/Views/InventoryManager/includes/sidebar_inventory.php');
      ?>
     <section class="dashboard-section">
         <?php 
@@ -59,8 +96,8 @@
         ?>
         <div class="space"></div>
         <div class="container">
-        <div class="box">
-                <center><h1>Donation Request</h1></center>
+            <div class="box">
+                <center><h1>Service Request Form - Kamburupitiya</h1></center>
                 <form>
                 <fieldset>
                         <div style="padding-left:15% ;">
@@ -68,22 +105,22 @@
                                             <table style="border: none !important;width:70%;">
                                                 <tr>
                                                     <td>Requesting for</td>
-                                                    <td><input type="text" id="your_name" name="yourname"/></td>
+                                                    <td><input type="text" id="your_name" name="yourname" disabled='true'/></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Required Date</td>
-                                                    <td><input type="date" id="your_name" name="yourname"  style="width: 100%;"></td>
+                                                    <td><input type="date" id="your_name" name="yourname"  style="width: 100%;" disabled='true'></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Note</td>
-                                                    <td><textarea id="notes" name="drivernotes" rows="8" cols="50"></textarea></td>
+                                                    <td><textarea id="notes" name="drivernotes" rows="8" cols="50" disabled='true'></textarea></td>
                                                 </tr>
                                             </table>
                                             <div style="float: right;width:30%">
                                                 <table style="border: none !important;width:100%;">
                                                     <tr>
-                                                        <td><input type="reset" class="view" value="Cancel"></td>
-                                                        <td><input type="submit" class="create" value="Create"></td>
+                                                        <td><input type="button" class="view" value="Decline"></td>
+                                                        <td><input type="button" class="create" value="Accept"></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -95,9 +132,9 @@
         </div>
     </section>
     <script>
-        var thisPage = "#add";
+        var thisPage = "#Service";
         $(document).ready(function() {
-            $("#search,#add").each(function() {
+            $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

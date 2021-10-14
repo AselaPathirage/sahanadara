@@ -8,10 +8,12 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/searchList.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <style>
         .generate{
             width: 100px;
@@ -28,7 +30,7 @@
         }
         td{
             border: none;
-            text-align: center;
+            text-align: left;
             vertical-align: middle;
         }
         .reset{
@@ -40,8 +42,11 @@
         .reset:hover{
             background-color:rgb(161, 40, 14);
         }
+        .combo {
+            max-width:350px;
+        }
     </style>
-    </head>
+</head>
 <body>
     <?php
         include_once('./public/Views/ResponsiblePerson/includes/sidebar_reports.php');
@@ -52,27 +57,41 @@
         ?>
         <div class="space"></div>
         <div class="container">
-        <div class="box">
-                <center><h1>Safe House Report</h1></center>
-                <h3>Time Period</h3>
+            <div class="box">
+                <center><h1>AID Request Report</h1></center>
                 <form>
                     <div style="display:flex;">
-                            <div style="width: 70%;padding-left:10%">
+                            <div style="width: 70%;">
                                 <table style="border: none !important;width:100%;">
-                                    <tr>
-                                        <td>
-                                        <label for="your_name">Starting Date</label>
+                                   <tr>
+                                       <td colspan="2"><h3>Time Period</h3></td>
+                                       <td><h3>Required Details</h3></td>
+                                   </tr>
+                                   <tr>
+                                        <td><label for="your_name">Starting Date</label></td>
+                                        <td><input type="date" id="birthday" name="birthday"></td>
+                                        <td rowspan="2">
+                                                <label id="combo3-label" >Requested Items</label>
+                                                <span id="combo3-remove" style="display: none">remove</span> <!-- used as descriptive text for option buttons; if used within the button text itself, it ends up being read with the input name -->
+                                                <div class="combo js-inline-buttons">
+                                                    <div role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-owns="listbox3" class="input-wrapper multiselect-inline">
+                                                    <ul class="selected-options" aria-live="assertive" aria-atomic="false" aria-relevant="additions removals" id="combo3-selected"></ul>
+                                                    <input
+                                                        aria-activedescendant=""
+                                                        aria-autocomplete="list"
+                                                        aria-labelledby="combo3-label combo3-selected"
+                                                        id="combo3"
+                                                        class="combo-input"
+                                                        type="text">
+                                                    </div>
+                                                    <div class="combo-menu" role="listbox" aria-multiselectable="true" id="listbox3"></div>
+                                                </div>
                                         </td>
-                                        <td>
-                                        <input type="date" id="birthday" name="birthday">
-                                        </td>
-                                        <td>
-                                        <label for="your_name">End Date</label>
-                                        </td>
-                                        <td>
-                                        <input type="date" id="birthday" name="birthday">
-                                        </td>
-                                    </tr>
+                                   </tr>
+                                   <tr>
+                                       <td style="vertical-align: top;"><label for="your_name">End Date</label></td>
+                                       <td style="vertical-align: top;"><input type="date" id="birthday" name="birthday"></td>
+                                   </tr>
                                 </table>
                             </div>
                             <div style="float: right;padding-left:5%">
@@ -84,7 +103,7 @@
                                         </tr>
                                         <tr>
                                             <td>
-                                            <input type="reset" class="reset" value="Cancel">
+                                            <input type="reset" id='reset' class="reset" value="Cancel">
                                             </td>
                                         </tr>
                                     </table> 
@@ -94,8 +113,9 @@
             </div>
         </div>
     </section>
+    <script  src="/<?php echo baseUrl; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
     <script>
-        var thisPage = "#safe";
+        var thisPage = "#inventory";
         $(document).ready(function() {
             $("#inventory,#safe").each(function() {
                 if ($(this).hasClass('active')){
@@ -110,6 +130,9 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        document.getElementById('reset').onclick = function() {
+            
         }
     </script>
 </body>

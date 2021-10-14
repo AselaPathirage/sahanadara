@@ -18,6 +18,7 @@
 </head>
 
 <body>
+
     <div id="page-container">
         <?php include './public/Views/landing_topnav.php'; ?>
         <section id="hero">
@@ -102,5 +103,6 @@
         });
     </script>
 </body>
+
 
 </html>

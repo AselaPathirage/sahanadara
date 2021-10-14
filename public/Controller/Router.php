@@ -1,4 +1,5 @@
 <?php
+
 class Router
 {
     protected static $defaultController = array(
@@ -11,8 +12,10 @@ class Router
         "donate" => "donate.php",
         "staff" => "staff.php",
         "about" => "about.php",
-        "forget" => "forget.php"
+        "forget" => "forget.php",
+      "Hello"=>"login.php",
     );
+
     protected static $routes = array(
         'Admin' => array(),
         'DisasterOfficer' => array(),

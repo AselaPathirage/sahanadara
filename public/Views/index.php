@@ -35,7 +35,7 @@ function getCompany(){
         type: "POST",
         url: "localhost/<?php echo baseUrl; ?>/Home_viewDonations/1234",
         dataType: "json",
-        data : JSON.stringify({'key': 'ABCD'}),
+        //data : JSON.stringify({'key': 'ABCD'}),
         cache: false,
         async: false
     }).responseText);

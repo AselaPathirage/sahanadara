@@ -106,10 +106,10 @@
                             </th>
 
                             <th style="width: 15%;text-align: center;">
-                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/serviceRequestForm" class="create">View</a>
+                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/viewNotice" class="create">View</a>
                             </th> 
                             <th style="width: 15%;text-align:center;">
-                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/viewRequest" class="view">Edit</a>
+                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
                             </th>
                             <th style="width: 15%;text-align:center;">
                                 <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/viewRequest" class="view">Remove</a>

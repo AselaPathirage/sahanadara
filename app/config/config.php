@@ -17,5 +17,6 @@ $errorCode = array(
                     'userKeyError' => 804,
                     'unknownError' => 805,
                     'success' => 806,
-                    'permissionError' => 807
+                    'permissionError' => 807,
+                    'jsonRequestNotFoundError' => 808
                     );

@@ -13,43 +13,6 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-    .radio-custom {
-        opacity: 0;
-        position: absolute;   
-    }
-    .radio-custom, .radio-custom-label {
-        display: inline-block;
-        vertical-align: middle;
-        margin: 5px;
-        cursor: pointer;
-    }
-    .radio-custom-label {
-        position: relative;
-    }
-    .radio-custom + .radio-custom-label:before {
-        content: '';
-        background: #fff;
-        border: 2px solid rgb(0, 0, 0);
-        display: inline-block;
-        vertical-align: middle;
-        width: 20px;
-        height: 20px;
-        padding: 2px;
-        margin-right: 10px;
-        text-align: center;
-    }
-    .radio-custom + .radio-custom-label:before {
-        border-radius: 10%;
-    }
-
-    .radio-custom:checked + .radio-custom-label:before {
-        content: "\E9A4";
-        font-family: 'boxicons';
-        color: #000;
-    }
-    .radio-custom:focus + .radio-custom-label {
-    outline: 1px solid #ddd; /* focus style */
-    }
     .create{
         background-color: rgb(148, 215, 190);
         height: 50px;

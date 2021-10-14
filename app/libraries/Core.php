@@ -2,6 +2,7 @@
 class Core{
         protected $currentModel = "Home";
         protected $currentMethod = "viewDonations";
+        protected $nonSecure = ['Home']; // releasing no login required classes
         protected $params = [];
         protected $connection; 
 
@@ -37,11 +38,8 @@ class Core{
                 }
                 $this->setClass($temp[0]);
                 if(!$this->authorization()){
-                    if(!strcmp($this->currentModel,"Home")){
-                        echo json_encode("{'code':".$errorCode['userKeyError']."}");
-                        
-                        exit();
-                    }
+                    echo json_encode("{'code':".$errorCode['userKeyError']."}");
+                    exit();
                 }
                 $this->currentModel =  new $this->currentModel($this->connection);
                 if(method_exists($this->currentModel,$temp[1])){
@@ -56,13 +54,13 @@ class Core{
             }
         }
         public function  setParams(){
-            global $errorCode;
+            global $errorCode;  
             $json = file_get_contents('php://input');
             //echo $json;exit();
 		    $this->params = json_decode($json,true);
-            if(count($this->params)<1){
-                echo json_encode("{'code':".$errorCode['unknownError']."}");
-                exit();    
+            //print_r($this->params);
+            if(is_null($this->params)){
+                $this->params = [];
             }
         }
         public function  setClass($class){
@@ -72,16 +70,16 @@ class Core{
             $this->currentMethod = $method;
         }
         public function  authorization(){
-            //echo json_encode("{'code':".$this->params['key']."}");
             if(isset($this->params['key'])){
                 $key = $this->params['key'];
-                
                 unset($this->params['key']);
                 if(isset($_SESSION['token'])){
                     if($_SESSION['token']==$key){
                         return true;
                     }
                 }
+            }else if(in_array($this->currentModel,$this->nonSecure)){
+                return true;
             }
             return false;
         }

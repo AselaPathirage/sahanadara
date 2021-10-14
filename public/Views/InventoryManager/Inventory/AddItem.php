@@ -20,6 +20,10 @@ this is add item<br>
     <input type="text" name="email">
     <input type="submit" value="submit">   
 </form>
+<form action="/<?php echo baseUrl; ?>/a?formControl=1" method="POST">
+<input type="hidden" name="check" value="workss">
+<input type="submit" name="submit">
+</form>
 <br>
 <table id="myTable" border="0">
 <thead>
@@ -69,12 +73,11 @@ var output;
                 type: "POST",
                 url: "localhost/<?php echo baseUrl; ?>/Home_viewDonations/1234",
                 dataType: "json", 
-                data : JSON.stringify({'key': 'ABCD'}),
+                //data : JSON.stringify({'key': 'ABCD'}),
                 cache: false,
                 async: false
             }).responseText);
             console.log(output);
-            console.log(JSON.stringify({'key': 'ABCD'}));
             var table = document.getElementById("trow");
             for (var i = 0; i < output.length; i++){
                 let obj = output[i];

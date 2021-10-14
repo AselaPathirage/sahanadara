@@ -1,0 +1,288 @@
+
+
+/* Navbar */
+.logo2 {
+    width: 20%;
+    padding: 0;
+    z-index: 1000;
+  }
+  
+  .navbar {
+    align-items: center;
+    background: #1D1D46;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    font-family: sans-serif;
+    padding: 5px 50px;
+    position:fixed;
+    width: 100%;
+    z-index: 1000;
+    
+  }
+  
+  .push-left {
+    margin-left: auto;
+  }
+  
+  /* Menu */
+  .hamburger {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: none;
+    outline: none;
+    height: 50px;
+    position: relative;
+    width: 50px;
+    color: #FFFFFF;
+    z-index: 1000;
+  }
+
+  .hamburger i{
+    font-size:25px;
+  }
+
+  @media screen and (max-width: 768px) {
+    .hamburger {
+      display: inline-block;
+    }
+  }
+  
+  .nav-menu {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    transition: all 0.25s ease-in;
+  }
+  @media screen and (max-width: 768px) {
+    .nav-menu {
+      background: #1D1D46;
+      flex-direction: column;
+      justify-content: center;
+      opacity: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      transform: translatey(-100%);
+      text-align: center;
+      color: #e6e0e0;
+      height:100vh;
+    }
+    .menu-active .nav-menu {
+      transform: translatey(0%);
+      opacity: 1;
+    }
+  }
+  .nav-menu .menu-item a {
+    color: #f3f3f3;
+    display: block;
+    line-height: 30px;
+    margin: 0px 10px;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+  .nav-menu .menu-item a:hover {
+    color: #c5c5c5;
+    text-decoration: none;
+  }
+  @media screen and (max-width: 768px) {
+    .nav-menu .menu-item a {
+      font-size: 20px;
+      margin: 8px;
+    }
+  }
+  
+  .sub-nav {
+    border: 1px solid #ccc;
+    display: none;
+    position: absolute;
+    background-color: #1D1D46;
+    padding: 5px 5px;
+    list-style: none;
+    width: 230px;
+  }
+  @media screen and (max-width: 768px) {
+    .sub-nav {
+      position: relative;
+      width: 100%;
+      display: none;
+      background-color: rgba(0, 0, 0, 0.2);
+      box-sizing: border-box;
+    }
+  }
+  
+  .nav__link:hover + .sub-nav {
+    display: block;
+  }
+  
+  .sub-nav:hover {
+    display: block;
+  }
+
+  .nav__link.round{
+    border: 1px solid white;
+    border-radius:5px;
+    padding :1px 6px;
+  }
+
+/* Hero section */
+
+#hero{
+  background-image: url(../img/images.jpg);
+  background-repeat: no-repeat;
+  width: 100%;
+  background-size: cover;
+  height:100vh;
+}
+
+.background{
+  position: relative;
+}
+
+.blueback{
+  position: absolute;
+  background-color: #3d3d9b94;
+  top: 0;
+  bottom: 0;
+  width:40%;
+  height: 100vh;
+  z-index: 900;
+  
+}
+
+.blueback .container{
+  color: #fff;
+  align-items: center;
+  vertical-align: middle;
+  position: relative;
+  top: 25%;
+  z-index: 1000;
+  padding-left: 30px;
+}
+
+.title{
+  color: #fff;
+  font-size:70px;
+}
+
+.sub{
+  font-size:30px;
+  margin-bottom: 20px;
+}
+
+.btn_donate{
+  padding: 5px 20px;
+  border-radius:4px;
+  text-decoration: none;
+  font-size: 20px;
+  color: #fff;
+  background-color: red;
+}
+
+.title_sec{
+  font-size:50px;
+}
+
+.help{
+  padding-top: 50px;
+}
+
+.box{
+  background-color:#c5c5c5;
+}
+
+.row{
+  justify-content: center;
+}
+
+.seemore{
+  background-color:#1D1D46;
+  color: #fff;
+  padding:3px 10px;
+  border-radius:4px;
+  text-decoration: none;
+}
+
+.donate{
+  padding: 2px 10px;
+  border-radius:4px;
+  text-decoration: none;
+  color: #fff;
+  background-color: red;
+}
+
+#page-container{
+  position: relative;
+  min-height: 100vh;
+}
+
+#page-content{
+  padding-bottom: 8rem;
+  padding-left: 20px;
+  padding-right:20px;
+}
+
+.heading_landing{
+  text-align: center;
+}
+
+
+/* about */
+#aboutsec {
+  padding: 0 50px 0 50px;
+  position: relative;
+}
+
+
+/* footer */
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  background-color:#1D1D46;
+  color: #fff;
+  height: 5rem;
+}
+
+.footer h3{
+  padding-top: 20px;
+  padding-bottom:0;
+}
+
+/* staff */
+.staff_bluebox {
+  background-color:#1D1D46;
+  color: #fff;
+  border-radius: 8px;
+  padding-bottom: 40px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+input[type=password]{
+  width:100%;
+    padding:5px;
+    box-sizing:border-box;
+}
+
+.login-bar {
+padding-top: 20px;
+text-align: left;
+}
+
+.forget-password{
+  text-decoration: none;
+  color: red;
+  margin-left: 10px;
+}
+
+.btn-login{
+  font-size:18px;
+  padding:5px 10px;
+
+}

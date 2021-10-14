@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,6 +20,10 @@ this is add item<br>
     <input type="text" name="email">
     <input type="submit" value="submit">   
 </form>
+<form action="/<?php echo baseUrl; ?>/a?formControl=1" method="POST">
+<input type="hidden" name="check" value="workss">
+<input type="submit" name="submit">
+</form>
 <br>
 <table id="myTable" border="0">
 <thead>
@@ -35,13 +40,21 @@ var output;
             getCompany();
             $("#add").submit(function(e) {
                 e.preventDefault();
-                var str = $("form").serialize();
-                console.log(str);
+                var str = [];
+                var formElement = document.querySelector("#add");
+                var formData = new FormData(formElement);
+                //var array = {'key':'ABCD'}
+                var object = {};
+                formData.forEach(function(value, key){
+                    object[key] = value;
+                });
+                object['key'] = 'ABCD';
+                var json = JSON.stringify(object);
+                console.log(json);
                 $.ajax({
 					type: "POST",
-					url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=InventoryManager&method=addCompany",
-					data: str, 
-                    //data:JSON.stringify(str),
+					url: "localhost/<?php echo baseUrl; ?>/InventoryManager_addCompany/1234",
+					data: json, 
 					cache: false,
 					success: function(result) {
 						$('#trow').empty();
@@ -58,11 +71,13 @@ var output;
         function getCompany(){
             output = $.parseJSON($.ajax({
                 type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=Home&method=viewDonations",
+                url: "localhost/<?php echo baseUrl; ?>/Home_viewDonations/1234",
                 dataType: "json", 
+                //data : JSON.stringify({'key': 'ABCD'}),
                 cache: false,
                 async: false
             }).responseText);
+            console.log(output);
             var table = document.getElementById("trow");
             for (var i = 0; i < output.length; i++){
                 let obj = output[i];
@@ -70,12 +85,17 @@ var output;
                 let cell1 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
                 var attribute = document.createElement("button");
+                var attribute2 = document.createElement("button");
                 attribute.innerHTML = "update";
+                attribute2.innerHTML = "delete";
                 attribute.setAttribute("onclick", "updateCompany("+ i +")");
+                attribute2.setAttribute("onclick", "deleteCompany("+ i +")");
                 cell1.innerHTML = obj['caompanyName'];
                 cell2.innerHTML = obj['email'];
                 cell3.appendChild(attribute);
+                cell4.appendChild(attribute2);
             }
         }
 
@@ -86,9 +106,9 @@ var output;
                 let id = output[val]['consumerId'];
                 $.ajax({
 					type: "POST",
-					url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=InventoryManager&method=updateCompany",
-					data: {person,id}, 
-                    //data:JSON.stringify(str),
+					url: "localhost/<?php echo baseUrl; ?>/InventoryManager_updateCompany/1234",
+					//data: {'key': 'ABCD',person,id}, 
+                    data:JSON.stringify({'key': 'ABCD',person,id}),
 					cache: false,
 					success: function(result) {
 						$('#trow').empty();
@@ -100,6 +120,24 @@ var output;
 					}
 				});
             } 
+        }
+        function deleteCompany(val){
+                let id = output[val]['consumerId'];
+                $.ajax({
+					type: "POST",
+					url: "localhost/<?php echo baseUrl; ?>/InventoryManager_deleteCompany/1234",
+					//data: {'key': 'ABCD',person,id}, 
+                    data:JSON.stringify({'key': 'ABCD',id}),
+					cache: false,
+					success: function(result) {
+						$('#trow').empty();
+                        console.log(result); 
+                        getCompany();
+					},
+					error: function(err) {
+						console.log(err);
+					}
+				});
         }
 </script>
 </html>

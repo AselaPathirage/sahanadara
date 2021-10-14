@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-    <?php
+    <?php 
         include_once('./public/Views/Admin/includes/admin_sidebar.php');
      ?>
     <section class="dashboard-section">

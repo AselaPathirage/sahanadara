@@ -4,6 +4,7 @@ class Router{
                                                 "test"=>"test.php",
                                                 "404"=>"404.php",
                                                 "a"=>"a.php",
+                                                "Hello"=>"login.php",
                                                 "b"=>"b.php");
     protected static $routes = array(
                                     'Admin'=>array(),

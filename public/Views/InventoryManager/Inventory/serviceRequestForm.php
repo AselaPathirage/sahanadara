@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Inventory Manager - Notice </title>
+    <title> Inventory Manager - Inventory </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -14,8 +14,45 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+    .radio-custom {
+        opacity: 0;
+        position: absolute;   
+    }
+    .radio-custom, .radio-custom-label {
+        display: inline-block;
+        vertical-align: middle;
+        margin: 5px;
+        cursor: pointer;
+    }
+    .radio-custom-label {
+        position: relative;
+    }
+    .radio-custom + .radio-custom-label:before {
+        content: '';
+        background: #fff;
+        border: 2px solid rgb(0, 0, 0);
+        display: inline-block;
+        vertical-align: middle;
+        width: 20px;
+        height: 20px;
+        padding: 2px;
+        margin-right: 10px;
+        text-align: center;
+    }
+    .radio-custom + .radio-custom-label:before {
+        border-radius: 10%;
+    }
+
+    .radio-custom:checked + .radio-custom-label:before {
+        content: "\E9A4";
+        font-family: 'boxicons';
+        color: #000;
+    }
+    .radio-custom:focus + .radio-custom-label {
+    outline: 1px solid #ddd; /* focus style */
+    }
     .create{
-        background-color: rgb(148, 215, 190);
+        background-color: rgb(132, 199, 174);
         height: 50px;
         width: 100%;
         padding: 14px;
@@ -24,10 +61,9 @@
         line-height: 25px;
         text-decoration: none;
         color: black;
-        font-weight: bold;
     }
     .create:hover{
-        background-color: rgb(163, 230, 205);   
+        background-color: rgb(153,176,255);   
     }
     .view{
         background-color:rgb(241,67,67);
@@ -38,10 +74,9 @@
         border-radius: 5px;
         line-height: 25px;
         color: black;
-        font-weight: bold;
     }
     .view:hover{
-        background-color: rgb(246, 139, 139);
+        background-color: rgb(138,123,217);
     }
     td{
             border: none;
@@ -52,7 +87,7 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/InventoryManager/includes/sidebar_notice.php');
+        include_once('./public/Views/InventoryManager/includes/sidebar_inventory.php');
      ?>
     <section class="dashboard-section">
         <?php 
@@ -60,42 +95,15 @@
         ?>
         <div class="space"></div>
         <div class="container">
-        <div class="box">
-                <center><h1>Donation Request</h1></center>
+            <div class="box">
+                <center><h1>Service Request Form - Kamburupitiya</h1></center>
                 <form>
                 <fieldset>
                         <div style="padding-left:15% ;">
                                     <div class="column" style="width:90%;float: none;padding-left:5%;padding-top:2px;">
                                             <table style="border: none !important;width:70%;">
                                                 <tr>
-                                                    <td>Title</td>
-                                                    <td><input type="text" id="your_name" name="yourname"/></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Number of Families</td>
-                                                    <td><input type="text" id="your_name" name="yourname"  style="width: 100%;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Number of People</td>
-                                                    <td><input type="text" id="your_name" name="yourname"  style="width: 100%;"></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Location</td>
-                                                    <td>
-                                                    <select id="assigned-user-filter" class="form-control">
-                                                        <option>321/A</option>
-                                                        <option>321/B</option>
-                                                        <option>321/C</option>
-                                                        <option>322</option>
-                                                    </select>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Description</td>
-                                                    <td><textarea id="notes" name="drivernotes" rows="8" cols="50"></textarea></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Required Items</td>
+                                                    <td>Requesting for</td>
                                                     <td>
                                                         <span id="combo3-remove" style="display: none">remove</span> <!-- used as descriptive text for option buttons; if used within the button text itself, it ends up being read with the input name -->
                                                         <div class="combo js-inline-buttons">
@@ -113,12 +121,31 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>Requesting From</td>
+                                                    <td>                                
+                                                        <select id="status-filter" class="form-control">
+                                                            <option>Any</option>
+                                                            <option>Matara</option>
+                                                            <option>Hakmana</option>
+                                                            <option>Kirinda</option>
+                                                        </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Required Date</td>
+                                                    <td><input type="date" id="your_name" name="yourname"  style="width: 100%;"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Note</td>
+                                                    <td><textarea id="notes" name="drivernotes" rows="8" cols="50"></textarea></td>
+                                                </tr>
                                             </table>
                                             <div style="float: right;width:30%">
                                                 <table style="border: none !important;width:100%;">
                                                     <tr>
-                                                        <td><input type="reset" class="view" value="Cancel"></td>
-                                                        <td><input type="submit" class="create" value="Create"></td>
+                                                        <td><input type="reset" class="view"></td>
+                                                        <td><input type="submit" class="create"></td>
                                                     </tr>
                                                 </table>
                                             </div>
@@ -131,9 +158,9 @@
     </section>
     <script  src="/<?php echo baseUrl; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
     <script>
-        var thisPage = "#add";
+        var thisPage = "#Service";
         $(document).ready(function() {
-            $("#search,#add").each(function() {
+            $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

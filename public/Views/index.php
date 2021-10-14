@@ -17,6 +17,7 @@ this is home<br>
 <a href="test">test</a><br>
 <a href="a">a</a><br>
 <a href="b">b</a><br>  
+<a href="Hello">Login</a><br>  
 <div id="show">sdszfsz</div>
 <table id="myTable" border="0">
 <thead>
@@ -33,11 +34,14 @@ this is home<br>
 function getCompany(){
     var output = $.parseJSON($.ajax({
         type: "POST",
-        url: "localhost/<?php echo baseUrl; ?>?api_key=1234&class=Home&method=viewDonations",
-        dataType: "json", 
+        url: "localhost/<?php echo baseUrl; ?>/Home_viewDonations/1234",
+        dataType: "json",
+        //data : JSON.stringify({'key': 'ABCD'}),
         cache: false,
         async: false
     }).responseText);
+    console.log(output);
+    //debugger;
     var table = document.getElementById("myTable");
     for (var i = 0; i < output.length; i++){
         let obj = output[i];

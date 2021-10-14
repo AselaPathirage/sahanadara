@@ -17,6 +17,7 @@ this is home<br>
 <a href="test">test</a><br>
 <a href="a">a</a><br>
 <a href="b">b</a><br>  
+<a href="Hello">Login</a><br>  
 <div id="show">sdszfsz</div>
 <table id="myTable" border="0">
 <thead>

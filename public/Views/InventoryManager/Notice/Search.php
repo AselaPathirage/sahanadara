@@ -112,7 +112,7 @@
                                 <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
                             </th>
                             <th style="width: 15%;text-align:center;">
-                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/viewRequest" class="view">Remove</a>
+                                <a href="#" class="view">Remove</a>
                             </th>
                         </tr>
                     </thead>

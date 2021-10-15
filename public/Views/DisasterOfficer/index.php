@@ -1,4 +1,6 @@
-<!doctype html>
+<?php
+header("location:Dashboard/");?>
+<!-- <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -65,4 +67,5 @@ this is Disaster officer<br>
 </script>
  
 </body>
-</html>
+</html> -->
+

@@ -1,6 +1,7 @@
 <?php
 class Router{
     protected static $defaultController = array(
+
                                                 "public" => "index.php",
                                                 "test" => "test.php",
                                                 "404" => "404.php",
@@ -19,12 +20,13 @@ class Router{
                                     'DisasterOfficer' => array(),
                                     'DistrictSecratarists' => array(),
                                     'DivisionalSecretariat' => array(),
-                                    'DMC' => array(),
-                                    'GramaNiladari' => array(),
+                                    'DMC' => array('Report'),
+                                    'GramaNiladari' => array('Report'),
                                     'InventoryManager' => array('SafeHouse', 'Inventory', 'Report', 'Notice'),
                                     'ResponsiblePerson' => array('SafeHouse', 'Report'),
                                     'Handler' => array()
                                 );
+
     protected $currentController;
 
     public function __construct()

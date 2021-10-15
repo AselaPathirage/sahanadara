@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/landing_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-
 </head>
 
 <body>
@@ -40,19 +39,19 @@
                         <p>Enter your username and password</p>
                         <div class="row-content">
                             <div class="container">
-                                <form action="#" method="post">
+                                <form action="/<?php echo baseUrl; ?>/Handler/loginHandle?formControl=1" method="post">
                                     <h2>Login</h2>
 
                                     <label for="username">Username</label>
-                                    <input type="text" id="username" name="userrname" required />
+                                    <input type="text" id="username" name="username" required />
 
                                     <label for="password">Password</label>
                                     <input type="password" id="password" name="password" required />
                                     <br>
                                     <div class="login-bar">
-                                        <input type="submit" value="Login" class="btn-login" />
+                                        <input type="submit" name="submit" value="Login" class="btn-login" />
 
-                                        <a href="forget.php" class="forget-password">Forget Password?</a>
+                                        <a href="forget" class="forget-password">Forget Password?</a>
                                     </div>
                                 </form>
                             </div>
@@ -61,20 +60,9 @@
                     </div>
                 </div>
             </div>
-
-
         </div>
-
-
-
-
         <?php include 'footer.php'; ?>
-
-
-
     </div>
-
-
     <script type="text/javascript">
         $(document).ready(function() {
             // Toggle menu on click

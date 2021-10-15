@@ -1,31 +1,30 @@
 <?php
-
-class Router
-{
+class Router{
     protected static $defaultController = array(
-        "public" => "index.php",
-        "test" => "test.php",
-        "404" => "404.php",
-        "a" => "a.php",
-        "b" => "b.php",
-        "help" => "help.php",
-        "donate" => "donate.php",
-        "staff" => "staff.php",
-        "about" => "about.php",
-        "forget" => "forget.php",
-      "Hello"=>"login.php",
-    );
+                                                "public" => "index.php",
+                                                "test" => "test.php",
+                                                "404" => "404.php",
+                                                "a" => "a.php",
+                                                "b" => "b.php",
+                                                "help" => "help.php",
+                                                "donate" => "donate.php",
+                                                "staff" => "staff.php",
+                                                "about" => "about.php",
+                                                "forget" => "forget.php",
+                                                "logout"=>"logout.php"
+                                            );
 
     protected static $routes = array(
-        'Admin' => array(),
-        'DisasterOfficer' => array('SafeHouse','Dashboard','Report','Notice'),
-        'DistrictSecratarists' => array(),
-        'DivisionalSecretariat' => array('Dashboard','Notice','Report'),
-        'DMC' => array(),
-        'GramaNiladari' => array(),
-        'InventoryManager' => array('SafeHouse', 'Inventory', 'Report', 'Notice'),
-        'ResponsiblePerson' => array('SafeHouse', 'Report'),
-    );
+                                    'Admin' => array(),
+                                    'DisasterOfficer' => array(),
+                                    'DistrictSecratarists' => array(),
+                                    'DivisionalSecretariat' => array(),
+                                    'DMC' => array(),
+                                    'GramaNiladari' => array(),
+                                    'InventoryManager' => array('SafeHouse', 'Inventory', 'Report', 'Notice'),
+                                    'ResponsiblePerson' => array('SafeHouse', 'Report'),
+                                    'Handler' => array()
+                                );
     protected $currentController;
 
     public function __construct()

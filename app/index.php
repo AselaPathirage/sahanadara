@@ -1,5 +1,6 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
+
 include_once("./app/libraries/vendor/autoload.php");
 include_once("./app/config/config.php");
 
@@ -22,5 +23,12 @@ ini_set("log_errors", 1);
 ini_set("error_log", "./app/error.log"); //create a error log file
 $db = Database::getInstance();
 $mysqli = $db->getConnection(); // set db connection
-$_SESSION["token"] = "ABCD"; //only for demostration 
+//$_SESSION["token"] = "ABCD"; //only for demostration 
+
+//if(!isset($_SESSION['token'])){
+$_SESSION["token"] = "ABCD";
+//echo json_encode($_SESSION);exit();
+    //$_SESSION['userId'] = 0;
+    //$_SESSION['userRole'] = 0;
+//}
 $core = new Core($mysqli);

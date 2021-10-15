@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<link rel="stylesheet" type="text/css" href="../Style/manageuser.css" />
+<link href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css" rel="stylesheet" />
+
+<head>
+  <title>Manage user</title>
+</head>
+
+<body>
+  <div class="topnav">
+    <table>
+      <tbody>
+        <tr>
+          <td>
+            <div class="leftcontainer">
+              <img src="../Images/social-care3.png" alt="" class="img" />
+            </div>
+          </td>
+          <td>
+            <div class="midcontainer">
+              <a href="dashboard">Dashboard</a>
+              <a href="report">Report</a>
+            </div>
+          </td>
+          <td>
+            <div class="rightcontainer">
+              <a href="profile.html"><i class="bx bx-user"></i></a>
+              <a href="profile.html">Logout</a>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  </header>
+  <div class="sidebar">
+    <ul class="ul">
+      <li>
+        <a href="#" id="a1"><i class="bx bx-user-circle"></i>Admin</a>
+      </li>
+      <li>
+        <a href="#"><i class="bx bx-home"></i>Home</a>
+      </li>
+      <li>
+        <a href="../UI/newuser.html"><i class="bx bx-plus-circle"></i>Add new user</a>
+      </li>
+      <li>
+        <a href="../Style/manageuser.html"><i class="bx bx-calendar-alt"></i>Manage user</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="content">
+    <div class="filterbar">
+      <table>
+        <tr>
+          <td>
+            <div class="col-100">
+              <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="col-100">
+              <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="col-100">
+              <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="col-100">
+              <select name="cars" id="cars">
+                <option value="volvo">Volvo</option>
+                <option value="saab">Saab</option>
+                <option value="mercedes">Mercedes</option>
+                <option value="audi">Audi</option>
+              </select>
+            </div>
+          </td>
+          <td>
+            <div class="col-100">
+              <form class="example" action="/action_page.php">
+                <input type="text" placeholder="Search.." name="search">
+                <button type="submit"><i class="bx bx-search"></i></button>
+              </form>
+
+            </div>
+          </td>
+
+        </tr>
+      </table>
+    </div>
+    <div class="box1">
+      <table>
+        <tr>
+          <td>
+            <div class="box2"></div>
+            <div class="box2"></div>
+            <div class="box2"></div>
+            <div class="box2"></div>
+          </td>
+          <td>
+            <div class="box3">
+              <h1><i class="bx bx-user-circle">Profile</i></h1>
+              <div class="row">
+                <div class="col-25">
+                  <label for="fname">First Name</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="fname" name="firstname" placeholder="Four name..">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="lname">Last Name</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="lname" name="lastname" placeholder="Last name..">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="fname">NIC</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="NIC" name="NIC" placeholder="NIC..">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="email">Email</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="email" name="email" placeholder="Email here..">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="address">Address</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="NIC" name="address" placeholder="Address here..">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="TP number">TP Number</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="TP number" name="TP number" placeholder="Phone number here..">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="user role">Old password</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="old password" name="old password" placeholder="..">
+                </div>
+              </div>
+              <p><b>Reset Password</b>
+              <p>
+              <div class="row">
+                <div class="col-25">
+                  <label for="new password">New Password</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="new password" name="new password" placeholder="..">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-25">
+                  <label for="confirm password">Confirm Password</label>
+                </div>
+                <div class="col-75">
+                  <input type="text" id="confirm password" name="confirm password" placeholder="..">
+                </div>
+              </div>
+
+              <br>
+              <div class="row">
+                <input type="submit" style="background-color: darkblue;" value="Cancel">
+                <input type="submit" style="background-color: darkblue;" value="Update">
+                <input type="submit" style="background-color: darkblue;" value="Deactivate">
+                <input type="submit" style="background-color: darkblue;" value="Delete">
+              </div>
+              <div class="row">
+
+              </div>
+              </form>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</body>
+
+</html>

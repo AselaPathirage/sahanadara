@@ -13,7 +13,7 @@ class Router
         "staff" => "staff.php",
         "about" => "about.php",
         "forget" => "forget.php",
-      "Hello"=>"login.php",
+        "Hello" => "login.php",
     );
 
     protected static $routes = array(
@@ -21,8 +21,8 @@ class Router
         'DisasterOfficer' => array(),
         'DistrictSecratarists' => array(),
         'DivisionalSecratarists' => array(),
-        'DMC' => array(),
-        'GramaNiladari' => array(),
+        'DMC' => array('Report'),
+        'GramaNiladari' => array('Report'),
         'InventoryManager' => array('SafeHouse', 'Inventory', 'Report', 'Notice'),
         'ResponsiblePerson' => array('SafeHouse', 'Report'),
     );

@@ -26,6 +26,7 @@
         include_once('./public/Views/DMC/includes/topnav.php');
         ?>
         <div class="space"></div>
+        <div class="space"></div>
         <div class="container">
             <div class="box">
                 <center>
@@ -68,7 +69,7 @@
                                 </select>
                             </div>
                             <div class="col3">
-                                <label for="crusttype">Starting Date</label>
+                                <label for="crusttype">Start Date</label>
                                 <input type="date" id="birthday" name="birthday">
                             </div>
                             <div class="col3">
@@ -90,9 +91,9 @@
     </section>
     <script src="/<?php echo baseUrl; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
     <script>
-        var thisPage = "#user";
+        var thisPage = "#compensation";
         $(document).ready(function() {
-            $("#inventory,#safe").each(function() {
+            $("#incident,#safehouse,#user").each(function() {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }

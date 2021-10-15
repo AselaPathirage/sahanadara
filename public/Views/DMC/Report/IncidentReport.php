@@ -26,6 +26,7 @@
         include_once('./public/Views/DMC/includes/topnav.php');
         ?>
         <div class="space"></div>
+        <div class="space"></div>
         <div class="container">
             <div class="box">
                 <center>
@@ -92,7 +93,7 @@
     <script>
         var thisPage = "#incident";
         $(document).ready(function() {
-            $("#inventory,#safe").each(function() {
+            $("#user,#safehouse,#compensation").each(function() {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }

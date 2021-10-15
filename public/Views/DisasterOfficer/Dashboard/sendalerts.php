@@ -68,7 +68,7 @@
                         </label>
                     </fieldset>
                     <input type="submit" value="Send" />
-                    <input type="reset" value="Reset" />
+                    <input type="reset" value="Cancel" />
                 </div>
 
             </form>

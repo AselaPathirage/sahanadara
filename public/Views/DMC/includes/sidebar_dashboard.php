@@ -20,19 +20,19 @@
         </li>
         <li>
             <a href="/<?php echo baseUrl; ?>/DMC/IncidentReporting" id="incidents">
-                <i class='bx bx-send'></i>
+                <i class='bx bxs-report'></i>
                 <span class="links_name">Incident Reporting</span>
             </a>
         </li>
         <li>
             <a href="/<?php echo baseUrl; ?>/DMC/Compensation" id="compensations">
-                <i class='bx bx-send'></i>
+                <i class='bx bx-money'></i>
                 <span class="links_name">Compensation</span>
             </a>
         </li>
         <li>
             <a href="/<?php echo baseUrl; ?>/DMC/SafeHouse" id="safehouse">
-                <i class='bx bx-send'></i>
+                <i class='bx bx-buildings'></i>
                 <span class="links_name">Safehouse</span>
             </a>
         </li>

@@ -26,8 +26,77 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
+ 
+        <!-- TABLE -->
+        <div class="container">
+            <div class="">
 
+                <table class="table">
+                    <thead>
+                        <tr class="filters">
+                            <th>Approved
+                                <select id="assigned-user-filter" class="form-control">
+                                    <option>Approved</option>
+                                    <option>Not Approved</option>
+                                </select>
+                            </th>
+                            
+                            <th>Search
+                                <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+
+
+                <div class="panel panel-primary filterable">
+                    <table id="task-list-tbl" class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Applicant Name</th>
+                                <th>Type</th>
+                                <th>DS Note</th>
+                                <th>DMC Note</th>
+                                <th>Status</th>
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                
+                                <td>09/24/2015</td>
+                                <td>Task title 1</td>
+                                <td>Urgent</td>
+                                <td>DS Note 1</td>
+                                <td>DMC Note 1</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
+                                
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/24/2015</td>
+                                <td>Task title 2</td>
+                                <td>Urgent</td>
+                                <td>DS Note 2</td>
+                                <td>DMC Note 2</td>
+                                <td>Active</td>
+                            </tr>
+
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
+           
+               
+
     </section>
     <script>
         var thisPage = "#Incidents";

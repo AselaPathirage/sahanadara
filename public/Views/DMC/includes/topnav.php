@@ -11,10 +11,9 @@
         <a href="/<?php echo baseUrl; ?>/DMC/">
             <span class="links_name">Dashboard</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/DMC/Report/SafeHouseReport">
+        <a href="/<?php echo baseUrl; ?>/DMC/Report/UserReport">
             <span class="links_name">Report</span>
         </a>
-
     </div>
     <div class="rightcorner">
         <a href="#">

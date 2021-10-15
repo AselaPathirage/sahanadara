@@ -21,7 +21,7 @@
         <li>
             <a href="/<?php echo baseUrl; ?>/DMC/Report/CompensationReport" id="compensation">
                 <i class='bx bxs-report'></i>
-                <span class="links_name">Compensation Report</span>
+                <span class="links_name">Compensation </span>
             </a>
         </li>
         <li>

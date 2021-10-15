@@ -47,7 +47,7 @@ var output;
                 var object = {};
                 formData.forEach(function(value, key){
                     object[key] = value;
-                });
+                }); 
                 object['key'] = 'ABCD';
                 var json = JSON.stringify(object);
                 console.log(json);

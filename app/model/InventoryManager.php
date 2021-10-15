@@ -4,11 +4,11 @@ class InventoryManager extends Noticer{
         parent::__construct($con);
     }
 
-    public function addCompany(array $data){
+    public function addItem(array $data){
         global $errorCode;
-        $companyName = $data['company'];
-        $email = $data['email'];
-        $sql = "INSERT INTO `company` (`consumerId`, `caompanyName`, `email`, `web`, `pass`, `companyState`, `authcode`, `username`) VALUES (NULL, '$companyName', '$email', NULL, NULL, NULL, NULL, NULL);";
+        $itemName = $data['itemName'];
+        $unitType = $data['unitType'];
+        $sql = "INSERT INTO `item` (`itemName`, `unitType`) VALUES ('$itemName', $unitType);";
         $this->connection->query($sql);
         echo json_encode("{'code':".$errorCode['success']."}");
     }
@@ -29,7 +29,17 @@ class InventoryManager extends Noticer{
         //echo json_encode("{'code':".$errorCode['success']."}");
     }
     public function getItem(){
-        $sql = "SELECT * FROM `item`";
+        $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getUnit(){
+        $sql = "SELECT * FROM `unit` ORDER BY unitName";
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

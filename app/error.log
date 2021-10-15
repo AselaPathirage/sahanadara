@@ -1,1 +1,4 @@
-
+[16-Oct-2021 00:44:04 Europe/Berlin] PHP Warning:  Undefined array key "itemName" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 9
+[16-Oct-2021 00:44:04 Europe/Berlin] PHP Warning:  Undefined array key "unitType" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 10
+[16-Oct-2021 00:45:10 Europe/Berlin] PHP Warning:  Undefined array key "itemName" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 9
+[16-Oct-2021 00:45:10 Europe/Berlin] PHP Warning:  Undefined array key "unitType" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 10

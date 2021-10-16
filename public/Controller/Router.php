@@ -19,7 +19,7 @@ class Router{
                                     'Admin' => array(),
                                     'DisasterOfficer' => array('SafeHouse','Dashboard','Report','Notice'),
                                     'DistrictSecratarists' => array(),
-                                    'DivisionalSecretariat' => array('Dashboard','Notice','Report'),
+                                    'DivisionalSecretariat' => array('Dashboard','Report'),
                                     'DMC' => array('Report'),
                                     'GramaNiladari' => array('Report'),
                                     'InventoryManager' => array('SafeHouse', 'Inventory', 'Report', 'Notice'),

@@ -2,12 +2,12 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Disaster Management Officer - Dashboard </title>
+    <title> Divisional Secretariat - Dashboard </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_divsec.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -15,38 +15,54 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
+        include_once('./public/Views/DivisionalSecretariat/includes/sidebar_dashboard.php');
      ?>
     <section class="dashboard-section">
         <?php 
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
+        include_once('./public/Views/DivisionalSecretariat/includes/topnav.php'); 
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
+        <div class="box">
+                <!-- FORM -->
+        <div class="container">
             <form action="#" method="post">
-                <h1>Compensation Requests</h1>
-                <label for="notes">Requests 1</label>
-                    <label for="notes">Note</label>
-                    <textarea id="notes" name="compensationnotes"></textarea>
+                <h1>Inventory Manager</h1>
 
-               
+                <div class="column">
+                    <label for="your_name">First Name</label>
+                    <input type="text" id="your_name" name="yourname" />
 
-                    <input type="submit" value="Approve" />
-                    <input type="reset" value="Decline" />
+                    <label for="your_email">Last Name</label>
+                    <input type="email" id="your_email" name="youremail" />
+
+                    <label for="nic">NIC</label>
+                    <input type="nic" id="nic" name="nic" />
+
+                    <label for="email">email</label>
+                    <textarea id="email" name="email"></textarea>
+
+                    <label for="address">Address</label>
+                    <textarea id="address" name="youraddress"></textarea>
+
+                    <label for="your_phone">TP Number</label>
+                    <input type="tel" id="your_phone" name="yourphone" />
+                    <br><br>
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Remove Manager" />
                 </div>
 
             </form>
         </div>
 
-               
     </section>
     <script>
-        var thisPage = "#Compensation";
+        var thisPage = "#InventoryManager";
         $(document).ready(function() {
-            $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
+            $("#Home,#Compensation,#Incidents,#FundRaising,#Donation,#BorrowRequests,#InventoryManager").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }
@@ -61,6 +77,5 @@
             sidebar.classList.toggle("active");
         }
     </script>
-    <script src="/<?php echo baseUrl; ?>/public/assets/js/table.js"></script>
 </body>
 </html>

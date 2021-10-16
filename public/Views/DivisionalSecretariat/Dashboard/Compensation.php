@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_divsec.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -70,7 +70,6 @@
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
                                 <th>Status</th>
-                                <th></th>
                             </tr>
                         </thead>
 
@@ -84,6 +83,9 @@
                                 <td>DS Note 1</td>
                                 <td>DMC Note 1</td>
                                 <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
+
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -93,6 +95,8 @@
                                 <td>DS Note 2</td>
                                 <td>DMC Note 2</td>
                                 <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
                             </tr>
 
                             

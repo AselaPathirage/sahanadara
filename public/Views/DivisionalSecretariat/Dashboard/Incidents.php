@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_divsec.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -73,7 +73,7 @@
                                 <td>DS Note 1</td>
                                 <td>DMC Note 1</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
                                 
                             </tr>
 
@@ -84,6 +84,8 @@
                                 <td>DS Note 2</td>
                                 <td>DMC Note 2</td>
                                 <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
+
                             </tr>
 
                             

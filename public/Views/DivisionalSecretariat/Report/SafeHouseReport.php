@@ -60,6 +60,15 @@
                                 </select>
                             </div>
 
+                            <div class="col4"><label for="crusttype">Safe House</label>
+                                <select id="crusttype" name="crust">
+                                    <option value="wheat">All</option>
+                                    <option value="wheat">1</option>
+                                    <option value="white">2</option>
+                                    <option value="thin">3</option>
+                                </select>
+                            </div>
+
                         </div>
 
                         <div class="row" style="justify-content: center;">

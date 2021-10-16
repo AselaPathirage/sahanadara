@@ -148,7 +148,7 @@ tr:hover{
                 formData.forEach(function(value, key){
                     object[key] = value;
                 }); 
-                object['key'] = 'cb08ca4a7bb5f9683c19133a84872ca7';
+                object['key'] = "<?php echo $_SESSION['key'] ?>";
                 var json = JSON.stringify(object);
                 console.log(json);
                 $.ajax({
@@ -173,7 +173,7 @@ tr:hover{
             sidebar.classList.toggle("active");
         }
         function getUnit(){
-            var x = "cb08ca4a7bb5f9683c19133a84872ca7";
+            var x = "<?php echo $_SESSION['key'] ?>";
             console.log(x);
             output = $.parseJSON($.ajax({
                 type: "POST",
@@ -194,7 +194,7 @@ tr:hover{
             }
         }
         function getItem(){
-            var x = "cb08ca4a7bb5f9683c19133a84872ca7";
+            var x = "<?php echo $_SESSION['key'] ?>";
             console.log(x);
             output = $.parseJSON($.ajax({
                 type: "POST",

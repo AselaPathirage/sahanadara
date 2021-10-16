@@ -11,9 +11,6 @@
         <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/">
             <span class="links_name">Dashboard</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Notice/Search">
-            <span class="links_name">Notice</span>
-        </a>
         <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Report/IncidentReport">
             <span class="links_name">Reports</span>
         </a>

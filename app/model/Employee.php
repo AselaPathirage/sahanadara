@@ -6,8 +6,8 @@ class Employee{
         $this->connection = $con;
     }
     public function login(array $data){
-    
         global $errorCode;
+        
         if((! isset($data['username']) || (! isset($data['password'])))){
             echo json_encode("{'code':".$errorCode['attributeMissing']."}");
             exit();
@@ -18,23 +18,19 @@ class Employee{
         $excute = $this->connection->query($sql);
         
         if($excute->num_rows>0){
-            global $_SESSION;
+            $secure = new Openssl_EncryptDecrypt();
             $data = $excute-> fetch_assoc();
-            $token_key = $this->tokenKey();
-            //echo json_encode($_SESSION);exit();
-            if(isset($_SESSION['token'])){
-                unset($_SESSION['token']);
-            }
-            //$_SESSION['token']=$token_key;
-            
-            $token_key = md5($token_key);
-            //$token_key = md5("ABCD");
-            $_SESSION['userId'] = $data['empId'];
-            $_SESSION['userRole'] = $data['roleId'];
-            //echo json_encode($_SESSION);exit();
-            $token = array("key"=>"$token_key","userRole"=> $data['roleId']);
-            $JSON = json_encode($token);
+            //$token_key = $this->tokenKey();
+            $auth = true;
+            $array = array("auth"=>$auth,"userRole"=> $data['roleId'],"issue"=>time());
+            //print_r($data);exit();
+            $string = json_encode($array);
+            $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
+            //echo is_string($encrpt);exit();
+            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId']);
+            $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
             echo $JSON;
+            //echo $secure->decrypt(base64_decode($token['key']), ENCRYPTION_KEY);
         }else{
             echo json_encode(array("code"=>808));
         }

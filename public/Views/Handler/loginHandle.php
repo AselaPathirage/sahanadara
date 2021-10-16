@@ -30,11 +30,8 @@ if(isset($_POST['submit'])){
         header("location:../staff?error=wrong password");
         exit();
     }else{
-        if(isset($_SESSION['key'])){
-            unset($_SESSION['key']);
-        }
         $_SESSION['key'] = $response['key'];
-        //$_SESSION['userRole']= $response['userRole']; commented because this run on same server
+        $_SESSION['userRole']= $response['userRole'];
         header("location:/".baseUrl."/".$routes[$response['userRole']]);
     }
 }

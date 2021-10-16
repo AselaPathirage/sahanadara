@@ -9,25 +9,25 @@
         <li>
             <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Report/IncidentReport" id="incident">
                 <i class='bx bxs-report' ></i>
-                <span class="links_name">Incident Report</span>
+                <span class="links_name">Incident </span>
             </a>
         </li>
         <li>
             <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Report/SafeHouseReport" id="safe">
                 <i class='bx bxs-report' ></i>
-                <span class="links_name">Safe House Report</span>
+                <span class="links_name">Safe House </span>
             </a>
         </li>
         <li>
             <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Report/CompensationReport" id="compensation">
                 <i class='bx bxs-report' ></i>
-                <span class="links_name">Compensation Report</span>
+                <span class="links_name">Compensation </span>
             </a>
         </li>
         <li>
             <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Report/InventoryReport" id="inventory">
                 <i class='bx bxs-report' ></i>
-                <span class="links_name">Inventory Report</span>
+                <span class="links_name">Inventory </span>
             </a>
         </li>
     </ul>

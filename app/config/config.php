@@ -5,7 +5,7 @@ define("DB_USER", "root");
 define("DB_PASS", "");
 define("DB_NAME", "sahanadara");
 define("API_KEY", "1234");
-define("ENCRYPTION_KEY","AHkjghjvHJGKNKLlkBG54JHJKvhjhggc");
+define("ENCRYPTION_KEY","AHkjghjvHJGKNKLlkBG54J");
 
 //SMS
 define("sender", ""); 
@@ -19,5 +19,6 @@ $errorCode = array(
                     'unknownError' => 805,
                     'success' => 806,
                     'permissionError' => 807,
-                    'jsonRequestNotFoundError' => 808
+                    'jsonRequestNotFoundError' => 808,
+                    'tokenExpired' => 809
                     );

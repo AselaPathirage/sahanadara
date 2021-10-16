@@ -7,7 +7,6 @@ class Core{
         protected $connection; 
 
         public function __construct($mysqli){
-            //$_SESSION["token"] = "ABCDE";
             global $errorCode;
             $this->connection = $mysqli;
             $this->setParams();
@@ -60,11 +59,8 @@ class Core{
             }
         }
         public function  setParams(){
-
             $json = file_get_contents('php://input');
-            //echo $json;exit();
 		    $this->params = json_decode($json,true);
-            //print_r($this->params);
             if(is_null($this->params)){
                 $this->params = [];
             }
@@ -76,19 +72,27 @@ class Core{
             $this->currentMethod = $method;
         }
         public function  authorization(){
+            global $errorCode;
             if(isset($this->params['key'])){
-                
-                $key = $this->params['key'];
+                $lifetime = 60*60*60*24;
+                $key = base64_decode($this->params['key']);
                 unset($this->params['key']);
-                //echo json_encode($_SESSION);exit();
-                //echo json_encode(array('key'=>md5($_SESSION['token'])));exit();
-                if(isset($_SESSION['token'])){
-                    //echo json_encode(array('key'=>100));exit();
-                    if(md5($_SESSION['token'])==$key){
-                        
-                        return true;
+                $secure = new Openssl_EncryptDecrypt();
+                $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
+                if($decrypted){
+                    $data = json_decode($decrypted,true);
+                    if(isset($data['auth'])){
+                        if($data['auth']){
+                            if(time() - $data['issue'] > 0){
+                            return true;
+                            }
+                            echo json_encode(array("code"=>$errorCode['tokenExpired']));
+                            exit();
+                        }
                     }
-                }
+                }                            
+                echo json_encode(array("code"=>$errorCode['apiKeyError']));
+                exit();
             }else if(in_array($this->currentModel,$this->nonSecure)){
                 return true;
             }

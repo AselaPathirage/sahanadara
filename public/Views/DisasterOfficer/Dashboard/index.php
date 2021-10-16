@@ -34,7 +34,7 @@
                         <div class="number">10</div>
 
                     </div>
-                    <i class='bx bxs-report'></i>
+                    <i class='bx bxs-report cart one'></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
@@ -50,7 +50,7 @@
                         <div class="number">6</div>
 
                     </div>
-                    <i class='bx bxs-report'></i>
+                    <i class='bx bxs-report cart two'></i>
                 </div>
             </div>
         </div>

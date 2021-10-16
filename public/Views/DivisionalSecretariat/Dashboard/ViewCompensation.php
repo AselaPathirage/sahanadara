@@ -26,44 +26,28 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
+           <!-- TABLE -->
+           <div class="container">
         <div class="box">
-                <!-- FORM -->
-        <div class="container">
             <form action="#" method="post">
-                <h1>Inventory Manager</h1>
+                <h1>Donation Requests</h1>
+                <label for="notes">Requests 1</label>
+                    <label for="notes">Remarks</label>
+                    <textarea id="notes" name="compensationnotes"></textarea>
 
-                <div class="column">
-                    <label for="your_name">First Name</label>
-                    <input type="text" id="your_name" name="yourname" />
+               
 
-                    <label for="your_email">Last Name</label>
-                    <input type="email" id="your_email" name="youremail" />
-
-                    <label for="nic">NIC</label>
-                    <input type="nic" id="nic" name="nic" />
-
-                    <label for="email">email</label>
-                    <textarea id="email" name="email"></textarea>
-
-                    <label for="address">Address</label>
-                    <textarea id="address" name="youraddress"></textarea>
-
-                    <label for="your_phone">TP Number</label>
-                    <input type="tel" id="your_phone" name="yourphone" />
-
-                    </div>
-                    <div>
-                    <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Assignnewinventorymanager" class="btn-box">Assign New Manager</a></td>
-
-                    <input type="reset" value="Cancel" />
+                    <input type="submit" value="Approve" />
+                    <input type="reset" value="Decline" />
                 </div>
 
             </form>
         </div>
-
+        </div>
     </section>
+
     <script>
-        var thisPage = "#InventoryManager";
+        var thisPage = "#Compensation";
         $(document).ready(function() {
             $("#Home,#Compensation,#Incidents,#FundRaising,#Donation,#BorrowRequests,#InventoryManager").each(function() {
                 if ($(this).hasClass('active')){
@@ -80,5 +64,6 @@
             sidebar.classList.toggle("active");
         }
     </script>
+    <script src="/<?php echo baseUrl; ?>/public/assets/js/table.js"></script>
 </body>
 </html>

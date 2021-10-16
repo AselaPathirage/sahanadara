@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_divsec.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -25,8 +25,81 @@
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
+        <!-- TABLE -->
         <div class="container">
+            <div class="">
 
+                <table class="table">
+                    <thead>
+                        <tr class="filters">
+                            <th>Approved
+                                <select id="assigned-user-filter" class="form-control">
+                                    <option>Approved</option>
+                                    <option>Not Approved</option>
+                                </select>
+                            </th>
+
+                            <th>Type
+                                <select id="assigned-user-filter" class="form-control">
+                                    <option>Select</option>
+                                    <option>Type1</option>
+                                </select>
+                            </th>
+                            
+                            <th>Search
+                                <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+
+
+                <div class="panel panel-primary filterable">
+                    <table id="task-list-tbl" class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Applicant Name</th>
+                                <th>Type</th>
+                                <th>DS Note</th>
+                                <th>DMC Note</th>
+                                <th>Status</th>
+                                
+
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                
+                                <td>09/24/2015</td>
+                                <td>Task title 1</td>
+                                <td>Urgent</td>
+                                <td>DS Note 1</td>
+                                <td>DMC Note 1</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                                
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/24/2015</td>
+                                <td>Task title 2</td>
+                                <td>Urgent</td>
+                                <td>DS Note 2</td>
+                                <td>DMC Note 2</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </section>
     <script>

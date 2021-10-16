@@ -50,12 +50,9 @@
 
                     <label for="your_phone">TP Number</label>
                     <input type="tel" id="your_phone" name="yourphone" />
-
-                    </div>
-                    <div>
-                    <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Assignnewinventorymanager" class="btn-box">Assign New Manager</a></td>
-
-                    <input type="reset" value="Cancel" />
+                    <br><br>
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Remove Manager" />
                 </div>
 
             </form>

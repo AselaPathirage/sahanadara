@@ -26,44 +26,35 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
-        <div class="box">
+        <!-- TABLE -->
+        <div class="container">
+            <div class="box">
+                <h1 style="text-align:center;">Create Fundraises</h1>
                 <!-- FORM -->
         <div class="container">
             <form action="#" method="post">
-                <h1>Inventory Manager</h1>
 
                 <div class="column">
-                    <label for="your_name">First Name</label>
-                    <input type="text" id="your_name" name="yourname" />
 
-                    <label for="your_email">Last Name</label>
-                    <input type="email" id="your_email" name="youremail" />
+                    <label for="title">Title</label>
+                    <textarea id="title" name="title"></textarea>
 
-                    <label for="nic">NIC</label>
-                    <input type="nic" id="nic" name="nic" />
+                    <label for="description">Description</label>
+                    <textarea id="description" name="titdescriptionle"></textarea>
 
-                    <label for="email">email</label>
-                    <textarea id="email" name="email"></textarea>
-
-                    <label for="address">Address</label>
-                    <textarea id="address" name="youraddress"></textarea>
-
-                    <label for="your_phone">TP Number</label>
-                    <input type="tel" id="your_phone" name="yourphone" />
-
-                    </div>
-                    <div>
-                    <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Assignnewinventorymanager" class="btn-box">Assign New Manager</a></td>
-
+                    
+                    <input type="submit" value="Add" />
                     <input type="reset" value="Cancel" />
                 </div>
 
             </form>
         </div>
+            </div>
+        </div>
 
     </section>
     <script>
-        var thisPage = "#InventoryManager";
+        var thisPage = "#FundRaising";
         $(document).ready(function() {
             $("#Home,#Compensation,#Incidents,#FundRaising,#Donation,#BorrowRequests,#InventoryManager").each(function() {
                 if ($(this).hasClass('active')){

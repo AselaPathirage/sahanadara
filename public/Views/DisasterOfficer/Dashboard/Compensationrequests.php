@@ -42,7 +42,7 @@
         </div>
 
                
-    
+    </section>
     <script>
         var thisPage = "#Compensation";
         $(document).ready(function() {

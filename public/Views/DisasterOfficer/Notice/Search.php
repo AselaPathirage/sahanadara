@@ -84,11 +84,11 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/InventoryManager/includes/sidebar_notice.php');
+        include_once('./public/Views/DisasterOfficer/includes/sidebar_notice.php');
      ?>
     <section class="dashboard-section">
         <?php 
-        include_once('./public/Views/InventoryManager/includes/topnav.php'); 
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
         ?>
         <div class="space"></div>
         <div class="container">
@@ -106,10 +106,10 @@
                             </th>
 
                             <th style="width: 15%;text-align: center;">
-                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/viewNotice" class="create">View</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/viewNotice" class="create">View</a>
                             </th> 
                             <th style="width: 15%;text-align:center;">
-                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/editNotice" class="view">Edit</a>
                             </th>
                             <th style="width: 15%;text-align:center;">
                                 <a href="#" class="view">Remove</a>

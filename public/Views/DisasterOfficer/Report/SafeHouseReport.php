@@ -26,6 +26,50 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
+        <div class="box">
+                <center>
+                    <h1>Safehouse Report</h1>
+                </center>
+                <form>
+                    <div class="row-content">
+
+                        <h2>Select the area</h2>
+                        <div class="row">
+                            <div class="col4"><label for="crusttype">District</label>
+                                <select id="crusttype" name="crust">
+                                    <option value="white">All</option>
+                                    <option value="wheat">Kaluatara</option>
+                                    <option value="thin">Gampaha</option>
+                                </select>
+                            </div>
+                            <div class="col4"><label for="crusttype">DS Division</label>
+                                <select id="crusttype" name="crust">
+                                    <option value="wheat">All</option>
+                                    <option value="wheat">Horana</option>
+                                    <option value="white">Millaniya</option>
+
+                                </select>
+                            </div>
+                            <div class="col4"><label for="crusttype">GN Division</label>
+                                <select id="crusttype" name="crust">
+                                    <option value="wheat">All</option>
+                                    <option value="wheat">Bellapitiya West</option>
+                                    <option value="white">Bellapitiya North</option>
+                                    <option value="thin">Horana North</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <div class="row" style="justify-content: center;">
+
+                            <input type="submit" value="Generate" class="btn-alerts" />
+                            <input type="reset" value="Cancel" class="btn-alerts" />
+                        </div>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </section>
     <script>

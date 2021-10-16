@@ -38,24 +38,32 @@
                 <div class="column">
 
                     <label for="number">Safe house number</label>
-                    <textarea id="number" name="number"></textarea>
+                    <input type="number" id="number" name="number">
+                    
+                    <label for="address">Safe house address</label>
+                    <textarea id="address" name="address"></textarea>
 
                     <label for="Name">Name</label>
-                    <select id="Name" name="Name">
-                        <option value="safe1">Safe house 1</option>
-                        <option value="safe2">Safe house 2</option>
-                    </select>
+                    <input type="text" name="address">
 
-                    <label for="location">GN Division</label>
+                    <label for="tp">TP Number</label>
+                    <input type="text" name="tp">
+
+                    <label  style="text-align:center;">
+                            <input type="checkbox" name="sendalerts" value="safehouses" />
+                            Is Available
+                        </label>
+
+                    <!-- <label for="location">GN Division</label>
                     <select id="gndivision" name="gndivision">
                         <option value="Keselwatta">Keselwatta</option>
                         <option value="Maradana">Maradana</option>
                         <option value="Kochchikade">Kochchikade</option>
                         <option value="Welikala">Welikala</option>
                     </select>
+ -->
 
-
-                    <fieldset>
+                    <!-- <fieldset>
                         <legend>Send alerts -</legend>
                         <label>
                             <input type="checkbox" name="officers" value="officers" />
@@ -66,10 +74,10 @@
                             Assigned Safe Houses
                         </label>
                     </fieldset>
-                    <input type="submit" value="Send" />
-                    <input type="reset" value="Reset" />
+                    -->
+                    <input type="submit" value="Submit" />
+                    <input type="reset" value="Cancel" />
                 </div>
-
             </form>
         </div>
             </div>

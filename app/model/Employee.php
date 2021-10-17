@@ -53,7 +53,7 @@ class Employee{
             $secure = new Openssl_EncryptDecrypt();
             $data = $excute-> fetch_assoc();
             $token_key = $this->tokenKey();
-            $sql = "UPDATE login SET keyAuth='".$token_key."' WHERE empId=".$data['empId'];
+            $sql = "UPDATE login SET keyAuth='".$token_key."' WHERE empId=".$data['empId']." AND roleId =".$data['roleId'];
             $this->connection->query($sql);
             $array = array("auth"=>1,"userRole"=> $data['roleId'],"issue"=>time(),"tokenKey"=>$token_key,"userId"=> $data['empId']);
             $string = json_encode($array);

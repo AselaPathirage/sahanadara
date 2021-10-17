@@ -89,7 +89,8 @@ class Core{
                         if($data['auth']){
                             if(time() - $data['issue'] < $lifetime){
                                 $id = $data['userId'];
-                                $sql = "SELECT l.keyAuth FROM login l WHERE l.empId = $id";
+                                $role = $data['userRole'];
+                                $sql = "SELECT l.keyAuth FROM login l WHERE l.empId = $id AND l.roleId = $role";
                                 $excute = $this->connection->query($sql);
                                 $data2 = $excute-> fetch_assoc();
                                 if(!strcmp($data['tokenKey'],$data2['keyAuth'])){

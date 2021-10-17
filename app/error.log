@@ -1,9 +1,0 @@
-[16-Oct-2021 12:43:56 Europe/Berlin] PHP Warning:  Array to string conversion in F:\xampp\htdocs\sahanadara\app\model\Employee.php on line 30
-[16-Oct-2021 12:46:55 Europe/Berlin] PHP Warning:  Undefined variable $JSON in F:\xampp\htdocs\sahanadara\app\model\Employee.php on line 33
-[16-Oct-2021 13:08:35 Europe/Berlin] PHP Fatal error:  Uncaught Error: Undefined constant "token" in F:\xampp\htdocs\sahanadara\app\model\Employee.php:34
-Stack trace:
-#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(25): Employee->login(Array)
-#1 F:\xampp\htdocs\sahanadara\app\index.php(26): Core->__construct(Object(mysqli))
-#2 F:\xampp\htdocs\sahanadara\index.php(9): require('F:\\xampp\\htdocs...')
-#3 {main}
-  thrown in F:\xampp\htdocs\sahanadara\app\model\Employee.php on line 34

@@ -83,7 +83,7 @@ class Core{
                     $data = json_decode($decrypted,true);
                     if(isset($data['auth'])){
                         if($data['auth']){
-                            if(time() - $data['issue'] > 0){
+                            if(time() - $data['issue'] < $lifetime){
                             return true;
                             }
                             echo json_encode(array("code"=>$errorCode['tokenExpired']));

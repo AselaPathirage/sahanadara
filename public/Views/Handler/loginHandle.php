@@ -32,6 +32,7 @@ if(isset($_POST['submit'])){
     }else{
         $_SESSION['key'] = $response['key'];
         $_SESSION['userRole']= $response['userRole'];
+        $_SESSION['roleId']= $response['roleId'];
         header("location:/".baseUrl."/".$routes[$response['userRole']]);
     }
 }

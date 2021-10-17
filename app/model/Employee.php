@@ -27,7 +27,7 @@ class Employee{
             $string = json_encode($array);
             $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
             //echo is_string($encrpt);exit();
-            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId']);
+            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId'],"userId"=> $data['empId']);
             $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
             echo $JSON;
             //echo $secure->decrypt(base64_decode($token['key']), ENCRYPTION_KEY);

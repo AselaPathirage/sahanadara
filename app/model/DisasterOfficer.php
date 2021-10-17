@@ -1,5 +1,5 @@
 <?php
-class DisasterManager extends Noticer{
+class DisasterOfficer extends Noticer{
     use Viewer;
     use Alerter;
 }

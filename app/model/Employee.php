@@ -14,35 +14,73 @@ class Employee{
         } 
         $username = md5($data['username']);
         $password = md5($data['password']);
-        $sql = "SELECT l.empId,r.roleId FROM login l, role r WHERE l.nid ='$username' AND l.empPassword ='$password' AND l.roleId = r.roleId";
+        $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE l.nid ='$username' AND l.empPassword ='$password' AND l.roleId = r.roleId";
         $excute = $this->connection->query($sql);
         
         if($excute->num_rows>0){
             $secure = new Openssl_EncryptDecrypt();
             $data = $excute-> fetch_assoc();
-            //$token_key = $this->tokenKey();
             $auth = true;
-            $array = array("auth"=>$auth,"userRole"=> $data['roleId'],"issue"=>time());
-            //print_r($data);exit();
+            $array = array("auth"=>$auth,"userRole"=> $data['roleId'],"issue"=>time(),"tokenKey"=>$data['keyAuth'],"userId"=> $data['empId']);
             $string = json_encode($array);
             $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
             //echo is_string($encrpt);exit();
             $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId'],"userId"=> $data['empId']);
             $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
             echo $JSON;
-            //echo $secure->decrypt(base64_decode($token['key']), ENCRYPTION_KEY);
         }else{
-            echo json_encode(array("code"=>808));
+            echo json_encode("{'code':".$errorCode['userCreadentialWrong']."}");
+            exit();
         }
     }
-    private function tokenKey($length=10){
+    protected function tokenKey($length=10){
         return substr(str_shuffle("abcdefghijklmnopqrst0123456789"),0,$length);
     }
     public function logout(){
+        
+    }
+    public function rewoke(array $data){
         global $errorCode;
-        echo json_encode($_SESSION);exit();
-        session_unset();
-        session_destroy();
-        //echo json_encode(array("code"=>$errorCode['success']));
+        if((! isset($data['username']) || (! isset($data['password'])))){
+            echo json_encode("{'code':".$errorCode['attributeMissing']."}");
+            exit();
+        }        
+        $username = md5($data['username']);
+        $password = md5($data['password']);
+        $sql = "SELECT l.empId,r.roleId FROM login l, role r WHERE l.nid ='$username' AND l.empPassword ='$password' AND l.roleId = r.roleId";
+        $excute = $this->connection->query($sql);
+        if($excute->num_rows>0){
+            $secure = new Openssl_EncryptDecrypt();
+            $data = $excute-> fetch_assoc();
+            $token_key = $this->tokenKey();
+            $sql = "UPDATE login SET keyAuth='".$token_key."' WHERE empId=".$data['empId'];
+            $this->connection->query($sql);
+            $array = array("auth"=>1,"userRole"=> $data['roleId'],"issue"=>time(),"tokenKey"=>$token_key,"userId"=> $data['empId']);
+            $string = json_encode($array);
+            $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
+            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId'],"userId"=> $data['empId']);
+            $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
+            echo $JSON;
+        }else{ 
+            echo json_encode("{'code':".$errorCode['userCreadentialWrong']."}");
+            exit();
+        }
+    }
+    public function renew(array $data){
+        global $errorCode;
+        $key = base64_decode($data['key']);
+        $secure = new Openssl_EncryptDecrypt();
+        $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
+        if($decrypted){
+            $data = json_decode($decrypted,true);
+            $array = array("auth"=>1,"userRole"=> $data['roleId'],"issue"=>time(),"tokenKey"=>$data['tokenKey'],"userId"=> $data['empId']);
+            $string = json_encode($array);
+            $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
+            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId'],"userId"=> $data['empId']);
+            $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
+            echo $JSON;
+        }                            
+        echo json_encode(array("code"=>$errorCode['apiKeyError']));
+        exit();
     }
 }

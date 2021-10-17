@@ -20,5 +20,7 @@ $errorCode = array(
                     'success' => 806,
                     'permissionError' => 807,
                     'jsonRequestNotFoundError' => 808,
-                    'tokenExpired' => 809
+                    'tokenExpired' => 809,
+                    'tokenRewoked' => 810,
+                    'userCreadentialWrong' => 811
                     );

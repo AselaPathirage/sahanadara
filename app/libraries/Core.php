@@ -5,6 +5,16 @@ class Core{
         protected $nonSecure = ['Home','Employee']; // releasing no login required classes
         protected $params = [];
         protected $connection; 
+        protected $permission = array(
+                                    'Admin' => 5,
+                                    'DisasterOfficer' => 6,
+                                    'DistrictSecratarists'=>3,
+                                    'DivisionalSecretariat' => 4,
+                                    'Dmc' => 7,
+                                    'GramaNiladari' => 1,
+                                    'InventoryManager' => 2,
+                                    'ResponsiblePerson'=> 8
+                                );
 
         public function __construct($mysqli){
             global $errorCode;
@@ -12,7 +22,6 @@ class Core{
             $this->setParams();
             $this->filterRequest();
             if(!$this->requestAuthorization()){
-                //echo json_encode("{'code':".$errorCode['apiKeyError']."}");
                 echo json_encode(array("code"=>$errorCode['apiKeyError']));
                 exit();
             }
@@ -31,29 +40,24 @@ class Core{
                 $url = filter_var($url, FILTER_SANITIZE_URL);
                 $url = explode('/', $url);
                 $temp = explode('_', $url[count($url)-2]);
-                //$count = count($temp);
+
                 if(!class_exists($temp[0])) {
-                    //echo json_encode("{'code':".$errorCode['classNotFound']."}");
-                    //echo json_encode("{'code':".$temp[0]."}");
                     echo json_encode(array("code"=>$errorCode['classNotFound']));
                     exit();
                 }
                 $this->setClass($temp[0]);
                 if(!$this->authorization()){
-                    //echo json_encode("{'code':".$errorCode['userKeyError']."}");
                     echo json_encode(array("code"=>$errorCode['userKeyError']));
                     exit();
                 }
                 $this->currentModel =  new $this->currentModel($this->connection);
                 if(method_exists($this->currentModel,$temp[1])){
                     $this->setMthod($temp[1]);
-                }else{
-                    //echo json_encode("{'code':".$errorCode['methodNotFound']."}");
+                }else{;
                     echo json_encode(array("code"=>$errorCode['methodNotFound']));
                     exit();
                 }
             }else{
-               //echo json_encode("{'code':".$errorCode['unknownError']."}");
                 echo json_encode(array("code"=>$errorCode['unknownError']));
                 exit();
             }
@@ -74,7 +78,7 @@ class Core{
         public function  authorization(){
             global $errorCode;
             if(isset($this->params['key'])){
-                $lifetime = 60*60*60*24;
+                $lifetime = 60*60*60;
                 $key = base64_decode($this->params['key']);
                 unset($this->params['key']);
                 $secure = new Openssl_EncryptDecrypt();
@@ -84,7 +88,21 @@ class Core{
                     if(isset($data['auth'])){
                         if($data['auth']){
                             if(time() - $data['issue'] < $lifetime){
-                                return true;
+                                $id = $data['userId'];
+                                $sql = "SELECT l.keyAuth FROM login l WHERE l.empId = $id";
+                                $excute = $this->connection->query($sql);
+                                $data2 = $excute-> fetch_assoc();
+                                if(!strcmp($data['tokenKey'],$data2['keyAuth'])){
+                                    if(array_key_exists($this->currentModel,$this->permission)){
+                                        if($data['userRole'] != $this->permission[$this->currentModel]){
+                                            echo json_encode(array("code"=>$errorCode['permissionError']));
+                                            exit();
+                                        }  
+                                    }
+                                    return true;
+                                }
+                                echo json_encode(array("code"=>$errorCode['tokenRewoked']));
+                                exit();
                             }
                             echo json_encode(array("code"=>$errorCode['tokenExpired']));
                             exit();

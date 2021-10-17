@@ -39,17 +39,54 @@
                 <h1>Donation Requesting Notices</h1>
 
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
+
 
                 <a href="/<?php echo baseUrl; ?>/help" class="seemore">See more</a>
             </div>
@@ -58,19 +95,41 @@
 
                 <div class="row text-center">
                     <div class="col5 box row-content">
-                        <p>sdfasdfasdfasdf</p>
+                        <h4>Fund for displaced persons</h4>
+                        <p>Bellapitiya</p>
                         <a href="./donate.php" class="donate">Donate</a>
                     </div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Fund for displaced persons</h4>
+                        <p>Bellapitiya</p>
+                        <a href="./donate.php" class="donate">Donate</a>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Fund for displaced persons</h4>
+                        <p>Bellapitiya</p>
+                        <a href="./donate.php" class="donate">Donate</a>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Fund for displaced persons</h4>
+                        <p>Bellapitiya</p>
+                        <a href="./donate.php" class="donate">Donate</a>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Fund for displaced persons</h4>
+                        <p>Bellapitiya</p>
+                        <a href="./donate.php" class="donate">Donate</a>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Fund for displaced persons</h4>
+                        <p>Bellapitiya</p>
+                        <a href="./donate.php" class="donate">Donate</a>
+                    </div>
                 </div>
+
 
                 <a href="/<?php echo baseUrl; ?>/donate" class="seemore">See more</a>
             </div>

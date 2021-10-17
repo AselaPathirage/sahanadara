@@ -32,47 +32,21 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Assigned User
+                            <th>District
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>John</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>All</option>
+                                    <option>Kalutara</option>
+                                    <option>Gampaha</option>
+                                    <option>Colombo</option>
+
                                 </select>
                             </th>
-                            <th>Status
+                            <th>Div Sec Office
                                 <select id="status-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Not Started</option>
-                                    <option>In Progress</option>
-                                    <option>Completed</option>
-                                </select>
-                            </th>
-                            <th>Milestone
-                                <select id="milestone-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Milestone 1</option>
-                                    <option>Milestone 2</option>
-                                    <option>Milestone 3</option>
-                                </select>
-                            </th>
-                            <th>Priority
-                                <select id="priority-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Low</option>
-                                    <option>Medium</option>
-                                    <option>High</option>
-                                    <option>Urgent</option>
-                                </select>
-                            </th>
-                            <th>Tags
-                                <select id="tags-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Tag 1</option>
-                                    <option>Tag 2</option>
-                                    <option>Tag 3</option>
+                                    <option>All</option>
+                                    <option>Madurawala</option>
+                                    <option>Horana</option>
+                                    <option>Millaniya</option>
                                 </select>
                             </th>
                             <th>Search
@@ -84,32 +58,84 @@
 
 
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
-                </div>
-                <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
-                </div>
-                <div class="row text-center">
-                    <div class="col5 box row-content">asdasd</div>
-                    <div class="col5 box row-content">asdasda</div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
+                    <div class="col5 box row-content">
+                        <h4>Bellapitiya Maha Vidyalaya</h4>
+                        <p>Bellapitiya, Horana</p>
+                        <p>Telephone Number - 0778787878</p>
+                        <p>People - 100</p>
+                        <p>Water bottles-100</p>
+                    </div>
                 </div>
             </div>
 

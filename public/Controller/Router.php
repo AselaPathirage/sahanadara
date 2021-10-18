@@ -35,11 +35,12 @@ class Router{
         if (array_key_exists($url[0], Router::$defaultController) && count($url) == 1) {
             $this->currentController = 'public/Views/' . Router::$defaultController[$url[0]];
         } else if (array_key_exists($url[0], Router::$defaultController)) {
-            if (array_key_exists($url[1], Router::$defaultController)) {
-                $this->currentController = 'public/Views/' . Router::$defaultController[$url[0]];
-            }
+            //if (array_key_exists($url[1], Router::$defaultController)) {
+                //$this->currentController = 'public/Views/' . Router::$defaultController[$url[0]];
+            //}
+            $this->currentController = 'public/Views/404.php';
         } else if (array_key_exists($url[0], Router::$routes)) {
-            //print_r($url);exit();
+            
             if (count($url) > 2) {
                 if (in_array($url[1], Router::$routes[$url[0]])) {
                     if (file_exists('public/Views/' . $url[0] . '/' . $url[1] . '/' . $url[2] . '.php')) {

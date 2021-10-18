@@ -17,10 +17,13 @@ class Core{
                                 );
 
         public function __construct($mysqli){
-            //echo $_SERVER['REQUEST_URI'];exit();
+            //echo $_SERVER['REQUEST_URI'];
+            print_r($_GET) ;
             global $errorCode;
             $this->connection = $mysqli;
-            $this->urlParams();
+            $this->setParams(); // adding json data to array
+            $this->urlParams(); // adding url data to array
+            $this->authorization();
         }        
         public function  setParams(){
             $json = file_get_contents('php://input');
@@ -28,15 +31,19 @@ class Core{
             if(is_null($this->params)){
                 $this->params = [];
             }
+            print_r($this->params);
         }
         public function urlParams(){
             if(isset($_GET['reqeust'])){
-                $url = rtrim($_SERVER['REQUEST_URI'], '/');
+                $url = rtrim($_GET['reqeust'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
                 $url = explode('/', $url);
-                array_shift($url);
+                //array_shift($url);
+                //array_shift($url);
+                //array_shift($url);
+                $this->params['receivedParams'] = $url;
+                print_r($this->params);
                 print_r($url);
-                exit();
             }
         } 
         public function  setClass($class){

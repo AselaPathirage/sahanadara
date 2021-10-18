@@ -1,8 +1,9 @@
 <IfModule mod_rewrite.c>
   Options -Multiviews
   RewriteEngine on
-  RewriteRule ^app/.*$ app/index.php?reqeust=$1 [QSA,L]
+  #RewriteRule   .*app/(.+)   app/index.php?request=$1   [L]
   RewriteRule ^$ public/ [L]
   RewriteCond %{REQUEST_URI}  !(\.css|\.js|\.ico|\.jpeg|\.jpg|\.pdf|\.png)$
+  RewriteCond %{REQUEST_URI} !app/?
   RewriteRule  ^(.+)$ index.php?url=$1 [QSA,L]
 </IfModule>

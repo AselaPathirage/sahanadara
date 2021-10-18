@@ -29,7 +29,7 @@ class Employee{
             $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
             echo $JSON;
         }else{
-            echo json_encode("{'code':".$errorCode['userCreadentialWrong']."}");
+            echo json_encode(array("code"=>$errorCode['userCreadentialWrong']));
             exit();
         }
     }
@@ -42,7 +42,7 @@ class Employee{
     public function rewoke(array $data){
         global $errorCode;
         if((! isset($data['username']) || (! isset($data['password'])))){
-            echo json_encode("{'code':".$errorCode['attributeMissing']."}");
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
             exit();
         }        
         $username = md5($data['username']);
@@ -62,7 +62,7 @@ class Employee{
             $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
             echo $JSON;
         }else{ 
-            echo json_encode("{'code':".$errorCode['userCreadentialWrong']."}");
+            echo json_encode(array("code"=>$errorCode['userCreadentialWrong']));
             exit();
         }
     }

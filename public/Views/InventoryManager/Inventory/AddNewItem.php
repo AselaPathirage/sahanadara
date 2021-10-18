@@ -198,7 +198,7 @@ tr:hover{
             console.log(x);
             output = $.parseJSON($.ajax({
                 type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>/InventoryManager_getItem/1234",
+                url: "<?php echo HOST; ?>/InventoryManager_getItem/1234",
                 dataType: "json", 
                 data : JSON.stringify({'key': x}),
                 cache: false,

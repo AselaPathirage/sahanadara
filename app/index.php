@@ -18,21 +18,6 @@ function loader($class)
     include $file;
 }
 spl_autoload_register('loader'); // set class auto loader
-
-if(isset($_GET['reqeust'])){
-    $url = rtrim($_GET['reqeust'], '/');
-    $url = filter_var($url, FILTER_SANITIZE_URL);
-    $url = explode('/', $url);
-    //print_r($url);
-}
-$json = file_get_contents('php://input');
-$params = json_decode($json,true);
-$headers = apache_request_headers();
-if(isset($headers['HTTP_APIKEY'])){
-    echo "hello";
-}
-echo json_encode($headers);
-exit();
 ini_set("log_errors", 1);
 ini_set("error_log", "./error.log"); //create a error log file
 $db = Database::getInstance();

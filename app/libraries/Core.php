@@ -20,19 +20,7 @@ class Core{
             //echo $_SERVER['REQUEST_URI'];exit();
             global $errorCode;
             $this->connection = $mysqli;
-            $this->setParams();
-            $this->filterRequest();
-            if(!$this->requestAuthorization()){
-                echo json_encode(array("code"=>$errorCode['apiKeyError']));
-                exit();
-            }
-            $method = new ReflectionMethod($this->currentModel, $this->currentMethod);
-            $parameters = $method->getParameters();
-            if (count($parameters)==0) {
-                $this->params = [];
-            }
-            
-            call_user_func_array([$this->currentModel, $this->currentMethod], array($this->params));
+            $this->urlParams();
         }        
         public function  setParams(){
             $json = file_get_contents('php://input');
@@ -47,16 +35,22 @@ class Core{
                 $url = filter_var($url, FILTER_SANITIZE_URL);
                 $url = explode('/', $url);
                 array_shift($url);
-                $temp = $url[count($url)-1];
-                
+                print_r($url);
+                exit();
             }
-        }        
+        } 
+        public function  setClass($class){
+            $this->currentModel = $class;
+        }
+        public function  setMthod($method){
+            $this->currentMethod = $method;
+        }       
         public function  authorization(){
             global $errorCode;
             $headers = apache_request_headers();
-            if(isset($_SERVER['HTTP_APIKEY'])){
+            if(isset($headers['HTTP_APIKEY'])){
                 $lifetime = 60*60*60;
-                $key = base64_decode($this->$_SERVER['HTTP_APIKEY']);
+                $key = base64_decode($headers['HTTP_APIKEY']);
                 $secure = new Openssl_EncryptDecrypt();
                 $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
                 if($decrypted){
@@ -93,5 +87,4 @@ class Core{
             }
             return false;
         }
-
 }

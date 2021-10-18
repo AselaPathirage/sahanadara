@@ -33,6 +33,13 @@ class Core{
             }
             
             call_user_func_array([$this->currentModel, $this->currentMethod], array($this->params));
+        }        
+        public function  setParams(){
+            $json = file_get_contents('php://input');
+		    $this->params = json_decode($json,true);
+            if(is_null($this->params)){
+                $this->params = [];
+            }
         }
         public function urlParams(){
             if(isset($_GET['reqeust'])){
@@ -43,6 +50,48 @@ class Core{
                 $temp = $url[count($url)-1];
                 
             }
+        }        
+        public function  authorization(){
+            global $errorCode;
+            $headers = apache_request_headers();
+            if(isset($_SERVER['HTTP_APIKEY'])){
+                $lifetime = 60*60*60;
+                $key = base64_decode($this->$_SERVER['HTTP_APIKEY']);
+                $secure = new Openssl_EncryptDecrypt();
+                $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
+                if($decrypted){
+                    $data = json_decode($decrypted,true);
+                    if(isset($data['auth'])){
+                        if($data['auth']){
+                            if(time() - $data['issue'] < $lifetime){
+                                $id = $data['userId'];
+                                $role = $data['userRole'];
+                                $sql = "SELECT l.keyAuth FROM login l WHERE l.empId = $id AND l.roleId = $role";
+                                $excute = $this->connection->query($sql);
+                                $data2 = $excute-> fetch_assoc();
+                                if(!strcmp($data['tokenKey'],$data2['keyAuth'])){
+                                    if(array_key_exists($this->currentModel,$this->permission)){
+                                        if($data['userRole'] != $this->permission[$this->currentModel]){
+                                            echo json_encode(array("code"=>$errorCode['permissionError']));
+                                            exit();
+                                        }  
+                                    }
+                                    return true;
+                                }
+                                echo json_encode(array("code"=>$errorCode['tokenRewoked']));
+                                exit();
+                            }
+                            echo json_encode(array("code"=>$errorCode['tokenExpired']));
+                            exit();
+                        }
+                    }
+                }                            
+                echo json_encode(array("code"=>$errorCode['apiKeyError']));
+                exit();
+            }else if(in_array($this->currentModel,$this->nonSecure)){
+                return true;
+            }
+            return false;
         }
 
 }

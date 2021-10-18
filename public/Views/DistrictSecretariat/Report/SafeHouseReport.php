@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Disaster Management Officer - Report </title>
+    <title> District Secretariat Officer - Report </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -15,11 +15,11 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/DisasterOfficer/includes/sidebar_reports.php');
+        include_once('./public/Views/DistrictSecretariat/includes/sidebar_reports.php');
      ?>
     <section class="dashboard-section">
         <?php 
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
+        include_once('./public/Views/DistrictSecretariat/includes/topnav.php'); 
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->

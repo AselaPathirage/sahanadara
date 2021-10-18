@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Disaster Management Officer - Report </title>
+    <title> District Secretariat Officer - Report </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -15,11 +15,11 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/DisasterOfficer/includes/sidebar_reports.php');
+        include_once('./public/Views/DistrictSecretariat/includes/sidebar_reports.php');
      ?>
     <section class="dashboard-section">
         <?php 
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
+        include_once('./public/Views/DistrictSecretariat/includes/topnav.php'); 
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
@@ -28,21 +28,21 @@
         <div class="container">
         <div class="box">
                 <center>
-                    <h1>Safehouse Report</h1>
+                    <h1>Incident Report</h1>
                 </center>
                 <form>
                     <div class="row-content">
 
                         <h2>Select the area</h2>
                         <div class="row">
-                            <div class="col4"><label for="crusttype">District</label>
+                            <div class="col3"><label for="crusttype">District</label>
                                 <select id="crusttype" name="crust">
                                     <option value="white">All</option>
                                     <option value="wheat">Kaluatara</option>
                                     <option value="thin">Gampaha</option>
                                 </select>
                             </div>
-                            <div class="col4"><label for="crusttype">DS Division</label>
+                            <div class="col3"><label for="crusttype">DS Division</label>
                                 <select id="crusttype" name="crust">
                                     <option value="wheat">All</option>
                                     <option value="wheat">Horana</option>
@@ -50,7 +50,7 @@
 
                                 </select>
                             </div>
-                            <div class="col4"><label for="crusttype">GN Division</label>
+                            <div class="col3"><label for="crusttype">GN Division</label>
                                 <select id="crusttype" name="crust">
                                     <option value="wheat">All</option>
                                     <option value="wheat">Bellapitiya West</option>
@@ -58,7 +58,22 @@
                                     <option value="thin">Horana North</option>
                                 </select>
                             </div>
-
+                            <div class="col3">
+                                <label for="crusttype">Incident</label>
+                                <select id="crusttype" name="crust">
+                                    <option value="wheat">All</option>
+                                    <option value="wheat">Landslide</option>
+                                    <option value="white">Flood</option>
+                                </select>
+                            </div>
+                            <div class="col3">
+                                <label for="crusttype">Start Date</label>
+                                <input type="date" id="birthday" name="birthday">
+                            </div>
+                            <div class="col3">
+                                <label for="crusttype">End Date</label>
+                                <input type="date" id="birthday" name="birthday">
+                            </div>
                         </div>
 
                         <div class="row" style="justify-content: center;">
@@ -73,7 +88,7 @@
         </div>
     </section>
     <script>
-        var thisPage = "#safe";
+        var thisPage = "#incident";
         $(document).ready(function() {
             $("#incident,#safe,#compensation").each(function() {
                 if ($(this).hasClass('active')){

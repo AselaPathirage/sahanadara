@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Divisional Secretariat - Dashboard </title>
+    <title> District Secretariat - Dashboard </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -15,51 +15,28 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/DivisionalSecretariat/includes/sidebar_dashboard.php');
+        include_once('./public/Views/DistrictSecretariat/includes/sidebar_dashboard.php');
      ?>
     <section class="dashboard-section">
         <?php 
-        include_once('./public/Views/DivisionalSecretariat/includes/topnav.php'); 
+        include_once('./public/Views/DistrictSecretariat/includes/topnav.php'); 
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
-            <h1>Dashboard</h1>
-            <h1>Welcome Divisional Secretariat Officer</h1>
+            <center>
+            <h1>Welcome District Secretariat Officer</h1>
+            </center>
             <div class="stat-row">
                 <div class="box">
                     <div class="right-side">
-                        <div class="box-topic">Incident Reports</div>
-                        <div class="number">10</div>
-
-                    </div>
-                    <i class='bx bxs-report cart one'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
                         <div class="box-topic">Compensation Requests</div>
-                        <div class="number">5</div>
+                        <div class="number">3</div>
 
                     </div>
                     <i class='bx bxs-report cart two'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Borrow Requests</div>
-                        <div class="number">6</div>
-
-                    </div>
-                    <i class='bx bxs-report cart three'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Donation Requests</div>
-                        <div class="number">7</div>
-
-                    </div>
-                    <i class='bx bxs-report cart four'></i>
                 </div>
             </div>
         </div>
@@ -90,9 +67,9 @@
         
     </section>
     <script>
-        var thisPage = "#Dashboard";
+        var thisPage = "#Home";
         $(document).ready(function() {
-            $("#Home,#Compensation,#Incidents,#FundRaising,#Donation,#BorrowRequests,#InventoryManager").each(function() {
+            $("#Home,#Compensation").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

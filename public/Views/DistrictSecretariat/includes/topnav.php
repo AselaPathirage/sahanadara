@@ -1,17 +1,17 @@
 <nav>
     <div class="sidebar-button">
         <i class='bx bx-menu sidebarBtn'></i>
-        <span class="dashboard">Divisional Secretariat</span>
+        <span class="dashboard">District Secretariat</span>
     </div>
     <!-- <div class="mid">
                 <input type="text" placeholder="Search...">
                 <i class='bx bx-search'></i>
             </div> -->
     <div class="mid">
-        <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/">
+        <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/">
             <span class="links_name">Dashboard</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Report/IncidentReport">
+        <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Report/IncidentReport">
             <span class="links_name">Reports</span>
         </a>
     </div>

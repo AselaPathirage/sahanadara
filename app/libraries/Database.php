@@ -33,12 +33,5 @@ class Database{
 /*	public function backlog() {
 
 	}
-
-	public function encrypt() {
-
-	}
-
-	public function decrypt() {
-
-	}*/
+*/
 }

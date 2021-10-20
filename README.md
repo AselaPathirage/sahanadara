@@ -1,4 +1,6 @@
-# sahanadara
+# Sahanadara - IS14
+
+Useful git commands
 
 Create branch<br />
   <code>git checkout -b <new_branch_name></code>
@@ -23,3 +25,6 @@ Push the code in your local repository to GitHub in the branch name<br />
   <code>git push -u origin <branch_name></code>
     
 Create a PULL REQUEST
+    
+Merge existing branch with main
+  <code>git merge origin/main</code>

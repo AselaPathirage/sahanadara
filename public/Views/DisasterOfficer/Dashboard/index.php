@@ -26,7 +26,7 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
-            <h1 style="text-align:center;">Welcome Disaster Management Officer</h1>
+            <center><h1 style="text-align:center;">Welcome Disaster Management Officer</h1></center>
             <div class="stat-row">
                 <div class="box">
                     <div class="right-side">
@@ -42,7 +42,7 @@
                         <div class="number">5</div>
 
                     </div>
-                    <i class='bx bxs-report'></i>
+                    <i class='bx bxs-report cart two'></i>
                 </div>
                 <div class="box">
                     <div class="right-side">
@@ -50,7 +50,7 @@
                         <div class="number">6</div>
 
                     </div>
-                    <i class='bx bxs-report cart two'></i>
+                    <i class='bx bxs-report cart three'></i>
                 </div>
             </div>
         </div>

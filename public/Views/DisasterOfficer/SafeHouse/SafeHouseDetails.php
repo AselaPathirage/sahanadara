@@ -72,7 +72,7 @@
                 </div>
                 <div class="col6" style="overflow: auto">
                     <div class="box row-content" style="height:100%;min-height: 300px;">
-                    Safe House Status
+                    Safe House Status<br><br>
                     <div class="forms">
                     <form action="./editSafehouse.php" method="POST">
                         <input type="hidden" name="id" id="id" value="<?php echo $id ?>">

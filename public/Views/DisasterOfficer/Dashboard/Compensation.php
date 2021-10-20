@@ -77,22 +77,22 @@
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                             
-                                <td>01/24/2021</td>
+                                <td>01/24/2021 1:50</td>
                                 <td>ABC Perera</td>
-                                <td>Flood</td>
-                                <td>DS Note 1</td>
-                                <td>DMC Note 1</td>
-                                <td>Active</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td>Collected</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                             <td>01/24/2021</td>
                                 <td>ABC Silva</td>
-                                <td>Flood</td>
-                                <td>DS Note 2</td>
-                                <td>DMC Note 2</td>
-                                <td>Active</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
                             </tr>
 

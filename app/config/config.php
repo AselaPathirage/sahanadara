@@ -22,5 +22,7 @@ $errorCode = array(
                     'jsonRequestNotFoundError' => 808,
                     'tokenExpired' => 809,
                     'tokenRewoked' => 810,
-                    'userCreadentialWrong' => 811
+                    'userCreadentialWrong' => 811,
+                    'routeNotFound' => 812,
+                    'unhandledRequestingMetod' => 813,
                     );

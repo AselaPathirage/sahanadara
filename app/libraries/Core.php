@@ -8,22 +8,31 @@ class Core{
         protected $permission = array(
                                     'Admin' => 5,
                                     'DisasterOfficer' => 6,
-                                    'DistrictSecratarists'=>3,
+                                    'DistrictSecretariat' => 3,
                                     'DivisionalSecretariat' => 4,
                                     'Dmc' => 7,
                                     'GramaNiladari' => 1,
                                     'InventoryManager' => 2,
-                                    'ResponsiblePerson'=> 8
+                                    'ResponsiblePerson' => 8
                                 );
+        private $userType=0;
 
         public function __construct($mysqli){
             //echo $_SERVER['REQUEST_URI'];
-            print_r($_GET) ;
+            //print_r($_GET) ;
             global $errorCode;
             $this->connection = $mysqli;
+            $this->authorization();
             $this->setParams(); // adding json data to array
             $this->urlParams(); // adding url data to array
-            $this->authorization();
+            $this->setClass();
+            $method = new ReflectionMethod($this->currentModel, $this->currentMethod);
+            $parameters = $method->getParameters();
+            if (count($parameters)==0) {
+                $this->params = [];
+            }
+            
+            call_user_func_array([$this->currentModel, $this->currentMethod], array($this->params));
         }        
         public function  setParams(){
             $json = file_get_contents('php://input');
@@ -31,30 +40,64 @@ class Core{
             if(is_null($this->params)){
                 $this->params = [];
             }
-            print_r($this->params);
+            //print_r($this->params);
         }
         public function urlParams(){
-            if(isset($_GET['reqeust'])){
-                $url = rtrim($_GET['reqeust'], '/');
+            if(isset($_GET['request'])){
+                if($_GET['request']=="index.php"){
+                    exit();
+                }
+                $url = rtrim($_GET['request'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
                 $url = explode('/', $url);
-                //array_shift($url);
-                //array_shift($url);
-                //array_shift($url);
                 $this->params['receivedParams'] = $url;
-                print_r($this->params);
-                print_r($url);
+                //print_r($this->params);
             }
         } 
-        public function  setClass($class){
-            $this->currentModel = $class;
+        public function  setClass(){
+            global $errorCode;
+            global $route;
+            $url = $this->params['receivedParams'][0];
+            $array = $route->checkAvailibility($url);
+            foreach($array as $item) {
+                $temp = explode("@", $item);
+                if(in_array($temp[0],$this->nonSecure)){
+                        $this->currentModel = $temp[0];
+                        $this->currentModel =  new $this->currentModel($this->connection);
+                        $this->setMthod($temp[1]);
+                        array_shift($this->params['receivedParams']);
+                        //unset($this->params['receivedParams'][0]);
+                        return;
+                }else if(in_array($temp[0],array_keys($this->permission))){
+                    if($this->userType == $this->permission[$temp[0]]){
+                        $this->currentModel = $temp[0];
+                        $this->currentModel =  new $this->currentModel($this->connection);
+                        $this->setMthod($temp[1]);
+                        array_shift($this->params['receivedParams']);
+                        //unset($this->params['receivedParams'][0]);
+                        return;
+                    }else{
+                        echo json_encode(array("code"=>$errorCode['permissionError']));
+                        exit();
+                    }
+                }
+            }
+            echo json_encode(array("code"=>$errorCode['classNotFound']));
+            exit();
         }
         public function  setMthod($method){
-            $this->currentMethod = $method;
+            global $errorCode;
+            if(method_exists($this->currentModel,$method)){
+                $this->currentMethod = $method;
+            }else{;
+                echo json_encode(array("code"=>$errorCode['methodNotFound']));
+                exit();
+            }
         }       
         public function  authorization(){
             global $errorCode;
             $headers = apache_request_headers();
+            //print_r($headers);//exit();
             if(isset($headers['HTTP_APIKEY'])){
                 $lifetime = 60*60*60;
                 $key = base64_decode($headers['HTTP_APIKEY']);
@@ -71,27 +114,23 @@ class Core{
                                 $excute = $this->connection->query($sql);
                                 $data2 = $excute-> fetch_assoc();
                                 if(!strcmp($data['tokenKey'],$data2['keyAuth'])){
-                                    if(array_key_exists($this->currentModel,$this->permission)){
-                                        if($data['userRole'] != $this->permission[$this->currentModel]){
-                                            echo json_encode(array("code"=>$errorCode['permissionError']));
-                                            exit();
-                                        }  
-                                    }
-                                    return true;
+                                    $this->userType=$role;
+                                }else{
+                                    echo json_encode(array("code"=>$errorCode['tokenRewoked']));
+                                    exit();
                                 }
-                                echo json_encode(array("code"=>$errorCode['tokenRewoked']));
+                            }else{
+                                echo json_encode(array("code"=>$errorCode['tokenExpired']));
                                 exit();
                             }
-                            echo json_encode(array("code"=>$errorCode['tokenExpired']));
-                            exit();
                         }
                     }
+                }else{
+                    echo json_encode(array("code"=>$errorCode['apiKeyError']));
+                    exit();
                 }                            
-                echo json_encode(array("code"=>$errorCode['apiKeyError']));
-                exit();
-            }else if(in_array($this->currentModel,$this->nonSecure)){
-                return true;
+            }else{
+                $this->userType=0;
             }
-            return false;
         }
 }

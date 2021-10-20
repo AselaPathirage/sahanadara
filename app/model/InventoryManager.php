@@ -10,10 +10,17 @@ class InventoryManager extends Noticer{
         $unitType = $data['unitType'];
         $sql = "INSERT INTO `item` (`itemName`, `unitType`) VALUES ('$itemName', $unitType);";
         $this->connection->query($sql);
-        echo json_encode("{'code':".$errorCode['success']."}");
+        echo json_encode(array("code"=>$errorCode['success']));
     }
-    public function getItem(){
-        $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
+    public function getItem(array $data){
+        print_r($data);
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId WHERE item.itemId=";
+        }else{
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
+        }
+        
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

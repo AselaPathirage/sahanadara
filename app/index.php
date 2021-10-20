@@ -20,6 +20,9 @@ function loader($class)
 spl_autoload_register('loader'); // set class auto loader
 ini_set("log_errors", 1);
 ini_set("error_log", "./error.log"); //create a error log file
+
 $db = Database::getInstance();
+$route = Route::getInstance();
+
 $mysqli = $db->getConnection(); // set db connection
 $core = new Core($mysqli);

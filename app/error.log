@@ -1,2 +1,50 @@
 
 [18-Oct-2021 20:58:20 Europe/Berlin] PHP Warning:  Array to string conversion in F:\xampp\htdocs\sahanadara\app\libraries\Core.php on line 21
+[20-Oct-2021 14:22:50 Europe/Berlin] PHP Fatal error:  Cannot use temporary expression in write context in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 19
+[20-Oct-2021 14:26:09 Europe/Berlin] PHP Fatal error:  Cannot use temporary expression in write context in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 19
+[20-Oct-2021 14:26:11 Europe/Berlin] PHP Fatal error:  Cannot use temporary expression in write context in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 19
+[20-Oct-2021 14:28:29 Europe/Berlin] PHP Fatal error:  Cannot use temporary expression in write context in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 19
+[20-Oct-2021 14:29:14 Europe/Berlin] PHP Fatal error:  Uncaught Error: Access to undeclared static property Route::$get in F:\xampp\htdocs\sahanadara\app\libraries\Route.php:19
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\config\apiRoutes.php(16): Route::GET('unit', Array)
+#1 F:\xampp\htdocs\sahanadara\app\libraries\Route.php(16): require_once('F:\\xampp\\htdocs...')
+#2 F:\xampp\htdocs\sahanadara\app\libraries\Route.php(11): Route->__construct()
+#3 F:\xampp\htdocs\sahanadara\app\index.php(25): Route::getInstance()
+#4 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 19
+[20-Oct-2021 14:30:58 Europe/Berlin] PHP Notice:  Accessing static property Route::$get as non static in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 16
+[20-Oct-2021 14:30:58 Europe/Berlin] PHP Warning:  Undefined property: Route::$get in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 16
+[20-Oct-2021 17:01:56 Europe/Berlin] PHP Warning:  mysqli::__construct(): (HY000/2002): No connection could be made because the target machine actively refused it in F:\xampp\htdocs\sahanadara\app\libraries\Database.php on line 19
+[20-Oct-2021 17:02:21 Europe/Berlin] PHP Warning:  mysqli::__construct(): (HY000/2002): No connection could be made because the target machine actively refused it in F:\xampp\htdocs\sahanadara\app\libraries\Database.php on line 19
+[20-Oct-2021 17:34:05 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: Too few arguments to function Core::setClass(), 0 passed in F:\xampp\htdocs\sahanadara\app\libraries\Core.php on line 26 and exactly 1 expected in F:\xampp\htdocs\sahanadara\app\libraries\Core.php:50
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(26): Core->setClass()
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\libraries\Core.php on line 50
+[20-Oct-2021 17:34:21 Europe/Berlin] PHP Warning:  Array to string conversion in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 21
+[20-Oct-2021 17:34:21 Europe/Berlin] PHP Warning:  Array to string conversion in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 21
+[20-Oct-2021 17:43:26 Europe/Berlin] PHP Warning:  Undefined variable $errorCode in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 28
+[20-Oct-2021 17:43:26 Europe/Berlin] PHP Warning:  Trying to access array offset on value of type null in F:\xampp\htdocs\sahanadara\app\libraries\Route.php on line 28
+[20-Oct-2021 19:08:01 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Home1" not found in F:\xampp\htdocs\sahanadara\app\libraries\Core.php:60
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(28): Core->setClass()
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\libraries\Core.php on line 60
+[20-Oct-2021 19:11:18 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\app\model\Home.php:13
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(35): Home->viewDonations(Array)
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\model\Home.php on line 13
+[20-Oct-2021 19:33:03 Europe/Berlin] PHP Warning:  Undefined array key "itemName" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 9
+[20-Oct-2021 19:33:03 Europe/Berlin] PHP Warning:  Undefined array key "unitType" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 10
+[20-Oct-2021 19:34:03 Europe/Berlin] PHP Warning:  Undefined array key "itemName" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 9
+[20-Oct-2021 19:34:03 Europe/Berlin] PHP Warning:  Undefined array key "unitType" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 10
+[20-Oct-2021 20:17:41 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php:26
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(35): InventoryManager->getItem(Array)
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 26

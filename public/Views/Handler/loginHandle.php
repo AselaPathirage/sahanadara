@@ -22,7 +22,7 @@ if(isset($_POST['submit'])){
     $result = curl_exec($ch);
     curl_close($ch);
     $response = json_decode($result,true);
-    print_r($response);
+    //print_r($response);exit();
     //print_r($_SESSION);
     //$res = session_save_path();
     //echo $res;
@@ -33,6 +33,7 @@ if(isset($_POST['submit'])){
         $_SESSION['key'] = $response['key'];
         $_SESSION['userRole']= $response['userRole'];
         $_SESSION['roleId']= $response['roleId'];
+        $_SESSION['userId']= $response['userId'];
         header("location:/".baseUrl."/".$routes[$response['userRole']]);
     }
 }

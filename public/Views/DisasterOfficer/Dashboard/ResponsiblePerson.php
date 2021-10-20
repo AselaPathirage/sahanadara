@@ -89,6 +89,7 @@
 
 
                                 <div class="space"></div>
+                                <a href="" class="btn-box">Add</a>
                                 <a href="" class="btn-box">Remove</a>
                             </div>
                         </div>

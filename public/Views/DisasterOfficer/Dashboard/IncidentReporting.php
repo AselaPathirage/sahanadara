@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_disofficer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -27,7 +27,7 @@
         <!-- STATS -->
         <div class="container">
          <!-- TABLE -->
-         <div class="container">
+        <div class="container">
             <div class="">
 
                 <table class="table">
@@ -51,14 +51,6 @@
                                     <option>Completed</option>
                                 </select>
                             </th>
-                            <th>GN Division
-                                <select id="milestone-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Milestone 1</option>
-                                    <option>Milestone 2</option>
-                                    <option>Milestone 3</option>
-                                </select>
-                            </th>
                             
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
@@ -66,6 +58,47 @@
                         </tr>
                     </thead>
                 </table>
+
+
+                <div class="panel panel-primary filterable">
+                    <table id="task-list-tbl" class="table">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Applicant Name</th>
+                                <th>Type</th>
+                                <th>DS Note</th>
+                                <th>DMC Note</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                            
+                                <td>01/24/2021 1:50</td>
+                                <td>ABC Perera</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td>Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021</td>
+                                <td>ABC Silva</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            
+                        </tbody>
+                    </table>
 
 
                 

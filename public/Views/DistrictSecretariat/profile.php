@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Disaster Management Officer</title>
+    <title> District Secretariat </title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -18,11 +18,11 @@
 
 <body>
     <?php
-    include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
+    include_once('./public/Views/DistrictSecretariat/includes/sidebar_dashboard.php');
     ?>
     <section class="dashboard-section">
         <?php
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php');
+        include_once('./public/Views/DistrictSecretariat/includes/topnav.php');
         ?>
         <div class="space"></div>
 
@@ -31,36 +31,19 @@
                 <div class="box1">
                     <h1 class="text-center">Profile</h1>
                     <div class="row">
-                        <div class="col6">
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="user role">District</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
-                                </div>
-                            </div>
+
+                        <div class="col3">
+                            <label for="user role">District</label>
                         </div>
-                        <div class="col6">
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="user role">DS Office</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
-                                </div>
-                            </div>
+                        <div class="col9">
+                            <select id="District" name="District">
+                                <option value="null">Kalutara</option>
+                                <option value="Gampaha">Gampaha</option>
+                                <option value="Colombo">Colombo</option>
+                                <option value="Kaluthara">Kaluthara</option>
+                            </select>
                         </div>
+
                     </div>
 
 

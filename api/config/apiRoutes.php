@@ -11,7 +11,7 @@ Route::GET("item",array("InventoryManager@getItem"));
 Route::GET("donation",array("Home@viewDonations"));
 Route::GET("user",array("Admin@searchUser"));
 Route::GET("district",array("Admin@getDistrict"));
-Route::GET("area",array("Admin@DBtoJson"));
+//Route::GET("area",array("Admin@DBtoJson"));
 Route::GET("division",array("Admin@getDivision"));
 Route::GET("GnDivision",array("Admin@getGnDivision"));
 Route::POST("login",array("Employee@login"));

@@ -18,11 +18,11 @@
 
 <body>
     <?php
-    include_once('./public/Views/GramaNiladari/includes/sidebar_dashboard.php');
+    include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
     ?>
     <section class="dashboard-section">
         <?php
-        include_once('./public/Views/GramaNiladari/includes/topnav.php');
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php');
         ?>
         <div class="space"></div>
 

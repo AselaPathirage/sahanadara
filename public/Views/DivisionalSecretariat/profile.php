@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Grama Niladari</title>
+    <title> Divisional Secretariat</title>
     <!-- CSS -->
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
@@ -18,11 +18,11 @@
 
 <body>
     <?php
-    include_once('./public/Views/GramaNiladari/includes/sidebar_dashboard.php');
+    include_once('./public/Views/DivisionalSecretariat/includes/sidebar_dashboard.php');
     ?>
     <section class="dashboard-section">
         <?php
-        include_once('./public/Views/GramaNiladari/includes/topnav.php');
+        include_once('./public/Views/DivisionalSecretariat/includes/topnav.php');
         ?>
         <div class="space"></div>
 
@@ -62,24 +62,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row text-center">
 
-                        <div class="row">
-                            <div class="col3">
-                                <label for="user role">GN division</label>
-                            </div>
-                            <div class="col9">
-                                <select id="District" name="District">
-                                    <option value="null">Kalutara</option>
-                                    <option value="Gampaha">Gampaha</option>
-                                    <option value="Colombo">Colombo</option>
-                                    <option value="Kaluthara">Kaluthara</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                    </div>
 
                     <h4 class="text-center">Personal Details</h4>
 

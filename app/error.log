@@ -48,3 +48,27 @@ Stack trace:
 #1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
 #2 {main}
   thrown in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 26
+[20-Oct-2021 20:37:42 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php:26
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(35): InventoryManager->getItem(Array)
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 26
+[20-Oct-2021 22:46:44 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php:26
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(35): InventoryManager->getItem(Array)
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 26
+[20-Oct-2021 22:47:21 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php:26
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(35): InventoryManager->getItem(Array)
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 26
+[21-Oct-2021 08:33:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php:25
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\app\libraries\Core.php(35): InventoryManager->getItem(Array)
+#1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 25

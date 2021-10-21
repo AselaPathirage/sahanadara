@@ -57,7 +57,7 @@ class Core{
         public function  setClass(){
             global $errorCode;
             global $route;
-            $url = $this->params['receivedParams'][0];
+            $url = trim($this->params['receivedParams'][0]);
             $array = $route->checkAvailibility($url);
             foreach($array as $item) {
                 $temp = explode("@", $item);
@@ -77,11 +77,13 @@ class Core{
                         //unset($this->params['receivedParams'][0]);
                         return;
                     }else{
+                        http_response_code(403);
                         echo json_encode(array("code"=>$errorCode['permissionError']));
                         exit();
                     }
                 }
             }
+            http_response_code(404);
             echo json_encode(array("code"=>$errorCode['classNotFound']));
             exit();
         }
@@ -89,7 +91,8 @@ class Core{
             global $errorCode;
             if(method_exists($this->currentModel,$method)){
                 $this->currentMethod = $method;
-            }else{;
+            }else{
+                http_response_code(404);
                 echo json_encode(array("code"=>$errorCode['methodNotFound']));
                 exit();
             }
@@ -99,7 +102,7 @@ class Core{
             $headers = apache_request_headers();
             //print_r($headers);//exit();
             if(isset($headers['HTTP_APIKEY'])){
-                $lifetime = 60*60*60;
+                $lifetime = 60*60;
                 $key = base64_decode($headers['HTTP_APIKEY']);
                 $secure = new Openssl_EncryptDecrypt();
                 $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
@@ -116,16 +119,19 @@ class Core{
                                 if(!strcmp($data['tokenKey'],$data2['keyAuth'])){
                                     $this->userType=$role;
                                 }else{
+                                    http_response_code(401);
                                     echo json_encode(array("code"=>$errorCode['tokenRewoked']));
                                     exit();
                                 }
                             }else{
+                                http_response_code(401);
                                 echo json_encode(array("code"=>$errorCode['tokenExpired']));
                                 exit();
                             }
                         }
                     }
                 }else{
+                    http_response_code(401);
                     echo json_encode(array("code"=>$errorCode['apiKeyError']));
                     exit();
                 }                            

@@ -1,4 +1,5 @@
 <?php
+
 class Route{
     private static $_instance;
     private static $get=[];
@@ -25,6 +26,7 @@ class Route{
                     return self::$post[$item];     
                 }
             }
+            http_response_code(501);
             echo json_encode(array("code"=>$errorCode['routeNotFound']));
             exit();
         }elseif($_SERVER['REQUEST_METHOD'] =="GET"){
@@ -34,6 +36,7 @@ class Route{
                     return self::$get[$item];     
                 }
             }
+            http_response_code(501);
             echo json_encode(array("code"=>$errorCode['routeNotFound']));
             exit();
         }elseif($_SERVER['REQUEST_METHOD'] =="PUT"){
@@ -43,6 +46,7 @@ class Route{
                     return self::$put[$item];     
                 }
             }
+            http_response_code(501);
             echo json_encode(array("code"=>$errorCode['routeNotFound']));
             exit();
         }elseif($_SERVER['REQUEST_METHOD'] =="DELETE"){
@@ -52,9 +56,11 @@ class Route{
                     return self::$delete[$item];     
                 }
             }
+            http_response_code(501);
             echo json_encode(array("code"=>$errorCode['routeNotFound']));
             exit();
         }else{ 
+            http_response_code(405);
             echo json_encode(array("code"=>$errorCode['unhandledRequestingMetod']));
             exit();
         }

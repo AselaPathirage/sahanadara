@@ -13,10 +13,9 @@ class InventoryManager extends Noticer{
         echo json_encode(array("code"=>$errorCode['success']));
     }
     public function getItem(array $data){
-        print_r($data);
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId WHERE item.itemId=";
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
         }else{
             $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
         }

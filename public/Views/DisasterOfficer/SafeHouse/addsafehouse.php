@@ -33,21 +33,24 @@
                 <h1 style="text-align:center;">Add Safe House</h1>
                 <!-- FORM -->
         <div class="container">
-            <form action="#" method="post">
+            <form method="post" id='add' name="add">
 
                 <div class="column">
+                    <label for="safeHouseAddress">Safe house address</label>
+                    <textarea id="safeHouseAddress" name="safeHouseAddress"></textarea>
 
-                    <label for="number">Safe house number</label>
-                    <input type="number" id="number" name="number">
-                    
-                    <label for="address">Safe house address</label>
-                    <textarea id="address" name="address"></textarea>
+                    <label for="safeHouseName">Name</label>
+                    <input type="text" id="safeHouseName" name="safeHouseName">
 
-                    <label for="Name">Name</label>
-                    <input type="text" name="address">
+                    <label for="gnDiv">GN Division</label>
+                    <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
 
-                    <label for="tp">TP Number</label>
-                    <input type="text" name="tp">
+                    <select id="gnDiv" name="gnDiv">
+                                        <option>Select GN Division</option>
+                                    </select>
+
+                    <label for="safeHouseTelno">TP Number</label>
+                    <input type="text" id="safeHouseTelno" name="safeHouseTelno">
 
                     <br><br>
 
@@ -77,7 +80,7 @@
                         </label>
                     </fieldset>
                     -->
-                    <input type="submit" id="search" value="Submit" />
+                    <input type="submit" id="submit" value="Submit" name="submit"/>
                     <input type="reset" value="Cancel" />
                 </div>
             </form>
@@ -87,8 +90,8 @@
 
     </section>
     <script>
-        getUnit();
-            getItem()
+        // getUnit();
+            // getItem()
             $("#add").submit(function(e) {
                 e.preventDefault();
                 var str = [];
@@ -108,78 +111,47 @@
 					data: json, 
 					cache: false,
 					success: function(result) {
-						$('#trow').empty();
-                        getItem();
+						// $('#trow').empty();
+                        // getItem();
 					},
 					error: function(err) {
 						alert(err);
 					}
 				});
             });
-		});
+		
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-        function getUnit(){
+
+        function getGNDivision(){
             var x = "<?php echo $_SESSION['key'] ?>";
-            console.log(x);
+            var object = {};
+            object['key'] = x;
+            object['id'] = <?php echo $_SESSION['userId'] ?>;
             output = $.parseJSON($.ajax({
                 type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>/DisasterOfficer_getUnit/1234",
+                url: "localhost/<?php echo baseUrl; ?>/DisasterOfficer_getGNDivision/1234",
                 dataType: "json", 
-                data : JSON.stringify({'key': x}),
-                cache: false,
-                async: false
-            }).responseText);
-            //console.log(output);
-            var select = document.getElementById("unitType");
-            for (var i = 0; i < output.length; i++){
-                //console.log(i);
-                var opt = document.createElement('option');
-                opt.value = output[i]['unitId'];
-                opt.innerHTML = output[i]['unitName'];
-                select.appendChild(opt);
-            }
-        }
-        function getItem(){
-            var x = "<?php echo $_SESSION['key'] ?>";
-            console.log(x);
-            output = $.parseJSON($.ajax({
-                type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>/DisasterOfficer_getSafehouse/1234",
-                dataType: "json", 
-                data : JSON.stringify({'key': x}),
+                data : JSON.stringify(object),
                 cache: false,
                 async: false
             }).responseText);
             console.log(output);
-            var table = document.getElementById("trow");
+            var select = document.getElementById("gnDiv");
             for (var i = 0; i < output.length; i++){
-                let obj = output[i];
-                console.log(obj);
-                let row = table.insertRow(-1);
-                let cell1 = row.insertCell(-1);
-                let cell2 = row.insertCell(-1);
-                let cell3 = row.insertCell(-1);
-                let cell4 = row.insertCell(-1);
-                let cell5 = row.insertCell(-1);
-                var attribute = document.createElement("input");
-                attribute.id = i;
-                attribute.type ="radio";
-                attribute.class ="radio-custom";
-                attribute.name = "radio-group";
-                var attribute2 = document.createElement("label");
-                attribute2.for = i;
-                attribute2.class ="radio-custom-label";
-                cell1.append = attribute;
-                //cell1.append = attribute2;
-                cell2.innerHTML = obj['itemName'];
-                cell3.innerHTML = obj['unitName'];
+                //console.log(i);
+                var opt = document.createElement('option');
+                opt.value = output[i]['gndvId'];
+                opt.innerHTML = output[i]['gnDvName'];
+                select.appendChild(opt);
             }
         }
+        getGNDivision();
+        
     </script>
 </body>
 </html>

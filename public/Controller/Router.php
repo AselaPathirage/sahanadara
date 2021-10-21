@@ -29,8 +29,7 @@ class Router{
 
     protected $currentController;
 
-    public function __construct()
-    {
+    public function __construct(){
         $url = $this->getUrl();
         if (array_key_exists($url[0], Router::$defaultController) && count($url) == 1) {
             $this->currentController = 'public/Views/' . Router::$defaultController[$url[0]];
@@ -38,7 +37,7 @@ class Router{
             //if (array_key_exists($url[1], Router::$defaultController)) {
                 //$this->currentController = 'public/Views/' . Router::$defaultController[$url[0]];
             //}
-            $this->currentController = 'public/Views/404.php';
+            $this->currentController = 'public/Views/' . Router::$defaultController[$url[0]];
         } else if (array_key_exists($url[0], Router::$routes)) {
             
             if (count($url) > 2) {
@@ -78,13 +77,17 @@ class Router{
         require_once($this->currentController);
     }
 
-    public function getUrl()
-    {
+    public function getUrl(){
         if (isset($_GET['url'])) {
             $url = rtrim($_GET['url'], '/');
             $url = filter_var($url, FILTER_SANITIZE_URL);
             $url = explode('/', $url);
             return $url;
+        }
+    }
+    public function checkPermission($requiredUserType){
+        if(isset($_SESSION['key']) && isset($_SESSION['key']) && isset($_SESSION['key'])){
+
         }
     }
 }

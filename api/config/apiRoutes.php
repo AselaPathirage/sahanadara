@@ -13,3 +13,5 @@ Route::GET("user",array("Admin@searchUser"));
 Route::POST("login",array("Employee@login"));
 Route::POST("item",array("InventoryManager@addItem"));
 Route::POST("user",array("Admin@register","DivisionalSecretariat@register","DisasterOfficer@register"));
+Route::POST("renew",array("Employee@renew"));
+Route::POST("rewoke",array("Employee@rewoke"));

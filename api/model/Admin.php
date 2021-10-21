@@ -7,6 +7,8 @@ class Admin extends Employee{
         echo "efsdfsd";
     }
     public function searchUser(array $data){
-        echo "searchUser";
+        $mail = new mail();
+        $mail->emailBody("About your account","Dear Naween","use this item");
+        $mail->sendMail("htnaweenpasindu@gmail.com","login credeantials");
     }
 }

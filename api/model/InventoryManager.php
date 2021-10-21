@@ -3,7 +3,6 @@ class InventoryManager extends Noticer{
     public function __construct($con){
         parent::__construct($con);
     }
-
     public function addItem(array $data){
         global $errorCode;
         $itemName = $data['itemName'];

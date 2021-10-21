@@ -7,15 +7,15 @@ class mail{
     private $body = "";
     public function __construct(){
         $this->email = new PHPMailer();
-        $this->email->SMTPDebug = 0;                   // Enable verbose debug output
+        //$this->email->SMTPDebug = 1;                   // Enable verbose debug output
         $this->email->isSMTP();                        // Set mailer to use SMTP
-        $this->email->Host       = 'svr3.educationhost.cloud';    // Specify main SMTP server
+        $this->email->Host       = 'svr2.educationhost.cloud';    // Specify main SMTP server
         $this->email->SMTPAuth   = true;               // Enable SMTP authentication
-        $this->email->Username   = 'no-reply@dms.educationhost.cloud';     // SMTP username
-        $this->email->Password   = 'SV8VaACL1V';         // SMTP password
+        $this->email->Username   = "no-reply@webdms.live" ;//'no-reply@webdms.live';     // SMTP username
+        $this->email->Password   = "HKfWoTOQ0p";//'QziR4t6v';         // SMTP password
         $this->email->SMTPSecure = 'tls';              // Enable TLS encryption, 'ssl' also accepted
         $this->email->Port       = 587; 
-        $this->email->setFrom('no-reply@dms.educationhost.cloud', 'DMS Team');           // Set sender of the mail
+        $this->email->setFrom('no-reply@webdms.live', 'DMS Team');           // Set sender of the mail
         $this->email->isHTML(true);                                  
     }
 
@@ -294,12 +294,12 @@ class mail{
               <table border='0' cellpadding='0' cellspacing='0'>
                 <tr>
                   <td class='content-block'>
-                    <span class='apple-link'>Dms.educationhost.cloud/ | Protection | Care | Law | Open</span>
+                    <span class='apple-link'>webdms.live | Protection | Care | Law | Open</span>
                   </td>
                 </tr>
                 <tr>
                   <td class='content-block powered-by'>
-                    Powered by <a href='https://fb.me/jalasem'>DMS Team</a>.
+                    Powered by <a href=''>DMS Team</a>.
                   </td>
                 </tr>
               </table>

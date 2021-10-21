@@ -10,7 +10,7 @@ if(isset($_POST['submit'])){
                 2=>'InventoryManager',
                 8=>'ResponsiblePerson'
             );
-    $url = "localhost/sahanadara/Employee_login/1234";
+    $url = API."login";
     $ch = curl_init( $url );
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -30,9 +30,10 @@ if(isset($_POST['submit'])){
         header("location:../staff?error=wrong password");
         exit();
     }else{
+        $time = time();
+        $_SESSION['createdTime'] = $time;
         $_SESSION['key'] = $response['key'];
         $_SESSION['userRole']= $response['userRole'];
-        $_SESSION['roleId']= $response['roleId'];
         $_SESSION['userId']= $response['userId'];
         header("location:/".baseUrl."/".$routes[$response['userRole']]);
     }

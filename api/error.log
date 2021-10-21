@@ -72,3 +72,31 @@ Stack trace:
 #1 F:\xampp\htdocs\sahanadara\app\index.php(28): Core->__construct(Object(mysqli))
 #2 {main}
   thrown in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 25
+[21-Oct-2021 10:21:04 Europe/Berlin] PHP Warning:  Undefined array key "itemName" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 9
+[21-Oct-2021 10:21:04 Europe/Berlin] PHP Warning:  Undefined array key "unitType" in F:\xampp\htdocs\sahanadara\app\model\InventoryManager.php on line 10
+[21-Oct-2021 15:58:21 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 15:58:21 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 15:58:21 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 15:58:21 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:03:54 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:03:54 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:03:54 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:03:54 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:03:56 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:03:56 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:03:56 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:03:56 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:03:59 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:03:59 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:03:59 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:03:59 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:04:00 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:04:00 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 76
+[21-Oct-2021 16:04:00 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:04:00 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 79
+[21-Oct-2021 16:04:34 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 77
+[21-Oct-2021 16:04:34 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 77
+[21-Oct-2021 16:04:34 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 80
+[21-Oct-2021 16:04:34 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 80
+[21-Oct-2021 16:05:47 Europe/Berlin] PHP Warning:  Undefined array key "roleId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 80
+[21-Oct-2021 16:05:47 Europe/Berlin] PHP Warning:  Undefined array key "empId" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 80

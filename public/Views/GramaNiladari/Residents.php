@@ -163,7 +163,7 @@
                 object[key] = value;
             });
             object['key'] = "<?php echo $_SESSION['key'] ?>";
-            object['gnid'] = "<?php echo $_SESSION['userid'] ?>";
+            object['gnid'] = "<?php echo $_SESSION['userId'] ?>";
             var json = JSON.stringify(object);
             console.log(json);
             $.ajax({
@@ -182,19 +182,21 @@
         });
 
         function getResident() {
-            var x = "<?php echo $_SESSION['key'] ?>";
-            console.log(x);
+            var object = {};
+            object['key'] = "<?php echo $_SESSION['key'] ?>";
+            object['gnid'] = "<?php echo $_SESSION['userId'] ?>";
+            var json = JSON.stringify(object);
+            console.log(object);
             output = $.parseJSON($.ajax({
                 type: "POST",
                 url: "localhost/<?php echo baseUrl; ?>/GramaNiladari_getResident/1234",
                 dataType: "json",
-                data: JSON.stringify({
-                    'key': x,
-                }),
+                data: json,
                 cache: false,
                 async: false
             }).responseText);
             console.log(output);
+            $("#table2 tbody").empty();
             var table = document.getElementById("table2");
             for (var i = 0; i < output.length; i++) {
                 let obj = output[i];
@@ -205,18 +207,32 @@
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
                 let cell5 = row.insertCell(-1);
-                var attribute = document.createElement("input");
+                let cell6 = row.insertCell(-1);
+                var attribute = document.createElement("a");
                 attribute.id = i;
-                attribute.type = "radio";
-                attribute.class = "radio-custom";
-                attribute.name = "radio-group";
-                var attribute2 = document.createElement("label");
-                attribute2.for = i;
-                attribute2.class = "radio-custom-label";
-                cell1.append = attribute;
-                //cell1.append = attribute2;
-                cell2.innerHTML = obj['itemName'];
-                cell3.innerHTML = obj['unitName'];
+                attribute.href = "";
+                attribute.className = "btn_blue";
+                attribute.name = "update";
+                attribute.innerHTML = "Update";
+                var attribute2 = document.createElement("a");
+
+                attribute2.id = i;
+                attribute2.href = "";
+                attribute2.className = "btn_delete";
+                attribute2.name = "delete";
+                attribute2.innerHTML = "Delete";
+                cell1.innerHTML = obj['residentId'];
+                cell2.innerHTML = obj['residentName'];
+                cell3.innerHTML = obj['residentNIC'];
+                cell4.innerHTML = obj['residentAddress'];
+                cell5.innerHTML = obj['residentTelNo'];
+                var attribute3 = document.createElement("span");
+                attribute3.innerHTML = " ";
+                cell6.appendChild(attribute);
+                cell6.appendChild(attribute3);
+                cell6.appendChild(attribute2);
+                console.log(attribute);
+                console.log(attribute2);
             }
         }
     </script>

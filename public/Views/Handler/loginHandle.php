@@ -3,7 +3,7 @@ if(isset($_POST['submit'])){
     $routes = array(
                 5=>'Admin',
                 6=>'DisasterOfficer',
-                3=>'DistrictSecratarists',
+                3=>'DistrictSecretariat',
                 4=>'DivisionalSecretariat',
                 7=>'DMC',
                 1=>'GramaNiladari',
@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
     //$res = session_save_path();
     //echo $res;
     if(key_exists('code',$response)){
-        header("location:../staff?error=wrong password");
+        //header("location:../staff?error=wrong password");
         exit();
     }else{
         $time = time();
@@ -35,6 +35,8 @@ if(isset($_POST['submit'])){
         $_SESSION['key'] = $response['key'];
         $_SESSION['userRole']= $response['userRole'];
         $_SESSION['userId']= $response['userId'];
-        header("location:/".baseUrl."/".$routes[$response['userRole']]);
+        $_SESSION['name']= $response['userName'];
+        //print_r($_SESSION);
+        header("location:".HOST.$routes[$response['userRole']]);
     }
 }

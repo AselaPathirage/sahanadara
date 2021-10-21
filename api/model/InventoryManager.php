@@ -27,8 +27,13 @@ class InventoryManager extends Noticer{
         $json = json_encode($results);
         echo $json;
     }
-    public function getUnit(){
-        $sql = "SELECT * FROM `unit` ORDER BY unitName";
+    public function getUnit(array $data){
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $sql = "SELECT * FROM `unit` WHERE unitId=$id";
+        }else{
+            $sql = "SELECT * FROM `unit` ORDER BY unitName";
+        }
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

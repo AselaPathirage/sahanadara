@@ -36,22 +36,22 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form action="#" method="post">
+                            <form action="#" id='add' name="add" method="POST">
                                 <h1>New Record</h1>
 
                                 <div class="row-content">
 
                                     <label for="your_name">Name</label>
-                                    <input type="text" id="your_name" name="yourname" />
+                                    <input type="text" id="name" name="name" />
 
                                     <label for="your_nic">NIC</label>
-                                    <input type="text" id="your_nic" name="yournic" />
+                                    <input type="text" id="nic" name="nic" />
 
                                     <label for="your_phone">Phone Number</label>
-                                    <input type="tel" id="your_phone" name="yourphone" />
+                                    <input type="tel" id="phone" name="phone" />
 
                                     <label for="address">Address</label>
-                                    <textarea id="address" name="youraddress"></textarea>
+                                    <textarea id="address" name="address"></textarea>
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Send" class="btn-alerts" />
                                         <input type="reset" value="Cancel" class="btn-alerts" />
@@ -79,7 +79,7 @@
 
 
                     <div class="panel panel-primary filterable">
-                        <table id="task-list-tbl" class="table">
+                        <table id="table2" class="table">
                             <thead>
                                 <tr>
                                     <th>Number</th>
@@ -134,6 +134,8 @@
                 $(thisPage).addClass("active");
             });
 
+            getResident();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -149,6 +151,74 @@
         $(".close-btn, .bg-overlay").click(function() {
             $(".custom-model-main").removeClass('model-open');
         });
+
+        $("#add").submit(function(e) {
+            e.preventDefault();
+            var str = [];
+            var formElement = document.querySelector("#add");
+            var formData = new FormData(formElement);
+            //var array = {'key':'ABCD'}
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+            object['key'] = "<?php echo $_SESSION['key'] ?>";
+            object['gnid'] = "<?php echo $_SESSION['userid'] ?>";
+            var json = JSON.stringify(object);
+            console.log(json);
+            $.ajax({
+                type: "POST",
+                url: "localhost/<?php echo baseUrl; ?>/GramaNiladari_addResident/1234",
+                data: json,
+                cache: false,
+                success: function(result) {
+                    console.log(result);
+                    getResident();
+                },
+                error: function(err) {
+                    alert(err);
+                }
+            });
+        });
+
+        function getResident() {
+            var x = "<?php echo $_SESSION['key'] ?>";
+            console.log(x);
+            output = $.parseJSON($.ajax({
+                type: "POST",
+                url: "localhost/<?php echo baseUrl; ?>/GramaNiladari_getResident/1234",
+                dataType: "json",
+                data: JSON.stringify({
+                    'key': x,
+                }),
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            var table = document.getElementById("table2");
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                console.log(obj);
+                let row = table.insertRow(-1);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
+                var attribute = document.createElement("input");
+                attribute.id = i;
+                attribute.type = "radio";
+                attribute.class = "radio-custom";
+                attribute.name = "radio-group";
+                var attribute2 = document.createElement("label");
+                attribute2.for = i;
+                attribute2.class = "radio-custom-label";
+                cell1.append = attribute;
+                //cell1.append = attribute2;
+                cell2.innerHTML = obj['itemName'];
+                cell3.innerHTML = obj['unitName'];
+            }
+        }
     </script>
 </body>
 

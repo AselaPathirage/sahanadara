@@ -20,10 +20,17 @@ function renew(){
             $result = curl_exec($ch);
             curl_close($ch);
             $response = json_decode($result,true);
-            $_SESSION['createdTime'] = time();
-            $_SESSION['key'] = $response['key'];
-            $_SESSION['userRole']= $response['userRole'];
-            $_SESSION['userId']= $response['userId'];
+            if(key_exists('code',$response)){
+                session_unset();
+                session_destroy();
+                session_start();
+            }else{
+                
+                $_SESSION['createdTime'] = time();
+                $_SESSION['key'] = $response['key'];
+                $_SESSION['userRole']= $response['userRole'];
+                $_SESSION['userId']= $response['userId'];
+            }
         }
     }
 }

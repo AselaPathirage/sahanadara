@@ -27,7 +27,7 @@ if(isset($_POST['submit'])){
     //$res = session_save_path();
     //echo $res;
     if(key_exists('code',$response)){
-        //header("location:../staff?error=wrong password");
+        header("location:../staff?error=wrong password");
         exit();
     }else{
         $time = time();

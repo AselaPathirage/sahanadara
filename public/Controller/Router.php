@@ -30,7 +30,7 @@ class Router{
                                     'DisasterOfficer' => 6,
                                     'DistrictSecretariat' => 3,
                                     'DivisionalSecretariat' => 4,
-                                    'Dmc' => 7,
+                                    'DMC' => 7,
                                     'GramaNiladari' => 1,
                                     'InventoryManager' => 2,
                                     'ResponsiblePerson' => 8

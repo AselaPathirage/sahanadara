@@ -26,7 +26,7 @@
                                     6 => 'DisasterOfficer',
                                     3 => 'DistrictSecretariat',
                                     4 => 'DivisionalSecretariat',
-                                    7 => 'Dmc',
+                                    7 => 'DMC',
                                     1 => 'GramaNiladari',
                                     2 => 'InventoryManager',
                                     8 => 'ResponsiblePerson'

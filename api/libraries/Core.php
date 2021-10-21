@@ -58,6 +58,7 @@ class Core{
             global $errorCode;
             global $route;
             $url = trim($this->params['receivedParams'][0]);
+
             $array = $route->checkAvailibility($url);
             foreach($array as $item) {
                 $temp = explode("@", $item);

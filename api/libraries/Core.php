@@ -16,6 +16,7 @@ class Core{
                                     'ResponsiblePerson' => 8
                                 );
         private $userType=0;
+        private $userId=0;
 
         public function __construct($mysqli){
             //echo $_SERVER['REQUEST_URI'];
@@ -31,7 +32,6 @@ class Core{
             if (count($parameters)==0) {
                 $this->params = [];
             }
-            
             call_user_func_array([$this->currentModel, $this->currentMethod], array($this->params));
         }        
         public function  setParams(){
@@ -75,17 +75,14 @@ class Core{
                         $this->currentModel =  new $this->currentModel($this->connection);
                         $this->setMthod($temp[1]);
                         array_shift($this->params['receivedParams']);
+                        $this->params['userId'] = $this->userId;
                         //unset($this->params['receivedParams'][0]);
                         return;
-                    }else{
-                        http_response_code(403);
-                        echo json_encode(array("code"=>$errorCode['permissionError']));
-                        exit();
                     }
                 }
             }
-            http_response_code(404);
-            echo json_encode(array("code"=>$errorCode['classNotFound']));
+            http_response_code(403);
+            echo json_encode(array("code"=>$errorCode['permissionError']));
             exit();
         }
         public function  setMthod($method){
@@ -119,6 +116,7 @@ class Core{
                                 $data2 = $excute-> fetch_assoc();
                                 if(!strcmp($data['tokenKey'],$data2['keyAuth'])){
                                     $this->userType=$role;
+                                    $this->userId = $data['userId'];
                                 }else{
                                     http_response_code(401);
                                     echo json_encode(array("code"=>$errorCode['tokenRewoked']));

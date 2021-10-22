@@ -30,7 +30,7 @@ class DisasterOfficer extends Noticer{
         echo json_encode(array("code"=>$errorCode['success']));
     }
     public function getGNDivision(array $data){
-        $id = $data['id'];
+        $id = $data['userId'];
         $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
         WHERE m.disMgtOfficerID = d.disasterManager AND g.dvId = d.dvId AND m.disMgtOfficerID = $id  AND g.safeHouseID IS NULL";
         $excute = $this->connection->query($sql);

@@ -94,30 +94,30 @@
             // getItem()
             $("#add").submit(function(e) {
                 e.preventDefault();
+                //$(".custom-model-main").removeClass('model-open');
                 var str = [];
                 var formElement = document.querySelector("#add");
                 var formData = new FormData(formElement);
-                //var array = {'key':'ABCD'}
                 var object = {};
                 formData.forEach(function(value, key){
                     object[key] = value;
                 }); 
-                object['key'] = "<?php echo $_SESSION['key'] ?>";
                 var json = JSON.stringify(object);
                 console.log(json);
                 $.ajax({
 					type: "POST",
-					url: "localhost/<?php echo baseUrl; ?>/DisasterOfficer_addSafehouse/1234",
-					data: json, 
+					url: "<?php echo API; ?>safehouse",
+					data: json,
+                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
 					cache: false,
 					success: function(result) {
-						// $('#trow').empty();
-                        // getItem();
+						window.location.replace("<?php echo HOST ?>DisasterOfficer/SafeHouse/SafeHouseDetails");
 					},
 					error: function(err) {
 						alert(err);
 					}
 				});
+
             });
 		
 
@@ -128,15 +128,11 @@
         }
 
         function getGNDivision(){
-            var x = "<?php echo $_SESSION['key'] ?>";
-            var object = {};
-            object['key'] = x;
-            object['id'] = <?php echo $_SESSION['userId'] ?>;
             output = $.parseJSON($.ajax({
-                type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>/DisasterOfficer_getGNDivision/1234",
+                type: "GET",
+                url: "<?php echo API; ?>GnDivision",
                 dataType: "json", 
-                data : JSON.stringify(object),
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
                 cache: false,
                 async: false
             }).responseText);

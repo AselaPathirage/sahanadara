@@ -31,7 +31,7 @@
         
 
         <!-- TABLE -->
-        <div class="container">
+        <!-- <div class="container">
             <div class="">
 
                 <table class="table">
@@ -56,7 +56,8 @@
                             </th>
                         </tr>
                     </thead>
-                </table>
+                </table> -->
+                <br>
                 
                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-fun">Add new safehouse</a>
                 

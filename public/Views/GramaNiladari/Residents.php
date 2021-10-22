@@ -36,22 +36,22 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form action="#" method="post">
+                            <form action="#" id='add' name="add" method="POST">
                                 <h1>New Record</h1>
 
                                 <div class="row-content">
 
                                     <label for="your_name">Name</label>
-                                    <input type="text" id="your_name" name="yourname" />
+                                    <input type="text" id="name" name="name" />
 
                                     <label for="your_nic">NIC</label>
-                                    <input type="text" id="your_nic" name="yournic" />
+                                    <input type="text" id="nic" name="nic" />
 
                                     <label for="your_phone">Phone Number</label>
-                                    <input type="tel" id="your_phone" name="yourphone" />
+                                    <input type="tel" id="phone" name="phone" />
 
                                     <label for="address">Address</label>
-                                    <textarea id="address" name="youraddress"></textarea>
+                                    <textarea id="address" name="address"></textarea>
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Send" class="btn-alerts" />
                                         <input type="reset" value="Cancel" class="btn-alerts" />
@@ -79,7 +79,7 @@
 
 
                     <div class="panel panel-primary filterable">
-                        <table id="task-list-tbl" class="table">
+                        <table id="table2" class="table">
                             <thead>
                                 <tr>
                                     <th>Number</th>
@@ -134,6 +134,8 @@
                 $(thisPage).addClass("active");
             });
 
+            getResident();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -149,6 +151,90 @@
         $(".close-btn, .bg-overlay").click(function() {
             $(".custom-model-main").removeClass('model-open');
         });
+
+        $("#add").submit(function(e) {
+            e.preventDefault();
+            var str = [];
+            var formElement = document.querySelector("#add");
+            var formData = new FormData(formElement);
+            //var array = {'key':'ABCD'}
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+            object['key'] = "<?php echo $_SESSION['key'] ?>";
+            object['gnid'] = "<?php echo $_SESSION['userId'] ?>";
+            var json = JSON.stringify(object);
+            console.log(json);
+            $.ajax({
+                type: "POST",
+                url: "localhost/<?php echo baseUrl; ?>/GramaNiladari_addResident/1234",
+                data: json,
+                cache: false,
+                success: function(result) {
+                    console.log(result);
+                    getResident();
+                },
+                error: function(err) {
+                    alert(err);
+                }
+            });
+        });
+
+        function getResident() {
+            var object = {};
+            object['key'] = "<?php echo $_SESSION['key'] ?>";
+            object['gnid'] = "<?php echo $_SESSION['userId'] ?>";
+            var json = JSON.stringify(object);
+            console.log(object);
+            output = $.parseJSON($.ajax({
+                type: "POST",
+                url: "localhost/<?php echo baseUrl; ?>/GramaNiladari_getResident/1234",
+                dataType: "json",
+                data: json,
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            $("#table2 tbody").empty();
+            var table = document.getElementById("table2");
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                console.log(obj);
+                let row = table.insertRow(-1);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
+                let cell6 = row.insertCell(-1);
+                var attribute = document.createElement("a");
+                attribute.id = i;
+                attribute.href = "";
+                attribute.className = "btn_blue";
+                attribute.name = "update";
+                attribute.innerHTML = "Update";
+                var attribute2 = document.createElement("a");
+
+                attribute2.id = i;
+                attribute2.href = "";
+                attribute2.className = "btn_delete";
+                attribute2.name = "delete";
+                attribute2.innerHTML = "Delete";
+                cell1.innerHTML = obj['residentId'];
+                cell2.innerHTML = obj['residentName'];
+                cell3.innerHTML = obj['residentNIC'];
+                cell4.innerHTML = obj['residentAddress'];
+                cell5.innerHTML = obj['residentTelNo'];
+                var attribute3 = document.createElement("span");
+                attribute3.innerHTML = " ";
+                cell6.appendChild(attribute);
+                cell6.appendChild(attribute3);
+                cell6.appendChild(attribute2);
+                console.log(attribute);
+                console.log(attribute2);
+            }
+        }
     </script>
 </body>
 

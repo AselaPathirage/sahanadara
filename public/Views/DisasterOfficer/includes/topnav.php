@@ -22,7 +22,7 @@
         </a>
     </div>
     <div class="rightcorner">
-        <a href="#">
+        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/profile">
             <i class='bx bx-user'></i>
             <span class="links_name">Profile</span>
         </a>

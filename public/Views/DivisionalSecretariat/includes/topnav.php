@@ -16,7 +16,7 @@
         </a>
     </div>
     <div class="rightcorner">
-        <a href="#">
+        <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/profile">
             <i class='bx bx-user'></i>
             <span class="links_name">Profile</span>
         </a>

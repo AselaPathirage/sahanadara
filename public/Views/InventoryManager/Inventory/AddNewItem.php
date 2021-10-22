@@ -174,28 +174,25 @@ tr:hover{
             </div>
             <div class="box">
                     <div class="panel panel-primary filterable">
-                        <table  class="table" style="width: 100%;">
+                        <table id="ajaxFilter"  class="table" style="width: 100%;">
                             <thead>
                                 <tr>
                                     <th style="width: 5%;">
                                     </th>
-                                    <th style="width: 30%;">Name</th>
-                                    <th style="width: 30%;">Type
-                                        <select id="" class="form-control">
-                                            <option>Select Type</option>
-                                            <option>Dry rations</option>
-                                            <option>Rob</option>
-                                            <option>Larry</option>
-                                            <option>Donald</option>
-                                            <option>Roger</option>
+                                    <th style="width: 30%;">Name
+                                    <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                                    </th>
+                                    <th style="width: 30%;">Unit
+                                        <select id="unitType_2" class="form-control">
+                                            <option>Any</option>
                                         </select>
                                     </th>
                                     <th style="width: 10%;">
                                     <input type="submit" id="addNew" value="+ Create New Item" class="form-control">
                                     </th>
-                                    <th style="width: 10%;">
+                                    <!-- <th style="width: 10%;">
                                     <input type="submit" id="editItem" value="+ Create New Item" class="form-control">
-                                    </th>
+                                    </th> -->
                                 </tr>
                             </thead>
                             <tbody id="trow">                   
@@ -216,7 +213,7 @@ tr:hover{
                 $(thisPage).addClass("active");
             });
             getUnit();
-            getItem()
+            getItem();
             $("#add").submit(function(e) {
                 e.preventDefault();
                 //$(".custom-model-main").removeClass('model-open');
@@ -269,18 +266,21 @@ tr:hover{
                 cache: false,
                 async: false
             }).responseText);
-            //console.log(output);
             var select = document.getElementById("unitType");
+            var select2 = document.getElementById("unitType_2");
             for (var i = 0; i < output.length; i++){
                 var opt = document.createElement('option');
                 opt.value = output[i]['unitId'];
                 opt.innerHTML = output[i]['unitName'];
+                var opt2 = document.createElement('option');
+                opt2.value = output[i]['unitName'];
+                opt2.innerHTML = output[i]['unitName'];
                 select.appendChild(opt);
+                select2.appendChild(opt2);
             }
         }
         function getItem(){
             var x = "<?php echo $_SESSION['key'] ?>";
-            console.log(x);
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>item",
@@ -289,31 +289,69 @@ tr:hover{
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
             var table = document.getElementById("trow");
             for (var i = 0; i < output.length; i++){
                 let obj = output[i];
-                console.log(obj);
                 let row = table.insertRow(-1);
+                let id ="data_"+i;
+                row.id = id;
+                row.className = "task-list-row";
+                $("#data_"+i).attr('data-unit', obj['unitName']);
                 let cell1 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
-                let cell4 = row.insertCell(-1);
-                let cell5 = row.insertCell(-1);
-                var attribute = document.createElement("input");
-                attribute.id = i;
-                attribute.type ="radio";
-                attribute.class ="radio-custom";
-                attribute.name = "radio-group";
-                var attribute2 = document.createElement("label");
-                attribute2.for = i;
-                attribute2.class ="radio-custom-label";
-                cell1.append = attribute;
-                //cell1.append = attribute2;
+                cell1.innerHTML  = "<input id='"+obj['itemId']+"' class='radio-custom' name='radio-group' type='radio' checked><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
                 cell2.innerHTML = obj['itemName'];
+                cell3.colSpan ="2";
                 cell3.innerHTML = obj['unitName'];
             }
         }
+        var filters = {
+                unit: null
+            };
+
+        function updateFilters() {
+            $('.task-list-row').hide().filter(function () {
+                var
+                    self = $(this),
+                    result = true; // not guilty until proven guilty
+
+                Object.keys(filters).forEach(function (filter) {
+                    if (filters[filter] && (filters[filter] != 'None') && (filters[filter] != 'Any')) {
+                        result = result && filters[filter] === self.data(filter);
+                    }
+                });
+
+                return result;
+            }).show();
+        }
+
+        function changeFilter(filterName) {
+            filters[filterName] = this.value;
+            updateFilters();
+        }
+        $('#unitType_2').on('change', function () {
+            changeFilter.call(this, 'unit');
+        });
+
+        //var $rows = $('#ajaxFilter #trow .task-list-row'); 
+        (function () {
+        var showResults;
+        $('#search').keyup(function () {
+            var searchText;
+            searchText = $('#search').val();
+            return showResults(searchText);
+        });
+        showResults = function (searchText) {
+            $('tbody tr').hide();
+            return $('tbody tr:Contains(' + searchText + ')').show();
+        };
+        jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+    }.call(this));
     </script>
 </body>
 </html>

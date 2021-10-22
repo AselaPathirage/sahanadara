@@ -100,7 +100,6 @@ class Employee{
         $key = base64_decode($data['key']);
         $secure = new Openssl_EncryptDecrypt();
         $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
-        print_r($decrypted);
         if($decrypted){
             $data = json_decode($decrypted,true);
             $array = array("auth"=>1,"userRole"=> $data['userRole'],"issue"=>time(),"tokenKey"=>$data['tokenKey'],"userId"=> $data['userId']);
@@ -109,8 +108,9 @@ class Employee{
             $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['userRole'],"userId"=> $data['userId']);
             $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
             echo $JSON;
-        }                            
-        echo json_encode(array("code"=>$errorCode['apiKeyError']));
-        exit();
+        }else{                           
+            echo json_encode(array("code"=>$errorCode['apiKeyError']));
+            exit();
+        }
     }
 }

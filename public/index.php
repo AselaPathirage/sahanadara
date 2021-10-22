@@ -13,7 +13,7 @@ function renew(){
             curl_setopt( $ch, CURLOPT_POSTFIELDS, $payload );
             $headers = array(
                 "Accept: application/json",
-                "HTTP_KEY: ".$_SESSION['key'],
+                "HTTP_APIKEY: ".$_SESSION['key'],
             );
             curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
             curl_setopt( $ch, CURLOPT_RETURNTRANSFER, true );
@@ -25,7 +25,6 @@ function renew(){
                 session_destroy();
                 session_start();
             }else{
-                
                 $_SESSION['createdTime'] = time();
                 $_SESSION['key'] = $response['key'];
                 $_SESSION['userRole']= $response['userRole'];

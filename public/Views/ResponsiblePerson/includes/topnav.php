@@ -21,7 +21,7 @@
             <i class='bx bx-user'></i>
             <span class="links_name">Profile</span>
         </a>
-        <a href="#" style="border: 2px solid rgb(194, 5, 5);">
+        <a href="/<?php echo baseUrl; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
         </a>

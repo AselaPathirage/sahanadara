@@ -4,7 +4,7 @@ define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
 define("DB_NAME", "sahanadara");
-define("API_KEY", "1234");
+//define("API_KEY", "1234");
 define("ENCRYPTION_KEY","AHkjghjvHJGKNKLlkBG54J");
 
 //SMS
@@ -22,5 +22,7 @@ $errorCode = array(
                     'jsonRequestNotFoundError' => 808,
                     'tokenExpired' => 809,
                     'tokenRewoked' => 810,
-                    'userCreadentialWrong' => 811
+                    'userCreadentialWrong' => 811,
+                    'routeNotFound' => 812,
+                    'unhandledRequestingMetod' => 813,
                     );

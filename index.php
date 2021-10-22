@@ -1,13 +1,13 @@
 <?php
-define("baseUrl","sahanadara");
-define("HOST","http://localhost/sahanadara/");
+define("baseUrl", "sahanadara/sahanadara");
+define("HOST", "http://localhost/sahanadara/");
 
-if($_SERVER['REQUEST_METHOD'] === 'PUT' || $_SERVER['REQUEST_METHOD'] === 'DELETE' || $_SERVER['REQUEST_METHOD'] === 'POST'){
-    if(isset($_GET['formControl'])){
+if ($_SERVER['REQUEST_METHOD'] === 'PUT' || $_SERVER['REQUEST_METHOD'] === 'DELETE' || $_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_GET['formControl'])) {
         require  "public/index.php";
-    }else{
+    } else {
         require  "app/index.php";
     }
-}else{
+} else {
     require  "public/index.php";
-} 
+}

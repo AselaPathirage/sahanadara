@@ -1,16 +1,16 @@
 <?php
 header("Content-Type: application/json; charset=UTF-8");
-
-include_once("./app/libraries/vendor/autoload.php");
-include_once("./app/config/config.php");
+define("HOST","http://localhost/sahanadara/");
+include_once("./libraries/vendor/autoload.php");
+include_once("./config/config.php");
 
 function loader($class)
 {
     $filename = $class. '.php';
-    $file ='./app/libraries/' . $filename;
+    $file ='./libraries/' . $filename;
     if (!file_exists($file))
     {
-        $file ='./app/model/'. $filename;
+        $file ='./model/'. $filename;
         if (!file_exists($file)){
             return false;
         }
@@ -18,9 +18,11 @@ function loader($class)
     include $file;
 }
 spl_autoload_register('loader'); // set class auto loader
-
 ini_set("log_errors", 1);
-ini_set("error_log", "./app/error.log"); //create a error log file
+ini_set("error_log", "./error.log"); //create a error log file
+
 $db = Database::getInstance();
+$route = Route::getInstance();
+
 $mysqli = $db->getConnection(); // set db connection
 $core = new Core($mysqli);

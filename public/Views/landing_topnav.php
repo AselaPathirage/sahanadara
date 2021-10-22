@@ -17,14 +17,27 @@
 
             </li> -->
 
-            <li class="menu-item "><a class="nav__link" href="/<?php echo baseUrl; ?>/about">About Us</a>
-            <li class="menu-item "><a class="nav__link round" href="/<?php echo baseUrl; ?>/help">Help </a>
-            <li class="menu-item "><a class="nav__link round" href="/<?php echo baseUrl; ?>/donate">Donate </a>
-            <li class="menu-item "><a class="nav__link" href="/<?php echo baseUrl; ?>/staff">Staff </a>
-
+            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>about">About Us</a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>help">Help </a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>donate">Donate </a>
+            <?php
+                $folder = array(
+                                    5 => 'Admin',
+                                    6 => 'DisasterOfficer',
+                                    3 => 'DistrictSecretariat',
+                                    4 => 'DivisionalSecretariat',
+                                    7 => 'DMC',
+                                    1 => 'GramaNiladari',
+                                    2 => 'InventoryManager',
+                                    8 => 'ResponsiblePerson'
+                                );
+                if(isset($_SESSION['key']) && isset($_SESSION['name']) && isset($_SESSION['userRole'])){
+                    echo "<li class='menu-item'><a class='nav__link' href='".HOST.$folder[$_SESSION['userRole']]."'>Hi, ".$_SESSION['name']." </a>";
+                }else{
+                    echo "<li class='menu-item'><a class='nav__link' href='".HOST."staff'>Staff </a>";
+                }
+            ?>
             </li>
         </ul>
-
-
     </div>
 </nav>

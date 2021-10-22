@@ -1,2 +1,2 @@
 <?php
-header("location:ResponsiblePerson/SafeHouse/");
+header("location:".HOST."ResponsiblePerson/SafeHouse/");

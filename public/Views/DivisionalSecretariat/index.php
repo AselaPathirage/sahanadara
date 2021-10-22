@@ -1,2 +1,2 @@
 <?php
-header("location:DivisionalSecretariat/Dashboard/");?>
+header("location:".HOST."DivisionalSecretariat/Dashboard/");?>

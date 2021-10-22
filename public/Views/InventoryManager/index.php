@@ -1,2 +1,2 @@
 <?php
-header("location:InventoryManager/Inventory/");
+header("location:".HOST."InventoryManager/Inventory/");

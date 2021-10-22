@@ -1,5 +1,5 @@
 <?php
-define("baseUrl", "sahanadara/sahanadara");
+define("baseUrl", "sahanadara");
 define("HOST", "http://localhost/sahanadara/");
 
 if ($_SERVER['REQUEST_METHOD'] === 'PUT' || $_SERVER['REQUEST_METHOD'] === 'DELETE' || $_SERVER['REQUEST_METHOD'] === 'POST') {

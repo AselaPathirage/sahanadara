@@ -33,22 +33,18 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Approved
+                            <th>Status
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>John</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>All</option>
+                                    <option>Approved</option>
+                                    <option>Not Approved</option>
                                 </select>
                             </th>
                             <th>Type
                                 <select id="status-filter" class="form-control">
                                     <option>Any</option>
-                                    <option>Not Started</option>
-                                    <option>In Progress</option>
-                                    <option>Completed</option>
+                                    <option>Death</option>
+                                    <option>Property</option>
                                 </select>
                             </th>
                             
@@ -77,11 +73,11 @@
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                             
-                                <td>01/24/2021</td>
+                                <td>01/24/2021 12:50</td>
                                 <td>ABC Perera</td>
-                                <td>Flood</td>
-                                <td>DS Note 1</td>
-                                <td>DMC Note 1</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
                                 <td>Active</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
@@ -89,11 +85,11 @@
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021</td>
+                            <td>01/24/2021 2:50</td>
                                 <td>ABC Silva</td>
-                                <td>Flood</td>
-                                <td>DS Note 2</td>
-                                <td>DMC Note 2</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
                                 <td>Active</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 

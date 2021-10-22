@@ -41,7 +41,7 @@
 
                                 </select>
                             </th>
-                            <th>Div Sec Office
+                            <th>DS Division
                                 <select id="status-filter" class="form-control">
                                     <option>All</option>
                                     <option>Madurawala</option>
@@ -58,83 +58,133 @@
 
 
                 <div class="row text-center">
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
-                    </div>
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
-                    </div>
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="row text-center">
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <p>Bellapitiya, Horana</p>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <div class="go-corner" href="#">
+                            <div class="go-arrow">
+                                <i class="fas fa-hands-helping"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -164,6 +214,8 @@
 
         });
     </script>
+    <script src="https://kit.fontawesome.com/9e8a3f781b.js" crossorigin="anonymous"></script>
+
 </body>
 
 </html>

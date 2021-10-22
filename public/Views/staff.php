@@ -27,9 +27,7 @@
                     <div class="space"></div>
                     <h1 class="heading_landing">Staff</h1>
                     <div class="container aboutsec">
-                        <p>lorem ipsum dolor sit amet, consectetur adip
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit quas hic id. Consectetur dolore commodi porro perspiciatis asperiores deserunt! Sed magni qui voluptates aliquam temporibus. Quia officia non dolor labore vitae, a ex. Vero ipsum error, accusamus assumenda voluptatem molestiae ipsam doloribus fuga repellat repudiandae reprehenderit earum amet doloremque nam.
-                        </p>
+                        <img src="/<?php echo baseUrl; ?>/public/assets/img/staff.jpg" alt="" style="border-radius: 5px;width:75%;">
                     </div>
                 </div>
                 <div class="col6">

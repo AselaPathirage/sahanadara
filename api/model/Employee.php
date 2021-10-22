@@ -101,16 +101,27 @@ class Employee{
         $secure = new Openssl_EncryptDecrypt();
         $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
         if($decrypted){
+            $lifetime = 60*60;
             $data = json_decode($decrypted,true);
-            $array = array("auth"=>1,"userRole"=> $data['userRole'],"issue"=>time(),"tokenKey"=>$data['tokenKey'],"userId"=> $data['userId']);
-            $string = json_encode($array);
-            $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
-            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['userRole'],"userId"=> $data['userId']);
-            $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
-            echo $JSON;
-        }else{                           
+            if(time() - $data['issue'] < $lifetime){
+                $array = array("auth"=>1,"userRole"=> $data['userRole'],"issue"=>time(),"tokenKey"=>$data['tokenKey'],"userId"=> $data['userId']);
+                $string = json_encode($array);
+                $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
+                $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['userRole'],"userId"=> $data['userId']);
+                $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
+                echo $JSON;
+            }else{
+                http_response_code(401);
+                echo json_encode(array("code"=>$errorCode['tokenExpired']));
+                exit();
+            }
+        }else{    
+            http_response_code(401);                       
             echo json_encode(array("code"=>$errorCode['apiKeyError']));
             exit();
         }
+    }
+    public function resetPassword(array $data){
+        
     }
 }

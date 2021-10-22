@@ -163,6 +163,24 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+        const estadosJSON = 'https://gist.githubusercontent.com/letanure/3012978/raw/36fc21d9e2fc45c078e0e0e07cce3c81965db8f9/estados-cidades.json'
+        $.getJSON(estadosJSON, function(json) {
+        $.each(json.estados, function(key, val) {
+            $('#estados').append('<option value="'+json.estados[key].sigla+'">'+json.estados[key].nome+'</option>')
+        })
+        });
+
+        $('#estados').on('change', function() {
+        $.getJSON(estadosJSON, function(json) {
+            const request = json.estados.filter(function(cidade) {
+            return cidade.sigla == $('#estados').val()
+            });
+            $('#cidades').find('option').remove();
+            $.each(request[0].cidades, function(i) {
+            $('#cidades').append('<option value="'+request[0].cidades[i]+'">'+request[0].cidades[i]+'</option>')
+            })
+        })
+        })
     </script>
 </body>
 

@@ -1,3 +1,18 @@
+<?php
+    $routes = array(
+        5=>'Admin',
+        6=>'DisasterOfficer',
+        3=>'DistrictSecretariat',
+        4=>'DivisionalSecretariat',
+        7=>'DMC',
+        1=>'GramaNiladari',
+        2=>'InventoryManager',
+        8=>'ResponsiblePerson'
+    );
+    if(isset($_SESSION['userRole'])){
+        header("location:".HOST.$routes[$_SESSION['userRole']]);
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -77,5 +92,4 @@
         });
     </script>
 </body>
-
 </html>

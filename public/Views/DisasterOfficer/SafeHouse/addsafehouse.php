@@ -36,7 +36,7 @@
             <form method="post" id='add' name="add">
 
                 <div class="column">
-                    <label for="safeHouseAddress">Safe house address</label>
+                    <label for="safeHouseAddress">Safe House Address</label>
                     <textarea id="safeHouseAddress" name="safeHouseAddress"></textarea>
 
                     <label for="safeHouseName">Name</label>

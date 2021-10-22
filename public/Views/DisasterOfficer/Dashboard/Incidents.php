@@ -27,7 +27,9 @@
         <!-- STATS -->
         <div class="container">
             <br>
-                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">CREATE INCIDENT</a>
+                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Create Incident</a>
+                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Update Incident</a>
+                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/incidents" class="btn-fun">Close the Incident</a>
  
         <!-- TABLE -->
         <div class="container">
@@ -39,16 +41,8 @@
                             <th>Status
                                 <select id="assigned-user-filter" class="form-control">
                                     <option>All</option>
-                                    <option>Approved</option>
-                                    <option>Not Approved</option>
-                                </select>
-                            </th>
-                            <th>Type
-                                <select id="status-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Initial</option>
-                                    <option>Relief</option>
-                                    <option>Final</option>
+                                    <option>Active</option>
+                                    <option>Finished</option>
                                 </select>
                             </th>
             
@@ -58,54 +52,54 @@
                         </tr>
                     </thead>
                 </table>
-
-
-                <div class="panel panel-primary filterable">
-                    <table id="task-list-tbl" class="table">
-                        <thead>
-                            <tr>
-                                <th>Date</th>
-                                <th>Incident Descreption</th>
-                                <th>Type</th>
-                                <th>DS Note</th>
-                                <th>DMC Note</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                
-                                <td>09/24/2015</td>
-                                <td>Flood in Millaniya</td>
-                                <td>Initial</td>
-                                <td>Approved</td>
-                                <td>Approved</td>
-                                <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
-
-                                
-                            </tr>
-
-                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                <td>02/24/2015</td>
-                                <td>Flood in Kandana</td>
-                                <td>Relief</td>
-                                <td>Approved</td>
-                                <td>Approved</td>
-                                <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
-
-                            </tr>
-
-                            
-                            
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
+        <div class="container">
+                <div class="row">
+                    <div class="col6">
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                            <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col6" style="overflow: auto">
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
            
                

@@ -17,7 +17,7 @@
 
             </li> -->
 
-            <li class="menu-item "><a class="nav__link" href="/<?php echo baseUrl; ?>/about">About Us</a>
+            <li class="menu-item "><a class="nav__link" href="/<?php echo baseUrl; ?>/about">About</a>
             <li class="menu-item "><a class="nav__link round" href="/<?php echo baseUrl; ?>/help">Help </a>
             <li class="menu-item "><a class="nav__link round" href="/<?php echo baseUrl; ?>/donate">Donate </a>
             <li class="menu-item "><a class="nav__link" href="/<?php echo baseUrl; ?>/staff">Staff </a>

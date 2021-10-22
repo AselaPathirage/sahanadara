@@ -270,9 +270,7 @@ class mail{
                 <td>&nbsp;</td>
                 <td class='container'>
                   <div class='content'>
-                    <span class='preheader'>Subscribe to Coloured.com.ng mailing list</span>
                     <table class='main'>
-
                       <!-- START MAIN CONTENT AREA -->
                       <tr>
                         <td class='wrapper'>

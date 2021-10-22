@@ -32,23 +32,23 @@
                     <h1 class="text-center">New User</h1>
                     <div class="row">
                         <div class="col3">
-                            <label for="fname">First Name</label>
+                            <label for="firstname">First Name</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="fname" name="firstname" placeholder="First Name">
+                            <input type="text" id="firstname" name="firstname" placeholder="First Name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col3">
-                            <label for="lname">Last Name</label>
+                            <label for="lastname">Last Name</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="lname" name="lastname" placeholder="Last Name">
+                            <input type="text" id="lastname" name="lastname" placeholder="Last Name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col3">
-                            <label for="fname">NIC</label>
+                            <label for="NIC">NIC</label>
                         </div>
                         <div class="col9">
                             <input type="text" id="NIC" name="NIC" placeholder="NIC">
@@ -75,7 +75,7 @@
                             <label for="TP number">TP Number</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="TP number" name="TP number" placeholder="Phone number">
+                            <input type="text" id="TP_number" name="TP_number" placeholder="Phone number">
                         </div>
                     </div>
                     <div class="row">
@@ -83,7 +83,7 @@
                             <label for="user role">User role</label>
                         </div>
                         <div class="col9">
-                            <select id="user role" name="user role">
+                            <select id="user_role" name="user_role">
                                 <option value="null">Select</option>
                                 <option value="Grama Niladhari">Grama Niladhari</option>
                                 <option value="Divisional secretariat">Divisional Secretariat</option>

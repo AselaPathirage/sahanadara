@@ -33,14 +33,11 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Approved
+                            <th>Status
                                 <select id="assigned-user-filter" class="form-control">
                                     <option>None</option>
-                                    <option>John</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>Approve</option>
+                                    <option>Not Approve</option>
                                 </select>
                             </th>
                             <th>Type

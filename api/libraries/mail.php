@@ -270,9 +270,7 @@ class mail{
                 <td>&nbsp;</td>
                 <td class='container'>
                   <div class='content'>
-                    <span class='preheader'>Subscribe to Coloured.com.ng mailing list</span>
                     <table class='main'>
-
                       <!-- START MAIN CONTENT AREA -->
                       <tr>
                         <td class='wrapper'>
@@ -283,7 +281,7 @@ class mail{
                                 <h3>$salutation</h3>
                                 <p>$content</p>
                                 Your Sincerly,<br>
-                                DMS Team
+                                Team Sahanadara
                               </td>
                             </tr>
                           </table>
@@ -299,7 +297,7 @@ class mail{
                         </tr>
                         <tr>
                           <td class='content-block powered-by'>
-                            Powered by <a href=''>DMS Team</a>.
+                            Powered by <a href=''>Team Sahanadara</a>.
                           </td>
                         </tr>
                       </table>

@@ -42,7 +42,7 @@
                     <label for="safeHouseName">Name</label>
                     <input type="text" id="safeHouseName" name="safeHouseName">
 
-                    <label for="gnDiv">GN Division</label>
+                    <label for="gnDiv">Grama Division</label>
                     <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
 
                     <select id="gnDiv" name="gnDiv">

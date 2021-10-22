@@ -36,22 +36,19 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Active
+                            <th>Status
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>John</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>All</option>
+                                    <option>Approved</option>
+                                    <option>Not Approved</option>
                                 </select>
                             </th>
                             <th>Type
                                 <select id="status-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Not Started</option>
-                                    <option>In Progress</option>
-                                    <option>Completed</option>
+                                    <option>All</option>
+                                    <option>Initial</option>
+                                    <option>Relief</option>
+                                    <option>Final</option>
                                 </select>
                             </th>
             
@@ -81,21 +78,25 @@
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                 
                                 <td>09/24/2015</td>
-                                <td>Task title 1</td>
-                                <td>Urgent</td>
-                                <td>DS Note 1</td>
-                                <td>DMC Note 1</td>
+                                <td>Flood in Millaniya</td>
+                                <td>Initial</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
                                 <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
                                 
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                 <td>02/24/2015</td>
-                                <td>Task title 2</td>
-                                <td>Urgent</td>
-                                <td>DS Note 2</td>
-                                <td>DMC Note 2</td>
+                                <td>Flood in Kandana</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
                                 <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
                             </tr>
 
                             

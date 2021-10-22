@@ -25,33 +25,41 @@
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-        <br>
-        <div class="container" style="text-align: right;">
+        <div class="container">
+            <br>
+            <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/DonationRequests" class="btn-fun">Create Donation Request</a>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-box">Create Final Incident</a>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-box">Add Expense Note</a>
+                </div>
             </div>
+ 
+        <!-- TABLE -->
         <div class="container">
             <div class="">
 
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Status
+                            <th>Active
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Approved</option>
-                                    <option>Not Approved</option>
+                                    <option>None</option>
+                                    <option>John</option>
+                                    <option>Rob</option>
+                                    <option>Larry</option>
+                                    <option>Donald</option>
+                                    <option>Roger</option>
                                 </select>
                             </th>
                             <th>Type
                                 <select id="status-filter" class="form-control">
                                     <option>Any</option>
-                                    <option>Flood</option>
-                                    <option>Landslide</option>
-                                    <option>Lightning</option>
+                                    <option>Not Started</option>
+                                    <option>In Progress</option>
+                                    <option>Completed</option>
                                 </select>
                             </th>
-                            
+            
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
@@ -65,7 +73,7 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Applicant Name</th>
+                                <th>Incident Descreption</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
@@ -76,36 +84,43 @@
                         <tbody>
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                            
-                                <td>01/24/2021</td>
-                                <td>ABC Perera</td>
-                                <td>Flood</td>
+                                
+                                <td>09/24/2015</td>
+                                <td>Task title 1</td>
+                                <td>Initial</td>
                                 <td>Approved</td>
                                 <td>Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                                
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021</td>
-                                <td>ABC Silva</td>
-                                <td>Flood</td>
+                                <td>02/24/2015</td>
+                                <td>Task title 2</td>
+                                <td>Relief</td>
                                 <td>Approved</td>
-                                <td>Not Approved</td>
+                                <td>Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
-                            </tr>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
                             </tr>
 
+                            
                             
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
+
+           
+               
+
     </section>
     <script>
-        var thisPage = "#Donation";
+        var thisPage = "#Incidents";
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_disofficer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -57,26 +57,52 @@
 
         <!-- BOXES -->
         <div class="container">
-        <h1 style="text-align:center;">Incidents</h1>
-            <div class="row">
-                <div class="col3">
-                    <div class="box row-content">Title <br> Description </div>
-                    <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>-->
+                <div class="row">
+                    <div class="col6">
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                            <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col6" style="overflow: auto">
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+                        <div class="box row-content">
+                            <h4>Flood in Millaniya</h4>
+                            <p>A flood situation in low line areas of river Kalu</p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col3">
-                    <div class="box row-content">Title <br> Description </div>
-                    <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>-->
-                </div>
-                <div class="col3">
-                    <div class="box row-content">Title <br> Description </div>
-                    <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>-->
-                </div>
-                <div class="col3">
-                    <div class="box row-content">Title <br> Description </div>
-                    <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>-->
-                </div>
+
             </div>
-        </div>
 
     </section>
     <script>

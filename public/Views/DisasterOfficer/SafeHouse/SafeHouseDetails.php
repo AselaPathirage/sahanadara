@@ -76,23 +76,23 @@
                     <div class="forms">
                     <form action="./editSafehouse.php" method="POST">
                         <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
-                        <button type="submit" id="editSafehouseBtn" class="btn" name="btnEdit">Edit Safehouse</button>
+                        <button type="submit" id="editSafehouseBtn" class="btn-box" name="btnEdit">Edit Safehouse</button>
                     </form>
                     <br>
                     <form action="../Controls/deleteSafehouse.php" method="POST">
-                        <button type="submit" id="delete" class="btn" name="btnDelete">Delete Safehouse</button>
+                        <button type="submit" id="delete" class="btn-box" name="btnDelete">Delete Safehouse</button>
                     </form>
                     <br>
                     <form action="../Controls/addresponsibleperson.php" method="POST">
-                        <button type="submit" id="add" class="btn" name="btnAdd">Add Reponsible Person</button>
+                        <button type="submit" id="add" class="btn-box" name="btnAdd">Add Reponsible Person</button>
                     </form>
                     <br>
                     <form action="../Controls/editResponsibleperson.php" method="POST">
-                        <button type="submit" id="delete" class="btn" name="btnEdit">Edit Safehouse</button>
+                        <button type="submit" id="delete" class="btn-box" name="btnEdit">Edit Safehouse</button>
                     </form>
                     <br>
                     <form action="../Controls/removeresponsibleperson.php" method="POST">
-                        <button type="submit" id="delete" class="btn" name="btnDelete">Delete Responsible Person</button>
+                        <button type="submit" id="delete" class="btn-box" name="btnDelete">Delete Responsible Person</button>
                     </form>
                    
         

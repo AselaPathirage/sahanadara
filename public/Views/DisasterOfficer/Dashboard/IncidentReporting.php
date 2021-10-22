@@ -87,7 +87,7 @@
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021</td>
+                            <td>01/24/2021 12:20</td>
                                 <td>ABC Silva</td>
                                 <td>Final</td>
                                 <td>Approved</td>

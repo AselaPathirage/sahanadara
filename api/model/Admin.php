@@ -8,32 +8,43 @@ class Admin extends Employee{
         if(isset($data['firstname']) && isset($data['lastname']) && isset($data['NIC']) && isset($data['email']) && isset($data['address']) && isset($data['TP_number']) && isset($data['user_role'])){
             $mail = new mail();
             $name = $data['firstname']." ".$data['lastname'];
+    
             switch ($data['user_role']) {
                 case 1:
+                    $sql0 = "SELECT empEmail FROM gramaniladari WHERE empEmail = '".$data['email']."'";
                     $sql ="INSERT INTO gramaniladari (empName,empAddress,empEmail) VALUES ('$name','".$data['address']."','".$data['email']."');";
                     break;
                 case 3:
+                    $sql0 = "SELECT empEmail FROM districtsecretariat WHERE empEmail = '".$data['email']."'";
                     $sql ="INSERT INTO districtsecretariat (empName,empAddress,empEmail) VALUES ('$name','".$data['address']."','".$data['email']."');";
                     break;
                 case 4:
+                    $sql0 = "SELECT empEmail FROM divisionalsecretariat WHERE empEmail = '".$data['email']."'";
                     $sql ="INSERT INTO divisionalsecretariat (empName,empAddress,empEmail) VALUES ('$name','".$data['address']."','".$data['email']."');";
                     break;
             }
-            $this->connection->query($sql);
-            $tokenKey= $this->tokenKey(10);
-            $password = $this->tokenKey(8);
-            $sql = "SELECT LAST_INSERT_ID();";
-            $execute = $this->connection->query($sql);
-            $r = $execute-> fetch_assoc();
-            $userId = $r["LAST_INSERT_ID()"];
-            $role = $data['user_role'];
-            $sql = "INSERT INTO login VALUES ($userId,'".md5($data['NIC'])."','".md5($password)."','$tokenKey',$role)";
-            $this->connection->query($sql);
-            $body ="Please use these creadentials to login Sahanadara. You need to change your password after the login.<ul><li>User Name: ".$data['NIC']." </li><li>Password: $password </li></ul>";
-            $mail->emailBody("About your account","Dear ".$data['firstname'],$body);
-            $mail->sendMail($data['email'],"Account Information");
-            echo json_encode(array("code"=>$errorCode['success']));
-            exit();
+            $query = $this->connection->query($sql0);
+            if($query->num_rows==0){
+                $this->connection->query($sql);
+                $tokenKey= $this->tokenKey(10);
+                $password = $this->tokenKey(8);
+                $sql = "SELECT LAST_INSERT_ID();";
+                $execute = $this->connection->query($sql);
+                $r = $execute-> fetch_assoc();
+                $userId = $r["LAST_INSERT_ID()"];
+                $role = $data['user_role'];
+                $sql = "INSERT INTO login VALUES ($userId,'".md5($data['NIC'])."','".md5($password)."','$tokenKey',$role)";
+                $this->connection->query($sql);
+                $body ="Please use these creadentials to login Sahanadara. You need to change your password after the login.<ul><li>User Name: ".$data['NIC']." </li><li>Password: $password </li></ul>";
+                $mail->emailBody("About your account","Dear ".$data['firstname'],$body);
+                $mail->sendMail($data['email'],"Account Information");
+                echo json_encode(array("code"=>$errorCode['success']));
+                exit();
+            }else{
+                http_response_code(400);
+                echo json_encode(array("code"=>$errorCode['emailAlreadyInUse']));
+                exit();   
+            }
         }else{
             http_response_code(406);
             echo json_encode(array("code"=>$errorCode['attributeMissing']));

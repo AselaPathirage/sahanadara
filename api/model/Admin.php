@@ -61,25 +61,25 @@ class Admin extends Employee{
                             7=>array("tableName"=>"dmc","primaryKey" => "dmcID"),
                             8=>array("tableName"=>"responsibleperson","primaryKey" => "responsiblePersonID"));
         if(count($data['receivedParams'])==1){
-            $sql = "SELECT empName,empAddress,empEmail,empTele,roleName FROM ".$roleTable[$data['receivedParams'][0]]['tableName'].",role WHERE roleId=".$data['receivedParams'][0];
+            $sql = "SELECT ".$roleTable[$data['receivedParams'][0]]['primaryKey']." AS empId, empName,empAddress,empEmail,empTele,roleName,roleId FROM ".$roleTable[$data['receivedParams'][0]]['tableName'].",role WHERE roleId=".$data['receivedParams'][0];
         }elseif(count($data['receivedParams'])==2){
-            $sql = "SELECT empName,empAddress,empEmail,empTele,roleName FROM ".$roleTable[$data['receivedParams'][0]]['tableName'].",role WHERE ".$roleTable[$data['receivedParams'][0]]['primaryKey']."=".$data['receivedParams'][1]." AND roleId=".$data['receivedParams'][0];
+            $sql = "SELECT ".$roleTable[$data['receivedParams'][0]]['primaryKey']." AS empId, empName,empAddress,empEmail,empTele,roleName,roleId FROM ".$roleTable[$data['receivedParams'][0]]['tableName'].",role WHERE ".$roleTable[$data['receivedParams'][0]]['primaryKey']."=".$data['receivedParams'][1]." AND roleId=".$data['receivedParams'][0];
         }else{
-            $sql = "(SELECT empName,empAddress,empEmail,empTele,roleName FROM gramaniladari,role WHERE roleId = 1)
+            $sql = "(SELECT ".$roleTable[1]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM gramaniladari,role WHERE roleId = 1)
                     UNION
-                    (SELECT empName,empAddress,empEmail,empTele,roleName FROM inventorymgtofficer,role WHERE roleId = 2)
+                    (SELECT ".$roleTable[2]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM inventorymgtofficer,role WHERE roleId = 2)
                     UNION
-                    (SELECT empName,empAddress,empEmail,empTele,roleName FROM districtsecretariat,role WHERE roleId = 3)
+                    (SELECT ".$roleTable[3]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM districtsecretariat,role WHERE roleId = 3)
                     UNION
-                    (SELECT empName,empAddress,empEmail,empTele,roleName FROM divisionalsecretariat,role WHERE roleId = 4)
+                    (SELECT ".$roleTable[4]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM divisionalsecretariat,role WHERE roleId = 4)
                     UNION
-                    (SELECT empName,empAddress,empEmail,empTele,roleName FROM admin,role WHERE roleId = 5)
+                    (SELECT ".$roleTable[5]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM admin,role WHERE roleId = 5)
                     UNION
-                    (SELECT empName,empAddress,empEmail,empTele,roleName FROM dismgtofficer,role WHERE roleId = 6)
+                    (SELECT ".$roleTable[6]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM dismgtofficer,role WHERE roleId = 6)
                     UNION
-                    (SELECT empName,empAddress,empEmail,empTele,roleName FROM dmc,role WHERE roleId = 7)
+                    (SELECT ".$roleTable[7]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM dmc,role WHERE roleId = 7)
                     UNION
-                    (SELECT empName,empAddress,empEmail,empTele,roleName FROM responsibleperson,role WHERE roleId = 8)";
+                    (SELECT ".$roleTable[8]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM responsibleperson,role WHERE roleId = 8)";
         }
         $excute = $this->connection->query($sql);
         $results = array();

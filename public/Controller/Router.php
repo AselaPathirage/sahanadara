@@ -18,7 +18,7 @@ class Router{
     protected static $routes = array(
                                     'Admin' => array(),
                                     'DisasterOfficer' => array('SafeHouse','Dashboard','Report','Notice'),
-                                    'DistrictSecretariat' => array(),
+                                    'DistrictSecretariat' => array('Dashboard','Report'),
                                     'DivisionalSecretariat' => array('Dashboard','Notice','Report'),
                                     'DMC' => array('Report'),
                                     'GramaNiladari' => array('Report'),

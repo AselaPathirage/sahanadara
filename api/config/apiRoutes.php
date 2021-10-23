@@ -16,6 +16,7 @@ Route::GET("division",array("Admin@getDivision"));
 Route::GET("role",array("Employee@getRole"));
 Route::GET("GnDivision",array("Admin@getGnDivision","DisasterOfficer@getGNDivision"));
 Route::GET("safehouse",array("DisasterOfficer@viewSafehouse"));
+Route::PUT("resetPassword",array("Employee@updatePassword"));
 Route::POST("login",array("Employee@login"));
 Route::POST("resetPassword",array("Employee@resetPassword"));
 Route::POST("item",array("InventoryManager@addItem"));

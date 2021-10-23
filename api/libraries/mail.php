@@ -15,7 +15,7 @@ class mail{
         $this->email->Password   = "HKfWoTOQ0p";//'QziR4t6v';         // SMTP password
         $this->email->SMTPSecure = 'tls';              // Enable TLS encryption, 'ssl' also accepted
         $this->email->Port       = 587; 
-        $this->email->setFrom('no-reply@webdms.live', 'DMS Team');           // Set sender of the mail
+        $this->email->setFrom('no-reply@webdms.live', 'Team Sahanadara');           // Set sender of the mail
         $this->email->isHTML(true);                                  
     }
 

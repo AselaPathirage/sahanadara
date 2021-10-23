@@ -19,6 +19,7 @@ class Route{
 	}
     public function checkAvailibility($requestName){
         global $errorCode;
+        
         if($_SERVER['REQUEST_METHOD'] =="POST"){
             $key = array_keys(self::$post);
             foreach($key as $item) {

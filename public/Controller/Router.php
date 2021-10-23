@@ -12,7 +12,8 @@ class Router{
                                                 "staff" => "staff.php",
                                                 "about" => "about.php",
                                                 "forget" => "forget.php",
-                                                "logout"=>"logout.php"
+                                                "ResetPassword" => "ResetPassword.php",
+                                                "logout"=>"logout.php" 
                                             );
     protected static $routes = array(
                                     'Admin' => array(),

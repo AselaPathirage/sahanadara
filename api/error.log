@@ -1,0 +1,44 @@
+[22-Oct-2021 19:31:12 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ")" in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 105
+[22-Oct-2021 21:17:20 Europe/Berlin] PHP Parse error:  syntax error, unexpected token ";", expecting "]" in F:\xampp\htdocs\sahanadara\api\libraries\Core.php on line 73
+[22-Oct-2021 21:21:15 Europe/Berlin] PHP Warning:  Undefined array key "userId" in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 33
+[22-Oct-2021 21:21:15 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php:38
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): DisasterOfficer->getGNDivision(Array)
+#1 F:\xampp\htdocs\sahanadara\api\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 38
+[22-Oct-2021 21:21:41 Europe/Berlin] PHP Warning:  Undefined array key "userId" in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 33
+[22-Oct-2021 21:21:41 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php:38
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): DisasterOfficer->getGNDivision(Array)
+#1 F:\xampp\htdocs\sahanadara\api\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 38
+[22-Oct-2021 21:22:09 Europe/Berlin] PHP Warning:  Undefined array key "userId" in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 33
+[22-Oct-2021 21:22:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php:38
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): DisasterOfficer->getGNDivision(Array)
+#1 F:\xampp\htdocs\sahanadara\api\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 38
+[22-Oct-2021 21:22:44 Europe/Berlin] PHP Warning:  Undefined array key "userId" in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 33
+[22-Oct-2021 21:22:44 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php:38
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): DisasterOfficer->getGNDivision(Array)
+#1 F:\xampp\htdocs\sahanadara\api\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 38
+[22-Oct-2021 21:23:11 Europe/Berlin] PHP Warning:  Undefined array key "userId" in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 33
+[22-Oct-2021 21:23:11 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php:38
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): DisasterOfficer->getGNDivision(Array)
+#1 F:\xampp\htdocs\sahanadara\api\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 38
+[22-Oct-2021 21:23:37 Europe/Berlin] PHP Warning:  Undefined array key "userId" in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 33
+[22-Oct-2021 21:23:37 Europe/Berlin] PHP Fatal error:  Uncaught Error: Call to a member function fetch_assoc() on bool in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php:38
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): DisasterOfficer->getGNDivision(Array)
+#1 F:\xampp\htdocs\sahanadara\api\index.php(28): Core->__construct(Object(mysqli))
+#2 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\model\DisasterOfficer.php on line 38

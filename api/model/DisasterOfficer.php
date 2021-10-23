@@ -29,8 +29,30 @@ class DisasterOfficer extends Noticer{
         $this->connection->query($sql);
         echo json_encode(array("code"=>$errorCode['success']));
     }
+
+    public function viewSafehouse(array $data){
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $sql = "SELECT s.* FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
+            WHERE s.safeHouseId = t.safeHouseID AND g.	safeHouseID = s.safeHouseId AND g.dvId = d.dvId
+            AND dv.dvId = d.dvId AND dv.disasterManager = $uid AND s.safeHouseId = $id";
+        }else{
+            $sql = "SELECT s.* FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
+            WHERE s.safeHouseId = t.safeHouseID AND g.	safeHouseID = s.safeHouseId AND g.dvId = d.dvId
+            AND dv.dvId = d.dvId AND dv.disasterManager = $uid";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
     public function getGNDivision(array $data){
-        $id = $data['id'];
+        $id = $data['userId'];
         $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
         WHERE m.disMgtOfficerID = d.disasterManager AND g.dvId = d.dvId AND m.disMgtOfficerID = $id  AND g.safeHouseID IS NULL";
         $excute = $this->connection->query($sql);
@@ -40,16 +62,16 @@ class DisasterOfficer extends Noticer{
         }
         $json = json_encode($results);
         echo $json;
-    }
-    public function getUnit(){
-        $sql = "SELECT * FROM `unit` ORDER BY unitName";
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
-    }
+     }
+    // public function getUnit(){
+    //     $sql = "SELECT * FROM `unit` ORDER BY unitName";
+    //     $excute = $this->connection->query($sql);
+    //     $results = array();
+    //     while($r = $excute-> fetch_assoc()) {
+    //         $results[] = $r;
+    //     }
+    //     $json = json_encode($results);
+    //     echo $json;
+    // }
         
 }

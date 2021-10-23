@@ -20,12 +20,41 @@ class Employee{
         if($excute->num_rows>0){
             $secure = new Openssl_EncryptDecrypt();
             $data = $excute-> fetch_assoc();
+            $id = $data['empId'];
+            switch ($data['roleId']) {
+                case 1:
+                    $sql ="SELECT empName FROM gramaniladari WHERE gramaNiladariID = $id";
+                    break;
+                case 2:
+                    $sql ="SELECT empName FROM inventorymgtofficer WHERE 	inventoryMgtOfficerID = $id";
+                    break;
+                case 3:
+                    $sql ="SELECT empName FROM districtsecretariat WHERE districtSecretariatID = $id";
+                    break;
+                case 4:
+                    $sql ="SELECT empName FROM divisionalsecretariat WHERE divisionalSecretariatID = $id";
+                    break;
+                case 5:
+                    $sql ="SELECT empName FROM admin WHERE 	adminID = $id";
+                    break;
+                case 6:
+                    $sql ="SELECT empName FROM dismgtofficer WHERE disMgtOfficerID = $id";
+                    break;
+                case 7:
+                    $sql ="SELECT empName FROM dmc WHERE dmcID = $id";
+                    break;
+                case 8:
+                    $sql ="SELECT empName FROM responsibleperson WHERE responsiblePersonID = $id";
+                    break;
+            }
+            $excute = $this->connection->query($sql);
+            $userName = $excute-> fetch_assoc()['empName'];
             $auth = true;
             $array = array("auth"=>$auth,"userRole"=> $data['roleId'],"issue"=>time(),"tokenKey"=>$data['keyAuth'],"userId"=> $data['empId']);
             $string = json_encode($array);
             $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
-            //echo is_string($encrpt);exit();
-            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId'],"userId"=> $data['empId']);
+            //echo is_string($encrpt);exit(); 
+            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId'],"userId"=> $data['empId'],"userName"=> $userName);
             $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
             echo $JSON;
         }else{
@@ -72,15 +101,27 @@ class Employee{
         $secure = new Openssl_EncryptDecrypt();
         $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
         if($decrypted){
+            $lifetime = 60*60;
             $data = json_decode($decrypted,true);
-            $array = array("auth"=>1,"userRole"=> $data['roleId'],"issue"=>time(),"tokenKey"=>$data['tokenKey'],"userId"=> $data['empId']);
-            $string = json_encode($array);
-            $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
-            $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['roleId'],"userId"=> $data['empId']);
-            $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
-            echo $JSON;
-        }                            
-        echo json_encode(array("code"=>$errorCode['apiKeyError']));
-        exit();
+            if(time() - $data['issue'] < $lifetime){
+                $array = array("auth"=>1,"userRole"=> $data['userRole'],"issue"=>time(),"tokenKey"=>$data['tokenKey'],"userId"=> $data['userId']);
+                $string = json_encode($array);
+                $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
+                $token = array("key"=> base64_encode($encrpt),"userRole"=> $data['userRole'],"userId"=> $data['userId']);
+                $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
+                echo $JSON;
+            }else{
+                http_response_code(401);
+                echo json_encode(array("code"=>$errorCode['tokenExpired']));
+                exit();
+            }
+        }else{    
+            http_response_code(401);                       
+            echo json_encode(array("code"=>$errorCode['apiKeyError']));
+            exit();
+        }
+    }
+    public function resetPassword(array $data){
+        
     }
 }

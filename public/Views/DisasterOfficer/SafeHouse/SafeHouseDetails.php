@@ -31,7 +31,7 @@
         
 
         <!-- TABLE -->
-        <div class="container">
+        <!-- <div class="container">
             <div class="">
 
                 <table class="table">
@@ -45,8 +45,9 @@
                             </th>
                             <th>GN Division
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>Keselwatta</option>
-                                    <option>Maradana</option>
+                                    <option>all</option>
+                                    <option>Koholana North</option>
+                                    <option>Ukwatta</option>
                                 </select>
                             </th>
                             
@@ -55,55 +56,78 @@
                             </th>
                         </tr>
                     </thead>
-                </table>
+                </table> -->
+                <br>
                 
                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-fun">Add new safehouse</a>
                 
 
 
-                <div class="row">
-                <div class="col6">
-                    <div class="box row-content">Name<br>Location<br>Families<br>people</div>
-                    <div class="box row-content">Name<br>Location<br>Families<br>people</div>
-                    <div class="box row-content">Name<br>Location<br>Families<br>people</div>
-                    <div class="box row-content">Name<br>Location<br>Families<br>people</div>
-                    <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>
-                    <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div> -->
-                </div>
-                <div class="col6" style="overflow: auto">
-                    <div class="box row-content" style="height:100%;min-height: 300px;">
-                    Safe House Status<br><br>
-                    <div class="forms">
-                    <form action="./editSafehouse.php" method="POST">
-                        <input type="hidden" name="id" id="id" value="<?php echo $id ?>">
-                        <button type="submit" id="editSafehouseBtn" class="btn" name="btnEdit">Edit Safehouse</button>
-                    </form>
-                    <br>
-                    <form action="../Controls/deleteSafehouse.php" method="POST">
-                        <button type="submit" id="delete" class="btn" name="btnDelete">Delete Safehouse</button>
-                    </form>
-                    <br>
-                    <form action="../Controls/addresponsibleperson.php" method="POST">
-                        <button type="submit" id="add" class="btn" name="btnAdd">Add Reponsible Person</button>
-                    </form>
-                    <br>
-                    <form action="../Controls/editResponsibleperson.php" method="POST">
-                        <button type="submit" id="delete" class="btn" name="btnEdit">Edit Safehouse</button>
-                    </form>
-                    <br>
-                    <form action="../Controls/removeresponsibleperson.php" method="POST">
-                        <button type="submit" id="delete" class="btn" name="btnDelete">Delete Responsible Person</button>
-                    </form>
-                   
-        
-    </div>
+                
+               
                     
-                </div>
+        
+                    
+            </div>
+
+        <div class="container">
+                        <div class="row">
+                            <div class="col6">
+                                <div class="box row-content">
+                                    <h4>Millaniya Maha Vidyalya</h4>
+                                    <p>Haltota, Millaniya Road, Tuttiripitiya</p>
+
+                                    <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
+                                    </div>
+                                </div>
+                                <div class="box row-content">
+                                    <h4>Taxila Central College</h4>
+                                    <p>Horana</p>
+
+                                    <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>
+                    <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div> -->
+                            </div>
+                            <div class="col6" style="overflow: auto">
+                                <div class="box row-content" style="height:100%;min-height: 300px;">
+                                    <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                    </div>
+                                    <h4>Millaniya Maha Vidyalya</h4>
+                                    <p> Haltota, Millaniya Road, Tuttiripitiya</p>
+                                    <p>Families - 20</p>
+                                    <p>People - 85</p><br><br>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-box">Edit Safehouse</a>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse" class="btn-box">Delete Safehouse</a>
+                    <br><br>
+                    
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ResponsiblePerson" class="btn-box">Add Reponsible Person</a>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ResponsiblePerson" class="btn-box">Delete Reponsible Person</a>
+
+
+                    <br>
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>
-                
-        </div>
+
+
+
+
     </section>
     <script>
         let sidebar = document.querySelector(".sidebar");

@@ -7,7 +7,7 @@ class Home{
     }
 
     public function viewDonations(){
-        $sql = "SELECT * FROM `company`";
+        $sql = "SELECT * FROM `item`";
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

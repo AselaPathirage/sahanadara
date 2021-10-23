@@ -32,23 +32,23 @@
                     <h1 class="text-center">New User</h1>
                     <div class="row">
                         <div class="col3">
-                            <label for="fname">First Name</label>
+                            <label for="firstname">First Name</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="fname" name="firstname" placeholder="First Name">
+                            <input type="text" id="firstname" name="firstname" placeholder="First Name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col3">
-                            <label for="lname">Last Name</label>
+                            <label for="lastname">Last Name</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="lname" name="lastname" placeholder="Last Name">
+                            <input type="text" id="lastname" name="lastname" placeholder="Last Name">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col3">
-                            <label for="fname">NIC</label>
+                            <label for="NIC">NIC</label>
                         </div>
                         <div class="col9">
                             <input type="text" id="NIC" name="NIC" placeholder="NIC">
@@ -75,7 +75,7 @@
                             <label for="TP number">TP Number</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="TP number" name="TP number" placeholder="Phone number">
+                            <input type="text" id="TP_number" name="TP_number" placeholder="Phone number">
                         </div>
                     </div>
                     <div class="row">
@@ -83,7 +83,7 @@
                             <label for="user role">User role</label>
                         </div>
                         <div class="col9">
-                            <select id="user role" name="user role">
+                            <select id="user_role" name="user_role">
                                 <option value="null">Select</option>
                                 <option value="Grama Niladhari">Grama Niladhari</option>
                                 <option value="Divisional secretariat">Divisional Secretariat</option>
@@ -163,6 +163,24 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+        const estadosJSON = 'https://gist.githubusercontent.com/letanure/3012978/raw/36fc21d9e2fc45c078e0e0e07cce3c81965db8f9/estados-cidades.json'
+        $.getJSON(estadosJSON, function(json) {
+        $.each(json.estados, function(key, val) {
+            $('#estados').append('<option value="'+json.estados[key].sigla+'">'+json.estados[key].nome+'</option>')
+        })
+        });
+
+        $('#estados').on('change', function() {
+        $.getJSON(estadosJSON, function(json) {
+            const request = json.estados.filter(function(cidade) {
+            return cidade.sigla == $('#estados').val()
+            });
+            $('#cidades').find('option').remove();
+            $.each(request[0].cidades, function(i) {
+            $('#cidades').append('<option value="'+request[0].cidades[i]+'">'+request[0].cidades[i]+'</option>')
+            })
+        })
+        })
     </script>
 </body>
 

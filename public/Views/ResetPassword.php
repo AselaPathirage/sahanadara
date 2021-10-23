@@ -1,16 +1,9 @@
 <?php
-    $routes = array(
-        5=>'Admin',
-        6=>'DisasterOfficer',
-        3=>'DistrictSecretariat',
-        4=>'DivisionalSecretariat',
-        7=>'DMC',
-        1=>'GramaNiladari',
-        2=>'InventoryManager',
-        8=>'ResponsiblePerson'
-    );
     if(isset($_SESSION['userRole'])){
-        header("location:".HOST.$routes[$_SESSION['userRole']]);
+        header("location:".HOST."404");
+    }
+    if(!isset($_GET['token'])){
+        header("location:".HOST."404");
     }
 ?>
 <!DOCTYPE html>
@@ -42,28 +35,32 @@
                         <div class="space"></div>
                         <div class="staff_bluebox">
                             <h1 class="heading_landing">Reset Password </h1>
-                            <p>Enter your email</p>
                             <div class="row-content">
                                 <div class="container">
                                     <form action="/<?php echo baseUrl; ?>/Handler/resetHandle" method="post">
-                                        <label for="e_email">Email Address</label>
+                                        <label for="newPass">New Password</label>
+                                        <input type="password" id="newPass" name="newPass" required />
+                                        <label for="newPass2">Confirm Password</label>
+                                        <input type="password" id="newPass2" name="newPass2" required />
                                         <?php
                                             if(isset($_GET['reply'])){
                                                 if($_GET['reply']==1){
-                                                    echo "<p style='color:red'>Please input a Email Address</p>";
+                                                    echo "<p style='color:red'>Please input a new password</p>";
                                                 }elseif($_GET['reply']==2) {
-                                                    echo "<p style='color:red'>Unable to find this Email Address with associated account</p>";
-                                                }elseif ($_GET['reply']==3){
-                                                    echo "<p>Password reset email send. Please follow the guidlines.</p>";
+                                                    echo "<p style='color:red'>Password reset link expired.</p>";
                                                 }elseif ($_GET['reply']==4){
                                                     echo "<p style='color:red'>Something went wrong. Please try again</p>";
                                                 }
                                             }
                                         ?>
-                                        
-                                        <input type="email" id="e_email" name="e_email" required />
+                                        <p style="color: red;" id="messege"></p>
                                         <div class="login-bar"> 
-                                            <input type="submit" name="submit" value="Send" class="btn-login" />
+                                            <input type="hidden" name="code" value="<?php echo $_GET['token'] ?>">
+                                            <label>
+                                                <input type="checkbox" name="otherDevice" />
+                                                Logout from all other devices ?
+                                            </label>
+                                            <input type="submit" name="reset" value="Send" onclick="return Validate()" class="btn-login" />
                                             <a href="staff" class="forget-password" style="color: wheat;">Back to Login</a>
                                         </div>
                                     </form>
@@ -86,8 +83,16 @@
             function toggleBodyClass(className) {
                 document.body.classList.toggle(className);
             }
-
         });
+        function Validate() {
+        var password = document.getElementById("newPass").value;
+        var confirmPassword = document.getElementById("newPass2").value;
+        if (password != confirmPassword) {
+            document.getElementById("newPass").innerHTML("Passwords do not match.");
+            return false;
+        }
+        return true;
+    }
     </script>
 </body>
 </html>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 17, 2021 at 10:22 PM
+-- Generation Time: Oct 23, 2021 at 01:34 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -32,15 +32,16 @@ CREATE TABLE `admin` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n'
+  `isAssigned` char(1) DEFAULT 'n',
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`adminID`, `empName`, `empAddress`, `empEmail`, `isAssigned`) VALUES
-(1, 'Sanduni Rashmika', '297, KIRILLAWALA, WEBODA', 'sanduni@gmail.com', 'n');
+INSERT INTO `admin` (`adminID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
+(1, 'Sanduni Rashmika', '297, KIRILLAWALA, WEBODA', 'sanduni@gmail.com', 'n', '');
 
 -- --------------------------------------------------------
 
@@ -53,15 +54,16 @@ CREATE TABLE `dismgtofficer` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n'
+  `isAssigned` char(1) DEFAULT 'n',
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dismgtofficer`
 --
 
-INSERT INTO `dismgtofficer` (`disMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`) VALUES
-(1, 'Yohombu Abeysinghe', 'MAHENDRA, WELIKALA, POKUNUWITA', 'yohombu@gmail.com', 'n');
+INSERT INTO `dismgtofficer` (`disMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
+(1, 'Yohombu Abeysinghe', 'MAHENDRA, WELIKALA, POKUNUWITA', 'yohombu@gmail.com', 'n', '');
 
 -- --------------------------------------------------------
 
@@ -116,15 +118,16 @@ CREATE TABLE `districtsecretariat` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n'
+  `isAssigned` char(1) DEFAULT 'n',
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `districtsecretariat`
 --
 
-INSERT INTO `districtsecretariat` (`districtSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`) VALUES
-(1, 'District Officer', 'District Office,Kalutara', 'district@gmail.com', 'n');
+INSERT INTO `districtsecretariat` (`districtSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
+(1, 'District Officer', 'District Office,Kalutara', 'district@gmail.com', 'n', '');
 
 -- --------------------------------------------------------
 
@@ -166,11 +169,19 @@ INSERT INTO `division` (`dvId`, `dvName`, `dsId`) VALUES
 
 CREATE TABLE `divisionaloffice` (
   `divisionalOfficeId` int(3) NOT NULL,
-  `divisionalSofficeName` varchar(30) NOT NULL,
+  `divisionalSofficeName` varchar(100) NOT NULL,
   `divisionalSofficeAddress` varchar(50) NOT NULL,
   `dvId` int(3) DEFAULT NULL,
-  `divisionalSecretariatID` int(6) DEFAULT NULL
+  `divisionalSecretariatID` int(6) DEFAULT NULL,
+  `disasterManager` int(6) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `divisionaloffice`
+--
+
+INSERT INTO `divisionaloffice` (`divisionalOfficeId`, `divisionalSofficeName`, `divisionalSofficeAddress`, `dvId`, `divisionalSecretariatID`, `disasterManager`) VALUES
+(1, 'Divisional Secretariat Office Dodangoda', 'Kalutara-Matugama Rd, Thudugala 12020', 10, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -194,15 +205,17 @@ CREATE TABLE `divisionalsecretariat` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n'
+  `isAssigned` char(1) DEFAULT 'n',
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `divisionalsecretariat`
 --
 
-INSERT INTO `divisionalsecretariat` (`divisionalSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`) VALUES
-(1, 'Divisional Secratariat', 'Divisional Secratariat,Horana', 'division@gmail.com', 'n');
+INSERT INTO `divisionalsecretariat` (`divisionalSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
+(1, 'Divisional Secratariat', 'Divisional Secratariat,Horana', 'division@gmail.com', 'n', ''),
+(2, 'Pasindu Lakshan', 'Test test', 'htnaweenpasindu2@gmail.com', 'n', '');
 
 -- --------------------------------------------------------
 
@@ -215,15 +228,16 @@ CREATE TABLE `dmc` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n'
+  `isAssigned` char(1) DEFAULT 'n',
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `dmc`
 --
 
-INSERT INTO `dmc` (`dmcID`, `empName`, `empAddress`, `empEmail`, `isAssigned`) VALUES
-(1, 'DMC', 'Vidya Mawatha, Colombo 00700', 'dmc@gmail.com', 'n');
+INSERT INTO `dmc` (`dmcID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
+(1, 'DMC', 'Vidya Mawatha, Colombo 00700', 'dmc@gmail.com', 'n', '');
 
 -- --------------------------------------------------------
 
@@ -366,15 +380,16 @@ CREATE TABLE `gramaniladari` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n'
+  `isAssigned` char(1) DEFAULT 'n',
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `gramaniladari`
 --
 
-INSERT INTO `gramaniladari` (`gramaNiladariID`, `empName`, `empAddress`, `empEmail`, `isAssigned`) VALUES
-(1, 'Asela Pathirage', 'NO 252/D,, ANANDA MAITHREE MAWATHA,, BELLAPITIYA, HORANA.', 'asela@gmail.com', 'n');
+INSERT INTO `gramaniladari` (`gramaNiladariID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
+(1, 'Asela Pathirage', 'NO 252/D,, ANANDA MAITHREE MAWATHA,, BELLAPITIYA, HORANA.', 'asela@gmail.com', 'n', '');
 
 -- --------------------------------------------------------
 
@@ -387,6 +402,13 @@ CREATE TABLE `inventory` (
   `inventoryAddress` varchar(60) NOT NULL,
   `dvId` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `inventory`
+--
+
+INSERT INTO `inventory` (`inventoryId`, `inventoryAddress`, `dvId`) VALUES
+(1, 'Divisional Office, Dodangoda', 10);
 
 -- --------------------------------------------------------
 
@@ -414,8 +436,16 @@ CREATE TABLE `inventorymgtofficer` (
   `empEmail` varchar(50) NOT NULL,
   `isAssigned` char(1) DEFAULT 'n',
   `assignedDate` datetime NOT NULL,
-  `inventoryID` int(3) NOT NULL
+  `inventoryID` int(3) NOT NULL,
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `inventorymgtofficer`
+--
+
+INSERT INTO `inventorymgtofficer` (`inventoryMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `assignedDate`, `inventoryID`, `empTele`) VALUES
+(1, 'Naween Pasindu', 'Hene Gedara Hena,Ullala,Kamburupitiya', 'htnaweenpasindu@gmail.com', 'y', '2021-10-21 20:47:22', 1, '');
 
 -- --------------------------------------------------------
 
@@ -443,7 +473,8 @@ INSERT INTO `item` (`itemId`, `itemName`, `unitType`) VALUES
 (7, '500 l Water Tank', 4),
 (8, 'Mini generator', 4),
 (9, 'Soya', 1),
-(10, 'Water Bowser', 4);
+(10, 'Water Bowser', 4),
+(16, 'test', 1);
 
 -- --------------------------------------------------------
 
@@ -471,7 +502,8 @@ INSERT INTO `login` (`empId`, `nid`, `empPassword`, `keyAuth`, `roleId`) VALUES
 (1, '627e959497b80e7fa95d10194f813ba5', '47982c18f4861b2edf96bfe9f73f12bf', 'o48gatdqbk', 5),
 (1, '29ad81bf880b526979eeee461fc16580', 'd32934b31349d77e70957e057b1bcd28', 'ni1saocfq5', 6),
 (1, '735fd4e6cae4fa6000d0372d7d6a47c1', 'd32934b31349d77e70957e057b1bcd28', 'c6emf4qdj5', 7),
-(1, 'b723c460021647140afe4af4cf346ded', 'd32934b31349d77e70957e057b1bcd28', 'dhp3secg8a', 8);
+(1, 'b723c460021647140afe4af4cf346ded', 'd32934b31349d77e70957e057b1bcd28', 'dhp3secg8a', 8),
+(2, 'ab30489bb5771436ff53be2915a98451', '5fe6b431c86370dd7843ac95c833bbb0', '8hbq62ctd7', 4);
 
 -- --------------------------------------------------------
 
@@ -514,15 +546,16 @@ CREATE TABLE `responsibleperson` (
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
   `isAssigned` char(1) DEFAULT 'n',
-  `safeHouseID` int(5) NOT NULL
+  `safeHouseID` int(5) NOT NULL,
+  `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `responsibleperson`
 --
 
-INSERT INTO `responsibleperson` (`responsiblePersonID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `safeHouseID`) VALUES
-(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'y', 1);
+INSERT INTO `responsibleperson` (`responsiblePersonID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `safeHouseID`, `empTele`) VALUES
+(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'y', 1, '');
 
 -- --------------------------------------------------------
 
@@ -540,7 +573,7 @@ CREATE TABLE `role` (
 --
 
 INSERT INTO `role` (`roleId`, `roleName`) VALUES
-(1, 'Grama Sewaka'),
+(1, 'Grama Niladari'),
 (2, 'Inventory Manager'),
 (3, 'District Secretariat'),
 (4, 'Divisional Secretariat'),
@@ -579,6 +612,13 @@ CREATE TABLE `safehousecontact` (
   `safeHouseTelno` char(10) NOT NULL,
   `safeHouseID` int(5) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `safehousecontact`
+--
+
+INSERT INTO `safehousecontact` (`safeHouseTelno`, `safeHouseID`) VALUES
+('0345165219', 1);
 
 -- --------------------------------------------------------
 
@@ -645,7 +685,9 @@ ALTER TABLE `division`
 --
 ALTER TABLE `divisionaloffice`
   ADD PRIMARY KEY (`divisionalOfficeId`),
-  ADD KEY `divisionalSecretariatID` (`divisionalSecretariatID`);
+  ADD KEY `divisionalSecretariatID` (`divisionalSecretariatID`),
+  ADD KEY `disasterManager` (`disasterManager`),
+  ADD KEY `dvId` (`dvId`);
 
 --
 -- Indexes for table `divisionalofficecontact`
@@ -806,13 +848,13 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT for table `divisionaloffice`
 --
 ALTER TABLE `divisionaloffice`
-  MODIFY `divisionalOfficeId` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `divisionalOfficeId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `divisionalsecretariat`
 --
 ALTER TABLE `divisionalsecretariat`
-  MODIFY `divisionalSecretariatID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `divisionalSecretariatID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `dmc`
@@ -836,7 +878,7 @@ ALTER TABLE `gramaniladari`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryId` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `inventoryId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `inventoryitem`
@@ -848,13 +890,13 @@ ALTER TABLE `inventoryitem`
 -- AUTO_INCREMENT for table `inventorymgtofficer`
 --
 ALTER TABLE `inventorymgtofficer`
-  MODIFY `inventoryMgtOfficerID` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `inventoryMgtOfficerID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `resident`
@@ -900,7 +942,9 @@ ALTER TABLE `division`
 -- Constraints for table `divisionaloffice`
 --
 ALTER TABLE `divisionaloffice`
-  ADD CONSTRAINT `divisionaloffice_ibfk_1` FOREIGN KEY (`divisionalSecretariatID`) REFERENCES `divisionalsecretariat` (`divisionalSecretariatID`);
+  ADD CONSTRAINT `divisionaloffice_ibfk_1` FOREIGN KEY (`divisionalSecretariatID`) REFERENCES `divisionalsecretariat` (`divisionalSecretariatID`),
+  ADD CONSTRAINT `divisionaloffice_ibfk_2` FOREIGN KEY (`disasterManager`) REFERENCES `dismgtofficer` (`disMgtOfficerID`),
+  ADD CONSTRAINT `divisionaloffice_ibfk_3` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`);
 
 --
 -- Constraints for table `divisionalofficecontact`

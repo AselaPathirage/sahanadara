@@ -13,6 +13,7 @@ Route::GET("user",array("Admin@searchUser"));
 Route::GET("district",array("Admin@getDistrict"));
 Route::GET("area",array("Admin@DBtoJson"));
 Route::GET("division",array("Admin@getDivision"));
+Route::GET("role",array("Employee@getRole"));
 Route::GET("GnDivision",array("Admin@getGnDivision","DisasterOfficer@getGNDivision"));
 Route::GET("safehouse",array("DisasterOfficer@viewSafehouse"));
 Route::POST("login",array("Employee@login"));

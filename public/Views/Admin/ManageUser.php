@@ -67,47 +67,15 @@
                         <th>Search
                             <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                         </th>
-                    </tr>
+                    </tr> 
                 </thead>
             </table>
 
             <div class="container">
                 <div class="row">
-                    <div class="col5">
-                        <div class="box row-content">
-                            <h4>Danushka Perera</h4>
-                            <p>Divisional Secretariat</p>
-                            <p>Gampaha</p>
-                            <p>aperera@gmail.com</p>
-                            <p>0784444444</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" style="background-color:yellow;" class="btn_manage">Manage</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Danushka Perera</h4>
-                            <p>Divisional Secretariat</p>
-                            <p>Gampaha</p>
-                            <p>aperera@gmail.com</p>
-                            <p>0784444444</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" style="background-color:yellow;" class="btn_manage">Manage</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Danushka Perera</h4>
-                            <p>Divisional Secretariat</p>
-                            <p>Gampaha</p>
-                            <p>aperera@gmail.com</p>
-                            <p>0784444444</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" style="background-color:yellow;" class="btn_manage">Manage</a>
-                            </div>
-                        </div>
-
-
+                    <div class="col6" id="users" name = "users">
                     </div>
-                    <div class="col7" style="overflow: auto">
+                    <!-- <div class="col7" style="overflow: auto">
                         <div class="box row-content" style="min-height: 300px;">
                             <h1 class="text-center">Update User</h1>
                             <div class="row">
@@ -219,7 +187,7 @@
                             </div>
                             </form>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -231,6 +199,7 @@
     <script>
         var thisPage = "#manage";
         $(document).ready(function() {
+            getUsers();
             $("#stats,#updates").each(function() {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
@@ -245,6 +214,45 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+        function getRoles(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>role",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            var select = document.getElementById("unitType");
+            var select2 = document.getElementById("unitType_2");
+            for (var i = 0; i < output.length; i++){
+                var opt = document.createElement('option');
+                opt.value = output[i]['unitId'];
+                opt.innerHTML = output[i]['unitName'];
+                var opt2 = document.createElement('option');
+                opt2.value = output[i]['unitName'];
+                opt2.innerHTML = output[i]['unitName'];
+                select.appendChild(opt);
+                select2.appendChild(opt2);
+            }
+        }
+        function getUsers(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>user",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            var parent = document.getElementById('users');
+            for (var i = 0; i < output.length; i++){
+                let newChild = "<div class='box row-content'><h4>"+output[i]['empName']+"</h4><p>"+output[i]['roleName']+"</p><p>"+output[i]['empAddress']+"</p><p>"+output[i]['empEmail']+"</p><p>"+output[i]['empTele']+"</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a href='/<?php echo baseUrl; ?>' style='background-color:yellow;' class='btn_manage'>Manage</a></div></div>";
+                parent.insertAdjacentHTML('beforeend', newChild);
+            }
+        }
+
     </script>
 </body>
 

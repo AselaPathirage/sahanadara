@@ -34,11 +34,11 @@ class DisasterOfficer extends Noticer{
         $uid = $data['userId'];
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
-            $sql = "SELECT s.* FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
+            $sql = "SELECT s.*,t.*,g.gnDvName FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
             WHERE s.safeHouseId = t.safeHouseID AND g.	safeHouseID = s.safeHouseId AND g.dvId = d.dvId
             AND dv.dvId = d.dvId AND dv.disasterManager = $uid AND s.safeHouseId = $id";
         }else{
-            $sql = "SELECT s.* FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
+            $sql = "SELECT s.*,t.*,g.gnDvName FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
             WHERE s.safeHouseId = t.safeHouseID AND g.	safeHouseID = s.safeHouseId AND g.dvId = d.dvId
             AND dv.dvId = d.dvId AND dv.disasterManager = $uid";
         }

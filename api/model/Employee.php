@@ -124,4 +124,19 @@ class Employee{
     public function resetPassword(array $data){
         
     }
+    public function getRole(array $data){
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $sql = "SELECT * FROM `role` WHERE roleId=$id";
+        }else{
+            $sql = "SELECT * FROM `role`";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
 }

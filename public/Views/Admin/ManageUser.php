@@ -67,7 +67,7 @@
                         <th>Search
                             <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                         </th>
-                    </tr>
+                    </tr> 
                 </thead>
             </table>
 
@@ -213,6 +213,28 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        function getRoles(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>role",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            var select = document.getElementById("unitType");
+            var select2 = document.getElementById("unitType_2");
+            for (var i = 0; i < output.length; i++){
+                var opt = document.createElement('option');
+                opt.value = output[i]['unitId'];
+                opt.innerHTML = output[i]['unitName'];
+                var opt2 = document.createElement('option');
+                opt2.value = output[i]['unitName'];
+                opt2.innerHTML = output[i]['unitName'];
+                select.appendChild(opt);
+                select2.appendChild(opt2);
+            }
         }
         function getUsers(){
             output = $.parseJSON($.ajax({

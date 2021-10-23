@@ -17,7 +17,8 @@
 
             </li> -->
 
-            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>about">About Us</a>
+
+            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>about">About </a>
             <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>help">Help </a>
             <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>donate">Donate </a>
             <?php
@@ -37,6 +38,7 @@
                     echo "<li class='menu-item'><a class='nav__link' href='".HOST."staff'>Staff </a>";
                 }
             ?>
+
             </li>
         </ul>
     </div>

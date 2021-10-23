@@ -76,19 +76,27 @@
   tr:nth-of-type(odd) { 
       background: #ffffff; 
       }
+  tr:nth-of-type(even) { 
+      background: #f2f8f9; 
+      }
   
   th { 
-      background: #d6d6d6; 
+      /* background: #f2f8f9;  */
+      background: #06318881; 
       color: rgb(0, 0, 0); 
       font-weight: bold; 
       }
   
+      
+
   td, th { 
       padding: 10px; 
       border: 1px solid #f1f1f1; 
       text-align: left; 
       font-size: 18px;
       }
+
+    
   
   .form-control{
     display: block;

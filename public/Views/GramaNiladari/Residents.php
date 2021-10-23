@@ -82,7 +82,7 @@
                         <table id="table2" class="table">
                             <thead>
                                 <tr>
-                                    <th>Number</th>
+                                 
                                     <th>Name</th>
                                     <th>NIC</th>
                                     <th>Address</th>
@@ -92,10 +92,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tbodyid">
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    <td>1</td>
+                                    
                                     <td>N Nimesh </td>
                                     <td>991237564V</td>
                                     <td>111, Maithree Rd, Horana</td>
@@ -107,7 +107,7 @@
                                 </tr>
 
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>2</td>
+                                    
                                     <td>Y Abeysinghe</td>
                                     <td>985637555V</td>
                                     <td>14/D, Samagi Rd, Bellapitiya, Horana</td>
@@ -146,6 +146,8 @@
 
         // popup
         $(".Click-here").on('click', function() {
+            $(".custom-model-main").fadeIn();
+            $("#add").trigger("reset");
             $(".custom-model-main").addClass('model-open');
         });
         $(".close-btn, .bg-overlay").click(function() {
@@ -154,6 +156,7 @@
 
         $("#add").submit(function(e) {
             e.preventDefault();
+            $(".custom-model-main").fadeOut();
             var str = [];
             var formElement = document.querySelector("#add");
             var formData = new FormData(formElement);
@@ -162,17 +165,20 @@
             formData.forEach(function(value, key) {
                 object[key] = value;
             });
-            object['key'] = "<?php echo $_SESSION['key'] ?>";
-            object['gnid'] = "<?php echo $_SESSION['userId'] ?>";
+
             var json = JSON.stringify(object);
             console.log(json);
             $.ajax({
                 type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>/GramaNiladari_addResident/1234",
+                url: "<?php echo API; ?>residents",
                 data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
                 cache: false,
                 success: function(result) {
                     console.log(result);
+                    $("#tbodyid").empty();
                     getResident();
                 },
                 error: function(err) {
@@ -182,22 +188,25 @@
         });
 
         function getResident() {
-            var object = {};
-            object['key'] = "<?php echo $_SESSION['key'] ?>";
-            object['gnid'] = "<?php echo $_SESSION['userId'] ?>";
-            var json = JSON.stringify(object);
-            console.log(object);
+            // var object = {};
+
+
+            // var json = JSON.stringify(object);
+            // console.log(object);
             output = $.parseJSON($.ajax({
-                type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>/GramaNiladari_getResident/1234",
+                type: "GET",
+                url: "<?php echo API; ?>residents",
                 dataType: "json",
-                data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
                 cache: false,
                 async: false
             }).responseText);
             console.log(output);
-            $("#table2 tbody").empty();
-            var table = document.getElementById("table2");
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+
             for (var i = 0; i < output.length; i++) {
                 let obj = output[i];
                 console.log(obj);
@@ -207,7 +216,7 @@
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
                 let cell5 = row.insertCell(-1);
-                let cell6 = row.insertCell(-1);
+                
                 var attribute = document.createElement("a");
                 attribute.id = i;
                 attribute.href = "";
@@ -221,20 +230,41 @@
                 attribute2.className = "btn_delete";
                 attribute2.name = "delete";
                 attribute2.innerHTML = "Delete";
-                cell1.innerHTML = obj['residentId'];
-                cell2.innerHTML = obj['residentName'];
-                cell3.innerHTML = obj['residentNIC'];
-                cell4.innerHTML = obj['residentAddress'];
-                cell5.innerHTML = obj['residentTelNo'];
+                
+                cell1.innerHTML = obj['residentName'];
+                cell2.innerHTML = obj['residentNIC'];
+                cell3.innerHTML = obj['residentAddress'];
+                cell4.innerHTML = obj['residentTelNo'];
                 var attribute3 = document.createElement("span");
                 attribute3.innerHTML = " ";
-                cell6.appendChild(attribute);
-                cell6.appendChild(attribute3);
-                cell6.appendChild(attribute2);
+                cell5.appendChild(attribute);
+                cell5.appendChild(attribute3);
+                cell5.appendChild(attribute2);
                 console.log(attribute);
                 console.log(attribute2);
             }
         }
+
+
+        // search
+
+        (function() {
+            var showResults;
+            $('#search').keyup(function() {
+                var searchText;
+                searchText = $('#search').val();
+                return showResults(searchText);
+            });
+            showResults = function(searchText) {
+                $('tbody tr').hide();
+                return $('tbody tr:Contains(' + searchText + ')').show();
+            };
+            jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function(arg) {
+                return function(elem) {
+                    return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                };
+            });
+        }.call(this));
     </script>
 </body>
 

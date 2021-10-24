@@ -218,6 +218,7 @@ tr:hover{
                 e.preventDefault();
                 //$(".custom-model-main").removeClass('model-open');
                 $(".custom-model-main").fadeOut();
+                $(".custom-model-main").removeClass('model-open');
                 var str = [];
                 var formElement = document.querySelector("#add");
                 var formData = new FormData(formElement);
@@ -225,6 +226,7 @@ tr:hover{
                 formData.forEach(function(value, key){
                     object[key] = value;
                 }); 
+                $("#add").trigger('reset');
                 var json = JSON.stringify(object);
                 console.log(json);
                 $.ajax({
@@ -251,6 +253,7 @@ tr:hover{
         }
 
         $("#addNew").on('click', function() {
+            $(".custom-model-main").fadeIn();
             $(".custom-model-main").addClass('model-open');
         });
         $(".close-btn, .bg-overlay").click(function() {

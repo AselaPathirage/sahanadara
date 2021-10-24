@@ -35,6 +35,22 @@ class Admin extends Employee{
                 $role = $data['user_role'];
                 $sql = "INSERT INTO login VALUES ($userId,'".md5($data['NIC'])."','".md5($password)."','$tokenKey',$role)";
                 $this->connection->query($sql);
+                switch ($role) {
+                    case 1:
+                        $gnId = $data['Gndivision'];
+                        $sql ="UPDATE gndivision SET gramaNiladariID = $userId WHERE gndvId = $gnId";
+                        break;
+                    case 3:
+                        $dsId = $data['District'];
+                        $sql ="UPDATE districtsoffice SET districtSecretariat = $userId WHERE dsId = $dsId";
+                        break;
+                    case 4:
+                        $dvId = $data['Division'];
+                        $sql ="UPDATE divisionaloffice SET divisionalSecretariatID = $userId WHERE dvId = $dvId";
+                        break;
+                }
+                echo $sql;
+                $this->connection->query($sql);
                 $body ="Please use these creadentials to login Sahanadara. You need to change your password after the login.<ul><li>User Name: ".$data['NIC']." </li><li>Password: $password </li></ul>";
                 $mail->emailBody("About your account","Dear ".$data['firstname'],$body);
                 $mail->sendMail($data['email'],"Account Information");
@@ -45,7 +61,7 @@ class Admin extends Employee{
                 echo json_encode(array("code"=>$errorCode['emailAlreadyInUse']));
                 exit();   
             }
-        }else{
+        }else{ 
             http_response_code(406);
             echo json_encode(array("code"=>$errorCode['attributeMissing']));
             exit();

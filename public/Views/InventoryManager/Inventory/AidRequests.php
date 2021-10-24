@@ -13,6 +13,10 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        tr:hover{
+  background:#c9e8f7;
+  position:relative;
+}
     .radio-custom {
         opacity: 0;
         position: absolute;   
@@ -111,8 +115,8 @@
                             <tr>
                                 <th></th>
                                 <th>Name</th>
-                                <th>Type</th>
-                                <th>Quantity</th>
+                                <th>Priority</th>
+                                <th>Date</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -122,38 +126,64 @@
                                         <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-1" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 1</td>
-                                    <td>01/24/2015</td>
-                                    <td>09/24/2015</td>
+                                    <td>Bolossagama Safe House</td>
+                                    <td>High</td>
+                                    <td>09/24/2021</td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td> 
                                         <input id="radio-2" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-2" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 2</td>
-                                    <td>03/14/2015</td>
-                                    <td>09/18/2015</td>
+                                    <td>Gamagoda Safe House</td>
+                                    <td>Low</td>
+                                    <td>12/14/2020</td>
                                 </tr>
                                 <tr id="task-3" class="task-list-row" data-task-id="3" data-user="Donald" data-status="Not Started" data-milestone="Milestone 1" data-priority="Low" data-tags="Tag 3">
                                     <td> 
                                         <input id="radio-3" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-3" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 3</td>
-                                    <td>11/16/2014</td>
-                                    <td>02/29/2015</td>
+                                    <td>Adhikarigoda Safe House</td>
+                                    <td>High</td>
+                                    <td>24/02/2021</td>
                                 </tr>
                                 <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
                                     <td> 
                                         <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-4" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 4</td>
-                                    <td>11/16/2014</td>
-                                    <td>02/29/2015</td>
+                                    <td>Adhikarigoda Safe House</td>
+                                    <td>Low</td>
+                                    <td>1/03/2021</td>
                                 </tr>
-                            
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Bombuwala South Safe House</td>
+                                    <td>Low</td>
+                                    <td>5/03/2021</td>
+                                </tr>
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Galpottawila Safe House</td>
+                                    <td>High</td>
+                                    <td>02/22/2021</td>
+                                </tr>
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Galpottawila Safe House</td>
+                                    <td>Low</td>
+                                    <td>02/23/2021</td>
+                                </tr>
                         </tbody>
                     </table>
                 </div>

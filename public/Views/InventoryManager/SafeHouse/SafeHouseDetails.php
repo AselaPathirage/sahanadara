@@ -52,7 +52,7 @@
                                 <div class="box row-content">
                                     <h4>Millaniya Maha Vidyalya</h4>
                                     <p>Haltota, Millaniya Road, Tuttiripitiya</p>
-
+                                    <p>Tele: 071-5632541, 035-5635413</p>
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                         <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
                                         <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
@@ -61,23 +61,20 @@
                                 <div class="box row-content">
                                     <h4>Taxila Central College</h4>
                                     <p>Horana</p>
-
+                                    <p>Tele: 071-5672554, 035-7135353</p>
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                         <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
                                     </div>
                                 </div>
                                 <div class="box row-content">
-                                    <h4>Taxila Central College</h4>
-                                    <p>Horana</p>
-
+                                    <h4>Bolossagama Central College</h4>
+                                    <p>Bolossagama</p>
+                                    <p>Tele: 077-5412554, 035-7735455</p>
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                         <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
                                     </div>
                                 </div>
-                                <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>
-                    <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div> -->
                             </div>
-
                         </div>
                     </div>
         </div>

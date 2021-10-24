@@ -251,6 +251,7 @@ tr:hover{
         }
 
         $("#addNew").on('click', function() {
+            $(".custom-model-main").fadeIn();
             $(".custom-model-main").addClass('model-open');
         });
         $(".close-btn, .bg-overlay").click(function() {

@@ -45,4 +45,58 @@ class InventoryManager extends Noticer{
         $json = json_encode($results);
         echo $json;
     }
+    public function addInventory(array $data){
+        global $errorCode;
+        if(isset($data['itemId']) && isset($data['quantity'])){
+            $itemId = $data['itemId'];
+            $quantity = $data['quantity'];
+            $uid = $data['userId'];
+            if(isset($data['release'])){
+                
+                $sql = "SELECT SUM(v.quantity) AS quantity FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND v.itemId = $itemId  AND i.unitType =u.unitId GROUP BY v.itemId";
+                $excute = $this->connection->query($sql);
+                $array = $excute-> fetch_assoc();
+                $q = $array['quantity'];
+                if($q<$quantity){
+                    http_response_code(200); 
+                    echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                    exit();
+                }
+                $quantity *= -1;
+            }
+            $sql = "SELECT inventoryID  FROM  inventorymgtofficer WHERE inventoryMgtOfficerID = $uid";
+            $excute = $this->connection->query($sql);
+            $array = $excute-> fetch_assoc();
+            $id = $array['inventoryID'];
+            $date= date('Y-m-d H:i:s',strtotime("-1 days"));
+            $sql = "INSERT INTO inventoryitem(itemId,inventoryId ,quantity,transactionDate) VALUES ($itemId,$id,$quantity,'$date') ";
+            $this->connection->query($sql);
+            http_response_code(200); 
+            echo json_encode(array("code"=>$errorCode['success']));
+            exit();
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function updateInventory(array $data){
+        //print_r($data);
+    }
+    public function getInventory(array $data){
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $sql = "SELECT i.itemId,i.itemName,SUM(v.quantity) AS quantity, unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND v.itemId = $id  AND i.unitType =u.unitId GROUP BY v.itemId";
+        }else{
+            $sql = "SELECT i.itemId,i.itemName,SUM(v.quantity) AS quantity, unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId GROUP BY v.itemId";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
 }

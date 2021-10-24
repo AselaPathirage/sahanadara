@@ -12,20 +12,57 @@
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        td{
+            border: none;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
     <?php
         include_once('./public/Views/InventoryManager/includes/sidebar_reports.php');
      ?>
     <section class="dashboard-section">
-        <?php 
-        include_once('./public/Views/InventoryManager/includes/topnav.php'); 
+        <?php
+        include_once('./public/Views/InventoryManager/includes/topnav.php');
         ?>
         <div class="space"></div>
-        <!-- ======================================================================================================================================= -->
-        <!-- content frome below -->
-        <!-- STATS -->
+        <div class="space"></div>
         <div class="container">
+        <div class="box">
+                <center><h1>Safe House Report</h1></center>
+                <h3>Time Period</h3>
+                <form>
+                    <div style="display:flex;">
+                            <div style="width: 70%;padding-left:10%">
+                                <table style="border: none !important;width:100%;">
+                                    <tr>
+                                        <td>
+                                        <label for="your_name">Starting Date</label>
+                                        </td>
+                                        <td>
+                                        <input type="date" id="birthday" name="birthday">
+                                        </td>
+                                        <td>
+                                        <label for="your_name">End Date</label>
+                                        </td>
+                                        <td>
+                                        <input type="date" id="birthday" name="birthday">
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div style="float: right;padding-left:5%">
+                                <div class="row" style="justify-content: center;">
+                                    <input type="submit" value="Generate" class="btn-alerts" />
+                                    <input type="reset" value="Cancel" class="btn-alerts" />
+                                </div>
+                            </div>
+                    </div>
+                </form>
+            </div>
         </div>
     </section>
     <script>

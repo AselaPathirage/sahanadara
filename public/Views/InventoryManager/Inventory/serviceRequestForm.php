@@ -83,6 +83,7 @@
             text-align: left;
             vertical-align: middle;
     }
+    
     </style>
 </head>
 <body>

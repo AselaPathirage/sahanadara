@@ -80,6 +80,10 @@
     .view:hover{
         background-color: rgb(138,123,217);
     }
+    tr:hover{
+  background:#c9e8f7;
+  position:relative;
+}
     </style>
 </head>
 <body>
@@ -141,38 +145,64 @@
                                         <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-1" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 1</td>
-                                    <td>01/24/2015</td>
-                                    <td>09/24/2015</td>
+                                    <td>Divisional Office Agalawatta</td>
+                                    <td>Water Bowser</td>
+                                    <td>09/24/2021</td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td> 
                                         <input id="radio-2" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-2" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 2</td>
-                                    <td>03/14/2015</td>
-                                    <td>09/18/2015</td>
+                                    <td>Divisional Office Beruwala</td>
+                                    <td>Generator</td>
+                                    <td>12/28/2020</td>
                                 </tr>
                                 <tr id="task-3" class="task-list-row" data-task-id="3" data-user="Donald" data-status="Not Started" data-milestone="Milestone 1" data-priority="Low" data-tags="Tag 3">
                                     <td> 
                                         <input id="radio-3" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-3" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 3</td>
-                                    <td>11/16/2014</td>
-                                    <td>02/29/2015</td>
+                                    <td>Divisional Office Ingiriya</td>
+                                    <td>Water Bowser</td>
+                                    <td>02/29/2021</td>
                                 </tr>
                                 <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
                                     <td> 
                                         <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-4" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 4</td>
-                                    <td>11/16/2014</td>
-                                    <td>02/29/2015</td>
+                                    <td>Divisional Office Madurawala</td>
+                                    <td>Tents</td>
+                                    <td>02/20/2021</td>
                                 </tr>
-                            
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Divisional Office Madurawala</td>
+                                    <td>Generator</td>
+                                    <td>02/22/2021</td>
+                                </tr>
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Divisional Office Walallavita</td>
+                                    <td>Boats</td>
+                                    <td>03/01/2021</td>
+                                </tr>
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Divisional Office Madurawala</td>
+                                    <td>Boats</td>
+                                    <td>03/03/2021</td>
+                                </tr>
                         </tbody>
                     </table>
                 </div>

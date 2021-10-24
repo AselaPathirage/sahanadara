@@ -33,19 +33,19 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Status
+                            <th>Approved
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Approve</option>
-                                    <option>Not Approve</option>
+                                    <option>All</option>
+                                    <option>Approved</option>
+                                    <option>Not Approved</option>
                                 </select>
                             </th>
                             <th>Type
                                 <select id="status-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Not Started</option>
-                                    <option>In Progress</option>
-                                    <option>Completed</option>
+                                    <option>All</option>
+                                    <option>Initial</option>
+                                    <option>Relief</option>
+                                    <option>Final</option>
                                 </select>
                             </th>
                             
@@ -61,12 +61,11 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Applicant Name</th>
+                                <th>Date/Time</th>
+                                <th>Descreption</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
-                                <th>Status</th>
                             </tr>
                         </thead>
 
@@ -75,22 +74,20 @@
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                             
                                 <td>01/24/2021 1:50</td>
-                                <td>ABC Perera</td>
-                                <td>Death</td>
+                                <td>Flood</td>
+                                <td>Initial</td>
                                 <td>Approved</td>
                                 <td>Approved</td>
-                                <td>Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentRep" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                             <td>01/24/2021 12:20</td>
-                                <td>ABC Silva</td>
+                                <td>Flood</td>
                                 <td>Final</td>
                                 <td>Approved</td>
                                 <td>Pending</td>
-                                <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentRep" class="btn-box">View</a></td>
                             </tr>
 
                             

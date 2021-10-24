@@ -31,20 +31,21 @@
         <div class="container">
             <div class="">
 
-                <table class="table">
+            <table class="table">
                     <thead>
                         <tr class="filters">
                             <th>Approved
                                 <select id="assigned-user-filter" class="form-control">
+                                    <option>All</option>
                                     <option>Approved</option>
                                     <option>Not Approved</option>
                                 </select>
                             </th>
-
                             <th>Type
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>Select</option>
-                                    <option>Type1</option>
+                                <select id="status-filter" class="form-control">
+                                    <option>All</option>
+                                    <option>Death</option>
+                                    <option>Property</option>
                                 </select>
                             </th>
                             
@@ -60,43 +61,38 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <th>Date/Time</th>
                                 <th>Applicant Name</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
                                 <th>Status</th>
-                                
-
                             </tr>
                         </thead>
 
                         <tbody>
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                
-                                <td>09/24/2015</td>
-                                <td>Task title 1</td>
-                                <td>Urgent</td>
-                                <td>DS Note 1</td>
-                                <td>DMC Note 1</td>
-                                <td>Active</td>
+                            
+                                <td>01/24/2021 1:50</td>
+                                <td>ABC Perera</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td>Collected</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/DonationRequests" class="btn-box">View</a></td>
-                                
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                <td>02/24/2015</td>
-                                <td>Task title 2</td>
-                                <td>Urgent</td>
-                                <td>DS Note 2</td>
-                                <td>DMC Note 2</td>
-                                <td>Active</td>
+                            <td>01/24/2021 12:50</td>
+                                <td>ABC Silva</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/DonationRequests" class="btn-box">View</a></td>
-
                             </tr>
 
-                            
                             
                         </tbody>
                     </table>

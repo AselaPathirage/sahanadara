@@ -99,7 +99,7 @@
 
                             <tbody id="tableSafeHouse">
 
-                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                <!-- <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td>Haltota, Millaniya Road, Tuttiripitiya</td>
                                     <td>Millaniya Maha Vidyalya</td>
                                     <td>Halthota</td>
@@ -118,7 +118,7 @@
                                     <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/updatesafeHouse" class="btn_blue">Update</a>
                                         <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_delete">Delete</a>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -205,7 +205,7 @@
                 async: false
             }).responseText);
             var table = document.getElementById("tableSafeHouse");
-            for (var i = 0; i < output.length-1; i++){
+            for (var i = 0; i < output.length; i++){
                 let obj = output[i];
                 console.log(obj);
                 // let row = table.insertRow(-1);

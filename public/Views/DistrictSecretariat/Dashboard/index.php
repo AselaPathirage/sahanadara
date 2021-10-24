@@ -29,7 +29,7 @@
             <center>
             <h1>Welcome District Secretariat Officer</h1>
             </center>
-            <div class="stat-row">
+            <!-- <div class="stat-row">
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Compensation Requests</div>
@@ -38,7 +38,32 @@
                     </div>
                     <i class='bx bxs-report cart two'></i>
                 </div>
-            </div>
+            </div> -->
+
+            <section class="services">
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#4eb7ff">
+                            <ion-icon name="videocam-outline">
+                                <i class='bx bxs-report '></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                3
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                            Compensation Requests
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
+                    </div>
+                </a>
+
+            </section>
         </div>
 
 

@@ -35,20 +35,16 @@
                         <tr class="filters">
                             <th>Approved
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>John</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>All</option>
+                                    <option>Approved</option>
+                                    <option>Not Approved</option>
                                 </select>
                             </th>
                             <th>Type
                                 <select id="status-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Not Started</option>
-                                    <option>In Progress</option>
-                                    <option>Completed</option>
+                                    <option>All</option>
+                                    <option>Death</option>
+                                    <option>Property</option>
                                 </select>
                             </th>
                             
@@ -64,7 +60,7 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <th>Date/Time</th>
                                 <th>Applicant Name</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
@@ -87,7 +83,7 @@
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021</td>
+                            <td>01/24/2021 12:50</td>
                                 <td>ABC Silva</td>
                                 <td>Final</td>
                                 <td>Approved</td>

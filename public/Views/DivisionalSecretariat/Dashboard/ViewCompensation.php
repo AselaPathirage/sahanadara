@@ -30,7 +30,7 @@
            <div class="container">
         <div class="box">
             <form action="#" method="post">
-                <h1>Donation Requests</h1>
+                <h1>Compensation Requests</h1>
                 <label for="notes">Requests 1</label>
                     <label for="notes">Remarks</label>
                     <textarea id="notes" name="compensationnotes"></textarea>

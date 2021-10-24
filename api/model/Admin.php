@@ -12,15 +12,15 @@ class Admin extends Employee{
             switch ($data['user_role']) {
                 case 1:
                     $sql0 = "SELECT empEmail FROM gramaniladari WHERE empEmail = '".$data['email']."'";
-                    $sql ="INSERT INTO gramaniladari (empName,empAddress,empEmail) VALUES ('$name','".$data['address']."','".$data['email']."');";
+                    $sql ="INSERT INTO gramaniladari (empName,empAddress,empEmail,empTele) VALUES ('$name','".$data['address']."','".$data['email']."','".$data['TP_number']."');";
                     break;
                 case 3:
                     $sql0 = "SELECT empEmail FROM districtsecretariat WHERE empEmail = '".$data['email']."'";
-                    $sql ="INSERT INTO districtsecretariat (empName,empAddress,empEmail) VALUES ('$name','".$data['address']."','".$data['email']."');";
+                    $sql ="INSERT INTO districtsecretariat (empName,empAddress,empEmail,empTele) VALUES ('$name','".$data['address']."','".$data['email']."','".$data['TP_number']."');";
                     break;
                 case 4:
                     $sql0 = "SELECT empEmail FROM divisionalsecretariat WHERE empEmail = '".$data['email']."'";
-                    $sql ="INSERT INTO divisionalsecretariat (empName,empAddress,empEmail) VALUES ('$name','".$data['address']."','".$data['email']."');";
+                    $sql ="INSERT INTO divisionalsecretariat (empName,empAddress,empEmail,empTele) VALUES ('$name','".$data['address']."','".$data['email']."','".$data['TP_number']."');";
                     break;
             }
             $query = $this->connection->query($sql0);
@@ -52,7 +52,42 @@ class Admin extends Employee{
         }
     }
     public function searchUser(array $data){
-
+        $roleTable = array( 1=>array("tableName"=>"gramaniladari","primaryKey" => "gramaNiladariID"),
+                            2=>array("tableName"=>"inventorymgtofficer","primaryKey" => "inventoryMgtOfficerID"),
+                            3=>array("tableName"=>"districtsecretariat","primaryKey" => "districtSecretariatID"),
+                            4=>array("tableName"=>"divisionalsecretariat","primaryKey" => "divisionalSecretariatID"),
+                            5=>array("tableName"=>"admin","primaryKey" => "adminID"),
+                            6=>array("tableName"=>"dismgtofficer","primaryKey" => "disMgtOfficerID"),
+                            7=>array("tableName"=>"dmc","primaryKey" => "dmcID"),
+                            8=>array("tableName"=>"responsibleperson","primaryKey" => "responsiblePersonID"));
+        if(count($data['receivedParams'])==1){
+            $sql = "SELECT ".$roleTable[$data['receivedParams'][0]]['primaryKey']." AS empId, empName,empAddress,empEmail,empTele,roleName,roleId FROM ".$roleTable[$data['receivedParams'][0]]['tableName'].",role WHERE roleId=".$data['receivedParams'][0];
+        }elseif(count($data['receivedParams'])==2){
+            $sql = "SELECT ".$roleTable[$data['receivedParams'][0]]['primaryKey']." AS empId, empName,empAddress,empEmail,empTele,roleName,roleId FROM ".$roleTable[$data['receivedParams'][0]]['tableName'].",role WHERE ".$roleTable[$data['receivedParams'][0]]['primaryKey']."=".$data['receivedParams'][1]." AND roleId=".$data['receivedParams'][0];
+        }else{
+            $sql = "(SELECT ".$roleTable[1]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM gramaniladari,role WHERE roleId = 1)
+                    UNION
+                    (SELECT ".$roleTable[2]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM inventorymgtofficer,role WHERE roleId = 2)
+                    UNION
+                    (SELECT ".$roleTable[3]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM districtsecretariat,role WHERE roleId = 3)
+                    UNION
+                    (SELECT ".$roleTable[4]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM divisionalsecretariat,role WHERE roleId = 4)
+                    UNION
+                    (SELECT ".$roleTable[5]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM admin,role WHERE roleId = 5)
+                    UNION
+                    (SELECT ".$roleTable[6]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM dismgtofficer,role WHERE roleId = 6)
+                    UNION
+                    (SELECT ".$roleTable[7]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM dmc,role WHERE roleId = 7)
+                    UNION
+                    (SELECT ".$roleTable[8]['primaryKey']." as empId,empName,empAddress,empEmail,empTele,roleName,roleId FROM responsibleperson,role WHERE roleId = 8)";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
     public function getDistrict(array $data){
         if(count($data['receivedParams'])==1){

@@ -25,5 +25,7 @@ $errorCode = array(
                     'userCreadentialWrong' => 811,
                     'routeNotFound' => 812,
                     'unhandledRequestingMetod' => 813,
-                    'emailAlreadyInUse' => 814
+                    'emailAlreadyInUse' => 814,
+                    'emailNotInUse' => 815,
+                    'urlTokenExpired' => 816
                     );

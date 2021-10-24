@@ -12,12 +12,13 @@ class Router{
                                                 "staff" => "staff.php",
                                                 "about" => "about.php",
                                                 "forget" => "forget.php",
-                                                "logout"=>"logout.php"
+                                                "ResetPassword" => "ResetPassword.php",
+                                                "logout"=>"logout.php" 
                                             );
     protected static $routes = array(
                                     'Admin' => array(),
                                     'DisasterOfficer' => array('SafeHouse','Dashboard','Report','Notice'),
-                                    'DistrictSecretariat' => array(),
+                                    'DistrictSecretariat' => array('Dashboard','Report'),
                                     'DivisionalSecretariat' => array('Dashboard','Notice','Report'),
                                     'DMC' => array('Report'),
                                     'GramaNiladari' => array('Report'),

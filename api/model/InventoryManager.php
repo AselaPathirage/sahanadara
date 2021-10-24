@@ -1,7 +1,10 @@
 <?php
 class InventoryManager extends Noticer{
+    private $inventory = null;
+
     public function __construct($con){
         parent::__construct($con);
+        $this->inventory = new Inventory();
     }
     public function addItem(array $data){
         global $errorCode;

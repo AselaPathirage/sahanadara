@@ -54,7 +54,11 @@
                             <div class="container">
                                 <form action="/<?php echo baseUrl; ?>/Handler/loginHandle?formControl=1" method="post">
                                     <h2>Login</h2>
-
+                                    <?php
+                                        if(isset($_GET['error'])){
+                                            echo "<p style='color:red'>User Name or password is wrong. Please try again</p>";
+                                        }
+                                    ?>
                                     <label for="username">Username</label>
                                     <input type="text" id="username" name="username" required />
 

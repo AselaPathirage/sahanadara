@@ -69,11 +69,11 @@
                                 <label for="your_name">NIC</label>
                                 <input type="text" id="nic" name="yourname" />
 
-                                <label for="your_name">First name</label>
-                                <input type="text" id="your_name" name="yourname" />
+                                <label for="f_name">First name</label>
+                                <input type="text" id="f_name" name="f_name" />
 
-                                <label for="your_name">Last Name</label>
-                                <input type="text" id="your_name" name="yourname" />
+                                <label for="l_name">Last Name</label>
+                                <input type="text" id="l_name" name="l_name" />
 
                                 <label for="address">Address</label>
                                 <input type="text" id="adress" name="address" />
@@ -84,8 +84,8 @@
                                 <label for="email">Email</label>
                                 <input type="email" id="adress" name="youremail" />
 
-                                <label for="address">TP Number</label>
-                                <input type="number" id="tp" name="tpnum" />
+                                <label for="address">Tele Number</label>
+                                <input type="text" id="tp" name="tpnum" />
 
 
                                 <div class="space"></div>

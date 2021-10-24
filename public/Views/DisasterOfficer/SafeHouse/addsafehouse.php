@@ -27,7 +27,7 @@
         <!-- STATS -->
     <div class="space"></div>
         <div class="container">
-            <h1>Safe House List</h1>
+            <center><h1>Safe House List</h1></center>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
                     <a class="btn_blue Click-here">Add Safe House</a>

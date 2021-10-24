@@ -27,7 +27,7 @@
         <div class="container">
             <h1 class="text-center">Welcome DMC</h1>
             <div class="space"></div>
-            <div class="stat-row">
+            <!-- <div class="stat-row">
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Compensation Requests</div>
@@ -53,7 +53,80 @@
                     <i class='bx bx-building-house cart three'></i>
                 </div>
 
-            </div>
+            </div> -->
+
+            <section class="services">
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#ffb508">
+                            <ion-icon name="videocam-outline">
+                                <i class='bx bxs-report '></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                40
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                                Compensation Requests
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#4eb7ff">
+                            <ion-icon name="videocam-outline">
+                                <i class='bx bxs-report '></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                40
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                                Pending Report Approvals
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#fd6494">
+                            <ion-icon name="videocam-outline">
+                                <i class='bx bx-building-house '></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                140
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                                Active SafeHouses
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
+                    </div>
+                </a>
+
+            </section>
+
+
+
+
+
+
         </div>
         <div class="space"></div>
         <div class="container">

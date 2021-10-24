@@ -35,6 +35,7 @@ Route::GET("division",array("Admin@getDivision"));
 // Inventory Manager
 Route::GET("unit",array("InventoryManager@getUnit"));
 Route::GET("item",array("InventoryManager@getItem"));
+Route::GET("inventory",array("InventoryManager@getInventory"));
 Route::POST("item",array("InventoryManager@addItem"));
-
-
+Route::POST("inventory",array("InventoryManager@addInventory"));
+//Route::PUT("inventory",array("InventoryManager@updateInventory"));

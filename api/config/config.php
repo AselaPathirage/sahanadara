@@ -27,5 +27,6 @@ $errorCode = array(
                     'unhandledRequestingMetod' => 813,
                     'emailAlreadyInUse' => 814,
                     'emailNotInUse' => 815,
-                    'urlTokenExpired' => 816
+                    'urlTokenExpired' => 816,
+                    'unableToHandle' => 817
                     );

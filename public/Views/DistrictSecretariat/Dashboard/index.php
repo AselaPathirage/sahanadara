@@ -39,7 +39,7 @@
                     <i class='bx bxs-report cart two'></i>
                 </div>
             </div> -->
-
+            <div class="space"></div>
             <section class="services">
                 <a href="">
                     <div class="services__box">
@@ -64,53 +64,6 @@
                 </a>
 
             </section>
-        </div>
-
-
-        <div class="container">
-                <div class="row">
-                    <div class="col6">
-                        <div class="box row-content">
-                            <h4>Flood in Kadana</h4>
-                            <p>Affected the valleys of river Kalu </p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/IncidentView" class="btn_views">View</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Flood in Kadana</h4>
-                            <p>Affected the valleys of river Kalu </p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/IncidentView" class="btn_views">View</a>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="col6" style="overflow: auto">
-                        <div class="box row-content">
-                            <h4>Flood in Kadana</h4>
-                            <p>Affected the valleys of river Kalu </p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/IncidentView" class="btn_views">View</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Flood in Kadana</h4>
-                            <p>Affected the valleys of river Kalu </p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/IncidentView" class="btn_views">View</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
         </div>
         
     </section>

@@ -17,9 +17,9 @@
         <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/Search">
             <span class="links_name">Notice</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/InventoryManager/Report/InventoryReport">
+        <!-- <a href="/<?php echo baseUrl; ?>/InventoryManager/Report/InventoryReport">
             <span class="links_name">Reports</span>
-        </a>
+        </a> -->
     </div>
     <div class="rightcorner">
         <a href="/<?php echo baseUrl; ?>/InventoryManager/profile">

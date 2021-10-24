@@ -65,7 +65,7 @@
                         <div class="col6" style="overflow: auto">
                             <div class="box row-content" style="height:100%;min-height: 300px;">
                                 <h2>Fundraises</h1>
-                                <label for="title">title</label>
+                                <label for="title">Title</label>
                                 <input type="text" id="tuitle" name="title" />
 
                                 <label for="description">Description</label>

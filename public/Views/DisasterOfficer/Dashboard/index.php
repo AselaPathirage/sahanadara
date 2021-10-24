@@ -27,7 +27,7 @@
         <!-- STATS -->
         <div class="container">
             <center><h1 style="text-align:center;">Welcome Disaster Management Officer</h1></center>
-            <div class="stat-row">
+            <!-- <div class="stat-row">
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Incident Reports</div>
@@ -52,7 +52,76 @@
                     </div>
                     <i class='bx bxs-report cart three'></i>
                 </div>
-            </div>
+            </div> -->
+
+            <div class="space"></div>
+
+            <section class="services">
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#ffb508">
+                            <ion-icon name="videocam-outline">
+                                <i class='bx bxs-report '></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                5
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                            Incident Reports
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#4eb7ff">
+                            <ion-icon name="videocam-outline">
+                                <i class='bx bxs-report '></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                6
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                            Donation Requests Notices
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
+                    </div>
+                </a>
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#fd6494">
+                            <ion-icon name="videocam-outline">
+                                <i class='bx bx-building-house '></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                140
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                                Active SafeHouses
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
+                    </div>
+                </a>
+
+            </section>
         </div>
 
         <!-- BOXES -->

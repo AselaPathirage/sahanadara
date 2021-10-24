@@ -67,21 +67,16 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Type
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>Electric</option>
-                                    <option>Dry rations</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
-                                </select>
+                            <th>Unit
+                                        <select id="unitType" name="unitType" class="form-control" required='true'>
+                                            <option>Select Type</option>
+                                        </select>
                             </th>
-                            <th>Quantity
+                            <th>Type
                                 <select id="status-filter" class="form-control">
                                     <option>Any</option>
-                                    <option>Ascending</option>
-                                    <option>Descending </option>
+                                    <option>Incoming</option>
+                                    <option>Outgoing </option>
                                 </select>
                             </th>
                             <th>Availability
@@ -159,6 +154,7 @@
     </section>
     <script>
         var thisPage = "#Maintain";
+        getUnit();
         $(document).ready(function() {
             $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){
@@ -166,13 +162,29 @@
                 }
                 $(thisPage).addClass("active");
             });
-
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        function getUnit(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>unit",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            var select = document.getElementById("unitType");
+            for (var i = 0; i < output.length; i++){
+                var opt = document.createElement('option');
+                opt.value = output[i]['unitId'];
+                opt.innerHTML = output[i]['unitName'];
+                select.appendChild(opt);
+            }
         }
     </script>
 </body>

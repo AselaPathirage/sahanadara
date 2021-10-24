@@ -11,9 +11,9 @@
         <a href="/<?php echo baseUrl; ?>/ResponsiblePerson/SafeHouse/">
             <span class="links_name">Safe House</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/ResponsiblePerson/Report/SafeHouseReport">
+        <!-- <a href="/<?php echo baseUrl; ?>/ResponsiblePerson/Report/SafeHouseReport">
             <span class="links_name">Report</span>
-        </a>
+        </a> -->
 
     </div>
     <div class="rightcorner">

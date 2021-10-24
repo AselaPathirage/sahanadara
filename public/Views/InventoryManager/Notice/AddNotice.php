@@ -48,6 +48,9 @@
             text-align: left;
             vertical-align: middle;
     }
+    tr{
+        background-color: #fff !important;
+    }
     </style>
 </head>
 <body>

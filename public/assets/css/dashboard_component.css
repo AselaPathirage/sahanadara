@@ -253,6 +253,12 @@ a{
     width:100%;
     padding:3px;
   }
+
+  .datesInForms{
+    padding:5px;
+    box-sizing:border-box;
+  }
+
   
   /* BUTTONS */
   input[type=submit]{

@@ -1,0 +1,458 @@
+[
+  {
+    "name": "Kalutara",
+    "dsId": 3,
+    "division": [
+      {
+        "name": "Horana",
+        "dvId": "3",
+        "gnArea": [
+          {
+            "name": "632 Kandana North",
+            "gndvId": "76"
+          },
+          {
+            "name": "633A Ilimba",
+            "gndvId": "77"
+          },
+          {
+            "name": "632B Kandana South",
+            "gndvId": "78"
+          },
+          {
+            "name": "633 Werawatta",
+            "gndvId": "79"
+          },
+          {
+            "name": "633A Kananvila",
+            "gndvId": "80"
+          },
+          {
+            "name": "633B Walpita",
+            "gndvId": "81"
+          },
+          {
+            "name": "634 Mahayala East",
+            "gndvId": "82"
+          },
+          {
+            "name": "634A Mahayala West",
+            "gndvId": "83"
+          },
+          {
+            "name": "635 Madurawala East",
+            "gndvId": "84"
+          },
+          {
+            "name": "635A Madurawala West",
+            "gndvId": "85"
+          },
+          {
+            "name": "636 Kudayala",
+            "gndvId": "86"
+          },
+          {
+            "name": "637 Anguruwathota",
+            "gndvId": "87"
+          },
+          {
+            "name": "648 Keselhenawa",
+            "gndvId": "88"
+          },
+          {
+            "name": "648A Kudella",
+            "gndvId": "89"
+          },
+          {
+            "name": "648B Hallankanda",
+            "gndvId": "90"
+          },
+          {
+            "name": "650 Remuna",
+            "gndvId": "91"
+          },
+          {
+            "name": "650A Bellapitiya Eas",
+            "gndvId": "92"
+          },
+          {
+            "name": "650B Bellapitiya Wes",
+            "gndvId": "93"
+          },
+          {
+            "name": "650C Peramunagama",
+            "gndvId": "94"
+          },
+          {
+            "name": "650D Weliketella",
+            "gndvId": "95"
+          },
+          {
+            "name": "650E Elawella",
+            "gndvId": "96"
+          },
+          {
+            "name": "650F Mahena South",
+            "gndvId": "97"
+          },
+          {
+            "name": "811 Karannagoda",
+            "gndvId": "98"
+          },
+          {
+            "name": "811A Pahala Karannag",
+            "gndvId": "99"
+          },
+          {
+            "name": "811B Ihala Karannago",
+            "gndvId": "100"
+          },
+          {
+            "name": "815 Nahalla",
+            "gndvId": "101"
+          },
+          {
+            "name": "815A Katuhena",
+            "gndvId": "102"
+          },
+          {
+            "name": "815B Pahalagoda",
+            "gndvId": "103"
+          },
+          {
+            "name": "815C Ihalagoda",
+            "gndvId": "104"
+          },
+          {
+            "name": "816 Warakagoda East",
+            "gndvId": "105"
+          },
+          {
+            "name": "816A Warakagoda West",
+            "gndvId": "106"
+          },
+          {
+            "name": "816B Warakagoda Nort",
+            "gndvId": "107"
+          },
+          {
+            "name": "816C Warakagoda Sout",
+            "gndvId": "108"
+          }
+        ]
+      },
+      {
+        "name": "Ingiriya",
+        "dvId": "4",
+        "gnArea": [
+          {
+            "name": "618 Wagawatta",
+            "gndvId": "45"
+          },
+          {
+            "name": "618 A Poruwadanda Ea",
+            "gndvId": "46"
+          },
+          {
+            "name": "618 B Kekulaliya",
+            "gndvId": "47"
+          },
+          {
+            "name": "618 C Poruwadanda We",
+            "gndvId": "48"
+          },
+          {
+            "name": "619 Urugala East",
+            "gndvId": "49"
+          },
+          {
+            "name": "619 A Nambapana",
+            "gndvId": "50"
+          },
+          {
+            "name": "619 B Urugala West",
+            "gndvId": "51"
+          },
+          {
+            "name": "620 Ingiriya East",
+            "gndvId": "52"
+          },
+          {
+            "name": "620 A Ingiriya West",
+            "gndvId": "53"
+          },
+          {
+            "name": "620 B Rayigamwatta",
+            "gndvId": "54"
+          },
+          {
+            "name": "620 C Ingiriya North",
+            "gndvId": "55"
+          },
+          {
+            "name": "620 D Nimalagama",
+            "gndvId": "56"
+          },
+          {
+            "name": "620 E Aduragala",
+            "gndvId": "57"
+          },
+          {
+            "name": "620 F Dombagaskanda",
+            "gndvId": "58"
+          },
+          {
+            "name": "620 G Maha Ingiriya",
+            "gndvId": "59"
+          },
+          {
+            "name": "621 Maputugala",
+            "gndvId": "60"
+          },
+          {
+            "name": "621 A Rathmalgoda Ea",
+            "gndvId": "61"
+          },
+          {
+            "name": "621 B Rathmalgoda We",
+            "gndvId": "62"
+          },
+          {
+            "name": "622 Pelpitigoda",
+            "gndvId": "63"
+          },
+          {
+            "name": "622 Handapangoda Sou",
+            "gndvId": "64"
+          },
+          {
+            "name": "623 A Handapangoda E",
+            "gndvId": "65"
+          },
+          {
+            "name": "623 B Handapangoda W",
+            "gndvId": "66"
+          },
+          {
+            "name": "624 Batugampala",
+            "gndvId": "67"
+          },
+          {
+            "name": "624 A Kekuladola",
+            "gndvId": "68"
+          },
+          {
+            "name": "625 Arakawila",
+            "gndvId": "69"
+          },
+          {
+            "name": "625 A Menerigama",
+            "gndvId": "70"
+          },
+          {
+            "name": "626 Kadanapitiya",
+            "gndvId": "71"
+          },
+          {
+            "name": "626 A Kottiyawatta",
+            "gndvId": "72"
+          },
+          {
+            "name": "627 Kurana South",
+            "gndvId": "73"
+          },
+          {
+            "name": "627 A Kotigala",
+            "gndvId": "74"
+          },
+          {
+            "name": "627 B Kurana North",
+            "gndvId": "75"
+          }
+        ]
+      },
+      {
+        "name": "Dodangoda",
+        "dvId": "10",
+        "gnArea": [
+          {
+            "name": " 719  Koholana South",
+            "gndvId": "1"
+          },
+          {
+            "name": "719 A Adhikarigoda",
+            "gndvId": "2"
+          },
+          {
+            "name": "719 B Koholana North",
+            "gndvId": "3"
+          },
+          {
+            "name": "720 Ukwatta",
+            "gndvId": "4"
+          },
+          {
+            "name": "721 Bolossagama",
+            "gndvId": "5"
+          },
+          {
+            "name": "722 Serupita West",
+            "gndvId": "6"
+          },
+          {
+            "name": "722 A Serupita East",
+            "gndvId": "7"
+          },
+          {
+            "name": "724 Gamagoda East",
+            "gndvId": "8"
+          },
+          {
+            "name": "724 A Gamagoda West",
+            "gndvId": "9"
+          },
+          {
+            "name": "726 A Remunagoda Sou",
+            "gndvId": "10"
+          },
+          {
+            "name": "726 A Remunagoda Nor",
+            "gndvId": "11"
+          },
+          {
+            "name": "728 Bombuwala South ",
+            "gndvId": "12"
+          },
+          {
+            "name": "728 A Bombuwala Nort",
+            "gndvId": "13"
+          },
+          {
+            "name": "728 B Bombuwala Nort",
+            "gndvId": "14"
+          },
+          {
+            "name": "728 C Bombuwala Nort",
+            "gndvId": "15"
+          },
+          {
+            "name": "728 D Bombuwala Sout",
+            "gndvId": "16"
+          },
+          {
+            "name": "799 Puhabugoda East",
+            "gndvId": "17"
+          },
+          {
+            "name": "799 A Eladuwa",
+            "gndvId": "18"
+          },
+          {
+            "name": "799 B Galpottawila",
+            "gndvId": "19"
+          },
+          {
+            "name": "799 C Puhambugoda We",
+            "gndvId": "20"
+          },
+          {
+            "name": "800 Dodangoda West",
+            "gndvId": "21"
+          },
+          {
+            "name": "800 A Dodangoda East",
+            "gndvId": "22"
+          },
+          {
+            "name": "800 B Sapugahawatta",
+            "gndvId": "23"
+          },
+          {
+            "name": "800 C Dodangoda West",
+            "gndvId": "24"
+          },
+          {
+            "name": "800 D Dodangoda West",
+            "gndvId": "25"
+          },
+          {
+            "name": "800 E Dodangoda West",
+            "gndvId": "26"
+          },
+          {
+            "name": "800 F Dodangoda West",
+            "gndvId": "27"
+          },
+          {
+            "name": "800 G Dodangoda East",
+            "gndvId": "28"
+          },
+          {
+            "name": "800 H Dodangoda East",
+            "gndvId": "29"
+          },
+          {
+            "name": "800 I Dodangoda East",
+            "gndvId": "30"
+          },
+          {
+            "name": "801 Nehinna",
+            "gndvId": "31"
+          },
+          {
+            "name": "801 A Wadugama",
+            "gndvId": "32"
+          },
+          {
+            "name": "807 Nebada",
+            "gndvId": "33"
+          },
+          {
+            "name": "807 A Upper Nebada",
+            "gndvId": "34"
+          },
+          {
+            "name": "807 B Lower Nebada",
+            "gndvId": "35"
+          },
+          {
+            "name": "807 C Nebada West",
+            "gndvId": "36"
+          },
+          {
+            "name": "807 D Wellatha",
+            "gndvId": "37"
+          },
+          {
+            "name": "807 E Wattahena",
+            "gndvId": "38"
+          },
+          {
+            "name": "808 Thudugala West",
+            "gndvId": "39"
+          },
+          {
+            "name": "808 A Thudugala East",
+            "gndvId": "40"
+          },
+          {
+            "name": "809 Thebuwana East",
+            "gndvId": "41"
+          },
+          {
+            "name": "809 Thebuwana West",
+            "gndvId": "42"
+          },
+          {
+            "name": "810 Pelapitiyagoda",
+            "gndvId": "43"
+          },
+          {
+            "name": "810 A Pelapitiyagoda",
+            "gndvId": "44"
+          }
+        ]
+      }
+    ]
+  }
+]

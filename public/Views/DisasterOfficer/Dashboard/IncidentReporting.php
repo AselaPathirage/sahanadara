@@ -26,29 +26,40 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
-         <!-- TABLE -->
+            <br>
+            <div class="container" style="text-align: right;">
+                <div style="display:block;">
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-box">Create Final Incident</a>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-box">Add Expense Note</a>
+                </div>
+            </div>
+ 
+        <!-- TABLE -->
         <div class="container">
             <div class="">
 
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Approved
+                            <th>Active
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Approved</option>
-                                    <option>Not Approved</option>
+                                    <option>None</option>
+                                    <option>John</option>
+                                    <option>Rob</option>
+                                    <option>Larry</option>
+                                    <option>Donald</option>
+                                    <option>Roger</option>
                                 </select>
                             </th>
                             <th>Type
                                 <select id="status-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Initial</option>
-                                    <option>Relief</option>
-                                    <option>Final</option>
+                                    <option>Any</option>
+                                    <option>Not Started</option>
+                                    <option>In Progress</option>
+                                    <option>Completed</option>
                                 </select>
                             </th>
-                            
+            
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
@@ -61,49 +72,53 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th>Date/Time</th>
-                                <th>Descreption</th>
+                                <th>Date</th>
+                                <th>Incident Description</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
+                                <th>Status</th>
                             </tr>
                         </thead>
 
                         <tbody>
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                            
-                                <td>01/24/2021 1:50</td>
+                                
+                                <td>09/24/2015</td>
                                 <td>Flood</td>
                                 <td>Initial</td>
                                 <td>Approved</td>
                                 <td>Approved</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentRep" class="btn-box">View</a></td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                                
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021 12:20</td>
+                                <td>02/24/2015</td>
                                 <td>Flood</td>
-                                <td>Final</td>
+                                <td>Relief</td>
                                 <td>Approved</td>
-                                <td>Pending</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentRep" class="btn-box">View</a></td>
+                                <td>Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
                             </tr>
 
                             
+                            
                         </tbody>
                     </table>
-
-
-                
+                </div>
             </div>
-        </div>
         </div>
     </section>
     <script>
         var thisPage = "#IncidentReporting";
         $(document).ready(function() {
-            $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
+            $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

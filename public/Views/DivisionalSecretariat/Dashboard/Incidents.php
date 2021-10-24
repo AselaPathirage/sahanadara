@@ -63,7 +63,7 @@
                         <thead>
                             <tr>
                                 <th>Date/Time</th>
-                                <th>Descreption</th>
+                                <th>Description</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
                                 <th>DMC Note</th>

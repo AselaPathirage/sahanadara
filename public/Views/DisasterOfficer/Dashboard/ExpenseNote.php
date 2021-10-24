@@ -64,7 +64,7 @@
 
     </section>
     <script>
-        var thisPage = "#Incidents";
+        var thisPage = "#IncidentReporting";
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){

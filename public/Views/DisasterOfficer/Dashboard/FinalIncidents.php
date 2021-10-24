@@ -102,14 +102,6 @@
             </div>
             <div class="row">
                 <div class="col3">
-                    <label for="fname">Event</label>
-                </div>
-                <div class="col9">
-                    <input type="text" id="NIC" name="NIC" placeholder="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col3">
                     <label for="email">Location of Incident</label>
                 </div>
                 <div class="col9">
@@ -130,22 +122,7 @@
                 </div>
                
             </div>
-            <div class="row">
-                <div class="col3">
-                    <label for="fname">Families</label>
-                </div>
-                <div class="col9">
-                    <input type="text" id="NIC" name="NIC" placeholder="0">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col3">
-                    <label for="fname">Families</label>
-                </div>
-                <div class="col9">
-                    <input type="text" id="NIC" name="NIC" placeholder="0">
-                </div>
-            </div>
+            
             <div class="row">
                 <div class="col3">
                     <label for="fname">Families</label>
@@ -212,7 +189,7 @@
 
     </section>
     <script>
-        var thisPage = "#Incidents";
+        var thisPage = "#IncidentReporting";
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){

@@ -49,7 +49,6 @@ class Admin extends Employee{
                         $sql ="UPDATE divisionaloffice SET divisionalSecretariatID = $userId WHERE dvId = $dvId";
                         break;
                 }
-                echo $sql;
                 $this->connection->query($sql);
                 $body ="Please use these creadentials to login Sahanadara. You need to change your password after the login.<ul><li>User Name: ".$data['NIC']." </li><li>Password: $password </li></ul>";
                 $mail->emailBody("About your account","Dear ".$data['firstname'],$body);

@@ -9,12 +9,13 @@ class GramaNiladari extends ResponsiblePerson
     public function addResident(array $data)
     {
         global $errorCode;
+        $uid = $data['userId'];
         $name = $data['name'];
         $nic = $data['nic'];
         $phone = $data['phone'];
         $address = $data['address'];
-        $gnid = $data['gnid'];
-        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $gnid;
+        
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $sql = "INSERT INTO resident (residentName, residentTelNo,residentAddress,gndvId,residentNIC ) VALUES ('$name', '$phone','$address'," . $r['gndvId'] . ", '$nic');";
@@ -23,8 +24,8 @@ class GramaNiladari extends ResponsiblePerson
     }
     public function getResident(array $data)
     {
-        $gnid = $data['gnid'];
-        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $gnid;
+        $uid = $data['userId'];
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $sql = "SELECT r.* FROM resident r WHERE r.gndvId =" . $r['gndvId'];

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_dmc.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -107,7 +107,7 @@
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
                             <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                140
+                                10
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 150px;">
@@ -125,7 +125,7 @@
         </div>
         <div class="space"></div>
         <!-- BOXES -->
-        <div class="container">
+        <!-- <div class="container">
                 <div class="row">
                     <div class="col6">
                         <div class="box row-content">
@@ -138,9 +138,9 @@
                             </div>
                         </div>
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Dodangoda</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
-
+                            <br> 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                             <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
 
@@ -151,7 +151,7 @@
                     </div>
                     <div class="col6" style="overflow: auto">
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Agalawatta</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
@@ -160,24 +160,38 @@
                             </div>
                         </div>
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
-                            <p>A flood situation in low line areas of river Kalu</p>
-
+                            <h4>Landslide in Yakupitiya</h4>
+                            <p>The area had received over 250mm cumulative rainfall within 48 hours by the time.</p>
+                            <br> 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
                                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
+            <div class="space"></div>
+        <div class="container text-center">
+            <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
+                <button type="button" class="close-alert">×</button>
+                <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                    of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
+                </p>
+            </div>
+            <div class="row-content alert-div" style="margin: 10px auto;">
+                <button type="button" class="close-alert">×</button>
+                <p>High possibility of the current minor flood situation in low line areas of Kalu River Valley situated in Horana, Agalawatta, Ingiriya, Palinda Nuwara, Bulathsinhala, Dodangoda, Millaniya, Madurawala and Kalutara D/S Divisions further worsening. DMC
+            </div>
 
+
+        </div>
     </section>
     <script>
         var thisPage = "#Dashboard";
         $(document).ready(function() {
-            $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
+            $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

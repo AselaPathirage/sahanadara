@@ -73,7 +73,7 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
-                                <th>Incident Descreption</th>
+                                <th>Incident Description</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
@@ -118,7 +118,7 @@
     <script>
         var thisPage = "#IncidentReporting";
         $(document).ready(function() {
-            $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
+            $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

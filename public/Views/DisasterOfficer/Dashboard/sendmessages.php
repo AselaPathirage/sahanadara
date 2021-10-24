@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -19,48 +19,39 @@
      ?>
     <section class="dashboard-section">
         <?php 
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php');
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-        <div class="container col8">
-    <div class="box">
-        <div class="box1">
-            <h1 class="text-center">Donation Requests</h1>
-            
-            <div class="row">
-                <div class="col3">
-                    <label for="email">Title</label>
-                </div>
-                <div class="col9">
-                    <input type="text" id="email" name="email" placeholder="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col3">
-                    <label for="address">Content</label>
-                </div>
-                <div class="col9">
-                    <textarea type="text" id="address" name="address" placeholder=""></textarea>
-                </div>
-            </div>
-          
+        <div class="space" style="margin-bottom: 30px;"></div>
+        <div class="container">
+            <div class="row text-center">
+                <div class="col6 box" style="margin:0 auto;">
+                    <form action="#" method="post">
+                        <h1>New Message</h1>
 
-            <div class="row " style="text-align:right;justify-content: right;">
-                <input type="submit" style="background-color: red;" value="Cancel">
-                <input type="submit" style="background-color: darkblue;" value="Create">
+                        <div class="row-content">
+
+                            <label for="address">Message</label>
+                            <textarea id="address" name="youraddress"></textarea>
+
+                            
+                            <div class="row" style="justify-content: center;">
+
+                                <input type="submit" value="Send" class="btn-alerts" />
+                                <input type="reset" value="Cancel" class="btn-alerts" />
+                            </div>
+                        </div>
+                    </form>
+                </div>
             </div>
-            </form>
         </div>
-    </div>
-
-
 
     </section>
     <script>
-        var thisPage = "#Donation";
+        var thisPage = "#Messages";
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
@@ -77,5 +68,6 @@
             sidebar.classList.toggle("active");
         }
     </script>
+    <script src="/<?php echo baseUrl; ?>/public/assets/js/table.js"></script>
 </body>
 </html>

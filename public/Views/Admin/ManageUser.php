@@ -31,12 +31,8 @@
                 <thead>
                     <tr class="filters">
                         <th>User Role
-                            <select id="assigned-user-filter" class="form-control">
-                                <option>All</option>
-                                <option>Grama Niladari</option>
-                                <option>District Secretariat</option>
-                                <option></option>
-
+                            <select id="userRole" class="form-control">
+                                <option value="All">All</option>
                             </select>
                         </th>
                         <th>District
@@ -65,47 +61,15 @@
                             </select>
                         </th>
                         <th>Search
-                            <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                            <input type="text" id="search" name="search" placeholder="Search" title="Type " class="form-control">
                         </th>
-                    </tr>
+                    </tr> 
                 </thead>
             </table>
 
             <div class="container">
                 <div class="row">
-                    <div class="col5">
-                        <div class="box row-content">
-                            <h4>Danushka Perera</h4>
-                            <p>Divisional Secretariat</p>
-                            <p>Gampaha</p>
-                            <p>aperera@gmail.com</p>
-                            <p>0784444444</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" style="background-color:yellow;" class="btn_manage">Manage</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Danushka Perera</h4>
-                            <p>Divisional Secretariat</p>
-                            <p>Gampaha</p>
-                            <p>aperera@gmail.com</p>
-                            <p>0784444444</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" style="background-color:yellow;" class="btn_manage">Manage</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Danushka Perera</h4>
-                            <p>Divisional Secretariat</p>
-                            <p>Gampaha</p>
-                            <p>aperera@gmail.com</p>
-                            <p>0784444444</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" style="background-color:yellow;" class="btn_manage">Manage</a>
-                            </div>
-                        </div>
-
-
+                    <div class="col5" id="users" name = "users">
                     </div>
                     <div class="col7" style="overflow: auto">
                         <div class="box row-content" style="min-height: 300px;">
@@ -163,11 +127,8 @@
                                     <label for="user role">User role</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="user role" name="user role">
+                                    <select id="user_role" name="user role">
                                         <option value="null">Select</option>
-                                        <option value="Grama Niladhari">Grama Niladhari</option>
-                                        <option value="Divisional secretariat">Divisional Secretariat</option>
-                                        <option value="District secretariat">District secretariat</option>
                                     </select>
                                 </div>
                             </div>
@@ -231,6 +192,8 @@
     <script>
         var thisPage = "#manage";
         $(document).ready(function() {
+            getRoles();
+            getUsers();
             $("#stats,#updates").each(function() {
                 if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
@@ -244,6 +207,93 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        function getRoles(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>role",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            var select = document.getElementById("userRole");
+            var select2 = document.getElementById("user_role");
+            for (var i = 0; i < output.length; i++){
+                var opt = document.createElement('option');
+                opt.value = output[i]['roleName'];
+                opt.innerHTML = output[i]['roleName'];
+                var opt2 = document.createElement('option');
+                opt2.value = output[i]['roleId'];
+                opt2.innerHTML = output[i]['roleName'];
+                select.appendChild(opt);
+                select2.appendChild(opt2);
+            }
+        }
+        function getUsers(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>user",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            var parent = document.getElementById('users');
+            for (var i = 0; i < output.length; i++){
+                let newChild = "<div class='box row-content userBox' data-role='"+output[i]['roleName']+"' data-empId='"+output[i]['empId']+"' data-roleId='"+output[i]['roleId']+"'><h4>"+output[i]['empName']+"</h4><p>"+output[i]['roleName']+"</p><p>"+output[i]['empAddress']+"</p><p>"+output[i]['empEmail']+"</p><p>"+output[i]['empTele']+"</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a href='/<?php echo baseUrl; ?>' style='background-color:yellow;' class='btn_manage'>Manage</a></div></div>";
+                parent.insertAdjacentHTML('beforeend', newChild);
+            }
+        }
+        var filters = {
+                role: null
+            };
+
+        function updateFilters() {
+            $('.userBox').hide().filter(function () {
+                var
+                    self = $(this),
+                    result = true; // not guilty until proven guilty
+
+                Object.keys(filters).forEach(function (filter) {
+                    if (filters[filter] && (filters[filter] != 'None') && (filters[filter] != 'All')) {
+                        result = result && filters[filter] === self.data(filter);
+                    }
+                });
+
+                return result;
+            }).show();
+        }
+
+        function changeFilter(filterName) {
+            filters[filterName] = this.value;
+            updateFilters();
+        }
+        $('#userRole').on('change', function () {
+            changeFilter.call(this, 'role');
+        });
+        var input = document.getElementById("search");
+        input.addEventListener("input", myFunction);
+
+        function myFunction(e) {
+        var filter = e.target.value.toUpperCase();
+
+        var list = document.getElementById("users");
+        var divs = list.getElementsByTagName("div");
+        for (var i = 0; i < divs.length; i++) {
+            var a = divs[i].getElementsByTagName("H4")[0];
+
+            if (a) {
+            if (a.innerHTML.toUpperCase().indexOf(filter) > -1) {
+                divs[i].style.display = "";
+            } else {
+                divs[i].style.display = "none";
+            }
+            }
+        }
+
         }
     </script>
 </body>

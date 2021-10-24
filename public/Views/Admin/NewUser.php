@@ -97,10 +97,6 @@
                         </div>
                         <div class="col9">
                             <select id="District" name="District">
-                                <option value="null">Select</option>
-                                <option value="Gampaha">Gampaha</option>
-                                <option value="Colombo">Colombo</option>
-                                <option value="Kaluthara">Kaluthara</option>
                             </select>
                         </div>
                     </div>
@@ -109,11 +105,8 @@
                             <label for="user role">Div sec</label>
                         </div>
                         <div class="col9">
-                            <select id="District" name="District">
-                                <option value="null">Select</option>
-                                <option value="Gampaha">Gampaha</option>
-                                <option value="Colombo">Colombo</option>
-                                <option value="Kaluthara">Kaluthara</option>
+                            <select id="Division" name="Division">
+                                <option value="null">Select Division</option>   
                             </select>
                         </div>
                     </div>
@@ -122,11 +115,8 @@
                             <label for="user role">GN div</label>
                         </div>
                         <div class="col9">
-                            <select id="District" name="District">
-                                <option value="null">Select</option>
-                                <option value="Gampaha">Gampaha</option>
-                                <option value="Colombo">Colombo</option>
-                                <option value="Kaluthara">Kaluthara</option>
+                            <select id="Gndivision" name="Gndivision">
+                                <option value="null">Select GN Division</option>
                             </select>
                         </div>
                     </div>
@@ -155,9 +145,48 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            var distOptions = "<option value=''>Select District</option>";
+            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    distOptions += "<option value='"+district.dsId+"'>"+district.name+"</option>";
+                });
+                 $('#District').html(distOptions);
+            })
         });
-
+        $('#District').change(function(){
+            var val = $(this).val();
+            var divOptions = "<option value=''>Select Division</option>";
+            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    if(district.dsId == val){
+                        $.each(district.division,function(j,division){
+                           divOptions += "<option value='"+division.dvId+"'>"+division.name+"</option>";  
+                        })
+                    }
+                });
+                $('#Division').html(divOptions);
+            })
+        })
+        $('#Division').change(function(){
+            var div = $(this).val();
+            var dist = $('#District').val();
+            var gnOptions = "<option value=''>Select GNDivision</option>";
+            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    if(district.dsId == dist){
+                        $.each(district.division,function(j,division){
+                           if(division.dvId == div){
+                               $.each(division.gnArea, function(k,gnArea){
+                                gnOptions += "<option value='"+gnArea.gndvId+"'>"+gnArea.name+"</option>"; 
+                               })
+                           }
+                        })
+                    }
+                });
+                $('#Gndivision').html(gnOptions);
+            })
+        })
+        
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {

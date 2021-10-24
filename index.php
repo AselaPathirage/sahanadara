@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set("Asia/Colombo");
 
 // if ($_SERVER['REQUEST_METHOD'] === 'PUT' || $_SERVER['REQUEST_METHOD'] === 'DELETE' || $_SERVER['REQUEST_METHOD'] === 'POST') {
 //     if (isset($_GET['formControl'])) {

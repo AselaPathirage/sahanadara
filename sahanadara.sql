@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 23, 2021 at 01:34 PM
+-- Generation Time: Oct 24, 2021 at 01:02 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -110,6 +110,17 @@ INSERT INTO `district` (`dsId`, `dsName`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `districtofficecontact`
+--
+
+CREATE TABLE `districtofficecontact` (
+  `districtofficeTelno` char(10) NOT NULL,
+  `districtSOfficeID` int(3) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `districtsecretariat`
 --
 
@@ -128,6 +139,28 @@ CREATE TABLE `districtsecretariat` (
 
 INSERT INTO `districtsecretariat` (`districtSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
 (1, 'District Officer', 'District Office,Kalutara', 'district@gmail.com', 'n', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `districtsoffice`
+--
+
+CREATE TABLE `districtsoffice` (
+  `districtSOfficeID` int(3) NOT NULL,
+  `districtSOfficeName` varchar(100) NOT NULL,
+  `districtSOfficeAddress` varchar(50) NOT NULL,
+  `dsId` int(2) DEFAULT NULL,
+  `districtSecretariat` int(6) DEFAULT NULL,
+  `dmc` int(6) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `districtsoffice`
+--
+
+INSERT INTO `districtsoffice` (`districtSOfficeID`, `districtSOfficeName`, `districtSOfficeAddress`, `dsId`, `districtSecretariat`, `dmc`) VALUES
+(3, 'District Office - Kalutara', 'Good Shed Rd, Kalutara', 3, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -173,7 +206,7 @@ CREATE TABLE `divisionaloffice` (
   `divisionalSofficeAddress` varchar(50) NOT NULL,
   `dvId` int(3) DEFAULT NULL,
   `divisionalSecretariatID` int(6) DEFAULT NULL,
-  `disasterManager` int(6) NOT NULL
+  `disasterManager` int(6) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -181,7 +214,20 @@ CREATE TABLE `divisionaloffice` (
 --
 
 INSERT INTO `divisionaloffice` (`divisionalOfficeId`, `divisionalSofficeName`, `divisionalSofficeAddress`, `dvId`, `divisionalSecretariatID`, `disasterManager`) VALUES
-(1, 'Divisional Secretariat Office Dodangoda', 'Kalutara-Matugama Rd, Thudugala 12020', 10, 1, 1);
+(1, 'Divisional Secretariat Office Dodangoda', 'Kalutara-Matugama Rd, Thudugala 12020', 10, 1, 1),
+(3, 'Divisional Office Agalawatta', 'Divisional Office, Agalawatta', 12, NULL, NULL),
+(4, 'Divisional Office Bandaragama', 'Divisional Office, Bandaragama', 2, NULL, NULL),
+(5, 'Divisional Office Beruwala', 'Divisional Office, Beruwala', 9, NULL, NULL),
+(6, 'Divisional Office Bulathsinhala', 'Divisional Office, Bulathsinhala', 5, NULL, NULL),
+(7, 'Divisional Office Horana', 'Divisional Office, Horana', 3, NULL, NULL),
+(8, 'Divisional Office Ingiriya', 'Divisional Office, Ingiriya', 4, NULL, NULL),
+(9, 'Divisional Office Kalutara', 'Divisional Office, Kalutara', 8, NULL, NULL),
+(10, 'Divisional Office Madurawala', 'Divisional Office, Madurawala', 6, NULL, NULL),
+(11, 'Divisional Office Mathugama', 'Divisional Office, Mathugama', 11, NULL, NULL),
+(12, 'Divisional Office Millaniya', 'Divisional Office, Millaniya', 7, NULL, NULL),
+(13, 'Divisional Office Palindanuwara', 'Divisional Office, Palindanuwara', 13, NULL, NULL),
+(14, 'Divisional Office Panadura', 'Divisional Office, Panadura', 1, NULL, NULL),
+(15, 'Divisional Office Walallavita', 'Divisional Office, Walallavita', 14, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -474,7 +520,9 @@ INSERT INTO `item` (`itemId`, `itemName`, `unitType`) VALUES
 (8, 'Mini generator', 4),
 (9, 'Soya', 1),
 (10, 'Water Bowser', 4),
-(16, 'test', 1);
+(20, 'test 3', 3),
+(21, 'test 1', 3),
+(22, 'test 2', 1);
 
 -- --------------------------------------------------------
 
@@ -495,8 +543,8 @@ CREATE TABLE `login` (
 --
 
 INSERT INTO `login` (`empId`, `nid`, `empPassword`, `keyAuth`, `roleId`) VALUES
-(1, '542707836f5f6f33c09557eedaabb007', 'ef6402771dda8b4d756ff0a5d52cd2a8', '25f1jlpbdi', 1),
-(1, '732117f1eb812a658ebc83a24ef628c6', '5d93ceb70e2bf5daa84ec3d0cd2c731a', 'bc0a8rt573', 2),
+(1, '542707836f5f6f33c09557eedaabb007', 'ef6402771dda8b4d756ff0a5d52cd2a8', 'ASpAcHWhgF', 1),
+(1, '732117f1eb812a658ebc83a24ef628c6', '5d93ceb70e2bf5daa84ec3d0cd2c731a', 'qErJ9ERAbE', 2),
 (1, '2819743b0c0935037d2bc9cf1c68f217', 'd32934b31349d77e70957e057b1bcd28', 'fjktb7i18h', 3),
 (1, 'f1db2109cd14c5285f2b125e441e60fb', 'd32934b31349d77e70957e057b1bcd28', '5qh4pf1ick', 4),
 (1, '627e959497b80e7fa95d10194f813ba5', '47982c18f4861b2edf96bfe9f73f12bf', 'o48gatdqbk', 5),
@@ -520,6 +568,14 @@ CREATE TABLE `resetpass` (
   `active` char(1) DEFAULT 'a'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `resetpass`
+--
+
+INSERT INTO `resetpass` (`recordId`, `empId`, `roleId`, `createdTime`, `valueIdentity`, `active`) VALUES
+(1, 1, 2, '2021-10-23 20:49:35', 'aEfmS6GRnkH4Hdio0Gaefl9cWvfE1h5EgW7pqE8AjEFERASRSt', 'e'),
+(2, 1, 2, '2021-10-23 21:01:27', 'fEH9pfAHcWE1AggaQiqmbkatLG3nsh8SRv7EhRF2rddjGo0WeE', 'e');
+
 -- --------------------------------------------------------
 
 --
@@ -531,7 +587,8 @@ CREATE TABLE `resident` (
   `residentName` varchar(45) NOT NULL,
   `residentTelNo` char(10) DEFAULT NULL,
   `residentAddress` varchar(50) DEFAULT NULL,
-  `gndvId` int(5) DEFAULT NULL
+  `gndvId` int(5) DEFAULT NULL,
+  `residentNIC` char(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -666,11 +723,27 @@ ALTER TABLE `district`
   ADD UNIQUE KEY `dsName` (`dsName`);
 
 --
+-- Indexes for table `districtofficecontact`
+--
+ALTER TABLE `districtofficecontact`
+  ADD PRIMARY KEY (`districtofficeTelno`),
+  ADD KEY `districtSOfficeID` (`districtSOfficeID`);
+
+--
 -- Indexes for table `districtsecretariat`
 --
 ALTER TABLE `districtsecretariat`
   ADD PRIMARY KEY (`districtSecretariatID`),
   ADD UNIQUE KEY `empEmail` (`empEmail`);
+
+--
+-- Indexes for table `districtsoffice`
+--
+ALTER TABLE `districtsoffice`
+  ADD PRIMARY KEY (`districtSOfficeID`),
+  ADD KEY `districtSecretariat` (`districtSecretariat`),
+  ADD KEY `dmc` (`dmc`),
+  ADD KEY `dsId` (`dsId`);
 
 --
 -- Indexes for table `division`
@@ -839,6 +912,12 @@ ALTER TABLE `districtsecretariat`
   MODIFY `districtSecretariatID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `districtsoffice`
+--
+ALTER TABLE `districtsoffice`
+  MODIFY `districtSOfficeID` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `division`
 --
 ALTER TABLE `division`
@@ -848,7 +927,7 @@ ALTER TABLE `division`
 -- AUTO_INCREMENT for table `divisionaloffice`
 --
 ALTER TABLE `divisionaloffice`
-  MODIFY `divisionalOfficeId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `divisionalOfficeId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `divisionalsecretariat`
@@ -896,7 +975,13 @@ ALTER TABLE `inventorymgtofficer`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+
+--
+-- AUTO_INCREMENT for table `resetpass`
+--
+ALTER TABLE `resetpass`
+  MODIFY `recordId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `resident`
@@ -931,6 +1016,20 @@ ALTER TABLE `unit`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `districtofficecontact`
+--
+ALTER TABLE `districtofficecontact`
+  ADD CONSTRAINT `districtofficecontact_ibfk_1` FOREIGN KEY (`districtSOfficeID`) REFERENCES `districtsoffice` (`districtSOfficeID`);
+
+--
+-- Constraints for table `districtsoffice`
+--
+ALTER TABLE `districtsoffice`
+  ADD CONSTRAINT `districtsoffice_ibfk_1` FOREIGN KEY (`districtSecretariat`) REFERENCES `districtsecretariat` (`districtSecretariatID`),
+  ADD CONSTRAINT `districtsoffice_ibfk_2` FOREIGN KEY (`dmc`) REFERENCES `dmc` (`dmcID`),
+  ADD CONSTRAINT `districtsoffice_ibfk_3` FOREIGN KEY (`dsId`) REFERENCES `district` (`dsId`);
 
 --
 -- Constraints for table `division`

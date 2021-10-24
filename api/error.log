@@ -1,7 +1,0 @@
-[23-Oct-2021 20:05:07 Europe/Berlin] PHP Fatal error:  Uncaught ArgumentCountError: mysqli_result::fetch_assoc() expects exactly 0 arguments, 1 given in F:\xampp\htdocs\sahanadara\api\model\Employee.php:205
-Stack trace:
-#0 F:\xampp\htdocs\sahanadara\api\model\Employee.php(205): mysqli_result->fetch_assoc('qwer')
-#1 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): Employee->updatePassword(Array)
-#2 F:\xampp\htdocs\sahanadara\api\index.php(28): Core->__construct(Object(mysqli))
-#3 {main}
-  thrown in F:\xampp\htdocs\sahanadara\api\model\Employee.php on line 205

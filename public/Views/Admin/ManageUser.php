@@ -36,29 +36,18 @@
                             </select>
                         </th>
                         <th>District
-                            <select id="assigned-user-filter" class="form-control">
-                                <option>All</option>
-                                <option>Kalutara</option>
-                                <option>Gampaha</option>
-                                <option>Colombo</option>
-
-                            </select>
+                        <select id="District" name="District">
+                                    </select>
                         </th>
                         <th>Div Sec Office
-                            <select id="status-filter" class="form-control">
-                                <option>All</option>
-                                <option>Madurawala</option>
-                                <option>Horana</option>
-                                <option>Millaniya</option>
-                            </select>
+                        <select id="Division" name="Division">
+                                        <option value="null">Select Division</option>   
+                                    </select>
                         </th>
                         <th>GN Division
-                            <select id="status-filter" class="form-control">
-                                <option>All</option>
-                                <option>Madurawala</option>
-                                <option>Horana</option>
-                                <option>Millaniya</option>
-                            </select>
+                        <select id="Gndivision" name="Gndivision">
+                                        <option value="null">Select GN Division</option>
+                                    </select>
                         </th>
                         <th>Search
                             <input type="text" id="search" name="search" placeholder="Search" title="Type " class="form-control">
@@ -137,11 +126,7 @@
                                     <label for="user role">District</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Select</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
+                                <select id="District2" name="District2">
                                     </select>
                                 </div>
                             </div>
@@ -150,11 +135,8 @@
                                     <label for="user role">Div sec</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Select</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
+                                <select id="Division2" name="Division2">
+                                        <option value="null">Select Division</option>   
                                     </select>
                                 </div>
                             </div>
@@ -163,11 +145,8 @@
                                     <label for="user role">GN div</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Select</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
+                                <select id="Gndivision2" name="Gndivision2">
+                                        <option value="null">Select GN Division</option>
                                     </select>
                                 </div>
                             </div>
@@ -200,13 +179,27 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            var distOptions = "<option value='All'>Select District</option>";
+            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    distOptions += "<option value='"+district.dsId+"'>"+district.name+"</option>";
+                });
+                 $('#District').html(distOptions);
+            })
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        function isNumber(e) {
+            e = (e) ? e : window.event;
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
         }
         function getRoles(){
             output = $.parseJSON($.ajax({
@@ -243,12 +236,31 @@
             console.log(output);
             var parent = document.getElementById('users');
             for (var i = 0; i < output.length; i++){
-                let newChild = "<div class='box row-content userBox' data-role='"+output[i]['roleName']+"' data-empId='"+output[i]['empId']+"' data-roleId='"+output[i]['roleId']+"'><h4>"+output[i]['empName']+"</h4><p>"+output[i]['roleName']+"</p><p>"+output[i]['empAddress']+"</p><p>"+output[i]['empEmail']+"</p><p>"+output[i]['empTele']+"</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a href='/<?php echo baseUrl; ?>' style='background-color:yellow;' class='btn_manage'>Manage</a></div></div>";
+                var district,division,gnDiv;
+                district = output[i]['dsId'];
+                division = output[i]['dvId'];
+                gnDiv = output[i]['gndvId'];
+                if(!district){
+                    district = "0";
+                }
+                if(!division){
+                    division = "0";
+                }
+                if(!gnDiv){
+                    gnDiv = "0";
+                }
+                // console.log(district);
+                // console.log(division);
+                // console.log(gnDiv);
+                let newChild = "<div class='box row-content userBox' data-role='"+output[i]['roleName']+"' data-empId='"+output[i]['empId']+"' data-roleId='"+output[i]['roleId']+"' data-district='"+district.toString()+"' data-division='"+division.toString()+"' data-gnDivision='"+gnDiv.toString()+"'><h4>"+output[i]['empName']+"</h4><p>"+output[i]['roleName']+"</p><p>"+output[i]['empAddress']+"</p><p>"+output[i]['empEmail']+"</p><p>"+output[i]['empTele']+"</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a href='/<?php echo baseUrl; ?>' style='background-color:yellow;' class='btn_manage'>Manage</a></div></div>";
                 parent.insertAdjacentHTML('beforeend', newChild);
             }
         }
         var filters = {
-                role: null
+                role: null,
+                district: null,
+                division: null,
+                gnDivision: null
             };
 
         function updateFilters() {
@@ -259,16 +271,28 @@
 
                 Object.keys(filters).forEach(function (filter) {
                     if (filters[filter] && (filters[filter] != 'None') && (filters[filter] != 'All')) {
-                        result = result && filters[filter] === self.data(filter);
+                        result = result && filters[filter] == self.data(filter);
                     }
                 });
 
                 return result;
             }).show();
         }
-
+        $('#District').on('change', function () {
+            console.log(filters);
+            changeFilter.call(this, 'district');
+        });
+        $('#Division').on('change', function () {
+            console.log(filters);
+            changeFilter.call(this, 'division');
+        });
+        $('#Gndivision').on('change', function () {
+            console.log(filters);
+            changeFilter.call(this, 'gnDivision');
+        });
         function changeFilter(filterName) {
             filters[filterName] = this.value;
+            console.log(this.value);
             updateFilters();
         }
         $('#userRole').on('change', function () {
@@ -295,6 +319,39 @@
         }
 
         }
+        $('#District').change(function(){
+            var val = $(this).val();
+            var divOptions = "<option value='All'>Select Division</option>";
+            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    if(district.dsId == val){
+                        $.each(district.division,function(j,division){
+                           divOptions += "<option value='"+division.dvId+"'>"+division.name+"</option>";  
+                        })
+                    }
+                });
+                $('#Division').html(divOptions);
+            })
+        })
+        $('#Division').change(function(){
+            var div = $(this).val();
+            var dist = $('#District').val();
+            var gnOptions = "<option value='All'>Select GNDivision</option>";
+            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    if(district.dsId == dist){
+                        $.each(district.division,function(j,division){
+                           if(division.dvId == div){
+                               $.each(division.gnArea, function(k,gnArea){
+                                gnOptions += "<option value='"+gnArea.gndvId+"'>"+gnArea.name+"</option>"; 
+                               })
+                           }
+                        })
+                    }
+                });
+                $('#Gndivision').html(gnOptions);
+            })
+        })
     </script>
 </body>
 

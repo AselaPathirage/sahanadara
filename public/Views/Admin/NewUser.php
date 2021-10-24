@@ -52,7 +52,7 @@
                                     <label for="NIC">NIC</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="NIC" name="NIC" placeholder="NIC">
+                                    <input type="text" id="NIC" name="NIC" placeholder="NIC" maxlength="12">
                                 </div>
                             </div>
                             <div class="row">
@@ -60,7 +60,7 @@
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="email" name="email" placeholder="Email">
+                                    <input type="email" id="email" name="email" placeholder="Email">
                                 </div>
                             </div>
                             <div class="row">
@@ -76,7 +76,7 @@
                                     <label for="TP number">TP Number</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="TP_number" name="TP_number" placeholder="Phone number">
+                                    <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="10" onkeypress="return isNumber(event)">
                                 </div>
                             </div>
                             <div class="row">
@@ -158,6 +158,14 @@
             $('#DivisionBox').hide();
             $('#GndivisionBox').hide();
         });
+        function isNumber(e) {
+            e = (e) ? e : window.event;
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
         $('#District').change(function(){
             var val = $(this).val();
             var divOptions = "<option value=''>Select Division</option>";

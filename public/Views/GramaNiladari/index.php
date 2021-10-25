@@ -65,7 +65,7 @@
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
                             <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                40
+                                10
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
@@ -86,7 +86,7 @@
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
                             <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                40
+                                7
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">

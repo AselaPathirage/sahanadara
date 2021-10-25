@@ -24,7 +24,7 @@
             <div class="space"></div>
             <h1 class="heading_landing">Donation Requesting Notices</h1>
             <div class="container aboutsec">
-                <p>Help your neighbours through SAHANADARA by donating today! All donations go directly to making a difference for our cause.
+                <p class="text-center" style="font-size: large;">Help your neighbours through SAHANADARA by donating today! <br>All donations go directly to making a difference for our cause.
                 </p>
 
 

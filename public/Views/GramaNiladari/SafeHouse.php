@@ -56,7 +56,7 @@
                                     <p>Bellapitiya, Horana</p>
 
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Status : Active</a>
                                         <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
                                     </div>
                                 </div>
@@ -75,12 +75,14 @@
                             <div class="col6" style="overflow: auto">
                                 <div class="box row-content" style="height:100%;min-height: 300px;">
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Status : Active</a>
                                     </div>
                                     <h4>Bellapitiya Maha Vidyalaya</h4>
                                     <p>Bellapitiya, Horana</p>
+                                    <p>Telephone Number - 0778765367</p>
                                     <p>Families - 30</p>
                                     <p>People - 100</p>
+
                                 </div>
                             </div>
                         </div>

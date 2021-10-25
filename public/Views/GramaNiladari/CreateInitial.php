@@ -181,18 +181,18 @@
                             </div>
 
                             <div class="row">
-                                <div class="col3">
+                                <div class="col4">
                                     <label for="TP number">Fully</label>
                                 </div>
-                                <div class="col9">
+                                <div class="col8">
                                     <input type="text" id="TP number" name="TP number" placeholder="Fully">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col3">
+                                <div class="col4">
                                     <label for="TP number">Partially</label>
                                 </div>
-                                <div class="col9">
+                                <div class="col8">
                                     <input type="text" id="TP number" name="TP number" placeholder="Partially">
                                 </div>
                             </div>
@@ -201,95 +201,69 @@
                         <div class="col6">
                             <div class="col12">
 
-                                <h4 class="" style="padding:0 80px">Houses Damaged</h4>
+                                <h4 class="" style="padding:0 80px">Other Damages</h4>
                             </div>
 
                             <div class="row">
-                                <div class="col3">
-                                    <label for="TP number">Families</label>
+                                <div class="col4">
+                                    <label for="TP number">Enterprises </label>
                                 </div>
-                                <div class="col9">
-                                    <input type="text" id="TP number" name="TP number" placeholder="Families">
+                                <div class="col8">
+                                    <input type="text" id="TP number" name="TP number" placeholder="Enterprises Damages">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col3">
-                                    <label for="TP number">People</label>
+                                <div class="col4">
+                                    <label for="TP number">Infrastructure
+                                    </label>
                                 </div>
-                                <div class="col9">
-                                    <input type="text" id="TP number" name="TP number" placeholder="People">
+                                <div class="col8">
+                                    <input type="text" id="TP number" name="TP number" placeholder="Critical Infrastructure">
                                 </div>
                             </div>
 
                         </div>
                     </div>
+                    <div class="row">
 
+                        <div class="col12">
 
-                    <h4 class="text-center">Office Details</h4>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="address">Address</label>
+                            <h4 class="" style="padding:0 80px">Safe Locations</h4>
                         </div>
-                        <div class="col9">
-                            <textarea type="text" id="address" name="address" placeholder="Address"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="TP number">Telephone Number</label>
-                        </div>
-                        <div class="col9">
-                            <input type="text" id="TP number" name="TP number" placeholder="Phone number">
-                        </div>
-                    </div>
-                    <div class="row">
 
                         <div class="row">
-
-                            <div class="col3">
-                                <label for="TP number">Password</label>
+                            <div class="col4">
+                                <label for="TP number">Number of safe houses</label>
                             </div>
-                            <div class="col9">
-                                <input type="password" id="TP number" name="TP number" placeholder="Password">
+                            <div class="col8">
+                                <input type="text" id="TP number" name="TP number" placeholder="Number of safe houses<">
                             </div>
                         </div>
                         <div class="row">
-
-                            <div class="col3">
-                                <label for="TP number"> </label>
+                            <div class="col4">
+                                <label for="TP number">Families</label>
                             </div>
-                            <div class="col9 row-content">
-                                <span>* Enter password to save changes</span>
+                            <div class="col8">
+                                <input type="text" id="TP number" name="TP number" placeholder="Families">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col4">
+                                <label for="TP number">People</label>
+                            </div>
+                            <div class="col8">
+                                <input type="text" id="TP number" name="TP number" placeholder="People">
                             </div>
                         </div>
 
-
-
-
                     </div>
-                    <h4 class="text-center">Reset Password</h4>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="TP number">New Password</label>
-                        </div>
-                        <div class="col9">
-                            <input type="password" id="TP number" name="TP number" placeholder="New Password">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="TP number">Confirm Password</label>
-                        </div>
-                        <div class="col9">
-                            <input type="password" id="TP number" name="TP number" placeholder="Confirm Password">
-                        </div>
-                    </div>
+
                     <div class="row">
                         <div class="col3">
                             <label for="address">Remarks</label>
                         </div>
                         <div class="col9">
-                            <textarea type="text" id="address" name="address" placeholder="Address"></textarea>
+                            <textarea type="text" id="address" name="address" placeholder="Remarks"></textarea>
                         </div>
                     </div>
 

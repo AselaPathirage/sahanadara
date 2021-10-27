@@ -185,7 +185,7 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th></th>
+                                <th style="width: 10%;"></th>
                                 <th>Name</th>
                                 <th>Quantity</th>
                                 <th>Type</th>
@@ -362,7 +362,7 @@
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
-                cell1.innerHTML  = "";
+                cell1.innerHTML  = obj['itemId'];
                 cell2.innerHTML = obj['itemName'];
                 cell3.innerHTML = obj['quantity'];
                 //cell3.colSpan ="2";

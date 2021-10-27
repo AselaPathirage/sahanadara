@@ -108,4 +108,10 @@ class InventoryManager extends Noticer{
         $json = json_encode($results);
         echo $json;
     }
+    public function getSafeHouse(){
+
+    }
+    public function getDvOfficeList(){
+        
+    }
 }

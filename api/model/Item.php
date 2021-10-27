@@ -8,6 +8,7 @@ class Item{
         $this->itemCode = $code;
     }
     public static function getId($input){
+        $input =strtoupper($input);
         $id = explode("II0",$input);
         if(count($id)==2){
             return (int)$id[1];

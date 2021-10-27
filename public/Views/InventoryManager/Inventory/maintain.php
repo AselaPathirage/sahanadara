@@ -227,7 +227,15 @@
                                                 </td>
                                             </tr>
                                         </table>    
+                                        <!-- <table style="width: 100%;">
+                                            <tr>
+                                                <td>
+                                                    <label for="method">Received Method</label>
+                                                    <textarea id="method" name="method" required='true'></textarea>
+                                                    </td>
+                                                </tr>
 
+                                        </table>    -->
                                         <div class="row" style="justify-content: center;">
                                             <input type="submit" value="Send" class="btn-alerts" />
                                             <input type="reset" value="Reset" class="btn-alerts" />
@@ -245,7 +253,7 @@
                         <div class="custom-model-wrap">
                             <div class="pop-up-content-wrap">
                                 <form id='updateForm' name="updateForm" method="post">
-                                    <h1>Release Item</h1>
+                                    <h1>Remove Item</h1>
                                     <div class="row-content">
                                         <table style="width: 100%;">
                                             <tr>
@@ -269,7 +277,24 @@
                                                 <label class="unit" id="unit2"></label>
                                                 </td>
                                             </tr>
-                                        </table>                                       
+                                        </table>   
+                                        <table style="width: 100%;">
+                                            <tr>
+                                                <td>
+                                                    <label for="reason">Reason</label>
+                                                    <select id="reason" name="reason" class="form-control" required='true'>
+                                                        <option value="Damaged" data-unit="0">Damaged</option>
+                                                        <option value="Expired" data-unit="0">Expired</option>
+                                                        <option value="o" data-unit="0">Other</option>                                              
+                                                    </select>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="background-color: #fff;">
+                                                    <textarea id="other" name="other"></textarea>
+                                                    </td>
+                                                </tr>
+                                        </table>                                      
                                         <div class="row" style="justify-content: center;">
                                             <input type="hidden" value="1" name="release" id="release">
                                             <input type="submit" value="Update" class="btn-alerts" />
@@ -444,6 +469,7 @@
         $("#updateInventoryItem").on('click', function() {
             $("#updateItem").fadeIn();
             $("#updateItem").addClass('model-open');
+            $("#other").hide();
         });
         $(".close-btn, .bg-overlay").click(function() {
             $(".custom-model-main").removeClass('model-open');
@@ -456,7 +482,7 @@
             }else{
                 $("#unit").html("");
             }
-        });
+        }); 
         $('#itemId2').change(function(){
             var selected = $(this).find('option:selected');
             var extra = selected.data('unit'); 
@@ -464,6 +490,15 @@
                 $("#unit2").html(extra);
             }else{
                 $("#unit2").html("");
+            }
+        });
+        $('#reason').change(function(){
+            var selected = $(this).find('option:selected');
+            var extra = selected.text(); 
+            if(extra == "Other"){
+                $("#other").show();
+            }else{
+                $("#other").hide();
             }
         });
         var filters = {

@@ -8,6 +8,7 @@ DELETE - delete
 
 Route::GET("donation",array("Home@viewDonations"));
 Route::GET("role",array("Employee@getRole"));
+Route::GET("division",array("Admin@getDivision","InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision",array("Admin@getGnDivision","DisasterOfficer@getGNDivision"));
 
 Route::PUT("resetPassword",array("Employee@updatePassword"));
@@ -23,14 +24,13 @@ Route::GET("residents", array("GramaNiladari@getResident"));
 Route::POST("residents", array("GramaNiladari@addResident"));
 
 // Disaster Mgt officer
-Route::GET("safehouse",array("DisasterOfficer@viewSafehouse"));
+Route::GET("safehouse",array("DisasterOfficer@viewSafehouse","InventoryManager@getSafeHouse"));
 Route::POST("safehouse",array("DisasterOfficer@addSafehouse"));
 
 //Admin
 Route::GET("user",array("Admin@searchUser"));
 Route::GET("district",array("Admin@getDistrict"));
 Route::GET("area",array("Admin@DBtoJson"));
-Route::GET("division",array("Admin@getDivision"));
 
 // Inventory Manager
 Route::GET("unit",array("InventoryManager@getUnit"));

@@ -4,5 +4,6 @@ class Notice{
 
     public function __construct($con){
         $this->connection = $con;
-    } 
+    }
+
 }

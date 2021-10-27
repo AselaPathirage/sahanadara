@@ -17,14 +17,18 @@ class InventoryManager extends Noticer{
     public function getItem(array $data){
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
+            $id=Item::getId($id);
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id ORDER BY item.itemId";
         }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId  ORDER BY item.itemId";
         }
         
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
+            $item = new Item();
+            $item->setItemCode($r['itemId']);
+            $r['itemId'] = $item->getItemCode();
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -49,6 +53,7 @@ class InventoryManager extends Noticer{
         global $errorCode;
         if(isset($data['itemId']) && isset($data['quantity'])){
             $itemId = $data['itemId'];
+            $itemId = Item::getId($itemId);
             $quantity = $data['quantity'];
             $uid = $data['userId'];
             if(isset($data['release'])){
@@ -87,6 +92,7 @@ class InventoryManager extends Noticer{
         $uid = $data['userId'];
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
+            $id=Item::getId($id);
             $sql = "SELECT i.itemId,i.itemName,SUM(v.quantity) AS quantity, unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND v.itemId = $id  AND i.unitType =u.unitId GROUP BY v.itemId";
         }else{
             $sql = "SELECT i.itemId,i.itemName,SUM(v.quantity) AS quantity, unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId GROUP BY v.itemId";
@@ -94,6 +100,9 @@ class InventoryManager extends Noticer{
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
+            $item = new Item();
+            $item->setItemCode($r['itemId']);
+            $r['itemId'] = $item->getItemCode();
             $results[] = $r;
         }
         $json = json_encode($results);

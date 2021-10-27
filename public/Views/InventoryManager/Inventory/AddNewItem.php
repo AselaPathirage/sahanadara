@@ -179,7 +179,7 @@ tr:hover{
                                 <tr>
                                     <th style="width: 5%;">
                                     </th>
-                                    <th style="width: 30%;">Name
+                                    <th style="width: 30%;" colspan="2">Name
                                     <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                                     </th>
                                     <th style="width: 30%;">Unit
@@ -301,10 +301,12 @@ tr:hover{
                 row.className = "task-list-row";
                 $("#data_"+i).attr('data-unit', obj['unitName']);
                 let cell1 = row.insertCell(-1);
+                let cell11 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
                 cell1.innerHTML  = "<input id='"+obj['itemId']+"' class='radio-custom' name='radio-group' type='radio' checked><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
                 cell2.innerHTML = obj['itemName'];
+                cell11.innerHTML = obj['itemId'];
                 cell3.colSpan ="2";
                 cell3.innerHTML = obj['unitName'];
             }

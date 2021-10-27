@@ -101,7 +101,7 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th style="width: 25%;">DS Office
+                            <th style="width: 25%;">DV Office
                                 <select id="assigned-user-filter" class="form-control">
                                     <option>Electric</option>
                                     <option>Dry rations</option>

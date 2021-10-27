@@ -71,8 +71,8 @@
                                                     <td><input type="text" id="your_name" name="yourname" disabled='true'/></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Required Date</td>
-                                                    <td><input type="date" id="your_name" name="yourname"  style="width: 100%;" disabled='true'></td>
+                                                    <td style="background-color: #fff;">Required Date</td>
+                                                    <td style="background-color: #fff;"><input type="date" id="your_name" name="yourname"  style="width: 100%;" disabled='true'></td>
                                                 </tr>
                                                 <tr>
                                                     <td>Note</td>

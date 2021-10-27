@@ -123,8 +123,8 @@
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Requesting From</td>
-                                                    <td>                                
+                                                    <td style="background-color: #fff;">Requesting From</td>
+                                                    <td style="background-color: #fff;">                                
                                                         <select id="status-filter" class="form-control">
                                                             <option>Any</option>
                                                             <option>Matara</option>
@@ -137,7 +137,7 @@
                                                     <td>Required Date</td>
                                                     <td><input type="date" id="your_name" name="yourname"  style="width: 100%;"></td>
                                                 </tr>
-                                                <tr>
+                                                <tr style="background-color: #fff;">
                                                     <td>Note</td>
                                                     <td><textarea id="notes" name="drivernotes" rows="8" cols="50"></textarea></td>
                                                 </tr>

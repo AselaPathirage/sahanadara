@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -172,7 +173,7 @@
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
                             <th style="width: 15%;">
-                                <input type="submit" value="Add" id="addInventoryItem" class="form-control">
+                                <input type="submit" value="Add" id="addInventoryItem"  class="form-control">
                             </th>
                             <th style="width: 15%;">
                                 <input type="submit" value="Release" id="updateInventoryItem" class="form-control">
@@ -188,7 +189,7 @@
                                 <th style="width: 10%;"></th>
                                 <th>Name</th>
                                 <th>Quantity</th>
-                                <th>Type</th>
+                                <th>Unit</th>
                             </tr>
                         </thead>
                         <tbody id="trow">                                            
@@ -220,7 +221,7 @@
                                             <tr>
                                                 <td>
                                                 <label for="your_name">Quantity</label>
-                                                <input type="text" id="quantity" name="quantity" placeholder="Item Name" title="Type " class="form-control" required='true'>
+                                                <input type="text" id="quantity" name="quantity" placeholder="Item Quantity" title="Type" onkeypress="return isNumber(event)" class="form-control" required='true'>
                                                 </td>
                                                 <td>
                                                 <label class="unit" id="unit"></label>
@@ -271,7 +272,7 @@
                                             <tr>
                                                 <td>
                                                 <label for="your_name">Quantity</label>
-                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Name" title="Type " class="form-control" required='true'>
+                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Name" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
                                                 </td>
                                                 <td>
                                                 <label class="unit" id="unit2"></label>
@@ -307,18 +308,62 @@
                     </div>
                     <div class="bg-overlay"></div>
             </div>
+            <div id="alertBox">
+
+            </div>
     </section>
     <script>
         var thisPage = "#Maintain";
         getUnit();
         getItem();
         getInventory();
+        updateAvailableList()
+        //$("#alertBox").hide();
         $(document).ready(function() {
             $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }
                 $(thisPage).addClass("active");
+            });
+            $("#addInventoryItem").on('click', function() {
+                $("#addItem").fadeIn();
+                $("#addItem").addClass('model-open');
+            });
+            $("#updateInventoryItem").on('click', function() {
+                $("#updateItem").fadeIn();
+                $("#updateItem").addClass('model-open');
+                $("#other").hide();
+            });
+            $(".close-btn, .bg-overlay").click(function() {
+                $(".custom-model-main").removeClass('model-open');
+            });
+            $('#itemId').change(function(){
+                var selected = $(this).find('option:selected');
+                var extra = selected.data('unit'); 
+                if(extra != ""){
+                    $("#unit").html(extra);
+                }else{
+                    $("#unit").html("");
+                }
+            }); 
+            $('#itemId2').change(function(){
+                var selected = $(this).find('option:selected');
+                var extra = selected.data('unit'); 
+                if(extra != ""){
+                    $("#unit2").html(extra);
+                }else{
+                    $("#unit2").html("");
+                }
+            });
+            $('#reason').change(function(){
+                var selected = $(this).find('option:selected');
+                var extra = selected.text(); 
+                if(extra == "Other"){
+                    $("#other").show();
+                }else{
+                    $("#other").hide();
+                }
             });
         });
 
@@ -345,7 +390,7 @@
             }
         }  
         function getItem(){
-            var x = "<?php echo $_SESSION['key'] ?>";
+            var x = "<?php echo $_SESSION['key'] ?>"; 
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>item",
@@ -359,12 +404,28 @@
                 $(opt).html(output[i]['itemName']);
                 $(opt).attr('data-unit', output[i]['unitName']);
                 $("#itemId").append(opt);
+            }
+
+        }
+
+        function updateAvailableList(){
+            output2 = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>availableItem",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            $("#itemId2").find('option').not(':first').remove();
+            for (var i = 0; i < output2.length; i++){
                 var opt2 = new Option("option text",output[i]['itemId'] );
-                $(opt2).html(output[i]['itemName']);
-                $(opt2).attr('data-unit', output[i]['unitName']);
+                $(opt2).html(output2[i]['itemName']);
+                $(opt2).attr('data-unit', output2[i]['unitName']);
                 $("#itemId2").append(opt2);
             }
         }
+
         function getInventory(){
             var x = "<?php echo $_SESSION['key'] ?>";
             output = $.parseJSON($.ajax({
@@ -417,10 +478,16 @@
 					success: function(result) {
 						$('#trow').empty();
                         getInventory();
+                        updateAvailableList()
                         console.log(result);
+                        if(result.code==806){
+                            alertGen("Record Added Successfully!",1);
+                        }else{
+                            alertGen("Unable to handle request.",2);
+                        }
 					},
 					error: function(err) {
-						alert(err);
+						alertGen("Something went wrong.",3);
                         console.log(err);
 					}
 				});
@@ -440,7 +507,7 @@
                 object['quantity'] = object['quantity2'];
                 delete object.itemId2;
                 delete object.quantity2;
-                $("#add").trigger("reset");
+                $("#updateForm").trigger("reset");
                 var json = JSON.stringify(object);
                 $.ajax({
 					type: "POST",
@@ -451,56 +518,49 @@
 					success: function(result) {
 						$('#trow').empty();
                         getInventory();
+                        updateAvailableList()
                         console.log(result);
-                        if(result.code==817){
-                            alert("Unable to handle request.");
+                        if(result.code==806){
+                            alertGen("Record Added Successfully!",1);
+                        }else{
+                            alertGen("Unable to handle request.",2);
                         }
 					},
 					error: function(err) {
-						//alert(err);
+						alertGen("Something went wrong.",3);
                         console.log(err);
-					}
+					} 
 				});
         });
-        $("#addInventoryItem").on('click', function() {
-            $("#addItem").fadeIn();
-            $("#addItem").addClass('model-open');
-        });
-        $("#updateInventoryItem").on('click', function() {
-            $("#updateItem").fadeIn();
-            $("#updateItem").addClass('model-open');
-            $("#other").hide();
-        });
-        $(".close-btn, .bg-overlay").click(function() {
-            $(".custom-model-main").removeClass('model-open');
-        });
-        $('#itemId').change(function(){
-            var selected = $(this).find('option:selected');
-            var extra = selected.data('unit'); 
-            if(extra != ""){
-                $("#unit").html(extra);
+        function alertGen($messege,$type){
+            if ($type == 1){
+                $("#alertBox").html("  <div class='alert success-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }else if($type == 2){
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
             }else{
-                $("#unit").html("");
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
             }
-        }); 
-        $('#itemId2').change(function(){
-            var selected = $(this).find('option:selected');
-            var extra = selected.data('unit'); 
-            if(extra != ""){
-                $("#unit2").html(extra);
-            }else{
-                $("#unit2").html("");
+        }
+        function isNumber(e) {
+            e = (e) ? e : window.event;
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+                return false;
             }
-        });
-        $('#reason').change(function(){
-            var selected = $(this).find('option:selected');
-            var extra = selected.text(); 
-            if(extra == "Other"){
-                $("#other").show();
-            }else{
-                $("#other").hide();
-            }
-        });
+            return true;
+        }
         var filters = {
                 unit: null
             };
@@ -526,6 +586,10 @@
         }
         $('#unitType').on('change', function () {
             changeFilter.call(this, 'unit');
+        });
+        $(document).on('click','.closeMessege',function () {
+            $(".alert").fadeOut(100);
+                console.log("hello");
         });
     </script> 
 </body>

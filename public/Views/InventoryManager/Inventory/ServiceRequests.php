@@ -103,19 +103,18 @@
                         <tr class="filters">
                             <th style="width: 25%;">DV Office
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>Electric</option>
-                                    <option>Dry rations</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>Agalawatta</option>
+                                    <option>Beruwala</option>
+                                    <option>Ingiriya</option>
+                                    <option>Madurawala</option>
+                                    <option>Walallavita</option>
                                 </select>
                             </th>
                             <th style="width: 25%;">Responded
                                 <select id="milestone-filter" class="form-control">
                                     <option>Any</option>
-                                    <option>Availabile</option>
-                                    <option>Not Availabile</option>
+                                    <option>Responded</option>
+                                    <option>Not Responded</option>
                                 </select> 
                             </th>
                             <th style="width: 25%;text-align: center;">

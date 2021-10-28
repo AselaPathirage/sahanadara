@@ -29,8 +29,8 @@
             <br>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-box">Create Final Incident</a>
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-box">Add Expense Note</a>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-fun">Create Final Incident</a>
+                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-fun">Add Expense Note</a>
                 </div>
             </div>
  
@@ -41,22 +41,19 @@
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>Active
+                            <th>Approved
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>John</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>All</option>
+                                    <option>Approved</option>
+                                    <option>Not Approved</option>
                                 </select>
                             </th>
                             <th>Type
                                 <select id="status-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Not Started</option>
-                                    <option>In Progress</option>
-                                    <option>Completed</option>
+                                    <option>All</option>
+                                    <option>Initial</option>
+                                    <option>Relief</option>
+                                    <option>Final</option>
                                 </select>
                             </th>
             
@@ -72,12 +69,12 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th>Date</th>
+                                <th>Date/Time</th>
                                 <th>Incident Description</th>
                                 <th>Type</th>
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
-                                <th>Status</th>
+                                <th>View</th>
                             </tr>
                         </thead>
 
@@ -85,27 +82,86 @@
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                 
-                                <td>09/24/2015</td>
+                                <td>09/24/2021 9:54</td>
                                 <td>Flood</td>
                                 <td>Initial</td>
                                 <td>Approved</td>
                                 <td>Approved</td>
-                                <td>Active</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
 
                                 
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                <td>02/24/2015</td>
+                                <td>02/28/2021 8:54</td>
                                 <td>Flood</td>
                                 <td>Relief</td>
                                 <td>Approved</td>
                                 <td>Approved</td>
-                                <td>Active</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
 
                             </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>03/28/2021  1:54</td>
+                                <td>Flood</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/04/2021 9:54</td>
+                                <td>Flood</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/02/2021 10:54</td>
+                                <td>Flood</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/02/2021 9:54</td>
+                                <td>Flood</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/05/2021 6:54</td>
+                                <td>LandSlide</td>
+                                <td>Initial</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/06/2021 9:54</td>
+                                <td>Lightning</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/InitialIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
 
                             
                             

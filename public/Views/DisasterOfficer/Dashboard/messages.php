@@ -25,7 +25,7 @@
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <div class="container">
-            <h1>Messages</h1>
+            <center><h1>Messages</h1></center>
             <div class="container">
                 <div style="display:block;text-align: right;">
                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/sendmessages" class="btn-fun">Send Message</a>
@@ -57,6 +57,36 @@
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>09/14/2015 13:56</td>
                                     <td>Hand over your compensation requesting forms before 31st October</td>
+
+                                </tr>
+
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>09/14/2015 13:56</td>
+                                    <td>Landslide alert. Area residents requested to be alerted</td>
+
+                                </tr>
+
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>09/14/2015 13:56</td>
+                                    <td>Hand over your compensation requesting forms before 1st October</td>
+
+                                </tr>
+
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>09/14/2015 13:56</td>
+                                    <td>Hand over your compensation requesting forms before 21st October</td>
+
+                                </tr>
+
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>09/14/2015 13:56</td>
+                                    <td>Hand over your donation requesting forms before 31st October</td>
+
+                                </tr>
+
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>09/14/2015 13:56</td>
+                                    <td>Heavy rain alerts 250mm</td>
 
                                 </tr>
 

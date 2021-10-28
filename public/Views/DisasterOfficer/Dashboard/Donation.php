@@ -95,6 +95,55 @@
                                 <td>Active</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
                             </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021</td>
+                                <td>ABC Silva</td>
+                                <td>Flood</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021</td>
+                                <td>ABC Silva</td>
+                                <td>Flood</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021</td>
+                                <td>ABC Silva</td>
+                                <td>Flood</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021</td>
+                                <td>ABC Silva</td>
+                                <td>Flood</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021</td>
+                                <td>ABC Silva</td>
+                                <td>Flood</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Donationrequests" class="btn-box">View</a>&nbsp<a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensation" class="btn-box2">Remove</a></td>
                             </tr>
 
                             

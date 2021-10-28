@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Dodangoda</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col6" style="overflow: auto">
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Ingiriya</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Galpatha</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">

@@ -92,6 +92,75 @@
                                 <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>YD Abeysinghe</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>IU Kumara</td>
+                                <td>Final</td>
+                                <td>Not Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>ABC Rodrigo</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td>Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>KD Nimesh</td>
+                                <td>Property</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>KW Perera</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>YD Aluthge</td>
+                                <td>Property</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>SN Dias</td>
+                                <td>Final</td>
+                                <td>Not Approved</td>
+                                <td>Approved</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                            </tr>
                             
                         </tbody>
                     </table>

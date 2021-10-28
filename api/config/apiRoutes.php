@@ -36,6 +36,7 @@ Route::GET("area",array("Admin@DBtoJson"));
 Route::GET("unit",array("InventoryManager@getUnit"));
 Route::GET("item",array("InventoryManager@getItem"));
 Route::GET("inventory",array("InventoryManager@getInventory"));
+Route::GET("availableItem",array("InventoryManager@availableItem"));
 Route::POST("item",array("InventoryManager@addItem"));
 Route::POST("inventory",array("InventoryManager@addInventory"));
 //Route::PUT("inventory",array("InventoryManager@updateInventory"));

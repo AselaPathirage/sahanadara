@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -202,6 +203,9 @@ tr:hover{
             </div>
         </div>
         </div>
+        <div id="alertBox">
+
+        </div>
     </section>
     <script>
         var thisPage = "#Add";
@@ -238,9 +242,15 @@ tr:hover{
 					success: function(result) {
 						$('#trow').empty();
                         getItem();
+                        if(result.code==806){
+                            alertGen("Record Added Successfully!",1);
+                        }else{
+                            alertGen("Unable to handle request.",2);
+                        }
 					},
 					error: function(err) {
-						alert(err);
+						alertGen("Something went wrong.",3);
+                        console.log(err);  
 					}
 				});
             });
@@ -311,6 +321,31 @@ tr:hover{
                 cell3.innerHTML = obj['unitName'];
             }
         }
+        function alertGen($messege,$type){
+            if ($type == 1){
+                $("#alertBox").html("  <div class='alert success-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }else if($type == 2){
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }else{
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
+        }
+        $(document).on('click','.closeMessege',function () {
+            $(".alert").fadeOut(100);
+                console.log("hello");
+        });
         var filters = {
                 unit: null
             };

@@ -93,6 +93,14 @@
                     </div>
                     <div class="row">
                         <div class="col3">
+                            <label for="crusttype">End date</label>
+                        </div>
+                        <div class="col9 row-content" style="align-items: center;">
+                            <input type="date" id="birthday" name="birthday" class="datesInForms">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col3">
                             <label for="user role">Disaster</label>
                         </div>
                         <div class="col9">
@@ -144,31 +152,59 @@
                                     <input type="text" id="TP number" name="TP number" placeholder="People">
                                 </div>
                             </div>
+                            <div class="col6">
+                                <h4 class="" style="padding:0 80px">Evacuated</h4>
+                            </div>
+
+                            <div class="row">
+                                <div class="col3">
+                                    <label for="TP number">Families</label>
+                                </div>
+                                <div class="col9">
+                                    <input type="text" id="TP number" name="TP number" placeholder="Families">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col3">
+                                    <label for="TP number">People</label>
+                                </div>
+                                <div class="col9">
+                                    <input type="text" id="TP number" name="TP number" placeholder="People">
+                                </div>
+                            </div>
 
                         </div>
                         <div class="col6">
                             <div class="row">
-                                <div class="col3">
+                                <div class="col4">
                                     <label for="TP number">Deaths</label>
                                 </div>
-                                <div class="col9">
+                                <div class="col8">
                                     <input type="text" id="TP number" name="TP number" placeholder="Deaths">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col3">
+                                <div class="col4">
                                     <label for="TP number">Injured</label>
                                 </div>
-                                <div class="col9">
+                                <div class="col8">
                                     <input type="text" id="TP number" name="TP number" placeholder="Injured">
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col3">
+                                <div class="col4">
                                     <label for="TP number">Missing</label>
                                 </div>
-                                <div class="col9">
+                                <div class="col8">
                                     <input type="text" id="TP number" name="TP number" placeholder="Missing">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col4">
+                                    <label for="TP number">Hospitalized</label>
+                                </div>
+                                <div class="col8">
+                                    <input type="text" id="TP number" name="TP number" placeholder="Hospitalized">
                                 </div>
                             </div>
                         </div>
@@ -236,7 +272,7 @@
                                 <label for="TP number">Number of safe houses</label>
                             </div>
                             <div class="col8">
-                                <input type="text" id="TP number" name="TP number" placeholder="Number of safe houses<">
+                                <input type="text" id="TP number" name="TP number" placeholder="Number of safe houses">
                             </div>
                         </div>
                         <div class="row">
@@ -256,6 +292,47 @@
                             </div>
                         </div>
 
+                    </div>
+
+                    <h4 class="text-center">Requested amount for relief distribution (Indicate amount in relevant place - Rs)
+                    </h4>
+
+                    <div class="row">
+                        <div class="col6">
+                            <div class="row">
+                                <div class="col5">
+                                    <label for="TP number">Dry rations</label>
+                                </div>
+                                <div class="col7">
+                                    <input type="text" id="TP number" name="TP number" placeholder="Dry rations">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col5">
+                                    <label for="TP number">Cooking meals
+                                    </label>
+                                </div>
+                                <div class="col7">
+                                    <input type="text" id="TP number" name="TP number" placeholder="Cooking meals
+">
+                                </div>
+                            </div>
+
+
+
+                        </div>
+                        <div class="col6">
+                            <div class="row">
+                                <div class="col5">
+                                    <label for="TP number">Emergency supplies</label>
+                                </div>
+                                <div class="col7">
+                                    <input type="text" id="TP number" name="TP number" placeholder="Emergency supplies">
+                                </div>
+                            </div>
+
+
+                        </div>
                     </div>
 
                     <div class="row">

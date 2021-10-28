@@ -76,12 +76,11 @@
                         <tr class="filters">
                             <th>Safe House
                                 <select id="assigned-user-filter" class="form-control">
-                                    <option>Electric</option>
-                                    <option>Dry rations</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
+                                    <option>Adhikarigoda Safe House</option>
+                                    <option>Bombuwala Safe House</option>
+                                    <option>Bolossagama Safe House</option>
+                                    <option>Galpottawila Safe House</option>
+                                    <option>Gamagoda Safe House</option>
                                 </select>
                             </th>
                             <th>

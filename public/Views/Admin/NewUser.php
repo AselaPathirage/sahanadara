@@ -30,14 +30,14 @@
         <div class="container col8">
             <div class="box">
                     <div class="box1">
-                        <form id='add' name="add" method="post">
+                        <form id='add' name="add" method="post" onSubmit="return validate_nic();">
                             <h1 class="text-center">New User</h1>
                             <div class="row">
                                 <div class="col3">
                                     <label for="firstname">First Name</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="firstname" name="firstname" placeholder="First Name">
+                                    <input type="text" id="firstname" name="firstname" placeholder="First Name" required='true'>
                                 </div>
                             </div>
                             <div class="row">
@@ -45,7 +45,7 @@
                                     <label for="lastname">Last Name</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+                                    <input type="text" id="lastname" name="lastname" placeholder="Last Name" required='true'>
                                 </div>
                             </div>
                             <div class="row">
@@ -53,7 +53,9 @@
                                     <label for="NIC">NIC</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="NIC" name="NIC" placeholder="NIC" maxlength="12">
+                                    <div id="nicCheck">
+                                    </div>
+                                    <input type="text" id="NIC" name="NIC" placeholder="NIC" maxlength="12" required='true'>
                                 </div>
                             </div>
                             <div class="row">
@@ -61,7 +63,7 @@
                                     <label for="email">Email</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="email" id="email" name="email" placeholder="Email">
+                                    <input type="email" id="email" name="email" placeholder="Email" required='true'>
                                 </div>
                             </div>
                             <div class="row">
@@ -69,7 +71,7 @@
                                     <label for="address">Address</label>
                                 </div>
                                 <div class="col9">
-                                    <textarea type="text" id="address" name="address" placeholder="Address"></textarea>
+                                    <textarea type="text" id="address" name="address" placeholder="Address" required='true' ></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -77,7 +79,7 @@
                                     <label for="TP number">TP Number</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="10" onkeypress="return isNumber(event)">
+                                    <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="10" onkeypress="return isNumber(event)" required='true'>
                                 </div>
                             </div>
                             <div class="row">
@@ -85,8 +87,8 @@
                                     <label for="user role">User role</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="user_role" name="user_role">
-                                        <option value="0" selected='true'>Select</option>
+                                    <select id="user_role" name="user_role" required='true'>
+                                        <option value="" selected='true'>Select</option>
                                         <option value="1">Grama Niladhari</option>
                                         <option value="4">Divisional Secretariat</option>
                                         <option value="3">District secretariat</option>
@@ -125,7 +127,7 @@
 
                             <div class="row " style="text-align:right;justify-content: right;">
                                 <input type="reset" style="background-color: red;" value="Cancel">
-                                <input type="submit" style="background-color: darkblue;" value="Submit">
+                                <input type="submit" style="background-color: darkblue;margin-top:0px" value="Submit">
                             </div>
                         </form>
                 </div>
@@ -136,7 +138,18 @@
     </section>
     <script>
         var thisPage = "#new";
-
+        document.getElementById("NIC").addEventListener("keyup",function(e){
+            var nicNum = document.getElementById("NIC").value;
+            var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
+            var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
+            if (nicNum.length == 10 && cnic_no_regex.test(nicNum)) {
+                $("#nicCheck").html("");
+            } else if (nicNum.length == 12 && new_cnic_no_regex.test(nicNum)) {
+                $("#nicCheck").html("");
+            } else {
+                $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
+            }
+        });
         $(document).ready(function() {
             $("#stats,#updates").each(function() {
                 if ($(this).hasClass('active')) {
@@ -155,6 +168,20 @@
             $('#DivisionBox').hide();
             $('#GndivisionBox').hide();
         });
+        function validate_nic(nic) {
+            var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
+            var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
+            if (nic.length == 10 && cnic_no_regex.test(nic)) {
+                $("#nicCheck").html("");
+                return true;
+            } else if (nic.length == 12 && new_cnic_no_regex.test(nic)) {
+                $("#nicCheck").html("");
+                return true;
+            } else {
+                $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
+                return false;
+            }
+        }
         function isNumber(e) {
             e = (e) ? e : window.event;
             var charCode = (e.which) ? e.which : e.keyCode;

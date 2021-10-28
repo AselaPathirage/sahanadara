@@ -272,7 +272,7 @@
                                             <tr>
                                                 <td>
                                                 <label for="your_name">Quantity</label>
-                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Name" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
+                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Quantity" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
                                                 </td>
                                                 <td>
                                                 <label class="unit" id="unit2"></label>

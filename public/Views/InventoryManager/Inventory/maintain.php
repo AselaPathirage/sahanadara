@@ -173,7 +173,7 @@
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
                             <th style="width: 15%;">
-                                <input type="submit" value="Add" id="addInventoryItem" class="form-control">
+                                <input type="submit" value="Add" id="addInventoryItem"  class="form-control">
                             </th>
                             <th style="width: 15%;">
                                 <input type="submit" value="Release" id="updateInventoryItem" class="form-control">
@@ -221,7 +221,7 @@
                                             <tr>
                                                 <td>
                                                 <label for="your_name">Quantity</label>
-                                                <input type="text" id="quantity" name="quantity" placeholder="Item Name" title="Type " class="form-control" required='true'>
+                                                <input type="text" id="quantity" name="quantity" placeholder="Item Quantity" title="Type" onkeypress="return isNumber(event)" class="form-control" required='true'>
                                                 </td>
                                                 <td>
                                                 <label class="unit" id="unit"></label>
@@ -272,7 +272,7 @@
                                             <tr>
                                                 <td>
                                                 <label for="your_name">Quantity</label>
-                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Name" title="Type " class="form-control" required='true'>
+                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Name" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
                                                 </td>
                                                 <td>
                                                 <label class="unit" id="unit2"></label>
@@ -552,6 +552,14 @@
                     $("#alertBox").html("");
                 }, 4000);
             }
+        }
+        function isNumber(e) {
+            e = (e) ? e : window.event;
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+                return false;
+            }
+            return true;
         }
         var filters = {
                 unit: null

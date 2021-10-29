@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_divsec.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -106,10 +106,10 @@
                             </th>
 
                             <th style="width: 15%;text-align: center;">
-                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/viewNotice" class="create">View</a>
+                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/viewNotice" class="btn_active">View</a>
                             </th> 
                             <th style="width: 15%;text-align:center;">
-                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
+                                <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/editNotice" class="btn_remove">Edit</a>
                             </th>
                             <th style="width: 15%;text-align:center;">
                                 <a href="#" class="view">Remove</a>

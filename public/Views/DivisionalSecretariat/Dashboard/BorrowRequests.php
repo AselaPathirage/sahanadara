@@ -39,13 +39,6 @@
                                     <option>Not Approved</option>
                                 </select>
                             </th>
-                            <th>Type
-                                <select id="status-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Death</option>
-                                    <option>Property</option>
-                                </select>
-                            </th>
                             
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
@@ -60,37 +53,53 @@
                         <thead>
                             <tr>
                                 <th>Date/Time</th>
-                                <th>Applicant Name</th>
-                                <th>Type</th>
-                                <th>DS Note</th>
-                                <th>DMC Note</th>
+                                <th>Item Code</th>
+                                <th>Item Name</th>
+                                <th>Quantity</th>
                                 <th>Status</th>
                             </tr>
                         </thead>
 
                         <tbody>
 
-                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                             
-                                <td>01/24/2021 1:50</td>
-                                <td>ABC Perera</td>
-                                <td>Death</td>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>11001</td>
+                                <td>Generator</td>
+                                <td>1</td>
                                 <td>Approved</td>
-                                <td>Approved</td>
-                                <td>Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                             <td>01/24/2021 12:50</td>
-                                <td>ABC Silva</td>
-                                <td>Final</td>
+                                <td>11002</td>
+                                <td>Boat</td>
+                                <td>1</td>
                                 <td>Approved</td>
-                                <td>Pending</td>
-                                <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
                             </tr>
 
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>11003</td>
+                                <td>Tent</td>
+                                <td>2</td>
+                                <td>Approved</td>
+                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                            
+                                <td>01/24/2021 1:50</td>
+                                <td>11010</td>
+                                <td>Water Tank</td>
+                                <td>1</td>
+                                <td>Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                            </tr>
                             
                         </tbody>
                     </table>

@@ -21,12 +21,12 @@
         <?php 
         include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
         ?>
-        <div class="space"></div>
+        <div class="space"></div><div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-        <div class="container">
-            <br>
+        <div class="container" style="text-align: right;">
+                <div style="display:block;">
                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Create Incident</a>
                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Update Incident</a>
                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/incidents" class="btn-fun">Close the Incident</a>

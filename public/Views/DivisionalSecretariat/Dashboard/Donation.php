@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_divsec.css">
+    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/landing_style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -57,46 +58,53 @@
                 </table>
 
 
-                <div class="panel panel-primary filterable">
-                    <table id="task-list-tbl" class="table">
-                        <thead>
-                            <tr>
-                                <th>Date/Time</th>
-                                <th>Applicant Name</th>
-                                <th>Type</th>
-                                <th>DS Note</th>
-                                <th>DMC Note</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                            
-                                <td>01/24/2021 1:50</td>
-                                <td>ABC Perera</td>
-                                <td>Death</td>
-                                <td>Approved</td>
-                                <td>Approved</td>
-                                <td>Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/DonationRequests" class="btn-box">View</a></td>
-                            </tr>
-
-                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021 12:50</td>
-                                <td>ABC Silva</td>
-                                <td>Final</td>
-                                <td>Approved</td>
-                                <td>Pending</td>
-                                <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/DonationRequests" class="btn-box">View</a></td>
-                            </tr>
-
-                            
-                        </tbody>
-                    </table>
+                <div class="container" style="text-align: right;>
+                <div style="display:block;">
+                    
+            </div>
+            <div class="box">
+            <div class="row text-center">
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <br>
+                        <a href="" class="btn_active">Approve</a>
+                    </div>
+                    <div class="card row-content col5">
+                        <h3>Millaniya Maha Vidyalaya</h3>
+                        <p>Millaniya</p>
+                        <p class="small"><b>Telephone Number -</b> 0778765586</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <br>
+                        <a href="" class="btn_active">Approve</a>
+                    </div>
                 </div>
+                <div class="row text-center">
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <br>
+                        <a href="" class="btn_active">Approve</a>
+                    </div>
+                    <div class="card row-content col5">
+                        <h3>Bellapitiya Maha Vidyalaya</h3>
+                        <p>Bellapitiya, Horana.</p>
+                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
+                        <p class="small"><b>People -</b> 100</p>
+                        <p class="small">Water bottles-100</p>
+                        <br>
+                        <a href="" class="btn_active">Approve</a>
+                    </div>
+                </div>
+            </div>
+        </div>        
             </div>
         </div>
 

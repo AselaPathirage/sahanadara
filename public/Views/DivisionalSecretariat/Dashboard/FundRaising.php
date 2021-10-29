@@ -25,7 +25,7 @@
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-        <div class="container">
+        <div class="container" style="text-align: right;">
         <div class="space"></div>
             <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Createfundraise" class="btn-fun">Create New Fundraise</a>
             <br>
@@ -58,11 +58,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col6">
-                            <div class="box row-content">Title<br>Description<br><a href="./viewres.php" class="btn-box">View</a></div>
-                            <div class="box row-content">Title<br>Description<br><a href="./viewres.php" class="btn-box">View</a></div>   
+                            <div class="box row-content"><h2>Funds for displaced person</h2>Bellapitiya<br><br><a href="./viewres.php" class="btn-box">View</a></div>
+                            <div class="box row-content"><h2>Funds for property damages</h2>Millaniya<br><br><a href="./viewres.php" class="btn-box">View</a></div>   
                            
                         </div>
-                        <div class="col6" style="overflow: auto">
+                        <div class="col6" style="overflow: none">
                             <div class="box row-content" style="height:100%;min-height: 300px;">
                                 <h2>Fundraises</h1>
                                 <label for="title">Title</label>

@@ -30,6 +30,7 @@
         <div class="container" style="text-align: right;>
                 <div style="display:block;">
                     <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/DonationRequests" class="btn-fun">Create Donation Request</a>
+                    <div class="space"></div>
             </div>
             <div class="box">
             <div class="row text-center">

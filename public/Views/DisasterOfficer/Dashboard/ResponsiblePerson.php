@@ -55,13 +55,14 @@
                 <div class="container">
                     <div class="row">
                         <div class="col6">
-                            <div class="box row-content">Name - Naween Pasindu<br>Office - Horana<br>NIC - 981060920V<br><br><a href="./viewres.php" class="btn-box">View</a></div>
-                            <div class="box row-content">Name - Yohombu Abeysinghe<br>Office - Millaniya<br>NIC - 981620631V<br><br><a href="./viewres.php" class="btn-box">View</a></div> 
-                            <div class="box row-content">Name - Asela Pathirage<br>Office - Ballapitiya<br>NIC - 991091947V<br><br><a href="./viewres.php" class="btn-box">View</a></div> 
-                            <div class="box row-content">Name - Sanduni Rashmika<br>Office - Dodangoda<br>NIC - 987090723V<br><br><a href="./viewres.php" class="btn-box">View</a></div>    
+                            <div class="box row-content">Name - Naween Pasindu<br>Office - Horana<br>NIC - 981060920V<br><br><a href="./viewres.php" class="btn-box">Active</a></div>
+                            <div class="box row-content">Name - Yohombu Abeysinghe<br>Office - Millaniya<br>NIC - 981620631V<br><br><a href="./viewres.php" class="btn-box">Active</a></div> 
+                            <div class="box row-content">Name - Asela Pathirage<br>Office - Ballapitiya<br>NIC - 991091947V<br><br><a href="./viewres.php" class="btn-box">Active</a></div> 
+                            <div class="box row-content">Name - Sanduni Rashmika<br>Office - Dodangoda<br>NIC - 987090723V<br><br><a href="./viewres.php" class="btn-box">Active</a></div>
+                            <div class="box row-content">Name - Isuri Abeysinghe<br>Office - Kesbawa<br>NIC - 947410385V<br><br><a href="./viewres.php" class="btn-box">Active</a></div>
                            
                         </div>
-                        <div class="col6" style="overflow: auto">
+                        <div class="col6" style="overflow: none">
                             <div class="box row-content" style="height:100%;min-height: 300px;">
                                 <h2>Responsible Person</h1>
                                 <label for="your_name">NIC</label>
@@ -87,8 +88,8 @@
 
 
                                 <div class="space"></div>
-                                <a href="" class="btn-box">Add</a>
-                                <a href="" class="btn-box">Remove</a>
+                                <a href="" class="btn_active">Add</a>
+                                <a href="" class="btn_remove">Remove</a>
                             </div>
                         </div>
                     </div>

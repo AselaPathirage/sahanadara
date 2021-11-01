@@ -272,7 +272,7 @@
                                             <tr>
                                                 <td>
                                                 <label for="your_name">Quantity</label>
-                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Name" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
+                                                <input type="text" id="quantity2" name="quantity2" placeholder="Item Quantity" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
                                                 </td>
                                                 <td>
                                                 <label class="unit" id="unit2"></label>
@@ -405,7 +405,6 @@
                 $(opt).attr('data-unit', output[i]['unitName']);
                 $("#itemId").append(opt);
             }
-
         }
 
         function updateAvailableList(){
@@ -554,12 +553,31 @@
             }
         }
         function isNumber(e) {
+            var now =0;
+            $("#addItem,#updateItem").each(function() {
+                if ($(this).hasClass('model-open')){
+                    return false;
+                }
+                now++;
+            });
             e = (e) ? e : window.event;
             var charCode = (e.which) ? e.which : e.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
-                return false;
+            if(now==0){
+                var unit = $("#itemId").find(':selected').data('unit')
+            }else{
+                var unit = $("#itemId2").find(':selected').data('unit')
             }
-            return true;
+            if(unit=="units"){
+                if (charCode > 31 && (charCode < 48 || charCode > 57) ) {
+                    return false;
+                }
+                return true; 
+            }else{
+                if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
+                    return false;
+                }
+                return true;
+            }
         }
         var filters = {
                 unit: null
@@ -589,7 +607,6 @@
         });
         $(document).on('click','.closeMessege',function () {
             $(".alert").fadeOut(100);
-                console.log("hello");
         });
     </script> 
 </body>

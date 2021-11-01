@@ -45,6 +45,7 @@
     }
     td{
         border: none;
+        background-color:#fff;
     }
     </style>
 </head>

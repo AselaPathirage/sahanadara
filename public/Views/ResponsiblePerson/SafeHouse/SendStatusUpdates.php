@@ -86,7 +86,7 @@ color: #ffdddd;
                                             <textarea id="notes" name="drivernotes" rows="8" cols="50" required='true'></textarea>
                                     </div>
                     </div>
-                    <div class="tab">Required Aids
+                    <div class="tab"><h3>Required Aids</h3>
                         <div class="table-repsonsive">
                             <span id="error"></span>
                             <table class="table table-bordered" id="item_table">

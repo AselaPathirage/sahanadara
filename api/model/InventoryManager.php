@@ -8,11 +8,20 @@ class InventoryManager extends Noticer{
     }
     public function addItem(array $data){
         global $errorCode;
-        $itemName = $data['itemName'];
-        $unitType = $data['unitType'];
-        $sql = "INSERT INTO `item` (`itemName`, `unitType`) VALUES ('$itemName', $unitType);";
-        $this->connection->query($sql);
-        echo json_encode(array("code"=>$errorCode['success']));
+        if(isset($data['itemName']) && isset($data['unitType'])){
+            if($data['itemName']=="" || !is_int($data['unitType'])){
+                echo json_encode(array("code"=>$errorCode['attributeMissing']));
+                exit();
+            }
+            $itemName = $data['itemName'];
+            $unitType = $data['unitType']; 
+            $sql = "INSERT INTO `item` (`itemName`, `unitType`) VALUES ('$itemName', $unitType);";
+            $this->connection->query($sql);
+            echo json_encode(array("code"=>$errorCode['success']));
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
     }
     public function getItem(array $data){
         if(count($data['receivedParams'])==1){
@@ -21,14 +30,12 @@ class InventoryManager extends Noticer{
             $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id ORDER BY item.itemId";
         }else{
             $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId  ORDER BY item.itemId";
-        }
+        } 
         
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
-            $item = new Item();
-            $item->setItemCode($r['itemId']);
-            $r['itemId'] = $item->getItemCode();
+            $r['itemId'] = Item::getItemCode($r['itemId']);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -57,7 +64,6 @@ class InventoryManager extends Noticer{
             $quantity = $data['quantity'];
             $uid = $data['userId'];
             if(isset($data['release'])){
-                
                 $sql = "SELECT SUM(v.quantity) AS quantity FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND v.itemId = $itemId  AND i.unitType =u.unitId GROUP BY v.itemId";
                 $excute = $this->connection->query($sql);
                 $array = $excute-> fetch_assoc();
@@ -100,9 +106,7 @@ class InventoryManager extends Noticer{
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
-            $item = new Item();
-            $item->setItemCode($r['itemId']);
-            $r['itemId'] = $item->getItemCode();
+            $r['itemId'] = Item::getItemCode($r['itemId']);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -111,8 +115,18 @@ class InventoryManager extends Noticer{
     public function getSafeHouse(){
 
     }
-    public function getDvOfficeList(){
-        
+    public function getDvOfficeList(array $data){
+        $uid = $data['userId'];
+        $sql = "SELECT dv.dvId AS id,dv.dvName AS division FROM division dv
+        WHERE dv.dsId  IN (SELECT d.dsId AS id FROM inventorymgtofficer mn,inventory i,division d
+        WHERE mn.inventoryID = i.inventoryId  AND mn.inventoryMgtOfficerID = $uid AND i.dvId = d.dvId) ORDER BY division";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
     public function availableItem(array $data){
         $uid = $data['userId'];

@@ -125,11 +125,8 @@
                                                 <tr>
                                                     <td style="background-color: #fff;">Requesting From</td>
                                                     <td style="background-color: #fff;">                                
-                                                        <select id="status-filter" class="form-control">
-                                                            <option>Any</option>
-                                                            <option>Matara</option>
-                                                            <option>Hakmana</option>
-                                                            <option>Kirinda</option>
+                                                        <select id="division" class="form-control">
+                                                            <option value="">Any</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -174,6 +171,25 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        getDivision()
+        function getDivision(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>division",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            //console.log(output);
+            var select = document.getElementById("division");
+            for (var i = 0; i < output.length; i++){
+                var opt = document.createElement('option');
+                opt.value = output[i]['id'];
+                opt.innerHTML = output[i]['division'];
+                select.appendChild(opt);
+            }
         }
     </script>
 </body>

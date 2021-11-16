@@ -91,6 +91,7 @@
                                         <option value="" selected='true'>Select</option>
                                         <option value="1">Grama Niladhari</option>
                                         <option value="4">Divisional Secretariat</option>
+                                        <option value="6">Disaster management officer</option>
                                         <option value="3">District secretariat</option>
                                     </select>
                                 </div>
@@ -300,6 +301,10 @@
                 }else if(value==3){
                     $('#DistrictBox').show();
                     $('#DivisionBox').hide();
+                    $('#GndivisionBox').hide();
+                }else if(value==6){
+                    $('#DistrictBox').show();
+                    $('#DivisionBox').show();
                     $('#GndivisionBox').hide();
                 }
             });

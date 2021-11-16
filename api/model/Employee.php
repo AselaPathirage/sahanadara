@@ -9,7 +9,7 @@ class Employee{
         global $errorCode;
         
         if((! isset($data['username']) || (! isset($data['password'])))){
-            echo json_encode("{'code':".$errorCode['attributeMissing']."}");
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
             exit();
         } 
         $username = md5($data['username']);

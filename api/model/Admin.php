@@ -22,6 +22,9 @@ class Admin extends Employee{
                     $sql0 = "SELECT empEmail FROM divisionalsecretariat WHERE empEmail = '".$data['email']."'";
                     $sql ="INSERT INTO divisionalsecretariat (empName,empAddress,empEmail,empTele) VALUES ('$name','".$data['address']."','".$data['email']."','".$data['TP_number']."');";
                     break;
+                case 6:
+                    $sql0 = "SELECT empEmail FROM dismgtofficer WHERE empEmail = '".$data['email']."'";
+                    $sql ="INSERT INTO dismgtofficer (empName,empAddress,empEmail,empTele) VALUES ('$name','".$data['address']."','".$data['email']."','".$data['TP_number']."');";
             }
             $query = $this->connection->query($sql0);
             if($query->num_rows==0){
@@ -48,6 +51,10 @@ class Admin extends Employee{
                         $dvId = $data['Division'];
                         $sql ="UPDATE divisionaloffice SET divisionalSecretariatID = $userId WHERE dvId = $dvId";
                         break;
+                    case 6:
+                        $dvId = $data['Division'];
+                        $sql ="UPDATE divisionaloffice SET disasterManager = $userId WHERE dvId = $dvId";
+                        break;
                 }
                 $this->connection->query($sql);
                 $body ="Please use these creadentials to login Sahanadara. You need to change your password after the login.<ul><li>User Name: ".$data['NIC']." </li><li>Password: $password </li></ul>";
@@ -56,12 +63,10 @@ class Admin extends Employee{
                 echo json_encode(array("code"=>$errorCode['success']));
                 exit();
             }else{
-                http_response_code(400);
                 echo json_encode(array("code"=>$errorCode['emailAlreadyInUse']));
                 exit();   
             }
         }else{ 
-            http_response_code(406);
             echo json_encode(array("code"=>$errorCode['attributeMissing']));
             exit();
         }
@@ -106,52 +111,13 @@ class Admin extends Employee{
         echo $json;
     }
     public function getDistrict(array $data){
-        if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
-        }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
-        }
-        
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
+
     }
     public function getDivision(array $data){
-        if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
-        }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
-        }
-        
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
+
     }
     public function getGnDivision(array $data){
-        if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
-        }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
-        }
-        
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
+
     }
     public function DBtoJson(){
         $sql = "SELECT d.dsId,d.dsName,dv.dvId,dv.dvName,gn.gndvId,gn.gnDvName FROM district d,division dv,gndivision gn 

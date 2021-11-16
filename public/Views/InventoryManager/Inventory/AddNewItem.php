@@ -184,12 +184,12 @@ tr:hover{
                                     <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                                     </th>
                                     <th style="width: 30%;">Unit
-                                        <select id="unitType_2" class="form-control">
-                                            <option>Any</option>
+                                        <select id="unitType_2" class="form-control" >
+                                            <option value="">Any</option>
                                         </select>
                                     </th>
                                     <th style="width: 10%;">
-                                    <input type="submit" id="addNew" value="+ Create New Item" class="form-control">
+                                    <input type="submit" id="addNew" value="+ Create New Item" class="form-control" required='true'>
                                     </th>
                                     <!-- <th style="width: 10%;">
                                     <input type="submit" id="editItem" value="+ Create New Item" class="form-control">

@@ -115,8 +115,18 @@ class InventoryManager extends Noticer{
     public function getSafeHouse(){
 
     }
-    public function getDvOfficeList(){
-        
+    public function getDvOfficeList(array $data){
+        $uid = $data['userId'];
+        $sql = "SELECT dv.dvId AS id,dv.dvName AS division FROM division dv
+        WHERE dv.dsId  IN (SELECT d.dsId AS id FROM inventorymgtofficer mn,inventory i,division d
+        WHERE mn.inventoryID = i.inventoryId  AND mn.inventoryMgtOfficerID = $uid AND i.dvId = d.dvId) ORDER BY division";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
     public function availableItem(array $data){
         $uid = $data['userId'];

@@ -111,52 +111,13 @@ class Admin extends Employee{
         echo $json;
     }
     public function getDistrict(array $data){
-        if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
-        }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
-        }
-        
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
+
     }
     public function getDivision(array $data){
-        if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
-        }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
-        }
-        
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
+
     }
     public function getGnDivision(array $data){
-        if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id";
-        }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId";
-        }
-        
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
+
     }
     public function DBtoJson(){
         $sql = "SELECT d.dsId,d.dsName,dv.dvId,dv.dvName,gn.gndvId,gn.gnDvName FROM district d,division dv,gndivision gn 

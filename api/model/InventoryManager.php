@@ -8,11 +8,20 @@ class InventoryManager extends Noticer{
     }
     public function addItem(array $data){
         global $errorCode;
-        $itemName = $data['itemName'];
-        $unitType = $data['unitType'];
-        $sql = "INSERT INTO `item` (`itemName`, `unitType`) VALUES ('$itemName', $unitType);";
-        $this->connection->query($sql);
-        echo json_encode(array("code"=>$errorCode['success']));
+        if(isset($data['itemName']) && isset($data['unitType'])){
+            if($data['itemName']=="" || !is_int($data['unitType'])){
+                echo json_encode(array("code"=>$errorCode['attributeMissing']));
+                exit();
+            }
+            $itemName = $data['itemName'];
+            $unitType = $data['unitType']; 
+            $sql = "INSERT INTO `item` (`itemName`, `unitType`) VALUES ('$itemName', $unitType);";
+            $this->connection->query($sql);
+            echo json_encode(array("code"=>$errorCode['success']));
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
     }
     public function getItem(array $data){
         if(count($data['receivedParams'])==1){

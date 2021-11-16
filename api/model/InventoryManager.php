@@ -134,9 +134,7 @@ class InventoryManager extends Noticer{
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
-            $item = new Item();
-            $item->setItemCode($r['itemId']);
-            $r['itemId'] = $item->getItemCode();
+            $r['itemId'] = Item::getItemCode($r['itemId']);
             $results[] = $r;
         }
         $json = json_encode($results);

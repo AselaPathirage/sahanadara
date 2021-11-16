@@ -30,14 +30,12 @@ class InventoryManager extends Noticer{
             $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id ORDER BY item.itemId";
         }else{
             $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId  ORDER BY item.itemId";
-        }
+        } 
         
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
-            $item = new Item();
-            $item->setItemCode($r['itemId']);
-            $r['itemId'] = $item->getItemCode();
+            $r['itemId'] = Item::getItemCode($r['itemId']);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -66,7 +64,6 @@ class InventoryManager extends Noticer{
             $quantity = $data['quantity'];
             $uid = $data['userId'];
             if(isset($data['release'])){
-                
                 $sql = "SELECT SUM(v.quantity) AS quantity FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND v.itemId = $itemId  AND i.unitType =u.unitId GROUP BY v.itemId";
                 $excute = $this->connection->query($sql);
                 $array = $excute-> fetch_assoc();
@@ -109,9 +106,7 @@ class InventoryManager extends Noticer{
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
-            $item = new Item();
-            $item->setItemCode($r['itemId']);
-            $r['itemId'] = $item->getItemCode();
+            $r['itemId'] = Item::getItemCode($r['itemId']);
             $results[] = $r;
         }
         $json = json_encode($results);

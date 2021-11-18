@@ -1,6 +1,8 @@
 <?php
-class InventoryManager extends Noticer{
+class InventoryManager extends Employee{
     private $inventory = null;
+    use Noticer;
+    use Viewer;
 
     public function __construct($con){
         parent::__construct($con);
@@ -112,9 +114,6 @@ class InventoryManager extends Noticer{
         $json = json_encode($results);
         echo $json;
     }
-    public function getSafeHouse(){
-
-    }
     public function getDvOfficeList(array $data){
         $uid = $data['userId'];
         $sql = "SELECT dv.dvId AS id,dv.dvName AS division FROM division dv
@@ -134,11 +133,60 @@ class InventoryManager extends Noticer{
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
-            $item = new Item();
-            $item->setItemCode($r['itemId']);
-            $r['itemId'] = $item->getItemCode();
+            $r['itemId'] = Item::getItemCode($r['itemId']);
             $results[] = $r;
         }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getneighbourInventoryItem(array $data){
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $division = $this->inventory->getDivision();
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $sql = "SELECT i.inventoryId,d.dvName AS division,item.itemId,item.itemName
+            FROM inventory i,division d,item,inventoryitem
+            WHERE  d.dvId IN (SELECT dvId FROM division,district WHERE division.dsId = district.dsId AND division.dsId=(SELECT dsId FROM division WHERE dvId = $division))
+            AND inventoryitem.inventoryId = i.inventoryId AND item.itemId = inventoryitem.itemId
+            AND i.dvId = d.dvId AND i.inventoryId = $id
+            GROUP BY i.inventoryId,division,itemId HAVING SUM(inventoryitem.quantity) > 0";
+        }else{
+            $sql = "SELECT i.inventoryId,d.dvName AS division,item.itemId,item.itemName
+            FROM inventory i,division d,item,inventoryitem
+            WHERE  d.dvId IN (SELECT dvId FROM division,district WHERE division.dsId = district.dsId AND division.dsId=(SELECT dsId FROM division WHERE dvId = $division))
+            AND inventoryitem.inventoryId = i.inventoryId AND item.itemId = inventoryitem.itemId
+            AND i.dvId = d.dvId
+            GROUP BY i.inventoryId,division,itemId HAVING SUM(inventoryitem.quantity) > 0";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array("inventory"=>array());
+        while($r = $excute-> fetch_assoc()) {
+            if(!isset($results["inventory"][$r["division"]])) {
+                $results["inventory"][$r["division"]]["inventoryId"] = $r["inventoryId"];
+            }
+            $results["inventory"][$r["division"]][$r["itemName"]]["id"] = $r["itemId"];
+        }
+        $sql = "SELECT i.inventoryId,item.itemId,item.itemName
+                FROM inventory i,division d,item,inventoryitem
+                WHERE d.dvId IN (SELECT dvId FROM division,district WHERE division.dsId = district.dsId AND division.dsId=(SELECT dsId FROM division WHERE dvId = 1))
+                AND item.itemId = inventoryitem.itemId
+                AND i.dvId = d.dvId AND i.inventoryId = inventoryitem.inventoryId
+                GROUP BY i.inventoryId,itemId HAVING SUM(inventoryitem.quantity) > 0";
+        $excute = $this->connection->query($sql);
+        $results['all'] = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results["all"][$r["itemName"]]["id"] = $r["itemId"];
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function countItem(array $data){
+        $uid = $data['userId'];
+        $sql = "SELECT i.itemId,i.itemName, unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId GROUP BY v.itemId HAVING SUM(v.quantity) > 0";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        $results['item'] = $excute->num_rows;
         $json = json_encode($results);
         echo $json;
     }

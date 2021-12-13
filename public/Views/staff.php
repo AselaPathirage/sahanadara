@@ -52,7 +52,7 @@
                         <p>Enter your username and password</p>
                         <div class="row-content">
                             <div class="container">
-                                <form action="/<?php echo HOST; ?>/Handler/loginHandle" method="post">
+                                <form action="/<?php echo baseUrl; ?>/Handler/loginHandle" method="post">
                                     <h2>Login</h2>
                                     <?php
                                         if(isset($_GET['error'])){

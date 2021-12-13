@@ -142,7 +142,7 @@ color: #ffdddd;
                 html += '<td><button type="button" name="remove" class="form-control remove">Remove</button></td></tr>';
                 $('#item_table').append(html);
             });
-                 
+                
             $(document).on('click', '.remove', function(){
                 $(this).closest('tr').remove();
             });

@@ -138,4 +138,7 @@ class Core{
                 $this->userType=0;
             }
         }
+        public function backlog(){
+            
+        }
 }

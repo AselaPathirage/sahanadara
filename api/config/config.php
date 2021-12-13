@@ -4,7 +4,7 @@ define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
 define("DB_NAME", "sahanadara");
-//define("API_KEY", "1234");
+define("LOG_PATH", "/log");
 define("ENCRYPTION_KEY","AHkjghjvHJGKNKLlkBG54J");
 
 //SMS

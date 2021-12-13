@@ -50,11 +50,16 @@ trait Viewer{
                 $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'] = array();
             }
             if(!isset($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]])) {
+                if($r['isUsing'] == 'n'){
+                    $temp = "No";
+                }else{
+                    $temp = "Yes";
+                }
                 $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]] = array( 'gnId' => $r["gndvId"],
                                                                                                                 'safeHouseId' => $r["safeHouseID"],
                                                                                                                 'name' => $r["safeHouseName"],
                                                                                                                 'address' => $r["safeHouseAddress"],
-                                                                                                                'isusing' => $r["isUsing"],
+                                                                                                                'active' => $temp,
                                                                                                                 'contact' => array()
                 );
                 array_push($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]]['contact'],$r["safeHouseTelno"]);

@@ -12,6 +12,7 @@ Route::GET("division",array("Admin@getDivision","InventoryManager@getDvOfficeLis
 Route::GET("GnDivision",array("Admin@getGnDivision","DisasterOfficer@getGNDivision"));
 Route::GET("item",array("InventoryManager@getItem","ResponsiblePerson@getItem"));
 Route::GET("safehouse",array("DisasterOfficer@viewSafehouse","InventoryManager@getSafeHouse","DivisionalSecretariat@getSafeHouse","Dmc@getSafeHouse")); 
+Route::GET("district",array("Admin@getDistrict","InventoryManager@getDistrict"));
 
 Route::PUT("resetPassword",array("Employee@updatePassword"));
 
@@ -31,7 +32,6 @@ Route::POST("safehouse",array("DisasterOfficer@addSafehouse"));
 
 //Admin
 Route::GET("user",array("Admin@searchUser"));
-Route::GET("district",array("Admin@getDistrict"));
 Route::GET("area",array("Admin@DBtoJson"));
 
 // Inventory Manager

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title> DMC - Report </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/searchList.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/searchList.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -89,7 +89,7 @@
             </div>
         </div>
     </section>
-    <script src="/<?php echo baseUrl; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
+    <script src="<?php echo HOST; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
     <script>
         var thisPage = "#compensation";
         $(document).ready(function() {

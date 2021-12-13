@@ -190,4 +190,7 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
+    public function getDistrict(array $data){
+
+    }
 }

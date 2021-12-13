@@ -42,7 +42,7 @@
                     <div class="space"></div>
                     <h1 class="heading_landing">Staff</h1>
                     <div class="container aboutsec">
-                        <img src="/<?php echo baseUrl; ?>/public/assets/img/staff.jpg" alt="" style="border-radius: 5px;width:75%;">
+                        <img src="<?php echo HOST; ?>/public/assets/img/staff.jpg" alt="" style="border-radius: 5px;width:75%;">
                     </div>
                 </div>
                 <div class="col6">
@@ -52,7 +52,7 @@
                         <p>Enter your username and password</p>
                         <div class="row-content">
                             <div class="container">
-                                <form action="/<?php echo baseUrl; ?>/Handler/loginHandle" method="post">
+                                <form action="<?php echo HOST; ?>/Handler/loginHandle" method="post">
                                     <h2>Login</h2>
                                     <?php
                                         if(isset($_GET['error'])){

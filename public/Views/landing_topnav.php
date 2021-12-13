@@ -1,5 +1,5 @@
 <nav class="navbar">
-    <div class="logo2"><img src="/<?php echo baseUrl; ?>/public/assets/img/social-care.png" height="40" alt="LOGO"></div>
+    <div class="logo2"><img src="<?php echo HOST; ?>/public/assets/img/social-care.png" height="40" alt="LOGO"></div>
     <div class="push-left">
         <button id="menu-toggler" data-class="menu-active" class="hamburger">
             <span class="hamburger-line "><i class="fa fa-bars"></i></span>
@@ -18,9 +18,9 @@
             </li> -->
 
 
-            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>about">About </a>
-            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>help">Help </a>
-            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>donate">Donate </a>
+            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>/about">About </a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>/help">Help </a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>/donate">Donate </a>
             <?php
                 $folder = array(
                                     5 => 'Admin',
@@ -33,9 +33,9 @@
                                     8 => 'ResponsiblePerson'
                                 );
                 if(isset($_SESSION['key']) && isset($_SESSION['name']) && isset($_SESSION['userRole'])){
-                    echo "<li class='menu-item'><a class='nav__link' href='".HOST.$folder[$_SESSION['userRole']]."'>Hi, ".$_SESSION['name']." </a>";
+                    echo "<li class='menu-item'><a class='nav__link' href='".HOST.'/'.$folder[$_SESSION['userRole']]."'>Hi, ".$_SESSION['name']." </a>";
                 }else{
-                    echo "<li class='menu-item'><a class='nav__link' href='".HOST."staff'>Staff </a>";
+                    echo "<li class='menu-item'><a class='nav__link' href='".HOST."/staff'>Staff </a>";
                 }
             ?>
 

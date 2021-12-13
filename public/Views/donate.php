@@ -24,7 +24,7 @@
             <div class="space"></div>
             <h1 class="heading_landing">Fund Raises</h1>
             <div class="container aboutsec">
-                <p>MAKE A DONATION & SPREAD A SMILE <br> SAHANADARA ensures that every single Rupee what you donate will be solely used for Charity purpose.
+                <p class="text-center" style="font-size: large;">MAKE A DONATION & SPREAD A SMILE <br> SAHANADARA ensures that every single Rupee what you donate will be solely used for Charity purpose.
                 </p>
 
 

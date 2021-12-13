@@ -19,6 +19,12 @@
             </a>
         </li>
         <li>
+            <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/messages" id="Messages">
+            <i class='bx bx-message-dots'></i>
+                <span class="links_name">Messages</span>
+            </a>
+        </li>
+        <li>
             <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Incidents" id="Incidents">
                 <i class='bx bx-message-square-edit' ></i>
                 <span class="links_name">Incidents</span>

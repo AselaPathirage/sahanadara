@@ -79,7 +79,7 @@
                             <tbody>
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    <td>01/24/2015 12:50</td>
+                                    <td>01/24/2021 12:50</td>
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
@@ -87,9 +87,33 @@
                                 </tr>
 
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>03/14/2015 13:56</td>
+                                    <td>03/14/2021 13:56</td>
                                     <td>Relief</td>
                                     <td>Approved</td>
+                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>03/20/2021 13:56</td>
+                                    <td>Relief</td>
+                                    <td>Approved</td>
+                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>03/21/2021 13:56</td>
+                                    <td>Relief</td>
+                                    <td>Approved</td>
+                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>03/25/2021 13:56</td>
+                                    <td>Relief</td>
+                                    <td>Approved</td>
+                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>03/28/2021 13:56</td>
+                                    <td>Final</td>
+                                    <td>Not Approved</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                             </tbody>

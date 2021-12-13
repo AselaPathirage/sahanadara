@@ -60,6 +60,7 @@
                 <br>
                 
                 <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-fun">Add new safehouse</a>
+                <div class="space"></div>
                 
 
 

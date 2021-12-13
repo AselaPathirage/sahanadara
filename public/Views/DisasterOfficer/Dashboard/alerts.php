@@ -24,122 +24,46 @@
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
-        <!-- STATS -->
-               
-        
-        <!-- TABLE -->
         <div class="container">
-            <div class="">
-                <br>
-            <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/sendalerts" class="btn-fun">Send Alert</a>
+            <center>
+            <h1>Alerts</h1>
+            </center>
+            <div class="container text-center">
+                <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
+                    <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                        of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
+                    </p>
+                </div>
+                <div class="row-content alert-div" style="margin: 10px auto;">
+                    <p>High possibility of the current minor flood situation in low line areas of Kalu River Valley 
+                        situated in Horana, Agalawatta and Kalutara D/S Divisions further worsening. DMC
+                    </p>
+                </div>
+                <div class="row-content alert-div" style="margin: 10px auto;">
+                    <p>Rainfall over 225mm recorded in catchment areas Kalu river Basin. High risk of
+                        of minor flooding in low lying areas. Area residents requested to be alert. DMC
+                    </p>
+                </div>
+                <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
+                    <p>High possibility of the current minor flood situation in low line areas of Kalu River Valley 
+                        situated in Ingiriya, Palinda Nuwara, Bulathsinhala, Dodangoda, Millaniya and
+                        Madurawala  D/S Divisions further worsening. DMC
+                    </p>
+                </div>
 
-                <!-- <table class="table">
-                    <thead>
-                        <tr class="filters">
-                            <th>Assigned User
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>John</option>
-                                    <option>Rob</option>
-                                    <option>Larry</option>
-                                    <option>Donald</option>
-                                    <option>Roger</option>
-                                </select>
-                            </th>
-                            <th>Status
-                                <select id="status-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Not Started</option>
-                                    <option>In Progress</option>
-                                    <option>Completed</option>
-                                </select>
-                            </th>
-                            <th>Milestone
-                                <select id="milestone-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Milestone 1</option>
-                                    <option>Milestone 2</option>
-                                    <option>Milestone 3</option>
-                                </select>
-                            </th>
-                            <th>Priority
-                                <select id="priority-filter" class="form-control">
-                                    <option>Any</option>
-                                    <option>Low</option>
-                                    <option>Medium</option>
-                                    <option>High</option>
-                                    <option>Urgent</option>
-                                </select>
-                            </th>
-                            <th>Tags
-                                <select id="tags-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Tag 1</option>
-                                    <option>Tag 2</option>
-                                    <option>Tag 3</option>
-                                </select>
-                            </th>
-                            <th>Search
-                                <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
-                            </th>
-                        </tr>
-                    </thead>
-                </table> -->
-
-
-                <div class="panel panel-primary filterable">
-                    <table id="task-list-tbl" class="table">
-                        <thead>
-                            <tr>
-                                
-                                <th>Date/Time</th>
-                                <th>Message</th>
-                                <th>Officers only</th>
-                                <th>Location</th>
-                    
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                
-                                <td>01/24/2015</td>
-                                <td>Task 1</td>
-                                <td>Yes</td>
-                                <td>Horana</td>
-                            </tr>
-
-                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                
-                                <td>03/14/2015</td>
-                                <td>Task 2</td>
-                                <td>No</td>
-                                <td>Colombo</td>
-                            </tr>
-
-                            <tr id="task-3" class="task-list-row" data-task-id="3" data-user="Donald" data-status="Not Started" data-milestone="Milestone 1" data-priority="Low" data-tags="Tag 3">
-                                
-                                <td>11/16/2014</td>
-                                <td>Task 3</td>
-                                <td>Yes</td>
-                                <td>Matara</td>
-                            </tr>
-
-                        </tbody>
-                    </table>
+                <div class="row-content alert-div" style="margin: 10px auto;">
+                    <p>Rainfall over 225mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                        of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
+                    </p>
                 </div>
             </div>
         </div>
-
-           
-               
 
     </section>
     <script>
         var thisPage = "#Alerts";
         $(document).ready(function() {
-            $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
+            $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

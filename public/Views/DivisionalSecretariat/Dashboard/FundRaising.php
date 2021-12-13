@@ -26,6 +26,9 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
+        <div class="space"></div>
+            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Createfundraise" class="btn-fun">Create New Fundraise</a>
+            <br>
         <table class="table">
                     <thead>
                         <tr class="filters">
@@ -52,9 +55,6 @@
                         </tr>
                     </thead>
                 </table>
-                <br>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Createfundraise" class="btn-fun">Create New Fundraise</a>
-
                 <div class="container">
                     <div class="row">
                         <div class="col6">
@@ -73,8 +73,8 @@
 
                                
                                 <div class="space"></div>
-                                <a href="" class="btn-box">Remove</a>
-                                <a href="" class="btn-box">Update</a>
+                                <a href="" class="btn_active">Update</a>
+                                <a href="" class="btn_remove">Remove</a>
                             </div>
                         </div>
                     </div>

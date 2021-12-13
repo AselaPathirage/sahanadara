@@ -42,7 +42,7 @@
             </div>
             <div class="row">
                 <div class="col3">
-                    <label for="address">Descreption</label>
+                    <label for="address">Description</label>
                 </div>
                 <div class="col9">
                     <textarea type="text" id="address" name="address" placeholder=""></textarea>
@@ -70,7 +70,7 @@
     <script>
         var thisPage = "#Incidents";
         $(document).ready(function() {
-            $("#Dashboard,#Alerts,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
+            $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
                     $(this).removeClass("active");
                 }

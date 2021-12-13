@@ -77,7 +77,7 @@
                             <tbody>
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    <td>01/24/2015 12:50</td>
+                                    <td>10/24/2021 12:50</td>
                                     <td>Flood alert</td>
                                     <td>Yes</td>
                                     <td>Kalutara</td>
@@ -86,8 +86,9 @@
 
                                 </tr>
 
+
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>03/14/2015 13:56</td>
+                                    <td>10/22/2021 13:56</td>
                                     <td>Flood alert</td>
                                     <td>No</td>
                                     <td>Kalutara</td>
@@ -95,7 +96,105 @@
                                     <td>Millaniya- All, Horana West</td>
 
                                 </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/20/2021 10:26</td>
+                                    <td>Lanslide alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Bulathsinhala</td>
+                                    <td>Bulathsinhala- All, Horana West</td>
 
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/18/2021 18:43</td>
+                                    <td>Flood alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana West</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/16/2021 13:56</td>
+                                    <td>Landslide alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana- All</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/22/2021 13:56</td>
+                                    <td>Flood alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana West</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/20/2021 10:26</td>
+                                    <td>Lanslide alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Bulathsinhala</td>
+                                    <td>Bulathsinhala- All, Horana West</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/18/2021 18:43</td>
+                                    <td>Flood alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana West</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/16/2021 13:56</td>
+                                    <td>Landslide alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana- All</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/22/2021 13:56</td>
+                                    <td>Flood alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana West</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/20/2021 10:26</td>
+                                    <td>Lanslide alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Bulathsinhala</td>
+                                    <td>Bulathsinhala- All, Horana West</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/18/2021 18:43</td>
+                                    <td>Flood alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana West</td>
+
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>10/16/2021 13:56</td>
+                                    <td>Landslide alert</td>
+                                    <td>No</td>
+                                    <td>Kalutara</td>
+                                    <td>Horana, Millaniya</td>
+                                    <td>Millaniya- All, Horana- All</td>
+
+                                </tr>
 
                             </tbody>
                         </table>

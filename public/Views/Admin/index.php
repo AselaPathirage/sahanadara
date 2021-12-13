@@ -26,46 +26,93 @@
         <div class="space"></div>
         <div class="container">
             <h1 class="text-center">Welcome Admin</h1>
-            <div class="space"></div>
-            <div class="stat-row">
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">District Secretariats</div>
-                        <div class="number">20</div>
-
+    <section class="services">
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#ffb508">
+                            <ion-icon name="videocam-outline">
+                            <i class='bx bx-user cart one'></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                20
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 130px;">
+                            <h2 class="services__title">
+                            District Secretariats
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
                     </div>
-                    <i class='bx bx-user cart one'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Divisional Secretariats</div>
-                        <div class="number">80</div>
-
+                </a>
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#4eb7ff">
+                            <ion-icon name="videocam-outline">
+                            <i class='bx bx-user cart two'></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                80
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 130px;">
+                            <h2 class="services__title">
+                            Divisional Secretariats
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
                     </div>
-                    <i class='bx bx-user cart two'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Disaster Management Officers</div>
-                        <div class="number">80</div>
-
+                </a>
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#fd6494">
+                            <ion-icon name="videocam-outline">
+                            <i class='bx bx-user cart three'></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                80
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 130px;">
+                            <h2 class="services__title">
+                            Disaster Management <br>Officers
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
                     </div>
-                    <i class='bx bx-user cart three'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Grama Niladari</div>
-                        <div class="number">520</div>
-
+                </a>
+                <a href="">
+                    <div class="services__box">
+                        <figure class="services__icon" style="--i:#fd6494">
+                            <ion-icon name="videocam-outline">
+                            <i class='bx bx-user cart four'></i>
+                                <!-- <i class="fas fa-hands-helping"></i> -->
+                            </ion-icon>
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                500
+                            </h2>
+                        </figure>
+                        <div class="services__content" style="margin-top: 150px;">
+                            <h2 class="services__title">
+                            Grama Niladari
+                            </h2>
+                            <!-- <p class="services__description">
+                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
+                                        </p> -->
+                        </div>
                     </div>
-                    <i class='bx bx-user cart four'></i>
-                </div>
+                </a>
+            </section>
 
-            </div>
-        </div>
-        <div class="space"></div>
-
-    </section>
     <script>
         var thisPage = "#stats";
         $(document).ready(function() {

@@ -37,6 +37,6 @@ if(isset($_POST['submit'])){
         $_SESSION['userId']= $response['userId'];
         $_SESSION['name']= $response['userName'];
         //print_r($_SESSION);
-        header("location:".HOST.$routes[$response['userRole']]);
+        header("location:".HOST."/".$routes[$response['userRole']]);
     }
 }

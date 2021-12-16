@@ -1,7 +1,7 @@
 <div class="sidebar">
     <div class="logo-details">
         <a href="/<?php echo baseUrl; ?>">
-            <img src="/<?php echo basHOSTeUrl; ?>/public/assets/img/social-care3.png" width="" height="35" alt="logo">
+            <img src="<?php echo HOST; ?>public/assets/img/social-care3.png" width="" height="35" alt="logo">
         </a>
         <span class="logo_name">SAHANADARA</span>
     </div>

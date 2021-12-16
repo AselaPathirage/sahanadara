@@ -77,9 +77,6 @@
         color: wheat;
         box-shadow: 2px 1px #000;
     }
-    .view:hover{
-        /* background-color: rgb(66, 245, 96); */
-    }
     </style>
 </head>
 <body>

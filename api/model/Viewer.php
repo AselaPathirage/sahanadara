@@ -51,17 +51,29 @@ trait Viewer{
             }
             if(!isset($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]])) {
                 if($r['isUsing'] == 'n'){
-                    $temp = "No";
+                    $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]] = array( 'gnId' => $r["gndvId"],
+                    'safeHouseId' => $r["safeHouseID"],
+                    'name' => $r["safeHouseName"],
+                    'address' => $r["safeHouseAddress"],
+                    'active' => "No",
+                    'contact' => array()
+                    );
                 }else{
-                    $temp = "Yes";
+                    $sql = "SELECT adultMale,adultFemale,Children,disabledPerson FROM safehousestatus WHERE safehouseId =".$r['safeHouseID']." ORDER BY createdDate DESC LIMIT 1;";
+                    $temp = $this->connection->query($sql);
+                    $temp = $temp-> fetch_assoc();
+                    $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]] = array( 'gnId' => $r["gndvId"],
+                    'safeHouseId' => $r["safeHouseID"],
+                    'name' => $r["safeHouseName"],
+                    'address' => $r["safeHouseAddress"],
+                    'active' => "Yes",
+                    'contact' => array(),
+                    'males'=> $temp['adultMale'],
+                    'females' => $temp['adultFemale'],
+                    'children' => $temp['Children'],
+                    'disabledPerson' => $temp['disabledPerson'],
+                    );
                 }
-                $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]] = array( 'gnId' => $r["gndvId"],
-                                                                                                                'safeHouseId' => $r["safeHouseID"],
-                                                                                                                'name' => $r["safeHouseName"],
-                                                                                                                'address' => $r["safeHouseAddress"],
-                                                                                                                'active' => $temp,
-                                                                                                                'contact' => array()
-                );
                 array_push($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]]['contact'],$r["safeHouseTelno"]);
             }else{
                 array_push($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]]['contact'],$r["safeHouseTelno"]);

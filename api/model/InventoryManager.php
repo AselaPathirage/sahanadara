@@ -10,12 +10,9 @@ class InventoryManager extends Employee{
     }
     public function addItem(array $data){
         global $errorCode;
-        print_r($data);
         if(isset($data['itemName']) && isset($data['unitType'])){
+            $data['unitType'] = (int)$data['unitType'];
             if($data['itemName']=="" || !is_int($data['unitType'])){
-                echo $data['unitType'];
-                echo "-";
-                echo is_int($data['unitType']);
                 echo json_encode(array("code"=>$errorCode['attributeMissing']));
                 exit();
             }
@@ -38,7 +35,8 @@ class InventoryManager extends Employee{
             }
             $itemName = $data['value'];
             $itemId = $data['id']; 
-            $sql = "UPDATE `item` (`itemName`, `unitType`) SET `itemName`='$itemName' WHERE itemId =$itemId;";
+            $itemId = Item::getId($itemId);
+            $sql = "UPDATE `item` SET `itemName`='$itemName' WHERE itemId =$itemId;";
             $this->connection->query($sql);
             echo json_encode(array("code"=>$errorCode['success']));
         }else{

@@ -11,6 +11,7 @@ class InventoryManager extends Employee{
     public function addItem(array $data){
         global $errorCode;
         if(isset($data['itemName']) && isset($data['unitType'])){
+            $data['unitType'] = (int)$data['unitType'];
             if($data['itemName']=="" || !is_int($data['unitType'])){
                 echo json_encode(array("code"=>$errorCode['attributeMissing']));
                 exit();
@@ -18,6 +19,24 @@ class InventoryManager extends Employee{
             $itemName = $data['itemName'];
             $unitType = $data['unitType']; 
             $sql = "INSERT INTO `item` (`itemName`, `unitType`) VALUES ('$itemName', $unitType);";
+            $this->connection->query($sql);
+            echo json_encode(array("code"=>$errorCode['success']));
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function updateItem(array $data){
+        global $errorCode;
+        if(isset($data['value']) && isset($data['id'])){
+            if($data['value']==""){
+                echo json_encode(array("code"=>$errorCode['attributeMissing']));
+                exit();
+            }
+            $itemName = $data['value'];
+            $itemId = $data['id']; 
+            $itemId = Item::getId($itemId);
+            $sql = "UPDATE `item` SET `itemName`='$itemName' WHERE itemId =$itemId;";
             $this->connection->query($sql);
             echo json_encode(array("code"=>$errorCode['success']));
         }else{
@@ -191,6 +210,11 @@ class InventoryManager extends Employee{
         echo $json;
     }
     public function getDistrict(array $data){
-
+        $this->inventory->setInfo($data['userId']);
+        $temp = $this->inventory->getDistrict();
+        $district['name'] = $temp['dsName'];
+        $district['id'] = $temp['dsId'];
+        $json = json_encode($district);
+        echo $json;
     }
 }

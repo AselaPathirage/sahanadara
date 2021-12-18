@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Inventory Manager - Safe House </title>
@@ -13,13 +14,14 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <?php
-        include_once('./public/Views/ResponsiblePerson/includes/sidebar_safeHouse.php');
-     ?>
+    include_once('./public/Views/ResponsiblePerson/includes/sidebar_safeHouse.php');
+    ?>
     <section class="dashboard-section">
-        <?php 
-        include_once('./public/Views/ResponsiblePerson/includes/topnav.php'); 
+        <?php
+        include_once('./public/Views/ResponsiblePerson/includes/topnav.php');
         ?>
         <div class="space"></div>
         <div class="container">
@@ -71,7 +73,7 @@
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#ffb508">
                             <ion-icon name="videocam-outline">
-                            <i class='bx bxs-calendar'></i>
+                                <i class='bx bxs-calendar'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
                             <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
@@ -92,7 +94,7 @@
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#4eb7ff">
                             <ion-icon name="videocam-outline">
-                            <i class='bx bx-user'></i>
+                                <i class='bx bx-user'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
                             <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
@@ -113,14 +115,14 @@
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#fd6494">
                             <ion-icon name="videocam-outline">
-                            <i class='bx bx-cog'></i>
+                                <i class='bx bx-cog'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
                             <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
                                 2
                             </h2>
                         </figure>
-                        <div class="services__content" style="">
+                        <div class="services__content">
                             <h2 class="services__title">
                                 Pending AID Requests
                             </h2>
@@ -138,7 +140,7 @@
         var thisPage = "#stats";
         $(document).ready(function() {
             $("#stats,#updates").each(function() {
-                if ($(this).hasClass('active')){
+                if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }
                 $(thisPage).addClass("active");
@@ -153,4 +155,5 @@
         }
     </script>
 </body>
+
 </html>

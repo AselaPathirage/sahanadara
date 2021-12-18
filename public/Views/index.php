@@ -201,7 +201,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -218,7 +218,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -239,7 +239,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -256,7 +256,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>

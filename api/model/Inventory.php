@@ -11,17 +11,16 @@ class Inventory{
         $this->connection = $mysqli;
     }
     public function setInfo($userId){ 
-        $sql = "SELECT inventory.inventoryId AS inventoryId,division.dvId AS dvId FROM inventorymgtofficer,inventory,division 
+        $sql = "SELECT inventory.inventoryId AS inventoryId,division.dvId AS dvId,division.dvName FROM inventorymgtofficer,inventory,division 
                 WHERE inventoryMgtOfficerID = $userId AND inventorymgtofficer.inventoryID = inventory.inventoryId 
                 AND inventory.dvId = division.dvId";
         $excute = $this->connection->query($sql);
         $excute = $excute-> fetch_assoc();
         $this->inventoryId = $excute['inventoryId'];
-        $this->division = $excute['dvId'];
-        $sql = "SELECT dsId FROM division WHERE dvId =".$excute['dvId'];
+        $this->division = array('name'=>$excute['dvName'],'id'=>$excute['dvId']);
+        $sql = "SELECT dsName,district.dsId FROM district,division WHERE division.dsId = district.dsId AND dvId =".$excute['dvId'];
         $excute = $this->connection->query($sql);
-        $excute = $excute-> fetch_assoc();
-        $this->district = $excute['dsId'];
+        $this->district = $excute-> fetch_assoc();
     }
     public function setAddress($inventoryId){
         $sql = "SELECT inventoryAddress  FROM inventory WHERE inventoryId  = $inventoryId";

@@ -19,9 +19,9 @@
             </li> -->
 
 
-            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>/about">About </a>
-            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>/help">Help </a>
-            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>/donate">Donate </a>
+            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>about">About </a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>help">Help </a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>donate">Donate </a>
             <?php
                 $folder = array(
                                     5 => 'Admin',
@@ -34,9 +34,9 @@
                                     8 => 'ResponsiblePerson'
                                 );
                 if(isset($_SESSION['key']) && isset($_SESSION['name']) && isset($_SESSION['userRole'])){
-                    echo "<li class='menu-item'><a class='nav__link' href='".HOST."/".$folder[$_SESSION['userRole']]."'>Hi, ".$_SESSION['name']." </a>";
+                    echo "<li class='menu-item'><a class='nav__link' href='".HOST.$folder[$_SESSION['userRole']]."'>Hi, ".$_SESSION['name']." </a>";
                 }else{
-                    echo "<li class='menu-item'><a class='nav__link' href='".HOST."/staff'>Staff </a>";
+                    echo "<li class='menu-item'><a class='nav__link' href='".HOST."staff'>Staff </a>";
                 }
             ?>
 

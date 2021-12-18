@@ -105,7 +105,7 @@
                         <div class="col5 card_donation is-collapsed row-content">
                             <div class="card__inner js-expander">
                                 <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
+                                <p>Bellapitiya</p>
 
                             </div>
                             <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -122,45 +122,7 @@
                         <div class="col5 card_donation is-collapsed row-content">
                             <div class="card__inner js-expander">
                                 <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
-
-                            </div>
-                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
-                                <label for="your_name">Name</label>
-                                <input type="text" id="your_name" name="yourname" />
-
-                                <label for="your_phone">Amount (Rs)</label>
-                                <input type="tel" id="your_phone" name="yourphone" />
-                                <div class="space2"></div>
-                                <a href="./donate.php" class="donate">Donate</a>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row ">
-
-                        <div class="col5 card_donation is-collapsed row-content">
-                            <div class="card__inner js-expander">
-                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
-
-                            </div>
-                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
-                                <label for="your_name">Name</label>
-                                <input type="text" id="your_name" name="yourname" />
-
-                                <label for="your_phone">Amount (Rs)</label>
-                                <input type="tel" id="your_phone" name="yourphone" />
-                                <div class="space2"></div>
-                                <a href="./donate.php" class="donate">Donate</a>
-
-                            </div>
-                        </div>
-                        <div class="col5 card_donation is-collapsed row-content">
-                            <div class="card__inner js-expander">
-                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
+                                <p>Bellapitiya</p>
 
                             </div>
                             <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -181,7 +143,7 @@
                         <div class="col5 card_donation is-collapsed row-content">
                             <div class="card__inner js-expander">
                                 <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
+                                <p>Bellapitiya</p>
 
                             </div>
                             <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -198,45 +160,7 @@
                         <div class="col5 card_donation is-collapsed row-content">
                             <div class="card__inner js-expander">
                                 <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
-
-                            </div>
-                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
-                                <label for="your_name">Name</label>
-                                <input type="text" id="your_name" name="yourname" />
-
-                                <label for="your_phone">Amount (Rs)</label>
-                                <input type="tel" id="your_phone" name="yourphone" />
-                                <div class="space2"></div>
-                                <a href="./donate.php" class="donate">Donate</a>
-
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row ">
-
-                        <div class="col5 card_donation is-collapsed row-content">
-                            <div class="card__inner js-expander">
-                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
-
-                            </div>
-                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
-                                <label for="your_name">Name</label>
-                                <input type="text" id="your_name" name="yourname" />
-
-                                <label for="your_phone">Amount (Rs)</label>
-                                <input type="tel" id="your_phone" name="yourphone" />
-                                <div class="space2"></div>
-                                <a href="./donate.php" class="donate">Donate</a>
-
-                            </div>
-                        </div>
-                        <div class="col5 card_donation is-collapsed row-content">
-                            <div class="card__inner js-expander">
-                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
+                                <p>Bellapitiya</p>
 
                             </div>
                             <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -257,7 +181,7 @@
                         <div class="col5 card_donation is-collapsed row-content">
                             <div class="card__inner js-expander">
                                 <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
+                                <p>Bellapitiya</p>
 
                             </div>
                             <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -274,7 +198,83 @@
                         <div class="col5 card_donation is-collapsed row-content">
                             <div class="card__inner js-expander">
                                 <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                                <p style="">Bellapitiya</p>
+                                <p>Bellapitiya</p>
+
+                            </div>
+                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
+                                <label for="your_name">Name</label>
+                                <input type="text" id="your_name" name="yourname" />
+
+                                <label for="your_phone">Amount (Rs)</label>
+                                <input type="tel" id="your_phone" name="yourphone" />
+                                <div class="space2"></div>
+                                <a href="./donate.php" class="donate">Donate</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row ">
+
+                        <div class="col5 card_donation is-collapsed row-content">
+                            <div class="card__inner js-expander">
+                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
+                                <p>Bellapitiya</p>
+
+                            </div>
+                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
+                                <label for="your_name">Name</label>
+                                <input type="text" id="your_name" name="yourname" />
+
+                                <label for="your_phone">Amount (Rs)</label>
+                                <input type="tel" id="your_phone" name="yourphone" />
+                                <div class="space2"></div>
+                                <a href="./donate.php" class="donate">Donate</a>
+
+                            </div>
+                        </div>
+                        <div class="col5 card_donation is-collapsed row-content">
+                            <div class="card__inner js-expander">
+                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
+                                <p>Bellapitiya</p>
+
+                            </div>
+                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
+                                <label for="your_name">Name</label>
+                                <input type="text" id="your_name" name="yourname" />
+
+                                <label for="your_phone">Amount (Rs)</label>
+                                <input type="tel" id="your_phone" name="yourphone" />
+                                <div class="space2"></div>
+                                <a href="./donate.php" class="donate">Donate</a>
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row ">
+
+                        <div class="col5 card_donation is-collapsed row-content">
+                            <div class="card__inner js-expander">
+                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
+                                <p>Bellapitiya</p>
+
+                            </div>
+                            <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
+                                <label for="your_name">Name</label>
+                                <input type="text" id="your_name" name="yourname" />
+
+                                <label for="your_phone">Amount (Rs)</label>
+                                <input type="tel" id="your_phone" name="yourphone" />
+                                <div class="space2"></div>
+                                <a href="./donate.php" class="donate">Donate</a>
+
+                            </div>
+                        </div>
+                        <div class="col5 card_donation is-collapsed row-content">
+                            <div class="card__inner js-expander">
+                                <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
+                                <p>Bellapitiya</p>
 
                             </div>
                             <div class="card__expander"><i class="fa fa-close js-collapser"> </i>

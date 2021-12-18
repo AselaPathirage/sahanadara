@@ -21,7 +21,7 @@
         <li>
             <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/AddNewItem" id="Add">
                 <i class='bx bx-add-to-queue' ></i>
-                <span class="links_name">Add New Item</span>
+                <span class="links_name">Manage Item</span>
             </a>
         </li>
         <li>

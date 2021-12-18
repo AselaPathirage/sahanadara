@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 20, 2021 at 03:28 PM
+-- Generation Time: Dec 16, 2021 at 06:05 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -556,7 +556,8 @@ INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `tran
 (67, 6, 1, '-25.00', '2021-10-27 21:45:10', ''),
 (68, 2, 2, '1.00', '2021-11-18 17:29:02', ''),
 (69, 2, 2, '-2.00', '2021-11-18 18:02:46', ''),
-(70, 31, 2, '5.00', '2021-11-18 18:53:31', '');
+(70, 31, 2, '5.00', '2021-11-18 18:53:31', ''),
+(71, 2, 1, '2.00', '2021-12-06 19:33:47', '');
 
 -- --------------------------------------------------------
 
@@ -756,7 +757,7 @@ CREATE TABLE `safehouse` (
 --
 
 INSERT INTO `safehouse` (`safeHouseID`, `safeHouseAddress`, `safeHouseName`, `isUsing`) VALUES
-(1, 'No 10,School Road, Bolossagama', 'Bolossagama Safe House', 'n'),
+(1, 'No 10,School Road, Bolossagama', 'Bolossagama Safe House', 'y'),
 (2, 'Test', 'test Safe House', 'n');
 
 -- --------------------------------------------------------
@@ -778,6 +779,43 @@ INSERT INTO `safehousecontact` (`safeHouseTelno`, `safeHouseID`) VALUES
 ('0345165219', 1),
 ('0346165219', 1),
 ('0341115219', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `safehousestatus`
+--
+
+CREATE TABLE `safehousestatus` (
+  `r_id` int(5) NOT NULL,
+  `safehouseId` int(5) DEFAULT NULL,
+  `adultMale` int(3) DEFAULT NULL,
+  `adultFemale` int(3) DEFAULT NULL,
+  `children` int(3) DEFAULT NULL,
+  `disabledPerson` int(2) DEFAULT NULL,
+  `note` varchar(500) DEFAULT NULL,
+  `createdDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `safehousestatus`
+--
+
+INSERT INTO `safehousestatus` (`r_id`, `safehouseId`, `adultMale`, `adultFemale`, `children`, `disabledPerson`, `note`, `createdDate`) VALUES
+(1, 1, 10, 12, 5, 0, NULL, '2021-12-16 21:33:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `safehousestatusrequesteditem`
+--
+
+CREATE TABLE `safehousestatusrequesteditem` (
+  `recordId` int(5) NOT NULL,
+  `statusId` int(5) NOT NULL,
+  `itemId` int(2) NOT NULL,
+  `quantity` decimal(6,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1015,6 +1053,21 @@ ALTER TABLE `safehousecontact`
   ADD KEY `safeHouseID` (`safeHouseID`);
 
 --
+-- Indexes for table `safehousestatus`
+--
+ALTER TABLE `safehousestatus`
+  ADD PRIMARY KEY (`r_id`),
+  ADD KEY `safehouseId` (`safehouseId`);
+
+--
+-- Indexes for table `safehousestatusrequesteditem`
+--
+ALTER TABLE `safehousestatusrequesteditem`
+  ADD PRIMARY KEY (`recordId`),
+  ADD KEY `statusId` (`statusId`),
+  ADD KEY `itemId` (`itemId`);
+
+--
 -- Indexes for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
@@ -1115,7 +1168,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -1158,6 +1211,18 @@ ALTER TABLE `role`
 --
 ALTER TABLE `safehouse`
   MODIFY `safeHouseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `safehousestatus`
+--
+ALTER TABLE `safehousestatus`
+  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `safehousestatusrequesteditem`
+--
+ALTER TABLE `safehousestatusrequesteditem`
+  MODIFY `recordId` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `servicerequest`
@@ -1267,6 +1332,19 @@ ALTER TABLE `safehousecontact`
   ADD CONSTRAINT `safehousecontact_ibfk_1` FOREIGN KEY (`safeHouseID`) REFERENCES `safehouse` (`safeHouseID`);
 
 --
+-- Constraints for table `safehousestatus`
+--
+ALTER TABLE `safehousestatus`
+  ADD CONSTRAINT `safehousestatus_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`);
+
+--
+-- Constraints for table `safehousestatusrequesteditem`
+--
+ALTER TABLE `safehousestatusrequesteditem`
+  ADD CONSTRAINT `safehousestatusrequesteditem_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `safehousestatus` (`r_id`),
+  ADD CONSTRAINT `safehousestatusrequesteditem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+
+--
 -- Constraints for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
@@ -1279,14 +1357,6 @@ ALTER TABLE `servicerequest`
 ALTER TABLE `servicerequestitem`
   ADD CONSTRAINT `servicerequestitem_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `servicerequest` (`inventoryId`),
   ADD CONSTRAINT `servicerequestitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
-
-DELIMITER $$
---
--- Events
---
-CREATE DEFINER=`root`@`localhost` EVENT `password_reset_token_exipiring_event` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-11-20 19:04:09' ON COMPLETION PRESERVE ENABLE COMMENT 'Clean up token every 30 minutes daily!' DO DELETE FROM resetpass WHERE resetpass.createdTime < DATE_SUB(NOW(), INTERVAL 1 DAY)$$
-
-DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

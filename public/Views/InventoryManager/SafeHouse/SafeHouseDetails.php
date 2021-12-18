@@ -96,19 +96,35 @@
             sidebar.classList.toggle("active");
         }
         var output={};
+        var district={};
         getSafwHouse();
+        getDistrict();
         function getSafwHouse(){
             var x = "<?php echo $_SESSION['key'] ?>"; 
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>safehouse",
                 dataType: "json", 
-                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                headers: {'HTTP_APIKEY':x},
+                cache: false,
+                async: false
+            }).responseText);
+        }
+        function getDistrict(){
+            var x = "<?php echo $_SESSION['key'] ?>"; 
+            district = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>district",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':x},
                 cache: false,
                 async: false
             }).responseText);
         }
         console.log(output);
+        function viewDetails( ){
+
+        }
     </script>
 </body>
 </html>

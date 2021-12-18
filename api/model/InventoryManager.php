@@ -25,6 +25,23 @@ class InventoryManager extends Employee{
             exit();
         }
     }
+    public function updateItem(array $data){
+        global $errorCode;
+        if(isset($data['value']) || isset($data['id'])){
+            if($data['value']==""){
+                echo json_encode(array("code"=>$errorCode['attributeMissing']));
+                exit();
+            }
+            $itemName = $data['value'];
+            $itemId = $data['id']; 
+            $sql = "UPDATE `item` (`itemName`, `unitType`) SET `itemName`='$itemName' WHERE itemId =$itemId;";
+            $this->connection->query($sql);
+            echo json_encode(array("code"=>$errorCode['success']));
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
     public function getItem(array $data){
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
@@ -191,6 +208,11 @@ class InventoryManager extends Employee{
         echo $json;
     }
     public function getDistrict(array $data){
-
+        $this->inventory->setInfo($data['userId']);
+        $temp = $this->inventory->getDistrict();
+        $district['name'] = $temp['dsName'];
+        $district['id'] = $temp['dsId'];
+        $json = json_encode($district);
+        echo $json;
     }
 }

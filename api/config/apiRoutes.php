@@ -42,4 +42,4 @@ Route::GET("neighbour",array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count",array("InventoryManager@countItem"));
 Route::POST("item",array("InventoryManager@addItem"));
 Route::POST("inventory",array("InventoryManager@addInventory"));
-//Route::PUT("inventory",array("InventoryManager@updateInventory"));
+Route::PUT("item",array("InventoryManager@updateItem"));

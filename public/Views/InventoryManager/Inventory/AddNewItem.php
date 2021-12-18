@@ -326,7 +326,7 @@ tr:hover{
 						$('#trow').empty();
                         getItem();
                         if(result.code==806){
-                            alertGen("Record Added Successfully!",1);
+                            alertGen("Record Updated Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);
                         }

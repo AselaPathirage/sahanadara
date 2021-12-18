@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title> Admin </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_admin.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/alert.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -91,6 +91,7 @@
                                         <option value="" selected='true'>Select</option>
                                         <option value="1">Grama Niladhari</option>
                                         <option value="4">Divisional Secretariat</option>
+                                        <option value="6">Disaster management officer</option>
                                         <option value="3">District secretariat</option>
                                     </select>
                                 </div>
@@ -300,6 +301,10 @@
                 }else if(value==3){
                     $('#DistrictBox').show();
                     $('#DivisionBox').hide();
+                    $('#GndivisionBox').hide();
+                }else if(value==6){
+                    $('#DistrictBox').show();
+                    $('#DivisionBox').show();
                     $('#GndivisionBox').hide();
                 }
             });

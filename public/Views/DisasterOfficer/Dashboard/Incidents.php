@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Dashboard </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -66,7 +66,7 @@
                             </div>
                         </div>
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Dodangoda</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
@@ -79,7 +79,7 @@
                     </div>
                     <div class="col6" style="overflow: auto">
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Ingiriya</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="box row-content">
-                            <h4>Flood in Millaniya</h4>
+                            <h4>Flood in Galpatha</h4>
                             <p>A flood situation in low line areas of river Kalu</p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">

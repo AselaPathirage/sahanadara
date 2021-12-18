@@ -3,7 +3,6 @@ class Router{
     protected static $defaultController = array(
 
                                                 "public" => "index.php",
-                                                "test" => "test.php",
                                                 "404" => "404.php",
                                                 "a" => "a.php",
                                                 "noPermission" => "noPermission.php",

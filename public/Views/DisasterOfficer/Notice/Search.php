@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Notice </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -106,13 +106,13 @@
                             </th>
 
                             <th style="width: 15%;text-align: center;">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/viewNotice" class="create">View</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/viewNotice" class="btn-box">View</a>
                             </th> 
                             <th style="width: 15%;text-align:center;">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/editNotice" class="view">Edit</a>
+                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/editNotice" class="btn-box">Edit</a>
                             </th>
                             <th style="width: 15%;text-align:center;">
-                                <a href="#" class="view">Remove</a>
+                                <a href="#" class="btn-box">Remove</a>
                             </th>
                         </tr>
                     </thead>
@@ -130,13 +130,13 @@
                         </thead>
                         <tbody>
                             
-                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                        <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td> 
                                         <input id="radio-1" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-1" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 1</td>
-                                    <td>01/24/2015</td>
+                                    <td>Bellapitiya Maha Vidyalaya</td>
+                                    <td>10/21/2021</td>
                                     <td>Pending</td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -144,26 +144,53 @@
                                         <input id="radio-2" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-2" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 2</td>
-                                    <td>03/14/2015</td>
-                                    <td>Pending</td>
+                                    <td>Donation Request Notice for Bolossagama </td>
+                                    <td>02/24/2021</td>
+                                    <td>Approved</td>
                                 </tr>
                                 <tr id="task-3" class="task-list-row" data-task-id="3" data-user="Donald" data-status="Not Started" data-milestone="Milestone 1" data-priority="Low" data-tags="Tag 3">
                                     <td> 
                                         <input id="radio-3" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-3" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 3</td>
-                                    <td>11/16/2014</td>
-                                    <td>Pending</td>
+                                    <td>We need your donations</td>
+                                    <td>01/16/2021</td>
+                                    <td>Approved</td>
                                 </tr>
                                 <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
                                     <td> 
                                         <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
                                         <label for="radio-4" class="radio-custom-label"></label>
                                     </td>
-                                    <td>Task title 4</td>
-                                    <td>11/16/2014</td>
+                                    <td>Donation Request Notice for Dodangoda  </td>
+                                    <td>01/16/2021</td>
+                                    <td>Approved</td>
+                                </tr>
+                                <tr id="task-3" class="task-list-row" data-task-id="3" data-user="Donald" data-status="Not Started" data-milestone="Milestone 1" data-priority="Low" data-tags="Tag 3">
+                                    <td> 
+                                        <input id="radio-3" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-3" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>We need your donations</td>
+                                    <td>11/10/2020</td>
+                                    <td>Approved</td>
+                                </tr>
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Donation Request Notice for Dodangoda  </td>
+                                    <td>08/25/2020</td>
+                                    <td>Approved</td>
+                                </tr>
+                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
+                                    <td> 
+                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
+                                        <label for="radio-4" class="radio-custom-label"></label>
+                                    </td>
+                                    <td>Donation Request Notice for Sapugahawatta  </td>
+                                    <td>05/16/2020</td>
                                     <td>Approved</td>
                                 </tr>
                             

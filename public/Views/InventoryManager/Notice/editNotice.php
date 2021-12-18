@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Inventory Manager - Notice </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -45,6 +45,7 @@
     }
     td{
         border: none;
+        background-color:#fff;
     }
     </style>
 </head>

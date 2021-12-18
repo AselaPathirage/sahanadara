@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Divisional Secretariat - Dashboard </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_divsec.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_divsec.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -91,6 +91,65 @@
                                 <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
                             </tr>
 
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>03/28/2021  1:54</td>
+                                <td>Flood</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/04/2021 9:54</td>
+                                <td>Flood</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/02/2021 10:54</td>
+                                <td>Flood</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/02/2021 9:54</td>
+                                <td>Flood</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/05/2021 6:54</td>
+                                <td>LandSlide</td>
+                                <td>Initial</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <td>02/06/2021 9:54</td>
+                                <td>Lightning</td>
+                                <td>Relief</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewIncidents" class="btn-box">View</a></td>
+
+                            </tr>
                             
                         </tbody>
                     </table>

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Dashboard </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -66,6 +66,7 @@
                                 <th>DS Note</th>
                                 <th>DMC Note</th>
                                 <th>Status</th>
+                                <th>View</th>
                             </tr>
                         </thead>
 
@@ -74,7 +75,7 @@
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                             
                                 <td>01/24/2021 1:50</td>
-                                <td>ABC Perera</td>
+                                <td>AB Perera</td>
                                 <td>Death</td>
                                 <td>Approved</td>
                                 <td>Approved</td>
@@ -84,10 +85,80 @@
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                             <td>01/24/2021 12:50</td>
-                                <td>ABC Silva</td>
+                                <td>BP Silva</td>
                                 <td>Final</td>
                                 <td>Approved</td>
                                 <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>YD Abeysinghe</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>IU Kumara</td>
+                                <td>Final</td>
+                                <td>Not Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>ABC Rodrigo</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td>Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>KD Nimesh</td>
+                                <td>Property</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>KW Perera</td>
+                                <td>Final</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>YD Aluthge</td>
+                                <td>Property</td>
+                                <td>Approved</td>
+                                <td>Pending</td>
+                                <td>Not Collected</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
+                            </tr>
+
+                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                            <td>01/24/2021 12:50</td>
+                                <td>SN Dias</td>
+                                <td>Final</td>
+                                <td>Not Approved</td>
+                                <td>Approved</td>
                                 <td>Not Collected</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/Compensationrequests" class="btn-box">View</a></td>
                             </tr>
@@ -122,6 +193,6 @@
             sidebar.classList.toggle("active");
         }
     </script>
-    <script src="/<?php echo baseUrl; ?>/public/assets/js/table.js"></script>
+    <script src="<?php echo HOST; ?>/public/assets/js/table.js"></script>
 </body>
 </html>

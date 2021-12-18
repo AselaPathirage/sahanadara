@@ -22,11 +22,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/admin_style.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/landing_style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/admin_style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/landing_style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -42,7 +42,7 @@
                     <div class="space"></div>
                     <h1 class="heading_landing">Staff</h1>
                     <div class="container aboutsec">
-                        <img src="/<?php echo baseUrl; ?>/public/assets/img/staff.jpg" alt="" style="border-radius: 5px;width:75%;">
+                        <img src="<?php echo HOST; ?>/public/assets/img/staff.jpg" alt="" style="border-radius: 5px;width:75%;">
                     </div>
                 </div>
                 <div class="col6">
@@ -52,7 +52,7 @@
                         <p>Enter your username and password</p>
                         <div class="row-content">
                             <div class="container">
-                                <form action="/<?php echo baseUrl; ?>/Handler/loginHandle?formControl=1" method="post">
+                                <form action="<?php echo HOST; ?>/Handler/loginHandle" method="post">
                                     <h2>Login</h2>
                                     <?php
                                         if(isset($_GET['error'])){

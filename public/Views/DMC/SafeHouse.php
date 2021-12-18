@@ -91,6 +91,14 @@
                                         <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
                                     </div>
                                 </div>
+                                <div class="box row-content">
+                                    <h4>Vidyaratna Maha Viharaya</h4>
+                                    <p>Horana</p>
+
+                                    <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
+                                    </div>
+                                </div>
 
                                 <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>
                     <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div> -->
@@ -102,6 +110,7 @@
                                     </div>
                                     <h4>Bellapitiya Maha Vidyalaya</h4>
                                     <p>Bellapitiya, Horana</p>
+                                    <p>Telephone Number - 0778765367</p>
                                     <p>Families - 30</p>
                                     <p>People - 100</p>
                                 </div>

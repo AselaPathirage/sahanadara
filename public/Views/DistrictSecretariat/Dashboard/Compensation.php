@@ -73,7 +73,7 @@
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                             
-                                <td>01/24/2021 12:50</td>
+                                <td>01/24/2021 12:10</td>
                                 <td>ABC Perera</td>
                                 <td>Death</td>
                                 <td>Approved</td>
@@ -85,10 +85,70 @@
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021 2:50</td>
-                                <td>ABC Silva</td>
-                                <td>Final</td>
+                            <td>05/20/2021 9:51</td>
+                                <td>KD Silva</td>
+                                <td>Property</td>
                                 <td>Approved</td>
+                                <td>Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <td>06/19/2021 5:20</td>
+                                <td>KD Silva</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <td>07/21/2021 4:20</td>
+                                <td>KD Silva</td>
+                                <td>Property</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <td>08/25/2021 3:20</td>
+                                <td>S Rashmika</td>
+                                <td>Property</td>
+                                <td>Approved</td>
+                                <td>Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <td>09/11/2021 2:40</td>
+                                <td>AD Pathirage</td>
+                                <td>Death</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <td>01/24/2021 4:50</td>
+                                <td>YD Abeysinghe</td>
+                                <td>Property</td>
+                                <td>Approved</td>
+                                <td>Not Approved</td>
+                                <td>Active</td>
+                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+
+                            </tr>
+
+                            <td>01/25/2021 3:50</td>
+                                <td>HT Pasindu</td>
+                                <td>Death</td>
+                                <td>Not Approved</td>
                                 <td>Not Approved</td>
                                 <td>Active</td>
                                 <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>

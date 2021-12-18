@@ -7,6 +7,7 @@
 
         <!--  Menu compatible with wp_nav_menu  -->
         <ul id="primary-menu" class="menu nav-menu">
+
             <li class="menu-item current-menu-item"><a class="nav__link" href="<?php echo HOST; ?>">Home</a></li>
             <!-- <li class="menu-item dropdown"><a class="nav__link" href="#">About</a>
                 <ul class="sub-nav">

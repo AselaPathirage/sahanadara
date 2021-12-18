@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2021 at 04:46 PM
+-- Generation Time: Dec 18, 2021 at 04:56 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -304,7 +304,8 @@ CREATE TABLE `donationreqnotice` (
   `numOfFamilies` int(2) NOT NULL DEFAULT 0,
   `numOfPeople` int(3) NOT NULL,
   `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
-  `note` varchar(200) DEFAULT NULL
+  `note` varchar(200) DEFAULT NULL,
+  `appovalStatus` char(1) NOT NULL DEFAULT 'n'
 ) ;
 
 -- --------------------------------------------------------

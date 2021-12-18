@@ -9,4 +9,7 @@ trait Noticer{
     public function deleteNotice(array $data){
 
     }
+    public function viewNotice(array $data){
+        
+    }
 }

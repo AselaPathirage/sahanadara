@@ -14,13 +14,16 @@ class GramaNiladari extends ResponsiblePerson
         $nic = $data['nic'];
         $phone = $data['phone'];
         $address = $data['address'];
-        
+
         $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $sql = "INSERT INTO resident (residentName, residentTelNo,residentAddress,gndvId,residentNIC ) VALUES ('$name', '$phone','$address'," . $r['gndvId'] . ", '$nic');";
-        $this->connection->query($sql);
-        echo json_encode("{'code':" . $errorCode['success'] . "}");
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
     }
     public function getResident(array $data)
     {

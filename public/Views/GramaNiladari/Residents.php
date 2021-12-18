@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <title> Grama Niladari </title>
     <!-- CSS -->
+
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -26,6 +29,8 @@
         <div class="space"></div>
         <div class="container">
             <h1>Residents</h1>
+            <div id="alertBox">
+            </div>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
                     <a class="btn_blue Click-here">Create Record</a>
@@ -36,19 +41,20 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form action="#" id='add' name="add" method="POST">
+                            <form action="#" id='add' name="add" method="POST" onSubmit="return validate_nic();">
                                 <h1>New Record</h1>
 
                                 <div class="row-content">
 
                                     <label for="your_name">Name</label>
-                                    <input type="text" id="name" name="name" />
+                                    <input type="text" id="name" name="name" required='true' />
 
                                     <label for="your_nic">NIC</label>
-                                    <input type="text" id="nic" name="nic" />
-
+                                    <input type="text" id="nic" name="nic" maxlength="12" required='true' />
+                                    <div id="nicCheck">
+                                    </div>
                                     <label for="your_phone">Phone Number</label>
-                                    <input type="tel" id="phone" name="phone" />
+                                    <input type="tel" id="phone" name="phone" maxlength="10" onkeypress="return isNumber(event)" required='true' />
 
                                     <label for="address">Address</label>
                                     <textarea id="address" name="address"></textarea>
@@ -82,7 +88,7 @@
                         <table id="table2" class="table">
                             <thead>
                                 <tr>
-                                 
+
                                     <th>Name</th>
                                     <th>NIC</th>
                                     <th>Address</th>
@@ -95,7 +101,7 @@
                             <tbody id="tbodyid">
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    
+
                                     <td>N Nimesh </td>
                                     <td>991237564V</td>
                                     <td>111, Maithree Rd, Horana</td>
@@ -107,7 +113,7 @@
                                 </tr>
 
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    
+
                                     <td>Y Abeysinghe</td>
                                     <td>985637555V</td>
                                     <td>14/D, Samagi Rd, Bellapitiya, Horana</td>
@@ -137,6 +143,72 @@
             getResident();
 
         });
+
+
+        //validations
+        document.getElementById("nic").addEventListener("keyup", function(e) {
+            var nicNum = document.getElementById("nic").value;
+            var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
+            var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
+            if (nicNum.length == 10 && cnic_no_regex.test(nicNum)) {
+                $("#nicCheck").html("");
+            } else if (nicNum.length == 12 && new_cnic_no_regex.test(nicNum)) {
+                $("#nicCheck").html("");
+            } else {
+                $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
+            }
+        });
+
+        function validate_nic() {
+            var nic = document.add.nic.value;
+            console.log(nic);
+            var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
+            var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
+            if (nic.length == 10 && cnic_no_regex.test(nic)) {
+                $("#nicCheck").html("");
+                return true;
+            } else if (nic.length == 12 && new_cnic_no_regex.test(nic)) {
+                $("#nicCheck").html("");
+                return true;
+            } else {
+                $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
+                return false;
+            }
+
+        }
+
+        function isNumber(e) {
+            e = (e) ? e : window.event;
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
+        }
+
+
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
@@ -180,9 +252,18 @@
                     console.log(result);
                     $("#tbodyid").empty();
                     getResident();
+                    console.log(result.code);
+                    if (result.code == 806) {
+                        alertGen(" Record Added Successfully!", 1);
+
+                    } else {
+                        alertGen(" Unable to handle request.", 2);
+
+                    }
                 },
                 error: function(err) {
-                    alert(err);
+                    alertGen(" Something went wrong.", 3);
+                    console.log(err);
                 }
             });
         });
@@ -216,7 +297,7 @@
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
                 let cell5 = row.insertCell(-1);
-                
+
                 var attribute = document.createElement("a");
                 attribute.id = i;
                 attribute.href = "";
@@ -230,7 +311,7 @@
                 attribute2.className = "btn_delete";
                 attribute2.name = "delete";
                 attribute2.innerHTML = "Delete";
-                
+
                 cell1.innerHTML = obj['residentName'];
                 cell2.innerHTML = obj['residentNIC'];
                 cell3.innerHTML = obj['residentAddress'];

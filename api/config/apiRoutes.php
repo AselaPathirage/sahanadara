@@ -7,12 +7,14 @@ DELETE - delete
 */
 
 Route::GET("donation",array("Home@viewDonations"));
+Route::GET("notice",array("Employee@viewNotice"));
 Route::GET("role",array("Employee@getRole"));
 Route::GET("division",array("Admin@getDivision","InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision",array("Admin@getGnDivision","DisasterOfficer@getGNDivision"));
 Route::GET("item",array("InventoryManager@getItem","ResponsiblePerson@getItem"));
 Route::GET("safehouse",array("DisasterOfficer@viewSafehouse","InventoryManager@getSafeHouse","DivisionalSecretariat@getSafeHouse","Dmc@getSafeHouse")); 
-Route::GET("district",array("Admin@getDistrict","InventoryManager@getDistrict"));
+Route::GET("district",array("Admin@getDistrict"));
+Route::GET("myDistrict",array("InventoryManager@getMyDistrict"));
 
 Route::PUT("resetPassword",array("Employee@updatePassword"));
 
@@ -21,6 +23,7 @@ Route::POST("resetPassword",array("Employee@resetPassword"));
 Route::POST("renew",array("Employee@renew"));
 Route::POST("rewoke",array("Employee@rewoke"));
 Route::POST("user",array("Admin@register","DivisionalSecretariat@register","DisasterOfficer@register"));
+Route::POST("notice",array("InventoryManager@addNotice"));
 
 // Grama Niladari
 Route::GET("residents", array("GramaNiladari@getResident"));

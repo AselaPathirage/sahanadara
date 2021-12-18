@@ -209,7 +209,7 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
-    public function getDistrict(array $data){
+    public function getMyDistrict(array $data){
         $this->inventory->setInfo($data['userId']);
         $temp = $this->inventory->getDistrict();
         $district['name'] = $temp['dsName'];

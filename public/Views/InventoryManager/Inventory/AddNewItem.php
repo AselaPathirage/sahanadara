@@ -295,6 +295,7 @@ tr:hover{
                         if(result.code==806){
                             alertGen("Record Added Successfully!",1);
                         }else{
+                            console.log(result.code);
                             alertGen("Unable to handle request.",2);
                         }
 					},

@@ -10,8 +10,12 @@ class InventoryManager extends Employee{
     }
     public function addItem(array $data){
         global $errorCode;
+        print_r($data);
         if(isset($data['itemName']) && isset($data['unitType'])){
             if($data['itemName']=="" || !is_int($data['unitType'])){
+                echo $data['unitType'];
+                echo "-";
+                echo is_int($data['unitType']);
                 echo json_encode(array("code"=>$errorCode['attributeMissing']));
                 exit();
             }
@@ -27,7 +31,7 @@ class InventoryManager extends Employee{
     }
     public function updateItem(array $data){
         global $errorCode;
-        if(isset($data['value']) || isset($data['id'])){
+        if(isset($data['value']) && isset($data['id'])){
             if($data['value']==""){
                 echo json_encode(array("code"=>$errorCode['attributeMissing']));
                 exit();

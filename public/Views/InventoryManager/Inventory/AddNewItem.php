@@ -312,13 +312,13 @@ tr:hover{
                 var str = [];
                 var object = {};
                 object['value'] = document.getElementById("newName").value;
-                object['id'] = document.getElementById("item").value;
                 $("#update").trigger('reset');
                 var json = JSON.stringify(object);
+                var id = document.getElementById("item").value;
                 console.log(json);
                 $.ajax({
 					type: "PUT",
-					url: "<?php echo API; ?>item",
+					url: "<?php echo API; ?>item/"+id,
 					data: json,
                     headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
 					cache: false,

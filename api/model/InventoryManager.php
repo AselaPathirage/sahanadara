@@ -28,13 +28,13 @@ class InventoryManager extends Employee{
     }
     public function updateItem(array $data){
         global $errorCode;
-        if(isset($data['value']) && isset($data['id'])){
+        if(isset($data['value']) && count($data['receivedParams'])==1){
             if($data['value']==""){
                 echo json_encode(array("code"=>$errorCode['attributeMissing']));
                 exit();
             }
             $itemName = $data['value'];
-            $itemId = $data['id']; 
+            $itemId = $data['receivedParams'][0]; 
             $itemId = Item::getId($itemId);
             $sql = "UPDATE `item` SET `itemName`='$itemName' WHERE itemId =$itemId;";
             $this->connection->query($sql);

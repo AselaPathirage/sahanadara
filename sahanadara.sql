@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 16, 2021 at 06:05 PM
+-- Generation Time: Dec 18, 2021 at 04:56 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -294,6 +294,23 @@ INSERT INTO `dmc` (`dmcID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `donationreqnotice`
+--
+
+CREATE TABLE `donationreqnotice` (
+  `recordId` int(4) NOT NULL,
+  `safehouseId` int(5) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `numOfFamilies` int(2) NOT NULL DEFAULT 0,
+  `numOfPeople` int(3) NOT NULL,
+  `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `note` varchar(200) DEFAULT NULL,
+  `appovalStatus` char(1) NOT NULL DEFAULT 'n'
+) ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gndivision`
 --
 
@@ -557,7 +574,8 @@ INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `tran
 (68, 2, 2, '1.00', '2021-11-18 17:29:02', ''),
 (69, 2, 2, '-2.00', '2021-11-18 18:02:46', ''),
 (70, 31, 2, '5.00', '2021-11-18 18:53:31', ''),
-(71, 2, 1, '2.00', '2021-12-06 19:33:47', '');
+(71, 2, 1, '2.00', '2021-12-06 19:33:47', ''),
+(72, 28, 1, '50.00', '2021-12-16 23:21:13', '');
 
 -- --------------------------------------------------------
 
@@ -615,7 +633,8 @@ INSERT INTO `item` (`itemId`, `itemName`, `unitType`) VALUES
 (27, 'Diesel', 3),
 (28, 'Hand Hanitizer', 4),
 (29, 'Face Mask', 4),
-(31, 'Safety Jacket', 4);
+(31, 'Safety Jacket', 4),
+(32, 'test 4', 4);
 
 -- --------------------------------------------------------
 
@@ -659,6 +678,18 @@ INSERT INTO `login` (`empId`, `nid`, `empPassword`, `keyAuth`, `roleId`) VALUES
 (7, '731a528c0ac7ccfe928f7c50d7816205', 'c5a7026d54ad1ec0a6988b1be355533f', 'S40fWkEEEi', 1),
 (7, '731a528c0ac7ccfe928f7c50d7816205', 'b848f2e08fc7a2c737009c90215bb8ea', 'tdH4E07LEf', 4),
 (8, '731a528c0ac7ccfe928f7c50d7816205', 'f2dcd5d1f22c796a348685b6737845b6', 'bdjsgEEcAf', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `noticeitem`
+--
+
+CREATE TABLE `noticeitem` (
+  `noticeId` int(4) NOT NULL,
+  `itemId` int(2) NOT NULL,
+  `quantitity` decimal(6,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -811,7 +842,6 @@ INSERT INTO `safehousestatus` (`r_id`, `safehouseId`, `adultMale`, `adultFemale`
 --
 
 CREATE TABLE `safehousestatusrequesteditem` (
-  `recordId` int(5) NOT NULL,
   `statusId` int(5) NOT NULL,
   `itemId` int(2) NOT NULL,
   `quantity` decimal(6,2) NOT NULL DEFAULT 0.00
@@ -958,6 +988,13 @@ ALTER TABLE `dmc`
   ADD UNIQUE KEY `empEmail` (`empEmail`);
 
 --
+-- Indexes for table `donationreqnotice`
+--
+ALTER TABLE `donationreqnotice`
+  ADD PRIMARY KEY (`recordId`),
+  ADD KEY `safehouseId` (`safehouseId`);
+
+--
 -- Indexes for table `gndivision`
 --
 ALTER TABLE `gndivision`
@@ -1012,6 +1049,13 @@ ALTER TABLE `login`
   ADD KEY `roleId` (`roleId`);
 
 --
+-- Indexes for table `noticeitem`
+--
+ALTER TABLE `noticeitem`
+  ADD PRIMARY KEY (`noticeId`,`itemId`),
+  ADD KEY `itemId` (`itemId`);
+
+--
 -- Indexes for table `resetpass`
 --
 ALTER TABLE `resetpass`
@@ -1063,9 +1107,7 @@ ALTER TABLE `safehousestatus`
 -- Indexes for table `safehousestatusrequesteditem`
 --
 ALTER TABLE `safehousestatusrequesteditem`
-  ADD PRIMARY KEY (`recordId`),
-  ADD KEY `statusId` (`statusId`),
-  ADD KEY `itemId` (`itemId`);
+  ADD PRIMARY KEY (`itemId`,`statusId`);
 
 --
 -- Indexes for table `servicerequest`
@@ -1147,6 +1189,12 @@ ALTER TABLE `dmc`
   MODIFY `dmcID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `donationreqnotice`
+--
+ALTER TABLE `donationreqnotice`
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `gndivision`
 --
 ALTER TABLE `gndivision`
@@ -1168,7 +1216,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -1180,7 +1228,7 @@ ALTER TABLE `inventorymgtofficer`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `resetpass`
@@ -1217,12 +1265,6 @@ ALTER TABLE `safehouse`
 --
 ALTER TABLE `safehousestatus`
   MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `safehousestatusrequesteditem`
---
-ALTER TABLE `safehousestatusrequesteditem`
-  MODIFY `recordId` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `servicerequest`
@@ -1275,6 +1317,12 @@ ALTER TABLE `divisionalofficecontact`
   ADD CONSTRAINT `divisionalofficecontact_ibfk_1` FOREIGN KEY (`divisionalOfficeId`) REFERENCES `divisionaloffice` (`divisionalOfficeId`);
 
 --
+-- Constraints for table `donationreqnotice`
+--
+ALTER TABLE `donationreqnotice`
+  ADD CONSTRAINT `donationreqnotice_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`);
+
+--
 -- Constraints for table `gndivision`
 --
 ALTER TABLE `gndivision`
@@ -1314,6 +1362,13 @@ ALTER TABLE `login`
   ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`);
 
 --
+-- Constraints for table `noticeitem`
+--
+ALTER TABLE `noticeitem`
+  ADD CONSTRAINT `noticeitem_ibfk_1` FOREIGN KEY (`noticeId`) REFERENCES `donationreqnotice` (`recordId`),
+  ADD CONSTRAINT `noticeitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+
+--
 -- Constraints for table `resident`
 --
 ALTER TABLE `resident`
@@ -1336,13 +1391,6 @@ ALTER TABLE `safehousecontact`
 --
 ALTER TABLE `safehousestatus`
   ADD CONSTRAINT `safehousestatus_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`);
-
---
--- Constraints for table `safehousestatusrequesteditem`
---
-ALTER TABLE `safehousestatusrequesteditem`
-  ADD CONSTRAINT `safehousestatusrequesteditem_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `safehousestatus` (`r_id`),
-  ADD CONSTRAINT `safehousestatusrequesteditem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
 
 --
 -- Constraints for table `servicerequest`

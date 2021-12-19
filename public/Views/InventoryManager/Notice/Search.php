@@ -77,6 +77,10 @@
         color: wheat;
         box-shadow: 2px 1px #000;
     }
+    tr:hover{
+        background:#c9e8f7;
+        position:relative;
+    }
     </style>
 </head>
 <body>

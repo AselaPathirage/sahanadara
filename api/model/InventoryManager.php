@@ -28,13 +28,13 @@ class InventoryManager extends Employee{
     }
     public function updateItem(array $data){
         global $errorCode;
-        if(isset($data['value']) && isset($data['id'])){
+        if(isset($data['value']) && count($data['receivedParams'])==1){
             if($data['value']==""){
                 echo json_encode(array("code"=>$errorCode['attributeMissing']));
                 exit();
             }
             $itemName = $data['value'];
-            $itemId = $data['id']; 
+            $itemId = $data['receivedParams'][0]; 
             $itemId = Item::getId($itemId);
             $sql = "UPDATE `item` SET `itemName`='$itemName' WHERE itemId =$itemId;";
             $this->connection->query($sql);
@@ -209,12 +209,57 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
-    public function getDistrict(array $data){
-        $this->inventory->setInfo($data['userId']);
+    public function getMySelf(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==2){
+            if(strcasecmp("self",$data['receivedParams'][0])==0){
+                if(strcasecmp("district",$data['receivedParams'][1])==0){
+                    $output = $this->getDistrict($uid);
+                }else if(strcasecmp("division",$data['receivedParams'][1])==0){
+                    $output = $this->getDivision($uid);
+                }else{
+                    http_response_code(200);                       
+                    echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                    exit();
+                }
+                $json = json_encode($output);
+                echo $json;
+            }else{
+                http_response_code(200);                       
+                echo json_encode(array("code"=>$errorCode['permissionError']));
+                exit();   
+            }
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['unableToHandle']));
+            exit();
+        }
+    }   
+    public function getGNDivision(array $data){
+        $id = $data['userId'];
+        $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
+        WHERE m.disMgtOfficerID = d.disasterManager AND g.dvId = d.dvId AND m.disMgtOfficerID = $id  AND g.safeHouseID IS NULL";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getDistrict($userId){
+        $this->inventory->setInfo($userId);
         $temp = $this->inventory->getDistrict();
         $district['name'] = $temp['dsName'];
         $district['id'] = $temp['dsId'];
-        $json = json_encode($district);
-        echo $json;
+        return $district;
+    }
+    public function getDivision($userId){
+        $this->inventory->setInfo($userId);
+        $temp = $this->inventory->getDivision();
+        $division['name'] = $temp['dvName'];
+        $division['id'] = $temp['dvId'];
+        return $division;
     }
 }

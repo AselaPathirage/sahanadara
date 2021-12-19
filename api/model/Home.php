@@ -5,7 +5,8 @@ class Home{
     public function __construct($con){
         $this->connection = $con;
     }
-
+    public function viewNotice(){
+    }
     public function viewDonations(){
         $sql = "SELECT * FROM `item`";
         $excute = $this->connection->query($sql);

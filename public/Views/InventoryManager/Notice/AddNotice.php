@@ -64,7 +64,7 @@
         <div class="space"></div>
         <div class="container">
         <div class="box">
-                <center><h1>Donation Request</h1></center>
+                <center><h1>Donation Request Notice</h1></center>
                 <form>
                 <fieldset>
                         <div style="padding-left:15% ;">
@@ -99,20 +99,18 @@
                                                 </tr>
                                                 <tr>
                                                     <td>Required Items</td>
-                                                    <td>
-                                                        <span id="combo3-remove" style="display: none">remove</span> <!-- used as descriptive text for option buttons; if used within the button text itself, it ends up being read with the input name -->
-                                                        <div class="combo js-inline-buttons">
-                                                            <div role="combobox" aria-haspopup="listbox" aria-expanded="false" aria-owns="listbox3" class="input-wrapper multiselect-inline">
-                                                            <ul class="selected-options" aria-live="assertive" aria-atomic="false" aria-relevant="additions removals" id="combo3-selected"></ul>
-                                                            <input
-                                                                aria-activedescendant=""
-                                                                aria-autocomplete="list"
-                                                                aria-labelledby="combo3-label combo3-selected"
-                                                                id="combo3"
-                                                                class="combo-input"
-                                                                type="text">
-                                                            </div>
-                                                            <div class="combo-menu" role="listbox" aria-multiselectable="true" id="listbox3"></div>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2">
+                                                        <div class="table-repsonsive">
+                                                            <span id="error"></span>
+                                                            <table class="table table-bordered" id="item_table">
+                                                                <tr>
+                                                                    <th style="width: 30%;">Item</th>
+                                                                    <th style="width: 50%;">Quantity</th>
+                                                                    <th style="width: 20%;"><button type="button" name="add" class="form-control add" >Add</button></th>
+                                                            </tr>
+                                                            </table>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -132,9 +130,11 @@
             </div>
         </div>
     </section>
-    <script  src="/<?php echo baseUrl; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
+    <!-- <script  src="<?php echo HOST; ?>public/assets/js/responsiblePersonAidReport.js"></script> -->
     <script>
         var thisPage = "#add";
+        var output;
+        getItem();
         $(document).ready(function() {
             $("#search,#add").each(function() {
                 if ($(this).hasClass('active')){
@@ -142,13 +142,37 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            $(document).on('click', '.add', function(){
+                var html = '';
+                html += '<tr>';
+                html += '<td><select name="item_unit[]" class="form-control item_unit"><option value="">Select Unit</option>';
+                for (var i = 0; i < output.length; i++){
+                    html += "<option>"+output[i]['itemName']+"</option>";
+                }
+                html +="</select></td>";
+                html += '<td><input type="text" name="item_quantity[]" class="form-control item_quantity" /></td>';
+                html += '<td><button type="button" name="remove" class="form-control remove">Remove</button></td></tr>';
+                $('#item_table').append(html);
+            });
+            $(document).on('click', '.remove', function(){
+                $(this).closest('tr').remove();
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        function getItem(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>item",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
         }
     </script>
 </body>

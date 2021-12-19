@@ -1,0 +1,5 @@
+[19-Dec-2021 13:09:50 Asia/Colombo] PHP Parse error:  syntax error, unexpected token "}" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 217
+[19-Dec-2021 13:16:34 Asia/Colombo] PHP Warning:  Undefined array key "dvName" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 249
+[19-Dec-2021 13:16:34 Asia/Colombo] PHP Warning:  Undefined array key "dvId" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 250
+[19-Dec-2021 13:17:20 Asia/Colombo] PHP Warning:  Undefined array key "dvName" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 250
+[19-Dec-2021 13:17:20 Asia/Colombo] PHP Warning:  Undefined array key "dvId" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 251

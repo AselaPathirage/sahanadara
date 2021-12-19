@@ -17,7 +17,7 @@ class Inventory{
         $excute = $this->connection->query($sql);
         $excute = $excute-> fetch_assoc();
         $this->inventoryId = $excute['inventoryId'];
-        $this->division = array('name'=>$excute['dvName'],'id'=>$excute['dvId']);
+        $this->division = array('dvName'=>$excute['dvName'],'dvId'=>$excute['dvId']);
         $sql = "SELECT dsName,district.dsId FROM district,division WHERE division.dsId = district.dsId AND dvId =".$excute['dvId'];
         $excute = $this->connection->query($sql);
         $this->district = $excute-> fetch_assoc();

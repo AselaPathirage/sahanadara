@@ -18,7 +18,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
 
 // options for all examples
-const options = ['Water Bowser','Boats','Generator','Tents','Chairs','Bedsheets'];
+const options = $.parseJSON($.ajax({
+                                    type: "GET",
+                                    url: "<?php echo API; ?>item",
+                                    dataType: "json", 
+                                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                                    cache: false,
+                                    async: false
+                                  }).responseText);
 
 /*
  * Helper constants and functions

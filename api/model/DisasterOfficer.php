@@ -1,7 +1,8 @@
 <?php
-class DisasterOfficer extends Noticer{
+class DisasterOfficer extends Employee{
     use Viewer;
     use Alerter;
+    use Noticer;
 
     public function __construct($con){
         parent::__construct($con);
@@ -63,6 +64,12 @@ class DisasterOfficer extends Noticer{
         $json = json_encode($results);
         echo $json;
      }
+    public function getDistrict(){
+        //return on function ekak
+    }
+    public function getDivision(){
+        //return on function ekak
+    }
     // public function getUnit(){
     //     $sql = "SELECT * FROM `unit` ORDER BY unitName";
     //     $excute = $this->connection->query($sql);

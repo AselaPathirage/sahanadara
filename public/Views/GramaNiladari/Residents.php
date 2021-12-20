@@ -60,7 +60,7 @@
                                     <textarea id="address" name="address"></textarea>
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Send" class="btn-alerts" />
-                                        <input type="reset" value="Cancel" class="btn-alerts close-btn" />
+                                        <input type="reset" value="Cancel" class="btn-alerts cancel" />
                                     </div>
                                 </div>
                             </form>
@@ -93,7 +93,7 @@
                                     <textarea id="upaddress" name="upaddress"></textarea>
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Update" class="btn-alerts" />
-                                        <input type="reset" value="Cancel" class="btn-alerts close-btn" />
+                                        <input type="reset" value="Cancel" class="btn-alerts cancel" />
                                     </div>
                                 </div>
                             </form>
@@ -109,10 +109,11 @@
                         <div class="pop-up-content-wrap">
                             <div class="row-content">
                                 <h2>Are you sure?</h2>
-                                <p>Do you really want to delete these records? This process cannot be undone.</p>
+                                <input type="hidden" id="item2" value="">
+                                <p>Do you really want to delete this record? This process cannot be undone.</p>
                                 <div class="row" style="justify-content: center;">
-                                    <button type="button" value="Cancel" class="btn-alerts btn_cancel">
-                                        <button type="button" value="Delete" class="btn-alerts btn_danger close_btn">
+                                    <button type="button" class="btn-alerts btn_cancel cancel">Cancel</button>
+                                    <button type="button" class="btn-alerts btn_danger" id="delete-confirm">Delete</button>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +212,7 @@
                 $("#item").val(id);
             });
             $(".btn_delete").on('click', function() {
-                // var id = $(this).attr("id");
+                var id = $(this).attr("id");
                 // var nic = $(this).attr("data-nic");
                 // var name = $(this).attr("data-name");
                 // var address = $(this).attr("data-address");
@@ -225,7 +226,7 @@
                 // $("#upnic").val(nic);
                 // $("#upphone").val(telno);
                 // $("#upaddress").val(address);
-                // $("#item").val(id);
+                $("#item2").val(id);
             });
         });
 
@@ -311,7 +312,7 @@
             $("#add").trigger("reset");
             $(".addform").addClass('model-open');
         });
-        $(".close-btn, .bg-overlay").click(function() {
+        $(".close-btn, .bg-overlay, .cancel").click(function() {
             $(".custom-model-main").removeClass('model-open');
         });
 
@@ -398,9 +399,41 @@
                     console.log(err);
                 }
             });
-
-
-
+        });
+        $("#delete-confirm").on("click", function(e) {
+            e.preventDefault();
+            $("#deleteform").fadeOut();
+            $("#deleteform").removeClass('model-open');
+            var str = [];
+            //var array = {'key':'ABCD'}
+            var object = {};
+            var id = document.getElementById("item2").value;
+            object["id"] = id;
+            var json = JSON.stringify(object);
+            console.log(json);
+            $.ajax({
+                type: "DELETE",
+                url: "<?php echo API; ?>residents/" + id,
+                data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                success: function(result) {
+                    $('#trow').empty();
+                    getResident();
+                    location.reload();
+                    if (result.code == 806) {
+                        alertGen("Record Updated Successfully!", 1);
+                    } else {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                },
+                error: function(err) {
+                    alertGen("Something went wrong.", 3);
+                    console.log(err);
+                }
+            });
         });
 
         function getResident() {

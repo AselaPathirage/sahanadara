@@ -36,7 +36,7 @@
                     <a class="btn_blue Click-here">Create Record</a>
                 </div>
             </div>
-            <div class="custom-model-main">
+            <div class="custom-model-main addform">
                 <div class="custom-model-inner">
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
@@ -60,10 +60,61 @@
                                     <textarea id="address" name="address"></textarea>
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Send" class="btn-alerts" />
-                                        <input type="reset" value="Cancel" class="btn-alerts" />
+                                        <input type="reset" value="Cancel" class="btn-alerts close-btn" />
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-overlay"></div>
+            </div>
+            <div class="custom-model-main" id="updateform">
+                <div class="custom-model-inner">
+                    <div class="close-btn">×</div>
+                    <div class="custom-model-wrap">
+                        <div class="pop-up-content-wrap">
+                            <form action="#" id='update' name="update" method="POST" onSubmit="return validate_nic();">
+                                <h1>Update Record</h1>
+
+                                <div class="row-content">
+
+                                    <label for="your_name">Name</label>
+                                    <input type="text" id="upname" name="upname" required='true' />
+                                    <input type="hidden" id="item" value="">
+                                    <label for="your_nic">NIC</label>
+                                    <input type="text" id="upnic" name="upnic" maxlength="12" required='true' />
+                                    <div id="nicCheck">
+                                    </div>
+                                    <label for="your_phone">Phone Number</label>
+                                    <input type="tel" id="upphone" name="upphone" maxlength="10" onkeypress="return isNumber(event)" required='true' />
+
+                                    <label for="address">Address</label>
+                                    <textarea id="upaddress" name="upaddress"></textarea>
+                                    <div class="row" style="justify-content: center;">
+                                        <input type="submit" value="Update" class="btn-alerts" />
+                                        <input type="reset" value="Cancel" class="btn-alerts close-btn" />
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-overlay"></div>
+            </div>
+            <div class="custom-model-main" id="deleteform">
+                <div class="custom-model-inner">
+                    <div class="close-btn">×</div>
+                    <div class="custom-model-wrap">
+                        <div class="pop-up-content-wrap">
+                            <div class="row-content">
+                                <h2>Are you sure?</h2>
+                                <p>Do you really want to delete these records? This process cannot be undone.</p>
+                                <div class="row" style="justify-content: center;">
+                                    <button type="button" value="Cancel" class="btn-alerts btn_cancel">
+                                        <button type="button" value="Delete" class="btn-alerts btn_danger close_btn">
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -100,7 +151,7 @@
 
                             <tbody id="tbodyid">
 
-                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                <!-- <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
 
                                     <td>N Nimesh </td>
                                     <td>991237564V</td>
@@ -121,7 +172,7 @@
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
                                         <a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -142,6 +193,40 @@
 
             getResident();
 
+            $(".btn_update").on('click', function() {
+                var id = $(this).attr("id");
+                var nic = $(this).attr("data-nic");
+                var name = $(this).attr("data-name");
+                var address = $(this).attr("data-address");
+                var telno = $(this).attr("data-telno");
+
+                $("#updateform").fadeIn();
+                $("#update").trigger("reset");
+                $("#updateform").addClass('model-open');
+
+                $("#upname").val(name);
+                $("#upnic").val(nic);
+                $("#upphone").val(telno);
+                $("#upaddress").val(address);
+                $("#item").val(id);
+            });
+            $(".btn_delete").on('click', function() {
+                // var id = $(this).attr("id");
+                // var nic = $(this).attr("data-nic");
+                // var name = $(this).attr("data-name");
+                // var address = $(this).attr("data-address");
+                // var telno = $(this).attr("data-telno");
+
+                $("#deleteform").fadeIn();
+
+                $("#deleteform").addClass('model-open');
+
+                // $("#upname").val(name);
+                // $("#upnic").val(nic);
+                // $("#upphone").val(telno);
+                // $("#upaddress").val(address);
+                // $("#item").val(id);
+            });
         });
 
 
@@ -160,7 +245,11 @@
         });
 
         function validate_nic() {
-            var nic = document.add.nic.value;
+            if (document.update.upnic.value != '') {
+                var nic = document.update.upnic.value;
+            } else {
+                var nic = document.add.nic.value;
+            }
             console.log(nic);
             var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
             var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
@@ -218,9 +307,9 @@
 
         // popup
         $(".Click-here").on('click', function() {
-            $(".custom-model-main").fadeIn();
+            $(".addform").fadeIn();
             $("#add").trigger("reset");
-            $(".custom-model-main").addClass('model-open');
+            $(".addform").addClass('model-open');
         });
         $(".close-btn, .bg-overlay").click(function() {
             $(".custom-model-main").removeClass('model-open');
@@ -229,6 +318,7 @@
         $("#add").submit(function(e) {
             e.preventDefault();
             $(".custom-model-main").fadeOut();
+            $(".custom-model-main").removeClass('model-open');
             var str = [];
             var formElement = document.querySelector("#add");
             var formData = new FormData(formElement);
@@ -268,6 +358,51 @@
             });
         });
 
+        $("#update").submit(function(e) {
+            e.preventDefault();
+            $("#updateform").fadeOut();
+            $("#updateform").removeClass('model-open');
+            var str = [];
+            var object = {};
+            var formElement = document.querySelector("#update");
+            var formData = new FormData(formElement);
+            //var array = {'key':'ABCD'}
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+            $("#update").trigger('reset');
+            var json = JSON.stringify(object);
+            var id = document.getElementById("item").value;
+            console.log(json);
+            $.ajax({
+                type: "PUT",
+                url: "<?php echo API; ?>residents/" + id,
+                data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                success: function(result) {
+                    $('#trow').empty();
+                    getResident();
+                    location.reload();
+                    if (result.code == 806) {
+                        alertGen("Record Updated Successfully!", 1);
+                    } else {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                },
+                error: function(err) {
+                    alertGen("Something went wrong.", 3);
+                    console.log(err);
+                }
+            });
+
+
+
+        });
+
         function getResident() {
             // var object = {};
 
@@ -284,13 +419,13 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
+            // console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
 
             for (var i = 0; i < output.length; i++) {
                 let obj = output[i];
-                console.log(obj);
+                // console.log(obj);
                 let row = table.insertRow(-1);
                 let cell1 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
@@ -299,15 +434,19 @@
                 let cell5 = row.insertCell(-1);
 
                 var attribute = document.createElement("a");
-                attribute.id = i;
-                attribute.href = "";
-                attribute.className = "btn_blue";
+                attribute.id = obj['residentId'];
+                // attribute.href = "";
+                attribute.className = "btn_update btn_blue";
                 attribute.name = "update";
                 attribute.innerHTML = "Update";
+                attribute.setAttribute("data-name", obj['residentName'])
+                attribute.setAttribute("data-nic", obj['residentNIC'])
+                attribute.setAttribute("data-address", obj['residentAddress'])
+                attribute.setAttribute("data-telno", obj['residentTelNo'])
                 var attribute2 = document.createElement("a");
 
-                attribute2.id = i;
-                attribute2.href = "";
+                attribute2.id = obj['residentId'];
+                // attribute2.href = "";
                 attribute2.className = "btn_delete";
                 attribute2.name = "delete";
                 attribute2.innerHTML = "Delete";
@@ -321,8 +460,8 @@
                 cell5.appendChild(attribute);
                 cell5.appendChild(attribute3);
                 cell5.appendChild(attribute2);
-                console.log(attribute);
-                console.log(attribute2);
+                // console.log(attribute);
+                // console.log(attribute2);
             }
         }
 

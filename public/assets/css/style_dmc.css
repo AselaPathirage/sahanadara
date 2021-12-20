@@ -172,3 +172,38 @@
     font-size: 30px;
     color: #fff;
   }
+
+
+  .btn_cancel {
+    background: #c1c1c1;
+    color: #fff;
+	border-radius: 4px;
+	
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+  }
+  .btn_cancel:focus, .btn_cancel:hover {
+    background: #a8a8a8;
+  }
+  .btn_danger {
+    background: #f15e5e;
+    color: #fff;
+	border-radius: 4px;
+	text-decoration: none;
+	transition: all 0.4s;
+	line-height: normal;
+	min-width: 120px;
+	border: none;
+	min-height: 40px;
+	border-radius: 3px;
+	margin: 0 5px;
+  }
+  .btn_danger:focus, .btn_danger:hover{
+    background: #ee3535;
+  }

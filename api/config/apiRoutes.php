@@ -7,7 +7,7 @@ DELETE - delete
 */
 
 Route::GET("donation",array("Home@viewDonations"));
-Route::GET("notice",array("Employee@viewNotice"));
+Route::GET("notice",array("Home@viewNotice"));
 Route::GET("role",array("Employee@getRole"));
 Route::GET("division",array("Admin@getDivision","InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision",array("Admin@getGnDivision","DisasterOfficer@getGNDivision","InventoryManager@getGNDivision"));

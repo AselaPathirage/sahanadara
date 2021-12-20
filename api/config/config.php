@@ -6,6 +6,7 @@ define("DB_PASS", "");
 define("DB_NAME", "sahanadara");
 define("LOG_PATH", "/log");
 define("ENCRYPTION_KEY","AHkjghjvHJGKNKLlkBG54J");
+define("TRANSLATOR_KEY","AIzaSyDtcDT7w-D76oxrECf6qofOSRKMBDfOl40");
 
 //SMS
 define("sender", ""); 

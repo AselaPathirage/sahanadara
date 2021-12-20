@@ -3,3 +3,36 @@
 [19-Dec-2021 13:16:34 Asia/Colombo] PHP Warning:  Undefined array key "dvId" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 250
 [19-Dec-2021 13:17:20 Asia/Colombo] PHP Warning:  Undefined array key "dvName" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 250
 [19-Dec-2021 13:17:20 Asia/Colombo] PHP Warning:  Undefined array key "dvId" in F:\xampp\htdocs\sahanadara\api\model\InventoryManager.php on line 251
+[20-Dec-2021 14:38:51 Asia/Colombo] PHP Warning:  require(../libraries/vendor/autoload.php): Failed to open stream: No such file or directory in F:\xampp\htdocs\sahanadara\api\model\Home.php on line 2
+[20-Dec-2021 14:38:51 Asia/Colombo] PHP Fatal error:  Uncaught Error: Failed opening required '../libraries/vendor/autoload.php' (include_path='F:\xampp\php\PEAR') in F:\xampp\htdocs\sahanadara\api\model\Home.php:2
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\index.php(19): include()
+#1 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(67): loader('Home')
+#2 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(29): Core->setClass()
+#3 F:\xampp\htdocs\sahanadara\api\index.php(29): Core->__construct(Object(mysqli))
+#4 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\model\Home.php on line 2
+[20-Dec-2021 14:39:17 Asia/Colombo] PHP Fatal error:  Uncaught DomainException: Could not load the default credentials. Browse to https://developers.google.com/accounts/docs/application-default-credentials for more information in F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\auth\src\ApplicationDefaultCredentials.php:186
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\CredentialsWrapper.php(259): Google\Auth\ApplicationDefaultCredentials::getCredentials(NULL, Object(Google\Auth\HttpHandler\Guzzle7HttpHandler), NULL, NULL, NULL, Array)
+#1 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\CredentialsWrapper.php(132): Google\ApiCore\CredentialsWrapper::buildApplicationDefaultCredentials(NULL, Object(Google\Auth\HttpHandler\Guzzle7HttpHandler), NULL, NULL, NULL, Array)
+#2 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\GapicClientTrait.php(426): Google\ApiCore\CredentialsWrapper::build(Array)
+#3 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\GapicClientTrait.php(403): Google\Cloud\Translate\V3\Gapic\TranslationServiceGapicClient->createCredentialsWrapper(NULL, Array)
+#4 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\cloud-translate\src\V3\Gapic\TranslationServiceGapicClient.php(374): Google\Cloud\Translate\V3\Gapic\TranslationServiceGapicClient->setClientOptions(Array)
+#5 F:\xampp\htdocs\sahanadara\api\model\Home.php(11): Google\Cloud\Translate\V3\Gapic\TranslationServiceGapicClient->__construct()
+#6 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): Home->viewNotice(Array)
+#7 F:\xampp\htdocs\sahanadara\api\index.php(29): Core->__construct(Object(mysqli))
+#8 {main}
+
+Next Google\ApiCore\ValidationException: Could not construct ApplicationDefaultCredentials in F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\CredentialsWrapper.php:267
+Stack trace:
+#0 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\CredentialsWrapper.php(132): Google\ApiCore\CredentialsWrapper::buildApplicationDefaultCredentials(NULL, Object(Google\Auth\HttpHandler\Guzzle7HttpHandler), NULL, NULL, NULL, Array)
+#1 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\GapicClientTrait.php(426): Google\ApiCore\CredentialsWrapper::build(Array)
+#2 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\GapicClientTrait.php(403): Google\Cloud\Translate\V3\Gapic\TranslationServiceGapicClient->createCredentialsWrapper(NULL, Array)
+#3 F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\cloud-translate\src\V3\Gapic\TranslationServiceGapicClient.php(374): Google\Cloud\Translate\V3\Gapic\TranslationServiceGapicClient->setClientOptions(Array)
+#4 F:\xampp\htdocs\sahanadara\api\model\Home.php(11): Google\Cloud\Translate\V3\Gapic\TranslationServiceGapicClient->__construct()
+#5 F:\xampp\htdocs\sahanadara\api\libraries\Core.php(35): Home->viewNotice(Array)
+#6 F:\xampp\htdocs\sahanadara\api\index.php(29): Core->__construct(Object(mysqli))
+#7 {main}
+  thrown in F:\xampp\htdocs\sahanadara\api\libraries\vendor\google\gax\src\CredentialsWrapper.php on line 267
+[20-Dec-2021 15:01:19 Asia/Colombo] PHP Parse error:  syntax error, unexpected token "=>" in F:\xampp\htdocs\sahanadara\api\model\Home.php on line 11

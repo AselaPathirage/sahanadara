@@ -63,9 +63,9 @@ class GramaNiladari extends ResponsiblePerson
     {
         global $errorCode;
         if (count($data['receivedParams']) == 1) {
-            
+
             $residentId = $data['receivedParams'][0];
-            $sql = "DELETE `resident` WHERE residentId =$residentId ";
+            $sql = "DELETE FROM `resident` WHERE residentId =$residentId ";
             $this->connection->query($sql);
             echo json_encode(array("code" => $errorCode['success']));
         } else {

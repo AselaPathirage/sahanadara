@@ -205,6 +205,10 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+        $(".close-alert").click(function(e) {
+            $(this).parent().remove();
+            e.preventDefault();
+        });
     </script>
 </body>
 </html>

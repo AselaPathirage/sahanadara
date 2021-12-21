@@ -44,10 +44,10 @@
                                 <div class="row-content">
 
                                 <label for="safeHouseAddress">Safe House Address</label>
-                                <textarea id="safeHouseAddress" name="safeHouseAddress"></textarea>
+                                <textarea id="safeHouseAddress" name="safeHouseAddress" required='true'></textarea>
 
                                 <label for="safeHouseName">Name</label>
-                                <input type="text" id="safeHouseName" name="safeHouseName">
+                                <input type="text" id="safeHouseName" name="safeHouseName" required='true'>
 
                                 <label for="gnDiv">Grama Niladhari Division</label>
                                 <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
@@ -57,7 +57,7 @@
                                                 </select>
 
                                 <label for="safeHouseTelno">Tele Number</label>
-                                <input type="text" id="safeHouseTelno" name="safeHouseTelno">
+                                <input type="text" id="safeHouseTelno" name="safeHouseTelno" maxlength="10" required='true'>
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Submit" id="submit" class="btn-alerts" />
                                         <input type="reset" value="Reset" class="btn-alerts" />
@@ -205,7 +205,7 @@
                 async: false
             }).responseText);
             var table = document.getElementById("tableSafeHouse");
-            for (var i = 0; i < output.length; i++){
+            for (var i = 0; i < output.length-1; i++){
                 let obj = output[i];
                 console.log(obj);
                 // let row = table.insertRow(-1);

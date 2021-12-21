@@ -177,7 +177,7 @@
             <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
                 <button type="button" class="close-alert">×</button>
                 <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
-                    of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
+                    of minor flooding in low lying areas. Area residents requested to be alert. DMC 118
                 </p>
             </div>
             <div class="row-content alert-div" style="margin: 10px auto;">

@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <title> Inventory Manager - Inventory </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/alert.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -133,6 +133,15 @@ tr:hover{
     font-size: 30px;
     color: #fff;
   }
+  .model-table,tr:hover{
+    background-color: #fff;
+  }
+  .model-table,tr:nth-of-type(even) {
+    background-color: #fff;
+  }
+  .model-table,td{
+      vertical-align: bottom;
+  }
 </style>
 </head>
 <body>
@@ -145,7 +154,7 @@ tr:hover{
         ?>
         <div class="space"></div>
         <div class="container">
-            <div class="custom-model-main"> 
+            <div class="custom-model-main" id="addItem"> 
                     <div class="custom-model-inner">
                         <div class="close-btn">×</div>
                         <div class="custom-model-wrap">
@@ -173,6 +182,48 @@ tr:hover{
                     </div>
                     <div class="bg-overlay"></div>
             </div>
+            <div class="custom-model-main" id="editItem"> 
+                    <div class="custom-model-inner">
+                        <div class="close-btn">×</div>
+                        <div class="custom-model-wrap">
+                            <div class="pop-up-content-wrap">
+                                    <h1>Update Item</h1>
+                                    <div class="row-content">
+                                        <table class="model-table" style="width: 100%;" border="0">
+                                            <tr>
+                                                <td>
+                                                    <label for="your_name">Old Name</label>
+                                                    <input type="text" id="oldName" value="" name="oldName" disabled="true" title="Type" class="form-control">
+                                                </td>
+                                                <td>
+                                                    <label class="unit" id="unit1"></label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <form id='update' name="update" method="post">
+                                            <table class="model-table" style="width: 100%;" border="0">
+                                                <tr>
+                                                    <td>
+                                                        <label for="your_name">New Name</label>
+                                                        <input type="text" id="newName" name="newName" placeholder="Item Name" title="Type" class="form-control" required='true'>
+                                                    </td>
+                                                    <td>
+                                                        <label class="unit" id="unit2"></label>
+                                                    </td>
+                                                </tr>
+                                            </table>  
+                                            <input type="hidden" id="item" value="">
+                                            <div class="row" style="justify-content: center;">
+                                                <input type="submit" value="Update" class="btn-alerts" />
+                                                <input type="reset" value="Reset" class="btn-alerts" />
+                                            </div> 
+                                        </form>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-overlay"></div>
+            </div>
             <div class="box">
                     <div class="panel panel-primary filterable">
                         <table id="ajaxFilter"  class="table" style="width: 100%;">
@@ -184,16 +235,16 @@ tr:hover{
                                     <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                                     </th>
                                     <th style="width: 30%;">Unit
-                                        <select id="unitType_2" class="form-control">
-                                            <option>Any</option>
+                                        <select id="unitType_2" class="form-control" >
+                                            <option value="">Any</option>
                                         </select>
                                     </th>
                                     <th style="width: 10%;">
-                                    <input type="submit" id="addNew" value="+ Create New Item" class="form-control">
+                                    <input type="submit" id="addNew" value="+ Create New Item" class="form-control" required='true'>
                                     </th>
-                                    <!-- <th style="width: 10%;">
-                                    <input type="submit" id="editItem" value="+ Create New Item" class="form-control">
-                                    </th> -->
+                                    <th style="width: 10%;">
+                                    <input type="submit" id="edit" value="Edit Item" class="form-control" required='true'>
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody id="trow">                   
@@ -220,9 +271,8 @@ tr:hover{
             getItem();
             $("#add").submit(function(e) {
                 e.preventDefault();
-                //$(".custom-model-main").removeClass('model-open');
-                $(".custom-model-main").fadeOut();
-                $(".custom-model-main").removeClass('model-open');
+                $("#addItem").fadeOut();
+                $("#addItem").removeClass('model-open');
                 var str = [];
                 var formElement = document.querySelector("#add");
                 var formData = new FormData(formElement);
@@ -245,6 +295,39 @@ tr:hover{
                         if(result.code==806){
                             alertGen("Record Added Successfully!",1);
                         }else{
+                            console.log(result.code);
+                            alertGen("Unable to handle request.",2);
+                        }
+					},
+					error: function(err) {
+						alertGen("Something went wrong.",3);
+                        console.log(err);  
+					}
+				});
+            });
+            $("#update").submit(function(e) {
+                e.preventDefault();
+                $("#editItem").fadeOut();
+                $("#editItem").removeClass('model-open');
+                var str = [];
+                var object = {};
+                object['value'] = document.getElementById("newName").value;
+                $("#update").trigger('reset');
+                var json = JSON.stringify(object);
+                var id = document.getElementById("item").value;
+                console.log(json);
+                $.ajax({
+					type: "PUT",
+					url: "<?php echo API; ?>item/"+id,
+					data: json,
+                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+					cache: false,
+					success: function(result) {
+						$('#trow').empty();
+                        getItem();
+                        if(result.code==806){
+                            alertGen("Record Updated Successfully!",1);
+                        }else{
                             alertGen("Unable to handle request.",2);
                         }
 					},
@@ -263,12 +346,25 @@ tr:hover{
         }
 
         $("#addNew").on('click', function() {
-            $(".custom-model-main").fadeIn();
-            $(".custom-model-main").addClass('model-open');
+            $("#addItem").fadeIn();
+            $("#addItem").addClass('model-open');
         });
         $(".close-btn, .bg-overlay").click(function() {
-            $(".custom-model-main").removeClass('model-open');
+            $("#addItem").removeClass('model-open');
+            $("#editItem").removeClass('model-open');
         });
+
+        $("#edit").on('click', function() {
+            let id = $("input[type='radio'][name='radio-group']:checked").val();
+            let item = document.getElementById(id).getAttribute('data-itemId');
+            let name = document.getElementById(id).getAttribute('data-itemName');
+            let unit = document.getElementById(id).getAttribute('data-unit');
+            $("#unit1,#unit2").html(unit);
+            document.getElementById("oldName").value = name;
+            document.getElementById("item").value = item;
+            $("#editItem").fadeIn();
+            $("#editItem").addClass('model-open');
+        }); 
 
         function getUnit(){
             output = $.parseJSON($.ajax({
@@ -314,10 +410,10 @@ tr:hover{
                 let cell11 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
-                cell1.innerHTML  = "<input id='"+obj['itemId']+"' class='radio-custom' name='radio-group' type='radio' checked><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
+                cell1.innerHTML  = "<input id='"+obj['itemId']+"' value='"+obj['itemId']+"' data-itemId='"+obj['itemId']+"' data-itemName='"+obj['itemName']+"' data-unit='"+obj['unitName']+"' class='radio-custom' name='radio-group' type='radio' checked><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
                 cell2.innerHTML = obj['itemName'];
                 cell11.innerHTML = obj['itemId'];
-                cell3.colSpan ="2";
+                cell3.colSpan ="3";
                 cell3.innerHTML = obj['unitName'];
             }
         }

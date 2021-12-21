@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 24, 2021 at 01:02 PM
+-- Generation Time: Dec 18, 2021 at 04:56 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -63,7 +63,8 @@ CREATE TABLE `dismgtofficer` (
 --
 
 INSERT INTO `dismgtofficer` (`disMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'Yohombu Abeysinghe', 'MAHENDRA, WELIKALA, POKUNUWITA', 'yohombu@gmail.com', 'n', '');
+(1, 'Yohombu Abeysinghe', 'MAHENDRA, WELIKALA, POKUNUWITA', 'yohombu@gmail.com', 'n', ''),
+(2, 'test 4 test', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu99@gmail.com', 'n', '0719867823');
 
 -- --------------------------------------------------------
 
@@ -138,7 +139,9 @@ CREATE TABLE `districtsecretariat` (
 --
 
 INSERT INTO `districtsecretariat` (`districtSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'District Officer', 'District Office,Kalutara', 'district@gmail.com', 'n', '');
+(1, 'District Officer', 'District Office,Kalutara', 'district@gmail.com', 'n', ''),
+(4, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasind2u2@gmail.com', 'n', '0719867863'),
+(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu6@gmail.com', 'n', '0719867863');
 
 -- --------------------------------------------------------
 
@@ -160,7 +163,7 @@ CREATE TABLE `districtsoffice` (
 --
 
 INSERT INTO `districtsoffice` (`districtSOfficeID`, `districtSOfficeName`, `districtSOfficeAddress`, `dsId`, `districtSecretariat`, `dmc`) VALUES
-(3, 'District Office - Kalutara', 'Good Shed Rd, Kalutara', 3, NULL, NULL);
+(3, 'District Office - Kalutara', 'Good Shed Rd, Kalutara', 3, 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -214,13 +217,13 @@ CREATE TABLE `divisionaloffice` (
 --
 
 INSERT INTO `divisionaloffice` (`divisionalOfficeId`, `divisionalSofficeName`, `divisionalSofficeAddress`, `dvId`, `divisionalSecretariatID`, `disasterManager`) VALUES
-(1, 'Divisional Secretariat Office Dodangoda', 'Kalutara-Matugama Rd, Thudugala 12020', 10, 1, 1),
+(1, 'Divisional Secretariat Office Dodangoda', 'Kalutara-Matugama Rd, Thudugala 12020', 10, 8, 1),
 (3, 'Divisional Office Agalawatta', 'Divisional Office, Agalawatta', 12, NULL, NULL),
 (4, 'Divisional Office Bandaragama', 'Divisional Office, Bandaragama', 2, NULL, NULL),
 (5, 'Divisional Office Beruwala', 'Divisional Office, Beruwala', 9, NULL, NULL),
 (6, 'Divisional Office Bulathsinhala', 'Divisional Office, Bulathsinhala', 5, NULL, NULL),
-(7, 'Divisional Office Horana', 'Divisional Office, Horana', 3, NULL, NULL),
-(8, 'Divisional Office Ingiriya', 'Divisional Office, Ingiriya', 4, NULL, NULL),
+(7, 'Divisional Office Horana', 'Divisional Office, Horana', 3, 7, NULL),
+(8, 'Divisional Office Ingiriya', 'Divisional Office, Ingiriya', 4, NULL, 2),
 (9, 'Divisional Office Kalutara', 'Divisional Office, Kalutara', 8, NULL, NULL),
 (10, 'Divisional Office Madurawala', 'Divisional Office, Madurawala', 6, NULL, NULL),
 (11, 'Divisional Office Mathugama', 'Divisional Office, Mathugama', 11, NULL, NULL),
@@ -261,7 +264,10 @@ CREATE TABLE `divisionalsecretariat` (
 
 INSERT INTO `divisionalsecretariat` (`divisionalSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
 (1, 'Divisional Secratariat', 'Divisional Secratariat,Horana', 'division@gmail.com', 'n', ''),
-(2, 'Pasindu Lakshan', 'Test test', 'htnaweenpasindu2@gmail.com', 'n', '');
+(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu2@gmail.com', 'n', '0719867863'),
+(6, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu3@gmail.com', 'n', '0719867863'),
+(7, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu4@gmail.com', 'n', '0719867863'),
+(8, 'test 2 test 2', 'Hene Gedara Hena, Ullala', 'htnawsseenpasindu@gmail.com', 'n', '0719867863');
 
 -- --------------------------------------------------------
 
@@ -288,6 +294,23 @@ INSERT INTO `dmc` (`dmcID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `donationreqnotice`
+--
+
+CREATE TABLE `donationreqnotice` (
+  `recordId` int(4) NOT NULL,
+  `safehouseId` int(5) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `numOfFamilies` int(2) NOT NULL DEFAULT 0,
+  `numOfPeople` int(3) NOT NULL,
+  `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `note` varchar(200) DEFAULT NULL,
+  `appovalStatus` char(1) NOT NULL DEFAULT 'n'
+) ;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gndivision`
 --
 
@@ -306,7 +329,7 @@ CREATE TABLE `gndivision` (
 --
 
 INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `startDate`, `safeHouseID`, `gramaNiladariID`, `dvId`) VALUES
-(1, ' 719  Koholana South', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
+(1, ' 719  Koholana South', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, 2, NULL, 10),
 (2, '719 A Adhikarigoda', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
 (3, '719 B Koholana North', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
 (4, '720 Ukwatta', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
@@ -367,8 +390,8 @@ INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `startDate`, `s
 (59, '620 G Maha Ingiriya', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
 (60, '621 Maputugala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
 (61, '621 A Rathmalgoda Ea', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(62, '621 B Rathmalgoda We', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(63, '622 Pelpitigoda', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
+(62, '621 B Rathmalgoda We', 'Divisional Secretariat,Ingiriya', NULL, NULL, 7, 4),
+(63, '622 Pelpitigoda', 'Divisional Secretariat,Ingiriya', NULL, NULL, 6, 4),
 (64, '622 Handapangoda Sou', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
 (65, '623 A Handapangoda E', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
 (66, '623 B Handapangoda W', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
@@ -382,7 +405,7 @@ INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `startDate`, `s
 (74, '627 A Kotigala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
 (75, '627 B Kurana North', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
 (76, '632 Kandana North', 'Grama Niladhari Office,Kandana North - 632', NULL, NULL, NULL, 3),
-(77, '633A Ilimba', 'Grama Niladhari Office,Ilimba - 632A', NULL, NULL, NULL, 3),
+(77, '633A Ilimba', 'Grama Niladhari Office,Ilimba - 632A', NULL, NULL, 4, 3),
 (78, '632B Kandana South', 'Grama Niladhari Office,Kandana South - 632B', NULL, NULL, NULL, 3),
 (79, '633 Werawatta', 'Grama Niladhari Office,Werawatta - 633', NULL, NULL, NULL, 3),
 (80, '633A Kananvila', 'Grama Niladhari Office,Kananvila - 633A', NULL, NULL, NULL, 3),
@@ -397,7 +420,7 @@ INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `startDate`, `s
 (89, '648A Kudella', 'Grama Niladhari Office,Kudella - 648A', NULL, NULL, NULL, 3),
 (90, '648B Hallankanda', 'Grama Niladhari Office,Hallankanda - 648B', NULL, NULL, NULL, 3),
 (91, '650 Remuna', 'Grama Niladhari Office,Remuna - 650', NULL, NULL, NULL, 3),
-(92, '650A Bellapitiya Eas', 'Grama Niladhari Office,Bellapitiya East - 650A', NULL, NULL, NULL, 3),
+(92, '650A Bellapitiya Eas', 'Grama Niladhari Office,Bellapitiya East - 650A', NULL, NULL, 5, 3),
 (93, '650B Bellapitiya Wes', 'Grama Niladhari Office,Bellapitiya West - 650B', NULL, NULL, NULL, 3),
 (94, '650C Peramunagama', 'Grama Niladhari Office,Peramunagama - 650C', NULL, NULL, NULL, 3),
 (95, '650D Weliketella', 'Grama Niladhari Office,Weliketella - 650D', NULL, NULL, NULL, 3),
@@ -435,7 +458,13 @@ CREATE TABLE `gramaniladari` (
 --
 
 INSERT INTO `gramaniladari` (`gramaNiladariID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'Asela Pathirage', 'NO 252/D,, ANANDA MAITHREE MAWATHA,, BELLAPITIYA, HORANA.', 'asela@gmail.com', 'n', '');
+(1, 'Asela Pathirage', 'NO 252/D,, ANANDA MAITHREE MAWATHA,, BELLAPITIYA, HORANA.', 'asela@gmail.com', 'n', ''),
+(2, 'gn gn', 'Hene Gedara Hena, Ullala', 'htnaweegujgnpasindu@gmail.com', 'n', '0719867863'),
+(3, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsasindu@gmail.com', 'n', '0719867863'),
+(4, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsfasindu@gmail.com', 'n', '0719867863'),
+(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu@gmail.com', 'n', '0719867863'),
+(6, 'test  Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu6@gmail.com', 'n', '0719867863'),
+(7, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu7@gmail.com', 'n', '0719867863');
 
 -- --------------------------------------------------------
 
@@ -454,7 +483,8 @@ CREATE TABLE `inventory` (
 --
 
 INSERT INTO `inventory` (`inventoryId`, `inventoryAddress`, `dvId`) VALUES
-(1, 'Divisional Office, Dodangoda', 10);
+(1, 'Divisional Office, Dodangoda', 10),
+(2, 'Divisional Office, Horane', 3);
 
 -- --------------------------------------------------------
 
@@ -466,8 +496,86 @@ CREATE TABLE `inventoryitem` (
   `recId` int(3) NOT NULL,
   `itemId` int(2) DEFAULT NULL,
   `inventoryId` int(3) DEFAULT NULL,
-  `quantity` decimal(6,2) NOT NULL DEFAULT 0.00
+  `quantity` decimal(6,2) NOT NULL DEFAULT 0.00,
+  `transactionDate` datetime NOT NULL,
+  `remarks` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `inventoryitem`
+--
+
+INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `transactionDate`, `remarks`) VALUES
+(1, 5, 1, '50.00', '2021-10-11 00:14:15', ''),
+(2, 3, 1, '1.00', '2021-10-26 00:14:15', ''),
+(3, 6, 1, '100.00', '2021-10-22 00:14:47', ''),
+(5, 5, 1, '30.00', '2021-10-28 00:19:47', ''),
+(7, 5, 1, '200.00', '2021-10-24 01:11:47', ''),
+(8, 5, 1, '200.00', '2021-10-24 01:11:47', ''),
+(9, 5, 1, '2.00', '2021-10-24 01:12:51', ''),
+(10, 5, 1, '20.00', '2021-10-24 01:13:27', ''),
+(11, 5, 1, '10.00', '2021-10-24 01:14:26', ''),
+(12, 5, 1, '10.00', '2021-10-24 01:14:56', ''),
+(13, 5, 1, '-200.00', '2021-10-24 01:47:53', ''),
+(14, 5, 1, '-200.00', '2021-10-24 01:57:50', ''),
+(15, 1, 1, '2.00', '2021-10-24 02:08:57', ''),
+(16, 2, 1, '3.00', '2021-10-24 02:09:06', ''),
+(17, 3, 1, '10.00', '2021-10-24 02:34:57', ''),
+(18, 4, 1, '200.00', '2021-10-24 02:35:13', ''),
+(19, 5, 1, '200.00', '2021-10-24 03:11:14', ''),
+(20, 5, 1, '-22.00', '2021-10-24 03:11:22', ''),
+(21, 3, 1, '1.00', '2021-10-26 23:33:57', ''),
+(22, 3, 1, '-1.00', '2021-10-26 23:34:42', ''),
+(23, 26, 1, '50.00', '2021-10-27 00:03:25', ''),
+(24, 2, 1, '-1.00', '2021-10-27 13:41:59', ''),
+(25, 2, 1, '-1.00', '2021-10-27 13:43:09', ''),
+(26, 2, 1, '2.00', '2021-10-27 13:44:11', ''),
+(27, 2, 1, '-1.00', '2021-10-27 13:44:20', ''),
+(28, 5, 1, '-50.00', '2021-10-27 13:45:37', ''),
+(29, 6, 1, '-25.00', '2021-10-27 14:12:04', ''),
+(30, 5, 1, '-50.00', '2021-10-27 14:14:51', ''),
+(31, 5, 1, '-50.00', '2021-10-27 14:23:08', ''),
+(32, 4, 1, '-25.00', '2021-10-27 14:27:57', ''),
+(33, 3, 1, '-1.00', '2021-10-27 14:31:28', ''),
+(34, 6, 1, '-15.00', '2021-10-27 14:33:49', ''),
+(35, 6, 1, '-25.00', '2021-10-27 14:50:35', ''),
+(36, 5, 1, '-25.00', '2021-10-27 15:02:34', ''),
+(37, 4, 1, '-25.00', '2021-10-27 15:03:34', ''),
+(38, 5, 1, '-5.00', '2021-10-27 15:13:16', ''),
+(39, 5, 1, '-5.00', '2021-10-27 15:13:31', ''),
+(40, 5, 1, '-5.00', '2021-10-27 15:14:20', ''),
+(41, 5, 1, '-5.00', '2021-10-27 15:14:33', ''),
+(42, 4, 1, '-5.00', '2021-10-27 15:25:40', ''),
+(43, 3, 1, '-1.00', '2021-10-27 15:26:27', ''),
+(44, 4, 1, '-5.00', '2021-10-27 15:27:32', ''),
+(45, 3, 1, '-1.00', '2021-10-27 15:47:15', ''),
+(46, 3, 1, '-1.00', '2021-10-27 15:48:02', ''),
+(47, 3, 1, '-1.00', '2021-10-27 15:48:49', ''),
+(48, 3, 1, '-1.00', '2021-10-27 15:49:56', ''),
+(49, 4, 1, '-5.00', '2021-10-27 15:54:53', ''),
+(50, 5, 1, '-5.00', '2021-10-27 15:57:38', ''),
+(51, 2, 1, '-1.00', '2021-10-27 15:57:50', ''),
+(52, 26, 1, '-50.00', '2021-10-27 16:11:18', ''),
+(53, 26, 1, '50.00', '2021-10-27 16:19:19', ''),
+(54, 5, 1, '-100.00', '2021-10-27 16:21:23', ''),
+(55, 26, 1, '-50.00', '2021-10-27 16:23:21', ''),
+(56, 26, 1, '50.00', '2021-10-27 16:25:21', ''),
+(57, 26, 1, '-50.00', '2021-10-27 16:27:02', ''),
+(58, 26, 1, '50.00', '2021-10-27 16:27:17', ''),
+(59, 9, 1, '50.00', '2021-10-27 16:27:31', ''),
+(60, 6, 1, '15.00', '2021-10-27 16:50:57', ''),
+(61, 23, 1, '5.00', '2021-10-27 20:14:34', ''),
+(62, 9, 1, '-5.50', '2021-10-27 20:14:55', ''),
+(63, 23, 1, '2.00', '2021-10-27 21:12:27', ''),
+(64, 9, 1, '20.00', '2021-10-27 21:12:41', ''),
+(65, 6, 1, '-2.30', '2021-10-27 21:13:44', ''),
+(66, 10, 1, '1.00', '2021-10-27 21:44:49', ''),
+(67, 6, 1, '-25.00', '2021-10-27 21:45:10', ''),
+(68, 2, 2, '1.00', '2021-11-18 17:29:02', ''),
+(69, 2, 2, '-2.00', '2021-11-18 18:02:46', ''),
+(70, 31, 2, '5.00', '2021-11-18 18:53:31', ''),
+(71, 2, 1, '2.00', '2021-12-06 19:33:47', ''),
+(72, 28, 1, '50.00', '2021-12-16 23:21:13', '');
 
 -- --------------------------------------------------------
 
@@ -520,9 +628,13 @@ INSERT INTO `item` (`itemId`, `itemName`, `unitType`) VALUES
 (8, 'Mini generator', 4),
 (9, 'Soya', 1),
 (10, 'Water Bowser', 4),
-(20, 'test 3', 3),
-(21, 'test 1', 3),
-(22, 'test 2', 1);
+(23, 'Wheel Chair', 4),
+(26, 'Petrol', 3),
+(27, 'Diesel', 3),
+(28, 'Hand Hanitizer', 4),
+(29, 'Face Mask', 4),
+(31, 'Safety Jacket', 4),
+(32, 'test 4', 4);
 
 -- --------------------------------------------------------
 
@@ -550,8 +662,34 @@ INSERT INTO `login` (`empId`, `nid`, `empPassword`, `keyAuth`, `roleId`) VALUES
 (1, '627e959497b80e7fa95d10194f813ba5', '47982c18f4861b2edf96bfe9f73f12bf', 'o48gatdqbk', 5),
 (1, '29ad81bf880b526979eeee461fc16580', 'd32934b31349d77e70957e057b1bcd28', 'ni1saocfq5', 6),
 (1, '735fd4e6cae4fa6000d0372d7d6a47c1', 'd32934b31349d77e70957e057b1bcd28', 'c6emf4qdj5', 7),
-(1, 'b723c460021647140afe4af4cf346ded', 'd32934b31349d77e70957e057b1bcd28', 'dhp3secg8a', 8),
-(2, 'ab30489bb5771436ff53be2915a98451', '5fe6b431c86370dd7843ac95c833bbb0', '8hbq62ctd7', 4);
+(1, 'be9793b20f2e3bfb32dd79460a9d83d6', 'd32934b31349d77e70957e057b1bcd28', 'dhp3secg8a', 8),
+(2, '6d6effd7dc0d98612c6a55f9e7130082', '77882f4f713fe0e6e3eb33cc62508a72', '8JdvmR4afR', 1),
+(2, '1ad700ce5f87f8dc4506784d53a3f685', '7233ed1e298b367e56ac39ff22a3ebdc', 'vrEEbWJAfq', 3),
+(2, 'ab30489bb5771436ff53be2915a98451', '5fe6b431c86370dd7843ac95c833bbb0', '8hbq62ctd7', 4),
+(2, '4311d281769e23a6893578afa6ef91ea', 'e436e72a66a933ced03f390f9f73bdb3', 'AlWEH3ESf2', 6),
+(3, '09ac79a619ab6fe93ecd5990c4c0e857', 'fa1b6caccf1d40a65be440cd438bb9ad', 'SE0FSfn1i4', 1),
+(4, '09ac79a619ab6fe93ecd5990c4c0e857', '063b261f68d8cdde3b3f3d60e0b56cb8', 'sJo4anmaAg', 1),
+(4, 'd41d8cd98f00b204e9800998ecf8427e', 'a6af2c057668c3a37a35811eb085ab67', 'nA2dA5SSlS', 3),
+(5, '731a528c0ac7ccfe928f7c50d7816205', 'a609ad7d5b8837f412e2425866b3a631', 'Gdklg8fncq', 1),
+(5, '20aee3a5f4643755a79ee5f6a73050ac', '832fe1cc447051ec0137d846a5c3dd23', 'hRSEqhgj7G', 3),
+(5, '731a528c0ac7ccfe928f7c50d7816205', '53e5506045a86e2f826c026d63b252c6', '5dEdSco13b', 4),
+(6, 'd41d8cd98f00b204e9800998ecf8427e', 'be6662caf143ef8fe836673edad54dae', 'Gci1GHQqhR', 1),
+(6, '731a528c0ac7ccfe928f7c50d7816205', '5a561fd5bfff44f94dfc955253e2a917', 'aEJcHWEvtH', 4),
+(7, '731a528c0ac7ccfe928f7c50d7816205', 'c5a7026d54ad1ec0a6988b1be355533f', 'S40fWkEEEi', 1),
+(7, '731a528c0ac7ccfe928f7c50d7816205', 'b848f2e08fc7a2c737009c90215bb8ea', 'tdH4E07LEf', 4),
+(8, '731a528c0ac7ccfe928f7c50d7816205', 'f2dcd5d1f22c796a348685b6737845b6', 'bdjsgEEcAf', 4);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `noticeitem`
+--
+
+CREATE TABLE `noticeitem` (
+  `noticeId` int(4) NOT NULL,
+  `itemId` int(2) NOT NULL,
+  `quantitity` decimal(6,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -567,14 +705,6 @@ CREATE TABLE `resetpass` (
   `valueIdentity` varchar(50) NOT NULL,
   `active` char(1) DEFAULT 'a'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `resetpass`
---
-
-INSERT INTO `resetpass` (`recordId`, `empId`, `roleId`, `createdTime`, `valueIdentity`, `active`) VALUES
-(1, 1, 2, '2021-10-23 20:49:35', 'aEfmS6GRnkH4Hdio0Gaefl9cWvfE1h5EgW7pqE8AjEFERASRSt', 'e'),
-(2, 1, 2, '2021-10-23 21:01:27', 'fEH9pfAHcWE1AggaQiqmbkatLG3nsh8SRv7EhRF2rddjGo0WeE', 'e');
 
 -- --------------------------------------------------------
 
@@ -612,7 +742,8 @@ CREATE TABLE `responsibleperson` (
 --
 
 INSERT INTO `responsibleperson` (`responsiblePersonID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `safeHouseID`, `empTele`) VALUES
-(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'y', 1, '');
+(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'y', 1, ''),
+(2, 'test test', 'test at test', 'test@gmail.com', 'n', 2, '0111111111');
 
 -- --------------------------------------------------------
 
@@ -657,7 +788,8 @@ CREATE TABLE `safehouse` (
 --
 
 INSERT INTO `safehouse` (`safeHouseID`, `safeHouseAddress`, `safeHouseName`, `isUsing`) VALUES
-(1, 'No 10,School Road, Bolossagama', 'Bolossagama Safe House', 'n');
+(1, 'No 10,School Road, Bolossagama', 'Bolossagama Safe House', 'y'),
+(2, 'Test', 'test Safe House', 'n');
 
 -- --------------------------------------------------------
 
@@ -675,7 +807,80 @@ CREATE TABLE `safehousecontact` (
 --
 
 INSERT INTO `safehousecontact` (`safeHouseTelno`, `safeHouseID`) VALUES
-('0345165219', 1);
+('0345165219', 1),
+('0346165219', 1),
+('0341115219', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `safehousestatus`
+--
+
+CREATE TABLE `safehousestatus` (
+  `r_id` int(5) NOT NULL,
+  `safehouseId` int(5) DEFAULT NULL,
+  `adultMale` int(3) DEFAULT NULL,
+  `adultFemale` int(3) DEFAULT NULL,
+  `children` int(3) DEFAULT NULL,
+  `disabledPerson` int(2) DEFAULT NULL,
+  `note` varchar(500) DEFAULT NULL,
+  `createdDate` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `safehousestatus`
+--
+
+INSERT INTO `safehousestatus` (`r_id`, `safehouseId`, `adultMale`, `adultFemale`, `children`, `disabledPerson`, `note`, `createdDate`) VALUES
+(1, 1, 10, 12, 5, 0, NULL, '2021-12-16 21:33:55');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `safehousestatusrequesteditem`
+--
+
+CREATE TABLE `safehousestatusrequesteditem` (
+  `statusId` int(5) NOT NULL,
+  `itemId` int(2) NOT NULL,
+  `quantity` decimal(6,2) NOT NULL DEFAULT 0.00
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `servicerequest`
+--
+
+CREATE TABLE `servicerequest` (
+  `r_id` int(4) NOT NULL,
+  `inventoryId` int(3) NOT NULL,
+  `requestedDate` datetime NOT NULL,
+  `currentStatus` char(1) DEFAULT 'p',
+  `acceptedBy` int(3) DEFAULT NULL,
+  `acceptedDate` datetime DEFAULT NULL,
+  `requestingFrom` int(3) DEFAULT 0,
+  `note` varchar(200) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `servicerequest`
+--
+
+INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentStatus`, `acceptedBy`, `acceptedDate`, `requestingFrom`, `note`) VALUES
+(1, 1, '2021-11-18 20:26:01', 'p', NULL, '0000-00-00 00:00:00', 0, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `servicerequestitem`
+--
+
+CREATE TABLE `servicerequestitem` (
+  `r_id` int(4) NOT NULL,
+  `itemId` int(2) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -783,6 +988,13 @@ ALTER TABLE `dmc`
   ADD UNIQUE KEY `empEmail` (`empEmail`);
 
 --
+-- Indexes for table `donationreqnotice`
+--
+ALTER TABLE `donationreqnotice`
+  ADD PRIMARY KEY (`recordId`),
+  ADD KEY `safehouseId` (`safehouseId`);
+
+--
 -- Indexes for table `gndivision`
 --
 ALTER TABLE `gndivision`
@@ -837,6 +1049,13 @@ ALTER TABLE `login`
   ADD KEY `roleId` (`roleId`);
 
 --
+-- Indexes for table `noticeitem`
+--
+ALTER TABLE `noticeitem`
+  ADD PRIMARY KEY (`noticeId`,`itemId`),
+  ADD KEY `itemId` (`itemId`);
+
+--
 -- Indexes for table `resetpass`
 --
 ALTER TABLE `resetpass`
@@ -878,6 +1097,34 @@ ALTER TABLE `safehousecontact`
   ADD KEY `safeHouseID` (`safeHouseID`);
 
 --
+-- Indexes for table `safehousestatus`
+--
+ALTER TABLE `safehousestatus`
+  ADD PRIMARY KEY (`r_id`),
+  ADD KEY `safehouseId` (`safehouseId`);
+
+--
+-- Indexes for table `safehousestatusrequesteditem`
+--
+ALTER TABLE `safehousestatusrequesteditem`
+  ADD PRIMARY KEY (`itemId`,`statusId`);
+
+--
+-- Indexes for table `servicerequest`
+--
+ALTER TABLE `servicerequest`
+  ADD PRIMARY KEY (`r_id`),
+  ADD KEY `inventoryId` (`inventoryId`),
+  ADD KEY `acceptedBy` (`acceptedBy`);
+
+--
+-- Indexes for table `servicerequestitem`
+--
+ALTER TABLE `servicerequestitem`
+  ADD PRIMARY KEY (`r_id`,`itemId`),
+  ADD KEY `itemId` (`itemId`);
+
+--
 -- Indexes for table `unit`
 --
 ALTER TABLE `unit`
@@ -897,7 +1144,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `dismgtofficer`
 --
 ALTER TABLE `dismgtofficer`
-  MODIFY `disMgtOfficerID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `disMgtOfficerID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -909,7 +1156,7 @@ ALTER TABLE `district`
 -- AUTO_INCREMENT for table `districtsecretariat`
 --
 ALTER TABLE `districtsecretariat`
-  MODIFY `districtSecretariatID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `districtSecretariatID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `districtsoffice`
@@ -933,13 +1180,19 @@ ALTER TABLE `divisionaloffice`
 -- AUTO_INCREMENT for table `divisionalsecretariat`
 --
 ALTER TABLE `divisionalsecretariat`
-  MODIFY `divisionalSecretariatID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `divisionalSecretariatID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `dmc`
 --
 ALTER TABLE `dmc`
   MODIFY `dmcID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `donationreqnotice`
+--
+ALTER TABLE `donationreqnotice`
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gndivision`
@@ -951,19 +1204,19 @@ ALTER TABLE `gndivision`
 -- AUTO_INCREMENT for table `gramaniladari`
 --
 ALTER TABLE `gramaniladari`
-  MODIFY `gramaNiladariID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `gramaNiladariID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `inventoryId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -975,13 +1228,13 @@ ALTER TABLE `inventorymgtofficer`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT for table `resetpass`
 --
 ALTER TABLE `resetpass`
-  MODIFY `recordId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `recordId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `resident`
@@ -993,7 +1246,7 @@ ALTER TABLE `resident`
 -- AUTO_INCREMENT for table `responsibleperson`
 --
 ALTER TABLE `responsibleperson`
-  MODIFY `responsiblePersonID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `responsiblePersonID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `role`
@@ -1005,7 +1258,19 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `safehouse`
 --
 ALTER TABLE `safehouse`
-  MODIFY `safeHouseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `safeHouseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `safehousestatus`
+--
+ALTER TABLE `safehousestatus`
+  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `servicerequest`
+--
+ALTER TABLE `servicerequest`
+  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `unit`
@@ -1052,6 +1317,12 @@ ALTER TABLE `divisionalofficecontact`
   ADD CONSTRAINT `divisionalofficecontact_ibfk_1` FOREIGN KEY (`divisionalOfficeId`) REFERENCES `divisionaloffice` (`divisionalOfficeId`);
 
 --
+-- Constraints for table `donationreqnotice`
+--
+ALTER TABLE `donationreqnotice`
+  ADD CONSTRAINT `donationreqnotice_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`);
+
+--
 -- Constraints for table `gndivision`
 --
 ALTER TABLE `gndivision`
@@ -1091,6 +1362,13 @@ ALTER TABLE `login`
   ADD CONSTRAINT `login_ibfk_1` FOREIGN KEY (`roleId`) REFERENCES `role` (`roleId`);
 
 --
+-- Constraints for table `noticeitem`
+--
+ALTER TABLE `noticeitem`
+  ADD CONSTRAINT `noticeitem_ibfk_1` FOREIGN KEY (`noticeId`) REFERENCES `donationreqnotice` (`recordId`),
+  ADD CONSTRAINT `noticeitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+
+--
 -- Constraints for table `resident`
 --
 ALTER TABLE `resident`
@@ -1107,6 +1385,26 @@ ALTER TABLE `responsibleperson`
 --
 ALTER TABLE `safehousecontact`
   ADD CONSTRAINT `safehousecontact_ibfk_1` FOREIGN KEY (`safeHouseID`) REFERENCES `safehouse` (`safeHouseID`);
+
+--
+-- Constraints for table `safehousestatus`
+--
+ALTER TABLE `safehousestatus`
+  ADD CONSTRAINT `safehousestatus_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`);
+
+--
+-- Constraints for table `servicerequest`
+--
+ALTER TABLE `servicerequest`
+  ADD CONSTRAINT `servicerequest_ibfk_1` FOREIGN KEY (`inventoryId`) REFERENCES `inventory` (`inventoryId`),
+  ADD CONSTRAINT `servicerequest_ibfk_2` FOREIGN KEY (`acceptedBy`) REFERENCES `inventory` (`inventoryId`);
+
+--
+-- Constraints for table `servicerequestitem`
+--
+ALTER TABLE `servicerequestitem`
+  ADD CONSTRAINT `servicerequestitem_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `servicerequest` (`inventoryId`),
+  ADD CONSTRAINT `servicerequestitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

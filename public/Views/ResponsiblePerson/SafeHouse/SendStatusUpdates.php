@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Inventory Manager - Safe House </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -86,7 +86,7 @@ color: #ffdddd;
                                             <textarea id="notes" name="drivernotes" rows="8" cols="50" required='true'></textarea>
                                     </div>
                     </div>
-                    <div class="tab">Required Aids
+                    <div class="tab"><h3>Required Aids</h3>
                         <div class="table-repsonsive">
                             <span id="error"></span>
                             <table class="table table-bordered" id="item_table">

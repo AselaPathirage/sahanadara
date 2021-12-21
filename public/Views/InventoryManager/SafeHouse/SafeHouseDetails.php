@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Inventory Manager - Safe House </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -28,20 +28,30 @@
                         <tr class="filters">
                             <th>Active Status
                                 <select id="status-filter" class="form-control">
-                                <option>Active</option>
+                                    <option>All</option>
+                                    <option>Active</option>
                                     <option>Inactive</option>
                                 </select>
                             </th>
-                            <th>GN Division
+                            <th>District
+                                <select id="assigned-user-filter" class="form-control">
+                                    <option>All</option>
+                                    <option>Kalutara</option>
+                                </select>
+                            </th>
+                            <th>Division
                                 <select id="assigned-user-filter" class="form-control">
                                     <option>Keselwatta</option>
                                     <option>Maradana</option>
                                 </select>
-                            </th>
-                            
+                            </th> 
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Reset</th>
+                            <th></th>
                         </tr>
                     </thead>
                 </table>
@@ -84,6 +94,36 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        var output={};
+        var district={};
+        getSafwHouse();
+        getDistrict();
+        function getSafwHouse(){
+            var x = "<?php echo $_SESSION['key'] ?>"; 
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>safehouse",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':x},
+                cache: false,
+                async: false
+            }).responseText);
+        }
+        function getDistrict(){
+            var x = "<?php echo $_SESSION['key'] ?>"; 
+            district = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>district",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':x},
+                cache: false,
+                async: false
+            }).responseText);
+        }
+        console.log(output);
+        function viewDetails( ){
+
         }
     </script>
 </body>

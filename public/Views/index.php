@@ -7,11 +7,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <!-- <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/admin_style.css"> -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/landing_style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <!-- <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/admin_style.css"> -->
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/landing_style.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -201,7 +201,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -218,7 +218,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -239,7 +239,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>
@@ -256,7 +256,7 @@
                     <div class="col5 card_donation is-collapsed row-content">
                         <div class="card__inner js-expander">
                             <h2><i class="fas fa-donate"></i> Fund for displaced persons</h2>
-                            <p style="">Bellapitiya</p>
+                            <p>Bellapitiya</p>
 
                         </div>
                         <div class="card__expander"><i class="fa fa-close js-collapser"> </i>

@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Inventory Manager - Notice </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -66,7 +66,7 @@
         background-color: rgb(153,176,255);   
     }
     .view{
-        background-color: rgb(109,91,208);
+        background-color: rgb(66, 245, 96);
         height: 50px;
         display: block;
         padding: 14px;
@@ -77,8 +77,9 @@
         color: wheat;
         box-shadow: 2px 1px #000;
     }
-    .view:hover{
-        background-color: rgb(138,123,217);
+    tr:hover{
+        background:#c9e8f7;
+        position:relative;
     }
     </style>
 </head>
@@ -112,7 +113,7 @@
                                 <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
                             </th>
                             <th style="width: 15%;text-align:center;">
-                                <a href="#" class="view">Remove</a>
+                                <a href="#" style="background-color: rgb(245, 66, 66);" class="view">Remove</a>
                             </th>
                         </tr>
                     </thead>

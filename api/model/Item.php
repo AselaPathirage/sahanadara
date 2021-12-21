@@ -3,9 +3,9 @@ class Item{
     private $itemCode;
 
     public function setItemCode($id){
-        $numlength = strlen((string)$id);
-        $code = "II0".str_repeat("0",2-$numlength).$id;
-        $this->itemCode = $code;
+        // $numlength = strlen((string)$id);
+        // $code = "II0".str_repeat("0",2-$numlength).$id;
+        // $this->itemCode = $code;
     }
     public static function getId($input){
         $input =strtoupper($input);
@@ -15,7 +15,9 @@ class Item{
         }
         return (int)$id[0];
     }
-    public function getItemCode(){
-        return $this->itemCode;
+    public static function getItemCode($id){
+        $numlength = strlen((string)$id);
+        $code = "II0".str_repeat("0",2-$numlength).$id;
+        return $code;
     }
 }

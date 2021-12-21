@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title> Inventory Manager - Inventory </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/searchList.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/searchList.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -125,11 +125,8 @@
                                                 <tr>
                                                     <td style="background-color: #fff;">Requesting From</td>
                                                     <td style="background-color: #fff;">                                
-                                                        <select id="status-filter" class="form-control">
-                                                            <option>Any</option>
-                                                            <option>Matara</option>
-                                                            <option>Hakmana</option>
-                                                            <option>Kirinda</option>
+                                                        <select id="division" class="form-control">
+                                                            <option value="">Any</option>
                                                         </select>
                                                     </td>
                                                 </tr>
@@ -174,6 +171,25 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        getDivision()
+        function getDivision(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>division",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            //console.log(output);
+            var select = document.getElementById("division");
+            for (var i = 0; i < output.length; i++){
+                var opt = document.createElement('option');
+                opt.value = output[i]['id'];
+                opt.innerHTML = output[i]['division'];
+                select.appendChild(opt);
+            }
         }
     </script>
 </body>

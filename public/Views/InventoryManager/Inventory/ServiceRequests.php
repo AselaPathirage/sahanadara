@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <title> Inventory Manager - Inventory </title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -102,12 +102,8 @@
                     <thead>
                         <tr class="filters">
                             <th style="width: 25%;">DV Office
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>Agalawatta</option>
-                                    <option>Beruwala</option>
-                                    <option>Ingiriya</option>
-                                    <option>Madurawala</option>
-                                    <option>Walallavita</option>
+                                <select id="division" class="form-control">
+                                    <option value="">Any</option>
                                 </select>
                             </th>
                             <th style="width: 25%;">Responded
@@ -211,6 +207,7 @@
     </section>
     <script>
         var thisPage = "#Service";
+        getDivision();
         $(document).ready(function() {
             $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){
@@ -225,6 +222,25 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+
+        function getDivision(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>division",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            //console.log(output);
+            var select = document.getElementById("division");
+            for (var i = 0; i < output.length; i++){
+                var opt = document.createElement('option');
+                opt.value = output[i]['id'];
+                opt.innerHTML = output[i]['division'];
+                select.appendChild(opt);
+            }
         }
     </script>
 </body>

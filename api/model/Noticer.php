@@ -2,6 +2,7 @@
 trait Noticer{
     public function addNotice(array $data){
         global $errorCode;
+        
     }
     public function updateNotice(array $data){
         global $errorCode;

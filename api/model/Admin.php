@@ -120,20 +120,41 @@ class Admin extends Employee{
 
     }
     public function DBtoJson(){
-        $sql = "SELECT d.dsId,d.dsName,dv.dvId,dv.dvName,gn.gndvId,gn.gnDvName FROM district d,division dv,gndivision gn 
-            WHERE d.dsId = dv.dsId AND dv.dvId = gn.dvId";
+        $sql = "SELECT d.dsId,d.dsName FROM district d WHERE d.dsId IN (SELECT DISTINCT dv.dsId FROM division dv)";
         $excute = $this->connection->query($sql);
-        $results = array("district"=>array());
+        $results = array();
         while($r = $excute-> fetch_assoc()) {
-            if(!isset($results["district"][$r["dsName"]])) {
-                $results["district"][$r["dsName"]]["dsId"] = $r["dsId"];
+            $temp = array('dsId'=> $r['dsId'], 'name'=>$r['dsName'], 'division'=>array());
+            $sql = "SELECT dv.dvId,dv.dvName FROM division dv WHERE dv.dvId IN (SELECT DISTINCT gn.dvId FROM gndivision gn) AND dv.dsId=".$r['dsId'];
+            $divisionQuery = $this->connection->query($sql);
+            while($p = $divisionQuery-> fetch_assoc()) {
+                $temp2= array('dvId'=> $p['dvId'], 'name'=>$p['dvName'], 'gnArea'=>array());
+                $sql = "SELECT gn.gndvId,gn.gnDvName FROM gndivision gn WHERE gn.dvId=".$p['dvId'];
+                $gnQuery = $this->connection->query($sql);
+                while($q = $gnQuery-> fetch_assoc()) {
+                    $temp3 = array('gndvId'=>$q['gndvId'], 'name'=>$q['gnDvName']);
+                    array_push($temp2['gnArea'],$temp3);
+                }
+                array_push($temp['division'],$temp2);
             }
-            if(!isset($results["district"][$r["dsName"]]["division"][$r["dvName"]])) {
-                $results["district"][$r["dsName"]]["division"][$r["dvName"]]["dvId"] = $r["dvId"];
-            }
-            $results["district"][$r["dsName"]]["division"][$r["dvName"]]["gnArea"][$r["gnDvName"]]["gndvId"] = $r["gndvId"];
+            array_push($results,$temp);
         }
         $json = json_encode($results);
         echo $json;
     }
 } 
+// $sql = "SELECT d.dsId,d.dsName,dv.dvId,dv.dvName,gn.gndvId,gn.gnDvName FROM district d,division dv,gndivision gn 
+// WHERE d.dsId = dv.dsId AND dv.dvId = gn.dvId";
+// $excute = $this->connection->query($sql);
+// $results = array("district"=>array());
+// while($r = $excute-> fetch_assoc()) {
+// if(!isset($results["district"][$r["dsName"]])) {
+//     $results["district"][$r["dsName"]]["dsId"] = $r["dsId"];
+// }
+// if(!isset($results["district"][$r["dsName"]]["division"][$r["dvName"]])) {
+//     $results["district"][$r["dsName"]]["division"][$r["dvName"]]["dvId"] = $r["dvId"];
+// }
+// $results["district"][$r["dsName"]]["division"][$r["dvName"]]["gnArea"][$r["gnDvName"]]["gndvId"] = $r["gndvId"];
+// }
+// $json = json_encode($results);
+// echo $json;

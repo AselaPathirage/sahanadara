@@ -26,6 +26,7 @@
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
+        <div class="box">
             <form action="#" method="post">
                 <h1>Compensation Requests</h1>
                 <label for="notes">Requests 1</label>
@@ -36,12 +37,11 @@
 
                     <input type="submit" value="Approve" />
                     <input type="reset" value="Decline" />
-                </div>
 
-            </form>
-        </div>
+            </div>
 
-               
+    </form>
+    </div>
     </section>
     <script>
         var thisPage = "#Compensation";

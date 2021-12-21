@@ -205,7 +205,7 @@
                 async: false
             }).responseText);
             var table = document.getElementById("tableSafeHouse");
-            for (var i = 0; i < output.length-1; i++){
+            for (var i = 0; i < output.length; i++){
                 let obj = output[i];
                 console.log(obj);
                 // let row = table.insertRow(-1);

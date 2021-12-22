@@ -12,7 +12,7 @@ class Route{
 		if(!self::$_instance) { // If no instance then make one
 			self::$_instance = new self();
 		}
-		return self::$_instance;
+		return self::$_instance; 
 	}
     private function __construct(){
         require_once("config/apiRoutes.php");

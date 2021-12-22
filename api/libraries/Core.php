@@ -49,34 +49,32 @@ class Core{
                 }
                 $url = rtrim($_GET['request'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
+                $this->params['url'] = strtolower($url);
                 $url = explode('/', $url);
                 $this->params['receivedParams'] = $url;
-                //print_r($this->params);
+                array_shift($this->params['receivedParams']);
+                print_r($this->params);exit();
             }
         } 
-        public function  setClass(){
+        public function  setClass(){  
             global $errorCode;
             global $route;
-            $url = trim($this->params['receivedParams'][0]);
-
+            $url = trim($this->params['url']);
             $array = $route->checkAvailibility($url);
+            unset($this->params['url']);
             foreach($array as $item) {
                 $temp = explode("@", $item);
                 if(in_array($temp[0],$this->nonSecure)){
                         $this->currentModel = $temp[0];
                         $this->currentModel =  new $this->currentModel($this->connection);
                         $this->setMthod($temp[1]);
-                        array_shift($this->params['receivedParams']);
-                        //unset($this->params['receivedParams'][0]);
                         return;
                 }else if(in_array($temp[0],array_keys($this->permission))){
                     if($this->userType == $this->permission[$temp[0]]){
                         $this->currentModel = $temp[0];
                         $this->currentModel =  new $this->currentModel($this->connection);
                         $this->setMthod($temp[1]);
-                        array_shift($this->params['receivedParams']);
                         $this->params['userId'] = $this->userId;
-                        //unset($this->params['receivedParams'][0]);
                         return;
                     }
                 }

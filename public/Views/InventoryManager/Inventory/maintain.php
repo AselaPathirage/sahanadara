@@ -579,35 +579,50 @@
                 return true;
             }
         }
-        var filters = {
-                unit: null
-            };
-
-        function updateFilters() {
-            $('.task-list-row').hide().filter(function () {
-                var
-                    self = $(this),
-                    result = true; // not guilty until proven guilty
-
-                Object.keys(filters).forEach(function (filter) {
-                    if (filters[filter] && (filters[filter] != 'None') && (filters[filter] != 'Any')) {
-                        result = result && filters[filter] === self.data(filter);
-                    }
-                });
-
-                return result;
-            }).show();
-        }
-        function changeFilter(filterName) {
-            filters[filterName] = this.value;
-            updateFilters();
-        }
         $('#unitType').on('change', function () {
-            changeFilter.call(this, 'unit');
+            var unit = $('#unitType').val();
+            $('#trow').empty();
+            var table = document.getElementById("trow");
+            for (var i = 0; i < output.length; i++){
+                if(output[i]['unitName'] == unit || !unit){
+                    let obj = output[i];
+                    let row = table.insertRow(-1);
+                    let id ="data_"+i;
+                    row.id = id;
+                    row.className = "task-list-row";
+                    $("#data_"+i).attr('data-unit', obj['unitName']);
+                    let cell1 = row.insertCell(-1);
+                    let cell2 = row.insertCell(-1);
+                    let cell3 = row.insertCell(-1);
+                    let cell4 = row.insertCell(-1);
+                    cell1.innerHTML  = obj['itemId'];
+                    cell2.innerHTML = obj['itemName'];
+                    cell3.innerHTML = obj['quantity'];
+                    //cell3.colSpan ="2";
+                    cell4.innerHTML = obj['unitName'];
+            }
+            }
         });
         $(document).on('click','.closeMessege',function () {
             $(".alert").fadeOut(100);
         });
+        (function () {
+        var showResults;
+        $('#search').keyup(function () {
+            var searchText;
+            searchText = $('#search').val();
+            return showResults(searchText);
+        });
+        showResults = function (searchText) {
+            $('tbody tr').hide();
+            return $('tbody tr:Contains(' + searchText + ')').show();
+        };
+        jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function (arg) {
+            return function (elem) {
+                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+    }.call(this));
     </script> 
 </body>
 </html>

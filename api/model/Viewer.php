@@ -18,12 +18,6 @@ trait Viewer{
                     $sql = "SELECT safehouse.safeHouseID,safehouse.safeHouseName,safehouse.isUsing,safehouse.safeHouseAddress FROM safehouse,gndivision WHERE safehouse.safeHouseId = gndivision.safeHouseID AND gndivision.gndvId =".$q['gndvId'];
                     $safeHouseQuery = $this->connection->query($sql);
                     while($s = $safeHouseQuery-> fetch_assoc()) {
-                        $sql = "SELECT safeHouseTelno FROM safehousecontact WHERE safeHouseID=".$s['safeHouseID'];
-                        $contactQuery = $this->connection->query($sql);
-                        $contact = array();
-                        while($a = $contactQuery-> fetch_assoc()) {
-                            array_push($contact,$a['safeHouseTelno']);
-                        }
                         $safeHouseId = SafeHouse::getItemCode($s['safeHouseID']);
                         if($s['isUsing'] == 'n'){
                             $active = "No";
@@ -51,7 +45,11 @@ trait Viewer{
                                 'disabledPerson' => $temp5['disabledPerson']
                             );
                         }
-                        array_push($temp4['contact'],$contact);
+                        $sql = "SELECT safeHouseTelno FROM safehousecontact WHERE safeHouseID=".$s['safeHouseID'];
+                        $contactQuery = $this->connection->query($sql);
+                        while($a = $contactQuery-> fetch_assoc()) {
+                            array_push($temp4['contact'],$a['safeHouseTelno']);
+                        }
                         array_push($temp3['safeHouse'],$temp4);
                     }
                     array_push($temp2['gnArea'],$temp3);

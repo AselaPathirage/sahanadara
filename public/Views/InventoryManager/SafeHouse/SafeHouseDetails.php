@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
 <head>
     <meta charset="UTF-8">
     <title> Inventory Manager - Safe House </title>
@@ -13,6 +12,21 @@
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+.contact{
+    min-width: 40%;
+    max-width: 60%;
+    border-collapse: collapse;
+}
+.contact tr{
+  /* border-bottom: 1px solid black; */
+}
+.contact,tr,td{
+    border: none;
+    padding: 1px;
+    background-color:#fefeee;
+}
+</style>
 </head>
 
 <body>
@@ -25,63 +39,39 @@
         ?>
         <div class="space"></div>
         <div class="container">
-            <table class="table">
-                <thead>
-                    <tr class="filters">
-                        <th>Active Status
-                            <select id="status" class="form-control">
-                                <option value="">All</option>
-                                <option value="1">Active</option>
-                                <option value="2">Inactive</option>
-                            </select>
-                        </th>
-                        <th>District
-                            <select id="District" class="form-control">
-                            </select>
-                        </th>
-                        <th>Division
-                            <select id="Division" class="form-control">
-                            </select>
-                        </th>
-                        <th>Search
-                            <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
-                        </th>
-                    </tr>
-                    <tr>
-                        <th colspan="3">Reset</th>
-                        <th></th>
-                    </tr>
-                </thead>
-            </table>
-
+            <form>
+                <table class="table">
+                    <thead>
+                        <tr class="filters">
+                            <th>Active Status
+                                <select id="status" class="form-control">
+                                    <option value="Any">All</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Inactive</option>
+                                </select>
+                            </th>
+                            <th>District
+                                <select id="District" class="form-control">
+                                </select>
+                            </th>
+                            <th>Division
+                                <select id="Division" class="form-control">
+                                </select>
+                            </th>
+                            <th>Search
+                                <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                            </th>
+                        </tr>
+                        <tr>
+                            <th colspan="3">Reset</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+            </form>
             <div class="container">
                 <div class="row">
                     <div class="col12" id="display">
-                        <div class="box row-content">
-                            <h4>Millaniya Maha Vidyalya</h4>
-                            <p>Haltota, Millaniya Road, Tuttiripitiya</p>
-                            <p>Tele: 071-5632541, 035-5635413</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
-                            </div>
-                        </div>
-                        <div class="box row-content" style="background-color: rgb(176,224,230);">
-                            <h4>Taxila Central College</h4>
-                            <p>Horana</p>
-                            <p>Tele: 071-5672554, 035-7135353</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Bolossagama Central College</h4>
-                            <p>Bolossagama</p>
-                            <p>Tele: 077-5412554, 035-7735455</p>
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
-                            </div>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -97,8 +87,8 @@
         var district = {};
         getSafwHouse();
         $(document).ready(function(){
-            var distOptions = "<option value=''>Select District</option>";
-            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+            var distOptions = "<option value='Any'>Select District</option>";
+            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
                 $.each(result,function(i,district){
                     distOptions += "<option value='"+district.dsId+"'>"+district.name+"</option>";
                 });
@@ -125,7 +115,7 @@
         $('#District').change(function(){
             var val = $(this).val();
             document.getElementById("Division").selectedIndex = 0;;
-            var divOptions = "<option value=''>Select Division</option>";
+            var divOptions = "<option value='Any'>Select Division</option>";
             $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
                 $.each(result,function(i,district){
                     if(district.dsId == val){
@@ -145,24 +135,79 @@
             viewDetails();
         })
         function viewDetails() {
-            var district = $('#District').val();
-            var division = $('#Division').val();
+            var districtVal = $('#District').val();
+            var divisionVal = $('#Division').val();
             var status = $('#status').val();
-            console.log(output);
+            var display ="";
             $.each(output,function(i,district){
-                console.log(i);
-                console.log(district.id);
-                if(district.id == 3){
-                    console.log("fff");
+                if((district.id == districtVal || districtVal =="Any") || (!districtVal || !divisionVal || !status)){
                         $.each(district.division,function(j,division){
-                           console.log("division.dvId");
-                           //console.log(division.name);
-                        })
+                            $.each(division.gnArea,function(k,gnArea){
+                                if((division.id == divisionVal || divisionVal =="Any") || (!districtVal || !divisionVal || !status)){
+                                    $.each(gnArea.safeHouse,function(k,safeHouse){
+                                        if(status == "Any"){
+                                            if(safeHouse.active =="Yes"){
+                                                display += "<div class='box row-content' style='background-color: rgb(176,224,230);'><h4>"+safeHouse.id+" : "+safeHouse.name+"</h4><address>"+safeHouse.address+"</address><p>Tele: ";
+                                                var arrayLength = safeHouse.contact.length;
+                                                for (var i = 0; i < arrayLength; i++) {
+                                                    display += safeHouse.contact[i];
+                                                    if((i+1) != arrayLength){
+                                                        display += ", ";
+                                                    }
+                                                }
+                                                display +="</p><br><table class='contact'><tr><td >Males</td><td>"+safeHouse.males+"</td></tr><tr><td>Female</td><td>"+safeHouse.females+"</td></tr><tr><td>Children</td><td>"+safeHouse.children+"</td></tr><tr><td>Disabled Person</td><td>"+safeHouse.disabledPerson+"</td></tr></table><p></p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a href='' class='btn_active'>Active </a></div></div>";
+                                            }else{
+                                                display += "<div class='box row-content'><h4>"+safeHouse.id+" : "+safeHouse.name+"</h4><address>"+safeHouse.address+"</address><p>Tele: ";
+                                                var arrayLength = safeHouse.contact.length;
+                                                for (var i = 0; i < arrayLength; i++) {
+                                                    display += safeHouse.contact[i];
+                                                    if((i+1) != arrayLength){
+                                                        display += ", ";
+                                                    }
+                                                }
+                                                display +="</p><div class='row' style='text-align: right; margin: 0 auto;display:block'></div></div>"; 
+                                            }
+                                        }else if(status == 2 && safeHouse.active == "No"){
+                                            display += "<div class='box row-content'><h4>"+safeHouse.id+" : "+safeHouse.name+"</h4><address>"+safeHouse.address+"</address><p>Tele: ";
+                                            var arrayLength = safeHouse.contact.length;
+                                            for (var i = 0; i < arrayLength; i++) {
+                                                display += safeHouse.contact[i];
+                                                if((i+1) != arrayLength){
+                                                    display += ", ";
+                                                }
+                                            }
+                                            display +="</p><div class='row' style='text-align: right; margin: 0 auto;display:block'></div></div>";                                    
+                                        }else if(status == 1 && safeHouse.active == "Yes"){
+                                            display += "<div class='box row-content' style='background-color: rgb(176,224,230);'><h4>"+safeHouse.id+" : "+safeHouse.name+"</h4><address>"+safeHouse.address+"</address><p>Tele: ";
+                                            var arrayLength = safeHouse.contact.length;
+                                            for (var i = 0; i < arrayLength; i++) {
+                                                display += safeHouse.contact[i];
+                                                if((i+1) != arrayLength){
+                                                    display += ", ";
+                                                }
+                                            }
+                                            display +="</p><br><table class='contact'><tr><td >Males</td><td>"+safeHouse.males+"</td></tr><tr><td>Female</td><td>"+safeHouse.females+"</td></tr><tr><td>Children</td><td>"+safeHouse.children+"</td></tr><tr><td>Disabled Person</td><td>"+safeHouse.disabledPerson+"</td></tr></table><p></p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a href='' class='btn_active'>Active </a></div></div>";
+                                        }
+                                    });   
+                                }
+                            });                       
+                        });
                 }
             });
-            //$('#display').html("");
+            $('#display').html(display);
         }
+        $('#search').keyup(function () {
+            var filter = $(this).val();
+            $('.box').each(function() {
+                //console.log($(this).children("h4").text());
+                if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+
+            });
+        });
     </script>
 </body>
-
 </html>

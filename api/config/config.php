@@ -9,8 +9,8 @@ define("ENCRYPTION_KEY","AHkjghjvHJGKNKLlkBG54J");
 define("TRANSLATOR_KEY","AIzaSyDtcDT7w-D76oxrECf6qofOSRKMBDfOl40");
 
 //SMS
-define("sender", ""); 
-define("sms_password", "");
+define("SENDER", "94719867863"); 
+define("SMS_PASSWORD", "7170");
 $errorCode = array(
     	            'classNotFound' => 800,
                     'methodNotFound' => 801,
@@ -29,5 +29,6 @@ $errorCode = array(
                     'emailAlreadyInUse' => 814,
                     'emailNotInUse' => 815,
                     'urlTokenExpired' => 816,
-                    'unableToHandle' => 817
+                    'unableToHandle' => 817,
+                    'smsSendFailed' => 818
                     );

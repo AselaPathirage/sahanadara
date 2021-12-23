@@ -1,83 +1,62 @@
 <?php
 trait Viewer{
-    public function getSafeHouse(array $data){
+    public function getSafeHouseAll(array $data){
         global $errorCode;
-        $uid = $data['userId'];
-        if(count($data['receivedParams'])==2){
-            $keyword = $data['receivedParams'][0];
-            $id = $data['receivedParams'][1];
-            $sql = "SELECT safehouse.safeHouseID,safehouse.safeHouseName,safehouse.isUsing,safehouse.safeHouseAddress,safehousecontact.safeHouseTelno,gndivision.gndvId,gndivision.gnDvName,division.dvId,division.dvName,district.dsId,district.dsName
-                    FROM safehouse,gndivision,division,district,safehousecontact
-                    WHERE safehouse.safeHouseID = gndivision.safeHouseID AND gndivision.dvId = division.dvId AND division.dsId = district.dsId AND safehousecontact.safeHouseID = safehouse.safeHouseID";
-            if($keyword=="district"){
-                $sql .= " AND district";
-                if(!is_numeric($id)){
-                    $sql .= ".dsName LIKE '%$id%'";
-                }else{
-                    $sql .= ".dsId = $id";
-                }
-            }else if($keyword=="division"){
-                $sql .= " AND division";
-                if(!is_numeric($id)){
-                    $sql .= ".dvName LIKE '%$id%'";
-                }else{
-                    $sql .= ".dvId = $id";
-                }
-            }else{
-                http_response_code(200);                       
-                echo json_encode(array("code"=>$errorCode['unableToHandle']));
-                exit();
-            }
-        }else if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $sql = "SELECT safehouse.safeHouseID,safehouse.safeHouseName,safehouse.isUsing,safehouse.safeHouseAddress,safehousecontact.safeHouseTelno,gndivision.gndvId,gndivision.gnDvName,division.dvId,division.dvName,district.dsId,district.dsName
-                    FROM safehouse,gndivision,division,district,safehousecontact
-                    WHERE safehouse.safeHouseID = gndivision.safeHouseID AND gndivision.dvId = division.dvId AND division.dsId = district.dsId AND safehousecontact.safeHouseID = safehouse.safeHouseID AND safehouse.safeHouseID = $id";
-        }else{
-            $sql = "SELECT safehouse.safeHouseID,safehouse.safeHouseName,safehouse.isUsing,safehouse.safeHouseAddress,safehousecontact.safeHouseTelno,gndivision.gndvId,gndivision.gnDvName,division.dvId,division.dvName,district.dsId,district.dsName
-                    FROM safehouse,gndivision,division,district,safehousecontact
-                    WHERE safehouse.safeHouseID = gndivision.safeHouseID AND gndivision.dvId = division.dvId AND division.dsId = district.dsId AND safehousecontact.safeHouseID = safehouse.safeHouseID";
-        }
+        $sql = "SELECT d.dsId,d.dsName FROM district d WHERE d.dsId IN (SELECT DISTINCT dv.dsId FROM division dv)";
         $excute = $this->connection->query($sql);
-        $results = array("district"=>array());
+        $results = array();
         while($r = $excute-> fetch_assoc()) {
-            if(!isset($results["district"][$r["dsName"]])) {
-                $results["district"][$r["dsName"]]["id"] = $r["dsId"];
-                $results["district"][$r["dsName"]]["division"] = array();
-            }
-            if(!isset($results["district"][$r["dsName"]]["division"][$r["dvName"]])) {
-                $results["district"][$r["dsName"]]["division"][$r["dvName"]]['id'] = $r["dvId"];
-                $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'] = array();
-            }
-            if(!isset($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]])) {
-                if($r['isUsing'] == 'n'){
-                    $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]] = array( 'gnId' => $r["gndvId"],
-                    'safeHouseId' => $r["safeHouseID"],
-                    'name' => $r["safeHouseName"],
-                    'address' => $r["safeHouseAddress"],
-                    'active' => "No",
-                    'contact' => array()
-                    );
-                }else{
-                    $sql = "SELECT adultMale,adultFemale,Children,disabledPerson FROM safehousestatus WHERE safehouseId =".$r['safeHouseID']." ORDER BY createdDate DESC LIMIT 1;";
-                    $temp = $this->connection->query($sql);
-                    $temp = $temp-> fetch_assoc();
-                    $results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]] = array( 'gnId' => $r["gndvId"],
-                    'safeHouseId' => $r["safeHouseID"],
-                    'name' => $r["safeHouseName"],
-                    'address' => $r["safeHouseAddress"],
-                    'active' => "Yes",
-                    'contact' => array(),
-                    'males'=> $temp['adultMale'],
-                    'females' => $temp['adultFemale'],
-                    'children' => $temp['Children'],
-                    'disabledPerson' => $temp['disabledPerson'],
-                    );
+            $temp = array('id'=> $r['dsId'], 'name'=>$r['dsName'], 'division'=>array());
+            $sql = "SELECT dv.dvId,dv.dvName FROM division dv WHERE dv.dvId IN (SELECT DISTINCT gn.dvId FROM gndivision gn WHERE safeHouseID IS NOT NULL) AND dv.dsId=".$r['dsId'];
+            $divisionQuery = $this->connection->query($sql);
+            while($p = $divisionQuery-> fetch_assoc()) {
+                $temp2= array('id'=> $p['dvId'], 'name'=>$p['dvName'], 'gnArea'=>array());
+                $sql = "SELECT gn.gndvId,gn.gnDvName FROM gndivision gn WHERE gn.gndvId IN (SELECT DISTINCT gn.gndvId FROM gndivision gn WHERE safeHouseID IS NOT NULL)  AND gn.dvId=".$p['dvId'];
+                $gnQuery = $this->connection->query($sql);
+                while($q = $gnQuery-> fetch_assoc()) {
+                    $temp3 = array('id'=>$q['gndvId'], 'name'=>$q['gnDvName'], 'safeHouse' => array());
+                    $sql = "SELECT safehouse.safeHouseID,safehouse.safeHouseName,safehouse.isUsing,safehouse.safeHouseAddress FROM safehouse,gndivision WHERE safehouse.safeHouseId = gndivision.safeHouseID AND gndivision.gndvId =".$q['gndvId'];
+                    $safeHouseQuery = $this->connection->query($sql);
+                    while($s = $safeHouseQuery-> fetch_assoc()) {
+                        $safeHouseId = SafeHouse::getItemCode($s['safeHouseID']);
+                        if($s['isUsing'] == 'n'){
+                            $active = "No";
+                            $temp4 = array(
+                                'id' => $safeHouseId,
+                                'name' => $s["safeHouseName"],
+                                'address' => $s["safeHouseAddress"],
+                                'contact' => array(),
+                                'active' => $active,
+                            );
+                        }else{
+                            $active = "Yes";
+                            $sql = "SELECT adultMale,adultFemale,Children,disabledPerson FROM safehousestatus WHERE safehouseId =".$s['safeHouseID']." ORDER BY createdDate DESC LIMIT 1;";
+                            $temp5 = $this->connection->query($sql);
+                            $temp5 = $temp5-> fetch_assoc();
+                            $temp4 = array(
+                                'id' => $safeHouseId,
+                                'name' => $s["safeHouseName"],
+                                'address' => $s["safeHouseAddress"],
+                                'contact' => array(),
+                                'active' => $active,
+                                'males'=> $temp5['adultMale'],
+                                'females' => $temp5['adultFemale'],
+                                'children' => $temp5['Children'],
+                                'disabledPerson' => $temp5['disabledPerson']
+                            );
+                        }
+                        $sql = "SELECT safeHouseTelno FROM safehousecontact WHERE safeHouseID=".$s['safeHouseID'];
+                        $contactQuery = $this->connection->query($sql);
+                        while($a = $contactQuery-> fetch_assoc()) {
+                            array_push($temp4['contact'],$a['safeHouseTelno']);
+                        }
+                        array_push($temp3['safeHouse'],$temp4);
+                    }
+                    array_push($temp2['gnArea'],$temp3);
                 }
-                array_push($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]]['contact'],$r["safeHouseTelno"]);
-            }else{
-                array_push($results["district"][$r["dsName"]]["division"][$r["dvName"]]['gnArea'][$r["gnDvName"]]['contact'],$r["safeHouseTelno"]);
-            }                                                                                                                
+                array_push($temp['division'],$temp2);
+            }
+            array_push($results,$temp);
         }
         $json = json_encode($results);
         echo $json;

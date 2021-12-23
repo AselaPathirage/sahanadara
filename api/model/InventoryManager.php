@@ -161,7 +161,7 @@ class InventoryManager extends Employee{
     public function getneighbourInventoryItem(array $data){
         $uid = $data['userId'];
         $this->inventory->setInfo($uid);
-        $division = $this->inventory->getDivision();
+        $division = $this->getDivision($uid)['id'];
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
             $sql = "SELECT i.inventoryId,d.dvName AS division,item.itemId,item.itemName

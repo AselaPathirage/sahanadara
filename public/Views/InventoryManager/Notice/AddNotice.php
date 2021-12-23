@@ -57,6 +57,13 @@
         tr {
             background-color: #fff !important;
         }
+        .add{
+            background-color: #04AA6D;
+            color: #ffdddd;
+        }
+        .remove{
+            color: #ffdddd;
+        }
     </style>
 </head>
 

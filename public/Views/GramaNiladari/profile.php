@@ -211,7 +211,7 @@
         function getProfileDetails() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>profile",
+                url: "<?php echo API; ?>gnprofile",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -264,7 +264,7 @@
                 console.log(json);
                 $.ajax({
                     type: "PUT",
-                    url: "<?php echo API; ?>profile",
+                    url: "<?php echo API; ?>gnprofile",
                     data: json,
                     headers: {
                         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'

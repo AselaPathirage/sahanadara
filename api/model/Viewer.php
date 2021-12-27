@@ -32,7 +32,11 @@ trait Viewer{
                             $active = "Yes";
                             $sql = "SELECT adultMale,adultFemale,Children,disabledPerson FROM safehousestatus WHERE safehouseId =".$s['safeHouseID']." ORDER BY createdDate DESC LIMIT 1;";
                             $temp5 = $this->connection->query($sql);
-                            $temp5 = $temp5-> fetch_assoc();
+                            if($temp5->num_rows==0){
+                                $temp5 = array('adultMale'=>"Data not available",'adultFemale'=>"Data not available",'Children'=>"Data not available",'disabledPerson'=>"Data not available");
+                            }else{
+                                $temp5 = $temp5-> fetch_assoc();
+                            }
                             $temp4 = array(
                                 'id' => $safeHouseId,
                                 'name' => $s["safeHouseName"],

@@ -129,4 +129,37 @@ class GramaNiladari extends ResponsiblePerson
             exit();
         }
     }
+
+    public function getMessages(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "SELECT r.* FROM gnmsg r WHERE r.gndvId =" . $r['gndvId'] . " ORDER BY r.timestamp DESC";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function sendMessages(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        $msg = $data['msg'];
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "INSERT INTO gnmsg (message, gndvId ) VALUES ('$msg'," . $r['gndvId'] . ");";
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
+    }
 }

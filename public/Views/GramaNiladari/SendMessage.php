@@ -27,13 +27,13 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col7 box" style="margin:0 auto;">
-                    <form action="#" method="post">
+                    <form action="" method="post" id="add">
                         <h1>New Message</h1>
 
                         <div class="row-content">
 
-                            <label for="address">Message</label>
-                            <textarea id="address" name="youraddress"></textarea>
+                            <label for="msg">Message</label>
+                            <textarea id="msg" name="msg"></textarea>
 
 
                             <div class="row" style="justify-content: center;">
@@ -65,6 +65,48 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
+
+        $("#add").submit(function(e) {
+            e.preventDefault();
+            var str = [];
+            var formElement = document.querySelector("#add");
+            var formData = new FormData(formElement);
+            //var array = {'key':'ABCD'}
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+
+            var json = JSON.stringify(object);
+            console.log(json);
+            $.ajax({
+                type: "POST",
+                url: "<?php echo API; ?>gnmsg",
+                data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                success: function(result) {
+                    console.log(result);
+                    var url = "<?php echo HOST; ?>/GramaNiladari/Messages";
+                    $(location).attr('href', url);
+                    console.log(result.code);
+                    if (result.code == 806) {
+                        alertGen("Record Added Successfully!", 1);
+
+                    } else {
+                        alertGen(" Unable to handle request.", 2);
+
+                    }
+                },
+                error: function(err) {
+                    alertGen(" Something went wrong.", 3);
+                    console.log(err);
+                }
+            });
+        });
     </script>
 </body>
 

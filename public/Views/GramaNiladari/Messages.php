@@ -45,10 +45,10 @@
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tbodyid">
 
 
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                <!-- <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>10/24/2021 15:56</td>
                                     <td>Be aware of the strong winds.</td>
 
@@ -93,7 +93,7 @@
                                     <td>Flood alert. Area residents requested to be alerted</td>
 
 
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -112,12 +112,40 @@
                 $(thisPage).addClass("active");
             });
 
+            getMessages();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+
+        function getMessages() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>gnmsg",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                console.log(obj);
+                let row = table.insertRow(-1);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                cell1.innerHTML = obj['timestamp'];
+                cell2.innerHTML = obj['message'];
+            }
         }
     </script>
 </body>

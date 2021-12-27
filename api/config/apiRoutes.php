@@ -15,6 +15,7 @@ Route::GET("item",array("InventoryManager@getItem","ResponsiblePerson@getItem"))
 Route::GET("safehouse",array("DisasterOfficer@viewSafehouse","InventoryManager@getSafeHouseAll","DivisionalSecretariat@getSafeHouseAll","Dmc@getSafeHouseAll")); 
 Route::GET("district",array("Admin@getDistrict"));
 Route::GET("user",array("InventoryManager@getMySelf","Admin@searchUser")); //user/userId/required data
+Route::GET("report",array("Employee@report"));
 
 Route::PUT("resetPassword",array("Employee@updatePassword"));
 

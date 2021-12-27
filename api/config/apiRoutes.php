@@ -6,6 +6,7 @@ PUT - update data
 DELETE - delete
 */
 
+
 Route::GET("donation",array("Home@viewDonations"));
 Route::GET("notice",array("Home@viewNotice"));
 Route::GET("role",array("Employee@getRole"));
@@ -28,8 +29,10 @@ Route::POST("notice",array("InventoryManager@addNotice"));
 
 // Grama Niladari
 Route::GET("residents", array("GramaNiladari@getResident"));
+Route::GET("gnprofile", array("GramaNiladari@getProfileDetails"));
 Route::POST("residents", array("GramaNiladari@addResident"));
 Route::PUT("residents", array("GramaNiladari@updateResident"));
+Route::PUT("gnprofile", array("GramaNiladari@updateProfileDetails"));
 Route::DELETE("residents", array("GramaNiladari@deleteResident"));
 
 // Disaster Mgt officer

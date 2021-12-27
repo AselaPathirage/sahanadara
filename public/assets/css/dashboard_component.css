@@ -273,6 +273,7 @@ a{
   }
   /* Reset Button: minimize the appearance */
   input[type=reset]{
+    margin-top: 15px;
     border:none;
     cursor:pointer;
     padding: 6px 15px;

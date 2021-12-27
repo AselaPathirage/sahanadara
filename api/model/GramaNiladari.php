@@ -6,6 +6,10 @@ class GramaNiladari extends ResponsiblePerson
     {
         parent::__construct($con);
     }
+
+
+    // Resident Details
+
     public function addResident(array $data)
     {
         global $errorCode;
@@ -67,6 +71,58 @@ class GramaNiladari extends ResponsiblePerson
             $residentId = $data['receivedParams'][0];
             $sql = "DELETE FROM `resident` WHERE residentId =$residentId ";
             $this->connection->query($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+
+    // Profile Details
+    public function getProfileDetails(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
+        // SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=1 AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    protected function checkPassword(array $data)
+    {
+        $uid = $data['userId'];
+        $username = md5($data['nic']);
+        $password = md5($data['password']);
+        $sql = "SELECT * FROM login l WHERE l.nid ='$username' AND l.empPassword ='$password'";
+        $excute = $this->connection->query($sql);
+        return $excute->num_rows > 0;
+    }
+
+    public function updateProfileDetails(array $data)
+    {
+        global $errorCode;
+        if ($this->checkPassword($data)) {
+            $uid = $data['userId'];
+            $email = $data['email'];
+            $address = $data['add'];
+            $phone = $data['tel'];
+            $ofaddress = $data['ofAdd'];
+            $ofphone = $data['ofTel'];
+            $sql = "UPDATE `gramaniladari` SET `empAddress`='$address', `empEmail`='$email',`empTele`='$phone' WHERE `gramaNiladariID`='$uid' ";
+            $sql2 = "UPDATE `gndivision` SET `officeAddress`='$ofaddress', `officeTele`='$ofphone' WHERE `gramaNiladariID`='$uid' ";
+            $this->connection->query($sql);
+            $this->connection->query($sql2);
+            if (isset($data['npassword'])) {
+                $password = md5($data['npassword']);
+                $username = md5($data['nic']);
+                $sql = "UPDATE `login` SET `empPassword`='$password' WHERE `nid`='$username' ";
+                $this->connection->query($sql);
+            }
             echo json_encode(array("code" => $errorCode['success']));
         } else {
             echo json_encode(array("code" => $errorCode['attributeMissing']));

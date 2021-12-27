@@ -442,32 +442,30 @@ tr:hover{
             $(".alert").fadeOut(100);
                 console.log("hello");
         });
-        var filters = {
-                unit: null
-            };
 
-        function updateFilters() {
-            $('.task-list-row').hide().filter(function () {
-                var
-                    self = $(this),
-                    result = true; // not guilty until proven guilty
-
-                Object.keys(filters).forEach(function (filter) {
-                    if (filters[filter] && (filters[filter] != 'None') && (filters[filter] != 'Any')) {
-                        result = result && filters[filter] === self.data(filter);
-                    }
-                });
-
-                return result;
-            }).show();
-        }
-
-        function changeFilter(filterName) {
-            filters[filterName] = this.value;
-            updateFilters();
-        }
         $('#unitType_2').on('change', function () {
-            changeFilter.call(this, 'unit');
+            let value = $('#unitType_2').val();
+            $('#trow').empty();
+            var table = document.getElementById("trow");
+            for (var i = 0; i < output.length; i++){
+                if(output[i]['unitName'] == value  || !unit){
+                    let obj = output[i];
+                    let row = table.insertRow(-1);
+                    let id ="data_"+i;
+                    row.id = id;
+                    row.className = "task-list-row";
+                    $("#data_"+i).attr('data-unit', obj['unitName']);
+                    let cell1 = row.insertCell(-1);
+                    let cell11 = row.insertCell(-1);
+                    let cell2 = row.insertCell(-1);
+                    let cell3 = row.insertCell(-1);
+                    cell1.innerHTML  = "<input id='"+obj['itemId']+"' value='"+obj['itemId']+"' data-itemId='"+obj['itemId']+"' data-itemName='"+obj['itemName']+"' data-unit='"+obj['unitName']+"' class='radio-custom' name='radio-group' type='radio' checked><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
+                    cell2.innerHTML = obj['itemName'];
+                    cell11.innerHTML = obj['itemId'];
+                    cell3.colSpan ="3";
+                    cell3.innerHTML = obj['unitName'];
+                }
+            }
         });
 
         //var $rows = $('#ajaxFilter #trow .task-list-row'); 

@@ -28,7 +28,9 @@ Route::POST("notice", array("InventoryManager@addNotice"));
 // Grama Niladari
 Route::GET("residents", array("GramaNiladari@getResident"));
 Route::GET("gnprofile", array("GramaNiladari@getProfileDetails"));
+Route::GET("gnmsg", array("GramaNiladari@getMessages"));
 Route::POST("residents", array("GramaNiladari@addResident"));
+Route::POST("gnmsg", array("GramaNiladari@sendMessages"));
 Route::PUT("residents", array("GramaNiladari@updateResident"));
 Route::PUT("gnprofile", array("GramaNiladari@updateProfileDetails"));
 Route::DELETE("residents", array("GramaNiladari@deleteResident"));

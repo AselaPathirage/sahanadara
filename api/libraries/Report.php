@@ -1,4 +1,5 @@
 <?php
+require_once 'libraries/vendor/dompdf/autoload.inc.php';
 use Dompdf\Dompdf;
 
 class Report{
@@ -11,20 +12,21 @@ class Report{
 
     public function generatePdf(){
         //testing method only. need to implement properly
-        $folder = date("Y-m-d");
+        $folder = "reports/".date("Y-m-d");
         if(! is_dir($folder)) {
             mkdir($folder);
         }
-        $fileName = uniqid().".php";
+        $fileName = uniqid().".pdf";
+        $this->file = $fileName; 
         $this->dompdf->loadHtml('hello world');
         $this->dompdf->setPaper('A4', 'landscape');
         $this->dompdf->render();
         $output = $this->dompdf->output();
-        $this->file = $fileName;
+        $fileName = $folder."/".$fileName;
         file_put_contents($fileName, $output);
     }
 
     public function getFileUrl(){
-        return $_SERVER['SERVER_NAME']."/api/reports/".date("Y-m-d")."/".$this->file;
+        return $_SERVER['SERVER_NAME'].dirname($_SERVER['PHP_SELF'])."/reports/".date("Y-m-d")."/".$this->file;
     }
 }

@@ -27,10 +27,10 @@ Route::POST("notice", array("InventoryManager@addNotice"));
 
 // Grama Niladari
 Route::GET("residents", array("GramaNiladari@getResident"));
-Route::GET("profile", array("GramaNiladari@getProfileDetails"));
+Route::GET("gnprofile", array("GramaNiladari@getProfileDetails"));
 Route::POST("residents", array("GramaNiladari@addResident"));
 Route::PUT("residents", array("GramaNiladari@updateResident"));
-Route::PUT("profile", array("GramaNiladari@updateProfileDetails"));
+Route::PUT("gnprofile", array("GramaNiladari@updateProfileDetails"));
 Route::DELETE("residents", array("GramaNiladari@deleteResident"));
 
 // Disaster Mgt officer

@@ -94,3 +94,215 @@ input[type=submit]:hover {
   text-decoration: none;
   border-radius: 4px;
 }
+
+
+.btn_alerts{
+  color: #fff;
+  background-color: red;
+  font-weight: bold;
+  font-size:18px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.btn_views{
+  color: #fff;
+  background-color: rgb(255, 174, 0);
+  font-weight: bold;
+  font-size:14px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.btn_active{
+  color: rgb(16, 163, 65);
+  border: 2px solid ;
+  border-color: rgb(16, 163, 65);
+  font-weight: bold;
+  font-size:14px;
+  padding: 5px 5px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.btn_blue{
+  color: #fff;
+  background-color: rgb(57, 69, 245);
+  font-weight: bold;
+  font-size:14px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+.btn_delete{
+  color: #fff;
+  background-color: rgb(199, 30, 30);
+  font-weight: bold;
+  font-size:14px;
+  padding: 10px 15px;
+  text-decoration: none;
+  border-radius: 4px;
+}
+
+.container .alert-div{
+  padding: 10px 30px;
+  width: 80%;
+  background-color:rgb(243, 193, 193);
+  color: black;
+  border-radius: 4px;
+  min-width: 150px;
+
+margin-bottom: 20px;
+border: 1px solid transparent;
+
+}
+
+.container .alert-div.alert-warning {
+background-color: #ebc063f6;
+border-color: #e8b64c;
+/* color: #a07415; */
+}
+
+
+.container .alert-div .close-alert {
+-webkit-appearance: none;
+position: relative;
+float: right;
+padding: 0;
+border: 0;
+cursor: pointer;
+color: inherit;
+background: 0 0;
+font-size: 21px;
+line-height: 1;
+font-weight: bold;
+text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+filter: alpha(opacity=40);
+opacity: 0.4;
+}
+.container .alert-div .close-alert:hover {
+filter: alpha(opacity=70);
+opacity: 0.7;
+}
+
+.shadow-1, .alert {
+box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+.shadow-2, .alert:hover {
+box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+}
+
+
+/* popup */
+.custom-model-main {
+  text-align: center;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0; /* z-index: 1050; */
+  outline: 0;
+  opacity: 0;
+transition: opacity 0.15s linear, z-index 0.15;
+  z-index: -1;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.model-open {
+  z-index: 99999;
+  opacity: 1;
+  overflow: hidden;
+}
+.custom-model-inner {
+  transform: translate(0, -25%);
+  transition: -webkit-transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  display: inline-block;
+  vertical-align: middle;
+  width: 600px;
+  margin: 30px auto;
+  max-width: 97%;
+}
+.custom-model-wrap {
+  display: block;
+  width: 100%;
+  position: relative;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 6px;
+  box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
+  background-clip: padding-box;
+  outline: 0;
+  text-align: left;
+  padding: 20px;
+  box-sizing: border-box;
+  max-height: calc(100vh - 70px);
+  overflow-y: auto;
+}
+.model-open .custom-model-inner {
+  transform: translate(0, 0);
+  position: relative;
+  z-index: 999;
+}
+.model-open .bg-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 99;
+}
+.bg-overlay {
+  background: rgba(0, 0, 0, 0);
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  transition: background 0.15s linear;
+}
+.close-btn {
+  position: absolute;
+  right: 0;
+  top: -30px;
+  cursor: pointer;
+  z-index: 99;
+  font-size: 30px;
+  color: #fff;
+}
+
+
+.btn_cancel {
+  background: #c1c1c1;
+  color: #fff;
+border-radius: 4px;
+
+text-decoration: none;
+transition: all 0.4s;
+line-height: normal;
+min-width: 120px;
+border: none;
+min-height: 40px;
+border-radius: 3px;
+margin: 0 5px;
+}
+.btn_cancel:focus, .btn_cancel:hover {
+  background: #a8a8a8;
+}
+.btn_danger {
+  background: #f15e5e;
+  color: #fff;
+border-radius: 4px;
+text-decoration: none;
+transition: all 0.4s;
+line-height: normal;
+min-width: 120px;
+border: none;
+min-height: 40px;
+border-radius: 3px;
+margin: 0 5px;
+}
+.btn_danger:focus, .btn_danger:hover{
+  background: #ee3535;
+}

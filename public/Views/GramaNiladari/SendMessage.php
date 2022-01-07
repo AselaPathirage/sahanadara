@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -24,6 +25,9 @@
         include_once('./public/Views/GramaNiladari/includes/topnav.php');
         ?>
         <div class="space" style="margin-bottom: 30px;"></div>
+        <div id="alertBox">
+        </div>
+
         <div class="container">
             <div class="row text-center">
                 <div class="col7 box" style="margin:0 auto;">
@@ -91,15 +95,15 @@
                 success: function(result) {
                     console.log(result);
                     var url = "<?php echo HOST; ?>/GramaNiladari/Messages";
-                    $(location).attr('href', url);
                     console.log(result.code);
                     if (result.code == 806) {
                         alertGen("Record Added Successfully!", 1);
-
                     } else {
                         alertGen(" Unable to handle request.", 2);
-
                     }
+                    setTimeout(function() {
+                        $(location).attr('href', url);
+                    }, 500);
                 },
                 error: function(err) {
                     alertGen(" Something went wrong.", 3);
@@ -107,6 +111,29 @@
                 }
             });
         });
+
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
+        }
     </script>
 </body>
 

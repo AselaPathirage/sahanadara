@@ -26,11 +26,14 @@
         <div class="space"></div>
         <div class="container">
             <h1>Alerts</h1>
-            <div class="container text-center">
+            <div id="bodyid" class="container text-center">
                 <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
                     <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
                         of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
                     </p>
+                    <div style="text-align: right">
+                        <p>asdfasdfsdaf</p>
+                    </div>
                 </div>
                 <div class="row-content alert-div" style="margin: 10px auto;">
                     <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
@@ -67,12 +70,48 @@
                 $(thisPage).addClass("active");
             });
 
+            getAlerts();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+
+        function getAlerts() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>gnalert",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            $("#bodyid").empty();
+            // var table = document.getElementById("bodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                console.log(obj);
+                // let row = table.insertRow(-1);
+                // let cell1 = row.insertCell(-1);
+                // let cell2 = row.insertCell(-1);
+                // cell1.innerHTML = obj['timestamp'];
+                // cell2.innerHTML = obj['message'];
+                if (obj['onlyOfficers'] == 1) {
+                    var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                } else {
+                    var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                }
+
+                $("#bodyid").append($sample);
+
+            }
         }
     </script>
 </body>

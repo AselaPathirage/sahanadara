@@ -106,7 +106,7 @@
                                 <i class='bx bx-building-house '></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;" id="residentCount">
                                 140
                             </h2>
                         </figure>
@@ -128,7 +128,7 @@
 
         </div>
         <div class="space"></div>
-        <div class="container text-center">
+        <div class="container text-center" id="bodyid">
             <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
                 <button type="button" class="close-alert">×</button>
                 <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
@@ -144,6 +144,7 @@
 
 
         </div>
+        <div class="space"></div>
     </section>
     <script>
         var thisPage = "#stats";
@@ -155,6 +156,14 @@
                 $(thisPage).addClass("active");
             });
 
+            getAlerts();
+            $(".close-alert").click(function(e) {
+                $(this).parent().remove();
+                e.preventDefault();
+            });
+
+            getResidentCount();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -163,10 +172,58 @@
             sidebar.classList.toggle("active");
         }
 
-        $(".close-alert").click(function(e) {
-            $(this).parent().remove();
-            e.preventDefault();
-        });
+
+
+        function getAlerts() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>gnalert",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            $("#bodyid").empty();
+            // var table = document.getElementById("bodyid");
+
+            for (var i = 0; i < 3; i++) {
+                let obj = output[i];
+                console.log(obj);
+                // let row = table.insertRow(-1);
+                // let cell1 = row.insertCell(-1);
+                // let cell2 = row.insertCell(-1);
+                // cell1.innerHTML = obj['timestamp'];
+                // cell2.innerHTML = obj['message'];
+                if (obj['onlyOfficers'] == 1) {
+                    var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                } else {
+                    var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                }
+
+                $("#bodyid").append($sample);
+
+            }
+        }
+
+        function getResidentCount() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>residentcount",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output['count(a.residentId)']);
+            $("#residentCount").empty();
+            // var table = document.getElementById("bodyid");
+            $("#residentCount").text(output['count(a.residentId)']);
+        }
     </script>
 </body>
 

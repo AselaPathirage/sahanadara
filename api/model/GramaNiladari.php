@@ -162,4 +162,37 @@ class GramaNiladari extends ResponsiblePerson
             echo json_encode(array("code" => $errorCode['unknownError']));
         }
     }
+
+    public function getAlerts(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY a.timestamp DESC";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function getResidentCount(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT count(a.residentId) FROM resident a JOIN gndivision g ON g.gndvId=a.gndvId WHERE g.gramaNiladariID=" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
 }

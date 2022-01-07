@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Inventory Manager - Safe House </title>
+    <title> Responsible Person - Safe House </title>
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">

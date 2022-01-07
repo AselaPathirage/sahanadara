@@ -448,8 +448,8 @@ tr:hover{
             $('#trow').empty();
             var table = document.getElementById("trow");
             for (var i = 0; i < output.length; i++){
-                if(output[i]['unitName'] == value  || !unit){
-                    let obj = output[i];
+                if(output[i]['unitName'] == value  || !value){
+                    let obj = output[i]; 
                     let row = table.insertRow(-1);
                     let id ="data_"+i;
                     row.id = id;

@@ -146,6 +146,12 @@ color: #ffdddd;
             $(document).on('click', '.remove', function(){
                 $(this).closest('tr').remove();
             });
+
+            $("#regForm").submit(function(e) {
+                e.preventDefault();
+                var form_data = $("#regForm").serialize();
+                console.log(form_data);
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -184,6 +190,7 @@ color: #ffdddd;
         }
         if (n == (x.length - 1)) {
             document.getElementById("nextBtn").innerHTML = "Submit";
+            document.getElementById("nextBtn").type = "submit";
         } else {
             document.getElementById("nextBtn").innerHTML = "Next";
         }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2021 at 04:56 PM
+-- Generation Time: Jan 07, 2022 at 02:04 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -42,6 +42,64 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`adminID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
 (1, 'Sanduni Rashmika', '297, KIRILLAWALA, WEBODA', 'sanduni@gmail.com', 'n', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alert`
+--
+
+CREATE TABLE `alert` (
+  `msgId` int(11) NOT NULL,
+  `msg` varchar(150) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `assignedSafe` tinyint(1) NOT NULL DEFAULT 0,
+  `onlyOfficers` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `alert`
+--
+
+INSERT INTO `alert` (`msgId`, `msg`, `timestamp`, `assignedSafe`, `onlyOfficers`) VALUES
+(1, 'asdfsdf asdfsdfsf', '2022-01-06 20:31:52', 0, 0),
+(2, 'er asdfad 222 aeff', '2022-01-06 20:34:43', 0, 0),
+(3, 'er 33333 222 aeff', '2022-01-06 20:34:43', 1, 1),
+(4, 'er a444444 222 aeff', '2022-01-06 20:34:43', 1, 1),
+(5, 'er5555 aeff', '2022-01-06 20:34:43', 1, 0),
+(6, 'er56666666666666666 aeff', '2022-01-06 20:34:43', 1, 0),
+(7, 'er77777777777777aeff', '2022-01-06 20:34:43', 0, 1),
+(8, 'er8888888888aeff', '2022-01-06 20:34:44', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `alertdisdivgn`
+--
+
+CREATE TABLE `alertdisdivgn` (
+  `alertId` int(11) NOT NULL,
+  `dsId` int(11) NOT NULL,
+  `dvId` int(11) NOT NULL,
+  `gndvId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `alertdisdivgn`
+--
+
+INSERT INTO `alertdisdivgn` (`alertId`, `dsId`, `dvId`, `gndvId`) VALUES
+(1, 3, 10, 5),
+(1, 3, 10, 6),
+(1, 3, 10, 7),
+(2, 3, 10, 5),
+(2, 3, 10, 6),
+(3, 3, 10, 5),
+(3, 3, 10, 7),
+(4, 3, 10, 6),
+(5, 3, 10, 5),
+(6, 3, 10, 5),
+(8, 3, 10, 5);
 
 -- --------------------------------------------------------
 
@@ -306,7 +364,7 @@ CREATE TABLE `donationreqnotice` (
   `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
   `note` varchar(200) DEFAULT NULL,
   `appovalStatus` char(1) NOT NULL DEFAULT 'n'
-) ;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -343,7 +401,7 @@ INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `startDate`, `s
 (12, '728 Bombuwala South ', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
 (13, '728 A Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
 (14, '728 B Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(15, '728 C Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
+(15, '728 C Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, 3, NULL, 10),
 (16, '728 D Bombuwala Sout', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
 (17, '799 Puhabugoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
 (18, '799 A Eladuwa', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
@@ -441,6 +499,36 @@ INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `startDate`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `gnmsg`
+--
+
+CREATE TABLE `gnmsg` (
+  `msgId` int(11) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `message` varchar(300) NOT NULL,
+  `gndvId` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gnmsg`
+--
+
+INSERT INTO `gnmsg` (`msgId`, `timestamp`, `message`, `gndvId`) VALUES
+(1, '2021-12-27 21:10:34', 'asdasasdasd', 5),
+(2, '2021-12-27 21:25:30', '22222', 5),
+(3, '2022-01-06 19:13:42', 'asasas', 5),
+(4, '2022-01-06 22:12:30', 'fgfg', 5),
+(5, '2022-01-06 22:57:52', 'sdfsdf ssdaf', 5),
+(6, '2022-01-06 23:01:36', 'dfdff affdf', 5),
+(7, '2022-01-06 23:08:08', 'aaaaaaaaaaaaaaaaaaaa', 5),
+(8, '2022-01-06 23:08:27', 'ffffff', 5),
+(9, '2022-01-06 23:08:46', 'ggg', 5),
+(10, '2022-01-06 23:09:44', 'sdsd', 5),
+(11, '2022-01-06 23:10:01', 'hhh', 5);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `gramaniladari`
 --
 
@@ -465,6 +553,31 @@ INSERT INTO `gramaniladari` (`gramaNiladariID`, `empName`, `empAddress`, `empEma
 (5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu@gmail.com', 'n', '0719867863'),
 (6, 'test  Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu6@gmail.com', 'n', '0719867863'),
 (7, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu7@gmail.com', 'n', '0719867863');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incident`
+--
+
+CREATE TABLE `incident` (
+  `incidentId` int(5) NOT NULL,
+  `title` varchar(100) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `dvId` int(11) NOT NULL,
+  `isActive` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `incidentgn`
+--
+
+CREATE TABLE `incidentgn` (
+  `incidentId` int(5) NOT NULL,
+  `gndvId` int(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -634,7 +747,7 @@ INSERT INTO `item` (`itemId`, `itemName`, `unitType`) VALUES
 (28, 'Hand Hanitizer', 4),
 (29, 'Face Mask', 4),
 (31, 'Safety Jacket', 4),
-(32, 'test 4', 4);
+(32, 'test 3', 4);
 
 -- --------------------------------------------------------
 
@@ -789,7 +902,8 @@ CREATE TABLE `safehouse` (
 
 INSERT INTO `safehouse` (`safeHouseID`, `safeHouseAddress`, `safeHouseName`, `isUsing`) VALUES
 (1, 'No 10,School Road, Bolossagama', 'Bolossagama Safe House', 'y'),
-(2, 'Test', 'test Safe House', 'n');
+(2, 'Test', 'test Safe House', 'n'),
+(3, 'test address test', 'Bombuwala North Safe House', 'y');
 
 -- --------------------------------------------------------
 
@@ -809,7 +923,8 @@ CREATE TABLE `safehousecontact` (
 INSERT INTO `safehousecontact` (`safeHouseTelno`, `safeHouseID`) VALUES
 ('0345165219', 1),
 ('0346165219', 1),
-('0341115219', 2);
+('0341115219', 2),
+('0354545466', 3);
 
 -- --------------------------------------------------------
 
@@ -914,6 +1029,22 @@ ALTER TABLE `admin`
   ADD PRIMARY KEY (`adminID`);
 
 --
+-- Indexes for table `alert`
+--
+ALTER TABLE `alert`
+  ADD PRIMARY KEY (`msgId`);
+
+--
+-- Indexes for table `alertdisdivgn`
+--
+ALTER TABLE `alertdisdivgn`
+  ADD PRIMARY KEY (`alertId`,`dsId`,`dvId`,`gndvId`),
+  ADD KEY `fk_dis` (`dsId`),
+  ADD KEY `fk_gn` (`gndvId`),
+  ADD KEY `fk_div` (`dvId`),
+  ADD KEY `alertId` (`alertId`);
+
+--
 -- Indexes for table `dismgtofficer`
 --
 ALTER TABLE `dismgtofficer`
@@ -1005,10 +1136,30 @@ ALTER TABLE `gndivision`
   ADD KEY `dvId` (`dvId`);
 
 --
+-- Indexes for table `gnmsg`
+--
+ALTER TABLE `gnmsg`
+  ADD PRIMARY KEY (`msgId`);
+
+--
 -- Indexes for table `gramaniladari`
 --
 ALTER TABLE `gramaniladari`
   ADD PRIMARY KEY (`gramaNiladariID`);
+
+--
+-- Indexes for table `incident`
+--
+ALTER TABLE `incident`
+  ADD PRIMARY KEY (`incidentId`),
+  ADD KEY `fk_dvId` (`dvId`);
+
+--
+-- Indexes for table `incidentgn`
+--
+ALTER TABLE `incidentgn`
+  ADD PRIMARY KEY (`incidentId`,`gndvId`),
+  ADD KEY `fk_gnid` (`gndvId`);
 
 --
 -- Indexes for table `inventory`
@@ -1107,7 +1258,8 @@ ALTER TABLE `safehousestatus`
 -- Indexes for table `safehousestatusrequesteditem`
 --
 ALTER TABLE `safehousestatusrequesteditem`
-  ADD PRIMARY KEY (`itemId`,`statusId`);
+  ADD PRIMARY KEY (`itemId`,`statusId`),
+  ADD KEY `safehousestatusrequesteditem_ibfk_1` (`statusId`);
 
 --
 -- Indexes for table `servicerequest`
@@ -1139,6 +1291,12 @@ ALTER TABLE `unit`
 --
 ALTER TABLE `admin`
   MODIFY `adminID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `alert`
+--
+ALTER TABLE `alert`
+  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `dismgtofficer`
@@ -1201,10 +1359,22 @@ ALTER TABLE `gndivision`
   MODIFY `gndvId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
+-- AUTO_INCREMENT for table `gnmsg`
+--
+ALTER TABLE `gnmsg`
+  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
 -- AUTO_INCREMENT for table `gramaniladari`
 --
 ALTER TABLE `gramaniladari`
   MODIFY `gramaNiladariID` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `incident`
+--
+ALTER TABLE `incident`
+  MODIFY `incidentId` int(5) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -1258,7 +1428,7 @@ ALTER TABLE `role`
 -- AUTO_INCREMENT for table `safehouse`
 --
 ALTER TABLE `safehouse`
-  MODIFY `safeHouseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `safeHouseID` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `safehousestatus`
@@ -1281,6 +1451,15 @@ ALTER TABLE `unit`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `alertdisdivgn`
+--
+ALTER TABLE `alertdisdivgn`
+  ADD CONSTRAINT `fk_alerId` FOREIGN KEY (`alertId`) REFERENCES `alert` (`msgId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_dis` FOREIGN KEY (`dsId`) REFERENCES `district` (`dsId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_div` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_gn` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `districtofficecontact`
@@ -1329,6 +1508,19 @@ ALTER TABLE `gndivision`
   ADD CONSTRAINT `gndivision_ibfk_1` FOREIGN KEY (`safeHouseID`) REFERENCES `safehouse` (`safeHouseID`),
   ADD CONSTRAINT `gndivision_ibfk_2` FOREIGN KEY (`gramaNiladariID`) REFERENCES `gramaniladari` (`gramaNiladariID`),
   ADD CONSTRAINT `gndivision_ibfk_3` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`);
+
+--
+-- Constraints for table `incident`
+--
+ALTER TABLE `incident`
+  ADD CONSTRAINT `fk_dvId` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `incidentgn`
+--
+ALTER TABLE `incidentgn`
+  ADD CONSTRAINT `fk_gnid` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`),
+  ADD CONSTRAINT `fk_incId` FOREIGN KEY (`incidentId`) REFERENCES `incident` (`incidentId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `inventory`
@@ -1393,6 +1585,13 @@ ALTER TABLE `safehousestatus`
   ADD CONSTRAINT `safehousestatus_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`);
 
 --
+-- Constraints for table `safehousestatusrequesteditem`
+--
+ALTER TABLE `safehousestatusrequesteditem`
+  ADD CONSTRAINT `safehousestatusrequesteditem_ibfk_1` FOREIGN KEY (`statusId`) REFERENCES `safehousestatus` (`r_id`),
+  ADD CONSTRAINT `safehousestatusrequesteditem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+
+--
 -- Constraints for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
@@ -1405,6 +1604,14 @@ ALTER TABLE `servicerequest`
 ALTER TABLE `servicerequestitem`
   ADD CONSTRAINT `servicerequestitem_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `servicerequest` (`inventoryId`),
   ADD CONSTRAINT `servicerequestitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `password_reset_token_exipiring_event` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-11-20 19:04:09' ON COMPLETION PRESERVE ENABLE COMMENT 'Clean up token every 30 minutes daily!' DO DELETE FROM resetpass WHERE resetpass.createdTime < DATE_SUB(NOW(), INTERVAL 1 DAY)$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

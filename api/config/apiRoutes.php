@@ -41,7 +41,10 @@ Route::DELETE("residents", array("GramaNiladari@deleteResident"));
 
 // Disaster Mgt officer
 
+Route::GET("disofficerprofile", array("DisasterOfficer@getProfileDetails"));
 Route::POST("safehouse", array("DisasterOfficer@addSafehouse"));
+Route::PUT("safehouse", array("DisasterOfficer@updateSafehouse"));
+Route::DELETE("safehouse", array("DisasterOfficer@deleteSafehouse"));
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));

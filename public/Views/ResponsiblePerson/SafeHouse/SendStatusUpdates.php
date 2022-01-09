@@ -2,7 +2,7 @@
 <html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title> Inventory Manager - Safe House </title>
+    <title> Responsible Person - Safe House </title>
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
@@ -64,7 +64,7 @@ color: #ffdddd;
         <div class="container">
             <div class="box">
                 <center><h1>Safe House - Ullala 321/A</h1></center>
-                <form id="regForm">
+                <form id="sendReport">
                     <div class="tab">
                     <h3>Displaced person's details</h3>
                                     <div class="column" style="width:70%;float: none;padding-left:15%;padding-top:2px;">
@@ -72,18 +72,18 @@ color: #ffdddd;
                                             <input type="text" id="your_name" class="form-control" name="yourname" onkeypress="return isNumber(event)" required='true'/>
 
                                             <label for="your_email">Number of adult females</label>
-                                            <input type="email" id="your_email" class="form-control" name="youremail" onkeypress="return isNumber(event)" required='true'/>
+                                            <input type="text" id="your_email" class="form-control" name="youremail" onkeypress="return isNumber(event)" required='true'/>
 
                                             <label for="your_phone">Number of children</label>
-                                            <input type="tel" id="your_phone" class="form-control" name="yourphone" onkeypress="return isNumber(event)" required='true'/>
+                                            <input type="text" id="your_phone" class="form-control" name="yourphone" onkeypress="return isNumber(event)" required='true'/>
 
                                             <label for="address">Number of disabled persons</label>
-                                            <input type="tel" id="your_phone" class="form-control" name="yourphone" onkeypress="return isNumber(event)" required='true'/>
+                                            <input type="text" id="your_phone" class="form-control" name="yourphone" onkeypress="return isNumber(event)" required='true'/>
                                     </div>
                                     <h3>Other details</h3>
                                     <div class="column" style="width:70%;float: none;padding-left:15%;padding-top:2px;">
                                             <label for="notes">Remarks</label>
-                                            <textarea id="notes" name="drivernotes" rows="8" cols="50" required='true'></textarea>
+                                            <textarea id="drivernotes" name="drivernotes" rows="8" cols="50"></textarea>
                                     </div>
                     </div>
                     <div class="tab"><h3>Required Aids</h3>
@@ -147,9 +147,9 @@ color: #ffdddd;
                 $(this).closest('tr').remove();
             });
 
-            $("#regForm").submit(function(e) {
+            $("#sendReport").submit(function(e) {
                 e.preventDefault();
-                var form_data = $("#regForm").serialize();
+                var form_data = $("#sendReport").serialize();
                 console.log(form_data);
             });
         });
@@ -181,56 +181,56 @@ color: #ffdddd;
         showTab(currentTab);
 
         function showTab(n) {
-        var x = document.getElementsByClassName("tab");
-        x[n].style.display = "block";
-        if (n == 0) {
-            document.getElementById("prevBtn").style.display = "none";
-        } else {
-            document.getElementById("prevBtn").style.display = "inline";
-        }
-        if (n == (x.length - 1)) {
-            document.getElementById("nextBtn").innerHTML = "Submit";
-            document.getElementById("nextBtn").type = "submit";
-        } else {
-            document.getElementById("nextBtn").innerHTML = "Next";
-        }
-        fixStepIndicator(n)
+            var x = document.getElementsByClassName("tab");
+            x[n].style.display = "block";
+            if (n == 0) {
+                document.getElementById("prevBtn").style.display ='none';
+            } else {
+                document.getElementById("prevBtn").style.display = "inline";
+            }
+            if (n == (x.length - 1)) {
+                document.getElementById("nextBtn").innerHTML = "Submit";
+                document.getElementById("nextBtn").type = "submit";
+            } else {
+                document.getElementById("nextBtn").innerHTML = "Next";
+            }
+            fixStepIndicator(n)
         }
 
         function nextPrev(n) {
-        var x = document.getElementsByClassName("tab");
-        if (n == 1 && !validateForm()) return false;
-        x[currentTab].style.display = "none";
-        currentTab = currentTab + n;
-        if (currentTab >= x.length) {
-            document.getElementById("regForm").submit();
-            return false;
-        }
-        showTab(currentTab);
+            var x = document.getElementsByClassName("tab");
+            if (n == 1 && !validateForm()) return false;
+            x[currentTab].style.display ='none';
+            currentTab = currentTab + n;
+            if (currentTab >= x.length) {
+                //document.getElementById("sendReport").submit();
+                return false;
+            }
+            showTab(currentTab);
         }
 
         function validateForm() {
-        var x, y, i, valid = true;
-        x = document.getElementsByClassName("tab");
-        y = x[currentTab].getElementsByTagName("input");
-        for (i = 0; i < y.length; i++) {
-            if (y[i].value == "") {
-            y[i].className += " invalid";
-            valid = false;
+            var x, y, i, valid = true;
+            x = document.getElementsByClassName("tab");
+            y = x[currentTab].getElementsByTagName("input");
+            for (i = 0; i < y.length; i++) {
+                if (y[i].value == "") {
+                y[i].className += " invalid";
+                valid = false;
+                }
             }
-        }
-        if (valid) {
-            document.getElementsByClassName("step")[currentTab].className += " finish";
-        }
-        return valid;
+            if (valid) {
+                document.getElementsByClassName("step")[currentTab].className += " finish";
+            }
+            return valid;
         }
 
         function fixStepIndicator(n) {
-        var i, x = document.getElementsByClassName("step");
-        for (i = 0; i < x.length; i++) {
-            x[i].className = x[i].className.replace(" active", "");
-        }
-        x[n].className += " active";
+            var i, x = document.getElementsByClassName("step");
+            for (i = 0; i < x.length; i++) {
+                x[i].className = x[i].className.replace(" active", "");
+            }
+            x[n].className += " active";
         }
     </script>
 </body>

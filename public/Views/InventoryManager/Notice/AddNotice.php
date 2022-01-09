@@ -101,7 +101,7 @@
                                     <td>Location</td>
                                     <td>
                                         <select id="assigned-user-filter" class="form-control" required="true">
-                                            <option value="">Select Safe House</option>
+                                            <option value="0">Select Safe House</option>
                                         </select>
                                     </td>
                                 </tr>

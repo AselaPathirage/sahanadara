@@ -18,6 +18,8 @@ Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("InventoryManager@getMySelf", "Admin@searchUser")); //user/userId/required data
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
+Route::GET("safehouse", array("GramaNiladari@getSafehouses"));
+Route::GET("incident", array("GramaNiladari@getIncidents"));
 
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails"));
@@ -34,6 +36,8 @@ Route::GET("residents", array("GramaNiladari@getResident"));
 Route::GET("gnmsg", array("GramaNiladari@getMessages"));
 Route::GET("gnalert", array("GramaNiladari@getAlerts"));
 Route::GET("residentcount", array("GramaNiladari@getResidentCount"));
+Route::GET("recentsh", array("GramaNiladari@getSafehouseRecent"));
+Route::GET("responsible", array("GramaNiladari@getResponsible"));
 Route::POST("residents", array("GramaNiladari@addResident"));
 Route::POST("gnmsg", array("GramaNiladari@sendMessages"));
 Route::PUT("residents", array("GramaNiladari@updateResident"));

@@ -19,7 +19,6 @@ class Route{
 	}
     public function checkAvailibility($requestName){
         global $errorCode;
-        
         if($_SERVER['REQUEST_METHOD'] =="POST"){
             $key = array_keys(self::$post);
             foreach($key as $item) {
@@ -33,7 +32,9 @@ class Route{
         }elseif($_SERVER['REQUEST_METHOD'] =="GET"){
             $key = array_keys(self::$get);
             foreach($key as $item) {
-                if(strcasecmp($item,$requestName) == 0){
+                $matches = Array();
+                if(preg_match("\/(\d+)", $requestName, $matches)){
+                    print_r($matches);
                     return self::$get[$item];     
                 }
             }

@@ -262,4 +262,7 @@ class InventoryManager extends Employee{
         $division['id'] = $temp['dvId'];
         return $division;
     }
+    public function test(array $data){
+        print_r($data);
+    }
 }

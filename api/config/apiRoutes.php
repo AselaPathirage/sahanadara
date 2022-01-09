@@ -12,10 +12,12 @@ Route::GET("notice", array("Home@viewNotice"));
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
-Route::GET("item", array("InventoryManager@getItem", "ResponsiblePerson@getItem"));
+Route::GET("item", array("InventoryManager@getAllItem", "ResponsiblePerson@getAllItem"));
+Route::GET("item/{id}", array("InventoryManager@getItem"));
 Route::GET("safehouse", array("DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("district", array("Admin@getDistrict"));
-Route::GET("user", array("InventoryManager@getMySelf", "Admin@searchUser")); //user/userId/required data
+Route::GET("user", array("Admin@searchUser"));
+Route::GET("user/self/{data}", array("InventoryManager@getMySelf")); 
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 
@@ -57,4 +59,4 @@ Route::GET("neighbour", array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count", array("InventoryManager@countItem"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
-Route::PUT("item", array("InventoryManager@updateItem"));
+Route::PUT("item/{item}", array("InventoryManager@updateItem"));

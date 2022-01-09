@@ -195,4 +195,77 @@ class GramaNiladari extends ResponsiblePerson
         $json = json_encode($r);
         echo $json;
     }
+
+    public function getSafehouses(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT s.*,d.* FROM safehouse s JOIN safehousecontact d ON d.safeHouseID=s.safeHouseID JOIN gndivision g ON g.safeHouseID=s.safeHouseID WHERE g.gramaNiladariID=" . $uid . ";";
+        $excute = $this->connection->query($sql);
+        // $results = array();
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        $json = json_encode($r);
+        echo $json;
+    }
+    public function getSafehouseRecent(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN safehousestatus t ON t.safehouseId=s.safeHouseID JOIN gndivision g ON g.safeHouseID=s.safeHouseID WHERE g.gramaNiladariID=" . $uid . " ORDER BY t.createdDate DESC LIMIT 1;";
+        $excute = $this->connection->query($sql);
+        // $results = array();
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        $json = json_encode($r);
+        echo $json;
+    }
+    public function getResponsible(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID JOIN gndivision g ON g.safeHouseID=s.safeHouseID WHERE g.gramaNiladariID=" . $uid . ";";
+        $excute = $this->connection->query($sql);
+        // $results = array();
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        $json = json_encode($r);
+        echo $json;
+    }
+    public function getIncidents(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT s.*,t.* FROM incident s JOIN incidentgn t ON t.incidentId=s.incidentId JOIN gndivision g ON g.gndvId=t.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY s.isActive DESC, s.incidentId DESC;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
 }

@@ -7,6 +7,15 @@ class Employee
     {
         $this->connection = $con;
     }
+    public function checkAssigned($userId){
+        global $errorCode;
+        $sql = "SELECT isAssigned FROM responsibleperson WHERE responsiblePersonID = $userId AND isAssigned='y'";
+        $excute = $this->connection->query($sql);
+        if ($excute->num_rows == 0) {
+            echo json_encode(array("code" => $errorCode['userCreadentialWrong']));
+            exit();
+        }
+    }
     public function login(array $data)
     {
         global $errorCode;
@@ -24,6 +33,7 @@ class Employee
             $secure = new Openssl_EncryptDecrypt();
             $data = $excute->fetch_assoc();
             $id = $data['empId'];
+            $this->checkAssigned($id);
             switch ($data['roleId']) {
                 case 1:
                     $sql = "SELECT empName FROM gramaniladari WHERE gramaNiladariID = $id";

@@ -19,10 +19,12 @@ class Route{
 	}
     public function checkAvailibility($requestName){
         global $errorCode;
+        $requestName = strtolower($requestName);
         if($_SERVER['REQUEST_METHOD'] =="POST"){
             $key = array_keys(self::$post);
             foreach($key as $item) {
-                if(strcasecmp($item,$requestName) == 0){
+                $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
+                if(preg_match($pattern, strtolower($requestName))){
                     return self::$post[$item];     
                 }
             }
@@ -32,9 +34,8 @@ class Route{
         }elseif($_SERVER['REQUEST_METHOD'] =="GET"){
             $key = array_keys(self::$get);
             foreach($key as $item) {
-                $matches = Array();
-                if(preg_match("\/(\d+)", $requestName, $matches)){
-                    print_r($matches);
+                $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
+                if(preg_match($pattern, strtolower($requestName))){
                     return self::$get[$item];     
                 }
             }
@@ -44,7 +45,8 @@ class Route{
         }elseif($_SERVER['REQUEST_METHOD'] =="PUT"){
             $key = array_keys(self::$put);
             foreach($key as $item) {
-                if(strcasecmp($item,$requestName) == 0){
+                $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
+                if(preg_match($pattern, strtolower($requestName))){
                     return self::$put[$item];     
                 }
             }
@@ -54,7 +56,8 @@ class Route{
         }elseif($_SERVER['REQUEST_METHOD'] =="DELETE"){
             $key = array_keys(self::$delete);
             foreach($key as $item) {
-                if(strcasecmp($item,$requestName) == 0){
+                $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
+                if(preg_match($pattern, strtolower($requestName))){
                     return self::$delete[$item];     
                 }
             }

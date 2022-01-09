@@ -62,6 +62,24 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
+    public function getAllItem(array $data){
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id=Item::getId($id);
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id ORDER BY item.itemId";
+        }else{
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId  ORDER BY item.itemId";
+        } 
+        
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $r['itemId'] = Item::getItemCode($r['itemId']);
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
     public function getUnit(array $data){
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
@@ -261,8 +279,5 @@ class InventoryManager extends Employee{
         $division['name'] = $temp['dvName'];
         $division['id'] = $temp['dvId'];
         return $division;
-    }
-    public function test(array $data){
-        print_r($data);
     }
 }

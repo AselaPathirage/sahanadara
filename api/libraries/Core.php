@@ -4,6 +4,7 @@ class Core{
         protected $currentMethod = "viewDonations";
         protected $nonSecure = ['Home','Employee']; // releasing no login required classes
         protected $params = [];
+        protected $requestRoute;
         protected $connection; 
         protected $permission = array(
                                     'Admin' => 5,
@@ -49,6 +50,7 @@ class Core{
                 }
                 $url = rtrim($_GET['request'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
+                $this->requestRoute = explode("/api/",strtolower($url))[0];
                 $url = explode('/', $url);
                 $this->params['receivedParams'] = $url;
                 //print_r($this->params);
@@ -57,7 +59,7 @@ class Core{
         public function  setClass(){
             global $errorCode;
             global $route;
-            $url = trim($this->params['receivedParams'][0]);
+            $url = trim($this->requestRoute);
 
             $array = $route->checkAvailibility($url);
             foreach($array as $item) {

@@ -1,2 +1,2 @@
-$api/error.log
-$api/reports
+*.log
+api/reports/

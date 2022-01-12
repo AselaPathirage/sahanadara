@@ -152,7 +152,7 @@
                                 </tr>
                             </thead>
 
-                            <tbody id="tableSafeHouse">
+                            <tbody id="tbodyid">
 
                                 <!-- <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td>Haltota, Millaniya Road, Tuttiripitiya</td>
@@ -289,7 +289,7 @@
 					cache: false,
 					success: function(result) {
 						// window.location.replace("<?php echo HOST ?>DisasterOfficer/SafeHouse/SafeHouseDetails");
-                        $('#tableSafeHouse').empty();
+                        $('#tbodyid').empty();
                         viewSafehouse();
                         console.log(result.code);
                         if (result.code == 806) {
@@ -417,12 +417,12 @@
                 async: false
             }).responseText);
             //console.log(output);
-            $("#tableSafeHouse").empty();
-            var table = document.getElementById("tableSafeHouse");
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
             
             for (var i = 0; i < output.length; i++){
                 let obj = output[i];
-                //console.log(obj);
+                console.log(obj);
                 // let row = table.insertRow(-1);
                 // let id ="data_"+i;
                 // row.id = id;
@@ -445,8 +445,8 @@
                 let cell5 = row.insertCell(-1);
 
                 var attribute = document.createElement("a");
-                attribute.id = obj['safeHouseID'];
-                attribute.href = "";
+                attribute.id = obj['safeHouseId'];
+                //attribute.href = "";
                 attribute.className = "btn_update btn_blue";
                 attribute.name = "update";
                 attribute.innerHTML = "Update";
@@ -457,7 +457,7 @@
                 var attribute2 = document.createElement("a");
                 
 
-                attribute2.id = obj['safeHouseID'];
+                attribute2.id = obj['safeHouseId'];
                 //attribute2.href = "";
                 attribute2.className = "btn_delete";
                 attribute2.name = "delete";

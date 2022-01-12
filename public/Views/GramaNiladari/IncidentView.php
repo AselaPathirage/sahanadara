@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
+
+<?php
+$array = explode("/", $_GET["url"]);
+echo end($array);
+ ?>
+
 <head>
     <meta charset="UTF-8">
     <title> Grama Niladari</title>

@@ -16,11 +16,12 @@ Route::GET("item", array("InventoryManager@getAllItem", "ResponsiblePerson@getAl
 Route::GET("item/{id}", array("InventoryManager@getItem"));
 Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("Admin@searchUser"));
-Route::GET("user/self/{data}", array("InventoryManager@getMySelf")); 
+Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses","DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("incident", array("GramaNiladari@getIncidents"));
+Route::GET("incident/{id}", array("GramaNiladari@getIncidentById"));
 
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails"));
@@ -39,6 +40,7 @@ Route::GET("gnalert", array("GramaNiladari@getAlerts"));
 Route::GET("residentcount", array("GramaNiladari@getResidentCount"));
 Route::GET("recentsh", array("GramaNiladari@getSafehouseRecent"));
 Route::GET("responsible", array("GramaNiladari@getResponsible"));
+Route::GET("disaster", array("GramaNiladari@getDisaster"));
 Route::POST("residents", array("GramaNiladari@addResident"));
 Route::POST("gnmsg", array("GramaNiladari@sendMessages"));
 Route::PUT("residents", array("GramaNiladari@updateResident"));

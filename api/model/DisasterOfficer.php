@@ -8,6 +8,31 @@ class DisasterOfficer extends Employee{
         parent::__construct($con);
     }
 
+    // Donation
+
+    public function addDonation(array $data){
+        global $errorCode;
+        $recordId = $data['recordId'];
+        $safehouseId = $data['safehouseId'];
+        $title = $data['title'];
+        $numOfFamilies = $data['numOfFamilies'];
+        $numOfPeople = $data['numOfPeople'];
+        $createdDate = $data['createdDate'];
+        $note = $data['note'];
+        $approvalStatus = $data['approvalStatus'];
+
+        $sql = "SELECT * FROM ;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+    
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
+    }
+
+
     // Safehouse Details
 
     public function addSafehouse(array $data){

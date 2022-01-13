@@ -304,4 +304,78 @@ class GramaNiladari extends ResponsiblePerson
         $json = json_encode($results);
         echo $json;
     }
+
+    //initial incident
+    public function addInitial(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        $datePicker = $data['datePicker'];
+        $disaster = $data['disaster'];
+        $location = $data['location'];
+        $cause = $data['cause'];
+        $afam = $data['afam'];
+        $apeople = $data['apeople'];
+        $deaths = $data['deaths'];
+        $injured = $data['injured'];
+        $missing = $data['missing'];
+        $hfull = $data['hfull'];
+        $hpartial = $data['hpartial'];
+        $enterprises = $data['enterprises'];
+        $infra = $data['infra'];
+        $safenum = $data['safenum'];
+        $sfam = $data['sfam'];
+        $speople = $data['speople'];
+        $remarks = $data['remarks'];
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "INSERT INTO `initialincident`( `disaster`, `date`, `location`, `cause`, `fam`, `people`, `death`, `injured`, 
+        `missing`, `hfull`, `hpartial`, `enterprise`, `infra`, `safefam`, `safepeople`, `safenumber`, 
+        `remarks`, `gndvId`) VALUES ('$disaster','$datePicker','$location','$cause','$afam','$apeople','$deaths','$injured','$missing','$hfull','$hpartial','$enterprises','$infra','$sfam','$speople','$safenum','$remarks'," . $r['gndvId'] . ");";
+
+
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
+    }
+    public function addRelief(array $data)
+    {
+
+        global $errorCode;
+        $uid = $data['userId'];
+        $datePicker = $data['datePicker'];
+        $cause = $data['cause'];
+        $m1 = $data['m1'];
+        $m2 = $data['m2'];
+        $m3 = $data['m3'];
+        $m4 = $data['m4'];
+        $m5 = $data['m5'];
+        $cooked = $data['cooked'];
+        $emer = $data['emer'];
+        $fam = $data['fam'];
+        $people = $data['people'];
+        $deaths = $data['deaths'];
+        $injured = $data['injured'];
+        $missing = $data['missing'];
+        $remarks = $data['remarks'];
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "INSERT INTO `relief`( `date`, `description`, `f1`, `f2`, `f3`, `f4`, `f5`, `cooked`, `emergency`, `fam`, 
+        `people`, `death`, `injured`, `missing`, `remarks`, `gndvId`) VALUES 
+        ('$datePicker','$cause','$m1','$m2','$m3','$m4','$m5','$cooked',
+        '$emer','$fam','$people','$deaths','$injured','$missing','$remarks'," . $r['gndvId'] . ");";
+
+
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
+    }
 }

@@ -122,6 +122,9 @@
                                                     <th style="width: 50%;">Quantity</th>
                                                     <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
                                                 </tr>
+                                                <tbody>
+
+                                                </tbody>
                                             </table>
                                         </div>
                                     </td>
@@ -145,6 +148,7 @@
     <script>
         var thisPage = "#add";
         var output;
+        var count = 0;
         getItem();
         $(document).ready(function() {
             $("#search,#add").each(function() {
@@ -156,12 +160,12 @@
             $(document).on('click', '.add', function() {
                 var html = '';
                 html += '<tr>';
-                html += '<td><select name="item[]" class="form-control item_unit" required="true"><option value="">Select Item</option>';
+                html += '<td><select id="item'+count+'" name="item'+count+'" class="form-control item_unit" required="true"><option value="">Select Item</option>';
                 for (var i = 0; i < output.length; i++) {
-                    html += "<option>" + output[i]['itemName'] + "</option>";
+                    html += "<option value='" + output[i]['itemId'] + "'>" + output[i]['itemName'] + "</option>";
                 }
                 html += "</select></td>";
-                html += '<td><input type="text" name="quantity[]"  onkeypress="return isNumber(event,2)" class="form-control item_quantity" required="true"/></td>';
+                html += '<td><input type="text" id="quantity'+count+'" name="quantity'+count+'"  onkeypress="return isNumber(event,2)" class="form-control item_quantity" required="true"/></td>';
                 html += '<td><button type="button" name="remove" class="form-control remove">Remove</button></td></tr>';
                 $('#item_table').append(html);
             });
@@ -173,25 +177,32 @@
                 var formElement = document.querySelector("form");
                 var formData = new FormData(formElement);
                 var object = {};
-                formData.forEach(function(value, key){ 
-                    if(value ==""){
-                        return;
-                    }
-                    if(key in object){
-                        object[key].push(value);
-                    }else if(key.localeCompare("item[]")==0){
-                        object[key] = new Array();
-                        object[key].push(value);
-                    }else if(key.localeCompare("quantity[]")==0){
-                        object[key] = new Array();
-                        object[key].push(value);
-                    }else{
-                        object[key] = value;
-                    }
-                }); 
-                //$("#add").trigger('reset');
-                var json = JSON.stringify(object);
-                console.log(json);
+                // formData.forEach(function(value, key){ 
+                //     if(value ==""){
+                //         return;
+                //     }
+                //     if(key in object){
+                //         object[key].push(value);
+                //     }else if(key.localeCompare("item[]")==0){
+                //         object[key] = new Array();
+                //         object[key].push(value);
+                //     }else if(key.localeCompare("quantity[]")==0){
+                //         object[key] = new Array();
+                //         object[key].push(value);
+                //     }else{
+                //         object[key] = value;
+                //     }
+                // }); 
+                // //$("#add").trigger('reset');
+                // var json = JSON.stringify(object);
+                // console.log(json);
+                console.log("hello3");
+                $('#item_table  tbody  tr').each(function() {
+                    var item = this.getElementsByTagName('td');
+                    console.log();
+                    console.log(item.options[item[0].selectedIndex].value);
+                    console.log(item.value);
+                });
             });
         });
 

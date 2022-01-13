@@ -269,7 +269,7 @@ a{
     border-radius:5px;
     cursor:pointer;
     font-size: 15px;
-    margin-right: 10px;
+    margin-right: 5px;
   }
   /* Reset Button: minimize the appearance */
   input[type=reset]{

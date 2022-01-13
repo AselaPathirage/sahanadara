@@ -21,7 +21,7 @@ class DisasterOfficer extends Employee{
         $note = $data['note'];
         $approvalStatus = $data['approvalStatus'];
 
-        $sql = "SELECT * FROM ;
+        $sql = "SELECT * FROM ";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
     

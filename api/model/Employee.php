@@ -25,8 +25,9 @@ class Employee
             exit();
         }
         $username = md5($data['username']);
+        $usernameToCapital = md5(strtoupper($data['username']));
         $password = md5($data['password']);
-        $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE l.nid ='$username' AND l.empPassword ='$password' AND l.roleId = r.roleId";
+        $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE (l.nid ='$username' or l.nid ='$usernameToCapital') AND l.empPassword ='$password' AND l.roleId = r.roleId";
         $excute = $this->connection->query($sql);
 
         if ($excute->num_rows > 0) {

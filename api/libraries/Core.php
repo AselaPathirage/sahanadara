@@ -78,6 +78,7 @@ class Core{
                         $this->setMthod($temp[1]);
                         array_shift($this->params['receivedParams']);
                         $this->params['userId'] = $this->userId;
+                        $this->params['userType'] = $this->userType;
                         //unset($this->params['receivedParams'][0]);
                         return;
                     }

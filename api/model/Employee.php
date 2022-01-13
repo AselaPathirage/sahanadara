@@ -7,6 +7,15 @@ class Employee
     {
         $this->connection = $con;
     }
+    public function checkAssigned($userId){
+        global $errorCode;
+        $sql = "SELECT isAssigned FROM responsibleperson WHERE responsiblePersonID = $userId AND isAssigned='y'";
+        $excute = $this->connection->query($sql);
+        if ($excute->num_rows == 0) {
+            echo json_encode(array("code" => $errorCode['userCreadentialWrong']));
+            exit();
+        }
+    }
     public function login(array $data)
     {
         global $errorCode;
@@ -15,15 +24,17 @@ class Employee
             echo json_encode(array("code" => $errorCode['attributeMissing']));
             exit();
         }
-        $username = md5($data['username']);
+        $username = md5(strtolower($data['username']));
+        $usernameToCapital = md5(strtoupper($data['username']));
         $password = md5($data['password']);
-        $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE l.nid ='$username' AND l.empPassword ='$password' AND l.roleId = r.roleId";
+        $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE (l.nid ='$username' or l.nid ='$usernameToCapital') AND l.empPassword ='$password' AND l.roleId = r.roleId";
         $excute = $this->connection->query($sql);
 
         if ($excute->num_rows > 0) {
             $secure = new Openssl_EncryptDecrypt();
             $data = $excute->fetch_assoc();
             $id = $data['empId'];
+            $this->checkAssigned($id);
             switch ($data['roleId']) {
                 case 1:
                     $sql = "SELECT empName FROM gramaniladari WHERE gramaNiladariID = $id";

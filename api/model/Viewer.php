@@ -37,11 +37,20 @@ trait Viewer{
                             }else{
                                 $temp5 = $temp5-> fetch_assoc();
                             }
+                            $sql ="SELECT empName,empTele FROM `responsibleperson` WHERE safeHouseID = ".$s['safeHouseID']." AND isAssigned = 'y'";
+                            $responsiblePerson = $this->connection->query($sql);
+                            if($responsiblePerson->num_rows > 0){
+                                $responsiblePerson = $responsiblePerson-> fetch_assoc();
+                            }else{
+                                $responsiblePerson = array('empName'=>'Data not available','empTele'=>'Data not available');
+                            }
                             $temp4 = array(
                                 'id' => $safeHouseId,
                                 'name' => $s["safeHouseName"],
                                 'address' => $s["safeHouseAddress"],
                                 'contact' => array(),
+                                'responsible' => $responsiblePerson['empName'],
+                                'responsibleContact' => $responsiblePerson['empTele'],
                                 'active' => $active,
                                 'males'=> $temp5['adultMale'],
                                 'females' => $temp5['adultFemale'],

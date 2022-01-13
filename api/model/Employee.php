@@ -24,7 +24,7 @@ class Employee
             echo json_encode(array("code" => $errorCode['attributeMissing']));
             exit();
         }
-        $username = md5($data['username']);
+        $username = md5(strtolower($data['username']));
         $usernameToCapital = md5(strtoupper($data['username']));
         $password = md5($data['password']);
         $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE (l.nid ='$username' or l.nid ='$usernameToCapital') AND l.empPassword ='$password' AND l.roleId = r.roleId";

@@ -85,7 +85,7 @@
                                 <label for="safeHouseName">Name</label>
                                 <input type="text" id="upsafeHouseName" name="upsafeHouseName" required='true'>
 
-                                <label for="gnDiv">Grama Niladhari Division</label>
+                                <label for="upgnDiv">Grama Niladhari Division</label>
                                 <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
 
                                 <select id="upgnDiv" name="upgnDiv">
@@ -396,12 +396,19 @@
             }).responseText);
             // console.log(output);
             var select = document.getElementById("gnDiv");
+            var select2 = document.getElementById("upgnDiv");
             for (var i = 0; i < output.length; i++){
                 //console.log(i);
                 var opt = document.createElement('option');
                 opt.value = output[i]['gndvId'];
                 opt.innerHTML = output[i]['gnDvName'];
                 select.appendChild(opt);
+
+                var opt2 = document.createElement('option');
+                opt2.value = output[i]['gndvId'];
+                opt2.innerHTML = output[i]['gnDvName'];
+                select2.appendChild(opt2);
+                //console.log(opt2);
             }
         }
         getGNDivision();

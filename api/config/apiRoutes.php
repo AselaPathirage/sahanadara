@@ -43,6 +43,8 @@ Route::GET("responsible", array("GramaNiladari@getResponsible"));
 Route::GET("disaster", array("GramaNiladari@getDisaster"));
 Route::POST("residents", array("GramaNiladari@addResident"));
 Route::POST("gnmsg", array("GramaNiladari@sendMessages"));
+Route::POST("gninitial", array("GramaNiladari@addInitial"));
+Route::POST("gnrelief", array("GramaNiladari@addRelief"));
 Route::PUT("residents", array("GramaNiladari@updateResident"));
 Route::DELETE("residents", array("GramaNiladari@deleteResident"));
 

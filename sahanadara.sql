@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2022 at 02:04 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 8.0.1
+-- Generation Time: Jan 13, 2022 at 06:34 PM
+-- Server version: 10.4.22-MariaDB
+-- PHP Version: 8.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -100,6 +100,26 @@ INSERT INTO `alertdisdivgn` (`alertId`, `dsId`, `dvId`, `gndvId`) VALUES
 (5, 3, 10, 5),
 (6, 3, 10, 5),
 (8, 3, 10, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `disaster`
+--
+
+CREATE TABLE `disaster` (
+  `disId` int(5) NOT NULL,
+  `dis` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `disaster`
+--
+
+INSERT INTO `disaster` (`disId`, `dis`) VALUES
+(1, 'Flood'),
+(2, 'Landslide'),
+(3, 'Lightening');
 
 -- --------------------------------------------------------
 
@@ -376,6 +396,7 @@ CREATE TABLE `gndivision` (
   `gndvId` int(5) NOT NULL,
   `gnDvName` varchar(20) NOT NULL,
   `officeAddress` varchar(50) DEFAULT NULL,
+  `telno` int(11) DEFAULT NULL,
   `startDate` datetime DEFAULT NULL,
   `safeHouseID` int(5) DEFAULT NULL,
   `gramaNiladariID` int(6) DEFAULT NULL,
@@ -386,115 +407,152 @@ CREATE TABLE `gndivision` (
 -- Dumping data for table `gndivision`
 --
 
-INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `startDate`, `safeHouseID`, `gramaNiladariID`, `dvId`) VALUES
-(1, ' 719  Koholana South', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, 2, NULL, 10),
-(2, '719 A Adhikarigoda', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(3, '719 B Koholana North', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(4, '720 Ukwatta', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(5, '721 Bolossagama', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, 1, 1, 10),
-(6, '722 Serupita West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(7, '722 A Serupita East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(8, '724 Gamagoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(9, '724 A Gamagoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(10, '726 A Remunagoda Sou', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(11, '726 A Remunagoda Nor', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(12, '728 Bombuwala South ', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(13, '728 A Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(14, '728 B Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(15, '728 C Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, 3, NULL, 10),
-(16, '728 D Bombuwala Sout', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(17, '799 Puhabugoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(18, '799 A Eladuwa', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(19, '799 B Galpottawila', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(20, '799 C Puhambugoda We', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(21, '800 Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(22, '800 A Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(23, '800 B Sapugahawatta', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(24, '800 C Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(25, '800 D Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(26, '800 E Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(27, '800 F Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(28, '800 G Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(29, '800 H Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(30, '800 I Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(31, '801 Nehinna', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(32, '801 A Wadugama', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(33, '807 Nebada', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(34, '807 A Upper Nebada', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(35, '807 B Lower Nebada', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(36, '807 C Nebada West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(37, '807 D Wellatha', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(38, '807 E Wattahena', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(39, '808 Thudugala West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(40, '808 A Thudugala East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(41, '809 Thebuwana East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(42, '809 Thebuwana West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(43, '810 Pelapitiyagoda', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(44, '810 A Pelapitiyagoda', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, 10),
-(45, '618 Wagawatta', 'wagawaththa, Poruwadanda', NULL, NULL, NULL, 4),
-(46, '618 A Poruwadanda Ea', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(47, '618 B Kekulaliya', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(48, '618 C Poruwadanda We', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(49, '619 Urugala East', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(50, '619 A Nambapana', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(51, '619 B Urugala West', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(52, '620 Ingiriya East', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(53, '620 A Ingiriya West', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(54, '620 B Rayigamwatta', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(55, '620 C Ingiriya North', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(56, '620 D Nimalagama', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(57, '620 E Aduragala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(58, '620 F Dombagaskanda', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(59, '620 G Maha Ingiriya', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(60, '621 Maputugala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(61, '621 A Rathmalgoda Ea', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(62, '621 B Rathmalgoda We', 'Divisional Secretariat,Ingiriya', NULL, NULL, 7, 4),
-(63, '622 Pelpitigoda', 'Divisional Secretariat,Ingiriya', NULL, NULL, 6, 4),
-(64, '622 Handapangoda Sou', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(65, '623 A Handapangoda E', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(66, '623 B Handapangoda W', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(67, '624 Batugampala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(68, '624 A Kekuladola', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(69, '625 Arakawila', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(70, '625 A Menerigama', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(71, '626 Kadanapitiya', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(72, '626 A Kottiyawatta', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(73, '627 Kurana South', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(74, '627 A Kotigala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(75, '627 B Kurana North', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 4),
-(76, '632 Kandana North', 'Grama Niladhari Office,Kandana North - 632', NULL, NULL, NULL, 3),
-(77, '633A Ilimba', 'Grama Niladhari Office,Ilimba - 632A', NULL, NULL, 4, 3),
-(78, '632B Kandana South', 'Grama Niladhari Office,Kandana South - 632B', NULL, NULL, NULL, 3),
-(79, '633 Werawatta', 'Grama Niladhari Office,Werawatta - 633', NULL, NULL, NULL, 3),
-(80, '633A Kananvila', 'Grama Niladhari Office,Kananvila - 633A', NULL, NULL, NULL, 3),
-(81, '633B Walpita', 'Grama Niladhari Office,Walpita - 633B', NULL, NULL, NULL, 3),
-(82, '634 Mahayala East', 'Grama Niladhari Office,Mahayala East - 634', NULL, NULL, NULL, 3),
-(83, '634A Mahayala West', 'Grama Niladhari Office,Mahayala West - 634A', NULL, NULL, NULL, 3),
-(84, '635 Madurawala East', 'Grama Niladhari Office,Madurawala East - 635', NULL, NULL, NULL, 3),
-(85, '635A Madurawala West', 'Grama Niladhari Office,Madurawala West - 635A', NULL, NULL, NULL, 3),
-(86, '636 Kudayala', 'Grama Niladhari Office,Kudayala - 636', NULL, NULL, NULL, 3),
-(87, '637 Anguruwathota', 'Grama Niladhari Office,Anguruwathota - 637', NULL, NULL, NULL, 3),
-(88, '648 Keselhenawa', 'Grama Niladhari Office,Keselhenawa - 648', NULL, NULL, NULL, 3),
-(89, '648A Kudella', 'Grama Niladhari Office,Kudella - 648A', NULL, NULL, NULL, 3),
-(90, '648B Hallankanda', 'Grama Niladhari Office,Hallankanda - 648B', NULL, NULL, NULL, 3),
-(91, '650 Remuna', 'Grama Niladhari Office,Remuna - 650', NULL, NULL, NULL, 3),
-(92, '650A Bellapitiya Eas', 'Grama Niladhari Office,Bellapitiya East - 650A', NULL, NULL, 5, 3),
-(93, '650B Bellapitiya Wes', 'Grama Niladhari Office,Bellapitiya West - 650B', NULL, NULL, NULL, 3),
-(94, '650C Peramunagama', 'Grama Niladhari Office,Peramunagama - 650C', NULL, NULL, NULL, 3),
-(95, '650D Weliketella', 'Grama Niladhari Office,Weliketella - 650D', NULL, NULL, NULL, 3),
-(96, '650E Elawella', 'Grama Niladhari Office,Elawella - 650E', NULL, NULL, NULL, 3),
-(97, '650F Mahena South', 'Grama Niladhari Office,Mahena South - 650F', NULL, NULL, NULL, 3),
-(98, '811 Karannagoda', 'Grama Niladhari Office,Karannagoda - 811', NULL, NULL, NULL, 3),
-(99, '811A Pahala Karannag', 'Grama Niladhari Office,Pahala Karannagoda - 811A', NULL, NULL, NULL, 3),
-(100, '811B Ihala Karannago', 'Grama Niladhari Office,Ihala Karannagoda - 811B', NULL, NULL, NULL, 3),
-(101, '815 Nahalla', 'Grama Niladhari Office,Nahalla - 815', NULL, NULL, NULL, 3),
-(102, '815A Katuhena', 'Grama Niladhari Office,Katuhena - 815A', NULL, NULL, NULL, 3),
-(103, '815B Pahalagoda', 'Grama Niladhari Office,Pahalagoda - 815B', NULL, NULL, NULL, 3),
-(104, '815C Ihalagoda', 'Grama Niladhari Office,Ihalagoda - 815C', NULL, NULL, NULL, 3),
-(105, '816 Warakagoda East', 'Grama Niladhari Office,Warakagoda East - 816', NULL, NULL, NULL, 3),
-(106, '816A Warakagoda West', 'Grama Niladhari Office,Warakagoda West - 816A', NULL, NULL, NULL, 3),
-(107, '816B Warakagoda Nort', 'Grama Niladhari Office,Warakagoda North - 816B', NULL, NULL, NULL, 3),
-(108, '816C Warakagoda Sout', 'Grama Niladhari Office,Warakagoda South - 816C', NULL, NULL, NULL, 3);
+INSERT INTO `gndivision` (`gndvId`, `gnDvName`, `officeAddress`, `telno`, `startDate`, `safeHouseID`, `gramaNiladariID`, `dvId`) VALUES
+(1, ' 719  Koholana South', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, 2, NULL, 10),
+(2, '719 A Adhikarigoda', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(3, '719 B Koholana North', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(4, '720 Ukwatta', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(5, '721 Bolossagama', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, 1, 1, 10),
+(6, '722 Serupita West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(7, '722 A Serupita East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(8, '724 Gamagoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(9, '724 A Gamagoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(10, '726 A Remunagoda Sou', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(11, '726 A Remunagoda Nor', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(12, '728 Bombuwala South ', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(13, '728 A Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(14, '728 B Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(15, '728 C Bombuwala Nort', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, 3, NULL, 10),
+(16, '728 D Bombuwala Sout', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(17, '799 Puhabugoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(18, '799 A Eladuwa', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(19, '799 B Galpottawila', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(20, '799 C Puhambugoda We', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(21, '800 Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(22, '800 A Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(23, '800 B Sapugahawatta', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(24, '800 C Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(25, '800 D Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(26, '800 E Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(27, '800 F Dodangoda West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(28, '800 G Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(29, '800 H Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(30, '800 I Dodangoda East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(31, '801 Nehinna', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(32, '801 A Wadugama', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(33, '807 Nebada', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(34, '807 A Upper Nebada', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(35, '807 B Lower Nebada', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(36, '807 C Nebada West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(37, '807 D Wellatha', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(38, '807 E Wattahena', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(39, '808 Thudugala West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(40, '808 A Thudugala East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(41, '809 Thebuwana East', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(42, '809 Thebuwana West', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(43, '810 Pelapitiyagoda', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(44, '810 A Pelapitiyagoda', 'Divisional Secretariat, Dodangoda,Kalutara,South', NULL, NULL, NULL, NULL, 10),
+(45, '618 Wagawatta', 'wagawaththa, Poruwadanda', NULL, NULL, NULL, NULL, 4),
+(46, '618 A Poruwadanda Ea', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(47, '618 B Kekulaliya', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(48, '618 C Poruwadanda We', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(49, '619 Urugala East', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(50, '619 A Nambapana', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(51, '619 B Urugala West', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(52, '620 Ingiriya East', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(53, '620 A Ingiriya West', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(54, '620 B Rayigamwatta', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(55, '620 C Ingiriya North', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(56, '620 D Nimalagama', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(57, '620 E Aduragala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(58, '620 F Dombagaskanda', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(59, '620 G Maha Ingiriya', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(60, '621 Maputugala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(61, '621 A Rathmalgoda Ea', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(62, '621 B Rathmalgoda We', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 7, 4),
+(63, '622 Pelpitigoda', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, 6, 4),
+(64, '622 Handapangoda Sou', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(65, '623 A Handapangoda E', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(66, '623 B Handapangoda W', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(67, '624 Batugampala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(68, '624 A Kekuladola', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(69, '625 Arakawila', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(70, '625 A Menerigama', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(71, '626 Kadanapitiya', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(72, '626 A Kottiyawatta', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(73, '627 Kurana South', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(74, '627 A Kotigala', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(75, '627 B Kurana North', 'Divisional Secretariat,Ingiriya', NULL, NULL, NULL, NULL, 4),
+(76, '632 Kandana North', 'Grama Niladhari Office,Kandana North - 632', NULL, NULL, NULL, NULL, 3),
+(77, '633A Ilimba', 'Grama Niladhari Office,Ilimba - 632A', NULL, NULL, NULL, 4, 3),
+(78, '632B Kandana South', 'Grama Niladhari Office,Kandana South - 632B', NULL, NULL, NULL, NULL, 3),
+(79, '633 Werawatta', 'Grama Niladhari Office,Werawatta - 633', NULL, NULL, NULL, NULL, 3),
+(80, '633A Kananvila', 'Grama Niladhari Office,Kananvila - 633A', NULL, NULL, NULL, NULL, 3),
+(81, '633B Walpita', 'Grama Niladhari Office,Walpita - 633B', NULL, NULL, NULL, NULL, 3),
+(82, '634 Mahayala East', 'Grama Niladhari Office,Mahayala East - 634', NULL, NULL, NULL, NULL, 3),
+(83, '634A Mahayala West', 'Grama Niladhari Office,Mahayala West - 634A', NULL, NULL, NULL, NULL, 3),
+(84, '635 Madurawala East', 'Grama Niladhari Office,Madurawala East - 635', NULL, NULL, NULL, NULL, 3),
+(85, '635A Madurawala West', 'Grama Niladhari Office,Madurawala West - 635A', NULL, NULL, NULL, NULL, 3),
+(86, '636 Kudayala', 'Grama Niladhari Office,Kudayala - 636', NULL, NULL, NULL, NULL, 3),
+(87, '637 Anguruwathota', 'Grama Niladhari Office,Anguruwathota - 637', NULL, NULL, NULL, NULL, 3),
+(88, '648 Keselhenawa', 'Grama Niladhari Office,Keselhenawa - 648', NULL, NULL, NULL, NULL, 3),
+(89, '648A Kudella', 'Grama Niladhari Office,Kudella - 648A', NULL, NULL, NULL, NULL, 3),
+(90, '648B Hallankanda', 'Grama Niladhari Office,Hallankanda - 648B', NULL, NULL, NULL, NULL, 3),
+(91, '650 Remuna', 'Grama Niladhari Office,Remuna - 650', NULL, NULL, NULL, NULL, 3),
+(92, '650A Bellapitiya Eas', 'Grama Niladhari Office,Bellapitiya East - 650A', NULL, NULL, NULL, 5, 3),
+(93, '650B Bellapitiya Wes', 'Grama Niladhari Office,Bellapitiya West - 650B', NULL, NULL, NULL, NULL, 3),
+(94, '650C Peramunagama', 'Grama Niladhari Office,Peramunagama - 650C', NULL, NULL, NULL, NULL, 3),
+(95, '650D Weliketella', 'Grama Niladhari Office,Weliketella - 650D', NULL, NULL, NULL, NULL, 3),
+(96, '650E Elawella', 'Grama Niladhari Office,Elawella - 650E', NULL, NULL, NULL, NULL, 3),
+(97, '650F Mahena South', 'Grama Niladhari Office,Mahena South - 650F', NULL, NULL, NULL, NULL, 3),
+(98, '811 Karannagoda', 'Grama Niladhari Office,Karannagoda - 811', NULL, NULL, NULL, NULL, 3),
+(99, '811A Pahala Karannag', 'Grama Niladhari Office,Pahala Karannagoda - 811A', NULL, NULL, NULL, NULL, 3),
+(100, '811B Ihala Karannago', 'Grama Niladhari Office,Ihala Karannagoda - 811B', NULL, NULL, NULL, NULL, 3),
+(101, '815 Nahalla', 'Grama Niladhari Office,Nahalla - 815', NULL, NULL, NULL, NULL, 3),
+(102, '815A Katuhena', 'Grama Niladhari Office,Katuhena - 815A', NULL, NULL, NULL, NULL, 3),
+(103, '815B Pahalagoda', 'Grama Niladhari Office,Pahalagoda - 815B', NULL, NULL, NULL, NULL, 3),
+(104, '815C Ihalagoda', 'Grama Niladhari Office,Ihalagoda - 815C', NULL, NULL, NULL, NULL, 3),
+(105, '816 Warakagoda East', 'Grama Niladhari Office,Warakagoda East - 816', NULL, NULL, NULL, NULL, 3),
+(106, '816A Warakagoda West', 'Grama Niladhari Office,Warakagoda West - 816A', NULL, NULL, NULL, NULL, 3),
+(107, '816B Warakagoda Nort', 'Grama Niladhari Office,Warakagoda North - 816B', NULL, NULL, NULL, NULL, 3),
+(108, '816C Warakagoda Sout', 'Grama Niladhari Office,Warakagoda South - 816C', NULL, NULL, NULL, NULL, 3);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `gnfinalincident`
+--
+
+CREATE TABLE `gnfinalincident` (
+  `finalIncidentId` int(5) NOT NULL,
+  `startDate` date DEFAULT NULL,
+  `endDate` date DEFAULT NULL,
+  `disaster` int(11) NOT NULL,
+  `location` varchar(60) NOT NULL,
+  `cause` varchar(100) NOT NULL,
+  `fam` int(11) DEFAULT 0,
+  `people` int(11) DEFAULT 0,
+  `death` int(11) DEFAULT 0,
+  `injured` int(11) DEFAULT 0,
+  `evafam` int(11) DEFAULT 0,
+  `hospitalized` int(11) DEFAULT 0,
+  `evapeople` int(11) DEFAULT 0,
+  `hfull` int(11) DEFAULT 0,
+  `hpartial` int(11) DEFAULT 0,
+  `enterprise` int(11) DEFAULT 0,
+  `infras` int(11) DEFAULT 0,
+  `numofsafe` int(11) DEFAULT 0,
+  `sfpeople` int(11) DEFAULT 0,
+  `sfnumber` int(11) DEFAULT 0,
+  `dryrationsRs` int(11) DEFAULT 0,
+  `cookingRs` int(11) DEFAULT 0,
+  `emergencyRs` int(11) DEFAULT 0,
+  `remarks` varchar(50) DEFAULT NULL,
+  `gndvid` int(6) NOT NULL,
+  `disoffapproved` tinyint(1) NOT NULL DEFAULT 0,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `incidentId` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -524,7 +582,9 @@ INSERT INTO `gnmsg` (`msgId`, `timestamp`, `message`, `gndvId`) VALUES
 (8, '2022-01-06 23:08:27', 'ffffff', 5),
 (9, '2022-01-06 23:08:46', 'ggg', 5),
 (10, '2022-01-06 23:09:44', 'sdsd', 5),
-(11, '2022-01-06 23:10:01', 'hhh', 5);
+(11, '2022-01-06 23:10:01', 'hhh', 5),
+(12, '2022-01-09 15:46:40', 'sddfsgdfsgfg', 5),
+(13, '2022-01-09 15:46:49', 'sdfgsdfgsdfg dfgsdfgsdfg', 5);
 
 -- --------------------------------------------------------
 
@@ -546,7 +606,7 @@ CREATE TABLE `gramaniladari` (
 --
 
 INSERT INTO `gramaniladari` (`gramaNiladariID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'Asela Pathirage', 'NO 252/D,, ANANDA MAITHREE MAWATHA,, BELLAPITIYA, HORANA.', 'asela@gmail.com', 'n', ''),
+(1, 'Asela Pathirage', 'NO 252/D,, ANANDA MAITHREE MAWATHA,, BELLAPITIYA, HORANA.', 'asela@gmail.com', 'y', '0767877818'),
 (2, 'gn gn', 'Hene Gedara Hena, Ullala', 'htnaweegujgnpasindu@gmail.com', 'n', '0719867863'),
 (3, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsasindu@gmail.com', 'n', '0719867863'),
 (4, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsfasindu@gmail.com', 'n', '0719867863'),
@@ -568,6 +628,15 @@ CREATE TABLE `incident` (
   `isActive` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `incident`
+--
+
+INSERT INTO `incident` (`incidentId`, `title`, `description`, `dvId`, `isActive`) VALUES
+(1, 'sample', 'des', 10, 1),
+(2, 'ttttt2222', 'asdfadfasd sdfsdf', 10, 0),
+(3, 'rr3434', 'rewrtert wertwert', 10, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -578,6 +647,63 @@ CREATE TABLE `incidentgn` (
   `incidentId` int(5) NOT NULL,
   `gndvId` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `incidentgn`
+--
+
+INSERT INTO `incidentgn` (`incidentId`, `gndvId`) VALUES
+(1, 5),
+(1, 6),
+(1, 7),
+(1, 8),
+(2, 5),
+(2, 6),
+(3, 3),
+(3, 5),
+(3, 6);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `initialincident`
+--
+
+CREATE TABLE `initialincident` (
+  `initialId` int(10) NOT NULL,
+  `disaster` int(5) NOT NULL,
+  `date` date DEFAULT NULL,
+  `location` varchar(100) NOT NULL,
+  `cause` varchar(50) DEFAULT NULL,
+  `fam` int(11) DEFAULT 0,
+  `people` int(11) DEFAULT 0,
+  `death` int(11) DEFAULT 0,
+  `injured` int(11) DEFAULT 0,
+  `missing` int(11) DEFAULT 0,
+  `hfull` int(11) DEFAULT 0,
+  `hpartial` int(11) DEFAULT 0,
+  `enterprise` int(11) DEFAULT 0,
+  `infra` int(11) DEFAULT 0,
+  `safefam` int(11) DEFAULT 0,
+  `safepeople` int(11) DEFAULT 0,
+  `safenumber` int(11) DEFAULT 0,
+  `remarks` varchar(100) DEFAULT NULL,
+  `gndvId` int(5) NOT NULL,
+  `disoffapproved` tinyint(1) NOT NULL DEFAULT 0,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp(),
+  `incidentId` int(5) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `initialincident`
+--
+
+INSERT INTO `initialincident` (`initialId`, `disaster`, `date`, `location`, `cause`, `fam`, `people`, `death`, `injured`, `missing`, `hfull`, `hpartial`, `enterprise`, `infra`, `safefam`, `safepeople`, `safenumber`, `remarks`, `gndvId`, `disoffapproved`, `timestamp`, `incidentId`) VALUES
+(1, 1, '2022-01-23', 'dfgdfgdfg', 'asdasdasd', 5, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, NULL, 5, 0, '2022-01-13 08:11:40', NULL),
+(2, 1, '2022-01-13', 'Sri Lanka', '55tyhyhyh', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 5, 0, '2022-01-13 10:14:44', NULL),
+(3, 1, '2022-01-13', 'asdasdasdasd', 'sample', 7, 25, 5, 7, 0, 0, 0, 0, 0, 4, 6, 1, '', 5, 0, '2022-01-13 10:15:51', NULL),
+(4, 1, '2022-01-29', 'Sri Lanka', 'sadfsadf', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 5, 0, '2022-01-13 10:19:52', NULL),
+(5, 0, '2022-01-13', '', 'sadfsadf', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '', 5, 0, '2022-01-13 12:58:06', NULL);
 
 -- --------------------------------------------------------
 
@@ -807,6 +933,41 @@ CREATE TABLE `noticeitem` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `relief`
+--
+
+CREATE TABLE `relief` (
+  `reliefId` int(5) NOT NULL,
+  `date` date NOT NULL,
+  `description` int(11) DEFAULT NULL,
+  `incidentId` int(5) DEFAULT NULL,
+  `f1` int(11) DEFAULT 0,
+  `f2` int(11) DEFAULT 0,
+  `f3` int(11) DEFAULT 0,
+  `f4` int(11) DEFAULT 0,
+  `f5` int(11) DEFAULT 0,
+  `cooked` int(11) DEFAULT 0,
+  `emergency` int(11) DEFAULT 0,
+  `fam` int(11) DEFAULT 0,
+  `people` int(11) DEFAULT 0,
+  `death` int(11) DEFAULT 0,
+  `injured` int(11) DEFAULT 0,
+  `missing` int(11) DEFAULT 0,
+  `remarks` int(11) DEFAULT 0,
+  `gndvId` int(5) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `relief`
+--
+
+INSERT INTO `relief` (`reliefId`, `date`, `description`, `incidentId`, `f1`, `f2`, `f3`, `f4`, `f5`, `cooked`, `emergency`, `fam`, `people`, `death`, `injured`, `missing`, `remarks`, `gndvId`, `timestamp`) VALUES
+(1, '2022-01-13', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, '2022-01-13 13:18:24');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `resetpass`
 --
 
@@ -855,7 +1016,7 @@ CREATE TABLE `responsibleperson` (
 --
 
 INSERT INTO `responsibleperson` (`responsiblePersonID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `safeHouseID`, `empTele`) VALUES
-(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'y', 1, ''),
+(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'n', 1, '0767877999'),
 (2, 'test test', 'test at test', 'test@gmail.com', 'n', 2, '0111111111');
 
 -- --------------------------------------------------------
@@ -922,7 +1083,6 @@ CREATE TABLE `safehousecontact` (
 
 INSERT INTO `safehousecontact` (`safeHouseTelno`, `safeHouseID`) VALUES
 ('0345165219', 1),
-('0346165219', 1),
 ('0341115219', 2),
 ('0354545466', 3);
 
@@ -948,7 +1108,8 @@ CREATE TABLE `safehousestatus` (
 --
 
 INSERT INTO `safehousestatus` (`r_id`, `safehouseId`, `adultMale`, `adultFemale`, `children`, `disabledPerson`, `note`, `createdDate`) VALUES
-(1, 1, 10, 12, 5, 0, NULL, '2021-12-16 21:33:55');
+(1, 1, 10, 12, 5, 0, NULL, '2021-12-16 21:33:55'),
+(2, 2, 5, 3, 0, 8, 'sdfgdsfg', '2022-01-08 18:20:19');
 
 -- --------------------------------------------------------
 
@@ -1045,6 +1206,12 @@ ALTER TABLE `alertdisdivgn`
   ADD KEY `alertId` (`alertId`);
 
 --
+-- Indexes for table `disaster`
+--
+ALTER TABLE `disaster`
+  ADD PRIMARY KEY (`disId`);
+
+--
 -- Indexes for table `dismgtofficer`
 --
 ALTER TABLE `dismgtofficer`
@@ -1131,9 +1298,18 @@ ALTER TABLE `donationreqnotice`
 ALTER TABLE `gndivision`
   ADD PRIMARY KEY (`gndvId`),
   ADD UNIQUE KEY `gnDvName` (`gnDvName`),
+  ADD UNIQUE KEY `gramaNiladariID` (`gramaNiladariID`),
+  ADD UNIQUE KEY `tel` (`telno`),
   ADD KEY `safeHouseID` (`safeHouseID`),
-  ADD KEY `gramaNiladariID` (`gramaNiladariID`),
   ADD KEY `dvId` (`dvId`);
+
+--
+-- Indexes for table `gnfinalincident`
+--
+ALTER TABLE `gnfinalincident`
+  ADD PRIMARY KEY (`finalIncidentId`),
+  ADD KEY `fk_gndvId5` (`gndvid`),
+  ADD KEY `fk_incident8` (`incidentId`);
 
 --
 -- Indexes for table `gnmsg`
@@ -1160,6 +1336,14 @@ ALTER TABLE `incident`
 ALTER TABLE `incidentgn`
   ADD PRIMARY KEY (`incidentId`,`gndvId`),
   ADD KEY `fk_gnid` (`gndvId`);
+
+--
+-- Indexes for table `initialincident`
+--
+ALTER TABLE `initialincident`
+  ADD PRIMARY KEY (`initialId`),
+  ADD KEY `fk_gndvId` (`gndvId`),
+  ADD KEY `fk_inicide` (`incidentId`);
 
 --
 -- Indexes for table `inventory`
@@ -1205,6 +1389,14 @@ ALTER TABLE `login`
 ALTER TABLE `noticeitem`
   ADD PRIMARY KEY (`noticeId`,`itemId`),
   ADD KEY `itemId` (`itemId`);
+
+--
+-- Indexes for table `relief`
+--
+ALTER TABLE `relief`
+  ADD PRIMARY KEY (`reliefId`),
+  ADD KEY `fk_incId1` (`incidentId`),
+  ADD KEY `fk_gndv2` (`gndvId`);
 
 --
 -- Indexes for table `resetpass`
@@ -1299,6 +1491,12 @@ ALTER TABLE `alert`
   MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `disaster`
+--
+ALTER TABLE `disaster`
+  MODIFY `disId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `dismgtofficer`
 --
 ALTER TABLE `dismgtofficer`
@@ -1359,10 +1557,16 @@ ALTER TABLE `gndivision`
   MODIFY `gndvId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
+-- AUTO_INCREMENT for table `gnfinalincident`
+--
+ALTER TABLE `gnfinalincident`
+  MODIFY `finalIncidentId` int(5) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `gnmsg`
 --
 ALTER TABLE `gnmsg`
-  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `gramaniladari`
@@ -1374,7 +1578,13 @@ ALTER TABLE `gramaniladari`
 -- AUTO_INCREMENT for table `incident`
 --
 ALTER TABLE `incident`
-  MODIFY `incidentId` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `incidentId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `initialincident`
+--
+ALTER TABLE `initialincident`
+  MODIFY `initialId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `inventory`
@@ -1399,6 +1609,12 @@ ALTER TABLE `inventorymgtofficer`
 --
 ALTER TABLE `item`
   MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+
+--
+-- AUTO_INCREMENT for table `relief`
+--
+ALTER TABLE `relief`
+  MODIFY `reliefId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `resetpass`
@@ -1434,7 +1650,7 @@ ALTER TABLE `safehouse`
 -- AUTO_INCREMENT for table `safehousestatus`
 --
 ALTER TABLE `safehousestatus`
-  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `servicerequest`
@@ -1506,8 +1722,15 @@ ALTER TABLE `donationreqnotice`
 --
 ALTER TABLE `gndivision`
   ADD CONSTRAINT `gndivision_ibfk_1` FOREIGN KEY (`safeHouseID`) REFERENCES `safehouse` (`safeHouseID`),
-  ADD CONSTRAINT `gndivision_ibfk_2` FOREIGN KEY (`gramaNiladariID`) REFERENCES `gramaniladari` (`gramaNiladariID`),
-  ADD CONSTRAINT `gndivision_ibfk_3` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`);
+  ADD CONSTRAINT `gndivision_ibfk_3` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`),
+  ADD CONSTRAINT `gndivision_ibfk_4` FOREIGN KEY (`gramaNiladariID`) REFERENCES `gramaniladari` (`gramaNiladariID`);
+
+--
+-- Constraints for table `gnfinalincident`
+--
+ALTER TABLE `gnfinalincident`
+  ADD CONSTRAINT `fk_gndvId5` FOREIGN KEY (`gndvid`) REFERENCES `gramaniladari` (`gramaNiladariID`),
+  ADD CONSTRAINT `fk_incident8` FOREIGN KEY (`incidentId`) REFERENCES `incident` (`incidentId`);
 
 --
 -- Constraints for table `incident`
@@ -1521,6 +1744,13 @@ ALTER TABLE `incident`
 ALTER TABLE `incidentgn`
   ADD CONSTRAINT `fk_gnid` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`),
   ADD CONSTRAINT `fk_incId` FOREIGN KEY (`incidentId`) REFERENCES `incident` (`incidentId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `initialincident`
+--
+ALTER TABLE `initialincident`
+  ADD CONSTRAINT `fk_gndvId` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`),
+  ADD CONSTRAINT `fk_inicide` FOREIGN KEY (`incidentId`) REFERENCES `incident` (`incidentId`);
 
 --
 -- Constraints for table `inventory`
@@ -1561,6 +1791,13 @@ ALTER TABLE `noticeitem`
   ADD CONSTRAINT `noticeitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
 
 --
+-- Constraints for table `relief`
+--
+ALTER TABLE `relief`
+  ADD CONSTRAINT `fk_gndv2` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`),
+  ADD CONSTRAINT `fk_incId1` FOREIGN KEY (`incidentId`) REFERENCES `incident` (`incidentId`);
+
+--
 -- Constraints for table `resident`
 --
 ALTER TABLE `resident`
@@ -1576,13 +1813,13 @@ ALTER TABLE `responsibleperson`
 -- Constraints for table `safehousecontact`
 --
 ALTER TABLE `safehousecontact`
-  ADD CONSTRAINT `safehousecontact_ibfk_1` FOREIGN KEY (`safeHouseID`) REFERENCES `safehouse` (`safeHouseID`);
+  ADD CONSTRAINT `safehousecontact_ibfk_1` FOREIGN KEY (`safeHouseID`) REFERENCES `safehouse` (`safeHouseID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `safehousestatus`
 --
 ALTER TABLE `safehousestatus`
-  ADD CONSTRAINT `safehousestatus_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`);
+  ADD CONSTRAINT `safehousestatus_ibfk_1` FOREIGN KEY (`safehouseId`) REFERENCES `safehouse` (`safeHouseID`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `safehousestatusrequesteditem`

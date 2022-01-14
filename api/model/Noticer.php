@@ -11,7 +11,7 @@ trait Noticer{
         global $errorCode;
         if(isset($data['id'])){
             $id = $data['id'];
-            $sql = "DELETE FROM donationreqnotice WHERE recordId = $id;DELETE FROM noticeitem WHERE noticeId = $id;";
+            $sql = "DELETE FROM noticeitem WHERE noticeId = $id;DELETE FROM donationreqnotice WHERE recordId = $id;";
             $this->connection->query($sql);
             http_response_code(200); 
             echo json_encode(array("code"=>$errorCode['success']));
@@ -40,4 +40,31 @@ trait Noticer{
         $json = json_encode($results);
         echo $json;
      }
+    public function getItemFiltered($data){
+        global $errorCode;echo "hello";
+        if($data['receivedParams']==1){
+            $filter = $data['receivedParams'][0];
+            if(strcasecmp($filter,"id")){
+                $sql = "SELECT itemId  FROM item";
+            }elseif(strcasecmp($filter,"value")){
+                $sql = "SELECT itemName  FROM item";
+            }else{
+                http_response_code(200);                       
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $results[] = $r;
+            }
+            print_r($results);
+            $json = json_encode($results);
+            echo $json;
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
 }

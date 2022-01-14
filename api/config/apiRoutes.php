@@ -12,6 +12,7 @@ Route::GET("role",array("Employee@getRole"));
 Route::GET("division",array("Admin@getDivision","InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision",array("Admin@getGnDivision","DisasterOfficer@getGNDivision","InventoryManager@getGNDivision"));
 Route::GET("item",array("InventoryManager@getItem","ResponsiblePerson@getItem"));
+Route::GET("item/{filter}",array("InventoryManager@getItemFiltered","DisasterOfficer@getItemFiltered")); // filter = id or value only
 Route::GET("safehouse",array("DisasterOfficer@viewSafehouse","InventoryManager@getSafeHouseAll","DivisionalSecretariat@getSafeHouseAll","Dmc@getSafeHouseAll")); 
 Route::GET("district",array("Admin@getDistrict"));
 Route::GET("user",array("InventoryManager@getMySelf","Admin@searchUser")); //user/userId/required data

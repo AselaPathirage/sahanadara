@@ -64,6 +64,22 @@
         .remove{
             color: #ffdddd;
         }
+        .suggestion {
+            border: 1px solid #ccc;
+            padding: 0;
+            overflow: scroll;
+        }
+        .suggestion__item {
+            font-size: 24px;
+            background-color: #fff;
+            padding: 5px;
+        }
+        .suggestion__item:hover {
+            background-color: #cee;
+        }
+        .is-selected {
+            background-color: #eec;
+        }
     </style>
 </head>
 

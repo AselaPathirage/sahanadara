@@ -13,7 +13,8 @@ Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
 Route::GET("item", array("InventoryManager@getAllItem", "ResponsiblePerson@getAllItem"));
-Route::GET("item/{id}", array("InventoryManager@getItem"));
+Route::GET("item/{filter}", array("InventoryManager@getItemFiltered","DisasterOfficer@getItemFiltered"));
+
 Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("Admin@searchUser"));
 Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));

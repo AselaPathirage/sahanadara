@@ -27,11 +27,9 @@
             color: black;
             font-weight: bold;
         }
-
         .create:hover {
             background-color: rgb(163, 230, 205);
         }
-
         .view {
             background-color: rgb(241, 67, 67);
             height: 50px;
@@ -43,26 +41,88 @@
             color: black;
             font-weight: bold;
         }
-
         .view:hover {
             background-color: rgb(246, 139, 139);
         }
-
         td {
             border: none;
             text-align: left;
             vertical-align: middle;
         }
-
         tr {
             background-color: #fff !important;
         }
-        .add{
+        .add {
             background-color: #04AA6D;
             color: #ffdddd;
         }
-        .remove{
+        .remove {
             color: #ffdddd;
+        }
+        #search-bar {
+            display: block;
+            margin: .25em 0 0;
+            width: 100%;
+            padding: .25em .5em;
+            font-size: 1.2em;
+        }
+        .output {
+            list-style: none;
+            width: 20%;
+            min-height: 0px;
+            border-top: 0 !important;
+            color: #767676;
+            font-size: .75em;
+            transition: min-height 0.2s;
+            position:absolute ;
+            z-index: 5;
+            text-transform: capitalize;
+        }
+        .output,
+        #search-bar {
+            background: #fff;
+            border: 1px solid #767676;
+        }
+        .prediction-item {
+            padding: .5em .75em;
+            transition: color 0.2s, background 0.2s;
+        }
+        .output:hover .focus {
+            background: #fff;
+            color: #767676;
+        }
+        .prediction-item:hover,
+        .focus,
+        .output:hover .focus:hover {
+            background: #ddd;
+            color: #333;
+        }
+        .prediction-item:hover {
+            cursor: pointer;
+        }
+        .prediction-item strong {
+            color: #333;
+        }
+        .prediction-item:hover strong {
+            color: #000;
+        }
+
+        p {
+            margin-top: 1em;
+        }
+        #submit {
+            display: block;
+            margin: .5em 0 2.5em;
+            padding: .25em .5em;
+            font-size: 1.2em;
+            color: #439973;
+            border: 1px solid #439973;
+            background: 0;
+            transition: color 0.2s, background 0.2s;
+        }
+        #submit:hover {
+            color: #fff;
+            background: #439973;
         }
     </style>
 </head>
@@ -91,11 +151,11 @@
                                 </tr>
                                 <tr>
                                     <td>Number of Families</td>
-                                    <td><input type="text" id="numOfFamillies" name="numOfFamillies" style="width: 100%;"  onkeypress="return isNumber(event,1)"></td>
+                                    <td><input type="text" id="numOfFamillies" name="numOfFamillies" style="width: 100%;" onkeypress="return isNumber(event,1)"></td>
                                 </tr>
                                 <tr>
                                     <td>Number of People</td>
-                                    <td><input type="text" id="numOfPeople" name="numOfPeople" style="width: 100%;"  onkeypress="return isNumber(event,1)"></td>
+                                    <td><input type="text" id="numOfPeople" name="numOfPeople" style="width: 100%;" onkeypress="return isNumber(event,1)"></td>
                                 </tr>
                                 <tr>
                                     <td>Location</td>
@@ -118,13 +178,10 @@
                                             <span id="error"></span>
                                             <table class="table table-bordered" id="item_table">
                                                 <tr>
-                                                    <th style="width: 30%;">Item</th>
-                                                    <th style="width: 50%;">Quantity</th>
+                                                    <th style="width: 50%;">Item</th>
+                                                    <th style="width: 30%;">Quantity</th>
                                                     <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
                                                 </tr>
-                                                <tbody>
-
-                                                </tbody>
                                             </table>
                                         </div>
                                     </td>
@@ -145,7 +202,8 @@
         </div>
     </section>
     <!-- <script  src="<?php echo HOST; ?>public/assets/js/responsiblePersonAidReport.js"></script> -->
-    <script>
+
+    <script defer>
         var thisPage = "#add";
         var output;
         var count = 0;
@@ -159,19 +217,18 @@
             });
             $(document).on('click', '.add', function() {
                 var html = '';
-                html += '<tr>';
-                html += '<td><select id="item'+count+'" name="item'+count+'" class="form-control item_unit" required="true"><option value="">Select Item</option>';
-                for (var i = 0; i < output.length; i++) {
-                    html += "<option value='" + output[i]['itemId'] + "'>" + output[i]['itemName'] + "</option>";
-                }
-                html += "</select></td>";
-                html += '<td><input type="text" id="quantity'+count+'" name="quantity'+count+'"  onkeypress="return isNumber(event,2)" class="form-control item_quantity" required="true"/></td>';
-                html += '<td><button type="button" name="remove" class="form-control remove">Remove</button></td></tr>';
+                html += "<tr>";
+                html += "<td><input type='text' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                html += "<td><input type='text' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
+                html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
                 $('#item_table').append(html);
+                count++;
             });
+
             $(document).on('click', '.remove', function() {
                 $(this).closest('tr').remove();
             });
+
             $("form").on('submit', function(event) {
                 event.preventDefault();
                 var formElement = document.querySelector("form");
@@ -196,7 +253,6 @@
                 // //$("#add").trigger('reset');
                 // var json = JSON.stringify(object);
                 // console.log(json);
-                console.log("hello3");
                 $('#item_table  tbody  tr').each(function() {
                     var item = this.getElementsByTagName('td');
                     console.log();
@@ -205,12 +261,140 @@
                 });
             });
         });
+        //begginning of the text box filter
+        //Copyright (c) 2022 by Sarah Wulf (https://codepen.io/slwulf/pen/vczhJ)
+
+        // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+        // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+        // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+        var terms =
+            $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>item/value",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText),
+            returnList = [];
+            console.log(terms);
+        function strInArray(str, strArray) {
+            for (var j = 0; j < strArray.length; j++) {
+                var original = str;
+                str = str.toLowerCase();
+                var text = strArray[j].toLowerCase();
+                if (text.match(str) && returnList.length < 5) {
+                    let searchMask = original;
+                    let regEx = new RegExp(searchMask, "ig");
+                    let $h = strArray[j].replace(regEx, '<strong>' + original + '</strong>');
+                    returnList.push('<li class="prediction-item"><span class="prediction-text">' + $h + '</span></li>');
+                }
+            }
+        }
+
+        function nextItem(kp) {
+            if ($('.focus').length > 0) {
+                var $next = $('.focus').next(),
+                    $prev = $('.focus').prev();
+            }
+
+            if (kp == 38) { // Up
+
+                if ($('.focus').is(':first-child')) {
+                    $prev = $('.prediction-item:last-child');
+                }
+
+                $('.prediction-item').removeClass('focus');
+                $prev.addClass('focus');
+
+            } else if (kp == 40) { // Down
+
+                if ($('.focus').is(':last-child')) {
+                    $next = $('.prediction-item:first-child');
+                }
+
+                $('.prediction-item').removeClass('focus');
+                $next.addClass('focus');
+            }
+        }
+
+        function filter(id) {
+            const activeText = document.activeElement;
+            $(function() {
+                $(activeText).keydown(function(e) {
+                    $key = e.keyCode;
+                    if ($key == 38 || $key == 40) {
+                        nextItem($key);
+                        return;
+                    }
+
+                    setTimeout(function() {
+                        var $search = $(activeText).val();
+                        returnList = [];
+
+                        strInArray($search, terms);
+
+                        if ($search == '' || !$('input').val) {
+                            $('#output-' + id).html('').slideUp();
+                        } else {
+                            $('#output-' + id).html(returnList).slideDown();
+                        }
+
+                        $('.prediction-item').on('click', function() {
+                            $text = $(this).find('span').text();
+                            $('#output-' + id).slideUp(function() {
+                                $(this).html('');
+                            });
+                            $(activeText).val($text);
+                        });
+
+                        $('.prediction-item:first-child').addClass('focus');
+
+                    }, 50);
+                });
+            });
+
+            $(activeText).focus(function() {
+                if ($('.prediction-item').length > 0) {
+                    $('#output-' + id).slideDown();
+                }
+
+                $('#searchform').submit(function(e) {
+                    e.preventDefault();
+                    $text = $('.focus').find('span').text();
+                    $('#output-' + id).slideUp();
+                    $(activeText).val($text);
+                    $('input').blur();
+                });
+            });
+
+            $(activeText).blur(function() {
+                if ($('.prediction-item').length > 0) {
+                    $('#output-' + id).slideUp();
+                }
+            });
+        }
+        //end of the text box filter
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
+        var countries = $.parseJSON($.ajax({
+            type: "GET",
+            url: "<?php echo API; ?>item/value",
+            dataType: "json",
+            headers: {
+                'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+            },
+            cache: false,
+            async: false
+        }).responseText);
 
         function getItem() {
             output = $.parseJSON($.ajax({
@@ -224,15 +408,16 @@
                 async: false
             }).responseText);
         }
-        function isNumber(e,check) {
+
+        function isNumber(e, check) {
             e = (e) ? e : window.event;
             var charCode = (e.which) ? e.which : e.keyCode;
-            if(check==1){
+            if (check == 1) {
                 if (charCode > 31 && (charCode < 48 || charCode > 57)) {
                     return false;
                 }
                 return true;
-            }else{
+            } else {
                 if (charCode > 31 && (charCode < 48 || charCode > 57) && charCode != 46) {
                     return false;
                 }

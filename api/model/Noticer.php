@@ -41,13 +41,15 @@ trait Noticer{
         echo $json;
      }
     public function getItemFiltered($data){
-        global $errorCode;echo "hello";
-        if($data['receivedParams']==1){
+        global $errorCode;
+        if(count($data['receivedParams'])==1){
             $filter = $data['receivedParams'][0];
-            if(strcasecmp($filter,"id")){
+            if(strtolower($filter)=="id"){
                 $sql = "SELECT itemId  FROM item";
-            }elseif(strcasecmp($filter,"value")){
+                $temp = "itemId";
+            }elseif(strtolower($filter)=="value"){
                 $sql = "SELECT itemName  FROM item";
+                $temp = "itemName";
             }else{
                 http_response_code(200);                       
                 echo json_encode(array("code"=>$errorCode['unableToHandle']));
@@ -56,9 +58,8 @@ trait Noticer{
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
-                $results[] = $r;
+                $results[] = $r[$temp];
             }
-            print_r($results);
             $json = json_encode($results);
             echo $json;
         }else{

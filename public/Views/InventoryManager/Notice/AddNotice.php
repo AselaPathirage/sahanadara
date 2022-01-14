@@ -64,21 +64,72 @@
         .remove{
             color: #ffdddd;
         }
-        .suggestion {
-            border: 1px solid #ccc;
-            padding: 0;
-            overflow: scroll;
+        .textbox {
+            box-sizing: border-box;
+            display: inline-block;
+            perspective: 500px;
+            position: relative;
+            text-align: left;
         }
-        .suggestion__item {
-            font-size: 24px;
+
+        .textbox input {
             background-color: #fff;
-            padding: 5px;
+            border: none;
+            box-shadow: 0 8px 8px -10px rgba(0, 0, 0, .4);
+            box-sizing: border-box;
+            font-size: 1rem;
+            outline: none;
+            padding: 10px 14px;
         }
-        .suggestion__item:hover {
-            background-color: #cee;
+
+        .textbox input::placeholder {
+            color: #ccc;
         }
-        .is-selected {
-            background-color: #eec;
+
+        .textbox .autoComplete {
+            left: 0;
+            position: absolute;
+            top: calc(100% + 5px);
+            width: 100%;
+            z-index: 100;
+        }
+
+        .textbox .autoComplete .item {
+            animation: showItem .3s ease forwards;
+            background-color: #fff;
+            box-shadow: 0 8px 8px -10px rgba(0, 0, 0, .4);
+            box-sizing: border-box;
+            color: #7C8487;
+            cursor: pointer;
+            display: block;
+            font-size: .8rem;
+            opacity: 0;
+            outline: none;
+            padding: 10px;
+            text-decoration: none;
+            transform-origin: top;
+            /* transform: rotateX(-90deg); */
+            transform: translateX(10px);
+        }
+
+        .textbox .autoComplete .item:hover,
+        .textbox .autoComplete .item:focus {
+            background-color: #fafafa;
+            color: #D1822B;
+        }
+
+        @keyframes showItem {
+            0% {
+                opacity: 0;
+                /* transform: rotateX(-90deg); */
+                transform: translateX(10px);
+            }
+
+            100% {
+                opacity: 1;
+                /* transform: rotateX(0); */
+                transform: translateX(0);
+            }
         }
     </style>
 </head>
@@ -134,13 +185,10 @@
                                             <span id="error"></span>
                                             <table class="table table-bordered" id="item_table">
                                                 <tr>
-                                                    <th style="width: 30%;">Item</th>
-                                                    <th style="width: 50%;">Quantity</th>
+                                                    <th style="width: 50%;">Item</th>
+                                                    <th style="width: 30%;">Quantity</th>
                                                     <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
                                                 </tr>
-                                                <tbody>
-
-                                                </tbody>
                                             </table>
                                         </div>
                                     </td>
@@ -161,7 +209,8 @@
         </div>
     </section>
     <!-- <script  src="<?php echo HOST; ?>public/assets/js/responsiblePersonAidReport.js"></script> -->
-    <script>
+    <script src="<?php echo HOST; ?>public/assets/js/textBoxFilterFunc.js"></script>
+    <script defer>
         var thisPage = "#add";
         var output;
         var count = 0;
@@ -175,19 +224,17 @@
             });
             $(document).on('click', '.add', function() {
                 var html = '';
-                html += '<tr>';
-                html += '<td><select id="item'+count+'" name="item'+count+'" class="form-control item_unit" required="true"><option value="">Select Item</option>';
-                for (var i = 0; i < output.length; i++) {
-                    html += "<option value='" + output[i]['itemId'] + "'>" + output[i]['itemName'] + "</option>";
-                }
-                html += "</select></td>";
-                html += '<td><input type="text" id="quantity'+count+'" name="quantity'+count+'"  onkeypress="return isNumber(event,2)" class="form-control item_quantity" required="true"/></td>';
-                html += '<td><button type="button" name="remove" class="form-control remove">Remove</button></td></tr>';
+                html += "<tr>";
+                html += "<td><div class='textbox completeIt' id='data"+count+"'><input type='text' autocomplete='off' onkeypress='filter("+count+")' autofocus placeholder='Search .....'><div class='icon'></div><div id='auto"+count+"' class='autoComplete'></div></div></td>";
+                html += "<td><input type='text' id='quantity"+count+"' name='quantity"+count+"'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
+                html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
                 $('#item_table').append(html);
             });
+
             $(document).on('click', '.remove', function() {
                 $(this).closest('tr').remove();
             });
+
             $("form").on('submit', function(event) {
                 event.preventDefault();
                 var formElement = document.querySelector("form");
@@ -212,7 +259,6 @@
                 // //$("#add").trigger('reset');
                 // var json = JSON.stringify(object);
                 // console.log(json);
-                console.log("hello3");
                 $('#item_table  tbody  tr').each(function() {
                     var item = this.getElementsByTagName('td');
                     console.log();
@@ -227,6 +273,15 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
+        var countries = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>item/value",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+        }).responseText); 
 
         function getItem() {
             output = $.parseJSON($.ajax({

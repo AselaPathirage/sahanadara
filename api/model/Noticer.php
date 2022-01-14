@@ -45,10 +45,10 @@ trait Noticer{
         if(count($data['receivedParams'])==1){
             $filter = $data['receivedParams'][0];
             if(strtolower($filter)=="id"){
-                $sql = "SELECT itemId  FROM item";
+                $sql = "SELECT itemId  FROM item ORDER BY itemId";
                 $temp = "itemId";
             }elseif(strtolower($filter)=="value"){
-                $sql = "SELECT itemName  FROM item";
+                $sql = "SELECT itemName  FROM item ORDER BY itemName";
                 $temp = "itemName";
             }else{
                 http_response_code(200);                       

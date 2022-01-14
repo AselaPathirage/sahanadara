@@ -1,101 +1,108 @@
-function searchOn(words, find, limit) {
-    if(words == undefined || !Array.isArray(words)) {
-        return [];
-    }
-
-    if(find == undefined || String(find).length <= 0) {
-        return [];
-    }
-
-    if(limit == undefined || isNaN(limit)) {
-        limit = null;
-    }
-
-    let matches = [];
-    words.forEach((word) => {
-        if(limit == 0) {
-            return matches;
+var terms = [
+    'search',
+    'test',
+    'css',
+    'apple',
+    'bear',
+    'cat',
+    'crabapple',
+    'creep',
+    'czar',
+    'danger',
+    'dominant',
+    'doppler',
+    'everclear',
+    'evangelism',
+    'frodo'
+].sort(),
+    returnList = [];
+function strInArray(str, strArray) {
+    for (var j = 0; j < strArray.length; j++) {
+        if (strArray[j].match(str) && returnList.length < 5) {
+            var $h = strArray[j].replace(str, '<strong>' + str + '</strong>');
+            returnList.push('<li class="prediction-item"><span class="prediction-text">' + $h + '</span></li>');
         }
-
-        if(word.toLowerCase() != find.toLowerCase()) {
-            
-            if(word.toLowerCase().substr(0, find.length) == find.toLowerCase()) {
-                matches.push(word);
-                
-                if(limit !== null) {
-                    limit--;
-                }
-            }
-        }
-    });
-
-    return matches;
+    }
 }
 
-function filter(id){
-let textboxes = document.querySelectorAll('tbody  tr .completeIt');
-textboxes.forEach((textbox) => {
-    let input = textbox.querySelector('input[type="text"]');
-    let autoComplete = textbox.querySelector('#auto'+id);
+function nextItem(kp) {
+    if ($('.focus').length > 0) {
+        var $next = $('.focus').next(),
+            $prev = $('.focus').prev();
+    }
 
-    input.addEventListener('input', () => {
-        let val = input.value;
+    if (kp == 38) { // Up
 
-        let matches = searchOn(countries, val, 3);
-        
-        let items = autoComplete.querySelectorAll('.item');
-        
-        let remains = [];
-        items.forEach((item) => {
-            let save = false;
-            matches.forEach((match) => {
-                if(item.dataset.value == match) {
-                    save = true;
-                    remains.push(match);
-                }
-            });
+        if ($('.focus').is(':first-child')) {
+            $prev = $('.prediction-item:last-child');
+        }
 
-            if(!save) {
-                item.remove();
+        $('.prediction-item').removeClass('focus');
+        $prev.addClass('focus');
+
+    } else if (kp == 40) { // Down
+
+        if ($('.focus').is(':last-child')) {
+            $next = $('.prediction-item:first-child');
+        }
+
+        $('.prediction-item').removeClass('focus');
+        $next.addClass('focus');
+    }
+}
+function filter() {
+    const activeText = document.activeElement;
+    $(function () {
+        $(activeText).keydown(function (e) {
+            $key = e.keyCode;
+            if ($key == 38 || $key == 40) {
+                nextItem($key);
+                return;
             }
-        });
 
-        matches.forEach((match, index) => {
-            if(!remains.includes(match)) {
-                let item = document.createElement('a');
-                item.classList.add('item');
-                item.setAttribute('href', '#');
+            setTimeout(function () {
+                var $search = $(activeText).val();
+                returnList = [];
 
-                item.innerHTML = match;
-                item.dataset.value = match;
+                strInArray($search, terms);
 
-                item.addEventListener('click', (event) => {
-                    event.preventDefault();
+                if ($search == '' || !$('input').val) {
+                    $('.output').html('').slideUp();
+                } else {
+                    $('.output').html(returnList).slideDown();
+                }
 
-                    input.value = match;
-
-                    autoComplete.querySelectorAll('.item').forEach((item) => {
-                        item.remove();
+                $('.prediction-item').on('click', function () {
+                    $text = $(this).find('span').text();
+                    $('.output').slideUp(function () {
+                        $(this).html('');
                     });
-
-                    input.focus();
+                    $(activeText).val($text);
                 });
 
-                setTimeout(() => {
-                    autoComplete.appendChild(item);
-                }, index * 50);
-            }
+                $('.prediction-item:first-child').addClass('focus');
+
+            }, 50);
         });
     });
 
-    input.addEventListener('keyup', (event) => {
-        if(event.keyCode == 40) {
-            let firstItem = autoComplete.querySelector('.item');
-            if(firstItem != undefined) {
-                firstItem.focus();
-            }
+    $(activeText).focus(function () {
+        if ($('.prediction-item').length > 0) {
+            $('.output').slideDown();
         }
+
+        $('#searchform').submit(function (e) {
+            e.preventDefault();
+            $text = $('.focus').find('span').text();
+            $('.output').slideUp();
+            $(activeText).val($text);
+            $('input').blur();
+        });
     });
 
-});
+    $(activeText).blur(function () {
+        if ($('.prediction-item').length > 0) {
+            $('.output').slideUp();
+        }
+    });
 }

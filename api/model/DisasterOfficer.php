@@ -63,11 +63,11 @@ class DisasterOfficer extends Employee{
         $uid = $data['userId'];
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
-            $sql = "SELECT s.*,t.*,g.gnDvName FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
+            $sql = "SELECT s.*,t.*,g.gnDvName,g.gndvId FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
             WHERE s.safeHouseId = t.safeHouseID AND g.	safeHouseID = s.safeHouseId AND g.dvId = d.dvId
             AND dv.dvId = d.dvId AND dv.disasterManager = $uid AND s.safeHouseId = $id";
         }else{
-            $sql = "SELECT s.*,t.*,g.gnDvName FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
+            $sql = "SELECT s.*,t.*,g.gnDvName,g.gndvId FROM safehousecontact t, safehouse  s,gndivision g, division d, divisionaloffice dv
             WHERE s.safeHouseId = t.safeHouseID AND g.	safeHouseID = s.safeHouseId AND g.dvId = d.dvId
             AND dv.dvId = d.dvId AND dv.disasterManager = $uid";
         }
@@ -91,7 +91,7 @@ class DisasterOfficer extends Employee{
             $gndvId =$data['upgnDiv'];
             $safeHouseId = $data['receivedParams'][0];
 
-            $sql = "UPDATE `safehouse` SET `safeHouseAddress`='$safeHouseAddress', `safeHouseName`='$safeHouseName' WHERE safeHouseId =$safeHouseId ";
+            $sql = "UPDATE `safehouse`,`safehousecontact` SET `safeHouseAddress`='$safeHouseAddress', `safeHouseName`='$safeHouseName' WHERE safeHouseId =$safeHouseId ";
             $this->connection->query($sql);
             echo json_encode(array("code" => $errorCode['success']));
         } else {
@@ -118,8 +118,17 @@ class DisasterOfficer extends Employee{
 
     public function getGNDivision(array $data){
         $id = $data['userId'];
-        $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
+        if(count($data['receivedParams'])==1){
+            
+            $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
+        WHERE m.disMgtOfficerID = d.disasterManager AND g.dvId = d.dvId AND m.disMgtOfficerID = $id";
+        }else{
+            $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
         WHERE m.disMgtOfficerID = d.disasterManager AND g.dvId = d.dvId AND m.disMgtOfficerID = $id  AND g.safeHouseID IS NULL";
+        } 
+
+        
+        
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

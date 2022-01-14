@@ -88,7 +88,7 @@
                                 <label for="upgnDiv">Grama Niladhari Division</label>
                                 <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
 
-                                <select id="upgnDiv" name="upgnDiv">
+                                <select id="upgnDiv" name="upgnDiv" disabled="true">
                                                     <option>Select GN Division</option>
                                                 </select>
 
@@ -192,6 +192,32 @@
                     var safeHouseName = $(this).attr("data-safeHouseName");
                     var safeHouseTelno = $(this).attr("data-safeHouseTelno");
                     var gnDiv = $(this).attr("data-gnDiv");
+
+                        var output2 = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>GnDivision/all",
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    
+                    var select = document.getElementById("upgnDiv");
+            
+                        for (var i = 0; i < output2.length; i++){
+                            //console.log(i);
+                            var opt = document.createElement('option');
+                            opt.value = output2[i]['gndvId'];
+                            opt.innerHTML = output2[i]['gnDvName'];
+                            console.log(gnDiv);
+                            if(gnDiv==output2[i]['gndvId']){
+                                
+                                opt.selected = "selected";
+                            }
+                            select.appendChild(opt);
+
+                            
+                        }
 
                     $("#updateform").fadeIn();
                     $("#update").trigger("reset");
@@ -396,7 +422,7 @@
             }).responseText);
             // console.log(output);
             var select = document.getElementById("gnDiv");
-            var select2 = document.getElementById("upgnDiv");
+            
             for (var i = 0; i < output.length; i++){
                 //console.log(i);
                 var opt = document.createElement('option');
@@ -404,11 +430,7 @@
                 opt.innerHTML = output[i]['gnDvName'];
                 select.appendChild(opt);
 
-                var opt2 = document.createElement('option');
-                opt2.value = output[i]['gndvId'];
-                opt2.innerHTML = output[i]['gnDvName'];
-                select2.appendChild(opt2);
-                //console.log(opt2);
+                
             }
         }
         getGNDivision();
@@ -452,7 +474,7 @@
                 let cell5 = row.insertCell(-1);
 
                 var attribute = document.createElement("a");
-                attribute.id = obj['safeHouseId'];
+                attribute.id = obj['safeHouseID'];
                 //attribute.href = "";
                 attribute.className = "btn_update btn_blue";
                 attribute.name = "update";
@@ -460,11 +482,11 @@
                 attribute.setAttribute("data-safeHouseAddress", obj['safeHouseAddress'])
                 attribute.setAttribute("data-safeHouseName", obj['safeHouseName'])
                 attribute.setAttribute("data-safeHouseTelno", obj['safeHouseTelno'])
-                attribute.setAttribute("data-gnDiv", obj['gnDiv'])
+                attribute.setAttribute("data-gnDiv", obj['gndvId'])
                 var attribute2 = document.createElement("a");
-                
+                console.log(obj);
 
-                attribute2.id = obj['safeHouseId'];
+                attribute2.id = obj['safeHouseID'];
                 //attribute2.href = "";
                 attribute2.className = "btn_delete";
                 attribute2.name = "delete";

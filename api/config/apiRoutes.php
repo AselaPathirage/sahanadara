@@ -22,6 +22,7 @@ Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses","DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("incident", array("GramaNiladari@getIncidents"));
 Route::GET("incident/{id}", array("GramaNiladari@getIncidentById"));
+Route::GET("GnDivision/{data}", array("DisasterOfficer@getGNDivision"));
 
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails"));

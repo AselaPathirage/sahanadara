@@ -27,9 +27,11 @@
             color: black;
             font-weight: bold;
         }
+
         .create:hover {
             background-color: rgb(163, 230, 205);
         }
+
         .view {
             background-color: rgb(241, 67, 67);
             height: 50px;
@@ -41,24 +43,30 @@
             color: black;
             font-weight: bold;
         }
+
         .view:hover {
             background-color: rgb(246, 139, 139);
         }
+
         td {
             border: none;
             text-align: left;
             vertical-align: middle;
         }
+
         tr {
             background-color: #fff !important;
         }
+
         .add {
             background-color: #04AA6D;
             color: #ffdddd;
         }
+
         .remove {
             color: #ffdddd;
         }
+
         #search-bar {
             display: block;
             margin: .25em 0 0;
@@ -66,6 +74,7 @@
             padding: .25em .5em;
             font-size: 1.2em;
         }
+
         .output {
             list-style: none;
             width: 20%;
@@ -74,35 +83,42 @@
             color: #767676;
             font-size: .75em;
             transition: min-height 0.2s;
-            position:absolute ;
+            position: absolute;
             z-index: 5;
             text-transform: capitalize;
         }
+
         .output,
         #search-bar {
             background: #fff;
             border: 1px solid #767676;
         }
+
         .prediction-item {
             padding: .5em .75em;
             transition: color 0.2s, background 0.2s;
         }
+
         .output:hover .focus {
             background: #fff;
             color: #767676;
         }
+
         .prediction-item:hover,
         .focus,
         .output:hover .focus:hover {
             background: #ddd;
             color: #333;
         }
+
         .prediction-item:hover {
             cursor: pointer;
         }
+
         .prediction-item strong {
             color: #333;
         }
+
         .prediction-item:hover strong {
             color: #000;
         }
@@ -110,6 +126,7 @@
         p {
             margin-top: 1em;
         }
+
         #submit {
             display: block;
             margin: .5em 0 2.5em;
@@ -120,6 +137,7 @@
             background: 0;
             transition: color 0.2s, background 0.2s;
         }
+
         #submit:hover {
             color: #fff;
             background: #439973;
@@ -141,63 +159,61 @@
                 <center>
                     <h1>Donation Request Notice</h1>
                 </center>
-                <form id='add' name="add" method="POST">
-                    <div style="padding-left:15% ;">
-                        <div class="column" style="width:90%;float: none;padding-left:5%;padding-top:2px;">
+                <div style="padding-left:15% ;">
+                    <div class="column" style="width:90%;float: none;padding-left:5%;padding-top:2px;">
+                        <form id='add' method="POST">
                             <table style="border: none !important;width:70%;">
                                 <tr>
                                     <td>Title</td>
-                                    <td><input type="text" id="title" name="title" /></td>
+                                    <td><input type="text" id="title" name="title" required="true"/></td>
                                 </tr>
                                 <tr>
                                     <td>Number of Families</td>
-                                    <td><input type="text" id="numOfFamillies" name="numOfFamillies" style="width: 100%;" onkeypress="return isNumber(event,1)"></td>
+                                    <td><input type="text" id="numOfFamillies" name="numOfFamillies" style="width: 100%;" onkeypress="return isNumber(event,1)" required="true"></td>
                                 </tr>
                                 <tr>
                                     <td>Number of People</td>
-                                    <td><input type="text" id="numOfPeople" name="numOfPeople" style="width: 100%;" onkeypress="return isNumber(event,1)"></td>
+                                    <td><input type="text" id="numOfPeople" name="numOfPeople" style="width: 100%;" onkeypress="return isNumber(event,1)" required="true"></td>
                                 </tr>
                                 <tr>
                                     <td>Location</td>
                                     <td>
-                                        <select id="assigned-user-filter" class="form-control" required="true">
+                                        <select id="safeHouseId" class="form-control" required="true">
                                             <option value="0">Select Safe House</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td style="vertical-align: top;">Description</td>
-                                    <td><textarea id="notes" name="drivernotes" rows="8" cols="50"></textarea></td>
-                                </tr>
-                                <tr>
-                                    <td>Required Items</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="table-repsonsive">
-                                            <span id="error"></span>
-                                            <table class="table table-bordered" id="item_table">
-                                                <tr>
-                                                    <th style="width: 50%;">Item</th>
-                                                    <th style="width: 30%;">Quantity</th>
-                                                    <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
-                                                </tr>
-                                            </table>
-                                        </div>
-                                    </td>
+                                    <td><textarea id="description" name="description" rows="8" cols="50"></textarea></td>
                                 </tr>
                             </table>
+
+                            <h4>Required Items</h4>
+                            <div class="table-repsonsive">
+                                <span id="error"></span>
+                                <table class="table table-bordered" style="width:70%;margin:0" id="item_table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50%;">Item</th>
+                                            <th style="width: 30%;">Quantity</th>
+                                            <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
                             <div style="float: right;width:30%">
                                 <table style="border: none !important;width:100%;">
                                     <tr>
-                                        <td><input type="reset" class="view" value="Cancel"></td>
+                                        <td><input type="reset"  class="view" value="Cancel"></td>
                                         <td><input type="submit" class="create" value="Create"></td>
                                     </tr>
                                 </table>
                             </div>
-                        </div>
+                        </form>
                     </div>
-                </form>
+                </div>
             </div>
         </div>
     </section>
@@ -207,7 +223,7 @@
         var thisPage = "#add";
         var output;
         var count = 0;
-        getItem();
+        safeHouseList()
         $(document).ready(function() {
             $("#search,#add").each(function() {
                 if ($(this).hasClass('active')) {
@@ -218,10 +234,10 @@
             $(document).on('click', '.add', function() {
                 var html = '';
                 html += "<tr>";
-                html += "<td><input type='text' style='text-transform: capitalize;' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                html += "<td><input type='text' style='text-transform: capitalize;' required='true' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
                 html += "<td><input type='text' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
                 html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
-                $('#item_table').append(html);
+                $('#item_table > tbody').append(html);
                 count++;
             });
 
@@ -234,31 +250,48 @@
                 var formElement = document.querySelector("form");
                 var formData = new FormData(formElement);
                 var object = {};
-                // formData.forEach(function(value, key){ 
-                //     if(value ==""){
-                //         return;
-                //     }
-                //     if(key in object){
-                //         object[key].push(value);
-                //     }else if(key.localeCompare("item[]")==0){
-                //         object[key] = new Array();
-                //         object[key].push(value);
-                //     }else if(key.localeCompare("quantity[]")==0){
-                //         object[key] = new Array();
-                //         object[key].push(value);
-                //     }else{
-                //         object[key] = value;
-                //     }
-                // }); 
-                // //$("#add").trigger('reset');
-                // var json = JSON.stringify(object);
-                // console.log(json);
-                $('#item_table  tbody  tr').each(function() {
-                    var item = this.getElementsByTagName('td');
-                    console.log();
-                    console.log(item.options[item[0].selectedIndex].value);
-                    console.log(item.value);
+                formData.forEach(function(value, key) {
+                    if(key.includes("quantity")){
+                        return;
+                    }
+                    object[key] = value;
                 });
+                let e = document.getElementById("safeHouseId");
+                let safeHouseId = e.value;
+                object['safeHouseId'] = safeHouseId;
+                object['item'] = new Object();
+                $('#item_table  tbody  tr').each(function() {
+                    var item = $(this).find("td:first").find("input").val();
+                    var words = item.split(" ");
+                    for (let i = 0; i < words.length; i++) {
+                        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                    }
+                    words = words.join(" ");
+                    var quantity = $(this).find("td:nth-child(2)").find("input").val();
+                    object['item'][words] = quantity;
+                });
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+					type: "POST",
+					url: "<?php echo API; ?>notice",
+					data: json,
+                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+					cache: false,
+					success: function(result) {
+						$('#trow').empty();
+                        getItem();
+                        if(result.code==806){
+                            alertGen("Record Updated Successfully!",1);
+                        }else{
+                            alertGen("Unable to handle request.",2);
+                        }
+					},
+					error: function(err) {
+						alertGen("Something went wrong.",3);
+                        console.log(err);  
+					}
+				});
             });
         });
         //begginning of the text box filter
@@ -274,13 +307,15 @@
             $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>item/value",
-                dataType: "json", 
-                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
                 cache: false,
                 async: false
             }).responseText),
             returnList = [];
-            console.log(terms);
+
         function strInArray(str, strArray) {
             for (var j = 0; j < strArray.length; j++) {
                 var original = str;
@@ -385,28 +420,25 @@
             sidebar.classList.toggle("active");
         }
 
-        var countries = $.parseJSON($.ajax({
-            type: "GET",
-            url: "<?php echo API; ?>item/value",
-            dataType: "json",
-            headers: {
-                'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-            },
-            cache: false,
-            async: false
-        }).responseText);
-
-        function getItem() {
-            output = $.parseJSON($.ajax({
-                type: "GET",
-                url: "<?php echo API; ?>item",
-                dataType: "json",
-                headers: {
-                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                },
-                cache: false,
-                async: false
-            }).responseText);
+        function safeHouseList(){
+                output =             
+                        $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>safehouse/name",
+                        dataType: "json",
+                        headers: {
+                            'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                        },
+                        cache: false,
+                        async: false
+                    }).responseText);
+                for (var i = 0; i < output.length; i++){
+                    var option = document.createElement("option");
+                    option.text = output[i].safeHouseName;
+                    option.value = output[i].safeHouseID;
+                    var select = document.getElementById("safeHouseId");
+                    select.appendChild(option); 
+                }
         }
 
         function isNumber(e, check) {
@@ -424,6 +456,27 @@
                 return true;
             }
 
+        }
+        function alertGen($messege,$type){
+            if ($type == 1){
+                $("#alertBox").html("  <div class='alert success-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }else if($type == 2){
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }else{
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() { 
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
         }
     </script>
 </body>

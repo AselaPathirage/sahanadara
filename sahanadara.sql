@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 13, 2022 at 06:34 PM
--- Server version: 10.4.22-MariaDB
--- PHP Version: 8.1.1
+-- Generation Time: Jan 14, 2022 at 04:36 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 8.0.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -926,7 +926,7 @@ INSERT INTO `login` (`empId`, `nid`, `empPassword`, `keyAuth`, `roleId`) VALUES
 
 CREATE TABLE `noticeitem` (
   `noticeId` int(4) NOT NULL,
-  `itemId` int(2) NOT NULL,
+  `itemName` varchar(20) NOT NULL,
   `quantitity` decimal(6,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -1387,8 +1387,7 @@ ALTER TABLE `login`
 -- Indexes for table `noticeitem`
 --
 ALTER TABLE `noticeitem`
-  ADD PRIMARY KEY (`noticeId`,`itemId`),
-  ADD KEY `itemId` (`itemId`);
+  ADD PRIMARY KEY (`noticeId`);
 
 --
 -- Indexes for table `relief`
@@ -1787,8 +1786,7 @@ ALTER TABLE `login`
 -- Constraints for table `noticeitem`
 --
 ALTER TABLE `noticeitem`
-  ADD CONSTRAINT `noticeitem_ibfk_1` FOREIGN KEY (`noticeId`) REFERENCES `donationreqnotice` (`recordId`),
-  ADD CONSTRAINT `noticeitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+  ADD CONSTRAINT `noticeitem_ibfk_1` FOREIGN KEY (`noticeId`) REFERENCES `donationreqnotice` (`recordId`);
 
 --
 -- Constraints for table `relief`

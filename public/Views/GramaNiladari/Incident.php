@@ -31,10 +31,10 @@
                     <thead>
                         <tr class="filters">
                             <th>Status
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Active</option>
-                                    <option>Finished</option>
+                                <select id="status" class="form-control">
+                                    <option value="Any">All</option>
+                                    <option value="1">Active</option>
+                                    <option value="2">Finished</option>
 
                                 </select>
                             </th>
@@ -49,8 +49,19 @@
             </div>
 
 
-            <div class="container">
+            <div class="container" id="tbodyid">
                 <div class="row">
+                    <div class="col6">
+                        <div class="box row-content" style="position:relative;">
+                            <h4>Flood in Kadana</h4>
+                            <p>Affected the valleys of river Kalu </p>
+
+                            <div class="row" style="text-align: right; margin: 0 auto;display:block;">
+                                <a class="btn_active" style="position: absolute; top:15px;right:35px;">Status : Active</a>
+                                <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col6">
                         <div class="box row-content">
                             <h4>Flood in Kadana</h4>
@@ -61,17 +72,12 @@
                                 <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
-                        <div class="box row-content">
-                            <h4>Flood in Kadana</h4>
-                            <p>Affected the valleys of river Kalu </p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
-                            </div>
-                        </div>
-
                     </div>
-                    <div class="col6" style="overflow: auto">
+
+
+
+
+                    <!-- <div class="col6" style="overflow: auto">
                         <div class="box row-content">
                             <h4>Flood in Kadana</h4>
                             <p>Affected the valleys of river Kalu </p>
@@ -89,7 +95,7 @@
                                 <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>
@@ -98,6 +104,7 @@
     </section>
     <script>
         var thisPage = "#incident";
+        var output = {};
         $(document).ready(function() {
             $("#stats,#alerts").each(function() {
                 if ($(this).hasClass('active')) {
@@ -106,6 +113,8 @@
                 $(thisPage).addClass("active");
             });
 
+            getIncidents();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -113,6 +122,122 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
+        function getIncidents() {
+            // var object = {};
+
+
+            // var json = JSON.stringify(object);
+            // console.log(object);
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>incident",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#tbodyid").empty();
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No incident data</p>";
+            } else {
+                for (var i = 0; i < output.length; i++) {
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (i % 2 == 0) {
+                        $sample += "<div class='row'>";
+                    }
+                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                    if (obj['isActive'] == 1) {
+                        $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                    }
+                    $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                    if ((i % 2 == 1) || (i == output.length - 1)) {
+                        $sample += "</div>";
+                    }
+                }
+            }
+            console.log($sample);
+            $("#tbodyid").append($sample);
+        }
+        $("#status").on('change', function() {
+            var status = $('#status').val();
+            console.log(status);
+            $("#tbodyid").empty();
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No incident data</p>";
+            } else {
+                for (var i = 0; i < output.length; i++) {
+
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (status == "Any") {
+                        if (i % 2 == 0) {
+                            $sample += "<div class='row'>";
+                        }
+                        $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                        if (obj['isActive'] == 1) {
+                            $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                        }
+                        $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                        if ((i % 2 == 1) || (i == output.length - 1)) {
+                            $sample += "</div>";
+                        }
+                    } else if (status == "1") {
+                        if (obj['isActive'] == 1) {
+                            if (i % 2 == 0) {
+                                $sample += "<div class='row'>";
+                            }
+                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                            if (obj['isActive'] == 1) {
+                                $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                            }
+                            $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            if ((i % 2 == 1) || (i == output.length - 1)) {
+                                $sample += "</div>";
+                            }
+                        }
+                    } else {
+                        if (obj['isActive'] == 0) {
+                            if (i % 2 == 0) {
+                                $sample += "<div class='row'>";
+                            }
+                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                            if (obj['isActive'] == 1) {
+                                $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                            }
+                            $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            if ((i % 2 == 1) || (i == output.length - 1)) {
+                                $sample += "</div>";
+                            }
+                        }
+                    }
+                }
+            }
+            console.log($sample);
+            $("#tbodyid").append($sample);
+
+        });
+
+        $('#search').keyup(function () {
+            var filter = $(this).val();
+            $('.box').each(function() {
+                //console.log($(this).children("h4").text());
+                if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                    $(this).hide();
+                } else {
+                    $(this).show();
+                }
+
+            });
+        });
     </script>
 </body>
 

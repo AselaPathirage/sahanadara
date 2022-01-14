@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2022 at 04:36 PM
+-- Generation Time: Jan 14, 2022 at 07:30 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -32,7 +32,7 @@ CREATE TABLE `admin` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n',
+  `isAssigned` char(1) DEFAULT 'y',
   `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -41,7 +41,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`adminID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'Sanduni Rashmika', '297, KIRILLAWALA, WEBODA', 'sanduni@gmail.com', 'n', '');
+(1, 'Sanduni Rashmika', '297, KIRILLAWALA, WEBODA', 'sanduni@gmail.com', 'y', '');
 
 -- --------------------------------------------------------
 
@@ -132,7 +132,7 @@ CREATE TABLE `dismgtofficer` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n',
+  `isAssigned` char(1) DEFAULT 'y',
   `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -141,8 +141,8 @@ CREATE TABLE `dismgtofficer` (
 --
 
 INSERT INTO `dismgtofficer` (`disMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'Yohombu Abeysinghe', 'MAHENDRA, WELIKALA, POKUNUWITA', 'yohombu@gmail.com', 'n', ''),
-(2, 'test 4 test', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu99@gmail.com', 'n', '0719867823');
+(1, 'Yohombu Abeysinghe', 'MAHENDRA, WELIKALA, POKUNUWITA', 'yohombu@gmail.com', 'y', ''),
+(2, 'test 4 test', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu99@gmail.com', 'y', '0719867823');
 
 -- --------------------------------------------------------
 
@@ -208,7 +208,7 @@ CREATE TABLE `districtsecretariat` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n',
+  `isAssigned` char(1) DEFAULT 'y',
   `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -217,9 +217,9 @@ CREATE TABLE `districtsecretariat` (
 --
 
 INSERT INTO `districtsecretariat` (`districtSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'District Officer', 'District Office,Kalutara', 'district@gmail.com', 'n', ''),
-(4, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasind2u2@gmail.com', 'n', '0719867863'),
-(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu6@gmail.com', 'n', '0719867863');
+(1, 'District Officer', 'District Office,Kalutara', 'district@gmail.com', 'y', ''),
+(4, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasind2u2@gmail.com', 'y', '0719867863'),
+(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu6@gmail.com', 'y', '0719867863');
 
 -- --------------------------------------------------------
 
@@ -332,7 +332,7 @@ CREATE TABLE `divisionalsecretariat` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n',
+  `isAssigned` char(1) DEFAULT 'y',
   `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -341,11 +341,11 @@ CREATE TABLE `divisionalsecretariat` (
 --
 
 INSERT INTO `divisionalsecretariat` (`divisionalSecretariatID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'Divisional Secratariat', 'Divisional Secratariat,Horana', 'division@gmail.com', 'n', ''),
-(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu2@gmail.com', 'n', '0719867863'),
-(6, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu3@gmail.com', 'n', '0719867863'),
-(7, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu4@gmail.com', 'n', '0719867863'),
-(8, 'test 2 test 2', 'Hene Gedara Hena, Ullala', 'htnawsseenpasindu@gmail.com', 'n', '0719867863');
+(1, 'Divisional Secratariat', 'Divisional Secratariat,Horana', 'division@gmail.com', 'y', ''),
+(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu2@gmail.com', 'y', '0719867863'),
+(6, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu3@gmail.com', 'y', '0719867863'),
+(7, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu4@gmail.com', 'y', '0719867863'),
+(8, 'test 2 test 2', 'Hene Gedara Hena, Ullala', 'htnawsseenpasindu@gmail.com', 'y', '0719867863');
 
 -- --------------------------------------------------------
 
@@ -597,7 +597,7 @@ CREATE TABLE `gramaniladari` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n',
+  `isAssigned` char(1) DEFAULT 'y',
   `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -607,12 +607,12 @@ CREATE TABLE `gramaniladari` (
 
 INSERT INTO `gramaniladari` (`gramaNiladariID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
 (1, 'Asela Pathirage', 'NO 252/D,, ANANDA MAITHREE MAWATHA,, BELLAPITIYA, HORANA.', 'asela@gmail.com', 'y', '0767877818'),
-(2, 'gn gn', 'Hene Gedara Hena, Ullala', 'htnaweegujgnpasindu@gmail.com', 'n', '0719867863'),
-(3, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsasindu@gmail.com', 'n', '0719867863'),
-(4, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsfasindu@gmail.com', 'n', '0719867863'),
-(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu@gmail.com', 'n', '0719867863'),
-(6, 'test  Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu6@gmail.com', 'n', '0719867863'),
-(7, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu7@gmail.com', 'n', '0719867863');
+(2, 'gn gn', 'Hene Gedara Hena, Ullala', 'htnaweegujgnpasindu@gmail.com', 'y', '0719867863'),
+(3, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsasindu@gmail.com', 'y', '0719867863'),
+(4, 'test test', 'Hene Gedara Hena, Ullala', 'htnaweenpsfasindu@gmail.com', 'y', '0719867863'),
+(5, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu@gmail.com', 'y', '0719867863'),
+(6, 'test  Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu6@gmail.com', 'y', '0719867863'),
+(7, 'Naween Lakshan', 'Hene Gedara Hena, Ullala', 'htnaweenpasindu7@gmail.com', 'y', '0719867863');
 
 -- --------------------------------------------------------
 
@@ -827,7 +827,7 @@ CREATE TABLE `inventorymgtofficer` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n',
+  `isAssigned` char(1) DEFAULT 'y',
   `assignedDate` datetime NOT NULL,
   `inventoryID` int(3) NOT NULL,
   `empTele` char(10) NOT NULL
@@ -1006,7 +1006,7 @@ CREATE TABLE `responsibleperson` (
   `empName` varchar(100) NOT NULL,
   `empAddress` varchar(100) NOT NULL,
   `empEmail` varchar(50) NOT NULL,
-  `isAssigned` char(1) DEFAULT 'n',
+  `isAssigned` char(1) DEFAULT 'y',
   `safeHouseID` int(5) NOT NULL,
   `empTele` char(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -1016,8 +1016,8 @@ CREATE TABLE `responsibleperson` (
 --
 
 INSERT INTO `responsibleperson` (`responsiblePersonID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `safeHouseID`, `empTele`) VALUES
-(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'n', 1, '0767877999'),
-(2, 'test test', 'test at test', 'test@gmail.com', 'n', 2, '0111111111');
+(1, 'Responsible Person', 'No 5,School Road,Bolossagama', 'responsible@gmail.com', 'y', 1, '0767877999'),
+(2, 'test test', 'test at test', 'test@gmail.com', 'y', 2, '0111111111');
 
 -- --------------------------------------------------------
 

@@ -218,7 +218,7 @@
             $(document).on('click', '.add', function() {
                 var html = '';
                 html += "<tr>";
-                html += "<td><input type='text' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                html += "<td><input type='text' style='text-transform: capitalize;' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
                 html += "<td><input type='text' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
                 html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
                 $('#item_table').append(html);

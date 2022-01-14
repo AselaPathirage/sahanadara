@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 14, 2022 at 07:30 PM
+-- Generation Time: Jan 14, 2022 at 07:59 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 8.0.1
 
@@ -1387,7 +1387,7 @@ ALTER TABLE `login`
 -- Indexes for table `noticeitem`
 --
 ALTER TABLE `noticeitem`
-  ADD PRIMARY KEY (`noticeId`);
+  ADD PRIMARY KEY (`noticeId`,`itemName`);
 
 --
 -- Indexes for table `relief`

@@ -378,4 +378,68 @@ class GramaNiladari extends ResponsiblePerson
             echo json_encode(array("code" => $errorCode['unknownError']));
         }
     }
+    public function addFinal(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        $datePicker1 = $data['datePicker1'];
+        $datePicker2 = $data['datePicker2'];
+        $disaster = $data['disaster'];
+        $location = $data['location'];
+        $cause = $data['cause'];
+        $afam = $data['afam'];
+        $apeople = $data['apeople'];
+        $efam = $data['efam'];
+        $epeople = $data['epeople'];
+        $deaths = $data['deaths'];
+        $injured = $data['injured'];
+        $missing = $data['missing'];
+        $hos = $data['hos'];
+        $hfull = $data['hfull'];
+        $hpartial = $data['hpartial'];
+        $enterprises = $data['enterprises'];
+        $infra = $data['infra'];
+        $safenum = $data['safenum'];
+        $sfam = $data['sfam'];
+        $speople = $data['speople'];
+        $emer = $data['emer'];
+        $dry = $data['dry'];
+        $cooked = $data['cooked'];
+        $remarks = $data['remarks'];
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "INSERT INTO `gnfinalincident`(`startDate`, `endDate`, `disaster`, `location`,
+         `cause`, `fam`, `people`, `death`, `injured`, `evafam`, `hospitalized`, `missing`, `evapeople`, 
+         `hfull`, `hpartial`, `enterprise`, `infras`, `numofsafe`, `sfpeople`, `sffamily`, 
+         `dryrationsRs`, `cookingRs`, `emergencyRs`, `remarks`, `gndvid`) VALUES 
+        ('$datePicker1','$datePicker2','$disaster','$location','$cause','$afam','$apeople',
+        '$deaths','$injured','$efam','$hos','$missing',
+        '$epeople','$hfull','$hpartial','$enterprises','$infra','$safenum','$speople','$sfam',
+        '$dry','$cooked','$emer', '$remarks'," . $r['gndvId'] . ");";
+
+
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
+    }
+
+    public function getReports(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "SELECT r.* FROM resident r WHERE r.gndvId =" . $r['gndvId'];
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
 }

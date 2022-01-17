@@ -28,7 +28,7 @@
             <h1>Incident Reporting</h1>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreateFinal" class="btn_blue">Create Final Report</a>
+                    <!-- <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreateFinal" class="btn_blue">Create Final Report</a> -->
                     <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreateRelief" class="btn_blue">Create Relief Report</a>
                     <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreateInitial" class="btn_blue">Create Initial Report</a>
                 </div>
@@ -156,12 +156,76 @@
                 $(thisPage).addClass("active");
             });
 
+            getReports();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+
+        function getReports() {
+            // var object = {};
+
+
+            // var json = JSON.stringify(object);
+            // console.log(object);
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>gnreports",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                // console.log(obj);
+                let row = table.insertRow(-1);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
+
+                var attribute = document.createElement("a");
+                attribute.id = obj['residentId'];
+                // attribute.href = "";
+                attribute.className = "btn_update btn_blue";
+                attribute.name = "update";
+                attribute.innerHTML = "Update";
+                attribute.setAttribute("data-name", obj['residentName'])
+                attribute.setAttribute("data-nic", obj['residentNIC'])
+                attribute.setAttribute("data-address", obj['residentAddress'])
+                attribute.setAttribute("data-telno", obj['residentTelNo'])
+                var attribute2 = document.createElement("a");
+
+                attribute2.id = obj['residentId'];
+                // attribute2.href = "";
+                attribute2.className = "btn_delete";
+                attribute2.name = "delete";
+                attribute2.innerHTML = "Delete";
+
+                cell1.innerHTML = obj['residentName'];
+                cell2.innerHTML = obj['residentNIC'];
+                cell3.innerHTML = obj['residentAddress'];
+                cell4.innerHTML = obj['residentTelNo'];
+                var attribute3 = document.createElement("span");
+                attribute3.innerHTML = " ";
+                cell5.appendChild(attribute);
+                cell5.appendChild(attribute3);
+                cell5.appendChild(attribute2);
+                // console.log(attribute);
+                // console.log(attribute2);
+            }
         }
     </script>
 </body>

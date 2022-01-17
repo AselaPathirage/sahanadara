@@ -4,8 +4,8 @@
 
 <?php
 $array = explode("/", $_GET["url"]);
-echo end($array);
- ?>
+// echo end($array);
+?>
 
 <head>
     <meta charset="UTF-8">

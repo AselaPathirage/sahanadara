@@ -1,0 +1,75 @@
+[
+    {
+        "language":"si",
+        "menu":{
+            "home":"",
+            "about":"",
+            "help":"",
+            "donate":"",
+            "staff":""
+        },
+        "homePage":{
+            "header":"",
+            "subHeader":"",
+            "cardH1" :"",
+            "cardP":"",
+            "topic":"",
+            "topicTwo":""
+        },
+        "aboutUs":{
+            "topic":"",
+            "paragraph":""
+        },
+        "help":{
+            "topic":"",
+            "subTopic":"",
+            "district":"",
+            "division":"",
+            "search":""
+        },
+        "donate":{
+            "topic":"",
+            "subTopic":"",
+            "district":"",
+            "division":"",
+            "search":""
+        },
+        
+    },
+    {
+        "language":"en",
+        "menu":{
+            "home":"",
+            "about":"",
+            "help":"",
+            "donate":"",
+            "staff":""
+        },
+        "homePage":{
+            "header":"",
+            "subHeader":"",
+            "cardH1" :"",
+            "cardP":"",
+            "topic":"",
+            "topicTwo":""
+        }
+    },
+    {
+        "language":"ta",
+        "menu":{
+            "home":"",
+            "about":"",
+            "help":"",
+            "donate":"",
+            "staff":""
+        },
+        "homePage":{
+            "header":"",
+            "subHeader":"",
+            "cardH1" :"",
+            "cardP":"",
+            "topic":"",
+            "topicTwo":""
+        }
+    }
+]

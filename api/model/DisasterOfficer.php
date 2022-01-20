@@ -91,7 +91,7 @@ class DisasterOfficer extends Employee{
             $gndvId =$data['upgnDiv'];
             $safeHouseId = $data['receivedParams'][0];
 
-            $sql = "UPDATE `safehouse`,`safehousecontact` SET `safeHouseAddress`='$safeHouseAddress', `safeHouseName`='$safeHouseName' WHERE safeHouseId =$safeHouseId ";
+            $sql = "UPDATE `safehouse` SET `safeHouseAddress`='$safeHouseAddress', `safeHouseName`='$safeHouseName' WHERE safeHouseId =$safeHouseId , UPDATE `safehousecontact` SET `safeHouseTelno`=`$safeHouseTelno` WHERE safeHouseID =$safeHouseId ";
             $this->connection->query($sql);
             echo json_encode(array("code" => $errorCode['success']));
         } else {

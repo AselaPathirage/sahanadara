@@ -1,6 +1,8 @@
 <?php
 date_default_timezone_set("Asia/Colombo");
 header("Content-Type: application/json; charset=UTF-8");
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Request-Method: PUT, POST, GET, DELETE');
 define("HOST","http://localhost/sahanadara/");
 include_once("./libraries/vendor/autoload.php");
 include_once("./config/config.php");

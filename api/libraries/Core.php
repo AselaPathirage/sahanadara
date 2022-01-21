@@ -50,7 +50,7 @@ class Core{
                 }
                 $url = rtrim($_GET['request'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
-                $this->requestRoute = explode("/api/",strtolower($url))[0];
+                $this->requestRoute = explode("/api/",strtolower($url))[0]; 
                 $url = explode('/', $url);
                 $this->params['receivedParams'] = $url;
                 //print_r($this->params);
@@ -102,9 +102,11 @@ class Core{
             global $errorCode;
             $headers = apache_request_headers();
             //print_r($headers);//exit();
-            if(isset($headers['HTTP_APIKEY'])){
+            $http_list = $this->array_key_lookup($headers);
+            if(count($http_list) == 1){ //isset($headers['HTTP_APIKEY'])
                 $lifetime = 60*60;
-                $key = base64_decode($headers['HTTP_APIKEY']);
+                $arrayKey = array_keys($http_list);
+                $key = base64_decode($headers[$arrayKey[0]]); // $headers['HTTP_APIKEY']
                 $secure = new Openssl_EncryptDecrypt();
                 $decrypted = $secure->decrypt($key,ENCRYPTION_KEY);
                 if($decrypted){
@@ -143,5 +145,10 @@ class Core{
         }
         public function backlog(){
             
+        }
+        //https://stackoverflow.com/questions/41196639/filtering-an-associative-array-keys-by-regex/41206896
+        private function array_key_lookup($haystack){
+            $matches = preg_grep("/HTTP_APIKEY/i", array_keys($haystack)); //match array keys to get which contains http api key
+            return array_intersect_key($haystack, array_flip($matches));
         }
 }

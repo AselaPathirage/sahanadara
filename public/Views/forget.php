@@ -45,7 +45,7 @@
                             <p>Enter your email</p>
                             <div class="row-content">
                                 <div class="container">
-                                    <form action="/<?php echo baseUrl; ?>/Handler/resetHandle" method="post">
+                                    <form action="<?php echo HOST; ?>Handler/resetHandle" method="post">
                                         <label for="e_email">Email Address</label>
                                         <?php
                                             if(isset($_GET['reply'])){

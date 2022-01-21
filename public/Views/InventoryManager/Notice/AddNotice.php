@@ -279,10 +279,9 @@
                     headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
 					cache: false,
 					success: function(result) {
-						$('#trow').empty();
-                        getItem();
                         if(result.code==806){
-                            alertGen("Record Updated Successfully!",1);
+                            $("#add").trigger('reset');
+                            alertGen("Record Added Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);
                         }

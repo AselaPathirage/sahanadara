@@ -32,7 +32,7 @@
                 <div class="space"></div>
                 <div class="text-center">
 
-                    <img src="/<?php echo baseUrl; ?>/public/assets/img/sahana.jpg" alt="" style="border-radius: 5px;">
+                    <img src="<?php echo HOST; ?>public/assets/img/sahana.jpg" alt="" style="border-radius: 5px;">
                 </div>
 
             </div>

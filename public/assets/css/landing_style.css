@@ -760,3 +760,64 @@ text-align: left;
   padding: 5px;
   margin: 5px 0;
 }
+
+
+
+/* language */
+.select {
+  position: relative;
+  min-width: 5px;
+  /* border: 1px solid #e8eaed;
+  border-radius: 15px; */
+}
+.select svg {
+  position: absolute;
+  right: 12px;
+  /* top: calc(50% - 3px); */
+  width: 10px;
+  height: 6px;
+  stroke-width: 2px;
+  stroke: #9098a9;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+.select select {
+  -webkit-appearance: none;
+  padding: 2px 4px 2px 4px;
+  /* width: 100%; */
+  border: 1px solid #e8eaed;
+  border-radius: 15px;
+  background: #fff;
+  /* box-shadow: 0 1px 3px -2px #9098a9; */
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 15px;
+  transition: all 150ms ease;
+  text-align: center;
+}
+.select select:required:invalid {
+  color: #5a667f;
+}
+.select select option {
+  color: #002c8a;
+}
+.select select option[value=""][disabled] {
+  display: none;
+}
+.select select:focus {
+  outline: none;
+  border-color: rgb(0, 0, 0);
+  box-shadow: 0 0 0 2px rgba(0,119,255,0.2);
+}
+.select select:hover + svg {
+  stroke: rgb(2, 33, 70);
+}
+.sprites {
+  position: absolute;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+  user-select: none;
+}

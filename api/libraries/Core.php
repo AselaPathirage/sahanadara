@@ -46,14 +46,17 @@ class Core{
         public function urlParams(){
             if(isset($_GET['request'])){
                 if($_GET['request']=="index.php"){
-                    exit();
+                    $_GET['request'] = "/";
                 }
                 $url = rtrim($_GET['request'], '/');
                 $url = filter_var($url, FILTER_SANITIZE_URL);
                 $this->requestRoute = explode("/api/",strtolower($url))[0]; 
+                if($this->requestRoute ==""){
+                    $this->requestRoute ="/";
+                }
                 $url = explode('/', $url);
                 $this->params['receivedParams'] = $url;
-                //print_r($this->params);
+                //print_r($url);
             }
         } 
         public function  setClass(){

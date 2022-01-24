@@ -38,6 +38,15 @@ class Home{
         
         // echo $result['text'] . "\n";
     }
+    public function creadits(){
+        $array = array(
+            "Team No"=>"IS14",
+            "Project Name" =>"Sahanadara",
+            "Team members" => array("Asela Pathirage", "Yohombu Dulana","Sanduni Rashmika","Naween Pasindu")
+        );
+        $json = json_encode($array);
+        echo $json;
+    }
     public function viewDonations(){
 
     }

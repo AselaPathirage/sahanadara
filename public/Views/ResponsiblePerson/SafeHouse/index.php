@@ -26,48 +26,6 @@
         <div class="space"></div>
         <div class="container">
             <h1>Dashboard</h1>
-            <!-- <div class="stat-row">
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Order</div>
-                        <div class="number">40,876</div>
-
-                    </div>
-                    <i class='bx bx-cart-alt cart'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Sales</div>
-                        <div class="number">38,876</div>
-
-                    </div>
-                    <i class='bx bxs-cart-add cart two'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Profit</div>
-                        <div class="number">$12,876</div>
-
-                    </div>
-                    <i class='bx bx-cart cart three'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Return</div>
-                        <div class="number">11,086</div>
-
-                    </div>
-                    <i class='bx bxs-cart-download cart four'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Total Return</div>
-                        <div class="number">11,086</div>
-
-                    </div>
-                    <i class='bx bxs-cart-download cart four'></i>
-                </div>
-            </div> -->
             <section class="services">
                 <a href="">
                     <div class="services__box">
@@ -76,8 +34,8 @@
                                 <i class='bx bxs-calendar'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                3
+                            <h2 class="services__title" id="daysSpent" style="color: black; font-size: 52px; font-weight: bold;">
+                                
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
@@ -97,8 +55,8 @@
                                 <i class='bx bx-user'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                35
+                            <h2 class="services__title" id="count" style="color: black; font-size: 52px; font-weight: bold;">
+                                
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
@@ -111,12 +69,11 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <!-- <a href="">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#fd6494">
                             <ion-icon name="videocam-outline">
                                 <i class='bx bx-cog'></i>
-                                <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
                             <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
                                 2
@@ -126,18 +83,16 @@
                             <h2 class="services__title">
                                 Pending AID Requests
                             </h2>
-                            <!-- <p class="services__description">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
-                                        </p> -->
                         </div>
                     </div>
-                </a>
+                </a> -->
 
             </section>
         </div>
     </section>
     <script>
         var thisPage = "#stats";
+        addDetails()
         $(document).ready(function() {
             $("#stats,#updates").each(function() {
                 if ($(this).hasClass('active')) {
@@ -152,6 +107,19 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        function addDetails(){
+            var x = "<?php echo $_SESSION['key'] ?>"; 
+            var text = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>statistics",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            document.getElementById("count").innerHTML = text.count;
+            document.getElementById("daysSpent").innerHTML = text.days;
         }
     </script>
 </body>

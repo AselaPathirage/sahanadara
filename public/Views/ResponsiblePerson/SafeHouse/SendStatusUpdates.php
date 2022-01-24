@@ -14,33 +14,6 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        input.invalid {
-            background-color: #ffdddd;
-        }
-
-        .tab {
-            display: none;
-        }
-
-        .step {
-            height: 15px;
-            width: 15px;
-            margin: 0 2px;
-            background-color: #bbbbbb;
-            border: none;
-            border-radius: 50%;
-            display: inline-block;
-            opacity: 0.5;
-        }
-
-        .step.active {
-            opacity: 1;
-        }
-
-        .step.finish {
-            background-color: #04AA6D;
-        }
-
         td {
             border: none;
             text-align: left;
@@ -59,6 +32,54 @@
         .remove {
             color: #ffdddd;
         }
+
+        .output {
+            list-style: none;
+            width: 25%;
+            min-height: 0px;
+            border-top: 0 !important;
+            color: #767676;
+            font-size: .75em;
+            transition: min-height 0.2s;
+            position: absolute;
+            z-index: 5;
+            text-transform: capitalize;
+        }
+
+        .output,
+        #search-bar {
+            background: #fff;
+            border: 1px solid #767676;
+        }
+
+        .prediction-item {
+            padding: .5em .75em;
+            transition: color 0.2s, background 0.2s;
+        }
+
+        .output:hover .focus {
+            background: #fff;
+            color: #767676;
+        }
+
+        .prediction-item:hover,
+        .focus,
+        .output:hover .focus:hover {
+            background: #ddd;
+            color: #333;
+        }
+
+        .prediction-item:hover {
+            cursor: pointer;
+        }
+
+        .prediction-item strong {
+            color: #333;
+        }
+
+        .prediction-item:hover strong {
+            color: #000;
+        }
     </style>
 </head>
 
@@ -71,74 +92,76 @@
         include_once('./public/Views/ResponsiblePerson/includes/topnav.php');
         ?>
         <div class="space"></div>
+        <div class="space"></div>
         <div class="container">
             <div class="box">
                 <center>
-                    <h1>Safe House - Ullala 321/A</h1>
+                    <h1 id="safeHouseName"></h1>
                 </center>
-                <form id="sendReport">
-                    <div class="tab">
-                        <h3>Displaced person's details</h3>
-                        <div class="column" style="width:70%;float: none;padding-left:15%;padding-top:2px;">
-                            <label for="your_name">Number of adult males</label>
-                            <input type="text" id="your_name" class="form-control" name="yourname" onkeypress="return isNumber(event)" required='true' />
-
-                            <label for="your_email">Number of adult females</label>
-                            <input type="text" id="your_email" class="form-control" name="youremail" onkeypress="return isNumber(event)" required='true' />
-
-                            <label for="your_phone">Number of children</label>
-                            <input type="text" id="your_phone" class="form-control" name="yourphone" onkeypress="return isNumber(event)" required='true' />
-
-                            <label for="address">Number of disabled persons</label>
-                            <input type="text" id="your_phone" class="form-control" name="yourphone" onkeypress="return isNumber(event)" required='true' />
-                        </div>
-                        <h3>Other details</h3>
-                        <div class="column" style="width:70%;float: none;padding-left:15%;padding-top:2px;">
-                            <label for="notes">Remarks</label>
-                            <textarea id="drivernotes" name="drivernotes" rows="8" cols="50"></textarea>
-                        </div>
-                    </div>
-                    <div class="tab">
-                        <h3>Required Aids</h3>
-                        <div class="table-repsonsive">
-                            <span id="error"></span>
-                            <table class="table table-bordered" id="item_table">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 30%;">Item</th>
-                                        <th style="width: 50%;">Quantity</th>
-                                        <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div style="overflow:auto;">
-                        <div style="float:right;">
-                            <table style="border: none !important;width:400px;">
+                <div style="padding-left:15% ;">
+                    <div class="column" style="width:90%;float: none;padding-left:5%;padding-top:2px;">
+                        <form id='add' method="POST">
+                            <table style="border: none !important;width:85%;">
                                 <tr>
-                                    <td><button type="button" class="form-control" style="background-color:rgb(114, 204, 252);color:white;width:50%" id="prevBtn" onclick="nextPrev(-1)">Previous</button></td>
-                                    <td><button type="button" class="form-control" style="background-color:rgb(30, 227, 95);color:white;width:50%" id="nextBtn" onclick="nextPrev(1)">Next</button></td>
+                                    <td>Number of adult males</td>
+                                    <td><input type="text" id="numberOfAdultMales" class="form-control" name="numberOfAdultMales" onkeypress="return isNumber(event)" required='true' /></td>
+                                </tr>
+                                <tr>
+                                    <td>Number of adult females</td>
+                                    <td><input type="text" id="numberOfAdultFemales" class="form-control" name="numberOfAdultFemales" onkeypress="return isNumber(event)" required='true' /></td>
+                                </tr>
+                                <tr>
+                                    <td>Number of children</td>
+                                    <td><input type="text" id="numberOfChildren" class="form-control" name="numberOfChildren" onkeypress="return isNumber(event)" required='true' /></td>
+                                </tr>
+                                <tr>
+                                    <td>Number of disabled persons</td>
+                                    <td>
+                                        <input type="text" id="numberOfDisabledPersons" class="form-control" name="numberOfDisabledPersons" onkeypress="return isNumber(event)" required='true' />
+                                    </td>
                                 </tr>
                             </table>
-                        </div>
-                    </div>
+                            <h3>Other details</h3>
+                            <table style="border: none !important;width:85%;">
+                                <tr>
+                                    <td style="vertical-align: top;">Remarks</td>
+                                    <td><textarea id="drivernotes" name="drivernotes" rows="8" cols="50"></textarea></td>
+                                </tr>
+                            </table>
 
-                    <div style="text-align:center;margin-top:40px;">
-                        <span class="step"></span>
-                        <span class="step"></span>
+                            <h4>Required Items</h4>
+                            <div class="table-repsonsive">
+                                <span id="error"></span>
+                                <table class="table table-bordered" style="width:85%;margin:0" id="item_table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50%;">Item</th>
+                                            <th style="width: 30%;">Quantity</th>
+                                            <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+                            </div>
+                            <div style="float: right;width:30%">
+                                <table style="border: none !important;width:100%;">
+                                    <tr>
+                                        <td><input type="reset" class="view" value="Cancel"></td>
+                                        <td><input type="submit" class="create" value="Send"></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
                     </div>
-
-                </form>
+                </div>
             </div>
         </div>
     </section>
     <script>
         var thisPage = "#updates";
         var output;
-        getItem();
+        var count = 0;
+        addName();
         $(document).ready(function() {
             $("#stats,#updates").each(function() {
                 if ($(this).hasClass('active')) {
@@ -148,21 +171,17 @@
             });
             $(document).on('click', '.add', function() {
                 var html = '';
-                html += '<tr>';
-                html += '<td><select name="item_unit[]" class="form-control item_unit"><option value="">Select Item</option>';
-                for (var i = 0; i < output.length; i++) {
-                    html += "<option>" + output[i]['itemName'] + "</option>";
-                }
-                html += "</select></td>";
-                html += '<td><input type="text" name="item_quantity[]" class="form-control item_quantity" /></td>';
-                html += '<td><button type="button" name="remove" class="form-control remove">Remove</button></td></tr>';
-                $('#item_table').append(html);
+                html += "<tr>";
+                html += "<td><input type='text' style='text-transform: capitalize;' required='true' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                html += "<td><input type='text' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
+                html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
+                $('#item_table > tbody').append(html);
+                count++;
             });
 
             $(document).on('click', '.remove', function() {
                 $(this).closest('tr').remove();
             });
-
             $("#sendReport").submit(function(e) {
                 e.preventDefault();
                 var formElement = document.querySelector("form");
@@ -187,6 +206,27 @@
                 });
                 var json = JSON.stringify(object);
                 console.log(json);
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo API; ?>statusUpdate",
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        if (result.code == 806) {
+                            $("#add").trigger('reset');
+                            alertGen("Record Added Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Something went wrong.", 3);
+                        console.log(err);
+                    }
+                });
             });
         });
 
@@ -194,19 +234,6 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
-        }
-
-        function getItem() {
-            output = $.parseJSON($.ajax({
-                type: "GET",
-                url: "<?php echo API; ?>item",
-                dataType: "json",
-                headers: {
-                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                },
-                cache: false,
-                async: false
-            }).responseText);
         }
 
         function isNumber(e) {
@@ -217,61 +244,158 @@
             }
             return true;
         }
-        var currentTab = 0;
-        showTab(currentTab);
-
-        function showTab(n) {
-            var x = document.getElementsByClassName("tab");
-            x[n].style.display = "block";
-            if (n == 0) {
-                document.getElementById("prevBtn").style.display = 'none';
-            } else {
-                document.getElementById("prevBtn").style.display = "inline";
-            }
-            if (n == (x.length - 1)) {
-                document.getElementById("nextBtn").innerHTML = "Submit";
-                document.getElementById("nextBtn").type = "submit";
-            } else {
-                document.getElementById("nextBtn").innerHTML = "Next";
-            }
-            fixStepIndicator(n)
+        function addName(){
+            var x = "<?php echo $_SESSION['key'] ?>"; 
+            var text = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>statistics/safehouse",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            document.getElementById("safeHouseName").innerHTML = text.safeHouseName;
         }
-
-        function nextPrev(n) {
-            var x = document.getElementsByClassName("tab");
-            if (n == 1 && !validateForm()) return false;
-            x[currentTab].style.display = 'none';
-            currentTab = currentTab + n;
-            if (currentTab >= x.length) {
-                //document.getElementById("sendReport").submit();
-                return false;
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
             }
-            showTab(currentTab);
         }
+        //begginning of the text box filter
+        //Copyright (c) 2022 by Sarah Wulf (https://codepen.io/slwulf/pen/vczhJ)
 
-        function validateForm() {
-            var x, y, i, valid = true;
-            x = document.getElementsByClassName("tab");
-            y = x[currentTab].getElementsByTagName("input");
-            for (i = 0; i < y.length; i++) {
-                if (y[i].value == "") {
-                    y[i].className += " invalid";
-                    valid = false;
+        // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+        // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+        // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+        var terms =
+            $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>item/value",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText),
+            returnList = [];
+
+        function strInArray(str, strArray) {
+            for (var j = 0; j < strArray.length; j++) {
+                var original = str;
+                str = str.toLowerCase();
+                var text = strArray[j].toLowerCase();
+                if (text.match(str) && returnList.length < 5) {
+                    let searchMask = original;
+                    let regEx = new RegExp(searchMask, "ig");
+                    let $h = strArray[j].replace(regEx, '<strong>' + original + '</strong>');
+                    returnList.push('<li class="prediction-item"><span class="prediction-text">' + $h + '</span></li>');
                 }
             }
-            if (valid) {
-                document.getElementsByClassName("step")[currentTab].className += " finish";
-            }
-            return valid;
         }
 
-        function fixStepIndicator(n) {
-            var i, x = document.getElementsByClassName("step");
-            for (i = 0; i < x.length; i++) {
-                x[i].className = x[i].className.replace(" active", "");
+        function nextItem(kp) {
+            if ($('.focus').length > 0) {
+                var $next = $('.focus').next(),
+                    $prev = $('.focus').prev();
             }
-            x[n].className += " active";
+
+            if (kp == 38) { // Up
+
+                if ($('.focus').is(':first-child')) {
+                    $prev = $('.prediction-item:last-child');
+                }
+
+                $('.prediction-item').removeClass('focus');
+                $prev.addClass('focus');
+
+            } else if (kp == 40) { // Down
+
+                if ($('.focus').is(':last-child')) {
+                    $next = $('.prediction-item:first-child');
+                }
+
+                $('.prediction-item').removeClass('focus');
+                $next.addClass('focus');
+            }
         }
+
+        function filter(id) {
+            const activeText = document.activeElement;
+            $(function() {
+                $(activeText).keydown(function(e) {
+                    $key = e.keyCode;
+                    if ($key == 38 || $key == 40) {
+                        nextItem($key);
+                        return;
+                    }
+
+                    setTimeout(function() {
+                        var $search = $(activeText).val();
+                        returnList = [];
+
+                        strInArray($search, terms);
+
+                        if ($search == '' || !$('input').val) {
+                            $('#output-' + id).html('').slideUp();
+                        } else {
+                            $('#output-' + id).html(returnList).slideDown();
+                        }
+
+                        $('.prediction-item').on('click', function() {
+                            $text = $(this).find('span').text();
+                            $('#output-' + id).slideUp(function() {
+                                $(this).html('');
+                            });
+                            $(activeText).val($text);
+                        });
+
+                        $('.prediction-item:first-child').addClass('focus');
+
+                    }, 50);
+                });
+            });
+
+            $(activeText).focus(function() {
+                if ($('.prediction-item').length > 0) {
+                    $('#output-' + id).slideDown();
+                }
+
+                $('#searchform').submit(function(e) {
+                    e.preventDefault();
+                    $text = $('.focus').find('span').text();
+                    $('#output-' + id).slideUp();
+                    $(activeText).val($text);
+                    $('input').blur();
+                });
+            });
+
+            $(activeText).blur(function() {
+                if ($('.prediction-item').length > 0) {
+                    $('#output-' + id).slideUp();
+                }
+            });
+        }
+        //end of the text box filter
     </script>
 </body>
 

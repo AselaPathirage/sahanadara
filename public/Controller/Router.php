@@ -1,10 +1,11 @@
 <?php
 class Router{
     protected static $defaultController = array(
-
+                                                "Sinhala" => "index.php",
+                                                "English" => "index.php",
+                                                "Tamil" => "index.php",
                                                 "public" => "index.php",
                                                 "404" => "404.php",
-                                                "a" => "a.php",
                                                 "noPermission" => "noPermission.php",
                                                 "help" => "help.php",
                                                 "donate" => "donate.php",

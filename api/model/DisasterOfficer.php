@@ -83,6 +83,8 @@ class DisasterOfficer extends Employee{
     public function updateSafehouse(array $data)
     {
         global $errorCode;
+        // print_r($data['receivedParams']);
+        // print_r($data);
         if (count($data['receivedParams']) == 1) {
             $uid = $data['userId'];
             $safeHouseAddress = $data['upsafeHouseAddress'];
@@ -93,6 +95,7 @@ class DisasterOfficer extends Employee{
 
             $sql = "UPDATE `safehouse` SET `safeHouseAddress`='$safeHouseAddress', `safeHouseName`='$safeHouseName' WHERE safeHouseId =$safeHouseId , UPDATE `safehousecontact` SET `safeHouseTelno`=`$safeHouseTelno` WHERE safeHouseID =$safeHouseId ";
             $this->connection->query($sql);
+            // echo($sql);
             echo json_encode(array("code" => $errorCode['success']));
         } else {
             echo json_encode(array("code" => $errorCode['attributeMissing']));
@@ -226,4 +229,57 @@ class DisasterOfficer extends Employee{
     //     echo $json;
     // }
         
+
+
+public function getMessages(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "SELECT r.* FROM domsg r WHERE r.gndvId =" . $r['gndvId'] . " ORDER BY r.timestamp DESC";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function sendMessages(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        $msg = $data['msg'];
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "INSERT INTO domsg (message, gndvId ) VALUES ('$msg'," . $r['gndvId'] . ");";
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
+    }
+
+    public function getAlerts(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY a.timestamp DESC";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
 }

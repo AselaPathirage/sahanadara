@@ -81,7 +81,7 @@
 
                                 <label for="safeHouseAddress">Safe House Address</label>
                                 <textarea id="upsafeHouseAddress" name="upsafeHouseAddress" required='true'></textarea>
-                                <!-- <input type="hidden" id="item" value=""> -->
+                                <input type="hidden" id="item" value="">
                                 <label for="safeHouseName">Name</label>
                                 <input type="text" id="upsafeHouseName" name="upsafeHouseName" required='true'>
 

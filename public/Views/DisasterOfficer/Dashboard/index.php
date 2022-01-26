@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Disaster Management Officer </title>
@@ -199,16 +200,57 @@
             });
 
         });
+        
+        getAlerts();
+        $(".close-alert").click(function(e) {
+                $(this).parent().remove();
+                e.preventDefault();
+        });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-        $(".close-alert").click(function(e) {
-            $(this).parent().remove();
-            e.preventDefault();
-        });
+        // $(".close-alert").click(function(e) {
+        //     $(this).parent().remove();
+        //     e.preventDefault();
+        // });
+
+        function getAlerts() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>doalert",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            $("#bodyid").empty();
+            // var table = document.getElementById("bodyid");
+
+            for (var i = 0; i < 3; i++) {
+                let obj = output[i];
+                console.log(obj);
+                // let row = table.insertRow(-1);
+                // let cell1 = row.insertCell(-1);
+                // let cell2 = row.insertCell(-1);
+                // cell1.innerHTML = obj['timestamp'];
+                // cell2.innerHTML = obj['message'];
+                if (obj['onlyOfficers'] == 1) {
+                    var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                } else {
+                    var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                }
+
+                $("#bodyid").append($sample);
+
+            }
+        }
+
     </script>
 </body>
 </html>

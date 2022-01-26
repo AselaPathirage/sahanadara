@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -28,6 +29,8 @@
     <div class="space"></div>
         <div class="container">
             <center><h1>Safe House List</h1></center>
+            <div id="alertBox">
+            </div>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
                     <a class="btn_blue Click-here">Add Safe House</a>
@@ -57,9 +60,9 @@
                                                 </select>
 
                                 <label for="safeHouseTelno">Tele Number</label>
-                                <input type="text" id="safeHouseTelno" name="safeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
+                                <input type="tel" id="safeHouseTelno" name="safeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
                                     <div class="row" style="justify-content: center;">
-                                        <input type="submit" value="Submit" id="submit" class="btn-alerts" />
+                                        <input type="submit" value="Submit" class="btn-alerts" />
                                         <input type="reset" value="Reset" class="btn-alerts" />
                                     </div>
                                 </div>
@@ -93,7 +96,7 @@
                                                 </select>
 
                                 <label for="safeHouseTelno">Tele Number</label>
-                                <input type="text" id="upsafeHouseTelno" name="upsafeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
+                                <input type="tel" id="upsafeHouseTelno" name="upsafeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Update" class="btn-alerts" />
                                         <input type="reset" value="Reset" class="btn-alerts" />
@@ -451,7 +454,8 @@
             
             for (var i = 0; i < output.length; i++){
                 let obj = output[i];
-                console.log(obj);
+                //console.log(obj);
+                
                 // let row = table.insertRow(-1);
                 // let id ="data_"+i;
                 // row.id = id;

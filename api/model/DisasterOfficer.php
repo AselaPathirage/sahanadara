@@ -93,7 +93,9 @@ class DisasterOfficer extends Employee{
             $gndvId =$data['upgnDiv'];
             $safeHouseId = $data['receivedParams'][0];
 
-            $sql = "UPDATE `safehouse` SET `safeHouseAddress`='$safeHouseAddress', `safeHouseName`='$safeHouseName' WHERE safeHouseId =$safeHouseId , UPDATE `safehousecontact` SET `safeHouseTelno`=`$safeHouseTelno` WHERE safeHouseID =$safeHouseId ";
+            $sql = "UPDATE `safehouse` SET `safeHouseAddress`='$safeHouseAddress', `safeHouseName`='$safeHouseName' WHERE safeHouseId =$safeHouseId";
+            $this->connection->query($sql);
+            $sql = "UPDATE `safehousecontact` SET `safeHouseTelno`='$safeHouseTelno' WHERE safeHouseID =$safeHouseId";
             $this->connection->query($sql);
             // echo($sql);
             echo json_encode(array("code" => $errorCode['success']));
@@ -109,8 +111,10 @@ class DisasterOfficer extends Employee{
         if (count($data['receivedParams']) == 1) {
 
             $safeHouseId = $data['receivedParams'][0];
+            $sql = "UPDATE gndivision SET safeHouseID = NULL WHERE safeHouseId =$safeHouseId";
+            $this->connection->query($sql);
+
             $sql = "DELETE FROM `safehouse` WHERE safeHouseId =$safeHouseId";
-            
             $this->connection->query($sql);
             echo json_encode(array("code" => $errorCode['success']));
         } else {

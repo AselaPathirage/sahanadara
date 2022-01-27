@@ -77,49 +77,18 @@
                                     <label for="TP number">TP Number</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="10" onkeypress="return isNumber(event)" required='true'>
+                                <div id="tpCheck">
+                                    </div>
+                                    <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="11" required='true'>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col3">
-                                    <label for="user role">User role</label>
+                                    <label for="safehouse">Safe House</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="user_role" name="user_role" required='true'>
-                                        <option value="" selected='true'>Select</option>
-                                        <option value="1">Grama Niladhari</option>
-                                        <option value="4">Divisional Secretariat</option>
-                                        <option value="6">Disaster management officer</option>
-                                        <option value="3">District secretariat</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" id="DistrictBox">
-                                <div class="col3">
-                                    <label for="user role">District</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="District" name="District">
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" id="DivisionBox">
-                                <div class="col3">
-                                    <label for="user role">Div sec</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="Division" name="Division">
-                                        <option value="null">Select Division</option>   
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row" id="GndivisionBox">
-                                <div class="col3">
-                                    <label for="user role">GN div</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="Gndivision" name="Gndivision">
-                                        <option value="null">Select GN Division</option>
+                                    <select id="safehouse" name="safehouse" required="true" >
+                                    <option>Select a SafeHouse</option>
                                     </select>
                                 </div>
                             </div>
@@ -149,6 +118,19 @@
                 $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
             }
         });
+        document.getElementById("TP_number").addEventListener("keyup",function(e){
+            var nicNum = document.getElementById("TP_number").value;
+            console.log(nicNum);
+            var cnic_no_regex = new RegExp('/([07][0-9]{1})[-. ]([0-9]{7})$');
+            var new_cnic_no_regex = new RegExp('/([07][0-9]{9})$');
+            if (nicNum.length == 11 && cnic_no_regex.test(nicNum)) {
+                $("#tpCheck").html("bbbbb");
+            } else if (nicNum.length == 10 && new_cnic_no_regex.test(nicNum)) {
+                $("#tpCheck").html("aaaaa");
+            } else {
+                $("#tpCheck").html("<lable style='color:red'>Please input valid telephone number.</lable>");
+            }
+        });
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
@@ -167,20 +149,6 @@
             $('#DivisionBox').hide();
             $('#GndivisionBox').hide();
         });
-        function validate_nic(nic) {
-            var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
-            var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
-            if (nic.length == 10 && cnic_no_regex.test(nic)) {
-                $("#nicCheck").html("");
-                return true;
-            } else if (nic.length == 12 && new_cnic_no_regex.test(nic)) {
-                $("#nicCheck").html("");
-                return true;
-            } else {
-                $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
-                return false;
-            }
-        }
         function isNumber(e) {
             e = (e) ? e : window.event;
             var charCode = (e.which) ? e.which : e.keyCode;
@@ -259,6 +227,46 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+        function validate_nic(nic) {
+            var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
+            var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
+            if (nic.length == 10 && cnic_no_regex.test(nic)) {
+                $("#nicCheck").html("");
+                return true;
+            } else if (nic.length == 12 && new_cnic_no_regex.test(nic)) {
+                $("#nicCheck").html("");
+                return true;
+            } else {
+                $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
+                return false;
+            }
+        }
+        function filterSafehouse(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>safehouse/all",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            var select = document.getElementById("safehouse");
+
+            for (var i = 0; i < output.length; i++) {
+                //console.log(i);
+                var opt = document.createElement('option');
+                opt.value = output[i]['safeHouseID'];
+                opt.innerHTML = output[i]['safeHouseName'];
+                select.appendChild(opt);
+
+
+            }
+        }
+        filterSafehouse();
+
         function alertGen($messege,$type){
             if ($type == 1){
                 $("#alertBox").html("  <div class='alert success-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");

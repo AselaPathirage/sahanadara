@@ -75,6 +75,9 @@ class ResponsiblePerson  extends Employee{
         $sql = "SELECT st.adultMale + st.adultFemale + st.adultFemale + st.children + st.disabledPerson AS count FROM safehouse s, responsibleperson r, safehousestatus st WHERE r.responsiblePersonID = $userId AND s.safeHouseID = r.safeHouseID AND s.safeHouseID = st.safehouseId ORDER BY st.r_id DESC LIMIT 1";
         $excute = $this->connection->query($sql);
         $results = $excute-> fetch_assoc();
+        if(! isset($results['count'])){
+            $results['count'] = 0;
+        }
         $output['count'] = $results['count'];
         http_response_code(200);                       
         $json = json_encode($output);

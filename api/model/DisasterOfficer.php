@@ -202,16 +202,28 @@ class DisasterOfficer extends Employee
         }
     }
 
-    public function getDistrict()
+    public function getDistrict($userId)
     {
         //return on function ekak
-
-
+        $r=$this->getDivision($userId);
+        $division = $r['id'];
+        $sql ="SELECT dist.* FROM district dist, division d WHERE d.dsId = dist.dsId AND d.dvId=$division";
+        $excute = $this->connection->query($sql);
+        $r = $excute-> fetch_assoc();
+        $district['name'] = $r['dsName'];
+        $district['id'] = $r['dsId'];
+        return $district;
     }
-    public function getDivision()
+
+    public function getDivision($userId)
     {
         //return on function ekak
-
+        $sql = "SELECT d.* FROM division d, divisionaloffice divoff WHERE d.dvId=divoff.dvId AND divoff.disasterManager=$userId";
+        $excute = $this->connection->query($sql);
+        $r = $excute-> fetch_assoc();
+        $division['name'] = $r['dvName'];
+        $division['id'] = $r['dvId'];
+        return $division;
     }
 
 
@@ -329,24 +341,24 @@ class DisasterOfficer extends Employee
         }
     }
 
-    public function filterSafehouse(array $data)
-    {
-        $uid = $data['userId'];
-        if (count($data['receivedParams']) == 1) {
+    // public function filterSafehouse(array $data)
+    // {
+    //     $uid = $data['userId'];
+    //     if (count($data['receivedParams']) == 1) {
 
-            $sql = "SELECT s.* FROM safeHouse s WHERE s.safeHouseID IN (SELECT gn.safeHouseID FROM gndivision gn,divisionaloffice dv, safehouse sh WHERE gn.dvId = dv.dvId AND dv.disasterManager = 1 AND sh.isUsing = 'n' AND sh.safeHouseID = gn.safeHouseID);";
+    //         $sql = "SELECT s.* FROM safeHouse s WHERE s.safeHouseID IN (SELECT gn.safeHouseID FROM gndivision gn,divisionaloffice dv, safehouse sh WHERE gn.dvId = dv.dvId AND dv.disasterManager = 1 AND sh.isUsing = 'n' AND sh.safeHouseID = gn.safeHouseID);";
 
 
 
-            $excute = $this->connection->query($sql);
-            $results = array();
-            while ($r = $excute->fetch_assoc()) {
-                $results[] = $r;
-            }
-            $json = json_encode($results);
-            echo $json;
-        }
-    }
+    //         $excute = $this->connection->query($sql);
+    //         $results = array();
+    //         while ($r = $excute->fetch_assoc()) {
+    //             $results[] = $r;
+    //         }
+    //         $json = json_encode($results);
+    //         echo $json;
+    //     }
+    // }
     protected function tokenKey($length = 10)
     {
         return substr(str_shuffle("aAQEWAbcERWREdefghiHLafgdffhvcJHjklmnopqrSFSEREESGSEGst0123456789"), 0, $length);

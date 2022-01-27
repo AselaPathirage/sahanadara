@@ -39,19 +39,20 @@
                         <thead>
                             <tr class="filters">
                                 <th>Approved
-                                    <select id="assigned-user-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Approved</option>
-                                        <option>Not Approved</option>
+                                    <select id="status" class="form-control">
+                                        <option value="Any">All</option>
+                                        <option value="1">Approved</option>
+                                        <option value="2">Pending</option>
+                                        <option value="3">Rejected</option>
 
                                     </select>
                                 </th>
                                 <th>Type
-                                    <select id="status-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Initial</option>
-                                        <option>Relief</option>
-                                        <option>Final</option>
+                                    <select id="type" class="form-control">
+                                        <option value="Any">All</option>
+                                        <option value="1">Initial</option>
+                                        <option value="2">Relief</option>
+                                        <option value="3">Final</option>
 
                                     </select>
                                 </th>
@@ -72,13 +73,13 @@
                                     <th>Description</th>
                                     <th>Type</th>
                                     <th>DS note</th>
-                                    <th>DMC note</th>
-                                    <th>View</th>
+
+                                    <th>Actions</th>
 
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tbodyid">
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td>10/24/2021 12:50</td>
@@ -198,35 +199,384 @@
 
                 var attribute = document.createElement("a");
                 attribute.id = obj['residentId'];
-                // attribute.href = "";
-                attribute.className = "btn_update btn_blue";
-                attribute.name = "update";
-                attribute.innerHTML = "Update";
-                attribute.setAttribute("data-name", obj['residentName'])
-                attribute.setAttribute("data-nic", obj['residentNIC'])
-                attribute.setAttribute("data-address", obj['residentAddress'])
-                attribute.setAttribute("data-telno", obj['residentTelNo'])
-                var attribute2 = document.createElement("a");
+                attribute.target = "_blank";
+                attribute.href = obj['report'] + "/" + obj['reportId'];
+                attribute.className = "btn_views";
+                attribute.name = "view";
+                attribute.innerHTML = "View";
+                attribute.setAttribute("data-type", obj['report'])
+                attribute.setAttribute("data-Id", obj['reportId'])
 
-                attribute2.id = obj['residentId'];
-                // attribute2.href = "";
-                attribute2.className = "btn_delete";
-                attribute2.name = "delete";
-                attribute2.innerHTML = "Delete";
 
-                cell1.innerHTML = obj['residentName'];
-                cell2.innerHTML = obj['residentNIC'];
-                cell3.innerHTML = obj['residentAddress'];
-                cell4.innerHTML = obj['residentTelNo'];
-                var attribute3 = document.createElement("span");
-                attribute3.innerHTML = " ";
+                cell1.innerHTML = obj['timestamp'];
+                cell2.innerHTML = obj['cause'];
+                cell3.innerHTML = obj['report'];
+
+                let app = "";
+                if (obj['approved'] == 'p') {
+                    app = "Pending";
+                } else if (obj['approved'] == 'a') {
+                    app = "Approved";
+                } else if (obj['approved'] == 'r') {
+                    app = "Rejected";
+                }
+                cell4.innerHTML = app;
+
                 cell5.appendChild(attribute);
-                cell5.appendChild(attribute3);
-                cell5.appendChild(attribute2);
+
                 // console.log(attribute);
                 // console.log(attribute2);
             }
         }
+
+
+        $("#status").on('change', function() {
+            var status = $('#status').val();
+            console.log(status);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No records</p>";
+                $("#tbodyid").append($sample);
+            } else {
+                for (var i = 0; i < output.length; i++) {
+
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (status == "Any") {
+                        let row = table.insertRow(-1);
+                        let cell1 = row.insertCell(-1);
+                        let cell2 = row.insertCell(-1);
+                        let cell3 = row.insertCell(-1);
+                        let cell4 = row.insertCell(-1);
+                        let cell5 = row.insertCell(-1);
+
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['residentId'];
+                        // attribute.href = "";
+                        attribute.target = "_blank";
+                        attribute.href = obj['report'] + "/" + obj['reportId'];
+                        attribute.className = "btn_views";
+                        attribute.name = "view";
+                        attribute.innerHTML = "View";
+                        attribute.setAttribute("data-type", obj['report'])
+                        attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                        cell1.innerHTML = obj['timestamp'];
+                        cell2.innerHTML = obj['cause'];
+                        cell3.innerHTML = obj['report'];
+
+                        let app = "";
+                        if (obj['approved'] == 'p') {
+                            app = "Pending";
+                        } else if (obj['approved'] == 'a') {
+                            app = "Approved";
+                        } else if (obj['approved'] == 'r') {
+                            app = "Rejected";
+                        }
+                        cell4.innerHTML = app;
+
+                        cell5.appendChild(attribute);
+
+                    } else if (status == "1") {
+                        if (obj['approved'] == 'a') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            // attribute.href = "";
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['cause'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "Approved";
+
+                            cell4.innerHTML = app;
+
+                            cell5.appendChild(attribute);
+
+                        }
+                    } else if (status == "2") {
+                        if (obj['approved'] == 'p') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            // attribute.href = "";
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['cause'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "Pending";
+
+                            cell4.innerHTML = app;
+
+                            cell5.appendChild(attribute);
+
+                        }
+                    } else if (status == "3") {
+                        if (obj['approved'] == 'r') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            // attribute.href = "";
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['cause'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "Rejected";
+
+                            cell4.innerHTML = app;
+
+                            cell5.appendChild(attribute);
+
+                        }
+                    }
+                }
+            }
+            // console.log($sample);
+
+
+        });
+        $("#type").on('change', function() {
+            var status = $('#type').val();
+            console.log(status);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No records</p>";
+                $("#tbodyid").append($sample);
+            } else {
+                for (var i = 0; i < output.length; i++) {
+
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (status == "Any") {
+                        let row = table.insertRow(-1);
+                        let cell1 = row.insertCell(-1);
+                        let cell2 = row.insertCell(-1);
+                        let cell3 = row.insertCell(-1);
+                        let cell4 = row.insertCell(-1);
+                        let cell5 = row.insertCell(-1);
+
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['residentId'];
+                        // attribute.href = "";
+                        attribute.target = "_blank";
+                        attribute.href = obj['report'] + "/" + obj['reportId'];
+                        attribute.className = "btn_views";
+                        attribute.name = "view";
+                        attribute.innerHTML = "View";
+                        attribute.setAttribute("data-type", obj['report'])
+                        attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                        cell1.innerHTML = obj['timestamp'];
+                        cell2.innerHTML = obj['cause'];
+                        cell3.innerHTML = obj['report'];
+
+                        let app = "";
+                        if (obj['approved'] == 'p') {
+                            app = "Pending";
+                        } else if (obj['approved'] == 'a') {
+                            app = "Approved";
+                        } else if (obj['approved'] == 'r') {
+                            app = "Rejected";
+                        }
+                        cell4.innerHTML = app;
+
+                        cell5.appendChild(attribute);
+
+                    } else if (status == "1") {
+                        if (obj['report'] == 'Initial') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            // attribute.href = "";
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['cause'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['approved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['approved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['approved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            cell5.appendChild(attribute);
+
+
+                        }
+                    } else if (status == "2") {
+                        if (obj['report'] == 'Relief') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            // attribute.href = "";
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['cause'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['approved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['approved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['approved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            cell5.appendChild(attribute);
+
+
+                        }
+                    } else if (status == "3") {
+                        if (obj['report'] == 'Final') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            // attribute.href = "";
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['cause'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['approved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['approved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['approved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            cell5.appendChild(attribute);
+
+
+                        }
+                    }
+                }
+            }
+            // console.log($sample);
+            // $("#tbodyid").append($sample);
+
+        });
+
+        (function() {
+            var showResults;
+            $('#search').keyup(function() {
+                var searchText;
+                searchText = $('#search').val();
+                return showResults(searchText);
+            });
+            showResults = function(searchText) {
+                $('tbody tr').hide();
+                return $('tbody tr:Contains(' + searchText + ')').show();
+            };
+            jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function(arg) {
+                return function(elem) {
+                    return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                };
+            });
+        }.call(this));
     </script>
 </body>
 

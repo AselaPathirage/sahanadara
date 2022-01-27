@@ -277,7 +277,7 @@ class GramaNiladari extends ResponsiblePerson
         // $r = $excute->fetch_assoc();
         // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
         // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
-        $sql = "SELECT s.*,t.* FROM incident s JOIN incidentgn t ON t.incidentId=s.incidentId JOIN gndivision g ON g.gndvId=t.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY s.isActive DESC, s.incidentId DESC;";
+        $sql = "SELECT s.* FROM incident s WHERE s.incidentId=" . $incidentId . ";";
         $excute = $this->connection->query($sql);
         $results = array();
         // $r = $excute->fetch_assoc();
@@ -430,10 +430,100 @@ class GramaNiladari extends ResponsiblePerson
     public function getReports(array $data)
     {
         $uid = $data['userId'];
-        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $sql = "(
+            SELECT
+                initial.initialId AS reportId,
+                initial.cause AS cause,
+                initial.timestamp,
+                initial.disoffapproved AS approved,
+            'Initial' AS report
+            FROM
+                initialincident initial,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId
+        )
+        UNION
+            (
+            SELECT
+                f.finalIncidentId AS reportId,
+                f.cause AS cause,
+                f.timestamp,
+                f.disoffapproved AS approved,
+                'Final' AS report
+            FROM
+                gnfinalincident f,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = f.gndvid
+        )
+        UNION
+            (
+            SELECT
+                r.reliefId AS reportId,
+                r.description AS cause,
+                r.timestamp,
+                NULL AS approved,
+                'Relief' AS report
+            FROM
+                relief r,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = r.gndvid
+        )Order by timestamp DESC;";
         $excute = $this->connection->query($sql);
-        $r = $excute->fetch_assoc();
-        $sql = "SELECT r.* FROM resident r WHERE r.gndvId =" . $r['gndvId'];
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getReportsbyIncident(array $data)
+    {
+        $uid = $data['userId'];
+        $incidentId = $data['receivedParams'][0];
+        $sql = "(
+            SELECT
+                initial.initialId AS reportId,
+                initial.cause AS cause,
+                initial.timestamp,
+                initial.disoffapproved AS approved,
+            'Initial' AS report
+            FROM
+                initialincident initial,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.incidentId=" . $incidentId . "
+        )
+        UNION
+            (
+            SELECT
+                f.finalIncidentId AS reportId,
+                f.cause AS cause,
+                f.timestamp,
+                f.disoffapproved AS approved,
+                'Final' AS report
+            FROM
+                gnfinalincident f,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = f.gndvid AND f.incidentId=" . $incidentId . "
+        )
+        UNION
+            (
+            SELECT
+                r.reliefId AS reportId,
+                r.description AS cause,
+                r.timestamp,
+                NULL AS approved,
+                'Relief' AS report
+            FROM
+                relief r,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = r.gndvid AND r.incidentId=" . $incidentId . "
+        )Order by timestamp DESC;";
         $excute = $this->connection->query($sql);
         $results = array();
         while ($r = $excute->fetch_assoc()) {

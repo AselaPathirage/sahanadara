@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
+<?php
+$array = explode("/", $_GET["url"]);
+// echo end($array);
+// exit;
+?>
+
 <head>
     <meta charset="UTF-8">
     <title> Grama Niladari</title>
@@ -368,7 +374,8 @@
             document.getElementById('datePicker1').valueAsDate = new Date();
             document.getElementById('datePicker2').valueAsDate = new Date();
 
-            getDisasterType()
+            getDisasterType();
+            getFinalDetails();
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -377,6 +384,27 @@
             sidebar.classList.toggle("active");
         }
 
+        function getFinalDetails() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>countfinal",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log("1");
+            var select = document.getElementById("disaster");
+            for (var i = 0; i < output.length; i++) {
+                if (output[i]['disId'] == 3) continue;
+                var opt = document.createElement('option');
+                opt.value = output[i]['disId'];
+                opt.innerHTML = output[i]['dis'];
+                select.appendChild(opt);
+            }
+        }
         function getDisasterType() {
             output = $.parseJSON($.ajax({
                 type: "GET",

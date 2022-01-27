@@ -1,3 +1,10 @@
+<?php
+$lan = null;
+if (isset($_COOKIE['lan'])) {
+    $lan = $_COOKIE['lan'];
+    //echo $lan;exit;
+}
+?>
 <nav class="navbar">
     <div class="logo2"><img src="<?php echo HOST; ?>/public/assets/img/social-care.png" height="40" alt="LOGO"></div>
     <div class="push-left">
@@ -44,15 +51,15 @@
 
             <li class="menu-item ">
                 <div style="border-left: 2px solid #e8eaed;padding:0 15px;">
-                    <label class="select" for="slct" style="margin: 0;">
-                        <select id="slct" required="required">
-
-                            <option value="#">EN</option>
-                            <option value="#">සිං</option>
-                            <option value="#">தமிழ்</option>
-
-                        </select>
-                        <!-- <svg>
+                    <form id="language" name="language">
+                        <label class="select" for="lan" style="margin: 0;">
+                            <select id="lan" name="lan" required="required" onchange="setLanguage()">
+                                    <option value="en">EN</option>
+                                    <option value="si">සිං</option>
+                                    <option value="ta">தமிழ்</option>
+                            </select>
+                    </form>
+                    <!-- <svg>
                         <use xlink:href="#select-arrow-down"></use>
                     </svg> -->
                     </label>
@@ -69,3 +76,53 @@
         </ul>
     </div>
 </nav>
+<script>
+    const getCookieValue = (name) => (
+        document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)')?.pop() || ''
+    )
+    urlManage();
+    function setLanguage() {
+        var x = document.getElementById("lan").value;
+        if (x == 'si') {
+            var sub = "Sinhala";
+        } else if (x == 'en') {
+            var sub = "English";
+        } else {
+            var sub = "Tamil";
+        }
+        var string = window.location.pathname;
+        if (string.includes("Sinhala")) {
+            var data = string.split('/Sinhala');
+            string = data[0];
+        } else if (string.includes("English")) {
+            var data = string.split('/English');
+            string = data[0];
+        } else if (string.includes("Tamil")) {
+            var data = string.split('/Tamil');
+            string = data[0];
+        }
+        var str = string.slice(-1);
+        var value = $('#language').serialize();
+        //console.log(value);
+        var request = $.ajax({
+            url: "<?php echo HOST; ?>/Handler/lanHandler",
+            type: "post",
+            data: value
+        });
+        request.done(function(msg) {
+            //console.log(msg);
+        });
+        $('#lan').prop('selectedIndex',0);
+        if (str == '/') {
+            window.location = string + sub;
+        } else {
+            window.location = string + "/" + sub;
+        }
+    }
+
+    function urlManage() {
+        var val = getCookieValue('lan');
+        console.log(val);
+        $("#lan").val(val);
+    }
+</script>

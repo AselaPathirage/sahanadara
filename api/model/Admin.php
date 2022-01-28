@@ -142,7 +142,62 @@ class Admin extends Employee{
         $json = json_encode($results);
         echo $json;
     }
+    
+    public function updateProfileDetails(array $data){
+        global $errorCode;
+        if(isset($data['roleId']) && isset($data['empId'])){
+            $name = $data['firstname']." ".$data['lastname'];
+            $address = $data['address'];
+            $email = $data['email'];
+            $phone = $data['tpnumber'];
+            $uid = $data['empId'];
+            $password = md5($data['updatepass']);
+            $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE l.empPassword ='$password' AND l.roleId = '".$data['roleId']."' AND  l.empId = '".$data['empId']."'";
+            $excute = $this->connection->query($sql);
+            if ($excute->num_rows > 0) {
+                $sql1 = "UPDATE `admin` SET `empName`='$name', `empAddress`='$address', `empEmail`='$email',`empTele`='$phone' WHERE `adminID`='$uid' ";
+                $this->connection->query($sql1);
+                echo json_encode(array("code" => $errorCode['success']));
+                exit();
+            }else{
+                echo json_encode(array("code" => $errorCode['userCreadentialWrong']));
+                exit();
+            }            
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+    public function updatePassword(array $data){
+        global $errorCode;
+        if(isset($data['roleId']) && isset($data['empId'])){
+            $newpass = md5($data['newpass']);
+            $uid = $data['empId'];
+            $password = md5($data['oldpass']);
+            $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE l.empPassword ='$password' AND l.roleId = '".$data['roleId']."' AND  l.empId = '".$data['empId']."'";
+            $excute = $this->connection->query($sql);
+            if ($excute->num_rows > 0) {
+                $sql1 = "UPDATE login SET empPassword='" . $newpass . "' WHERE empId=" . $data['empId'] . " AND roleId =" . $data['roleId'];
+                $this->connection->query($sql1);
+                echo json_encode(array("code" => $errorCode['success']));
+                exit();
+            }else{
+                echo json_encode(array("code" => $errorCode['userCreadentialWrong']));
+                exit();
+            }  
+            echo json_encode(array("code" => $errorCode['success']));
+            exit();
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+
 } 
+
+
 // $sql = "SELECT d.dsId,d.dsName,dv.dvId,dv.dvName,gn.gndvId,gn.gnDvName FROM district d,division dv,gndivision gn 
 // WHERE d.dsId = dv.dsId AND dv.dvId = gn.dvId";
 // $excute = $this->connection->query($sql);

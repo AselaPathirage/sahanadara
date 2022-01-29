@@ -21,6 +21,7 @@ Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
+Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("safehouse/{dataType}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
 Route::GET("incident", array("GramaNiladari@getIncidents"));
@@ -31,6 +32,7 @@ Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "Inv
 
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
+Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails","Admin@updateProfileDetails"));
 
 Route::POST("login", array("Employee@login"));

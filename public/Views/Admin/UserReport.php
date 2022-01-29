@@ -37,35 +37,27 @@
 
                         <h2>Select the area</h2>
                         <div class="row">
-                            <div class="col3"><label for="crusttype">District</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="white">All</option>
-                                    <option value="wheat">Kaluatara</option>
-                                    <option value="thin">Gampaha</option>
+                            <div class="col3"><label for="District">District</label>
+                                <select id="District" name="District">
                                 </select>
                             </div>
-                            <div class="col3"><label for="crusttype">DS Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Horana</option>
-                                    <option value="white">Millaniya</option>
-
+                            <div class="col3"><label for="Division">DS Division</label>
+                                <select id="Division" name="Division">
+                                    <option value="null">Select Division</option>   
                                 </select>
                             </div>
-                            <div class="col3"><label for="crusttype">GN Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Bellapitiya West</option>
-                                    <option value="white">Bellapitiya North</option>
-                                    <option value="thin">Horana North</option>
+                            <div class="col3"><label for="Gndivision">GN Division</label>
+                                <select id="Gndivision" name="Gndivision">
+                                    <option value="null">Select GN Division</option>
                                 </select>
                             </div>
                             <div class="col3"><label for="crusttype">Role</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Bellapitiya West</option>
-                                    <option value="white">Bellapitiya North</option>
-                                    <option value="thin">Horana North</option>
+                                <select id="user_role" name="user_role" required='true'>
+                                    <option value="" selected='true'>Select</option>
+                                    <option value="1">Grama Niladhari</option>
+                                    <option value="4">Divisional Secretariat</option>
+                                    <option value="6">Disaster management officer</option>
+                                    <option value="3">District secretariat</option>
                                 </select>
                             </div>
                         </div>
@@ -91,6 +83,13 @@
                 }
                 $(thisPage).addClass("active");
             });
+            var distOptions = "<option value=''>Select District</option>";
+            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    distOptions += "<option value='"+district.dsId+"'>"+district.name+"</option>";
+                });
+                 $('#District').html(distOptions);
+            })
 
         });
 
@@ -99,9 +98,42 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-        document.getElementById('reset').onclick = function() {
 
-        }
+        $('#District').change(function(){
+            var val = $(this).val();
+            console.log(val);
+            var divOptions = "<option value=''>Select Division</option>";
+            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    if(district.dsId == val){
+                        $.each(district.division,function(j,division){
+                           divOptions += "<option value='"+division.dvId+"'>"+division.name+"</option>";  
+                        })
+                    }
+                });
+                $('#Division').html(divOptions);
+            })
+        })
+
+        $('#Division').change(function(){
+            var div = $(this).val();
+            var dist = $('#District').val();
+            var gnOptions = "<option value=''>Select GNDivision</option>";
+            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    if(district.dsId == dist){
+                        $.each(district.division,function(j,division){
+                           if(division.dvId == div){
+                               $.each(division.gnArea, function(k,gnArea){
+                                gnOptions += "<option value='"+gnArea.gndvId+"'>"+gnArea.name+"</option>"; 
+                               })
+                           }
+                        })
+                    }
+                });
+                $('#Gndivision').html(gnOptions);
+            })
+        })
     </script>
 </body>
 

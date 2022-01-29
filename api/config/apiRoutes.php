@@ -32,6 +32,7 @@ Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "Inv
 
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
+Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails","Admin@updateProfileDetails"));
 
 Route::POST("login", array("Employee@login"));

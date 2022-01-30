@@ -173,6 +173,7 @@
     </section>
     <script>
          var id = '';
+         var officeId = '';
          $(document).ready(function() {
             id = '<?php echo $_SESSION['userId'] ?>';
             getProfile();
@@ -198,6 +199,7 @@
             $('#tpnumber').val(output[0].empTele);
             $('#officetpnumber').val(output[0].districtofficeTelno);
             $('#officeaddress').val(output[0].districtSOfficeAddress);
+            officeId = output[0].dsId;
          }
 
          $("#update").submit(function(e) {
@@ -211,6 +213,7 @@
                 }); 
                 object['roleId'] = 3;
                 object['empId'] = id;
+                object['officeId'] = officeId;
                 var json = JSON.stringify(object);
                 console.log(json);
                 if($('#oldpass').val() == "" && $('#updatepass').val() == ""){
@@ -218,26 +221,25 @@
                 }
                 
                 if($('#updatepass').val() != ""){
-                    console.log("update");
-                    // $("#update").trigger("reset");
-                    // $.ajax({
-                    //     type: "PUT",
-                    //     url: "<?php echo API; ?>profile",
-                    //     data: json,
-                    //     headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                    //     cache: false,
-                    //     success: function(result) {
-                    //         console.log(result);
-                    //         if(result.code==806){
-                    //             alertGen("Updated Successfully!",1);
-                    //         }else{
-                    //             alertGen("Unable to handle request.",2);
-                    //         }
-                    //     },
-                    //     error: function(err) {
-                    //         alertGen("Unable to handle request.",2);
-                    //     }
-                    // }); 
+                    $("#update").trigger("reset");
+                    $.ajax({
+                        type: "PUT",
+                        url: "<?php echo API; ?>profile",
+                        data: json,
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        success: function(result) {
+                            console.log(result);
+                            if(result.code==806){
+                                alertGen("Updated Successfully!",1);
+                            }else{
+                                alertGen("Unable to handle request.",2);
+                            }
+                        },
+                        error: function(err) {
+                            alertGen("Unable to handle request.",2);
+                        }
+                    }); 
                 }
                 if($('#oldpass').val() != ""){
                     if($('#newpass').val() == "" || $('#confirmpass').val() == ""){

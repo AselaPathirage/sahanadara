@@ -55,6 +55,47 @@ class DistrictSecretariat extends Employee{
         echo $json;
     }
 
+    public function updateProfileDetails(array $data){
+        global $errorCode;
+        if(isset($data['roleId']) && isset($data['empId'])){
+            $name = $data['firstname']." ".$data['lastname'];
+            $address = $data['address'];
+            $email = $data['email'];
+            $phone = $data['tpnumber'];
+            $uid = $data['empId'];
+            $officeaddress = $data['officeaddress'];
+            $officetpnumber = $data['officetpnumber'];
+            $officeId = $data['officeId'];
+            $password = md5($data['updatepass']);
+            $sql = "SELECT l.empId,r.roleId,l.keyAuth FROM login l, role r WHERE l.empPassword ='$password' AND l.roleId = '".$data['roleId']."' AND  l.empId = '".$data['empId']."'";
+            $excute = $this->connection->query($sql);
+            if ($excute->num_rows > 0) {
+                 $sql1 = "UPDATE `districtsecretariat` SET `empName`='$name', `empAddress`='$address', `empEmail`='$email',`empTele`='$phone' WHERE `districtSecretariatID`='$uid' ";
+                 $sql2 = "UPDATE `districtsoffice` SET `districtSOfficeAddress`='$officeaddress' WHERE `districtSecretariat`= '$uid'";
+                 $this->connection->query($sql1);
+                 $this->connection->query($sql2);
+                 $sql3 = "SELECT * FROM `districtofficecontact` WHERE `districtSOfficeID` = '$officeId'";
+                 $excute1 = $this->connection->query($sql3);
+                if ($excute1->num_rows > 0) {
+                    $sql4 = "UPDATE `districtofficecontact` SET `districtofficeTelno` = '$officetpnumber' WHERE `districtSOfficeID` = '$officeId'";
+                    $this->connection->query($sql4);
+                }else{
+                    $sql4 = "INSERT INTO `districtofficecontact` (districtofficeTelno,districtSOfficeID) VALUES ('$officetpnumber','$officeId')";
+                    $this->connection->query($sql4);
+                }
+                
+                echo json_encode(array("code" => $errorCode['success']));
+                exit();
+            }else{
+                echo json_encode(array("code" => $errorCode['userCreadentialWrong']));
+                exit();
+            }            
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
     public function updatePassword(array $data){
         global $errorCode;
         if(isset($data['roleId']) && isset($data['empId'])){

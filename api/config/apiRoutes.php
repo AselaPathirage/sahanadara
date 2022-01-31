@@ -21,7 +21,7 @@ Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("safehouse/{dataType}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
-Route::GET("incident", array("GramaNiladari@getIncidents"));
+Route::GET("incident", array("GramaNiladari@getIncidents","DisasterOfficer@getIncidents"));
 Route::GET("incident/{id}", array("GramaNiladari@getIncidentById"));
 Route::GET("GnDivision/{data}", array("DisasterOfficer@getGNDivision"));
 Route::GET("statistics", array("ResponsiblePerson@getStats", "InventoryManager@getStats"));

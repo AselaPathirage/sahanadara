@@ -128,7 +128,7 @@
             } else if (nicNum.length == 10 && new_cnic_no_regex.test(nicNum)) {
                 $("#tpCheck").html("aaaaa");
             } else {
-                $("#tpCheck").html("<lable style='color:red'>Please input valid telephone number.</lable>");
+                //$("#tpCheck").html("<lable style='color:red'>Please input valid telephone number.</lable>");
             }
         });
         $(document).ready(function() {
@@ -244,7 +244,7 @@
         function filterSafehouse(){
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>safehouse/all",
+                url: "<?php echo API; ?>safehouse/name",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'

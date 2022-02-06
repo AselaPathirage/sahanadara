@@ -209,7 +209,7 @@
                                     <table style="width: 100%;">
                                             <tr>
                                                 <td>
-                                                    <label for="your_name">Unit</label>
+                                                    <label for="your_name">Item Name</label>
                                                     <select id="itemId" name="itemId" class="form-control" required='true'>
                                                         <option value="" data-unit="0">Select Type</option>
                                                     </select>

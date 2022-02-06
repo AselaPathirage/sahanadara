@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Safe House </title>
@@ -8,26 +9,32 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <?php
-        include_once('./public/Views/DisasterOfficer/includes/sidebar_safeHouse.php');
-     ?>
+    include_once('./public/Views/DisasterOfficer/includes/sidebar_safeHouse.php');
+    ?>
     <section class="dashboard-section">
-        <?php 
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
+        <?php
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php');
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-    <div class="space"></div>
+        <div class="space"></div>
         <div class="container">
-            <center><h1>Safe House List</h1></center>
+            <center>
+                <h1>Safe House List</h1>
+            </center>
+            <div id="alertBox">
+            </div>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
                     <a class="btn_blue Click-here">Add Safe House</a>
@@ -43,23 +50,23 @@
 
                                 <div class="row-content">
 
-                                <label for="safeHouseAddress">Safe House Address</label>
-                                <textarea id="safeHouseAddress" name="safeHouseAddress" required='true'></textarea>
+                                    <label for="safeHouseAddress">Safe House Address</label>
+                                    <textarea id="safeHouseAddress" name="safeHouseAddress" required='true'></textarea>
 
-                                <label for="safeHouseName">Name</label>
-                                <input type="text" id="safeHouseName" name="safeHouseName" required='true'>
+                                    <label for="safeHouseName">Name</label>
+                                    <input type="text" id="safeHouseName" name="safeHouseName" required='true'>
 
-                                <label for="gnDiv">Grama Niladhari Division</label>
-                                <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
+                                    <label for="gnDiv">Grama Niladhari Division</label>
+                                    <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
 
-                                <select id="gnDiv" name="gnDiv">
-                                                    <option>Select GN Division</option>
-                                                </select>
+                                    <select id="gnDiv" name="gnDiv">
+                                        <option>Select GN Division</option>
+                                    </select>
 
-                                <label for="safeHouseTelno">Tele Number</label>
-                                <input type="text" id="safeHouseTelno" name="safeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
+                                    <label for="safeHouseTelno">Tele Number</label>
+                                    <input type="tel" id="safeHouseTelno" name="safeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
                                     <div class="row" style="justify-content: center;">
-                                        <input type="submit" value="Submit" id="submit" class="btn-alerts" />
+                                        <input type="submit" value="Submit" class="btn-alerts" />
                                         <input type="reset" value="Reset" class="btn-alerts" />
                                     </div>
                                 </div>
@@ -79,21 +86,21 @@
 
                                 <div class="row-content">
 
-                                <label for="safeHouseAddress">Safe House Address</label>
-                                <textarea id="upsafeHouseAddress" name="upsafeHouseAddress" required='true'></textarea>
-                                <!-- <input type="hidden" id="item" value=""> -->
-                                <label for="safeHouseName">Name</label>
-                                <input type="text" id="upsafeHouseName" name="upsafeHouseName" required='true'>
+                                    <label for="safeHouseAddress">Safe House Address</label>
+                                    <textarea id="upsafeHouseAddress" name="upsafeHouseAddress" required='true'></textarea>
+                                    <input type="hidden" id="item" value="">
+                                    <label for="safeHouseName">Name</label>
+                                    <input type="text" id="upsafeHouseName" name="upsafeHouseName" required='true'>
 
-                                <label for="upgnDiv">Grama Niladhari Division</label>
-                                <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
+                                    <label for="upgnDiv">Grama Niladhari Division</label>
+                                    <!-- <input type="text" id="gnDiv" name="gnDiv"> -->
 
-                                <select id="upgnDiv" name="upgnDiv" disabled="true">
-                                                    <option>Select GN Division</option>
-                                                </select>
+                                    <select id="upgnDiv" name="upgnDiv" disabled="true">
+                                        <option>Select GN Division</option>
+                                    </select>
 
-                                <label for="safeHouseTelno">Tele Number</label>
-                                <input type="text" id="upsafeHouseTelno" name="upsafeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
+                                    <label for="safeHouseTelno">Tele Number</label>
+                                    <input type="tel" id="upsafeHouseTelno" name="upsafeHouseTelno" maxlength="10" onkeypress="return isNumber(event)" required='true' />
                                     <div class="row" style="justify-content: center;">
                                         <input type="submit" value="Update" class="btn-alerts" />
                                         <input type="reset" value="Reset" class="btn-alerts" />
@@ -183,112 +190,76 @@
     </section>
     <script>
         // getUnit();
-            // getItem();
-            viewSafehouse();
+        // getItem();
+        viewSafehouse();
+        $(document).ready(function() {
+            $(".btn_update").on('click', function() {
+                var id = $(this).attr("id");
+                var safeHouseAddress = $(this).attr("data-safeHouseAddress");
+                var safeHouseName = $(this).attr("data-safeHouseName");
+                var safeHouseTelno = $(this).attr("data-safeHouseTelno");
+                var gnDiv = $(this).attr("data-gnDiv");
 
-                $(".btn_update").on('click', function() {
-                    var id = $(this).attr("id");
-                    var safeHouseAddress = $(this).attr("data-safeHouseAddress");
-                    var safeHouseName = $(this).attr("data-safeHouseName");
-                    var safeHouseTelno = $(this).attr("data-safeHouseTelno");
-                    var gnDiv = $(this).attr("data-gnDiv");
+                var output2 = $.parseJSON($.ajax({
+                    type: "GET",
+                    url: "<?php echo API; ?>GnDivision/all",
+                    dataType: "json",
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    async: false
+                }).responseText);
 
-                        var output2 = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>GnDivision/all",
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    
-                    var select = document.getElementById("upgnDiv");
-            
-                        for (var i = 0; i < output2.length; i++){
-                            //console.log(i);
-                            var opt = document.createElement('option');
-                            opt.value = output2[i]['gndvId'];
-                            opt.innerHTML = output2[i]['gnDvName'];
-                            console.log(gnDiv);
-                            if(gnDiv==output2[i]['gndvId']){
-                                
-                                opt.selected = "selected";
-                            }
-                            select.appendChild(opt);
+                var select = document.getElementById("upgnDiv");
 
-                            
-                        }
+                for (var i = 0; i < output2.length; i++) {
+                    //console.log(i);
+                    var opt = document.createElement('option');
+                    opt.value = output2[i]['gndvId'];
+                    opt.innerHTML = output2[i]['gnDvName'];
+                    console.log(gnDiv);
+                    if (gnDiv == output2[i]['gndvId']) {
 
-                    $("#updateform").fadeIn();
-                    $("#update").trigger("reset");
-                    $("#updateform").addClass('model-open');
+                        opt.selected = "selected";
+                    }
+                    select.appendChild(opt);
 
-                    $("#upsafeHouseAddress").val(safeHouseAddress);
-                    $("#upsafeHouseName").val(safeHouseName);
-                    $("#upsafeHouseTelno").val(safeHouseTelno);
-                    $("#upgnDiv").val(gnDiv);
-                    $("#item").val(id);
-                });
-                $(".btn_delete").on('click', function() {
-                    var id = $(this).attr("id");
-                    // var nic = $(this).attr("data-nic");
-                    // var name = $(this).attr("data-name");
-                    // var address = $(this).attr("data-address");
-                    // var telno = $(this).attr("data-telno");
 
-                    $("#deleteform").fadeIn();
-
-                    $("#deleteform").addClass('model-open');
-
-                    // $("#upname").val(name);
-                    // $("#upnic").val(nic);
-                    // $("#upphone").val(telno);
-                    // $("#upaddress").val(address);
-                    $("#item2").val(id);
-                });
-            //validations
-            function isNumber(e) {
-            e = (e) ? e : window.event;
-            var charCode = (e.which) ? e.which : e.keyCode;
-            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
-                return false;
-            }
-                return true;
-            }
-            
-            function alertGen($messege, $type) {
-                if ($type == 1) {
-                    $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                    setTimeout(function() {
-                        $(".alert").fadeOut(100)
-                        $("#alertBox").html("");
-                    }, 4000);
-                } else if ($type == 2) {
-                    $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                    setTimeout(function() {
-                        $(".alert").fadeOut(100)
-                        $("#alertBox").html("");
-                    }, 4000);
-                } else {
-                    $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                    setTimeout(function() {
-                        $(".alert").fadeOut(100)
-                        $("#alertBox").html("");
-                    }, 4000);
                 }
-            }
 
-            let sidebar = document.querySelector(".sidebar");
-            let sidebarBtn = document.querySelector(".sidebarBtn");
-            sidebarBtn.onclick = function() {
-                sidebar.classList.toggle("active");    
-            }
-            
+                $("#updateform").fadeIn();
+                $("#update").trigger("reset");
+                $("#updateform").addClass('model-open');
+
+                $("#upsafeHouseAddress").val(safeHouseAddress);
+                $("#upsafeHouseName").val(safeHouseName);
+                $("#upsafeHouseTelno").val(safeHouseTelno);
+                $("#upgnDiv").val(gnDiv);
+                $("#item").val(id);
+            });
+            $(".btn_delete").on('click', function() {
+                var id = $(this).attr("id");
+                // var nic = $(this).attr("data-nic");
+                // var name = $(this).attr("data-name");
+                // var address = $(this).attr("data-address");
+                // var telno = $(this).attr("data-telno");
+
+                $("#deleteform").fadeIn();
+
+                $("#deleteform").addClass('model-open');
+
+                // $("#upname").val(name);
+                // $("#upnic").val(nic);
+                // $("#upphone").val(telno);
+                // $("#upaddress").val(address);
+                $("#item2").val(id);
+            });
             // popup
             $(".Click-here").on('click', function() {
-            $(".addform").fadeIn();
-            $("#add").trigger("reset");
-            $(".addform").addClass('model-open');
+                $(".addform").fadeIn();
+                $("#add").trigger("reset");
+                $(".addform").addClass('model-open');
             });
             $(".close-btn, .bg-overlay, .cancel").click(function() {
                 $(".custom-model-main").removeClass('model-open');
@@ -302,19 +273,21 @@
                 var formElement = document.querySelector("#add");
                 var formData = new FormData(formElement);
                 var object = {};
-                formData.forEach(function(value, key){
+                formData.forEach(function(value, key) {
                     object[key] = value;
-                }); 
+                });
                 var json = JSON.stringify(object);
                 // console.log(json);
                 $.ajax({
-					type: "POST",
-					url: "<?php echo API; ?>safehouse",
-					data: json,
-                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-					cache: false,
-					success: function(result) {
-						// window.location.replace("<?php echo HOST ?>DisasterOfficer/SafeHouse/SafeHouseDetails");
+                    type: "POST",
+                    url: "<?php echo API; ?>safehouse",
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        // window.location.replace("<?php echo HOST ?>DisasterOfficer/SafeHouse/SafeHouseDetails");
                         $('#tbodyid').empty();
                         viewSafehouse();
                         console.log(result.code);
@@ -333,125 +306,170 @@
             });
 
             $("#update").submit(function(e) {
-            e.preventDefault();
-            $("#updateform").fadeOut();
-            $("#updateform").removeClass('model-open');
-            var str = [];
-            var object = {};
-            var formElement = document.querySelector("#update");
-            var formData = new FormData(formElement);
-            //var array = {'key':'ABCD'}
-            var object = {};
-            formData.forEach(function(value, key) {
-                object[key] = value;
-            });
-            $("#update").trigger('reset');
-            var json = JSON.stringify(object);
-            var id = document.getElementById("item").value;
-            console.log(json);
-            $.ajax({
-                type: "PUT",
-                url: "<?php echo API; ?>safehouse/" + id,
-                data: json,
-                headers: {
-                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                },
-                cache: false,
-                success: function(result) {
-                    $('#trow').empty();
-                    viewSafehouse();
-                    location.reload();
-                    if (result.code == 806) {
-                        alertGen("Record Updated Successfully!", 1);
-                    } else {
-                        alertGen("Unable to handle request.", 2);
+                e.preventDefault();
+                $("#updateform").fadeOut();
+                $("#updateform").removeClass('model-open');
+                var str = [];
+                var object = {};
+                var formElement = document.querySelector("#update");
+                var formData = new FormData(formElement);
+                //var array = {'key':'ABCD'}
+                var object = {};
+                formData.forEach(function(value, key) {
+                    object[key] = value;
+                });
+                var select = document.getElementById("upgnDiv").value;
+                console.log(select);
+                object['upgnDiv'] = select;
+                $("#update").trigger('reset');
+                var json = JSON.stringify(object);
+                var id = document.getElementById("item").value;
+                console.log(json);
+                $.ajax({
+                    type: "PUT",
+                    url: "<?php echo API; ?>safehouse/" + id,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $('#trow').empty();
+                        viewSafehouse();
+                        location.reload();
+                        if (result.code == 806) {
+                            alertGen("Record Updated Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen(" Something went wrong.", 3);
+                        console.log(err);
                     }
-                },
-                error: function(err) {
-                    alertGen(" Something went wrong.", 3);
-                    console.log(err);
-                }
+                });
             });
-        });
-        $("#delete-confirm").on("click", function(e) {
-            e.preventDefault();
-            $("#deleteform").fadeOut();
-            $("#deleteform").removeClass('model-open');
-            var str = [];
-            //var array = {'key':'ABCD'}
-            var object = {};
-            var id = document.getElementById("item2").value;
-            object["id"] = id;
-            var json = JSON.stringify(object);
-            console.log(json);
-            $.ajax({
-                type: "DELETE",
-                url: "<?php echo API; ?>safehouse/" + id,
-                data: json,
-                headers: {
-                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                },
-                cache: false,
-                success: function(result) {
-                    $('#trow').empty();
-                    viewSafehouse();
-                    location.reload();
-                    if (result.code == 806) {
-                        alertGen("Record Updated Successfully!", 1);
-                    } else {
-                        alertGen("Unable to handle request.", 2);
+            $("#delete-confirm").click(function(e) {
+                e.preventDefault();
+                $("#deleteform").fadeOut();
+                $("#deleteform").removeClass('model-open');
+                var str = [];
+                //var array = {'key':'ABCD'}
+                var object = {};
+                var id = document.getElementById("item2").value;
+                object["id"] = id;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "DELETE",
+                    url: "<?php echo API; ?>safehouse/" + id,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $('#trow').empty();
+                        viewSafehouse();
+                        location.reload();
+                        if (result.code == 806) {
+                            alertGen("Record Updated Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Something went wrong.", 3);
+                        console.log(err);
                     }
-                },
-                error: function(err) {
-                    alertGen("Something went wrong.", 3);
-                    console.log(err);
-                }
+                });
             });
         });
 
-        
+        //validations
+        function isNumber(e) {
+            e = (e) ? e : window.event;
+            var charCode = (e.which) ? e.which : e.keyCode;
+            if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+                return false;
+            }
+            return true;
+        }
 
-        function getGNDivision(){
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
+        }
+
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
+
+        function getGNDivision() {
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>GnDivision",
-                dataType: "json", 
-                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
                 cache: false,
                 async: false
             }).responseText);
             // console.log(output);
             var select = document.getElementById("gnDiv");
-            
-            for (var i = 0; i < output.length; i++){
+
+            for (var i = 0; i < output.length; i++) {
                 //console.log(i);
                 var opt = document.createElement('option');
                 opt.value = output[i]['gndvId'];
                 opt.innerHTML = output[i]['gnDvName'];
                 select.appendChild(opt);
 
-                
+
             }
         }
         getGNDivision();
-        
 
-        function viewSafehouse(){
+
+        function viewSafehouse() {
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>safehouse",
-                dataType: "json", 
-                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
                 cache: false,
                 async: false
             }).responseText);
             //console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
-            
-            for (var i = 0; i < output.length; i++){
+
+            for (var i = 0; i < output.length; i++) {
                 let obj = output[i];
-                console.log(obj);
+                //console.log(obj);
+
                 // let row = table.insertRow(-1);
                 // let id ="data_"+i;
                 // row.id = id;
@@ -502,7 +520,7 @@
                 cell5.appendChild(attribute2);
                 // console.log(attribute);
                 // console.log(attribute2);
-                
+
             }
         }
         // search
@@ -526,4 +544,5 @@
         }.call(this));
     </script>
 </body>
+
 </html>

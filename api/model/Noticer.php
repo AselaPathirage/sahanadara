@@ -129,4 +129,18 @@ trait Noticer{
             exit();
         }
     }
+    public function getNotice(array $data){
+        global $errorCode;
+        $userId = $data['userId'];
+        $division = $this->getDivision($userId);
+        $division = $division['dvId'];
+        $sql = "SELECT donationreqnotice.* FROM donationreqnotice WHERE donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division);";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;echo "he";
+    }
 }

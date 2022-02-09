@@ -123,7 +123,6 @@ if (isset($_COOKIE['lan'])) {
 
     function urlManage() {
         var val = getCookieValue('lan');
-        console.log(val);
         $("#lan").val(val);
         if (val == 'si') {
             var sub = "Sinhala";
@@ -144,13 +143,12 @@ if (isset($_COOKIE['lan'])) {
             var data = string.split('/Tamil');
             string = data[0];
         }
-        console.log(string);
+
         var str = string.slice(-1);console.log(str);
         if (str == '/') {
             window.location = string + sub;
         } else if(!(temp.includes("Sinhala") || temp.includes("English") || temp.includes("Tamil"))) {
             window.location = string + "/" + sub;
-            //console.log(" jahd");
         }
     }
 </script>

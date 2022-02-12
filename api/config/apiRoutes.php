@@ -8,7 +8,7 @@ DELETE - delete
 
 Route::GET("/", array("Home@creadits"));
 Route::GET("donation", array("Home@viewDonations"));
-Route::GET("notice", array("Home@viewNotice"));
+Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice"));
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
@@ -16,9 +16,12 @@ Route::GET("item", array("InventoryManager@getAllItem"));
 Route::GET("item/{filter}", array("InventoryManager@getItemFiltered", "DisasterOfficer@getItemFiltered", "ResponsiblePerson@getItemFiltered"));
 Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("Admin@searchUser"));
+Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser"));
+Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
+Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("safehouse/{dataType}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
 Route::GET("incident", array("GramaNiladari@getIncidents","DisasterOfficer@getIncidents"));
@@ -28,7 +31,9 @@ Route::GET("statistics", array("ResponsiblePerson@getStats", "InventoryManager@g
 Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "InventoryManager@getStatsFiltered"));
 
 Route::PUT("resetPassword", array("Employee@updatePassword"));
-Route::PUT("profile", array("GramaNiladari@updateProfileDetails"));
+Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
+Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
+Route::PUT("profile", array("GramaNiladari@updateProfileDetails","Admin@updateProfileDetails","DistrictSecretariat@updateProfileDetails"));
 
 Route::POST("login", array("Employee@login"));
 Route::POST("resetPassword", array("Employee@resetPassword"));

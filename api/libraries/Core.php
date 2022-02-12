@@ -63,30 +63,61 @@ class Core{
             global $errorCode;
             global $route;
             $url = trim($this->requestRoute);
-
             $array = $route->checkAvailibility($url);
-            foreach($array as $item) {
-                $temp = explode("@", $item);
-                if(in_array($temp[0],$this->nonSecure)){
+            $userTypeByNameIndex = array_search($this->userType,array_values($this->permission));
+            $userTypeByName = array_keys($this->permission)[$userTypeByNameIndex];
+            //$contains = preg_grep("/\b".$userTypeByName."/",$array); "/\b".$userTypeByName."/"
+            $contains = $this->array_key_lookup($array,"/\b".$userTypeByName."/",1);//print_r($contains);
+            if(count($contains) > 0){
+                foreach($array as $item) {
+                    $temp = explode("@", $item);
+                    if(in_array($temp[0],array_keys($this->permission))){
+                        if($this->userType == $this->permission[$temp[0]]){
+                            $this->currentModel = $temp[0];
+                            $this->currentModel =  new $this->currentModel($this->connection);
+                            $this->setMthod($temp[1]);
+                            array_shift($this->params['receivedParams']);
+                            $this->params['userId'] = $this->userId;
+                            $this->params['userType'] = $this->userType;
+                            return;
+                        }
+                    }
+                }
+            }else{
+                foreach($array as $item) {
+                    $temp = explode("@", $item);
+                    if(in_array($temp[0],$this->nonSecure)){
                         $this->currentModel = $temp[0];
                         $this->currentModel =  new $this->currentModel($this->connection);
                         $this->setMthod($temp[1]);
                         array_shift($this->params['receivedParams']);
-                        //unset($this->params['receivedParams'][0]);
-                        return;
-                }else if(in_array($temp[0],array_keys($this->permission))){
-                    if($this->userType == $this->permission[$temp[0]]){
-                        $this->currentModel = $temp[0];
-                        $this->currentModel =  new $this->currentModel($this->connection);
-                        $this->setMthod($temp[1]);
-                        array_shift($this->params['receivedParams']);
-                        $this->params['userId'] = $this->userId;
-                        $this->params['userType'] = $this->userType;
                         //unset($this->params['receivedParams'][0]);
                         return;
                     }
                 }
             }
+            // foreach($array as $item) {
+            //     $temp = explode("@", $item);
+            //     if(in_array($temp[0],array_keys($this->permission))){
+            //         if($this->userType == $this->permission[$temp[0]]){
+            //             $this->currentModel = $temp[0];
+            //             $this->currentModel =  new $this->currentModel($this->connection);
+            //             $this->setMthod($temp[1]);
+            //             array_shift($this->params['receivedParams']);
+            //             $this->params['userId'] = $this->userId;
+            //             $this->params['userType'] = $this->userType;
+            //             //unset($this->params['receivedParams'][0]);
+            //             return;
+            //         }
+            //     }else if(in_array($temp[0],$this->nonSecure)){
+            //         $this->currentModel = $temp[0];
+            //         $this->currentModel =  new $this->currentModel($this->connection);
+            //         $this->setMthod($temp[1]);
+            //         array_shift($this->params['receivedParams']);
+            //         //unset($this->params['receivedParams'][0]);
+            //         return;
+            //     }
+            // }
             http_response_code(403);
             echo json_encode(array("code"=>$errorCode['permissionError']));
             exit();
@@ -150,8 +181,13 @@ class Core{
             
         }
         //https://stackoverflow.com/questions/41196639/filtering-an-associative-array-keys-by-regex/41206896
-        private function array_key_lookup($haystack){
-            $matches = preg_grep("/HTTP_APIKEY/i", array_keys($haystack)); //match array keys to get which contains http api key
-            return array_intersect_key($haystack, array_flip($matches));
+        private function array_key_lookup($haystack,$pattern = "/HTTP_APIKEY/i",$check=0){
+            if($check==0){
+                $matches = preg_grep($pattern, array_keys($haystack)); //match array keys to get which contains http api key
+                return array_intersect_key($haystack, array_flip($matches));
+            }else{
+                $matches = preg_grep($pattern, $haystack); //match array keys to get which contains http api key
+                return $matches;
+            }
         }
 }

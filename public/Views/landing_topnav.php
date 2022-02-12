@@ -107,7 +107,8 @@ if (isset($_COOKIE['lan'])) {
         var request = $.ajax({
             url: "<?php echo HOST; ?>/Handler/lanHandler",
             type: "post",
-            data: value
+            data: value,
+            async:false
         });
         request.done(function(msg) {
             //console.log(msg);
@@ -122,7 +123,32 @@ if (isset($_COOKIE['lan'])) {
 
     function urlManage() {
         var val = getCookieValue('lan');
-        console.log(val);
         $("#lan").val(val);
+        if (val == 'si') {
+            var sub = "Sinhala";
+        } else if (val == 'en') {
+            var sub = "English";
+        } else {
+            var sub = "Tamil";
+        }
+        var string = window.location.pathname;
+        var temp =window.location.pathname;
+        if (string.includes("Sinhala")) {
+            var data = string.split('/Sinhala');
+            string = data[0];
+        } else if (string.includes("English")) {
+            var data = string.split('/English');
+            string = data[0];
+        } else if (string.includes("Tamil")) {
+            var data = string.split('/Tamil');
+            string = data[0];
+        }
+
+        var str = string.slice(-1);console.log(str);
+        if (str == '/') {
+            window.location = string + sub;
+        } else if(!(temp.includes("Sinhala") || temp.includes("English") || temp.includes("Tamil"))) {
+            window.location = string + "/" + sub;
+        }
     }
 </script>

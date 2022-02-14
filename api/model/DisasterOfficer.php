@@ -363,4 +363,26 @@ class DisasterOfficer extends Employee
     {
         return substr(str_shuffle("aAQEWAbcERWREdefghiHLafgdffhvcJHjklmnopqrSFSEREESGSEGst0123456789"), 0, $length);
     }
+
+    public function addIncident(array $data)
+    {   
+        global $errorCode;
+        $uid = $data['userId'];
+        $title = $data['title'];
+        $description = $data['description'];
+
+        $sql = "SELECT d.* FROM division d, divisionaloffice divoff WHERE d.dvId=divoff.dvId AND divoff.disasterManager=$uid";
+        $excute = $this->connection->query($sql);
+        $r = $excute-> fetch_assoc();
+        $sql = "INSERT INTO `incident`(`title`, `description`, `dvId`) VALUES ('$title','$description'," . $r['dvId'] . ");";
+        $this->connection->query($sql);
+        $result = array();
+        $sql = "SELECT LAST_INSERT_ID();";
+        $execute = $this->connection->query($sql);
+        $r = $execute->fetch_assoc();
+        $incidentId = $r["LAST_INSERT_ID()"];
+        $this->connection->query($sql);
+        //$sql = "INSERT INTO `incidentgn`(`incidentId`, `gndvId`) VALUES (".$r['incidentId'].",'$')";
+    }
+
 }

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Dashboard </title>
@@ -13,13 +14,14 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <?php
-        include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
-     ?>
+    include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
+    ?>
     <section class="dashboard-section">
-        <?php 
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
+        <?php
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php');
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
@@ -27,51 +29,60 @@
         <!-- STATS -->
         <div class="space"></div>
 
-<div class="container col8">
-    <div class="box">
-        <div class="box1">
-            <h1 class="text-center">Incident</h1>
-            
-            <div class="row">
-                <div class="col3">
-                    <label for="email">Title</label>
-                </div>
-                <div class="col9">
-                    <input type="text" id="email" name="email" placeholder="">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col3">
-                    <label for="address">Description</label>
-                </div>
-                <div class="col9">
-                    <textarea type="text" id="address" name="address" placeholder=""></textarea>
-                </div>
-            </div>
-            
-            
+        <div class="container col8">
+            <div class="box">
+                <div class="box1">
+                    <h1 class="text-center">Incident</h1>
 
-            <div class="row " style="text-align:right;justify-content: right;">
-                <input type="submit" style="background-color: red;" value="Cancel">
-                <input type="submit" style="background-color: darkblue;" value="Submit">
+                    <div class="row">
+                        <div class="col3">
+                            <label for="title">Title</label>
+                        </div>
+                        <div class="col9">
+                            <input type="text" id="title" name="email" placeholder="">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col3">
+                            <label for="description">Description</label>
+                        </div>
+                        <div class="col9">
+                            <textarea type="text" id="description" name="description" placeholder=""></textarea>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col3">
+                            <label for="gndivision">GN Division</label>
+                        </div>
+                        <div class="col9">
+                            <select id="gndivision" name="gndivision" required="true">
+                                <option>Select a Grama Niladhari Division</option>
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="row " style="text-align:right;justify-content: right;">
+                        <input type="submit" style="background-color: red;" value="Cancel">
+                        <input type="submit" style="background-color: darkblue;" value="Submit">
+                    </div>
+                    </form>
+                </div>
             </div>
-            </form>
+
+
+
         </div>
-    </div>
 
 
 
-</div>
-
-           
-               
 
     </section>
     <script>
         var thisPage = "#Incidents";
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
-                if ($(this).hasClass('active')){
+                if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }
                 $(thisPage).addClass("active");
@@ -86,4 +97,5 @@
         }
     </script>
 </body>
+
 </html>

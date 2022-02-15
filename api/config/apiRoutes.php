@@ -9,6 +9,7 @@ DELETE - delete
 Route::GET("/", array("Home@creadits"));
 Route::GET("donation", array("Home@viewDonations"));
 Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice"));
+Route::GET("notice/{id}", array("InventoryManager@getNotice","DisasterOfficer@getNotice"));
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
@@ -41,6 +42,8 @@ Route::POST("renew", array("Employee@renew"));
 Route::POST("rewoke", array("Employee@rewoke"));
 Route::POST("user", array("Admin@register", "DivisionalSecretariat@register", "DisasterOfficer@register"));
 Route::POST("notice", array("InventoryManager@addNotice", "DisasterOfficer@addNotice"));
+
+Route::DELETE("notice/{id}", array("InventoryManager@deleteNotice", "DisasterOfficer@deleteNotice"));
 
 // Grama Niladari
 Route::GET("residents", array("GramaNiladari@getResident"));

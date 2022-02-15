@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/searchList.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -206,7 +207,7 @@
                             <div style="float: right;width:30%">
                                 <table style="border: none !important;width:100%;">
                                     <tr>
-                                        <td><input type="reset"  class="view" value="Cancel"></td>
+                                        <td><input type="reset" style="margin-top: 0px;"  class="view" value="Cancel"></td>
                                         <td><input type="submit" class="create" value="Create"></td>
                                     </tr>
                                 </table>
@@ -218,12 +219,13 @@
         </div>
     </section>
     <!-- <script  src="<?php echo HOST; ?>public/assets/js/responsiblePersonAidReport.js"></script> -->
-
+    <div id="alertBox">
+    </div>
     <script defer>
         var thisPage = "#add";
         var output;
         var count = 0;
-        safeHouseList()
+        safeHouseList();
         $(document).ready(function() {
             $("#search,#add").each(function() {
                 if ($(this).hasClass('active')) {
@@ -285,12 +287,17 @@
                         }else{
                             alertGen("Unable to handle request.",2);
                         }
+                        console.log(result);
 					},
 					error: function(err) {
 						alertGen("Something went wrong.",3);
                         console.log(err);  
 					}
 				});
+            });
+            $(document).on('click','.closeMessege',function () {
+            $(".alert").fadeOut(100);
+                console.log("hello");
             });
         });
         //begginning of the text box filter

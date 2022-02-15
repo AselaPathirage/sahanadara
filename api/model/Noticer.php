@@ -13,23 +13,25 @@ trait Noticer{
             }
             $sql = "INSERT INTO `donationreqnotice` (`safehouseId`, `title`, `numOfFamilies`, `numOfPeople`, `note`) VALUES ($safeHouseId, '$title', '$numOfFamillies', '$numOfPeople', '$description');";
             $this->connection->query($sql);
-            $sql = "SELECT LAST_INSERT_ID();";
-            $execute = $this->connection->query($sql);
-            $r = $execute-> fetch_assoc();
-            $noticeId = $r["LAST_INSERT_ID()"];
-            $len = count($data['item']);
-            $items = array_keys($data['item']);
-            $values = array_values($data['item']);
-            $sql ="INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES ";
-            for ($x = 0; $x < $len; $x++) {
-                $item = $items[$x];
-                $value = $values[$x];
-                $sql  .= "($noticeId, '$item', $value)";
-                if(($x+1) != $len){
-                    $sql .= ", ";
+            if(count($data['item'])>0){
+                $sql = "SELECT LAST_INSERT_ID();";
+                $execute = $this->connection->query($sql);
+                $r = $execute-> fetch_assoc();
+                $noticeId = $r["LAST_INSERT_ID()"];
+                $len = count($data['item']);
+                $items = array_keys($data['item']);
+                $values = array_values($data['item']);
+                $sql ="INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES ";
+                for ($x = 0; $x < $len; $x++) {
+                    $item = $items[$x];
+                    $value = $values[$x];
+                    $sql  .= "($noticeId, '$item', $value)";
+                    if(($x+1) != $len){
+                        $sql .= ", ";
+                    }
                 }
+                $this->connection->query($sql);
             }
-            $this->connection->query($sql);
             echo json_encode(array("code"=>$errorCode['success']));
             exit();
         }else{
@@ -43,9 +45,10 @@ trait Noticer{
     }
     public function deleteNotice(array $data){
         global $errorCode;
-        if(isset($data['id'])){
-            $id = $data['id'];
-            $sql = "DELETE FROM noticeitem WHERE noticeId = $id;DELETE FROM donationreqnotice WHERE recordId = $id;";
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $pk = Notice::getId($id);;
+            $sql = "UPDATE donationreqnotice SET donationreqnotice.appovalStatus = 'd' WHERE donationreqnotice.recordId = $pk;";
             $this->connection->query($sql);
             http_response_code(200); 
             echo json_encode(array("code"=>$errorCode['success']));
@@ -133,14 +136,44 @@ trait Noticer{
         global $errorCode;
         $userId = $data['userId'];
         $division = $this->getDivision($userId);
-        $division = $division['dvId'];
-        $sql = "SELECT donationreqnotice.* FROM donationreqnotice WHERE donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division);";
+        $division = $division['id'];
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id=Notice::getId($id);
+            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.recordId = $id  AND donationreqnotice.appovalStatus <> 'd' AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC;";
+        }else{
+            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.appovalStatus <> 'd' AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC;";
+        }
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
+            $sql = "SELECT noticeitem.itemName,noticeitem.quantitity FROM noticeitem WHERE noticeitem.noticeId =".$r['recordId'];
+            $itemList = $this->connection->query($sql);
+            $r['item'] = array();
+            while($row = $itemList-> fetch_assoc()) {
+                $sql = "SELECT unit.unitName FROM item,unit WHERE item.unitType = unit.unitId AND item.itemName LIKE '%".$row['itemName']."%' LIMIT 1";
+                $query = $this->connection->query($sql);
+                if($query->num_rows==0){
+                    $unit = "Units";
+                }else{
+                    $unit = $query-> fetch_assoc()['unitName'];
+                }
+                $temp = array("item"=>$row['itemName'],"unit"=>$unit,"quantity"=>$row['quantitity']);
+                array_push($r['item'],$temp);
+            }
+
+            $r['recordId'] = Notice::getNoticeCode($r['recordId']);
+            $r['safehouseId'] = SafeHouse::getSafeHouseCode($r['safehouseId']);
+            if($r['appovalStatus']== 'a'){
+                $r['appovalStatus'] = "Approved"; 
+            }else if($r['appovalStatus']== 'u'){
+                $r['appovalStatus'] = "Need Updates";
+            }else{
+                $r['appovalStatus'] = "Pending";
+            }
             $results[] = $r;
         }
         $json = json_encode($results);
-        echo $json;echo "he";
+        echo $json;
     }
 }

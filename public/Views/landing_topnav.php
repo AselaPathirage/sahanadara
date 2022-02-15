@@ -54,6 +54,7 @@ if (isset($_COOKIE['lan'])) {
                     <form id="language" name="language">
                         <label class="select" for="lan" style="margin: 0;">
                             <select id="lan" name="lan" required="required" onchange="setLanguage()">
+                                    <option value="" selected='true'>Lan</option>
                                     <option value="en">EN</option>
                                     <option value="si">සිං</option>
                                     <option value="ta">தமிழ்</option>
@@ -87,37 +88,39 @@ if (isset($_COOKIE['lan'])) {
             var sub = "Sinhala";
         } else if (x == 'en') {
             var sub = "English";
-        } else {
+        } else if(x == 'ta'){
             var sub = "Tamil";
         }
-        var string = window.location.pathname;
-        if (string.includes("Sinhala")) {
-            var data = string.split('/Sinhala');
-            string = data[0];
-        } else if (string.includes("English")) {
-            var data = string.split('/English');
-            string = data[0];
-        } else if (string.includes("Tamil")) {
-            var data = string.split('/Tamil');
-            string = data[0];
-        }
-        var str = string.slice(-1);
-        var value = $('#language').serialize();
-        //console.log(value);
-        var request = $.ajax({
-            url: "<?php echo HOST; ?>/Handler/lanHandler",
-            type: "post",
-            data: value,
-            async:false
-        });
-        request.done(function(msg) {
-            //console.log(msg);
-        });
-        $('#lan').prop('selectedIndex',0);
-        if (str == '/') {
-            window.location = string + sub;
-        } else {
-            window.location = string + "/" + sub;
+        if(x){
+            var string = window.location.pathname;
+            if (string.includes("Sinhala")) {
+                var data = string.split('/Sinhala');
+                string = data[0];
+            } else if (string.includes("English")) {
+                var data = string.split('/English');
+                string = data[0];
+            } else if (string.includes("Tamil")) {
+                var data = string.split('/Tamil');
+                string = data[0];
+            }
+            var str = string.slice(-1);
+            var value = $('#language').serialize();
+            //console.log(value);
+            var request = $.ajax({
+                url: "<?php echo HOST; ?>/Handler/lanHandler",
+                type: "post",
+                data: value,
+                async:false
+            });
+            request.done(function(msg) {
+                //console.log(msg);
+            });
+            $('#lan').prop('selectedIndex',0);
+            if (str == '/') {
+                window.location = string + sub;
+            } else {
+                window.location = string + "/" + sub;
+            }
         }
     }
 
@@ -128,27 +131,29 @@ if (isset($_COOKIE['lan'])) {
             var sub = "Sinhala";
         } else if (val == 'en') {
             var sub = "English";
-        } else {
+        } else if(val == 'ta'){
             var sub = "Tamil";
         }
-        var string = window.location.pathname;
-        var temp =window.location.pathname;
-        if (string.includes("Sinhala")) {
-            var data = string.split('/Sinhala');
-            string = data[0];
-        } else if (string.includes("English")) {
-            var data = string.split('/English');
-            string = data[0];
-        } else if (string.includes("Tamil")) {
-            var data = string.split('/Tamil');
-            string = data[0];
-        }
+        if(val){
+            var string = window.location.pathname;
+            var temp =window.location.pathname;
+            if (string.includes("Sinhala")) {
+                var data = string.split('/Sinhala');
+                string = data[0];
+            } else if (string.includes("English")) {
+                var data = string.split('/English');
+                string = data[0];
+            } else if (string.includes("Tamil")) {
+                var data = string.split('/Tamil');
+                string = data[0];
+            }
 
-        var str = string.slice(-1);console.log(str);
-        if (str == '/') {
-            window.location = string + sub;
-        } else if(!(temp.includes("Sinhala") || temp.includes("English") || temp.includes("Tamil"))) {
-            window.location = string + "/" + sub;
+            var str = string.slice(-1);console.log(str);
+            if (str == '/') {
+                window.location = string + sub;
+            } else if(!(temp.includes("Sinhala") || temp.includes("English") || temp.includes("Tamil"))) {
+                window.location = string + "/" + sub;
+            }
         }
     }
 </script>

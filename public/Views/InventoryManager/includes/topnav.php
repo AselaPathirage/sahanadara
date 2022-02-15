@@ -8,25 +8,25 @@
                 <i class='bx bx-search'></i>
             </div> -->
     <div class="mid">
-        <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/">
+        <a href="<?php echo HOST; ?>/InventoryManager/Inventory/">
             <span class="links_name">Inventory</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/InventoryManager/SafeHouse/SafeHouseDetails">
+        <a href="<?php echo HOST; ?>/InventoryManager/SafeHouse/SafeHouseDetails">
             <span class="links_name">Safe House</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/InventoryManager/Notice/Search">
+        <a href="<?php echo HOST; ?>/InventoryManager/Notice/Search">
             <span class="links_name">Notice</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/InventoryManager/Report/InventoryReport">
+        <a href="<?php echo HOST; ?>/InventoryManager/Report/InventoryReport">
             <span class="links_name">Reports</span>
         </a>
     </div>
     <div class="rightcorner">
-        <a href="/<?php echo baseUrl; ?>/InventoryManager/profile">
+        <a href="<?php echo HOST; ?>/InventoryManager/profile">
             <i class='bx bx-user'></i>
             <span class="links_name">Profile</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
+        <a href="<?php echo HOST; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
         </a>

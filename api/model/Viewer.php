@@ -18,7 +18,7 @@ trait Viewer{
                     $sql = "SELECT safehouse.safeHouseID,safehouse.safeHouseName,safehouse.isUsing,safehouse.safeHouseAddress FROM safehouse,gndivision WHERE safehouse.safeHouseId = gndivision.safeHouseID AND gndivision.gndvId =".$q['gndvId'];
                     $safeHouseQuery = $this->connection->query($sql);
                     while($s = $safeHouseQuery-> fetch_assoc()) {
-                        $safeHouseId = SafeHouse::getItemCode($s['safeHouseID']);
+                        $safeHouseId = SafeHouse::getSafeHouseCode($s['safeHouseID']);
                         if($s['isUsing'] == 'n'){
                             $active = "No";
                             $temp4 = array(

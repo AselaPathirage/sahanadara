@@ -314,6 +314,7 @@
     </section>
     <script>
         var thisPage = "#Maintain";
+        var output;
         getUnit();
         getItem();
         getInventory();

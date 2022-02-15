@@ -260,6 +260,7 @@ tr:hover{
     </section>
     <script>
         var thisPage = "#Add";
+        var output;
         $(document).ready(function() {
             $("#Dashboard,#Maintain,#Add,#Aid,#Add,#Service").each(function() {
                 if ($(this).hasClass('active')){

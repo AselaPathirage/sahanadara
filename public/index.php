@@ -24,12 +24,18 @@ function renew(){
                 session_unset();
                 session_destroy();
                 session_start();
+                header("location:".HOST);
             }else{
                 $_SESSION['createdTime'] = time();
                 $_SESSION['key'] = $response['key'];
                 $_SESSION['userRole']= $response['userRole'];
                 $_SESSION['userId']= $response['userId'];
             }
+        }else{
+            //session_unset();
+            //session_destroy();
+            //session_start();
+            //header("location:".HOST);
         }
     }
 }

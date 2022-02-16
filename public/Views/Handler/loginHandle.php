@@ -27,7 +27,21 @@ if(isset($_POST['submit'])){
     //$res = session_save_path();
     //echo $res;
     if(key_exists('code',$response)){
-        header("location:../staff?error=wrong password");
+        if (isset($_COOKIE['lan'])) {
+            $lan = $_COOKIE['lan'];
+            if($lan=='si'){
+                header("location:../staff/Sinhala?error=wrong password");
+            }elseif($lan=='en'){
+                header("location:../staff/English?error=wrong password");
+            }elseif($lan=='ta'){
+                header("location:../staff/Tamil?error=wrong password");
+            }else{
+
+            }
+        }else{
+            header("location:../staff/English?error=wrong password");
+        }
+
         exit();
     }else{
         $time = time();

@@ -54,7 +54,7 @@ if (isset($_COOKIE['lan'])) {
                     <form id="language" name="language">
                         <label class="select" for="lan" style="margin: 0;">
                             <select id="lan" name="lan" required="required" onchange="setLanguage()">
-                                    <option value="" selected='true'>Lan</option>
+                                    <!-- <option value="" selected='true'>Lan</option> -->
                                     <option value="en">EN</option>
                                     <option value="si">සිං</option>
                                     <option value="ta">தமிழ்</option>
@@ -121,6 +121,8 @@ if (isset($_COOKIE['lan'])) {
             } else {
                 window.location = string + "/" + sub;
             }
+        }else{
+            
         }
     }
 

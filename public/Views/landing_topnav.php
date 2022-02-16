@@ -121,8 +121,6 @@ if (isset($_COOKIE['lan'])) {
             } else {
                 window.location = string + "/" + sub;
             }
-        }else{
-            
         }
     }
 
@@ -156,6 +154,17 @@ if (isset($_COOKIE['lan'])) {
             } else if(!(temp.includes("Sinhala") || temp.includes("English") || temp.includes("Tamil"))) {
                 window.location = string + "/" + sub;
             }
+        }else{
+            var request = $.ajax({
+                url: "<?php echo HOST; ?>/Handler/lanHandler",
+                type: "post",
+                data: 'lan=en',
+                async:false
+            });
+            request.done(function(msg) {
+                //console.log(msg);
+            });
+            urlManage();
         }
     }
 </script>

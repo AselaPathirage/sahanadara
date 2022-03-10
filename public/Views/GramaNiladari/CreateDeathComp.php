@@ -21,7 +21,7 @@
         button {
             margin-top: 15px;
             margin-left: 20px;
-           
+
             padding: 12px 20px;
             border: none;
             border-radius: 4px;
@@ -64,28 +64,39 @@
                             </div>
                             <div class="row">
                                 <div class="col3">
-                                    <label for="doc">Date</label>
+                                    <label for="doc" style="margin-top:6px">Date</label>
                                 </div>
 
                                 <div class="col9 row-content" style="align-items: center;">
-                                    <input type="date" id="birthday" name="birthday" class="datesInForms">
+                                    <input type="date" id="disdate" name="disdate" class="datesInForms">
+                                </div>
+
+                            </div>
+                            <h4 class="text-center">Details of the deceased person</h4>
+                            <div class="row">
+                                <div class="col3">
+                                    <label for="fname" style="margin-top:0">Full name of deceased person</label>
+                                </div>
+                                <div class="col9">
+                                    <input type="text" id="dname" name="dname" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col3">
+                                    <label for="ddate" style="margin-top:6px">Date of death</label>
+                                </div>
+
+                                <div class="col9 row-content" style="align-items: center;">
+                                    <input type="date" id="ddate" name="ddate" class="datesInForms">
                                 </div>
 
                             </div>
                             <div class="row">
                                 <div class="col3">
-                                    <label for="fname">Full name of deceased person</label>
+                                    <label for="dnic">NIC</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="fname" name="fname" placeholder="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="fname">ID</label>
-                                </div>
-                                <div class="col9">
-                                    <input type="text" id="NIC" name="NIC" placeholder="NIC">
+                                    <input type="text" id="dnic" name="dnic" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
@@ -93,58 +104,30 @@
                                     <label for="address">Address</label>
                                 </div>
                                 <div class="col9">
-                                    <textarea type="text" id="address" name="address" placeholder=""></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="TP number">Tele Number</label>
-                                </div>
-                                <div class="col9">
-                                    <input type="text" id="tpnumber" name="tpnumber" placeholder="">
+                                    <textarea type="text" id="daddress" name="daddress" placeholder=""></textarea>
                                 </div>
                             </div>
 
+
                             <div class="row">
                                 <div class="col3">
-                                    <label for="occupation">Occupation</label>
+                                    <label for="doccupation">Occupation</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="occupation" name="occupation" placeholder="">
+                                    <input type="text" id="doccupation" name="doccupation" placeholder="">
                                 </div>
                             </div>
 
                         </div>
 
                         <div class="tab">
+                            <h4 class="text-center">Details of the applicant</h4>
                             <div class="row">
                                 <div class="col3">
                                     <label for="fname">Applicant Name</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="fname" name="fname" placeholder="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="relationship">Relationship</label>
-                                </div>
-                                <div class="col9">
-                                    <input type="text" id="relationship" name="relationship" placeholder="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="Division">Division</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="Division" name="Division">
-                                        <option value="null">Select</option>
-                                        <option value="Gampaha">Agalawatta</option>
-                                        <option value="Colombo">Bandaragama</option>
-                                        <option value="Kaluthara">Beruwala</option>
-                                        <option value="Kaluthara">Millaniya</option>
-                                    </select>
+                                    <input type="text" id="aname" name="aname" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
@@ -152,81 +135,122 @@
                                     <label for="nic">NIC</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="nic" name="nic" placeholder="">
+                                    <input type="text" id="anic" name="anic" placeholder="">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="col3">
-                                    <label for="doc">Date of Death</label>
-                                </div>
-                                <div class="col9 row-content" style="align-items: center;">
-                                    <input type="date" id="birthday" name="birthday" class="datesInForms">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="lastwill">Last will?</label>
+                                    <label for="TP number">Telephone Number</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="lastwill" name="lastwill">
+                                    <input type="text" id="atpnumber" name="atpnumber" placeholder="">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col3">
+                                    <label for="relationship">Relationship</label>
+                                </div>
+                                <div class="col9">
+                                    <select id="relationship" name="relationship">
                                         <option value="null">Select</option>
-                                        <option value="yes">Yes</option>
-                                        <option value="no">No</option>
+                                        <option value="Wife">Wife</option>
+                                        <option value="Husband">Husband</option>
+                                        <option value="Mother">Mother</option>
+                                        <option value="Father">Father</option>
+                                        <option value="Child">Child</option>
+                                        <option value="Other(Trustee)">Other(Trustee)</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="TP number">Number of Heirs</label>
-                                </div>
-                                <div class="col9 row-content" style="align-items: center;">
-                                    <input type="number" id="birthday" name="birthday" class="datesInForms">
-                                </div>
-                            </div>
+
+
+
+
+
                         </div>
 
                         <div class="tab">
-                            <h3>Bank Details of Heirs</h3>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="fname">Name</label>
+                            <h4 class="text-center">Details of heirs</h4>
+                            <div class="table-repsonsive">
+                                <span id="error"></span>
+                                <table class="table table-bordered" style="width:70%;margin:0" id="item_table">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50%;">Item</th>
+                                            <th style="width: 30%;">Quantity</th>
+                                            <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+
+                                <div id="heir1">
+                                    <div class="row">
+                                        <div class="col10">
+                                            <div class="row">
+                                                <div class="col3">
+                                                    <label for="fname">Name</label>
+                                                </div>
+                                                <div class="col9">
+                                                    <input type="text" id="hname" name="hname" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col3">
+                                                    <label for="fname">NIC</label>
+                                                </div>
+                                                <div class="col9">
+                                                    <input type="text" id="hnic" name="hnic" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col3">
+                                                    <label for="fname">Relationship</label>
+                                                </div>
+                                                <div class="col9">
+                                                    <input type="text" id="hrelationship" name="hrelationship" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col3">
+                                                    <label for="bank">Bank</label>
+                                                </div>
+                                                <div class="col9">
+                                                    <input type="text" id="hbank" name="hbank" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col3">
+                                                    <label for="branch">Branch</label>
+                                                </div>
+                                                <div class="col9">
+                                                    <input type="text" id="hbranch" name="hbranch" placeholder="">
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col3">
+                                                    <label for="nic" style="margin-top:1px">Account Number</label>
+                                                </div>
+                                                <div class="col9">
+                                                    <input type="number" id="nic" name="nic" placeholder="">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col2">
+                                            <button type="button" name="remove" class="form-control add">Remove</button>
+                                        </div>
+
+                                    </div>
+
                                 </div>
-                                <div class="col9">
-                                    <input type="text" id="fname" name="fname" placeholder="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="bank">Bank</label>
-                                </div>
-                                <div class="col9">
-                                    <input type="text" id="bank" name="bank" placeholder="">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="branch">Branch</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="branch" name="branch">
-                                        <option value="null">Select</option>
-                                        <option value="Gampaha">Horana</option>
-                                        <option value="Colombo">Bandaragama</option>
-                                        <option value="Kaluthara">Beruwala</option>
-                                        <option value="Kaluthara">Millaniya</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="nic">Accont Number</label>
-                                </div>
-                                <div class="col9">
-                                    <input type="text" id="nic" name="nic" placeholder="">
-                                </div>
+
+
+                                <button type="button" name="add" class="form-control add" style="width:70%;">Add</button>
+
                             </div>
 
-                            <div class="row">
+
+                            <!-- <div class="row">
                                 <div class="col3">
                                     <label for="upload">Upload certified photocopies</label>
 
@@ -273,7 +297,7 @@
                                 <div class="col9">
                                     <input type="submit" style="background-color: darkblue;" value="Upload">
                                 </div>
-                            </div>
+                            </div> -->
                             <!-- <div class="row " style="text-align:right;justify-content: right;">
                                 <input type="submit" style="background-color: red;" value="Cancel">
                                 <input type="submit" style="background-color: darkblue;" value="Submit">
@@ -290,13 +314,14 @@
                                 <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
                             </div>
                         </div>
+                    </div>
                 </form>
             </div>
         </div>
 
 
 
-        </div>
+
 
 
 
@@ -310,6 +335,22 @@
                 }
                 $(thisPage).addClass("active");
             });
+
+            $(document).on('click', '.add', function() {
+                var html = '';
+                html += "<tr>";
+                html += "<td><input type='text' style='text-transform: capitalize;' required='true' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                html += "<td><input type='text' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
+                html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
+                $('#item_table > tbody').append(html);
+                count++;
+            });
+
+            $(document).on('click', '.remove', function() {
+                $(this).closest('tr').remove();
+            });
+
+
 
         });
 

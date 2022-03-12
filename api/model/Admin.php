@@ -194,6 +194,28 @@ class Admin extends Employee{
         }
     }
 
+    public function getUserCount(array $data){
+        global $errorCode;
+        $roleId = $data['receivedParams'][1];
+        switch ($roleId) {
+            case 1:
+                $sql ="SELECT COUNT(gramaniladari.gramaNiladariID) as total FROM gramaniladari";
+                break;
+            case 3:
+                $sql ="SELECT COUNT(districtsecretariat.districtSecretariatID) as total FROM districtsecretariat";
+                break;
+            case 4:
+                $sql ="SELECT COUNT(divisionalsecretariat.divisionalSecretariatID) as total FROM divisionalsecretariat";
+                break;
+            case 6:
+                $sql ="SELECT COUNT(dmc.dmcID) as total FROM dmc;";
+                break;
+        }
+        $excute = $this->connection->query($sql);
+        $results = $excute-> fetch_assoc();
+        $json = json_encode($results);
+        echo $json;
+    }
 
 } 
 

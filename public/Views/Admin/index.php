@@ -34,9 +34,7 @@
                             <i class='bx bx-user cart one'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                20
-                            </h2>
+                            <h2 id="discount" class="services__title" style="color: black; font-size: 52px; font-weight: bold;"></h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
                             <h2 class="services__title">
@@ -55,9 +53,7 @@
                             <i class='bx bx-user cart two'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                80
-                            </h2>
+                            <h2 id="divcount" class="services__title" style="color: black; font-size: 52px; font-weight: bold;"></h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
                             <h2 class="services__title">
@@ -76,9 +72,7 @@
                             <i class='bx bx-user cart three'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                80
-                            </h2>
+                            <h2 id="dmccount" class="services__title" style="color: black; font-size: 52px; font-weight: bold;"></h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
                             <h2 class="services__title">
@@ -97,9 +91,7 @@
                             <i class='bx bx-user cart four'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                500
-                            </h2>
+                            <h2 id="gndcount" class="services__title" style="color: black; font-size: 52px; font-weight: bold;"></h2>
                         </figure>
                         <div class="services__content" style="margin-top: 150px;">
                             <h2 class="services__title">
@@ -122,13 +114,33 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            var gndCount = getUserCount(1);
+            var divCount = getUserCount(4);
+            var disCount = getUserCount(3);
+            var dmcCount = getUserCount(6);
+            console.log(disCount);
+            $('#discount').text(disCount);
+            $('#divcount').text(divCount);
+            $('#dmccount').text(dmcCount);
+            $('#gndcount').text(gndCount);
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+
+        function getUserCount($roleId) {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>user/count/"+$roleId,
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            return output.total;
         }
     </script>
 </body>

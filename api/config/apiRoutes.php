@@ -17,6 +17,7 @@ Route::GET("item", array("InventoryManager@getAllItem"));
 Route::GET("item/{filter}", array("InventoryManager@getItemFiltered", "DisasterOfficer@getItemFiltered", "ResponsiblePerson@getItemFiltered"));
 Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("Admin@searchUser"));
+Route::GET("user/count/{data}", array("Admin@getUserCount"));
 Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser"));
 Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));

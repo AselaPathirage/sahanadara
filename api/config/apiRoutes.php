@@ -8,7 +8,8 @@ DELETE - delete
 
 Route::GET("/", array("Home@creadits"));
 Route::GET("donation", array("Home@viewDonations"));
-Route::GET("notice", array("Home@viewNotice"));
+Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice"));
+Route::GET("notice/{id}", array("InventoryManager@getNotice","DisasterOfficer@getNotice"));
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
@@ -25,7 +26,7 @@ Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("safehouse/{dataType}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
-Route::GET("incident", array("GramaNiladari@getIncidents"));
+Route::GET("incident", array("GramaNiladari@getIncidents","DisasterOfficer@getIncidents"));
 Route::GET("incident/{id}", array("GramaNiladari@getIncidentById"));
 Route::GET("GnDivision/{data}", array("DisasterOfficer@getGNDivision"));
 Route::GET("statistics", array("ResponsiblePerson@getStats", "InventoryManager@getStats"));
@@ -42,6 +43,8 @@ Route::POST("renew", array("Employee@renew"));
 Route::POST("rewoke", array("Employee@rewoke"));
 Route::POST("user", array("Admin@register", "DivisionalSecretariat@register", "DisasterOfficer@register"));
 Route::POST("notice", array("InventoryManager@addNotice", "DisasterOfficer@addNotice"));
+
+Route::DELETE("notice/{id}", array("InventoryManager@deleteNotice", "DisasterOfficer@deleteNotice"));
 
 // Grama Niladari
 Route::GET("residents", array("GramaNiladari@getResident"));

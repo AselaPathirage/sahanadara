@@ -158,9 +158,8 @@
                 var json = JSON.stringify(object);
                 console.log(json);
                 $("#generate").trigger("reset");
-                if($('#user_role').val() == 0){
-                    getUsers();
-                }
+                var userRole = object["user_role"];
+                getUsers(userRole,object);
                 renderUser(); 
             });
 
@@ -194,16 +193,113 @@
             }
         });
 
-        function getUsers(){
-            output = $.parseJSON($.ajax({
-                type: "GET",
-                url: "<?php echo API; ?>user",
-                dataType: "json", 
-                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                cache: false,
-                async: false
-            }).responseText);
-            console.log(output);
+        function getUsers(userRole,object){
+            var json = JSON.stringify(object);
+            if (userRole == 0){
+                output = $.parseJSON($.ajax({
+                    type: "GET",
+                    url: "<?php echo API; ?>user",
+                    dataType: "json", 
+                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                    cache: false,
+                    async: false
+                }).responseText);
+            }
+            if (userRole == 1){
+                var gndivision = object["Gndivision"];
+                if (gndivision == "null"){
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/1",
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    console.log(output);
+                }else{
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/filter/1/"+gndivision,
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    console.log(output);
+                }
+            }
+            if (userRole == 4){
+                var division = object["Division"];
+                if (division == "null"){
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/4",
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                }else{
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/filter/4/"+division,
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    console.log(output);
+                }
+            }
+            if (userRole == 6){
+                var division = object["Division"];
+                if (division == "null"){
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/6",
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    console.log(output);
+                }else{
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/filter/6/"+division,
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    console.log(output);
+                }
+            }
+            if (userRole == 3){
+                var district = object["District"];
+                if (district == "null" || district == ""){
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/3",
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    console.log(output);
+                }else{
+                    output = $.parseJSON($.ajax({
+                        type: "GET",
+                        url: "<?php echo API; ?>user/filter/3/"+district,
+                        dataType: "json", 
+                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        cache: false,
+                        async: false
+                    }).responseText);
+                    console.log(output);
+                }
+            }
         }
 
         function renderUser(){

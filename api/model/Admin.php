@@ -217,6 +217,31 @@ class Admin extends Employee{
         echo $json;
     }
 
+    public function getFilteredUser(array $data){
+        global $errorCode;
+        $roleId = $data['receivedParams'][1];
+        switch ($roleId) {
+            case 1:
+                $sql0 = "SELECT gramaniladari.gramaNiladariID as empId, gramaniladari.empName, gramaniladari.empAddress, gramaniladari.empEmail, gramaniladari.empTele , role.roleName, role.roleName  FROM gramaniladari INNER JOIN gndivision ON gndivision.gramaNiladariID = gramaniladari.gramaNiladariID, role WHERE role.roleId = 1 AND gndivision.gndvId = '".$data['receivedParams'][2]."' ";
+                break;
+            case 3:
+                $sql0 = "SELECT districtsecretariat.districtSecretariatID as empId, districtsecretariat.empName, districtsecretariat.empAddress, districtsecretariat.empEmail, districtsecretariat.empTele, role.roleName, role.roleName FROM districtsecretariat INNER JOIN districtsoffice on districtsoffice.districtSecretariat = districtsecretariat.districtSecretariatID , role WHERE role.roleId = 3 AND districtsoffice.dsId = '".$data['receivedParams'][2]."'";
+                break;
+            case 4:
+                $sql0 = "SELECT divisionalsecretariat.divisionalSecretariatID as empId, divisionalsecretariat.empName, divisionalsecretariat.empAddress, divisionalsecretariat.empEmail, divisionalsecretariat.empTele, role.roleName, role.roleName FROM divisionalsecretariat INNER JOIN divisionaloffice on divisionaloffice.divisionalSecretariatID = divisionalsecretariat.divisionalSecretariatID , role WHERE role.roleId = 4 AND divisionaloffice.dvId = '".$data['receivedParams'][2]."'";
+                break;
+            case 6:
+                $sql0 = "SELECT dmc.dmcID as empId, dmc.empName, dmc.empAddress, dmc.empEmail, dmc.empTele, role.roleName, role.roleName FROM dmc INNER JOIN divisionaloffice on divisionaloffice.disasterManager = dmc.dmcID , role WHERE role.roleId = 6 AND divisionaloffice.dvId = '".$data['receivedParams'][2]."'";
+        }
+        $excute = $this->connection->query($sql0);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
 } 
 
 

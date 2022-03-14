@@ -21,6 +21,7 @@ Route::GET("user/count/{data}", array("Admin@getUserCount"));
 Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser"));
 Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));
+Route::GET("user/filter/{data}/{data}", array("Admin@getFilteredUser"));
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));

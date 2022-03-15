@@ -23,17 +23,17 @@
         <?php include './public/Views/landing_topnav.php'; ?>
         <section id="hero">
             <video id="video1" preload="" autoplay="" muted="" playsinline="" loop="">
-                <source src="/<?php echo baseUrl; ?>/public/assets/video/homevideo_1.mp4" type="video/mp4">
+                <source src="<?php echo HOST; ?>public/assets/video/homevideo_1.mp4" type="video/mp4">
             </video>
             <div class="background text-center row">
                 <div class="blueback " style="margin: auto auto;">
                     <div class=" container col9">
-                        <h1 class="title">S A H A N A D A R A</h1>
-                        <h3 class=" sub">Are you interested in doing good for our most vulnerable neighbors who are suffering from natural disasters ?</h3>
+                        <h1 class="title" id="header"></h1>
+                        <h3 class=" sub" id="subHeader"></h3>
                         <!-- <a href="/<?php echo baseUrl; ?>/donate" class="btn_donate">Donate</a> -->
                         <div class="space"></div>
                         <section class="services">
-                            <a href="/<?php echo baseUrl; ?>/donate">
+                            <a href="<?php echo HOST; ?>donate">
                                 <div class="services__box">
                                     <figure class="services__icon" style="--i:#ffb508">
                                         <ion-icon name="videocam-outline">
@@ -42,8 +42,8 @@
                                         </ion-icon>
                                     </figure>
                                     <div class="services__content">
-                                        <h2 class="services__title">
-                                            Help
+                                        <h2 class="services__title" id="cardH">
+                                            
                                         </h2>
                                         <!-- <p class="services__description">
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
@@ -51,14 +51,14 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="/<?php echo baseUrl; ?>/help">
+                            <a href="<?php echo HOST; ?>help">
                                 <div class="services__box">
                                     <figure class="services__icon" style="--i:#C60606">
                                         <ion-icon name="videocam-outline"><i class="fas fa-donate"></i></ion-icon>
                                     </figure>
                                     <div class="services__content">
-                                        <h2 class="services__title">
-                                            Donate
+                                        <h2 class="services__title" id="cardP">
+                                            
                                         </h2>
                                         <!-- <p class="services__description">
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
@@ -78,11 +78,11 @@
             <div class="container text-center ">
                 <div class="row aboutsec_aboutpage" style="margin:60px auto 0;">
                     <div class="col5 row-content">
-                        <h2>Looking for a reliable way to support people who are affected by natural disasters?</h2>
-                        <p>Turn your occasion into a fundraising opportunity for neighbours in need. SAHANADARA empowers both individuals and non profits to fundraising into action</p>
+                        <h2 id="topic"></h2>
+                        <p id="paragraph"></p>
                     </div>
                     <div class="col7">
-                        <img src="/<?php echo baseUrl; ?>/public/assets/img/images.jpg" alt="" style="border-radius: 5px;width:95%;">
+                        <img src="<?php echo HOST; ?>public/assets/img/images.jpg" alt="" style="border-radius: 5px;width:95%;">
                     </div>
 
                 </div>
@@ -90,7 +90,7 @@
 
 
             <div class="help container text-center" id="help">
-                <h1>Donation Requesting Notices</h1>
+                <h1 id="topicTwo"></h1>
 
                 <div class="row text-center">
                     <!-- <div class="col5 box row-content">
@@ -179,7 +179,7 @@
                 </div> -->
 
 
-                <a href="/<?php echo baseUrl; ?>/help" class="seemore">See more</a>
+                <a href="<?php echo HOST; ?>help" class="seemore">See more</a>
             </div>
             <div class="help container text-center" id="help">
                 <h1>Fund Raises</h1>
@@ -275,7 +275,7 @@
 
 
 
-                <a href="/<?php echo baseUrl; ?>/donate" class="seemore">See more</a>
+                <a href="<?php echo HOST; ?>donate" class="seemore">See more</a>
             </div>
 
         </div>
@@ -339,6 +339,57 @@
             $thisCard.removeClass('is-expanded').addClass('is-collapsed');
             $cards.not($thisCard).removeClass('is-inactive');
         });
+
+        //Language translation part
+        window.onload = async function (){
+            var language = getCookieValue('lan');
+            try {
+                const response = await fetch("<?php echo HOST; ?>" + "public/assets/json/lanSupport.json", {method: "GET"});
+                let dataJson = JSON.parse(await response.text());
+                if (language == 'si') {
+                    var sub = 0;
+                } else if (language == 'en') {
+                    var sub = 1;
+                } else if(language == 'ta'){
+                    var sub = 2;
+                }
+                //menu items
+                document.getElementById("home").innerHTML= dataJson[sub].menu.home;
+                document.getElementById("about").innerHTML= dataJson[sub].menu.about;
+                document.getElementById("help").innerHTML= dataJson[sub].menu.help;
+                document.getElementById("donate").innerHTML= dataJson[sub].menu.donate;
+                if(!document.getElementById("staff").innerHTML){
+                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                }
+                
+                //body items
+                document.getElementById("header").innerHTML= dataJson[sub].homePage.header;
+                document.getElementById("subHeader").innerHTML= dataJson[sub].homePage.subHeader;
+                document.getElementById("cardH").innerHTML= dataJson[sub].homePage.cardH;
+                document.getElementById("cardP").innerHTML= dataJson[sub].homePage.cardP;
+                document.getElementById("topic").innerHTML= dataJson[sub].homePage.topic;
+                document.getElementById("paragraph").innerHTML= dataJson[sub].homePage.paragraph;
+                document.getElementById("topicTwo").innerHTML= dataJson[sub].homePage.topicTwo;
+                console.log(dataJson);
+            }catch (e) {
+                console.error(e);
+                //menu items
+                document.getElementById("home").innerHTML="Home";
+                document.getElementById("about").innerHTML="About";
+                document.getElementById("help").innerHTML="Help";
+                document.getElementById("donate").innerHTML="Donate";
+                document.getElementById("staff").innerHTML="Donate";
+
+                //body items
+                document.getElementById("header").innerHTML= "S A H A N A D A R A";
+                document.getElementById("subHeader").innerHTML= "Are you interested in doing good for our most vulnerable neighbors who are suffering from natural disasters ?";
+                document.getElementById("cardH").innerHTML= "Help";
+                document.getElementById("cardP").innerHTML= "Donate";
+                document.getElementById("topic").innerHTML= "Looking for a reliable way to support people who are affected by natural disasters?";
+                document.getElementById("paragraph").innerHTML= "Turn your occasion into a fundraising opportunity for neighbours in need. SAHANADARA empowers both individuals and non profits to fundraising into action";
+                document.getElementById("topicTwo").innerHTML= "Donation Requesting Notices";
+            }
+        };
     </script>
 </body>
 

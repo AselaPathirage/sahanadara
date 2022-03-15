@@ -15,7 +15,7 @@ if (isset($_COOKIE['lan'])) {
         <!--  Menu compatible with wp_nav_menu  -->
         <ul id="primary-menu" class="menu nav-menu">
 
-            <li class="menu-item current-menu-item"><a class="nav__link" href="<?php echo HOST; ?>">Home</a></li>
+            <li class="menu-item current-menu-item"><a class="nav__link" href="<?php echo HOST; ?>" id="home"></a></li>
             <!-- <li class="menu-item dropdown"><a class="nav__link" href="#">About</a>
                 <ul class="sub-nav">
                     <li><a class="sub-nav__link" href="#">link 1</a></li>
@@ -26,9 +26,9 @@ if (isset($_COOKIE['lan'])) {
             </li> -->
 
 
-            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>about">About </a>
-            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>help">Help </a>
-            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>donate">Donate </a>
+            <li class="menu-item "><a class="nav__link" href="<?php echo HOST; ?>about" id="about"> </a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>help" id="help"> </a>
+            <li class="menu-item "><a class="nav__link round" href="<?php echo HOST; ?>donate" id="donate"> </a>
                 <?php
                 $folder = array(
                     5 => 'Admin',
@@ -41,9 +41,9 @@ if (isset($_COOKIE['lan'])) {
                     8 => 'ResponsiblePerson'
                 );
                 if (isset($_SESSION['key']) && isset($_SESSION['name']) && isset($_SESSION['userRole'])) {
-                    echo "<li class='menu-item'><a class='nav__link' href='" . HOST . $folder[$_SESSION['userRole']] . "'>Hi, " . $_SESSION['name'] . " </a>";
+                    echo "<li class='menu-item'><a class='nav__link' href='" . HOST . $folder[$_SESSION['userRole']] . "'  id='staff'>Hi, " . $_SESSION['name'] . " </a>";
                 } else {
-                    echo "<li class='menu-item'><a class='nav__link' href='" . HOST . "staff'>Staff </a>";
+                    echo "<li class='menu-item'><a class='nav__link' href='" . HOST . "staff' id='staff'> </a>";
                 }
                 ?>
 

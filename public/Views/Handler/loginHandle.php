@@ -30,16 +30,16 @@ if(isset($_POST['submit'])){
         if (isset($_COOKIE['lan'])) {
             $lan = $_COOKIE['lan'];
             if($lan=='si'){
-                header("location:../staff/Sinhala?error=wrong password");
+                header("location:".HOST."staff/Sinhala?error=wrong password");
             }elseif($lan=='en'){
-                header("location:../staff/English?error=wrong password");
+                header("location:".HOST."staff/English?error=wrong password");
             }elseif($lan=='ta'){
-                header("location:../staff/Tamil?error=wrong password");
+                header("location:".HOST."staff/Tamil?error=wrong password");
             }else{
 
             }
         }else{
-            header("location:../staff/English?error=wrong password");
+            header("location:".HOST."staff/English?error=wrong password");
         }
 
         exit();

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2022 at 04:59 PM
+-- Generation Time: Mar 15, 2022 at 05:06 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -387,23 +387,6 @@ CREATE TABLE `donationreqnotice` (
   `appovalStatus` char(1) NOT NULL DEFAULT 'n',
   `remark` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `donationreqnotice`
---
-
-INSERT INTO `donationreqnotice` (`recordId`, `safehouseId`, `title`, `numOfFamilies`, `numOfPeople`, `createdDate`, `approvedDate`, `note`, `appovalStatus`, `remark`) VALUES
-(2, 1, 'test 2', 10, 22, '2022-02-13 20:54:27', '0000-00-00 00:00:00', NULL, 'a', NULL),
-(5, 3, 'test3', 10, 22, '2022-02-13 21:13:09', NULL, NULL, 'd', NULL),
-(7, 1, 'test 4', 18, 35, '2022-02-13 21:14:25', '0000-00-00 00:00:00', NULL, 'u', 'Data not clear'),
-(23, 1, 'test 12', 12, 30, '2022-02-14 17:25:28', NULL, '', 'd', NULL),
-(25, 1, 'test 12', 12, 30, '2022-02-14 17:25:41', NULL, '', 'd', NULL),
-(27, 2, 'test 14', 3, 10, '2022-02-14 17:30:58', NULL, '', 'n', NULL),
-(28, 1, 'test 15', 5, 30, '2022-02-14 17:32:37', NULL, '', 'd', NULL),
-(29, 2, 'test 16', 5, 35, '2022-02-14 17:33:32', NULL, '', 'd', NULL),
-(30, 1, 'test 18', 10, 40, '2022-02-14 17:36:30', NULL, '', 'd', NULL),
-(31, 1, 'test 20', 10, 28, '2022-02-14 17:45:18', NULL, '', 'd', NULL),
-(32, 1, 'test', 12, 30, '2022-02-15 19:28:56', NULL, 'test test test', 'n', NULL);
 
 -- --------------------------------------------------------
 
@@ -952,21 +935,6 @@ CREATE TABLE `noticeitem` (
   `itemName` varchar(20) NOT NULL,
   `quantitity` decimal(6,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `noticeitem`
---
-
-INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
-(10, '500 L Water Tank', '1.00'),
-(11, '500 L Water Tank', '1.00'),
-(12, '500 L Water Tank', '1.00'),
-(14, 'Tent', '3.00'),
-(18, 'Tent', '3.00'),
-(19, 'Tent', '3.00'),
-(32, 'Lentils', '15.00'),
-(32, 'Rice', '50.00'),
-(32, 'Tent', '5.00');
 
 -- --------------------------------------------------------
 
@@ -1586,7 +1554,7 @@ ALTER TABLE `dmc`
 -- AUTO_INCREMENT for table `donationreqnotice`
 --
 ALTER TABLE `donationreqnotice`
-  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gndivision`
@@ -1878,16 +1846,6 @@ ALTER TABLE `servicerequest`
 ALTER TABLE `servicerequestitem`
   ADD CONSTRAINT `servicerequestitem_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `servicerequest` (`inventoryId`),
   ADD CONSTRAINT `servicerequestitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
-
-DELIMITER $$
---
--- Events
---
-CREATE DEFINER=`root`@`localhost` EVENT `password_reset_token_exipiring_event` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-11-20 19:04:09' ON COMPLETION PRESERVE ENABLE COMMENT 'Clean up token every 30 minutes daily!' DO DELETE FROM resetpass WHERE resetpass.createdTime < DATE_SUB(NOW(), INTERVAL 1 DAY)$$
-
-CREATE DEFINER=`root`@`localhost` EVENT `increament_days_spent` ON SCHEDULE EVERY 24 HOUR STARTS '2022-01-23 00:00:00' ON COMPLETION PRESERVE ENABLE COMMENT 'increament days of spent' DO UPDATE safehouse SET days = days + 1$$
-
-DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

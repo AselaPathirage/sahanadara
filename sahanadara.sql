@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 15, 2022 at 05:06 AM
+-- Generation Time: Mar 15, 2022 at 12:47 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -974,6 +974,34 @@ INSERT INTO `relief` (`reliefId`, `date`, `description`, `incidentId`, `f1`, `f2
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `reqId` int(3) NOT NULL,
+  `requestDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `requestDuration` datetime NOT NULL,
+  `requestDiscription` varchar(300) NOT NULL,
+  `requestedBy` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requestsitem`
+--
+
+CREATE TABLE `requestsitem` (
+  `reqId` int(3) NOT NULL,
+  `acceptedBy` int(3) NOT NULL,
+  `itemId` int(2) NOT NULL,
+  `quantity` decimal(6,2) NOT NULL,
+  `sendBackBefore` date DEFAULT '1111-11-11'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `resetpass`
 --
 
@@ -1405,6 +1433,21 @@ ALTER TABLE `relief`
   ADD KEY `fk_gndv2` (`gndvId`);
 
 --
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`reqId`),
+  ADD KEY `requestedBy` (`requestedBy`);
+
+--
+-- Indexes for table `requestsitem`
+--
+ALTER TABLE `requestsitem`
+  ADD PRIMARY KEY (`reqId`,`acceptedBy`,`itemId`),
+  ADD KEY `acceptedBy` (`acceptedBy`),
+  ADD KEY `itemId` (`itemId`);
+
+--
 -- Indexes for table `resetpass`
 --
 ALTER TABLE `resetpass`
@@ -1623,6 +1666,18 @@ ALTER TABLE `relief`
   MODIFY `reliefId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `reqId` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `requestsitem`
+--
+ALTER TABLE `requestsitem`
+  MODIFY `reqId` int(3) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `resetpass`
 --
 ALTER TABLE `resetpass`
@@ -1803,6 +1858,20 @@ ALTER TABLE `relief`
   ADD CONSTRAINT `fk_incId1` FOREIGN KEY (`incidentId`) REFERENCES `incident` (`incidentId`);
 
 --
+-- Constraints for table `requests`
+--
+ALTER TABLE `requests`
+  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`requestedBy`) REFERENCES `inventory` (`inventoryId`);
+
+--
+-- Constraints for table `requestsitem`
+--
+ALTER TABLE `requestsitem`
+  ADD CONSTRAINT `requestsitem_ibfk_1` FOREIGN KEY (`reqId`) REFERENCES `requests` (`reqId`),
+  ADD CONSTRAINT `requestsitem_ibfk_2` FOREIGN KEY (`acceptedBy`) REFERENCES `inventory` (`inventoryId`),
+  ADD CONSTRAINT `requestsitem_ibfk_3` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+
+--
 -- Constraints for table `resident`
 --
 ALTER TABLE `resident`
@@ -1846,6 +1915,16 @@ ALTER TABLE `servicerequest`
 ALTER TABLE `servicerequestitem`
   ADD CONSTRAINT `servicerequestitem_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `servicerequest` (`inventoryId`),
   ADD CONSTRAINT `servicerequestitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `password_reset_token_exipiring_event` ON SCHEDULE EVERY 30 MINUTE STARTS '2021-11-20 19:04:09' ON COMPLETION PRESERVE ENABLE COMMENT 'Clean up token every 30 minutes daily!' DO DELETE FROM resetpass WHERE resetpass.createdTime < DATE_SUB(NOW(), INTERVAL 1 DAY)$$
+
+CREATE DEFINER=`root`@`localhost` EVENT `increament_days_spent` ON SCHEDULE EVERY 24 HOUR STARTS '2022-01-23 00:00:00' ON COMPLETION PRESERVE ENABLE COMMENT 'increament days of spent' DO UPDATE safehouse SET days = days + 1$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -2,11 +2,11 @@
     {
         "language":"si",
         "menu":{
-            "home":"",
-            "about":"",
-            "help":"",
-            "donate":"",
-            "staff":""
+            "home":"නිවස",
+            "about":"ගැන",
+            "help":"උදව්",
+            "donate":"පරිත්‍යාග කරන්න",
+            "staff":"කාර්ය මණ්ඩලය"
         },
         "homePage":{
             "header":"",

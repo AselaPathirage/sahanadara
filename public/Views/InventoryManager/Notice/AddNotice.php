@@ -78,7 +78,7 @@
 
         .output {
             list-style: none;
-            width: 20%;
+            width: 21.1%;
             min-height: 0px;
             border-top: 0 !important;
             color: #767676;

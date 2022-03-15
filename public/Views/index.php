@@ -358,7 +358,8 @@
                 document.getElementById("about").innerHTML= dataJson[sub].menu.about;
                 document.getElementById("help").innerHTML= dataJson[sub].menu.help;
                 document.getElementById("donate").innerHTML= dataJson[sub].menu.donate;
-                if(!document.getElementById("staff").innerHTML){
+                console.log(document.getElementById("staff").innerHTML);
+                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
                     document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
                 }
                 

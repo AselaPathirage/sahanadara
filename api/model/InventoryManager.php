@@ -266,6 +266,45 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
+    public function getAids(array $data){
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $division = $this->getDivision($uid)['id'];
+        $sql = "SELECT sf.safehouseId,s.statusId, i.itemId,i.itemName, SUM(s.quantity) AS quantity FROM safehousestatusrequesteditem s,item i, safehousestatus sf, gndivision gn WHERE s.statusId = sf.r_id AND s.itemId = i.itemId AND sf.safehouseId = gn.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = $division) GROUP BY sf.safehouseId,i.itemId ORDER BY sf.createdDate DESC;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $safeHouseId = SafeHouse::getSafeHouseCode($r['safehouseId']);
+            $r['safehouseId'] = $safeHouseId;
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getAidsSafeHouse(array $data){
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $division = $this->getDivision($uid)['id'];
+        $sql = "WITH cte AS (SELECT sf.safehouseId,sh.safeHouseName,sf.adultMale+sf.adultFemale+sf.children+sf.disabledPerson AS quantity, ROW_NUMBER() OVER (PARTITION BY sf.safehouseId ORDER BY sf.createdDate DESC) AS rn FROM safehousestatusrequesteditem s, safehousestatus sf, gndivision gn, safehouse sh WHERE s.statusId = sf.r_id AND sf.safehouseId = gn.safeHouseID AND gn.safeHouseID = sh.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = 10) ORDER BY sf.createdDate)SELECT * FROM cte WHERE rn = 1;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $safeHouseId = SafeHouse::getSafeHouseCode($r['safehouseId']);
+            $r['safehouseId'] = $safeHouseId;
+            unset($r['rn']);
+            if($r['quantity']<20){
+                $priority = 'low';
+            }elseif($r['quantity']<50){
+                $priority = 'medium';
+            }else{
+                $priority = 'high';
+            }
+            $r['priority'] = $priority;
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
     public function getDistrict($userId){
         $this->inventory->setInfo($userId);
         $temp = $this->inventory->getDistrict();

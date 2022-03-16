@@ -88,6 +88,8 @@ Route::GET("inventory", array("InventoryManager@getInventory"));
 Route::GET("availableItem", array("InventoryManager@availableItem"));
 Route::GET("neighbour", array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count", array("InventoryManager@countItem"));
+Route::GET("aids", array("InventoryManager@getAids"));
+Route::GET("aids/safeHouse", array("InventoryManager@getAidsSafeHouse"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));

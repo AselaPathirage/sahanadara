@@ -126,7 +126,6 @@ class ResponsiblePerson  extends Employee{
                             $input .= ",";
                         }
                     }
-                    echo $input;
                     $this->connection->query($input);
                 }
             }

@@ -80,8 +80,8 @@ Route::POST("donation", array("Home@addDonations"));
 Route::GET("area", array("Admin@DBtoJson"));
 
 //ResponsiblePerson
-Route::GET("statusUpdate", array("ResponsiblePerson@DBtoJson"));
-
+Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));
+ 
 // Inventory Manager
 Route::GET("unit", array("InventoryManager@getUnit"));
 Route::GET("inventory", array("InventoryManager@getInventory"));

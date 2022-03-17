@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 15, 2022 at 04:59 PM
+-- Generation Time: Mar 15, 2022 at 12:47 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -387,23 +387,6 @@ CREATE TABLE `donationreqnotice` (
   `appovalStatus` char(1) NOT NULL DEFAULT 'n',
   `remark` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `donationreqnotice`
---
-
-INSERT INTO `donationreqnotice` (`recordId`, `safehouseId`, `title`, `numOfFamilies`, `numOfPeople`, `createdDate`, `approvedDate`, `note`, `appovalStatus`, `remark`) VALUES
-(2, 1, 'test 2', 10, 22, '2022-02-13 20:54:27', '0000-00-00 00:00:00', NULL, 'a', NULL),
-(5, 3, 'test3', 10, 22, '2022-02-13 21:13:09', NULL, NULL, 'd', NULL),
-(7, 1, 'test 4', 18, 35, '2022-02-13 21:14:25', '0000-00-00 00:00:00', NULL, 'u', 'Data not clear'),
-(23, 1, 'test 12', 12, 30, '2022-02-14 17:25:28', NULL, '', 'd', NULL),
-(25, 1, 'test 12', 12, 30, '2022-02-14 17:25:41', NULL, '', 'd', NULL),
-(27, 2, 'test 14', 3, 10, '2022-02-14 17:30:58', NULL, '', 'n', NULL),
-(28, 1, 'test 15', 5, 30, '2022-02-14 17:32:37', NULL, '', 'd', NULL),
-(29, 2, 'test 16', 5, 35, '2022-02-14 17:33:32', NULL, '', 'd', NULL),
-(30, 1, 'test 18', 10, 40, '2022-02-14 17:36:30', NULL, '', 'd', NULL),
-(31, 1, 'test 20', 10, 28, '2022-02-14 17:45:18', NULL, '', 'd', NULL),
-(32, 1, 'test', 12, 30, '2022-02-15 19:28:56', NULL, 'test test test', 'n', NULL);
 
 -- --------------------------------------------------------
 
@@ -953,21 +936,6 @@ CREATE TABLE `noticeitem` (
   `quantitity` decimal(6,2) NOT NULL DEFAULT 0.00
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `noticeitem`
---
-
-INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
-(10, '500 L Water Tank', '1.00'),
-(11, '500 L Water Tank', '1.00'),
-(12, '500 L Water Tank', '1.00'),
-(14, 'Tent', '3.00'),
-(18, 'Tent', '3.00'),
-(19, 'Tent', '3.00'),
-(32, 'Lentils', '15.00'),
-(32, 'Rice', '50.00'),
-(32, 'Tent', '5.00');
-
 -- --------------------------------------------------------
 
 --
@@ -1002,6 +970,34 @@ CREATE TABLE `relief` (
 
 INSERT INTO `relief` (`reliefId`, `date`, `description`, `incidentId`, `f1`, `f2`, `f3`, `f4`, `f5`, `cooked`, `emergency`, `fam`, `people`, `death`, `injured`, `missing`, `remarks`, `gndvId`, `timestamp`) VALUES
 (1, '2022-01-13', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, '2022-01-13 13:18:24');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requests`
+--
+
+CREATE TABLE `requests` (
+  `reqId` int(3) NOT NULL,
+  `requestDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `requestDuration` datetime NOT NULL,
+  `requestDiscription` varchar(300) NOT NULL,
+  `requestedBy` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requestsitem`
+--
+
+CREATE TABLE `requestsitem` (
+  `reqId` int(3) NOT NULL,
+  `acceptedBy` int(3) NOT NULL,
+  `itemId` int(2) NOT NULL,
+  `quantity` decimal(6,2) NOT NULL,
+  `sendBackBefore` date DEFAULT '1111-11-11'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -1437,6 +1433,21 @@ ALTER TABLE `relief`
   ADD KEY `fk_gndv2` (`gndvId`);
 
 --
+-- Indexes for table `requests`
+--
+ALTER TABLE `requests`
+  ADD PRIMARY KEY (`reqId`),
+  ADD KEY `requestedBy` (`requestedBy`);
+
+--
+-- Indexes for table `requestsitem`
+--
+ALTER TABLE `requestsitem`
+  ADD PRIMARY KEY (`reqId`,`acceptedBy`,`itemId`),
+  ADD KEY `acceptedBy` (`acceptedBy`),
+  ADD KEY `itemId` (`itemId`);
+
+--
 -- Indexes for table `resetpass`
 --
 ALTER TABLE `resetpass`
@@ -1586,7 +1597,7 @@ ALTER TABLE `dmc`
 -- AUTO_INCREMENT for table `donationreqnotice`
 --
 ALTER TABLE `donationreqnotice`
-  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `gndivision`
@@ -1653,6 +1664,18 @@ ALTER TABLE `item`
 --
 ALTER TABLE `relief`
   MODIFY `reliefId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `requests`
+--
+ALTER TABLE `requests`
+  MODIFY `reqId` int(3) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `requestsitem`
+--
+ALTER TABLE `requestsitem`
+  MODIFY `reqId` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `resetpass`
@@ -1833,6 +1856,20 @@ ALTER TABLE `noticeitem`
 ALTER TABLE `relief`
   ADD CONSTRAINT `fk_gndv2` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`),
   ADD CONSTRAINT `fk_incId1` FOREIGN KEY (`incidentId`) REFERENCES `incident` (`incidentId`);
+
+--
+-- Constraints for table `requests`
+--
+ALTER TABLE `requests`
+  ADD CONSTRAINT `requests_ibfk_1` FOREIGN KEY (`requestedBy`) REFERENCES `inventory` (`inventoryId`);
+
+--
+-- Constraints for table `requestsitem`
+--
+ALTER TABLE `requestsitem`
+  ADD CONSTRAINT `requestsitem_ibfk_1` FOREIGN KEY (`reqId`) REFERENCES `requests` (`reqId`),
+  ADD CONSTRAINT `requestsitem_ibfk_2` FOREIGN KEY (`acceptedBy`) REFERENCES `inventory` (`inventoryId`),
+  ADD CONSTRAINT `requestsitem_ibfk_3` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
 
 --
 -- Constraints for table `resident`

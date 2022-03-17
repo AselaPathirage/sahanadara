@@ -129,60 +129,6 @@
                                     <td>High</td>
                                     <td>09/24/2021</td>
                                 </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td> 
-                                        <input id="radio-2" class="radio-custom" name="radio-group" type="radio" checked>
-                                        <label for="radio-2" class="radio-custom-label"></label>
-                                    </td>
-                                    <td>Gamagoda Safe House</td>
-                                    <td>Low</td>
-                                    <td>12/14/2020</td>
-                                </tr>
-                                <tr id="task-3" class="task-list-row" data-task-id="3" data-user="Donald" data-status="Not Started" data-milestone="Milestone 1" data-priority="Low" data-tags="Tag 3">
-                                    <td> 
-                                        <input id="radio-3" class="radio-custom" name="radio-group" type="radio" checked>
-                                        <label for="radio-3" class="radio-custom-label"></label>
-                                    </td>
-                                    <td>Adhikarigoda Safe House</td>
-                                    <td>High</td>
-                                    <td>24/02/2021</td>
-                                </tr>
-                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
-                                    <td> 
-                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
-                                        <label for="radio-4" class="radio-custom-label"></label>
-                                    </td>
-                                    <td>Adhikarigoda Safe House</td>
-                                    <td>Low</td>
-                                    <td>1/03/2021</td>
-                                </tr>
-                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
-                                    <td> 
-                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
-                                        <label for="radio-4" class="radio-custom-label"></label>
-                                    </td>
-                                    <td>Bombuwala South Safe House</td>
-                                    <td>Low</td>
-                                    <td>5/03/2021</td>
-                                </tr>
-                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
-                                    <td> 
-                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
-                                        <label for="radio-4" class="radio-custom-label"></label>
-                                    </td>
-                                    <td>Galpottawila Safe House</td>
-                                    <td>High</td>
-                                    <td>02/22/2021</td>
-                                </tr>
-                                <tr id="task-4" class="task-list-row" data-task-id="4" data-user="Donald" data-status="Completed" data-milestone="Milestone 1" data-priority="High" data-tags="Tag 1">
-                                    <td> 
-                                        <input id="radio-4" class="radio-custom" name="radio-group" type="radio" checked>
-                                        <label for="radio-4" class="radio-custom-label"></label>
-                                    </td>
-                                    <td>Galpottawila Safe House</td>
-                                    <td>Low</td>
-                                    <td>02/23/2021</td>
-                                </tr>
                         </tbody>
                     </table>
                 </div>

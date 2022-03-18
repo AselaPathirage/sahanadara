@@ -28,6 +28,28 @@ $array = explode("/", $_GET["url"]);
             margin-left: auto;
             margin-right: auto;
         }
+
+        #btnprint {
+            background: #efc468;
+            border-radius: 0;
+            color: #232323;
+            display: inline-block;
+            font-size: 1rem;
+            height: 50px;
+            line-height: 50px;
+            position: fixed;
+            right: 0;
+            text-align: center;
+            text-decoration: none;
+            text-transform: uppercase;
+            -moz-transform: rotate(-90deg);
+            -ms-transform: rotate(-90deg);
+            -o-transform: rotate(-90deg);
+            -webkit-transform: rotate(-90deg);
+            transform-origin: bottom right;
+            width: 150px;
+
+        }
     </style>
 </head>
 
@@ -40,63 +62,55 @@ $array = explode("/", $_GET["url"]);
     // include_once('./public/Views/GramaNiladari/includes/topnav.php');
     ?>
     <div class="space"></div>
-    <div id="alertBox">
-    </div>
-    <div class="container col11">
+    <!-- <div id="alertBox">
+    </div> -->
+    <!-- Print  -->
+    <a id="btnprint">Print</a>
+    <div class="container col12">
         <form id="add">
             <div class="box">
                 <div class="box1">
+                    <div style="text-align: center;">
+                        <img src="<?php echo HOST; ?>/public/assets/img/social-care (1).png" height="50" alt="LOGO">
+                    </div>
                     <h1 class="text-center">Final Incident Report</h1>
-                    <!-- <div class="row">
+                    <div class="row">
                         <div class="col6">
                             <div class="row">
-                                <div class="col3">
+                                <div class="col4" style="text-align: right;">
                                     <label for="user role">District</label>
                                 </div>
-                                <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
+                                <div class="col8">
+                                    <input type="text" id="district" name="district" placeholder="Location of incident" readonly>
                                 </div>
                             </div>
                         </div>
                         <div class="col6">
                             <div class="row">
-                                <div class="col3">
+                                <div class="col4" style="text-align: right;">
                                     <label for="user role">DS Office</label>
                                 </div>
-                                <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
+                                <div class="col8">
+                                    <input type="text" id="ds" name="ds" placeholder="Location of incident" readonly>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row text-center">
-
-                        <div class="row">
-                            <div class="col3">
-                                <label for="user role">GN division</label>
-                            </div>
-                            <div class="col9">
-                                <select id="District" name="District">
-                                    <option value="null">Kalutara</option>
-                                    <option value="Gampaha">Gampaha</option>
-                                    <option value="Colombo">Colombo</option>
-                                    <option value="Kaluthara">Kaluthara</option>
-                                </select>
+                    <div class="row ">
+                        <div class="col6">
+                            <div class="row">
+                                <div class="col4" style="text-align: right;">
+                                    <label for="user role">GN division</label>
+                                </div>
+                                <div class="col8">
+                                    <input type="text" id="gn" name="gn" placeholder="Location of incident" readonly>
+                                </div>
                             </div>
                         </div>
 
+                    </div>
+                    <hr style="margin:10px;">
 
-                    </div> -->
 
 
 
@@ -105,15 +119,15 @@ $array = explode("/", $_GET["url"]);
                             <label for="crusttype">Date of commenced</label>
                         </div>
                         <div class="col9 row-content" style="align-items: center;">
-                            <input type="date" id="datePicker1" name="datePicker1" class="datesInForms">
+                            <input type="date" id="datePicker1" name="datePicker1" class="datesInForms" readonly>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col3">
-                            <label for="crusttype">End date</label>
+                            <label for="crusttyphe">End date</label>
                         </div>
                         <div class="col9 row-content" style="align-items: center;">
-                            <input type="date" id="datePicker2" name="datePicker2" class="datesInForms">
+                            <input type="date" id="datePicker2" name="datePicker2" class="datesInForms" readonly>
                         </div>
                     </div>
                     <div class="row">
@@ -121,10 +135,8 @@ $array = explode("/", $_GET["url"]);
                             <label for="user role">Disaster</label>
                         </div>
                         <div class="col9">
-                            <select id="disaster" name="disaster">
+                            <input type="text" id="dis" name="dis" placeholder="Location of incident" readonly>
 
-
-                            </select>
                         </div>
                     </div>
                     <div class="row">
@@ -132,7 +144,7 @@ $array = explode("/", $_GET["url"]);
                             <label for="fname">Location of incident</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="location" name="location" placeholder="Location of incident" required>
+                            <input type="text" id="location" name="location" placeholder="Location of incident" readonly>
                         </div>
                     </div>
                     <div class="row">
@@ -140,11 +152,15 @@ $array = explode("/", $_GET["url"]);
                             <label for="fname">Cause</label>
                         </div>
                         <div class="col9">
-                            <input type="text" id="cause" name="cause" placeholder="Cause" required>
+                            <input type="text" id="cause" name="cause" placeholder="Cause" readonly>
                         </div>
                     </div>
-                    <h4 class="text-center">Reporting on the Impact of Disaster</h4>
 
+
+                    <hr style="margin:10px;">
+
+
+                    <h4 class="text-center">Reporting on the Impact of Disaster</h4>
                     <div class="row">
                         <div class="col6">
                             <div class="col12">
@@ -152,19 +168,19 @@ $array = explode("/", $_GET["url"]);
                             </div>
 
                             <div class="row">
-                                <div class="col4">
+                                <div class="col4" style="text-align: right;">
                                     <label for="TP number">Families</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="afam" name="afam" placeholder="0">
+                                    <input type="number" id="afam" name="afam" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col4">
+                                <div class="col4" style="text-align: right;">
                                     <label for="TP number">People</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="apeople" name="apeople" placeholder="0">
+                                    <input type="number" id="apeople" name="apeople" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="col12" style="margin-top: 10px;">
@@ -172,46 +188,46 @@ $array = explode("/", $_GET["url"]);
                             </div>
 
                             <div class="row">
-                                <div class="col4">
+                                <div class="col4" style="text-align: right;">
                                     <label for="TP number">Families</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="efam" name="efam" placeholder="0">
+                                    <input type="number" id="efam" name="efam" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col4">
+                                <div class="col4" style="text-align: right;">
                                     <label for="TP number">People</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="epeople" name="epeople" placeholder="0">
+                                    <input type="number" id="epeople" name="epeople" placeholder="0" readonly>
                                 </div>
                             </div>
 
                         </div>
                         <div class="col6">
                             <div class="row">
-                                <div class="col4">
+                                <div class="col4" style="text-align: right;">
                                     <label for="TP number">Deaths</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="deaths" name="deaths" placeholder="0">
+                                    <input type="number" id="deaths" name="deaths" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col4">
+                                <div class="col4" style="text-align: right;">
                                     <label for="TP number">Injured</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="injured" name="injured" placeholder="0">
+                                    <input type="number" id="injured" name="injured" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="row" id="missingrow">
-                                <div class="col4">
+                                <div class="col4" style="text-align: right;">
                                     <label for="TP number">Missing</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="missing" name="missing" placeholder="0">
+                                    <input type="number" id="missing" name="missing" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="row">
@@ -219,7 +235,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="TP number">Hospitalized</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="hos" name="hos" placeholder="0">
+                                    <input type="number" id="hos" name="hos" placeholder="0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -236,7 +252,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="TP number">Fully</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="hfull" name="hfull" placeholder="0">
+                                    <input type="number" id="hfull" name="hfull" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="row">
@@ -244,7 +260,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="TP number">Partially</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="hpartial" name="hpartial" placeholder="0">
+                                    <input type="number" id="hpartial" name="hpartial" placeholder="0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -259,7 +275,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="TP number">Enterprises </label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="enterprises" name="enterprises" placeholder="0">
+                                    <input type="number" id="enterprises" name="enterprises" placeholder="0" readonly>
                                 </div>
                             </div>
                             <div class="row">
@@ -268,7 +284,7 @@ $array = explode("/", $_GET["url"]);
                                     </label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="infra" name="infra" placeholder="0">
+                                    <input type="number" id="infra" name="infra" placeholder="0" readonly>
                                 </div>
                             </div>
 
@@ -277,7 +293,6 @@ $array = explode("/", $_GET["url"]);
                     <div class="row">
 
                         <div class="col12">
-
                             <h4 class="" style="padding:0 80px">Safe Locations</h4>
                         </div>
 
@@ -286,7 +301,7 @@ $array = explode("/", $_GET["url"]);
                                 <label for="TP number">Number of safe houses</label>
                             </div>
                             <div class="col8">
-                                <input type="number" id="safenum" name="safenum" placeholder="0">
+                                <input type="number" id="safenum" name="safenum" placeholder="0" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -294,7 +309,7 @@ $array = explode("/", $_GET["url"]);
                                 <label for="TP number">Families</label>
                             </div>
                             <div class="col8">
-                                <input type="number" id="sfam" name="sfam" placeholder="0">
+                                <input type="number" id="sfam" name="sfam" placeholder="0" readonly>
                             </div>
                         </div>
                         <div class="row">
@@ -302,13 +317,13 @@ $array = explode("/", $_GET["url"]);
                                 <label for="TP number">People</label>
                             </div>
                             <div class="col8">
-                                <input type="number" id="speople" name="speople" placeholder="0">
+                                <input type="number" id="speople" name="speople" placeholder="0" readonly>
                             </div>
                         </div>
 
                     </div>
 
-                    <h4 class="text-center">Requested amount for relief distribution (Indicate amount in relevant place - Rs)
+                    <h4 class="text-center">Requested amount for relief distribution (Rs)
                     </h4>
 
                     <div class="row">
@@ -318,7 +333,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="TP number">Dry rations</label>
                                 </div>
                                 <div class="col7">
-                                    <input type="text" id="dry" name="dry" placeholder="Rs 0">
+                                    <input type="text" id="dry" name="dry" placeholder="Rs 0" readonly>
                                 </div>
                             </div>
 
@@ -327,7 +342,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="TP number">Cooked food</label>
                                 </div>
                                 <div class="col7">
-                                    <input type="number" id="cooked" name="cooked" placeholder="Rs 0">
+                                    <input type="number" id="cooked" name="cooked" placeholder="Rs 0" readonly>
                                 </div>
                             </div>
 
@@ -338,7 +353,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="TP number">Emergency suppliess</label>
                                 </div>
                                 <div class="col7">
-                                    <input type="number" id="emer" name="emer" placeholder="Rs 0">
+                                    <input type="number" id="emer" name="emer" placeholder="Rs 0" readonly>
                                 </div>
                             </div>
                         </div>
@@ -346,19 +361,36 @@ $array = explode("/", $_GET["url"]);
 
                     <div class="row" style="margin-top:20px;">
                         <div class="row">
-                            <div class="col3" style="text-align: right;">
+                            <div class="col2" style="text-align: right;">
                                 <label for="remarks">Remarks</label>
                             </div>
-                            <div class="col9">
-                                <textarea type="text" id="remarks" name="remarks" placeholder="Remarks"></textarea>
+                            <div class="col10">
+                                <textarea type="text" id="remarks" name="remarks" placeholder="Remarks" readonly></textarea>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row " style="text-align:right;justify-content: right;">
+                    <!-- <div class="row " style="text-align:right;justify-content: right;">
                         <input type="reset" style="background-color: red;" value="Cancel">
                         <input type="submit" style="background-color: darkblue;" value="Submit">
+                    </div> -->
+
+                    <hr style="margin:10px;">
+
+                    <div class="row">
+                        <div class="col6">
+                            <h3>Prepared by : <span id="gnname"></span> - <span id="gntel"></span><br>(<span id="timestamp"></span>)</h3>
+                        </div>
+                        <div class="col6">
+                            <h3>Approved Status : <span id="dsname"></span></h3>
+                            <h4 style="text-align:left;padding-top:0;padding-left: 25px;"> <span id="dsremarks">* </span></h4>
+                        </div>
+
+
                     </div>
+
+
+
 
                 </div>
             </div>
@@ -379,10 +411,15 @@ $array = explode("/", $_GET["url"]);
                 }
                 $(thisPage).addClass("active");
             });
-            document.getElementById('datePicker1').valueAsDate = new Date();
-            document.getElementById('datePicker2').valueAsDate = new Date();
-
-            getDisasterType()
+            // document.getElementById('datePicker1').valueAsDate = new Date();
+            // document.getElementById('datePicker2').valueAsDate = new Date();
+            $("#btnprint").click(function() {
+                console.log("sdfsdf");
+                $("#btnprint").hide();
+                window.print();
+                $("#btnprint").show();
+            });
+            getFinal();
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -391,7 +428,67 @@ $array = explode("/", $_GET["url"]);
             sidebar.classList.toggle("active");
         }
 
-        function getDisasterType() {
+        function getFinal() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>gnfinal/<?php echo end($array); ?>",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            var obj = output;
+            console.log(obj);
+            $('#district').val(obj['dsName']);
+            $('#ds').val(obj['dvName']);
+            $('#gn').val(obj['gnDvName']);
+            $('#datePicker1').val(obj['startDate']);
+            $('#datePicker2').val(obj['endDate']);
+
+            // if(obj['disaster'])
+            // $('#dis').val(obj['disaster']);
+            getDisasterType(obj['disaster']);
+            $('#location').val(obj['location']);
+            $('#cause').val(obj['cause']);
+            $('#afam').val(obj['fam']);
+            $('#apeople').val(obj['people']);
+            $('#efam').val(obj['evafam']);
+            $('#epeople').val(obj['evapeople']);
+            $('#deaths').val(obj['death']);
+            $('#injured').val(obj['injured']);
+            $('#missing').val(obj['missing']);
+            $('#hos').val(obj['hospitalized']);
+            $('#hfull').val(obj['hfull']);
+            $('#hpartial').val(obj['hpartial']);
+            $('#enterprises').val(obj['enterprise']);
+            $('#infra').val(obj['infras']);
+            $('#safenum').val(obj['numofsafe']);
+            $('#sfam').val(obj['sffamily']);
+            $('#speople').val(obj['sfpeople']);
+            $('#dry').val(obj['dryrationsRs']);
+            $('#cooked').val(obj['cookingRs']);
+            $('#emer').val(obj['emergencyRs']);
+            $('#remarks').val(obj['remarks']);
+            $('#gnname').text(obj['empName']);
+            $('#gntel').text(obj['empTele']);
+            $('#timestamp').text(obj['timestamp']);
+            if (obj['disoffapproved'] == 'p') {
+                $('#dsname').text("Pending");
+            } else if (obj['disoffapproved'] == 'a') {
+                $('#dsname').text("Approved");
+            } else {
+                $('#dsname').text("Rejected");
+            }
+            if (obj['disRemarks'] != null) {
+                $('#dsremarks').append(obj['disRemarks']);
+            } else {
+                $('#dsremarks').text("");
+            }
+        }
+
+        function getDisasterType(obj) {
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>disaster",
@@ -402,68 +499,17 @@ $array = explode("/", $_GET["url"]);
                 cache: false,
                 async: false
             }).responseText);
-            console.log("1");
-            var select = document.getElementById("disaster");
-            for (var i = 0; i < output.length; i++) {
-                if (output[i]['disId'] == 3) continue;
-                var opt = document.createElement('option');
-                opt.value = output[i]['disId'];
-                opt.innerHTML = output[i]['dis'];
-                select.appendChild(opt);
-            }
+            console.log(output);
+            $('#dis').val(output[obj - 1]['dis']);
+            // var select = document.getElementById("disaster");
+            // for (var i = 0; i < output.length; i++) {
+            //     if (output[i]['disId'] == 3) continue;
+            //     var opt = document.createElement('option');
+            //     opt.value = output[i]['disId'];
+            //     opt.innerHTML = output[i]['dis'];
+            //     select.appendChild(opt);
+            // }
         }
-
-        $('#disaster').on('change', function() {
-
-            if ($('#disaster').val() == 3) {
-                $('#safe').hide();
-                $('#missingrow').hide();
-            } else {
-                $('#safe').show();
-                $('#missingrow').show();
-            }
-        });
-
-        $("#add").submit(function(e) {
-            e.preventDefault();
-
-            var str = [];
-            var formElement = document.querySelector("#add");
-            var formData = new FormData(formElement);
-            //var array = {'key':'ABCD'}
-            var object = {};
-            formData.forEach(function(value, key) {
-                object[key] = value;
-            });
-
-            var json = JSON.stringify(object);
-            console.log(json);
-            $.ajax({
-                type: "POST",
-                url: "<?php echo API; ?>gnfinal",
-                data: json,
-                headers: {
-                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                },
-                cache: false,
-                success: function(result) {
-                    var url = "<?php echo HOST; ?>/GramaNiladari/IncidentReporting";
-                    console.log(result.code);
-                    if (result.code == 806) {
-                        alertGen("Record Added Successfully!", 1);
-                    } else {
-                        alertGen(" Unable to handle request.", 2);
-                    }
-                    setTimeout(function() {
-                        $(location).attr('href', url);
-                    }, 1000);
-                },
-                error: function(err) {
-                    alertGen(" Something went wrong.", 3);
-                    console.log(err);
-                }
-            });
-        });
 
         function alertGen($messege, $type) {
             if ($type == 1) {

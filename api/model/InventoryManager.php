@@ -270,12 +270,35 @@ class InventoryManager extends Employee{
         $uid = $data['userId'];
         $this->inventory->setInfo($uid);
         $division = $this->getDivision($uid)['id'];
-        $sql = "SELECT sf.safehouseId,s.statusId, i.itemId,i.itemName, SUM(s.quantity) AS quantity FROM safehousestatusrequesteditem s,item i, safehousestatus sf, gndivision gn WHERE s.statusId = sf.r_id AND s.itemId = i.itemId AND sf.safehouseId = gn.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = $division) GROUP BY sf.safehouseId,i.itemId ORDER BY sf.createdDate DESC;";
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id = SafeHouse::getId($id);
+            $sql = "SELECT sf.safehouseId,s.statusId, i.itemId,i.itemName, SUM(s.quantity) AS quantity FROM safehousestatusrequesteditem s,item i, safehousestatus sf, gndivision gn WHERE s.statusId = sf.r_id AND s.itemId = i.itemId AND sf.safehouseId = gn.safeHouseID AND sf.safehouseId = $id AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = $division) GROUP BY sf.safehouseId,i.itemId ORDER BY sf.createdDate DESC;";
+        }else{
+            $sql = "SELECT sf.safehouseId,s.statusId, i.itemId,i.itemName, SUM(s.quantity) AS quantity FROM safehousestatusrequesteditem s,item i, safehousestatus sf, gndivision gn WHERE s.statusId = sf.r_id AND s.itemId = i.itemId AND sf.safehouseId = gn.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = $division) GROUP BY sf.safehouseId,i.itemId ORDER BY sf.createdDate DESC;";
+        }
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
             $safeHouseId = SafeHouse::getSafeHouseCode($r['safehouseId']);
             $r['safehouseId'] = $safeHouseId;
+            $itemId = $r['itemId'];
+            $quantity = $r['quantity'];
+            $sql = "SELECT i.itemId,SUM(v.quantity) AS quantity,u.unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND i.unitType =u.unitId AND m.inventoryMgtOfficerID = $uid  AND v.itemId = $itemId GROUP BY v.itemId";
+            $tempQuery = $this->connection->query($sql);
+            if($tempQuery->num_rows >0){
+                $data = $tempQuery-> fetch_assoc();
+                if($data['quantity'] >= $quantity){
+                    $r['availability'] = "Yes";
+                }else{
+                    $r['availability'] = "No";
+                }
+                $r['inInventory'] = $data['quantity'];
+                $r['unit'] = $data['unitName'];
+            }else{
+                $r['availability'] = "No";  
+            } 
+            $r['itemId'] = Item::getItemCode($r['itemId']);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -285,7 +308,7 @@ class InventoryManager extends Employee{
         $uid = $data['userId'];
         $this->inventory->setInfo($uid);
         $division = $this->getDivision($uid)['id'];
-        $sql = "WITH cte AS (SELECT sf.safehouseId,sh.safeHouseName,sf.adultMale+sf.adultFemale+sf.children+sf.disabledPerson AS quantity, ROW_NUMBER() OVER (PARTITION BY sf.safehouseId ORDER BY sf.createdDate DESC) AS rn FROM safehousestatusrequesteditem s, safehousestatus sf, gndivision gn, safehouse sh WHERE s.statusId = sf.r_id AND sf.safehouseId = gn.safeHouseID AND gn.safeHouseID = sh.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = 10) ORDER BY sf.createdDate)SELECT * FROM cte WHERE rn = 1;";
+        $sql = "WITH cte AS (SELECT sf.safehouseId,sh.safeHouseName,sf.adultMale+sf.adultFemale+sf.children+sf.disabledPerson AS quantity, DATE(sf.createdDate) AS createdDate, ROW_NUMBER() OVER (PARTITION BY sf.safehouseId ORDER BY sf.createdDate DESC) AS rn FROM safehousestatusrequesteditem s, safehousestatus sf, gndivision gn, safehouse sh WHERE s.statusId = sf.r_id AND sf.safehouseId = gn.safeHouseID AND gn.safeHouseID = sh.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = 10) ORDER BY sf.createdDate)SELECT * FROM cte WHERE rn = 1;";
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

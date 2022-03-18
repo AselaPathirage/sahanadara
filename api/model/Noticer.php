@@ -6,7 +6,7 @@ trait Noticer{
             $title = $data['title'];
             $numOfFamillies = $data['numOfFamillies'];
             $numOfPeople = $data['numOfPeople'];
-            $safeHouseId = $data['safeHouseId'];
+            $safeHouseId = SafeHouse::getId($data['safeHouseId']);
             $description = "";
             if(isset($data['description'])){
                 $description = $data['description'];
@@ -47,7 +47,7 @@ trait Noticer{
         global $errorCode;
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
-            $pk = Notice::getId($id);;
+            $pk = Notice::getId($id);
             $sql = "UPDATE donationreqnotice SET donationreqnotice.appovalStatus = 'd' WHERE donationreqnotice.recordId = $pk;";
             $this->connection->query($sql);
             http_response_code(200); 
@@ -114,6 +114,9 @@ trait Noticer{
             if(strtolower($filter)=="name"){
                 $sql = "SELECT s.safeHouseID,s.safeHouseName  FROM safehouse s,gndivision g WHERE g.safeHouseID = s.safeHouseID AND g.dvId=".$division;
                 $temp = "safeHouseName";
+            }elseif(str_contains(strtolower($filter),"sh") or is_numeric($filter)){
+                $pk = SafeHouse::getId($filter);
+                $sql = "SELECT s.safeHouseID,s.safeHouseName,s.safeHouseAddress,g.gnDvName  FROM safehouse s,gndivision g WHERE g.safeHouseID = s.safeHouseID AND s.safeHouseID = $pk ";
             }else{
                 http_response_code(200);                       
                 echo json_encode(array("code"=>$errorCode['unableToHandle']));
@@ -122,6 +125,12 @@ trait Noticer{
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
+                $r['safeHouseID'] = SafeHouse::getSafeHouseCode($r['safeHouseID']);
+                if(isset($r['gnDvName'])){
+                    $temp = $r['gnDvName'];
+                    unset($r['gnDvName']);
+                    $r['gramaNilaadariDivision'] = $temp;
+                }
                 $results[] = $r;
             }
             $json = json_encode($results);

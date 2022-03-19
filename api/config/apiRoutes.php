@@ -29,7 +29,7 @@ Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("safehouse/{dataType}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
 Route::GET("incident", array("GramaNiladari@getIncidents","DisasterOfficer@getIncidents"));
-Route::GET("incident/{id}", array("GramaNiladari@getIncidentById"));
+Route::GET("incident/{id}", array("GramaNiladari@getIncidentById,DisasterOfficer@getIncidentById"));
 Route::GET("GnDivision/{data}", array("DisasterOfficer@getGNDivision"));
 Route::GET("statistics", array("ResponsiblePerson@getStats", "InventoryManager@getStats"));
 Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "InventoryManager@getStatsFiltered"));
@@ -78,6 +78,17 @@ Route::POST("safehouse", array("DisasterOfficer@addSafehouse"));
 Route::PUT("safehouse/{id}", array("DisasterOfficer@updateSafehouse"));
 Route::DELETE("safehouse/{id}", array("DisasterOfficer@deleteSafehouse"));
 Route::POST("donation", array("Home@addDonations"));
+Route::POST("incident", array("DisasterOfficer@addIncidents"));
+Route::PUT("incident", array("DisasterOfficer@updateIncidents"));
+Route::GET("doreports", array("DisasterOfficer@getReports"));
+Route::GET("doreports/{id}", array("DisasterOfficer@getReportsbyIncident"));
+Route::POST("dofinal", array("DisasterOfficer@addFinal"));
+Route::GET("dofinal/{id}", array("DisasterOfficer@getFinal"));
+Route::GET("doinitial/{id}", array("DisasterOfficer@getInitial"));
+Route::GET("dorelief/{id}", array("DisasterOfficer@getRelief"));
+
+Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
+
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));
@@ -87,7 +98,8 @@ Route::GET("statusUpdate", array("ResponsiblePerson@DBtoJson"));
 
 // Inventory Manager
 Route::GET("unit", array("InventoryManager@getUnit"));
-Route::GET("inventory", array("InventoryManager@getInventory"));
+Route::GET("inventory", array("InventoryManager@getInventory","DivisionalSecretariat@getInventory"));
+Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));
 Route::GET("availableItem", array("InventoryManager@availableItem"));
 Route::GET("neighbour", array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count", array("InventoryManager@countItem"));

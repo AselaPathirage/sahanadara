@@ -95,6 +95,97 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
+        function getGNDivision() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>gndivision",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            var select = document.getElementById("gndivision");
+
+            for (var i = 0; i < output.length; i++) {
+                //console.log(i);
+                var opt = document.createElement('option');
+                opt.value = output[i]['gndvId'];
+                opt.innerHTML = output[i]['gnDvName'];
+                select.appendChild(opt);
+
+
+            }
+        }
+        getGNDivision();
+
+        $("#add").submit(function(e) {
+            e.preventDefault();
+            var str = [];
+            var formElement = document.querySelector("#add");
+            var formData = new FormData(formElement);
+            //var array = {'key':'ABCD'}
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+
+            var json = JSON.stringify(object);
+            console.log(json);
+            $.ajax({
+                type: "POST",
+                url: "<?php echo API; ?>incident",
+                data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                success: function(result) {
+                    console.log(result);
+                    var url = "<?php echo HOST; ?>/DisasterOfficer/Dashboard/Incidents";
+                    console.log(result.code);
+                    if (result.code == 806) {
+                        alertGen("Record Added Successfully!", 1);
+                    } else {
+                        alertGen(" Unable to handle request.", 2);
+                    }
+                    setTimeout(function() {
+                        $(location).attr('href', url);
+                    }, 500);
+                },
+                error: function(err) {
+                    alertGen(" Something went wrong.", 3);
+                    console.log(err);
+                }
+            });
+        });
+
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
+        }
+
     </script>
 </body>
 

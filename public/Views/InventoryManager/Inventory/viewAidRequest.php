@@ -176,8 +176,9 @@ $array = explode("/", $_GET["url"]);
                 <div class="custom-model-wrap">
                     <div class="pop-up-content-wrap">
                         <div class="row-content">
+                            <center><h2 id="header"></h2></center>
                             <div id="display"></div>
-                            <div class="row" >
+                            <div class="row" style="justify-content: center;">
                                 <input type="hidden" id="find" value="">
                                 <button type="button" class="btn-alerts btn_cancel cancel">No</button>
                                 <button type="button" class="btn-alerts btn_danger" id="process-confirm">Yes</button>
@@ -204,16 +205,20 @@ $array = explode("/", $_GET["url"]);
                     $("#find").val("notice");
                     $("#confirmProcess").addClass('model-open');
                 }else{
-
+                    $("#process").fadeIn();
+                    $("#process").addClass('model-open');
                 }
             });
             $("#inventory").on('click', function() {
                 if($(":checkbox:checked").length == 0){
                     $("#confirmProcess").fadeIn();
                     $("#find").val("inventory");
+                    $("#header").text("Release From Inventory");
                     $("#confirmProcess").addClass('model-open');
                 }else{
-
+                    $("#header").text("Create Donation Request Notice");
+                    $("#process").fadeIn();
+                    $("#process").addClass('model-open');
                 }
             });
             $(".close-btn, .bg-overlay, .cancel").click(function() {
@@ -221,9 +226,15 @@ $array = explode("/", $_GET["url"]);
             });
             $("#process-confirm").click(function(e) {
                 if($("#find").val() == "notice"){
-                    console.log("notice");
+                    $("#confirmProcess").removeClass('model-open');
+                    $("#header").text("Create Donation Request Notice");
+                    $("#process").fadeIn();
+                    $("#process").addClass('model-open');
                 }else if($("#find").val() == "inventory"){
-                    console.log("inventory");
+                    $("#confirmProcess").removeClass('model-open');
+                    $("#header").text("Release From Inventory");
+                    $("#process").fadeIn();
+                    $("#process").addClass('model-open');
                 }
             });
         });

@@ -151,11 +151,27 @@ class DisasterOfficer extends Employee
         echo $json;
     }
 
+    public function getDOGNDivision(array $data){
+        $id = $data['userId'];
+        $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
+        WHERE m.disMgtOfficerID = d.disasterManager AND g.dvId = d.dvId AND m.disMgtOfficerID = $id ";
+        // echo $sql;
+        // exit;
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
     // Profile Details
     public function getProfileDetails(array $data)
     {
         $uid = $data['userId'];
         //$sql = "SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
+        $sql = "SELECT * FROM dismgtofficer do JOIN divisionaloffice d ON do.disMgtOfficerID=" . $uid . " AND JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
         // SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=1 AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;
         $excute = $this->connection->query($sql);
         while ($r = $excute->fetch_assoc()) {
@@ -359,22 +375,19 @@ class DisasterOfficer extends Employee
     //         echo $json;
     //     }
     // }
-    protected function tokenKey($length = 10)
-    {
-        return substr(str_shuffle("aAQEWAbcERWREdefghiHLafgdffhvcJHjklmnopqrSFSEREESGSEGst0123456789"), 0, $length);
-    }
 
-    public function addIncident(array $data)
+    public function addIncidents(array $data)
     {   
         global $errorCode;
         $uid = $data['userId'];
         $title = $data['title'];
         $description = $data['description'];
+        $gndvId = $data['gnDiv'];
 
-        $sql = "SELECT d.* FROM division d, divisionaloffice divoff WHERE d.dvId=divoff.dvId AND divoff.disasterManager=$uid";
-        $excute = $this->connection->query($sql);
-        $r = $excute-> fetch_assoc();
-        $sql = "INSERT INTO `incident`(`title`, `description`, `dvId`) VALUES ('$title','$description'," . $r['dvId'] . ");";
+        //$sql = "SELECT d.* FROM division d, divisionaloffice divoff WHERE d.dvId=divoff.dvId AND divoff.disasterManager=$uid";
+        // $excute = $this->connection->query($sql);
+        // $r = $excute-> fetch_assoc();
+        $sql = "INSERT INTO incident (title, description, dvId) VALUES ('$title','$description'," . $r['dvId'] . ");";
         $this->connection->query($sql);
         $result = array();
         $sql = "SELECT LAST_INSERT_ID();";
@@ -383,6 +396,204 @@ class DisasterOfficer extends Employee
         $incidentId = $r["LAST_INSERT_ID()"];
         $this->connection->query($sql);
         //$sql = "INSERT INTO `incidentgn`(`incidentId`, `gndvId`) VALUES (".$r['incidentId'].",'$')";
+    }   
+
+    public function getIncidents(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT s.*,t.* FROM incident s JOIN incidentgn t ON t.incidentId=s.incidentId JOIN gndivision g ON g.gndvId=t.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY s.isActive DESC, s.incidentId DESC;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function getIncidentById(array $data)
+    {
+        $uid = $data['userId'];
+        $incidentId = $data['receivedParams'][0];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT s.* FROM incident s WHERE s.incidentId=" . $incidentId . ";";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function updateIncidents(array $data)
+    {
+        
+    }
+
+    protected function tokenKey($length = 10)
+    {
+        return substr(str_shuffle("aAQEWAbcERWREdefghiHLafgdffhvcJHjklmnopqrSFSEREESGSEGst0123456789"), 0, $length);
+    }
+
+    public function getReports(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "(
+            SELECT
+                initial.initialId AS reportId,
+                initial.cause AS cause,
+                initial.timestamp,
+                initial.disoffapproved AS approved,
+            'Initial' AS report
+            FROM
+                initialincident initial,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId
+        )
+        UNION
+            (
+            SELECT
+                f.finalIncidentId AS reportId,
+                f.cause AS cause,
+                f.timestamp,
+                f.disoffapproved AS approved,
+                'Final' AS report
+            FROM
+                gnfinalincident f,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = f.gndvid
+        )
+        UNION
+            (
+            SELECT
+                r.reliefId AS reportId,
+                r.description AS cause,
+                r.timestamp,
+                NULL AS approved,
+                'Relief' AS report
+            FROM
+                relief r,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = r.gndvid
+        )Order by timestamp DESC;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getReportsbyIncident(array $data)
+    {
+        $uid = $data['userId'];
+        $incidentId = $data['receivedParams'][0];
+        $sql = "(
+            SELECT
+                initial.initialId AS reportId,
+                initial.cause AS cause,
+                initial.timestamp,
+                initial.disoffapproved AS approved,
+            'Initial' AS report
+            FROM
+                initialincident initial,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.incidentId=" . $incidentId . "
+        )
+        UNION
+            (
+            SELECT
+                f.finalIncidentId AS reportId,
+                f.cause AS cause,
+                f.timestamp,
+                f.disoffapproved AS approved,
+                'Final' AS report
+            FROM
+                gnfinalincident f,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = f.gndvid AND f.incidentId=" . $incidentId . "
+        )
+        UNION
+            (
+            SELECT
+                r.reliefId AS reportId,
+                r.description AS cause,
+                r.timestamp,
+                NULL AS approved,
+                'Relief' AS report
+            FROM
+                relief r,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = r.gndvid AND r.incidentId=" . $incidentId . "
+        )Order by timestamp DESC;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function getDisaster(array $data)
+    {
+        // if(count($data['receivedParams'])==1){
+        //     $id = $data['receivedParams'][0];
+        //     $sql = "SELECT * FROM `unit` WHERE unitId=$id";
+        // }else{
+        $sql = "SELECT * FROM `disaster`";
+        // }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+
+    public function getFinal(array $data)
+    {
+        $uid = $data['userId'];
+        $finalId = $data['receivedParams'][0];
+        $sql = "
+            SELECT
+                final.*,gndivision.gnDvName,district.dsName,division.dvName,gramaniladari.*
+            FROM
+                gnfinalincident final,
+                gndivision,
+                gramaniladari,district,division
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = final.gndvId AND final.finalIncidentId=" . $finalId . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        
+        $json = json_encode($r);
+        // $json = json_encode($results);
+        echo $json;
     }
 
 }

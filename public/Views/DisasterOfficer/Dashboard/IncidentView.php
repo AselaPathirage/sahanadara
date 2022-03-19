@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
+
+<?php
+$array = explode("/", $_GET["url"]);
+// echo end($array);
+?>
+
 <head>
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Dashboard </title>
@@ -23,25 +29,21 @@
         <?php 
         include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
         ?>
-        <div class="space"></div>
+        <div class="space"></div><div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-        <div class="container">
-            <h1>Incident Reporting</h1>
-            <div class="container" style="text-align: right;">
+        <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-fun">Create Final Incident</a>
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-fun">Add Expense Note</a>
-                </div>
-            </div>
+                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Create Final Report</a>
  
         <!-- TABLE -->
         <div class="container">
-                <div class="">
-                    <table class="table">
-                        <thead>
-                            <tr class="filters">
+            <div class="">
+
+                <table class="table">
+                    <thead>
+                    <tr class="filters">
                                 <th>Approved
                                     <select id="status" class="form-control">
                                         <option value="Any">All</option>
@@ -76,11 +78,8 @@
                                     <th>Date/Time</th>
                                     <th>Description</th>
                                     <th>Type</th>
-                                    <th>DS note</th>
-
-                                    <th>Actions</th>
-                                    <th>GN Division</th>
-                                    <th>Incident</th>
+                                    <th>Status</th>
+                                    <th>View</th>
 
                                 </tr>
                             </thead>
@@ -88,61 +87,41 @@
                             <tbody id="tbodyid">
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    <td>10/24/2021 12:50</td>
-                                    <td>Flood </td>
-                                    <td>Final</td>
+                                    <td>01/24/2021 12:50</td>
+                                    <td>Initial</td>
                                     <td>Approved</td>
-                                    <td>Pending</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
 
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>10/22/2021 13:56</td>
-                                    <td>Flood </td>
-                                    <td>Initial</td>
-                                    <td>Approved</td>
+                                    <td>03/14/2021 13:56</td>
+                                    <td>Relief</td>
                                     <td>Approved</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>09/20/2021 13:56</td>
-                                    <td>Landslide</td>
+                                    <td>03/20/2021 13:56</td>
+                                    <td>Relief</td>
+                                    <td>Approved</td>
+                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>03/21/2021 13:56</td>
+                                    <td>Relief</td>
+                                    <td>Approved</td>
+                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>03/25/2021 13:56</td>
+                                    <td>Relief</td>
+                                    <td>Approved</td>
+                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                </tr>
+                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                    <td>03/28/2021 13:56</td>
                                     <td>Final</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
-                                </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>10/22/2021 13:56</td>
-                                    <td>Flood </td>
-                                    <td>Initial</td>
-                                    <td>Approved</td>
-                                    <td>Pending</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
-                                </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>08/22/2021 13:56</td>
-                                    <td>Flood </td>
-                                    <td>Initial</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
-                                </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>08/20/2021 13:56</td>
-                                    <td>Landslide</td>
-                                    <td>Final</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
-                                </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>07/22/2021 13:56</td>
-                                    <td>Flood </td>
-                                    <td>Initial</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
+                                    <td>Not Approved</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                             </tbody>
@@ -154,7 +133,7 @@
 
     </section>
     <script>
-        var thisPage = "#IncidentReporting";
+        var thisPage = "#Incidents";
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
                 if ($(this).hasClass('active')){
@@ -162,9 +141,8 @@
                 }
                 $(thisPage).addClass("active");
             });
-
-            getReports();
-
+            getIncidentById();
+            getReportsbyIncident();
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -172,8 +150,25 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-        
-        function getReports() {
+
+        function getIncidentById() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>incident/<?php echo end($array); ?>",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            let obj = output[0];
+            console.log(obj);
+            $('#incidentTitle').text(obj['title']);
+            $('#incidentDes').text(obj['description']);
+        }
+
+        function getReportsbyIncident() {
             // var object = {};
 
 
@@ -181,7 +176,7 @@
             // console.log(object);
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>doreports",
+                url: "<?php echo API; ?>gnreports/<?php echo end($array); ?>",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -205,8 +200,9 @@
 
                 var attribute = document.createElement("a");
                 attribute.id = obj['residentId'];
+                // attribute.href = "";
                 attribute.target = "_blank";
-                attribute.href = obj['report'] + "/" + obj['reportId'];
+                attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                 attribute.className = "btn_views";
                 attribute.name = "view";
                 attribute.innerHTML = "View";
@@ -235,7 +231,6 @@
             }
         }
 
-
         $("#status").on('change', function() {
             var status = $('#status').val();
             console.log(status);
@@ -263,7 +258,7 @@
                         attribute.id = obj['residentId'];
                         // attribute.href = "";
                         attribute.target = "_blank";
-                        attribute.href = obj['report'] + "/" + obj['reportId'];
+                        attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                         attribute.className = "btn_views";
                         attribute.name = "view";
                         attribute.innerHTML = "View";
@@ -300,7 +295,7 @@
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -332,7 +327,7 @@
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -364,7 +359,7 @@
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -417,7 +412,7 @@
                         attribute.id = obj['residentId'];
                         // attribute.href = "";
                         attribute.target = "_blank";
-                        attribute.href = obj['report'] + "/" + obj['reportId'];
+                        attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                         attribute.className = "btn_views";
                         attribute.name = "view";
                         attribute.innerHTML = "View";
@@ -454,7 +449,7 @@
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -493,7 +488,7 @@
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -532,7 +527,7 @@
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";

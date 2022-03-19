@@ -27,7 +27,8 @@ Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
-Route::GET("safehouse/{dataType}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
+Route::GET("safehouse/name", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
+Route::GET("safehouse/{safeHouseId}", array("DisasterOfficer@filterSafehouse","InventoryManager@filterSafehouse"));
 Route::GET("incident", array("GramaNiladari@getIncidents","DisasterOfficer@getIncidents"));
 Route::GET("incident/{id}", array("GramaNiladari@getIncidentById,DisasterOfficer@getIncidentById"));
 Route::GET("GnDivision/{data}", array("DisasterOfficer@getGNDivision"));
@@ -94,8 +95,8 @@ Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
 Route::GET("area", array("Admin@DBtoJson"));
 
 //ResponsiblePerson
-Route::GET("statusUpdate", array("ResponsiblePerson@DBtoJson"));
-
+Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));
+ 
 // Inventory Manager
 Route::GET("unit", array("InventoryManager@getUnit"));
 Route::GET("inventory", array("InventoryManager@getInventory","DivisionalSecretariat@getInventory"));
@@ -103,6 +104,9 @@ Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"
 Route::GET("availableItem", array("InventoryManager@availableItem"));
 Route::GET("neighbour", array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count", array("InventoryManager@countItem"));
+Route::GET("aids", array("InventoryManager@getAids"));
+Route::GET("aids/safeHouse", array("InventoryManager@getAidsSafeHouse"));
+Route::GET("aids/{safeHouseId}", array("InventoryManager@getAids"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));

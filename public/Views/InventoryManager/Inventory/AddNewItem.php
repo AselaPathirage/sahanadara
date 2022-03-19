@@ -338,6 +338,10 @@ tr:hover{
 					}
 				});
             });
+            $("#alertBox").click(function(){
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
+            });
 		});
 
         let sidebar = document.querySelector(".sidebar");
@@ -411,7 +415,7 @@ tr:hover{
                 let cell11 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
-                cell1.innerHTML  = "<input id='"+obj['itemId']+"' value='"+obj['itemId']+"' data-itemId='"+obj['itemId']+"' data-itemName='"+obj['itemName']+"' data-unit='"+obj['unitName']+"' class='radio-custom' name='radio-group' type='radio' checked><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
+                cell1.innerHTML  = "<input id='"+obj['itemId']+"' value='"+obj['itemId']+"' data-itemId='"+obj['itemId']+"' data-itemName='"+obj['itemName']+"' data-unit='"+obj['unitName']+"' class='radio-custom' name='radio-group' type='radio'><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
                 cell2.innerHTML = obj['itemName'];
                 cell11.innerHTML = obj['itemId'];
                 cell3.colSpan ="3";
@@ -460,7 +464,7 @@ tr:hover{
                     let cell11 = row.insertCell(-1);
                     let cell2 = row.insertCell(-1);
                     let cell3 = row.insertCell(-1);
-                    cell1.innerHTML  = "<input id='"+obj['itemId']+"' value='"+obj['itemId']+"' data-itemId='"+obj['itemId']+"' data-itemName='"+obj['itemName']+"' data-unit='"+obj['unitName']+"' class='radio-custom' name='radio-group' type='radio' checked><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
+                    cell1.innerHTML  = "<input id='"+obj['itemId']+"' value='"+obj['itemId']+"' data-itemId='"+obj['itemId']+"' data-itemName='"+obj['itemName']+"' data-unit='"+obj['unitName']+"' class='radio-custom' name='radio-group' type='radio'><label for='"+obj['itemId']+"' class='radio-custom-label'></label>";
                     cell2.innerHTML = obj['itemName'];
                     cell11.innerHTML = obj['itemId'];
                     cell3.colSpan ="3";

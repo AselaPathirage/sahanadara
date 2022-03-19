@@ -63,11 +63,9 @@ class ResponsiblePerson  extends Employee{
         global $errorCode;
         $userId = $data['userId'];
         $output=array();
-        $sql = "SELECT s.safeHouseID, s.safeHouseName FROM safehouse s, responsibleperson r WHERE r.responsiblePersonID = $userId AND s.safeHouseID = r.safeHouseID";
-        $excute = $this->connection->query($sql);
-        $results = $excute-> fetch_assoc();
-        $output['id'] = $results['safeHouseID'];
-        $output['name'] = $results['safeHouseName'];
+        $safeHouse = $this->getSafeHouseId($userId);
+        $output['id'] = $safeHouse['id'];
+        $output['name'] = $safeHouse['name'];
         $sql = "SELECT s.days FROM safehouse s, responsibleperson r WHERE r.responsiblePersonID = $userId AND s.safeHouseID = r.safeHouseID";
         $excute = $this->connection->query($sql);
         $results = $excute-> fetch_assoc();
@@ -82,5 +80,70 @@ class ResponsiblePerson  extends Employee{
         http_response_code(200);                       
         $json = json_encode($output);
         echo $json;
+    }
+    public function addStatusUpdate(array $data){
+        global $errorCode;
+        $userId = $data['userId'];
+        if(isset($data['numberOfAdultMales']) && isset($data['numberOfAdultFemales']) && isset($data['numberOfChildren']) && isset($data['numberOfDisabledPersons'])){
+            if(isset($data['note'])){
+                $note = $data['note'];
+            }else{
+                $note = "";
+            }
+            $numberOfAdultMales = $data['numberOfAdultMales'];
+            $numberOfAdultFemales = $data['numberOfAdultFemales'];
+            $numberOfChildren = $data['numberOfChildren'];
+            $numberOfDisabledPersons = $data['numberOfDisabledPersons'];
+            $safeHouse = $this->getSafeHouseId($userId);
+            $safeHouseId = $safeHouse['id'];
+            $sql = "INSERT INTO `safehousestatus` (`safehouseId`, `adultMale`, `adultFemale`, `children`, `disabledPerson`, `note`)     VALUES ($safeHouseId, $numberOfAdultMales, $numberOfAdultFemales, $numberOfChildren, $numberOfDisabledPersons, '$note');";
+            $this->connection->query($sql);
+            if(isset($data['item'])){
+                $count = count($data['item']);
+                $i = 0;
+                if($count > 0){
+                    $sql = "SELECT LAST_INSERT_ID();";
+                    $execute = $this->connection->query($sql);
+                    $r = $execute->fetch_assoc();
+                    $recordId = $r["LAST_INSERT_ID()"];
+                    $input = "INSERT INTO safehousestatusrequesteditem(statusId,itemId,quantity) VALUES ";
+                    foreach($data['item'] as $item => $quantity){
+                        $item1 = "%".str_replace(" ","%",$item)."%";
+                        $sql = "SELECT itemId FROM item WHERE itemName LIKE '$item1' LIMIT 1;";
+                        $execute = $this->connection->query($sql);
+                        if($execute->num_rows > 0){
+                            $r = $execute->fetch_assoc();
+                            $itemId = $r["itemId"];
+                        }else{
+                            $sql = "INSERT INTO item( itemName, unitType ) VALUES ('$item' , 4);";
+                            $sql = "SELECT LAST_INSERT_ID();";
+                            $execute = $this->connection->query($sql);
+                            $r = $execute->fetch_assoc();
+                            $itemId = $r["LAST_INSERT_ID()"];
+                        }
+                        $input .= "($recordId,$itemId,$quantity)";
+                        if(++$i !== $count) {
+                            $input .= ",";
+                        }
+                    }
+                    $this->connection->query($input);
+                }
+            }
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['success']));
+            exit();
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function getSafeHouseId($userId){
+        $sql = "SELECT s.safeHouseID, s.safeHouseName FROM safehouse s, responsibleperson r WHERE r.responsiblePersonID = $userId AND s.safeHouseID = r.safeHouseID";
+        $excute = $this->connection->query($sql);
+        $results = $excute-> fetch_assoc();
+        $output['id'] = $results['safeHouseID'];
+        $output['name'] = $results['safeHouseName'];
+        return $output;
     }
 }

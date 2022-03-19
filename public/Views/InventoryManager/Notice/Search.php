@@ -233,9 +233,9 @@
             $(".close-btn, .bg-overlay, .cancel").click(function() {
                 $(".custom-model-main").removeClass('model-open');
             });
-            $(document).on('click','.closeMessege',function () {
-            $(".alert").fadeOut(100);
-                console.log("hello");
+            $(".closeMessege").click(function(){
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
             });
             $("#delete-confirm").click(function(e) {
                 e.preventDefault();

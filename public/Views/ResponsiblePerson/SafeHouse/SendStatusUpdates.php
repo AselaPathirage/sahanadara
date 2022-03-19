@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -35,7 +36,7 @@
 
         .output {
             list-style: none;
-            width: 25%;
+            width: 25.8%;
             min-height: 0px;
             border-top: 0 !important;
             color: #767676;
@@ -100,7 +101,7 @@
                 </center>
                 <div style="padding-left:15% ;">
                     <div class="column" style="width:90%;float: none;padding-left:5%;padding-top:2px;">
-                        <form id='add' method="POST">
+                        <form id='sendReport' method="POST">
                             <table style="border: none !important;width:85%;">
                                 <tr>
                                     <td>Number of adult males</td>
@@ -125,7 +126,7 @@
                             <table style="border: none !important;width:85%;">
                                 <tr>
                                     <td style="vertical-align: top;">Remarks</td>
-                                    <td><textarea id="drivernotes" name="drivernotes" rows="8" cols="50"></textarea></td>
+                                    <td><textarea id="note" name="note" rows="8" cols="50"></textarea></td>
                                 </tr>
                             </table>
 
@@ -157,6 +158,8 @@
             </div>
         </div>
     </section>
+    <div id="alertBox">
+    </div>
     <script>
         var thisPage = "#updates";
         var output;
@@ -215,8 +218,10 @@
                     },
                     cache: false,
                     success: function(result) {
+                        console.log("here");
                         if (result.code == 806) {
-                            $("#add").trigger('reset');
+                            console.log("here");
+                            $("#sendReport").trigger('reset');
                             alertGen("Record Added Successfully!", 1);
                         } else {
                             alertGen("Unable to handle request.", 2);

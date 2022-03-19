@@ -132,15 +132,23 @@
     border: none;
     text-align: left;
     vertical-align: middle;
-}
-.unit{
-    margin: 16px 3px;
-    margin-bottom: -25px;
-}
-#trow tr:hover{
-  background:#c9e8f7;
-  position:relative;
-}
+    }
+    .unit{
+        margin: 16px 3px;
+        margin-bottom: -25px;
+    }
+    #trow tr:hover{
+    background:#c9e8f7;
+    position:relative;
+    }
+    .btn-fun{
+    padding: 5px 20px;
+    border-radius:4px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    background-color:lightslategrey;
+    }
     </style>
 </head>
 <body>
@@ -154,6 +162,9 @@
         <div class="space"></div>
         <div class="container">
         <div class="box">
+        <div style="display:block;text-align: right;">
+                <a href="<?php echo HOST; ?>InventoryManager/Inventory/distribute" class="btn-fun">Distribute Items</a>
+                </div>
                 <table class="table">
                     <thead>
                         <tr class="filters">
@@ -365,6 +376,10 @@
                 }else{
                     $("#other").hide();
                 }
+            });
+            $("#alertBox").click(function(){
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
             });
         });
 

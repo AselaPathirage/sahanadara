@@ -119,7 +119,7 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th style="width: 5%;"></th>
+                                <!-- <th style="width: 5%;"></th> -->
                                 <th style="width: 15%;">Safe House Id</th>
                                 <th style="width: 40%;">Name</th>
                                 <th style="width: 15%;">Priority</th>
@@ -175,7 +175,7 @@
                 let id = "data_" + i;
                 row.id = id;
                 row.className = "task-list-row";
-                let cell1 = row.insertCell(-1);
+                //let cell1 = row.insertCell(-1);
                 let cell11 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
@@ -188,7 +188,7 @@
                 attribute2.className = "btn_views";
                 attribute2.name = "delete";
                 attribute2.innerHTML = "View";
-                cell1.innerHTML = "<input id='" + obj['safehouseId'] + "' value='" + obj['safehouseId'] + "' data-itemId='" + obj['safehouseId'] + "' class='radio-custom' name='radio-group' type='radio'><label for='" + obj['safehouseId'] + "' class='radio-custom-label'></label>";
+                //cell1.innerHTML = "<input id='" + obj['safehouseId'] + "' value='" + obj['safehouseId'] + "' data-itemId='" + obj['safehouseId'] + "' class='radio-custom' name='radio-group' type='radio'><label for='" + obj['safehouseId'] + "' class='radio-custom-label'></label>";
                 cell11.innerHTML = obj['safehouseId'];
                 cell2.innerHTML = obj['safeHouseName'];
                 cell3.innerHTML = obj['priority'];

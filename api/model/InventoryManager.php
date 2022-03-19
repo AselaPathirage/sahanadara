@@ -308,7 +308,7 @@ class InventoryManager extends Employee{
         $uid = $data['userId'];
         $this->inventory->setInfo($uid);
         $division = $this->getDivision($uid)['id'];
-        $sql = "WITH cte AS (SELECT sf.safehouseId,sh.safeHouseName,sf.adultMale+sf.adultFemale+sf.children+sf.disabledPerson AS quantity, DATE(sf.createdDate) AS createdDate, ROW_NUMBER() OVER (PARTITION BY sf.safehouseId ORDER BY sf.createdDate DESC) AS rn FROM safehousestatusrequesteditem s, safehousestatus sf, gndivision gn, safehouse sh WHERE s.statusId = sf.r_id AND sf.safehouseId = gn.safeHouseID AND gn.safeHouseID = sh.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = 10) ORDER BY sf.createdDate)SELECT * FROM cte WHERE rn = 1;";
+        $sql = "WITH cte AS (SELECT sf.safehouseId,sh.safeHouseName,sf.adultMale+sf.adultFemale+sf.children+sf.disabledPerson AS quantity, DATE(sf.createdDate) AS createdDate, ROW_NUMBER() OVER (PARTITION BY sf.safehouseId ORDER BY sf.createdDate DESC) AS rn FROM safehousestatusrequesteditem s, safehousestatus sf, gndivision gn, safehouse sh WHERE s.statusId = sf.r_id AND sf.safehouseId = gn.safeHouseID AND sh.isUsing <> 'n' AND gn.safeHouseID = sh.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = 10) ORDER BY sf.createdDate)SELECT * FROM cte WHERE rn = 1;";
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

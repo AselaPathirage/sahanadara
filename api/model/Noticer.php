@@ -114,25 +114,76 @@ trait Noticer{
             if(strtolower($filter)=="name"){
                 $sql = "SELECT s.safeHouseID,s.safeHouseName  FROM safehouse s,gndivision g WHERE g.safeHouseID = s.safeHouseID AND g.dvId=".$division;
                 $temp = "safeHouseName";
+                $excute = $this->connection->query($sql);
+                $results = array();
+                while($r = $excute-> fetch_assoc()) {
+                    $r['safeHouseID'] = SafeHouse::getSafeHouseCode($r['safeHouseID']);
+                    $results[] = $r;
+                }
             }elseif(str_contains(strtolower($filter),"sh") or is_numeric($filter)){
                 $pk = SafeHouse::getId($filter);
-                $sql = "SELECT s.safeHouseID,s.safeHouseName,s.safeHouseAddress,g.gnDvName  FROM safehouse s,gndivision g WHERE g.safeHouseID = s.safeHouseID AND s.safeHouseID = $pk ";
+                $sql = "SELECT s.safeHouseID,s.safeHouseName,s.safeHouseAddress,g.gnDvName,s.isUsing  FROM safehouse s,gndivision g WHERE g.safeHouseID = s.safeHouseID AND s.safeHouseID = $pk ";
+                $excute = $this->connection->query($sql);
+                $results = array();
+                while($r = $excute-> fetch_assoc()) {
+                    $safeHouseId = SafeHouse::getSafeHouseCode($r['safeHouseID']);
+                    if($r['isUsing'] == 'n'){
+                        $active = "No";
+                        $temp4 = array(
+                            'id' => $safeHouseId,
+                            'name' => $r["safeHouseName"],
+                            'address' => $r["safeHouseAddress"],
+                            'contact' => array(),
+                            'active' => $active,
+                        );
+                        $r['contact'] = array();
+                        $r['responsible'] = "Not Assigned";
+                        $r['responsibleContact'] = "No data available";
+                        $r['active'] = $active;
+                        $r['males']= 0;
+                        $r['females'] = 0;
+                        $r['children'] = 0;
+                        $r['disabledPerson'] = 0;
+                    }else{
+                        $active = "Yes";
+                        $sql = "SELECT adultMale,adultFemale,Children,disabledPerson FROM safehousestatus WHERE safehouseId =".$r['safeHouseID']." ORDER BY createdDate DESC LIMIT 1;";
+                        $temp5 = $this->connection->query($sql);
+                        if($temp5->num_rows==0){
+                            $temp5 = array('adultMale'=>"Data not available",'adultFemale'=>"Data not available",'Children'=>"Data not available",'disabledPerson'=>"Data not available");
+                        }else{
+                            $temp5 = $temp5-> fetch_assoc();
+                        }
+                        $sql ="SELECT empName,empTele FROM `responsibleperson` WHERE safeHouseID = ".$r['safeHouseID']." AND isAssigned = 'y'";
+                        $responsiblePerson = $this->connection->query($sql);
+                        if($responsiblePerson->num_rows > 0){
+                            $responsiblePerson = $responsiblePerson-> fetch_assoc();
+                        }else{
+                            $responsiblePerson = array('empName'=>'Data not available','empTele'=>'Data not available');
+                        }
+                        $r['contact'] = array();
+                        $r['responsible'] = $responsiblePerson['empName'];
+                        $r['responsibleContact'] = $responsiblePerson['empTele'];
+                        $r['active'] = $active;
+                        $r['males']= $temp5['adultMale'];
+                        $r['females'] = $temp5['adultFemale'];
+                        $r['children'] = $temp5['Children'];
+                        $r['disabledPerson'] = $temp5['disabledPerson'];
+                    }
+
+                    $sql = "SELECT safeHouseTelno FROM safehousecontact WHERE safeHouseID=".$r['safeHouseID'];
+                    $contactQuery = $this->connection->query($sql);
+                    while($a = $contactQuery-> fetch_assoc()) {
+                        array_push($r['contact'],$a['safeHouseTelno']);
+                    }
+                    $r['safeHouseID'] = $safeHouseId;
+                    $results[] = $r;
+                }
             }else{
                 http_response_code(200);                       
                 echo json_encode(array("code"=>$errorCode['unableToHandle']));
                 exit();
             }
-            $excute = $this->connection->query($sql);
-            $results = array();
-            while($r = $excute-> fetch_assoc()) {
-                $r['safeHouseID'] = SafeHouse::getSafeHouseCode($r['safeHouseID']);
-                if(isset($r['gnDvName'])){
-                    $temp = $r['gnDvName'];
-                    unset($r['gnDvName']);
-                    $r['gramaNilaadariDivision'] = $temp;
-                }
-                $results[] = $r;
-            }
+
             $json = json_encode($results);
             echo $json;
         }else{

@@ -532,4 +532,78 @@ class GramaNiladari extends ResponsiblePerson
         $json = json_encode($results);
         echo $json;
     }
+    public function getInitial(array $data)
+    {
+        $uid = $data['userId'];
+        $initialId = $data['receivedParams'][0];
+        "SELECT * 
+        FROM gramaniladari g 
+        JOIN gndivision d 
+        ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 
+        JOIN division s ON d.dvId=s.dvId 
+        JOIN district t ON t.dsId=s.dsId";
+        $sql = "
+            SELECT
+                *
+            FROM
+                initialincident initial,
+                gndivision,
+                gramaniladari,district,division
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.initialId=" . $initialId . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        $json = json_encode($r);
+        // $json = json_encode($results);
+        echo $json;
+    }
+    public function getRelief(array $data)
+    {
+        $uid = $data['userId'];
+        $reliefId = $data['receivedParams'][0];
+        $sql = "
+            SELECT
+                *
+            FROM
+                relief,
+                gndivision,
+                gramaniladari,district,division
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = relief.gndvId AND relief.reliefId=" . $reliefId . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        $json = json_encode($r);
+        // $json = json_encode($results);
+        echo $json;
+    }
+    public function getFinal(array $data)
+    {
+        $uid = $data['userId'];
+        $finalId = $data['receivedParams'][0];
+        $sql = "
+            SELECT
+                final.*,gndivision.gnDvName,district.dsName,division.dvName,gramaniladari.*
+            FROM
+                gnfinalincident final,
+                gndivision,
+                gramaniladari,district,division
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = final.gndvId AND final.finalIncidentId=" . $finalId . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        
+        $json = json_encode($r);
+        // $json = json_encode($results);
+        echo $json;
+    }
 }

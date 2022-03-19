@@ -49,7 +49,7 @@
 
         <div class="container col8">
             <div class="box">
-                <form action="" id="regForm">
+                <form id="regForm">
                     <div class="box1">
                         <h1 class="text-center">Death Compensation</h1>
 
@@ -172,7 +172,10 @@
                         <div class="tab">
                             <h4 class="text-center">Details of heirs</h4>
                             <div class="table-repsonsive">
-                                <span id="error"></span>
+                                <div id="heirs">
+
+
+                                    <!-- <span id="error"></span>
                                 <table class="table table-bordered" style="width:70%;margin:0" id="item_table">
                                     <thead>
                                         <tr>
@@ -182,70 +185,74 @@
                                         </tr>
                                     </thead>
                                     <tbody></tbody>
-                                </table>
+                                </table> -->
 
-                                <div id="heir1">
-                                    <div class="row">
-                                        <div class="col10">
-                                            <div class="row">
-                                                <div class="col3">
-                                                    <label for="fname">Name</label>
+                                    <div id="heir1">
+                                        <div class="row">
+                                            <div class="col10">
+                                                <div class="row">
+                                                    <div class="col3">
+                                                        <label for="fname">Name</label>
+                                                    </div>
+                                                    <div class="col9">
+                                                        <input type="text" id="hname" name="hname" placeholder="">
+                                                    </div>
                                                 </div>
-                                                <div class="col9">
-                                                    <input type="text" id="hname" name="hname" placeholder="">
+                                                <div class="row">
+                                                    <div class="col3">
+                                                        <label for="fname">NIC</label>
+                                                    </div>
+                                                    <div class="col9">
+                                                        <input type="text" id="hnic" name="hnic" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col3">
+                                                        <label for="fname">Relationship</label>
+                                                    </div>
+                                                    <div class="col9">
+                                                        <input type="text" id="hrelationship" name="hrelationship" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col3">
+                                                        <label for="bank">Bank</label>
+                                                    </div>
+                                                    <div class="col9">
+                                                        <input type="text" id="hbank" name="hbank" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col3">
+                                                        <label for="branch">Branch</label>
+                                                    </div>
+                                                    <div class="col9">
+                                                        <input type="text" id="hbranch" name="hbranch" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col3">
+                                                        <label for="nic" style="">Account Number</label>
+                                                    </div>
+                                                    <div class="col9">
+                                                        <input type="number" id="hnic" name="hnic" placeholder="">
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="row">
-                                                <div class="col3">
-                                                    <label for="fname">NIC</label>
-                                                </div>
-                                                <div class="col9">
-                                                    <input type="text" id="hnic" name="hnic" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col3">
-                                                    <label for="fname">Relationship</label>
-                                                </div>
-                                                <div class="col9">
-                                                    <input type="text" id="hrelationship" name="hrelationship" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col3">
-                                                    <label for="bank">Bank</label>
-                                                </div>
-                                                <div class="col9">
-                                                    <input type="text" id="hbank" name="hbank" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col3">
-                                                    <label for="branch">Branch</label>
-                                                </div>
-                                                <div class="col9">
-                                                    <input type="text" id="hbranch" name="hbranch" placeholder="">
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col3">
-                                                    <label for="nic" style="margin-top:1px">Account Number</label>
-                                                </div>
-                                                <div class="col9">
-                                                    <input type="number" id="nic" name="nic" placeholder="">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col2">
-                                            <button type="button" name="remove" class="form-control add">Remove</button>
-                                        </div>
+                                            <!-- <div class="col2">
+                                                <button type="button" name="remove" class="form-control add remove" style="background-color:#FC4F4F;color:white;">Remove</button>
+                                            </div> -->
 
+                                        </div>
+                                        <hr>
                                     </div>
-
                                 </div>
 
-
-                                <button type="button" name="add" class="form-control add" style="width:70%;">Add</button>
+                                <div class="row">
+                                    <div style="margin:auto;">
+                                        <button type="button" name="add" class="form-control add" id="addheir" style="background-color: #11468F;color:white;">Add</button>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -327,6 +334,7 @@
 
     </section>
     <script>
+        var count = 0;
         var thisPage = "#compensations";
         $(document).ready(function() {
             $("#stats,#alerts").each(function() {
@@ -336,23 +344,80 @@
                 $(thisPage).addClass("active");
             });
 
-            $(document).on('click', '.add', function() {
+            $(document).on('click', '#addheir', function() {
                 var html = '';
-                html += "<tr>";
-                html += "<td><input type='text' style='text-transform: capitalize;' required='true' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
-                html += "<td><input type='text' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
-                html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
-                $('#item_table > tbody').append(html);
+                html += "<div id='heir1'><div class='row'><div class='col10'><div class='row'><div class='col3'><label for='fname'>Name</label></div><div class='col9'><input type='text' id='hname' name='hname'></div></div><div class='row'><div class='col3'><label for='fname'>NIC</label></div><div class='col9'><input type='text' id='hnic' name='hnic' ></div></div>";
+                html += " <div class='row'><div class='col3'><label for='fname'>Relationship</label></div> <div class='col9'><input type='text' id='hrelationship' name='hrelationship' placeholder=''></div></div><div class='row'><div class='col3'><label for='bank'>Bank</label></div><div class='col9'><input type='text' id='hbank' name='hbank'></div></div>";
+                html += "<div class='row'><div class='col3'><label for='branch'>Branch</label></div><div class='col9'><input type='text' id='hbranch' name='hbranch'></div></div> <div class='row'><div class='col3'><label for='nic' style=''>Account Number</label></div><div class='col9'><input type='number' id='hnic' name='hnic' ></div></div></div>";
+                html += " <div class='col2'><button type='button' name='remove' class='form-control add remove' style='background-color:#FC4F4F;color:white;'>Remove</button></div></div><hr></div>";
+                $('#heirs').append(html);
                 count++;
             });
 
             $(document).on('click', '.remove', function() {
-                $(this).closest('tr').remove();
+                $(this).closest('#heir1').remove();
             });
 
 
 
         });
+
+        $("#regForm").submit(function(event) {
+            event.preventDefault();
+            console.log("asdasdasdasdtarget");
+            var formElement = document.querySelector("form");
+            var formData = new FormData(formElement);
+            var object = {};
+            // formData.forEach(function(value, key) {
+            //     if (key.includes("quantity")) {
+            //         return;
+            //     }
+            //     object[key] = value;
+            // });
+            // let e = document.getElementById("safeHouseId");
+            // let safeHouseId = e.value;
+            // object['safeHouseId'] = safeHouseId;
+            // object['item'] = new Object();
+            // $('#item_table  tbody  tr').each(function() {
+            //     var item = $(this).find("td:first").find("input").val();
+            //     var words = item.split(" ");
+            //     for (let i = 0; i < words.length; i++) {
+            //         words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+            //     }
+            //     words = words.join(" ");
+            //     var quantity = $(this).find("td:nth-child(2)").find("input").val();
+            //     object['item'][words] = quantity;
+            // });
+            var json = JSON.stringify(object);
+            console.log(json);
+            // $.ajax({
+            //     type: "POST",
+            //     url: "<?php echo API; ?>notice",
+            //     data: json,
+            //     headers: {
+            //         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+            //     },
+            //     cache: false,
+            //     success: function(result) {
+            //         if (result.code == 806) {
+            //             $("#add").trigger('reset');
+            //             alertGen("Record Added Successfully!", 1);
+            //         } else {
+            //             alertGen("Unable to handle request.", 2);
+            //         }
+            //     },
+            //     error: function(err) {
+            //         alertGen("Something went wrong.", 3);
+            //         console.log(err);
+            //     }
+            // });
+        });
+
+
+
+
+
+
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
@@ -379,7 +444,7 @@
                 document.getElementById("nextBtn").innerHTML = "Next";
             }
             // ... and run a function that displays the correct step indicator:
-            fixStepIndicator(n)
+            // fixStepIndicator(n)
         }
 
         function nextPrev(n) {
@@ -394,8 +459,33 @@
             // if you have reached the end of the form... :
             if (currentTab >= x.length) {
                 //...the form gets submitted:
-                document.getElementById("regForm").submit();
-                return false;
+                event.preventDefault();
+                console.log("asdasdasdasdtarget");
+                var formElement = document.querySelector("form");
+                var formData = new FormData(formElement);
+                var object = {};
+                formData.forEach(function(value, key) {
+                    // if (key.includes("quantity")) {
+                    //     return;
+                    // }
+                    object[key] = value;
+                });
+                // let e = document.getElementById("safeHouseId");
+                // let safeHouseId = e.value;
+                // object['safeHouseId'] = safeHouseId;
+                // object['item'] = new Object();
+                // $('#item_table  tbody  tr').each(function() {
+                //     var item = $(this).find("td:first").find("input").val();
+                //     var words = item.split(" ");
+                //     for (let i = 0; i < words.length; i++) {
+                //         words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                //     }
+                //     words = words.join(" ");
+                //     var quantity = $(this).find("td:nth-child(2)").find("input").val();
+                //     object['item'][words] = quantity;
+                // });
+                var json = JSON.stringify(object);
+                console.log(json);
             }
             // Otherwise, display the correct tab:
             showTab(currentTab);

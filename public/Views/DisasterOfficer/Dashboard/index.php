@@ -172,7 +172,7 @@
                     </div>
                 </div> -->
 
-            </div>
+            
             <div class="space"></div>
         <div class="container text-center">
             <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
@@ -249,6 +249,23 @@
                 $("#bodyid").append($sample);
 
             }
+        }
+
+        function getSafehouseCount() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>SafehouseCount",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output['count(a.SafeHouseID)']);
+            $("#SafehouseCount").empty();
+            // var table = document.getElementById("bodyid");
+            $("#SafehouseCount").text(output['count(a.SafeHouseID)']);
         }
 
     </script>

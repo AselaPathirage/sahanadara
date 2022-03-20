@@ -55,7 +55,7 @@ Route::GET("gnmsg", array("GramaNiladari@getMessages"));
 Route::GET("gnalert", array("GramaNiladari@getAlerts"));
 Route::GET("residentcount", array("GramaNiladari@getResidentCount"));
 Route::GET("recentsh", array("GramaNiladari@getSafehouseRecent"));
-Route::GET("responsible", array("GramaNiladari@getResponsible"));
+Route::GET("responsible", array("GramaNiladari@getResponsible", "DisasterOfficer@getResponsible"));
 Route::GET("disaster", array("GramaNiladari@getDisaster"));
 Route::GET("gnreports", array("GramaNiladari@getReports"));
 Route::GET("gnreports/{id}", array("GramaNiladari@getReportsbyIncident"));
@@ -89,6 +89,7 @@ Route::GET("doinitial/{id}", array("DisasterOfficer@getInitial"));
 Route::GET("dorelief/{id}", array("DisasterOfficer@getRelief"));
 
 Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
+Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
 
 
 //Admin
@@ -100,7 +101,6 @@ Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));
 // Inventory Manager
 Route::GET("unit", array("InventoryManager@getUnit"));
 Route::GET("inventory", array("InventoryManager@getInventory","DivisionalSecretariat@getInventory"));
-Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));
 Route::GET("availableItem", array("InventoryManager@availableItem"));
 Route::GET("neighbour", array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count", array("InventoryManager@countItem"));
@@ -110,3 +110,8 @@ Route::GET("aids/{safeHouseId}", array("InventoryManager@getAids"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
+
+// Div Sec
+
+Route::GET("inventorymgr", array("DivisionalSecretariat@getInventorymgr"));
+Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));

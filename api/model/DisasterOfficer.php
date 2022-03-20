@@ -357,6 +357,25 @@ class DisasterOfficer extends Employee
         }
     }
 
+    public function getResponsibleperson(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID JOIN gndivision g ON g.safeHouseID=s.safeHouseID WHERE g.gramaNiladariID=" . $uid . ";";
+        $excute = $this->connection->query($sql);
+        // $results = array();
+        $r = $excute->fetch_assoc();
+        // while ($r = $excute->fetch_assoc()) {
+        //     $results[] = $r;
+        // }
+        $json = json_encode($r);
+        echo $json;
+    }
+
     // public function filterSafehouse(array $data)
     // {
     //     $uid = $data['userId'];
@@ -375,6 +394,22 @@ class DisasterOfficer extends Employee
     //         echo $json;
     //     }
     // }
+
+    public function getSafehouseCount(array $data)
+    {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT count(a.safeHouseID) FROM safehouse s JOIN gndivision g ON g.gndvId=a.gndvId WHERE g.gramaNiladariID=" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+
 
     public function addIncidents(array $data)
     {   

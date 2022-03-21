@@ -135,7 +135,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                         <div class="box row-content">
@@ -145,7 +145,7 @@
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                             <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
 
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
 
@@ -157,7 +157,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                         <div class="box row-content">
@@ -166,7 +166,7 @@
                             <br> 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                     </div>

@@ -36,7 +36,7 @@
                             <h1 class="heading_landing">Reset Password </h1>
                             <div class="row-content">
                                 <div class="container">
-                                    <form action="/<?php echo baseUrl; ?>/Handler/resetHandle" method="post">
+                                    <form action="<?php echo HOST; ?>/Handler/resetHandle" method="post">
                                         <label for="newPass">New Password</label>
                                         <input type="password" id="newPass" name="newPass" required />
                                         <label for="newPass2">Confirm Password</label>

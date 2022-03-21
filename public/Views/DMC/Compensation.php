@@ -104,7 +104,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Death </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -114,7 +114,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Death </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -124,7 +124,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Property </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -134,7 +134,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Death </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -144,7 +144,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Property </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -154,7 +154,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Death </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -164,7 +164,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Property </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -174,7 +174,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Death </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -184,7 +184,7 @@
                                     <td>Millaniya</td>
                                     <td>Bellapitiya </td>
                                     <td>Property </td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
 

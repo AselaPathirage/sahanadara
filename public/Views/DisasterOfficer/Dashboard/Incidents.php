@@ -29,9 +29,9 @@
         <!-- STATS -->
         <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Create Incident</a>
-                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Update Incident</a>
-                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/incidents" class="btn-fun">Close the Incident</a>
+                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Create Incident</a>
+                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/createincident" class="btn-fun">Update Incident</a>
+                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/incidents" class="btn-fun">Close the Incident</a>
  
         <!-- TABLE -->
         <div class="container">
@@ -64,7 +64,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +77,7 @@
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                             <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
 
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                         </div>
                     </div>
 
@@ -89,7 +89,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                         <div class="box row-content">
@@ -98,7 +98,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                     </div> -->
@@ -164,7 +164,7 @@
                     if (obj['isActive'] == 1) {
                         $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                     }
-                    $sample += "<a href='/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                    $sample += "<a href='<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
                         $sample += "</div>";
                     }
@@ -194,7 +194,7 @@
                         if (obj['isActive'] == 1) {
                             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                         }
-                        $sample += "<a href='/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                        $sample += "<a href='<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                         if ((i % 2 == 1) || (i == output.length - 1)) {
                             $sample += "</div>";
                         }
@@ -207,7 +207,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a href='<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }
@@ -221,7 +221,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a href='<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }

@@ -70,7 +70,7 @@
                                 <td>Generator</td>
                                 <td>1</td>
                                 <td>Approved</td>
-                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                            <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -79,7 +79,7 @@
                                 <td>Boat</td>
                                 <td>1</td>
                                 <td>Approved</td>
-                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                            <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -88,7 +88,7 @@
                                 <td>Tent</td>
                                 <td>2</td>
                                 <td>Approved</td>
-                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                            <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -98,7 +98,7 @@
                                 <td>Water Tank</td>
                                 <td>1</td>
                                 <td>Approved</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
                             </tr>
                             
                         </tbody>

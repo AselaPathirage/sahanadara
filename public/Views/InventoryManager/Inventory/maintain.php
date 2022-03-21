@@ -270,7 +270,7 @@
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td>
-                                                    <label for="your_nic">Item Name</label>
+                                                    <label for="itemId2">Item Name</label>
                                                     <select id="itemId2" name="itemId2" class="form-control" required='true'>
                                                         <option value="" data-unit="0">Select Type</option>
                                                     </select>
@@ -282,7 +282,7 @@
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td>
-                                                <label for="your_name">Quantity</label>
+                                                <label for="quantity2">Quantity</label>
                                                 <input type="text" id="quantity2" name="quantity2" placeholder="Item Quantity" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
                                                 </td>
                                                 <td>
@@ -434,7 +434,7 @@
             }).responseText);
             $("#itemId2").find('option').not(':first').remove();
             for (var i = 0; i < output2.length; i++){
-                var opt2 = new Option("option text",output[i]['itemId'] );
+                var opt2 = new Option("option text",output2[i]['itemId'] );
                 $(opt2).html(output2[i]['itemName']);
                 $(opt2).attr('data-unit', output2[i]['unitName']);
                 $("#itemId2").append(opt2);

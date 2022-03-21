@@ -183,7 +183,7 @@ $array = explode("/", $_GET["url"]);
                                     <td>Location</td>
                                     <td>
                                         <select id="safeHouseId" class="form-control" required="true">
-                                            <option value="0">Select Safe House</option>
+                                            <option value="">Select Safe House</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -457,8 +457,6 @@ $array = explode("/", $_GET["url"]);
                     var option = document.createElement("option");
                     option.text = output[i].safeHouseName;
                     option.value = output[i].safeHouseID;
-                    console.log(output[i].safeHouseID);
-                    console.log(safehouse);
                     if(output[i].safeHouseID == safehouse && check.indexOf('SH')!== -1){
                         option.selected = 'true';
                         document.getElementById("safeHouseId").disabled = 'true';

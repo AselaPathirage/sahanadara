@@ -238,6 +238,7 @@ $array = explode("/", $_GET["url"]);
                     $.each(favorite, function(index, value){
                         text += "<tr><td>" + index + "</td><td>" + value + "</td></tr>";
                     });
+                    sessionStorage.clear();
                     sessionStorage.setItem('safeHouseId',data[0].safeHouseID);
                     sessionStorage.setItem('safeHouseName',data[0].safeHouseName);
                     sessionStorage.setItem('numberOfPeople',parseInt(data[0].males) + parseInt(data[0].females) + parseInt(data[0].children) + parseInt(data[0].disabledPerson));
@@ -264,30 +265,24 @@ $array = explode("/", $_GET["url"]);
                     $("#find").val("inventory");
                     $("#header").text("Release From Inventory");
                     var favorite = {};
-                    var check = 1;
                     $.each($("input[name='items']:checked"), function(){
-                        if($(this).data("available") == 0){
-                            alertGen($(this).data("id")+" not in inventory",2);
-                            check = 0;
-                            return;
-                        }
-                        if($(this).data("quantity") > $(this).data("available")){
-                            favorite[$(this).val()] = $(this).data("available");
-                        }else{
-                            favorite[$(this).val()] = $(this).data("quantity");
-                        }
+                        favorite[$(this).data("id")] = $(this).data("quantity");
                     });
-                    if(check){
-                        var text = "<table style='width:80%'><tr style='background-color:#3471eb'><td>Item</td><td>Quantity</td></tr>";
-                        $.each(favorite, function(index, value) {
-                            text += "<tr><td>" + index + "</td><td>" + value + "</td></tr>";
-                        });
-                        text += "</table>";
-                        $('#display').html(text);
-                        console.log(favorite);
-                        $("#process").fadeIn();
-                        $("#process").addClass('model-open');
-                    }
+                    var text = "<table style='width:80%'><tr style='background-color:#3471eb'><td>Item</td><td>Quantity</td></tr>";
+                    $.each(favorite, function(index, value){
+                        text += "<tr><td>" + index + "</td><td>" + value + "</td></tr>";
+                    });
+                    sessionStorage.clear();
+                    sessionStorage.setItem('safeHouseId',data[0].safeHouseID);
+                    sessionStorage.setItem('safeHouseName',data[0].safeHouseName);
+                    sessionStorage.setItem('numberOfPeople',parseInt(data[0].males) + parseInt(data[0].females) + parseInt(data[0].children) + parseInt(data[0].disabledPerson));
+                    sessionStorage.setItem('numberOfFamilies',Math.ceil(parseInt(sessionStorage.getItem('numberOfPeople')) / 5));
+                    var json = JSON.stringify(favorite);
+                    sessionStorage.setItem('data',json);
+                    text += "</table>";
+                    $('#display').html(text);
+                    $("#process").fadeIn();
+                    $("#process").addClass('model-open');
                 }
             });
             $(".close-btn, .bg-overlay, .cancel").click(function(){
@@ -309,7 +304,12 @@ $array = explode("/", $_GET["url"]);
                 }
             });
             $("#continue").click(function(e){
-                window.location.href = "<?php echo HOST ?>InventoryManager/Notice/AddNotice/"+data[0].safeHouseID;
+                let check = $("#find").val();
+                if (check == "notice") {
+                    window.location.href = "<?php echo HOST ?>InventoryManager/Notice/AddNotice/"+data[0].safeHouseID;
+                }else if($("#find").val() == "inventory") {
+                    window.location.href = "<?php echo HOST ?>InventoryManager/Inventory/distribute/"+data[0].safeHouseID;
+                }
             });
             $("#alertBox").click(function(){
                 $(".alert").fadeOut(100)
@@ -347,6 +347,7 @@ $array = explode("/", $_GET["url"]);
         function processNotice(){
             document.getElementById('display').innerHTML = "";
             var text = "<table style='width:80%'><tr style='background-color:#3471eb'><td>Item</td><td>Quantity</td></tr>";
+            sessionStorage.clear();
             sessionStorage.setItem('safeHouseId',data[0].safeHouseID);
             sessionStorage.setItem('safeHouseName',data[0].safeHouseName);
             sessionStorage.setItem('numberOfPeople',parseInt(data[0].males) + parseInt(data[0].females) + parseInt(data[0].children) + parseInt(data[0].disabledPerson));
@@ -371,21 +372,23 @@ $array = explode("/", $_GET["url"]);
             document.getElementById('display').innerHTML = "";
             var text = "<table style='width:80%'><tr style='background-color:#3471eb'><td>Item</td><td>Quantity</td></tr>";
             var object = {};
-            object['safeHouseId'] = data[0].safeHouseID;
-            object['numberOfPeople'] = parseInt(data[0].males) + parseInt(data[0].females) + parseInt(data[0].children) + parseInt(data[0].disabledPerson);
-            object['numberOfFamilies'] = Math.ceil(parseInt(object['numberOfPeople']) / 5);
-            object['item'] = new Object();
+            sessionStorage.clear();
+            sessionStorage.setItem('safeHouseId',data[0].safeHouseID);
+            sessionStorage.setItem('safeHouseName',data[0].safeHouseName);
+            sessionStorage.setItem('numberOfPeople',parseInt(data[0].males) + parseInt(data[0].females) + parseInt(data[0].children) + parseInt(data[0].disabledPerson));
+            sessionStorage.setItem('numberOfFamilies',Math.ceil(parseInt(sessionStorage.getItem('numberOfPeople')) / 5));
             for (var i = 0; i < output.length; i++) {
                 let obj = output[i];
                 if (obj['availability'] == 'Yes') {
                     text += "<tr><td>" + obj['itemName'] + "</td><td>" + obj['quantity'] + "</td></tr>";
-                    object['item'][obj['itemName']] = obj['quantity'];
+                    object[obj['itemId']] = obj['quantity'];
                 }
             }
             text += "</table>";
             document.getElementById('display').innerHTML = text;
             console.log(object);
             var json = JSON.stringify(object);
+            sessionStorage.setItem('data',json);
             console.log(json);
         }
 

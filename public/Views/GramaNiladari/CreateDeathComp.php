@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -46,7 +47,8 @@
         include_once('./public/Views/GramaNiladari/includes/topnav.php');
         ?>
         <div class="space"></div>
-
+        <div id="alertBox">
+        </div>
         <div class="container col8">
             <div class="box">
                 <form id="regForm">
@@ -195,7 +197,7 @@
                                                         <label for="fname">Name</label>
                                                     </div>
                                                     <div class="col9">
-                                                        <input type="text" id="hname" name="hname" placeholder="">
+                                                        <input type="text" id="hname0" name="hname0" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -203,7 +205,7 @@
                                                         <label for="fname">NIC</label>
                                                     </div>
                                                     <div class="col9">
-                                                        <input type="text" id="hnic" name="hnic" placeholder="">
+                                                        <input type="text" id="hnic0" name="hnic0" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -211,7 +213,7 @@
                                                         <label for="fname">Relationship</label>
                                                     </div>
                                                     <div class="col9">
-                                                        <input type="text" id="hrelationship" name="hrelationship" placeholder="">
+                                                        <input type="text" id="hrelationship0" name="hrelationship0" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -219,7 +221,7 @@
                                                         <label for="bank">Bank</label>
                                                     </div>
                                                     <div class="col9">
-                                                        <input type="text" id="hbank" name="hbank" placeholder="">
+                                                        <input type="text" id="hbank0" name="hbank0" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -227,7 +229,7 @@
                                                         <label for="branch">Branch</label>
                                                     </div>
                                                     <div class="col9">
-                                                        <input type="text" id="hbranch" name="hbranch" placeholder="">
+                                                        <input type="text" id="hbranch0" name="hbranch0" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="row">
@@ -235,7 +237,7 @@
                                                         <label for="nic" style="">Account Number</label>
                                                     </div>
                                                     <div class="col9">
-                                                        <input type="number" id="hnic" name="hnic" placeholder="">
+                                                        <input type="number" id="haccnum0" name="haccnum0" placeholder="">
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,7 +336,7 @@
 
     </section>
     <script>
-        var count = 0;
+        var count = 1;
         var thisPage = "#compensations";
         $(document).ready(function() {
             $("#stats,#alerts").each(function() {
@@ -346,9 +348,9 @@
 
             $(document).on('click', '#addheir', function() {
                 var html = '';
-                html += "<div id='heir1'><div class='row'><div class='col10'><div class='row'><div class='col3'><label for='fname'>Name</label></div><div class='col9'><input type='text' id='hname' name='hname'></div></div><div class='row'><div class='col3'><label for='fname'>NIC</label></div><div class='col9'><input type='text' id='hnic' name='hnic' ></div></div>";
-                html += " <div class='row'><div class='col3'><label for='fname'>Relationship</label></div> <div class='col9'><input type='text' id='hrelationship' name='hrelationship' placeholder=''></div></div><div class='row'><div class='col3'><label for='bank'>Bank</label></div><div class='col9'><input type='text' id='hbank' name='hbank'></div></div>";
-                html += "<div class='row'><div class='col3'><label for='branch'>Branch</label></div><div class='col9'><input type='text' id='hbranch' name='hbranch'></div></div> <div class='row'><div class='col3'><label for='nic' style=''>Account Number</label></div><div class='col9'><input type='number' id='hnic' name='hnic' ></div></div></div>";
+                html += "<div id='heir1'><div class='row'><div class='col10'><div class='row'><div class='col3'><label for='fname'>Name</label></div><div class='col9'><input type='text' id='hname" + count + "' name='hname" + count + "'></div></div><div class='row'><div class='col3'><label for='fname'>NIC</label></div><div class='col9'><input type='text' id='hnic" + count + "' name='hnic" + count + "' ></div></div>";
+                html += " <div class='row'><div class='col3'><label for='fname'>Relationship</label></div> <div class='col9'><input type='text' id='hrelationship" + count + "' name='hrelationship" + count + "' placeholder=''></div></div><div class='row'><div class='col3'><label for='bank'>Bank</label></div><div class='col9'><input type='text' id='hbank" + count + "' name='hbank" + count + "'></div></div>";
+                html += "<div class='row'><div class='col3'><label for='branch'>Branch</label></div><div class='col9'><input type='text' id='hbranch" + count + "' name='hbranch" + count + "'></div></div> <div class='row'><div class='col3'><label for='nic' style=''>Account Number</label></div><div class='col9'><input type='number' id='haccnum" + count + "' name='haccnum" + count + "' ></div></div></div>";
                 html += " <div class='col2'><button type='button' name='remove' class='form-control add remove' style='background-color:#FC4F4F;color:white;'>Remove</button></div></div><hr></div>";
                 $('#heirs').append(html);
                 count++;
@@ -362,56 +364,56 @@
 
         });
 
-        $("#regForm").submit(function(event) {
-            event.preventDefault();
-            console.log("asdasdasdasdtarget");
-            var formElement = document.querySelector("form");
-            var formData = new FormData(formElement);
-            var object = {};
-            // formData.forEach(function(value, key) {
-            //     if (key.includes("quantity")) {
-            //         return;
-            //     }
-            //     object[key] = value;
-            // });
-            // let e = document.getElementById("safeHouseId");
-            // let safeHouseId = e.value;
-            // object['safeHouseId'] = safeHouseId;
-            // object['item'] = new Object();
-            // $('#item_table  tbody  tr').each(function() {
-            //     var item = $(this).find("td:first").find("input").val();
-            //     var words = item.split(" ");
-            //     for (let i = 0; i < words.length; i++) {
-            //         words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-            //     }
-            //     words = words.join(" ");
-            //     var quantity = $(this).find("td:nth-child(2)").find("input").val();
-            //     object['item'][words] = quantity;
-            // });
-            var json = JSON.stringify(object);
-            console.log(json);
-            // $.ajax({
-            //     type: "POST",
-            //     url: "<?php echo API; ?>notice",
-            //     data: json,
-            //     headers: {
-            //         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-            //     },
-            //     cache: false,
-            //     success: function(result) {
-            //         if (result.code == 806) {
-            //             $("#add").trigger('reset');
-            //             alertGen("Record Added Successfully!", 1);
-            //         } else {
-            //             alertGen("Unable to handle request.", 2);
-            //         }
-            //     },
-            //     error: function(err) {
-            //         alertGen("Something went wrong.", 3);
-            //         console.log(err);
-            //     }
-            // });
-        });
+        // $("#regForm").submit(function(event) {
+        //     event.preventDefault();
+        //     console.log("asdasdasdasdtarget");
+        //     var formElement = document.querySelector("form");
+        //     var formData = new FormData(formElement);
+        //     var object = {};
+        // formData.forEach(function(value, key) {
+        //     if (key.includes("quantity")) {
+        //         return;
+        //     }
+        //     object[key] = value;
+        // });
+        // let e = document.getElementById("safeHouseId");
+        // let safeHouseId = e.value;
+        // object['safeHouseId'] = safeHouseId;
+        // object['item'] = new Object();
+        // $('#item_table  tbody  tr').each(function() {
+        //     var item = $(this).find("td:first").find("input").val();
+        //     var words = item.split(" ");
+        //     for (let i = 0; i < words.length; i++) {
+        //         words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+        //     }
+        //     words = words.join(" ");
+        //     var quantity = $(this).find("td:nth-child(2)").find("input").val();
+        //     object['item'][words] = quantity;
+        // });
+        // var json = JSON.stringify(object);
+        // console.log(json);
+        // $.ajax({
+        //     type: "POST",
+        //     url: "<?php echo API; ?>notice",
+        //     data: json,
+        //     headers: {
+        //         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+        //     },
+        //     cache: false,
+        //     success: function(result) {
+        //         if (result.code == 806) {
+        //             $("#add").trigger('reset');
+        //             alertGen("Record Added Successfully!", 1);
+        //         } else {
+        //             alertGen("Unable to handle request.", 2);
+        //         }
+        //     },
+        //     error: function(err) {
+        //         alertGen("Something went wrong.", 3);
+        //         console.log(err);
+        //     }
+        // });
+        // });
 
 
 
@@ -465,30 +467,95 @@
                 var formData = new FormData(formElement);
                 var object = {};
                 formData.forEach(function(value, key) {
-                    // if (key.includes("quantity")) {
-                    //     return;
-                    // }
+                    // if (key.includes("h")) {
+                    if (key.startsWith('h')) {
+                        return;
+                    }
                     object[key] = value;
                 });
                 // let e = document.getElementById("safeHouseId");
                 // let safeHouseId = e.value;
                 // object['safeHouseId'] = safeHouseId;
-                // object['item'] = new Object();
-                // $('#item_table  tbody  tr').each(function() {
-                //     var item = $(this).find("td:first").find("input").val();
-                //     var words = item.split(" ");
-                //     for (let i = 0; i < words.length; i++) {
-                //         words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-                //     }
-                //     words = words.join(" ");
-                //     var quantity = $(this).find("td:nth-child(2)").find("input").val();
-                //     object['item'][words] = quantity;
-                // });
+                object['heir'] = new Object();
+                count = 0
+                $('#heirs #heir1').each(function() {
+                    // console.log("w");
+                    var hname = $(this).find("input[id^='hname']").val();
+                    var hnic = $(this).find("input[id^='hnic']").val();
+                    var hrelationship = $(this).find("input[id^='hrelationship']").val();
+                    var hbranch = $(this).find("input[id^='hbranch']").val();
+                    var haccnum = $(this).find("input[id^='haccnum']").val();
+                    var hbank = $(this).find("input[id^='hbank']").val();
+                    // var words = item.split(" ");
+                    // for (let i = 0; i < words.length; i++) {
+                    //     words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                    // }
+                    // words = words.join(" ");
+                    // var quantity = $(this).find("td:nth-child(2)").find("input").val();
+                    // object['item'][words] = quantity;
+                    var h = {};
+                    h['hname'] = hname;
+                    h['hnic'] = hnic;
+                    h['hrelationship'] = hrelationship;
+                    h['hbranch'] = hbranch;
+                    h['haccnum'] = haccnum;
+                    h['hbank'] = hbank;
+                    object['heir'][count++] = h;
+
+                });
                 var json = JSON.stringify(object);
                 console.log(json);
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo API; ?>deathcomp",
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        var url = "<?php echo HOST; ?>/GramaNiladari/Compensation";
+                        if (result.code == 806) {
+                            $("#regForm").trigger('reset');
+                            alertGen("Record Added Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                        setTimeout(function() {
+                            $(location).attr('href', url);
+                        }, 1000);
+                        console.log(result);
+                    },
+                    error: function(err) {
+                        alertGen("Something went wrong.", 3);
+                        console.log(err);
+                    }
+                });
             }
             // Otherwise, display the correct tab:
             showTab(currentTab);
+        }
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
         }
     </script>
 </body>

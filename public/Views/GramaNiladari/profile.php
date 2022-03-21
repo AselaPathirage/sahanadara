@@ -80,14 +80,14 @@
                             </div>
                         </div>
 
-                        <div class="row">
+                        <!-- <div class="row">
                             <div class="col3">
                                 <label for="fname">NIC</label>
                             </div>
                             <div class="col9">
                                 <input type="text" id="nic" name="nic" placeholder="NIC" readonly>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="row">
                             <div class="col3">
                                 <label for="email">Email</label>
@@ -226,18 +226,18 @@
             var ds = data['dvName'];
             var gn = data['gnDvName'];
             var name = data['empName'];
-            var nic = data['nid'];
+            // var nic = data['nid'];
             var email = data['empEmail'];
             var add = data['empAddress'];
             var tel = data['empTele'];
             var ofAdd = data['officeAddress'];
-            var ofTel = data['officeTele'];
+            var ofTel = data['telno'];
 
             $("#dis").val(dis);
             $("#ds").val(ds);
             $("#gn").val(gn);
             $("#name").val(name);
-            $("#nic").val(nic);
+            // $("#nic").val(nic);
             $("#email").val(email);
             $("#tel").val(tel);
             $("#add").val(add);

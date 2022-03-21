@@ -32,7 +32,7 @@
                 <center>
                     <h1>Compensation Report</h1>
                 </center>
-                <form>
+                <form action="<?php echo HOST;?>/GramaNiladari/Report/ViewCompensation" target="_blank">
                     <div class="row-content">
 
                         <h2>Select </h2>
@@ -40,26 +40,26 @@
 
                             <div class="col3">
                                 <label for="crusttype">Type</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Death</option>
-                                    <option value="white">Property</option>
+                                <select id="type" name="type">
+                                    <option value="all">All</option>
+                                    <option value="Death">Death</option>
+                                    <option value="Property">Property</option>
                                 </select>
                             </div>
                             <div class="col3">
-                                <label for="crusttype">Start Date</label>
-                                <input type="date" id="birthday" name="birthday">
+                                <label for="df">From</label>
+                                <input type="date" id="from" name="from">
                             </div>
                             <div class="col3">
-                                <label for="crusttype">End Date</label>
-                                <input type="date" id="birthday" name="birthday">
+                                <label for="crusttype">To</label>
+                                <input type="date" id="to" name="to">
                             </div>
                         </div>
 
                         <div class="row" style="justify-content: center;">
 
                             <input type="submit" value="Generate" class="btn-alerts" />
-                            <input type="reset" value="Cancel" class="btn-alerts" />
+                            <!-- <input type="reset" value="Cancel" class="btn-alerts" /> -->
                         </div>
                     </div>
 

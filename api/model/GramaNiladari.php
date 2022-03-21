@@ -96,9 +96,10 @@ class GramaNiladari extends ResponsiblePerson
     protected function checkPassword(array $data)
     {
         $uid = $data['userId'];
-        $username = md5($data['nic']);
+        // $username = md5($data['nic']);
+        $userType = $data['userType'];
         $password = md5($data['password']);
-        $sql = "SELECT * FROM login l WHERE l.nid ='$username' AND l.empPassword ='$password'";
+        $sql = "SELECT * FROM login l WHERE l.roleId ='$userType' AND l.empPassword ='$password' AND l.empId ='$uid'";
         $excute = $this->connection->query($sql);
         return $excute->num_rows > 0;
     }
@@ -106,7 +107,10 @@ class GramaNiladari extends ResponsiblePerson
     public function updateProfileDetails(array $data)
     {
         global $errorCode;
+
         if ($this->checkPassword($data)) {
+            // print_r($data);
+            // exit;
             $uid = $data['userId'];
             $email = $data['email'];
             $address = $data['add'];
@@ -114,13 +118,13 @@ class GramaNiladari extends ResponsiblePerson
             $ofaddress = $data['ofAdd'];
             $ofphone = $data['ofTel'];
             $sql = "UPDATE `gramaniladari` SET `empAddress`='$address', `empEmail`='$email',`empTele`='$phone' WHERE `gramaNiladariID`='$uid' ";
-            $sql2 = "UPDATE `gndivision` SET `officeAddress`='$ofaddress', `officeTele`='$ofphone' WHERE `gramaNiladariID`='$uid' ";
+            $sql2 = "UPDATE `gndivision` SET `officeAddress`='$ofaddress', `telno`='$ofphone' WHERE `gramaNiladariID`='$uid' ";
             $this->connection->query($sql);
             $this->connection->query($sql2);
-            if (isset($data['npassword'])) {
+            if (!empty($data['npassword'])) {
+                $userType = $data['userType'];
                 $password = md5($data['npassword']);
-                $username = md5($data['nic']);
-                $sql = "UPDATE `login` SET `empPassword`='$password' WHERE `nid`='$username' ";
+                $sql = "UPDATE `login` SET `empPassword`='$password' WHERE roleId ='$userType' AND empId ='$uid'";
                 $this->connection->query($sql);
             }
             echo json_encode(array("code" => $errorCode['success']));
@@ -193,6 +197,26 @@ class GramaNiladari extends ResponsiblePerson
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $json = json_encode($r);
+        echo $json;
+    }
+    public function getCompCount(array $data)
+    {
+        $uid = $data['userId'];
+        $results = array();
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT count(a.deathId) FROM deathcompensation a JOIN gndivision g ON g.gndvId=a.gndvId WHERE g.gramaNiladariID=" . $uid . " AND a.dmcapproved='a' AND a.collected='0'";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['dcount'] = $r;
+        $sql = "SELECT count(a.propcomId) FROM propertycompensation a JOIN gndivision g ON g.gndvId=a.gndvId WHERE g.gramaNiladariID=" . $uid . " AND a.dmcapproved='a' AND a.collected='0'";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['pcount'] = $r;
+        $json = json_encode($results);
         echo $json;
     }
 
@@ -536,12 +560,12 @@ class GramaNiladari extends ResponsiblePerson
     {
         $uid = $data['userId'];
         $initialId = $data['receivedParams'][0];
-        "SELECT * 
-        FROM gramaniladari g 
-        JOIN gndivision d 
-        ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 
-        JOIN division s ON d.dvId=s.dvId 
-        JOIN district t ON t.dsId=s.dsId";
+        // "SELECT * 
+        // FROM gramaniladari g 
+        // JOIN gndivision d 
+        // ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 
+        // JOIN division s ON d.dvId=s.dvId 
+        // JOIN district t ON t.dsId=s.dsId";
         $sql = "
             SELECT
                 *
@@ -601,9 +625,506 @@ class GramaNiladari extends ResponsiblePerson
         // while ($r = $excute->fetch_assoc()) {
         //     $results[] = $r;
         // }
-        
+
         $json = json_encode($r);
         // $json = json_encode($results);
+        echo $json;
+    }
+
+
+
+
+    // compensation
+    public function addDeathcomp(array $data)
+    {
+        // print_r(array_values($data['heir'][0]));
+        // exit;
+        global $errorCode;
+        $uid = $data['userId'];
+        $disaster = $data['disaster'];
+        $disdate = $data['disdate'];
+        $dname = $data['dname'];
+        $ddate = $data['ddate'];
+        $dnic = $data['dnic'];
+        $daddress = $data['daddress'];
+        $doccupation = $data['doccupation'];
+        $aname = $data['aname'];
+        $anic = $data['anic'];
+        $atpnumber = $data['atpnumber'];
+        $relationship = $data['relationship'];
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "INSERT INTO `deathcompensation`( `disaster`, `disasterdate`, `deathdate`, `dname`, `dnic`, `daddress`, `doccupation`, `aname`, `anic`, `arelationship`,`atelno`, `gndvId`) VALUES 
+        ('$disaster','$disdate','$ddate','$dname','$dnic','$daddress','$doccupation','$aname',
+        '$anic','$relationship','$atpnumber'," . $r['gndvId'] . ");";
+        $this->connection->query($sql);
+
+
+        if (count($data['heir']) > 0) {
+            $sql = "SELECT LAST_INSERT_ID();";
+            $execute = $this->connection->query($sql);
+            $r = $execute->fetch_assoc();
+            $noticeId = $r["LAST_INSERT_ID()"];
+            $sql = "INSERT INTO `deathheir`(`deathid`, `name`, `bank`, `branch`, `accno`, `nic`, `relationship`) VALUES ";
+            $len = count($data['heir']);
+            for ($x = 0; $x < $len; $x++) {
+                // $items = array_keys($data['heir'][$x]);
+                $values = array_values($data['heir'][$x]);
+                $leny = count($data['heir'][$x]);
+                // [0] => hname
+                // [1] => hnic
+                // [2] => hrelationship
+                // [3] => hbranch
+                // [4] => haccnum
+                // [5] => hbank
+                $hname = $values[0];
+                $hnic = $values[1];
+                $hrelationship = $values[2];
+                $hbranch = $values[3];
+                $haccnum = $values[4];
+                $hbank = $values[5];
+                $sql  .= "('$noticeId', '$hname', '$hbank','$hbranch', '$haccnum', '$hnic', '$hrelationship')";
+                if (($x + 1) != $len) {
+                    $sql .= ", ";
+                }
+            }
+            // echo $sql;
+            // exit();
+            if ($this->connection->query($sql)) {
+                echo json_encode(array("code" => $errorCode['success']));
+            } else {
+                echo json_encode(array("code" => $errorCode['unknownError']));
+            }
+        }
+    }
+    public function addPropertycomp(array $data)
+    {
+        // print_r(array_values($data['heir'][0]));
+        // exit;
+
+        global $errorCode;
+        $uid = $data['userId'];
+        $disaster = $data['disaster'];
+        $aname = $data['aname'];
+        $anic = $data['anic'];
+        $aaddress = $data['aaddress'];
+        $atpnumber = $data['atpnumber'];
+        $arelationship = $data['arelationship'];
+        $tla = $data['tla'];
+        $htype = $data['htype'];
+        $totcomp = $data['totcomp'];
+        $hname = $data['hname'];
+        $hbank = $data['hbank'];
+        $hbranch = $data['hbranch'];
+        $hacc = $data['hacc'];
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "INSERT INTO `propertycompensation`(`disaster`, `aname`, `anic`, `aaddress`, `atpnumber`, `arelationship`, `tla`, `htype`, `totcomp`, `hname`, `hbank`, `hacc`, `hbranch`, `gndvId`) VALUES 
+        ('$disaster','$aname','$anic','$aaddress','$atpnumber','$arelationship','$tla',
+        '$htype','$totcomp','$hname','$hbank','$hacc','$hbranch'," . $r['gndvId'] . ");";
+        $this->connection->query($sql);
+
+        $sql = "SELECT LAST_INSERT_ID();";
+        $execute = $this->connection->query($sql);
+        $r = $execute->fetch_assoc();
+        $noticeId = $r["LAST_INSERT_ID()"];
+
+
+        if (count($data['property']) > 0) {
+            $sql = "INSERT INTO `propcomprop`(`propcomId`, `dptype`, `dpdes`, `dpta`, `dpda`,`dpvod`) VALUES ";
+            $len = count($data['property']);
+            for ($x = 0; $x < $len; $x++) {
+                // $items = array_keys($data['heir'][$x]);
+                $values = array_values($data['property'][$x]);
+                $leny = count($data['property'][$x]);
+
+                $dptype = $values[0];
+                $dpdes = $values[1];
+                $dpta = $values[2];
+                $dpda = $values[3];
+                $dpvod = $values[4];
+
+                $sql  .= "('$noticeId', '$dptype', '$dpdes', '$dpta', '$dpda','$dpvod')";
+                if (($x + 1) != $len) {
+                    $sql .= ", ";
+                }
+            }
+            // echo $sql;
+            // exit();
+            if ($this->connection->query($sql)) {
+                // echo json_encode(array("code" => $errorCode['success']));
+            } else {
+                echo json_encode(array("code" => $errorCode['unknownErrorprop']));
+            }
+        }
+
+        if (count($data['equipment']) > 0) {
+            $sql = "INSERT INTO `propapp`(`propcomId`, `detype`, `deev`) VALUES ";
+            $len = count($data['equipment']);
+            for ($x = 0; $x < $len; $x++) {
+                // $items = array_keys($data['heir'][$x]);
+                $values = array_values($data['equipment'][$x]);
+                $leny = count($data['equipment'][$x]);
+
+                $detype = $values[0];
+                $deev = $values[1];
+
+                $sql  .= "('$noticeId', '$detype', '$deev')";
+                if (($x + 1) != $len) {
+                    $sql .= ", ";
+                }
+            }
+            // echo $sql;
+            // exit();
+            if ($this->connection->query($sql)) {
+                // echo json_encode(array("code" => $errorCode['success']));
+            } else {
+                echo json_encode(array("code" => $errorCode['unknownErrorEquip']));
+            }
+        }
+
+        if (count($data['service']) > 0) {
+            $sql = "INSERT INTO `propservice`(`propcomId`, `dstype`, `dsev`) VALUES ";
+            $len = count($data['service']);
+            for ($x = 0; $x < $len; $x++) {
+                // $items = array_keys($data['heir'][$x]);
+                $values = array_values($data['service'][$x]);
+                $leny = count($data['service'][$x]);
+
+                $dstype = $values[0];
+                $dsev = $values[1];
+
+                $sql  .= "('$noticeId', '$dstype', '$dsev')";
+                if (($x + 1) != $len) {
+                    $sql .= ", ";
+                }
+            }
+            // echo $sql;
+            // exit();
+            if ($this->connection->query($sql)) {
+                // echo json_encode(array("code" => $errorCode['success']));
+            } else {
+                echo json_encode(array("code" => $errorCode['unknownErrorService']));
+            }
+        }
+        echo json_encode(array("code" => $errorCode['success']));
+    }
+
+    public function getCompensations(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "(
+            SELECT
+                death.deathId AS reportId,
+                death.aname AS aname,
+                death.timestamp,
+                death.dvapproved,
+                death.disapproved,
+                death.dmcapproved,
+                death.collected,
+                death.disaster,
+                'Death' AS report
+            FROM
+                deathcompensation death,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = death.gndvId
+        )
+        UNION
+            (
+            SELECT
+                f.propcomId AS reportId,
+                f.aname AS aname,
+                f.timestamp,
+                f.dvapproved,
+                f.disapproved,
+                f.dmcapproved,
+                f.collected,
+                f.disaster,
+                'Property' AS report
+            FROM
+                propertycompensation f,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = f.gndvid
+        )Order by timestamp DESC;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getProperty(array $data)
+    {
+        $uid = $data['userId'];
+        $initialId = $data['receivedParams'][0];
+        // "SELECT * 
+        // FROM gramaniladari g 
+        // JOIN gndivision d 
+        // ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 
+        // JOIN division s ON d.dvId=s.dvId 
+        // JOIN district t ON t.dsId=s.dsId";
+        $results = array();
+        $resultsprop = array();
+        $resultsserv = array();
+        $resultsapp = array();
+
+        $sql = "
+            SELECT
+                *
+            FROM
+            propertycompensation initial,
+                gndivision,
+                gramaniladari,district,division
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.propcomId=" . $initialId . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+        $sql = "
+            SELECT
+                *
+            FROM
+            propcomprop initial  
+            WHERE
+                initial.propcomId  = " . $initialId . "";
+        // echo($sql);exit;
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $resultsprop[] = $r;
+        }
+        $results['prop'] = $resultsprop;
+        // print_r($results);exit;
+        $sql = "
+            SELECT
+                *
+            FROM
+            propservice initial  
+            WHERE
+                initial.propcomId  = " . $initialId . "";
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $resultsserv[] = $r;
+        }
+        $results['serv'] = $resultsserv;
+
+        $sql = "
+            SELECT
+                *
+            FROM
+            propapp initial  
+            WHERE
+                initial.propcomId  = " . $initialId . "";
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $resultsapp[] = $r;
+        }
+        $results['app'] = $resultsapp;
+
+        // $json = json_encode($r);
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getDeath(array $data)
+    {
+        $uid = $data['userId'];
+        $initialId = $data['receivedParams'][0];
+        // "SELECT * 
+        // FROM gramaniladari g 
+        // JOIN gndivision d 
+        // ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 
+        // JOIN division s ON d.dvId=s.dvId 
+        // JOIN district t ON t.dsId=s.dsId";
+        $results = array();
+        $resultsheir = array();
+
+        $sql = "
+            SELECT
+                *
+            FROM
+            deathcompensation initial,
+                gndivision,
+                gramaniladari,district,division
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.deathId =" . $initialId . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+        $sql = "
+            SELECT
+                *
+            FROM
+            deathheir initial  
+            WHERE
+                initial.deathid   = " . $initialId . "";
+        // echo($sql);exit;
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $resultsheir[] = $r;
+        }
+        $results['heir'] = $resultsheir;
+        // print_r($results);exit;
+
+        // $json = json_encode($r);
+        $json = json_encode($results);
+        echo $json;
+    }
+
+
+    // Reporting
+
+    public function getinitialsforreports(array $data)
+    {
+        $uid = $data['userId'];
+
+        $results = array();
+        $resultsreports = array();
+        $sql = "
+        SELECT
+            *
+        FROM
+        
+            gndivision,
+            gramaniladari,district,division
+        WHERE
+            gndivision.gramaNiladariID = " . $uid . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+        $sql = "
+        SELECT
+        initial.initialId AS reportId,
+        initial.cause AS cause,
+        initial.disaster,
+        initial.date,
+        initial.location,
+        initial.fam,
+        initial.people,
+        initial.death,
+        initial.injured,
+        initial.missing
+    FROM
+        initialincident initial,
+        gndivision,division,district
+    WHERE
+        gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.disoffapproved='a' AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+
+        // echo($sql);exit;
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $resultsreports[] = $r;
+        }
+        $results['reports'] = $resultsreports;
+        // print_r($results);exit;
+
+        // $json = json_encode($r);
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function getCompensationsforreports(array $data)
+    {
+        $uid = $data['userId'];
+        $results = array();
+        $resultsreports = array();
+        $sql = "
+        SELECT
+            *
+        FROM
+        
+            gndivision,
+            gramaniladari,district,division
+        WHERE
+            gndivision.gramaNiladariID = " . $uid . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+
+        $sql = "(
+            SELECT
+                death.deathId AS reportId,
+                death.aname AS aname,
+                death.timestamp,
+                death.dvapproved,
+                death.disapproved,
+                death.dmcapproved,
+                death.collected,
+                death.disaster,
+                'Death' AS report
+            FROM
+                deathcompensation death,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = death.gndvId AND death.dvapproved='a'
+        )
+        UNION
+            (
+            SELECT
+                f.propcomId AS reportId,
+                f.aname AS aname,
+                f.timestamp,
+                f.dvapproved,
+                f.disapproved,
+                f.dmcapproved,
+                f.collected,
+                f.disaster,
+                'Property' AS report
+            FROM
+                propertycompensation f,
+                gndivision
+            WHERE
+                gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = f.gndvid AND f.dvapproved='a'
+        );";
+        $excute = $this->connection->query($sql);
+        // $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $resultsreports[] = $r;
+        }
+        $results['reports'] = $resultsreports;
+        $json = json_encode($results);
+        echo $json;
+    }
+
+
+    public function getResidentAllReports(array $data)
+    {
+        $uid = $data['userId'];
+        $results = array();
+        $resultsreports = array();
+        $sql = "
+        SELECT
+            *
+        FROM
+        
+            gndivision,
+            gramaniladari,district,division
+        WHERE
+            gndivision.gramaNiladariID = " . $uid . " AND gramaniladari.gramaNiladariID=" . $uid . " AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+        $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $sql = "SELECT r.* FROM resident r WHERE r.gndvId =" . $r['gndvId'];
+        $excute = $this->connection->query($sql);
+
+        while ($r = $excute->fetch_assoc()) {
+            $resultsreports[] = $r;
+        }
+        $results['reports'] = $resultsreports;
+        $json = json_encode($results);
         echo $json;
     }
 }

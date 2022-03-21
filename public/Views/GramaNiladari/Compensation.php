@@ -38,18 +38,21 @@
                         <thead>
                             <tr class="filters">
                                 <th>Approved
-                                    <select id="assigned-user-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Approved</option>
-                                        <option>Not Approved</option>
+                                    <select id="status" class="form-control">
+                                        <option value="Any">All</option>
+                                        <option value="1">Approved</option>
+                                        <option value="2">Pending</option>
+                                        <option value="3">Rejected</option>
 
                                     </select>
                                 </th>
                                 <th>Type
-                                    <select id="status-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Death</option>
-                                        <option>Property</option>
+                                    <select id="type" class="form-control">
+                                        <option value="Any">All</option>
+                                        <option value="1">Death</option>
+                                        <option value="2">Property</option>
+
+
                                     </select>
                                 </th>
 
@@ -71,12 +74,12 @@
                                     <th>DS note</th>
                                     <th>DMC note</th>
                                     <th>Status</th>
-                                    <th>View</th>
+                                    <th>Actions</th>
 
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tbodyid">
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td>10/20/2021 12:50</td>
@@ -183,6 +186,7 @@
                 }
                 $(thisPage).addClass("active");
             });
+            getReports();
 
         });
 
@@ -191,6 +195,535 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
+        function getReports() {
+            // var object = {};
+
+
+            // var json = JSON.stringify(object);
+            // console.log(object);
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>gncomp",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                // console.log(obj);
+                let row = table.insertRow(-1);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
+                let cell6 = row.insertCell(-1);
+                let cell7 = row.insertCell(-1);
+
+                var attribute = document.createElement("a");
+                attribute.id = obj['residentId'];
+                attribute.target = "_blank";
+                attribute.href = obj['report'] + "/" + obj['reportId'];
+                attribute.className = "btn_views";
+                attribute.name = "view";
+                attribute.innerHTML = "View";
+                attribute.setAttribute("data-type", obj['report'])
+                attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                cell1.innerHTML = obj['timestamp'];
+                cell2.innerHTML = obj['aname'];
+                cell3.innerHTML = obj['report'];
+
+                let app = "";
+                if (obj['dvapproved'] == 'p') {
+                    app = "Pending";
+                } else if (obj['dvapproved'] == 'a') {
+                    app = "Approved";
+                } else if (obj['dvapproved'] == 'r') {
+                    app = "Rejected";
+                }
+                cell4.innerHTML = app;
+                if (obj['dmcapproved'] == 'p') {
+                    app = "Pending";
+                } else if (obj['dmcapproved'] == 'a') {
+                    app = "Approved";
+                } else if (obj['dmcapproved'] == 'r') {
+                    app = "Rejected";
+                }
+                cell5.innerHTML = app;
+                if (obj['collected'] == '0') {
+                    app = "Not Collected";
+                } else if (obj['collected'] == '1') {
+                    app = "Collected";
+                }
+                cell6.innerHTML = app;
+
+
+                cell7.appendChild(attribute);
+
+                // console.log(attribute);
+                // console.log(attribute2);
+            }
+        }
+
+
+        $("#status").on('change', function() {
+            var status = $('#status').val();
+            console.log(status);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No records</p>";
+                $("#tbodyid").append($sample);
+            } else {
+                for (var i = 0; i < output.length; i++) {
+
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (status == "Any") {
+                        let row = table.insertRow(-1);
+                        let cell1 = row.insertCell(-1);
+                        let cell2 = row.insertCell(-1);
+                        let cell3 = row.insertCell(-1);
+                        let cell4 = row.insertCell(-1);
+                        let cell5 = row.insertCell(-1);
+                        let cell6 = row.insertCell(-1);
+                        let cell7 = row.insertCell(-1);
+
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['residentId'];
+                        attribute.target = "_blank";
+                        attribute.href = obj['report'] + "/" + obj['reportId'];
+                        attribute.className = "btn_views";
+                        attribute.name = "view";
+                        attribute.innerHTML = "View";
+                        attribute.setAttribute("data-type", obj['report'])
+                        attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                        cell1.innerHTML = obj['timestamp'];
+                        cell2.innerHTML = obj['aname'];
+                        cell3.innerHTML = obj['report'];
+
+                        let app = "";
+                        if (obj['dvapproved'] == 'p') {
+                            app = "Pending";
+                        } else if (obj['dvapproved'] == 'a') {
+                            app = "Approved";
+                        } else if (obj['dvapproved'] == 'r') {
+                            app = "Rejected";
+                        }
+                        cell4.innerHTML = app;
+                        if (obj['dmcapproved'] == 'p') {
+                            app = "Pending";
+                        } else if (obj['dmcapproved'] == 'a') {
+                            app = "Approved";
+                        } else if (obj['dmcapproved'] == 'r') {
+                            app = "Rejected";
+                        }
+                        cell5.innerHTML = app;
+                        if (obj['collected'] == '0') {
+                            app = "Collected";
+                        } else if (obj['dmcapproved'] == '1') {
+                            app = "Not Collected";
+                        }
+
+                        cell6.innerHTML = app;
+
+
+                        cell7.appendChild(attribute);
+
+                    } else if (status == "1") {
+                        if (obj['dmcapproved'] == 'a') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+                            let cell6 = row.insertCell(-1);
+                            let cell7 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['aname'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['dvapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dvapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dvapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            if (obj['dmcapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell5.innerHTML = app;
+                            if (obj['collected'] == '0') {
+                                app = "Collected";
+                            } else if (obj['dmcapproved'] == '1') {
+                                app = "Not Collected";
+                            }
+                            cell6.innerHTML = app;
+
+
+                            cell7.appendChild(attribute);
+
+                        }
+                    } else if (status == "2") {
+                        if (obj['dmcapproved'] == 'p') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+                            let cell6 = row.insertCell(-1);
+                            let cell7 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['aname'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['dvapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dvapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dvapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            if (obj['dmcapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell5.innerHTML = app;
+                            if (obj['collected'] == '0') {
+                                app = "Collected";
+                            } else if (obj['dmcapproved'] == '1') {
+                                app = "Not Collected";
+                            }
+                            cell6.innerHTML = app;
+
+
+                            cell7.appendChild(attribute);
+
+                        }
+                    } else if (status == "3") {
+                        if (obj['dmcapproved'] == 'r') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+                            let cell6 = row.insertCell(-1);
+                            let cell7 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['aname'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['dvapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dvapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dvapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            if (obj['dmcapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell5.innerHTML = app;
+                            if (obj['collected'] == '0') {
+                                app = "Collected";
+                            } else if (obj['dmcapproved'] == '1') {
+                                app = "Not Collected";
+                            }
+                            cell6.innerHTML = app;
+
+
+                            cell7.appendChild(attribute);
+
+                        }
+                    }
+                }
+            }
+            // console.log($sample);
+
+
+        });
+
+
+
+        $("#type").on('change', function() {
+            var status = $('#type').val();
+            console.log(status);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No records</p>";
+                $("#tbodyid").append($sample);
+            } else {
+                for (var i = 0; i < output.length; i++) {
+
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (status == "Any") {
+                        let row = table.insertRow(-1);
+                        let cell1 = row.insertCell(-1);
+                        let cell2 = row.insertCell(-1);
+                        let cell3 = row.insertCell(-1);
+                        let cell4 = row.insertCell(-1);
+                        let cell5 = row.insertCell(-1);
+                        let cell6 = row.insertCell(-1);
+                        let cell7 = row.insertCell(-1);
+
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['residentId'];
+                        attribute.target = "_blank";
+                        attribute.href = obj['report'] + "/" + obj['reportId'];
+                        attribute.className = "btn_views";
+                        attribute.name = "view";
+                        attribute.innerHTML = "View";
+                        attribute.setAttribute("data-type", obj['report'])
+                        attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                        cell1.innerHTML = obj['timestamp'];
+                        cell2.innerHTML = obj['aname'];
+                        cell3.innerHTML = obj['report'];
+
+                        let app = "";
+                        if (obj['dvapproved'] == 'p') {
+                            app = "Pending";
+                        } else if (obj['dvapproved'] == 'a') {
+                            app = "Approved";
+                        } else if (obj['dvapproved'] == 'r') {
+                            app = "Rejected";
+                        }
+                        cell4.innerHTML = app;
+
+                        if (obj['dmcapproved'] == 'p') {
+                            app = "Pending";
+                        } else if (obj['dmcapproved'] == 'a') {
+                            app = "Approved";
+                        } else if (obj['dmcapproved'] == 'r') {
+                            app = "Rejected";
+                        }
+                        cell5.innerHTML = app;
+                        if (obj['collected'] == '0') {
+                            app = "Collected";
+                        } else if (obj['dmcapproved'] == '1') {
+                            app = "Not Collected";
+                        }
+                        cell6.innerHTML = app;
+
+
+                        cell7.appendChild(attribute);
+
+                    } else if (status == "1") {
+                        if (obj['report'] == 'Death') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+                            let cell6 = row.insertCell(-1);
+                            let cell7 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['aname'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['dvapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dvapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dvapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            if (obj['dmcapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell5.innerHTML = app;
+                            if (obj['collected'] == '0') {
+                                app = "Collected";
+                            } else if (obj['dmcapproved'] == '1') {
+                                app = "Not Collected";
+                            }
+                            cell6.innerHTML = app;
+
+
+                            cell7.appendChild(attribute);
+
+
+                        }
+                    } else if (status == "2") {
+                        if (obj['report'] == 'Property') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+                            let cell6 = row.insertCell(-1);
+                            let cell7 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['residentId'];
+                            attribute.target = "_blank";
+                            attribute.href = obj['report'] + "/" + obj['reportId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-type", obj['report'])
+                            attribute.setAttribute("data-Id", obj['reportId'])
+
+
+                            cell1.innerHTML = obj['timestamp'];
+                            cell2.innerHTML = obj['aname'];
+                            cell3.innerHTML = obj['report'];
+
+                            let app = "";
+                            if (obj['dvapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dvapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dvapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell4.innerHTML = app;
+
+                            if (obj['dmcapproved'] == 'p') {
+                                app = "Pending";
+                            } else if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            }
+                            cell5.innerHTML = app;
+                            if (obj['collected'] == '0') {
+                                app = "Collected";
+                            } else if (obj['dmcapproved'] == '1') {
+                                app = "Not Collected";
+                            }
+                            cell6.innerHTML = app;
+
+
+                            cell7.appendChild(attribute);
+
+
+                        }
+                    }
+                }
+            }
+            // console.log($sample);
+            // $("#tbodyid").append($sample);
+
+        });
+
+        (function() {
+            var showResults;
+            $('#search').keyup(function() {
+                var searchText;
+                searchText = $('#search').val();
+                return showResults(searchText);
+            });
+            showResults = function(searchText) {
+                $('tbody tr').hide();
+                return $('tbody tr:Contains(' + searchText + ')').show();
+            };
+            jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function(arg) {
+                return function(elem) {
+                    return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                };
+            });
+        }.call(this));
     </script>
 </body>
 

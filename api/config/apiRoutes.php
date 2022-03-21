@@ -101,16 +101,19 @@ Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));
 // Inventory Manager
 Route::GET("unit", array("InventoryManager@getUnit"));
 Route::GET("inventory", array("InventoryManager@getInventory","DivisionalSecretariat@getInventory"));
+Route::GET("inventory/offices", array("InventoryManager@getInventoryOffices"));
 Route::GET("availableItem", array("InventoryManager@availableItem"));
 Route::GET("neighbour", array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count", array("InventoryManager@countItem"));
 Route::GET("aids", array("InventoryManager@getAids"));
 Route::GET("aids/safeHouse", array("InventoryManager@getAidsSafeHouse"));
 Route::GET("aids/{safeHouseId}", array("InventoryManager@getAids"));
+Route::GET("serviceRequest", array("InventoryManager@getServiceRequest"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::POST("distribute", array("InventoryManager@addDistribute"));
 //Route::POST("distribute/", array("InventoryManager@addDistribute"));
+Route::POST("serviceRequest", array("InventoryManager@addServiceRequest"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
 
 // Div Sec

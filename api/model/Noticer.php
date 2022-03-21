@@ -200,9 +200,9 @@ trait Noticer{
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
             $id=Notice::getId($id);
-            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.recordId = $id  AND donationreqnotice.appovalStatus <> 'd' AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC;";
+            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.recordId = $id  AND donationreqnotice.appovalStatus <> 'd' AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC,donationreqnotice.recordId ASC;";
         }else{
-            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.appovalStatus <> 'd' AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC;";
+            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.appovalStatus <> 'd' AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC,donationreqnotice.recordId ASC;";
         }
         $excute = $this->connection->query($sql);
         $results = array();

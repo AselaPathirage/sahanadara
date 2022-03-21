@@ -210,16 +210,22 @@ class InventoryManager extends Employee{
         $divisionId = $division['id'];
         $this->inventory->setInfo($uid);
         $inventoryId = $this->inventory->getId();
-        $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.acceptedBy,servicerequest.acceptedDate,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  ORDER BY id;";
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id=ServiceRequestNotice::getId($id);
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
+        }else{
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  ORDER BY id;";
+        }
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
             $serviceRequestId = $r['id'];
-            $sql= "(SELECT servicerequestitem.itemId,item.itemName,unit.unitName,servicerequestitem.quantity AS requestedAmount,SUM(inventoryitem.quantity) AS quantity
+            $sql= "(SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount,SUM(inventoryitem.quantity) AS quantity
             FROM servicerequestitem,item,unit,inventoryitem
             WHERE servicerequestitem.itemId = item.itemId AND inventoryitem.itemId = item.itemId AND item.unitType = unit.unitId AND servicerequestitem.r_id = $serviceRequestId AND inventoryitem.inventoryId = $inventoryId GROUP BY servicerequestitem.r_id,servicerequestitem.itemId)
             UNION
-            (SELECT servicerequestitem.itemId,item.itemName,unit.unitName,servicerequestitem.quantity AS requestedAmount, 0 AS quantity
+            (SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount, 0 AS quantity
              FROM servicerequestitem,item,unit
              WHERE servicerequestitem.itemId = item.itemId AND item.unitType = unit.unitId AND servicerequestitem.r_id = $serviceRequestId AND servicerequestitem.itemId NOT IN (SELECT inventoryitem.itemId FROM inventoryitem WHERE inventoryitem.inventoryId = $inventoryId GROUP BY inventoryitem.itemId));";
              $temp = $this->connection->query($sql);
@@ -240,6 +246,9 @@ class InventoryManager extends Employee{
         }
         $json = json_encode($results);
         echo $json;
+    }
+    public function getServiceRequestById(array $data){
+
     }
     public function getInventoryOffices(array $data){
         $uid = $data['userId'];

@@ -109,6 +109,7 @@ Route::GET("aids", array("InventoryManager@getAids"));
 Route::GET("aids/safeHouse", array("InventoryManager@getAidsSafeHouse"));
 Route::GET("aids/{safeHouseId}", array("InventoryManager@getAids"));
 Route::GET("serviceRequest", array("InventoryManager@getServiceRequest"));
+Route::GET("serviceRequest/{requestId}", array("InventoryManager@getServiceRequestById"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::POST("distribute", array("InventoryManager@addDistribute"));

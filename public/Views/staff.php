@@ -67,7 +67,7 @@
                                     <div class="login-bar">
                                         <input type="submit" name="submit" value="Login" class="btn-login" />
 
-                                        <a href="forget" class="forget-password">Forget Password?</a>
+                                        <a href="<?php echo HOST; ?>forget" class="forget-password">Forget Password?</a>
                                     </div>
                                 </form>
                             </div>

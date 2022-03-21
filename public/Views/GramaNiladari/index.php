@@ -64,7 +64,7 @@
                                 <i class='bx bxs-report '></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;" id="compCount">
                                 10
                             </h2>
                         </figure>
@@ -78,27 +78,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
-                    <div class="services__box">
-                        <figure class="services__icon" style="--i:#4eb7ff">
-                            <ion-icon name="videocam-outline">
-                                <i class='bx bxs-report '></i>
-                                <!-- <i class="fas fa-hands-helping"></i> -->
-                            </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                7
-                            </h2>
-                        </figure>
-                        <div class="services__content" style="margin-top: 130px;">
-                            <h2 class="services__title">
-                                Approved Incident <br> Reports
-                            </h2>
-                            <!-- <p class="services__description">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
-                                        </p> -->
-                        </div>
-                    </div>
-                </a>
+
                 <a href="">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#fd6494">
@@ -163,6 +143,7 @@
             });
 
             getResidentCount();
+            getCompCount();
 
         });
 
@@ -223,6 +204,27 @@
             $("#residentCount").empty();
             // var table = document.getElementById("bodyid");
             $("#residentCount").text(output['count(a.residentId)']);
+        }
+
+        function getCompCount() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>compcount",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            var a = output['dcount']['count(a.deathId)'];
+            var bb = output['pcount']['count(a.propcomId)'];
+            console.log(bb);
+            // console.log(output['pcount']);
+            // console.log(parseInt(output['dcount']['count(a.deathId)']) + parseInt(output['pcount']['count(a.propcomId)']));
+            $("#compCount").empty();
+            // var table = document.getElementById("bodyid");
+            $("#compCount").text(parseInt(output['dcount']['count(a.deathId)']) + parseInt(output['pcount']['count(a.propcomId)']));
         }
     </script>
 </body>

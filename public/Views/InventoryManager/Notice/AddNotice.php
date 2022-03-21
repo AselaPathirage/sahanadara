@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
-
+<?php
+$array = explode("/", $_GET["url"]);
+// echo end($array);
+?>
 <head>
     <meta charset="UTF-8">
     <title> Inventory Manager - Notice </title>
@@ -180,7 +183,7 @@
                                     <td>Location</td>
                                     <td>
                                         <select id="safeHouseId" class="form-control" required="true">
-                                            <option value="0">Select Safe House</option>
+                                            <option value="">Select Safe House</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -222,10 +225,15 @@
     <div id="alertBox">
     </div>
     <script defer>
+            //         console.log(Object.keys(sessionStorage));
+            // for (var i = 0; i < sessionStorage.length; i++){
+            //     console.log(sessionStorage.getItem(sessionStorage.key(i)));
+            // }
         var thisPage = "#add";
         var output;
         var count = 0;
         safeHouseList();
+        checkData();
         $(document).ready(function() {
             $("#search,#add").each(function() {
                 if ($(this).hasClass('active')) {
@@ -295,10 +303,11 @@
 					}
 				});
             });
-            $(document).on('click','.closeMessege',function () {
-            $(".alert").fadeOut(100);
-                console.log("hello");
+            $("#alertBox").click(function(){
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
             });
+
         });
         //begginning of the text box filter
         //Copyright (c) 2022 by Sarah Wulf (https://codepen.io/slwulf/pen/vczhJ)
@@ -438,15 +447,56 @@
                         cache: false,
                         async: false
                     }).responseText);
+                var safehouse;
+                var check = "<?php echo end($array); ?>";
+                if (sessionStorage.getItem("safeHouseId") !== null) {
+                    safehouse = sessionStorage.getItem("safeHouseId");
+                }
+                
                 for (var i = 0; i < output.length; i++){
                     var option = document.createElement("option");
                     option.text = output[i].safeHouseName;
                     option.value = output[i].safeHouseID;
+                    if(output[i].safeHouseID == safehouse && check.indexOf('SH')!== -1){
+                        option.selected = 'true';
+                        document.getElementById("safeHouseId").disabled = 'true';
+                    }else{
+                        
+                    }
                     var select = document.getElementById("safeHouseId");
                     select.appendChild(option); 
                 }
         }
 
+        function checkData(){
+            var check = "<?php echo end($array); ?>";
+            if(check.indexOf('SH')=== -1){
+                sessionStorage.clear();
+            }else{
+                if (sessionStorage.getItem("safeHouseId") !== null) {
+                    document.getElementById('title').value =sessionStorage.getItem("safeHouseName")+" Need Your Donations";
+                }
+                if (sessionStorage.getItem("numberOfPeople") !== null) {
+                    document.getElementById('numOfPeople').value =sessionStorage.getItem("numberOfPeople");
+                }
+                if (sessionStorage.getItem("numberOfFamilies") !== null) {
+                    document.getElementById('numOfFamillies').value =sessionStorage.getItem("numberOfFamilies");
+                }
+                if (sessionStorage.getItem("data") !== null) {
+                    //document.getElementById('title').value =sessionStorage.getItem("safeHouseName")+" Need Your Donations";
+                    var data = JSON.parse(sessionStorage.getItem("data"));
+                    $.each(data, function(index, value){
+                        var html = '';
+                        html += "<tr>";
+                        html += "<td><input type='text' value='" + index + "' style='text-transform: capitalize;' required='true' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                        html += "<td><input type='text' value='" + value + "' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
+                        html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
+                        $('#item_table > tbody').append(html);
+                        count++;
+                    });
+                }
+            }
+        }
         function isNumber(e, check) {
             e = (e) ? e : window.event;
             var charCode = (e.which) ? e.which : e.keyCode;

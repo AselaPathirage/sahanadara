@@ -166,7 +166,7 @@ class InventoryManager extends Employee{
     }
     public function availableItem(array $data){
         $uid = $data['userId'];
-        $sql = "SELECT i.itemId,i.itemName, unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId GROUP BY v.itemId HAVING SUM(v.quantity) > 0";
+        $sql = "SELECT i.itemId,i.itemName, unitName,SUM(v.quantity) AS inInventory FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId GROUP BY v.itemId HAVING SUM(v.quantity) > 0 ORDER BY i.itemName";
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
@@ -253,7 +253,40 @@ class InventoryManager extends Employee{
             echo json_encode(array("code"=>$errorCode['unableToHandle']));
             exit();
         }
-    }   
+    } 
+    public function addDistribute(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(isset($data['safeHouseId']) && isset($data['item'])){
+            if(count($data['item'])==0){
+                http_response_code(200);                       
+                echo json_encode(array("code"=>$errorCode['attributeMissing']));
+                exit();
+            }else{
+                $safeHouseId=SafeHouse::getId($data['safeHouseId']);
+                $sql = "INSERT INTO  distributeitem(safeHouseId) VALUES (".$safeHouseId.")";
+                $this->connection->query($sql);
+                $sql = "SELECT LAST_INSERT_ID();";
+                $execute = $this->connection->query($sql);
+                $r = $execute-> fetch_assoc();
+                $distributeId = $r["LAST_INSERT_ID()"];
+                $this->inventory->setInfo($uid);
+                $inventoryId = $this->inventory->getId();
+                $sql ="";
+                foreach($data['item'] as $item => $quantity){
+                    $itemId=Item::getId(trim($item));
+                    $quantity = -1*$quantity;
+                    $sql .="INSERT INTO  inventoryitem(itemId,inventoryId,quantity) VALUES ($itemId,$inventoryId,$quantity);SET @last_id_in_table = LAST_INSERT_ID();INSERT INTO distributeitemrecord VALUES ($distributeId, @last_id_in_table);";
+                }
+                $this->connection->multi_query($sql);
+                echo json_encode(array("code"=>$errorCode['success']));
+            }
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }  
     public function getGNDivision(array $data){
         $id = $data['userId'];
         $sql = "SELECT g.* FROM gndivision g,divisionaloffice d,dismgtofficer m 
@@ -261,6 +294,77 @@ class InventoryManager extends Employee{
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getAids(array $data){
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $division = $this->getDivision($uid)['id'];
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id = SafeHouse::getId($id);
+            $sql = "SELECT sf.safehouseId,s.statusId, i.itemId,i.itemName, SUM(s.quantity) AS quantity FROM safehousestatusrequesteditem s,item i, safehousestatus sf, gndivision gn WHERE s.statusId = sf.r_id AND s.itemId = i.itemId AND sf.safehouseId = gn.safeHouseID AND sf.safehouseId = $id AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = $division) GROUP BY sf.safehouseId,i.itemId ORDER BY sf.createdDate DESC;";
+        }else{
+            $sql = "SELECT sf.safehouseId,s.statusId, i.itemId,i.itemName, SUM(s.quantity) AS quantity FROM safehousestatusrequesteditem s,item i, safehousestatus sf, gndivision gn WHERE s.statusId = sf.r_id AND s.itemId = i.itemId AND sf.safehouseId = gn.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = $division) GROUP BY sf.safehouseId,i.itemId ORDER BY sf.createdDate DESC;";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $safeHouseId = SafeHouse::getSafeHouseCode($r['safehouseId']);
+            $r['safehouseId'] = $safeHouseId;
+            $itemId = $r['itemId'];
+            $quantity = $r['quantity'];
+            $sql = "SELECT i.itemId,SUM(v.quantity) AS quantity,u.unitName FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND i.unitType =u.unitId AND m.inventoryMgtOfficerID = $uid  AND v.itemId = $itemId GROUP BY v.itemId";
+            $tempQuery = $this->connection->query($sql);
+            if($tempQuery->num_rows >0){
+                $data = $tempQuery-> fetch_assoc();
+                if($data['quantity'] >= $quantity){
+                    $r['availability'] = "Yes";
+                }else{
+                    $r['availability'] = "No";
+                }
+                $r['inInventory'] = $data['quantity'];
+                $r['unit'] = $data['unitName'];
+            }else{
+                $r['inInventory'] = 0;
+                $sql = "SELECT u.unitName FROM item i,unit u WHERE u.unitId = i.unitType AND i.itemId =".$itemId;
+                $tempQuery = $this->connection->query($sql);
+                if($tempQuery->num_rows >0){
+                    $data = $tempQuery-> fetch_assoc();
+                    $r['unit'] = $data['unitName'];
+                }else{
+                    $r['unit']="units";
+                }
+                $r['availability'] = "No";  
+            } 
+            $r['itemId'] = Item::getItemCode($r['itemId']);
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getAidsSafeHouse(array $data){
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $division = $this->getDivision($uid)['id'];
+        $sql = "WITH cte AS (SELECT sf.safehouseId,sh.safeHouseName,sf.adultMale+sf.adultFemale+sf.children+sf.disabledPerson AS quantity, DATE(sf.createdDate) AS createdDate, ROW_NUMBER() OVER (PARTITION BY sf.safehouseId ORDER BY sf.createdDate DESC) AS rn FROM safehousestatusrequesteditem s, safehousestatus sf, gndivision gn, safehouse sh WHERE s.statusId = sf.r_id AND sf.safehouseId = gn.safeHouseID AND sh.isUsing <> 'n' AND gn.safeHouseID = sh.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = 10) ORDER BY sf.createdDate)SELECT * FROM cte WHERE rn = 1;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $safeHouseId = SafeHouse::getSafeHouseCode($r['safehouseId']);
+            $r['safehouseId'] = $safeHouseId;
+            unset($r['rn']);
+            if($r['quantity']<20){
+                $priority = 'low';
+            }elseif($r['quantity']<50){
+                $priority = 'medium';
+            }else{
+                $priority = 'high';
+            }
+            $r['priority'] = $priority;
             $results[] = $r;
         }
         $json = json_encode($results);

@@ -87,6 +87,42 @@
             }
 
         });
+        window.onload = async function (){
+            var language = getCookieValue('lan');
+            try {
+                const response = await fetch("<?php echo HOST; ?>" + "public/assets/json/lanSupport.json", {method: "GET"});
+                let dataJson = JSON.parse(await response.text());
+                if (language == 'si') {
+                    var sub = 0;
+                } else if (language == 'en') {
+                    var sub = 1;
+                } else if(language == 'ta'){
+                    var sub = 2;
+                }
+                //menu items
+                document.getElementById("home").innerHTML= dataJson[sub].menu.home;
+                document.getElementById("about").innerHTML= dataJson[sub].menu.about;
+                document.getElementById("help").innerHTML= dataJson[sub].menu.help;
+                document.getElementById("donate").innerHTML= dataJson[sub].menu.donate;
+                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
+                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                }
+
+                //body items
+
+                //console.log(dataJson);
+            }catch (e) {
+                console.error(e);
+                //menu items
+                document.getElementById("home").innerHTML="Home";
+                document.getElementById("about").innerHTML="About";
+                document.getElementById("help").innerHTML="Help";
+                document.getElementById("donate").innerHTML="Donate";
+                document.getElementById("staff").innerHTML="Donate";
+
+                //body items
+            }
+        };
     </script>
 </body>
 </html>

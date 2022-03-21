@@ -132,15 +132,23 @@
     border: none;
     text-align: left;
     vertical-align: middle;
-}
-.unit{
-    margin: 16px 3px;
-    margin-bottom: -25px;
-}
-#trow tr:hover{
-  background:#c9e8f7;
-  position:relative;
-}
+    }
+    .unit{
+        margin: 16px 3px;
+        margin-bottom: -25px;
+    }
+    #trow tr:hover{
+    background:#c9e8f7;
+    position:relative;
+    }
+    .btn-fun{
+    padding: 5px 20px;
+    border-radius:4px;
+    text-decoration: none;
+    font-size: 20px;
+    color: #fff;
+    background-color:lightslategrey;
+    }
     </style>
 </head>
 <body>
@@ -154,6 +162,9 @@
         <div class="space"></div>
         <div class="container">
         <div class="box">
+        <div style="display:block;text-align: right;">
+                <a href="<?php echo HOST; ?>InventoryManager/Inventory/distribute" class="btn-fun">Distribute Items</a>
+                </div>
                 <table class="table">
                     <thead>
                         <tr class="filters">
@@ -259,7 +270,7 @@
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td>
-                                                    <label for="your_nic">Item Name</label>
+                                                    <label for="itemId2">Item Name</label>
                                                     <select id="itemId2" name="itemId2" class="form-control" required='true'>
                                                         <option value="" data-unit="0">Select Type</option>
                                                     </select>
@@ -271,7 +282,7 @@
                                         <table style="width: 100%;">
                                             <tr>
                                                 <td>
-                                                <label for="your_name">Quantity</label>
+                                                <label for="quantity2">Quantity</label>
                                                 <input type="text" id="quantity2" name="quantity2" placeholder="Item Quantity" onkeypress="return isNumber(event)"  title="Type" class="form-control" required='true'>
                                                 </td>
                                                 <td>
@@ -366,6 +377,10 @@
                     $("#other").hide();
                 }
             });
+            $("#alertBox").click(function(){
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -419,7 +434,7 @@
             }).responseText);
             $("#itemId2").find('option').not(':first').remove();
             for (var i = 0; i < output2.length; i++){
-                var opt2 = new Option("option text",output[i]['itemId'] );
+                var opt2 = new Option("option text",output2[i]['itemId'] );
                 $(opt2).html(output2[i]['itemName']);
                 $(opt2).attr('data-unit', output2[i]['unitName']);
                 $("#itemId2").append(opt2);

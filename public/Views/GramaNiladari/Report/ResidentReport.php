@@ -14,6 +14,10 @@
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+
 </head>
 
 <body>
@@ -29,27 +33,18 @@
         <div class="container">
             <div class="box">
                 <center>
-                    <h1>Safehouse Report</h1>
+                    <h1>Resident Report</h1>
+                    <!-- <h3>Generate resident report</h3> -->
                 </center>
-                <form>
-                    <div class="row-content">
+                <form action="<?php echo HOST;?>/GramaNiladari/Report/ViewResidents" target="_blank">
+                    <div class="">
 
-                        <h2>Select</h2>
-                        <div class="row">
-                            <div class="col4">
-                                <label for="crusttype">Start Date</label>
-                                <input type="date" id="birthday" name="birthday">
-                            </div>
-                            <div class="col4">
-                                <label for="crusttype">End Date</label>
-                                <input type="date" id="birthday" name="birthday">
-                            </div>
-                        </div>
+                        <h3 class="text-center">Generate resident report</h3>
 
                         <div class="row" style="justify-content: center;">
 
                             <input type="submit" value="Generate" class="btn-alerts" />
-                            <input type="reset" value="Cancel" class="btn-alerts" />
+                            <!-- <input type="reset" value="Cancel" class="btn-alerts" /> -->
                         </div>
                     </div>
 

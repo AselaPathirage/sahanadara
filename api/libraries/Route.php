@@ -25,7 +25,8 @@ class Route{
             foreach($key as $item) {
                 $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
                 if(preg_match($pattern, strtolower($requestName))){
-                    return self::$post[$item];     
+                    $return=array('output'=>self::$post[$item],'route'=>$item);
+                    return $return;     
                 }
             }
             http_response_code(501);
@@ -36,7 +37,8 @@ class Route{
             foreach($key as $item) {
                 $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
                 if(preg_match($pattern, strtolower($requestName))){
-                    return self::$get[$item];     
+                    $return=array('output'=>self::$get[$item],'route'=>$item);
+                    return $return;     
                 }
             }
             http_response_code(501);
@@ -47,7 +49,8 @@ class Route{
             foreach($key as $item) {
                 $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
                 if(preg_match($pattern, strtolower($requestName))){
-                    return self::$put[$item];     
+                    $return=array('output'=>self::$put[$item],'route'=>$item);
+                    return $return;     
                 }
             }
             http_response_code(501);
@@ -58,7 +61,8 @@ class Route{
             foreach($key as $item) {
                 $pattern = '~^' . preg_replace('/{.*?}/', '[^/]+', strtolower($item)) . '$~';
                 if(preg_match($pattern, strtolower($requestName))){
-                    return self::$delete[$item];     
+                    $return=array('output'=>self::$delete[$item],'route'=>$item);
+                    return $return;     
                 }
             }
             http_response_code(501);

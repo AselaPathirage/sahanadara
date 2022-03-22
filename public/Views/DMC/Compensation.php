@@ -88,40 +88,51 @@
                                     <td>Death</td>
                                     <td>Approved</td>
                                     <td>Pending</td>
-                                    <td>Not Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td>Kalutara</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Death </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    <td>09/24/2021 11:30</td>
-                                    <td>Y Abeysinghe</td>
-                                    <td>Death</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td>10/24/2021 12:50</td>
+                                    <td>Pending</td>
+                                    <td>Kalutara</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Death </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    <td>09/20/2021 11:50</td>
-                                    <td>N Nirmal </td>
-                                    <td>Property</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td>10/24/2021 12:50</td>
+                                    <td>Pending</td>
+                                    <td>Gampaha</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Property </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                                    <td>08/24/2021 09:50</td>
-                                    <td>Bhasuru Lakshan</td>
-                                    <td>Death</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td>10/24/2021 12:50</td>
+                                    <td>Yes</td>
+                                    <td>Kalutara</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Death </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 </tr>
+                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                    <td>10/24/2021 12:50</td>
+                                    <td>Yes</td>
+                                    <td>Gampaha</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Property </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
 
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/14/2021 15:45</td>
@@ -132,41 +143,45 @@
                                     <td>Collected</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>08/12/2021 15:45</td>
-                                    <td>C Kushan </td>
-                                    <td>Property</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                    <td>10/22/2021 12:50</td>
+                                    <td>Yes</td>
+                                    <td>Kalutara</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Death </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+
                                 </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>08/04/2021 15:45</td>
-                                    <td>T Eranga </td>
-                                    <td>Property</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                    <td>10/22/2021 12:50</td>
+                                    <td>Yes</td>
+                                    <td>Gampaha</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Property </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+
                                 </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>07/14/2021 15:45</td>
-                                    <td>K Hasith </td>
-                                    <td>Property</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                    <td>10/21/2021 12:50</td>
+                                    <td>Yes</td>
+                                    <td>Kalutara</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Death </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+
                                 </tr>
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                                    <td>07/10/2021 15:45</td>
-                                    <td>K Galagedara </td>
-                                    <td>Property</td>
-                                    <td>Approved</td>
-                                    <td>Approved</td>
-                                    <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                    <td>10/21/2021 12:50</td>
+                                    <td>Yes</td>
+                                    <td>Gampaha</td>
+                                    <td>Millaniya</td>
+                                    <td>Bellapitiya </td>
+                                    <td>Property </td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewCompensation" class="btn_views">View</a></td>
+
                                 </tr>
 
 

@@ -183,8 +183,8 @@
                                     <td>991237564V</td>
                                     <td>111, Maithree Rd, Horana</td>
                                     <td>0756787634</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
-                                        <a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
+                                        <a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
                                     </td>
 
                                 </tr>
@@ -195,8 +195,8 @@
                                     <td>985637555V</td>
                                     <td>14/D, Samagi Rd, Bellapitiya, Horana</td>
                                     <td>0778987655</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
-                                        <a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
+                                        <a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
                                     </td>
                                 </tr> -->
                             </tbody>

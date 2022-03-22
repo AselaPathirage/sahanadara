@@ -58,7 +58,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block;">
                                 <a class="btn_active" style="position: absolute; top:15px;right:35px;">Status : Active</a>
-                                <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                     </div>
@@ -69,7 +69,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                     </div>
@@ -84,7 +84,7 @@
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
                                 <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                         <div class="box row-content">
@@ -92,7 +92,7 @@
                             <p>Affected the valleys of river Kalu </p>
 
                             <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
+                                <a href="<?php echo HOST; ?>/GramaNiladari/IncidentView" class="btn_views">View</a>
                             </div>
                         </div>
                     </div> -->
@@ -156,7 +156,7 @@
                     if (obj['isActive'] == 1) {
                         $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                     }
-                    $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                    $sample += "<a href='<?php echo HOST; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
                         $sample += "</div>";
                     }
@@ -186,7 +186,7 @@
                         if (obj['isActive'] == 1) {
                             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                         }
-                        $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                        $sample += "<a href='<?php echo HOST; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                         if ((i % 2 == 1) || (i == output.length - 1)) {
                             $sample += "</div>";
                         }
@@ -199,7 +199,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a href='<?php echo HOST; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }
@@ -213,7 +213,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='/<?php echo baseUrl; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a href='<?php echo HOST; ?>/GramaNiladari/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }

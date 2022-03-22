@@ -72,6 +72,7 @@
                     </table>
 
 
+
                     <div class="panel panel-primary filterable">
                         <table id="task-list-tbl" class="table">
                             <thead>
@@ -129,6 +130,7 @@
                                     <td>Approved</td>
                                     <td>Collected</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+
 
                                 </tr>
 

@@ -79,7 +79,7 @@
                                 <td>Approved</td>
                                 <td>Approved</td>
                                 <td>Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -89,7 +89,7 @@
                                 <td>Approved</td>
                                 <td>Pending</td>
                                 <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -99,7 +99,7 @@
                                 <td>Approved</td>
                                 <td>Pending</td>
                                 <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -109,7 +109,7 @@
                                 <td>Not Approved</td>
                                 <td>Pending</td>
                                 <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -119,7 +119,7 @@
                                 <td>Approved</td>
                                 <td>Approved</td>
                                 <td>Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -129,7 +129,7 @@
                                 <td>Approved</td>
                                 <td>Pending</td>
                                 <td>Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -139,7 +139,7 @@
                                 <td>Approved</td>
                                 <td>Pending</td>
                                 <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -149,7 +149,7 @@
                                 <td>Approved</td>
                                 <td>Pending</td>
                                 <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
 
                             <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
@@ -159,7 +159,7 @@
                                 <td>Not Approved</td>
                                 <td>Approved</td>
                                 <td>Not Collected</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
                             </tr>
                             
                         </tbody>

@@ -308,7 +308,7 @@ $array = explode("/", $_GET["url"]);
                     object['item'][item] = quantity;
                 });
                 var json = JSON.stringify(object);console.log(json);
-                console.log(object['item'].length);
+
                 if( Object.keys(object['item']).length ==0){ 
                     alertGen("Please add items.",2);
                     return;

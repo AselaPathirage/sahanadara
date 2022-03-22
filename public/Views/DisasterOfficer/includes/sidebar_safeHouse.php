@@ -7,7 +7,7 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/SafeHouseDetails" class="active">
+            <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/SafeHouseDetails" class="active">
                 <i class='bx bx-building-house' ></i>
                 <span class="links_name">Safe House Details</span>
             </a>

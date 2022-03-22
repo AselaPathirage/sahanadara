@@ -60,7 +60,7 @@
                 <br>
                 <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-fun">Manage safehouse</a>
+                <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-fun">Manage safehouse</a>
                 <div class="space"></div>
                 </div></div>
                 
@@ -81,8 +81,8 @@
                                     <p>Haltota, Millaniya Road, Tuttiripitiya</p>
 
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_active">Active</a>
-                                        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_active">Active</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
                                     </div>
                                 </div>
                                 <div class="box row-content">
@@ -90,8 +90,8 @@
                                     <p>Horana</p>
 
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_active">Active</a>
-                                        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_active">Active</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_views">View</a>
                                     </div>
                                 </div>
 
@@ -107,12 +107,12 @@
                                     <p> Haltota, Millaniya Road, Tuttiripitiya</p>
                                     <p>Families - 20</p>
                                     <p>People - 85</p><br><br>
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-box">Edit Safehouse</a>
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-box">Delete Safehouse</a>
+                    <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-box">Edit Safehouse</a>
+                    <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-box">Delete Safehouse</a>
                     <br><br>
                     
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ResponsiblePerson" class="btn-box">Add Reponsible Person</a>
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ResponsiblePerson" class="btn-box">Delete Reponsible Person</a>
+                    <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/ResponsiblePerson" class="btn-box">Add Reponsible Person</a>
+                    <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/ResponsiblePerson" class="btn-box">Delete Reponsible Person</a>
 
 
                     <br>

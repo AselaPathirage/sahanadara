@@ -27,7 +27,7 @@
         <!-- STATS -->
         <div class="container" style="text-align: right;">
         <div class="space"></div>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Createfundraise" class="btn-fun">Create New Fundraise</a>
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/Createfundraise" class="btn-fun">Create New Fundraise</a>
             <br>
         <table class="table">
                     <thead>

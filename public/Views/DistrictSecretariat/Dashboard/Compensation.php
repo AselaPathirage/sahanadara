@@ -48,9 +48,10 @@
                                         <option value="1">Approved</option>
                                         <option value="2">Pending</option>
                                         <option value="3">Rejected</option>
-
                                     </select>
                                 </th>
+
+ 
 
 
                                 <th>Search
@@ -61,6 +62,7 @@
                     </table>
 
 
+
                     <div class="panel panel-primary filterable">
                         <table id="task-list-tbl" class="table">
                             <thead>
@@ -68,16 +70,13 @@
                                     <th>Date</th>
                                     <th>Applicant Name</th>
 
-                                    <th>District</th>
-                                    <th>Division</th>
-
-                                    <th>Status</th>
-                                    <th>Actions</th>
-
                                 </tr>
                             </thead>
 
+
                             <tbody id="tbodyid">
+
+
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td>10/20/2021 12:50</td>
@@ -87,6 +86,7 @@
                                     <td>Pending</td>
                                     <td>Not Collected</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -98,6 +98,7 @@
                                     <td>Collected</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
+
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td>09/20/2021 11:50</td>
@@ -107,6 +108,7 @@
                                     <td>Approved</td>
                                     <td>Collected</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -118,7 +120,9 @@
                                     <td>Collected</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
+
                                 </tr>
+
 
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/14/2021 15:45</td>
@@ -165,6 +169,7 @@
                                     <td>Collected</td>
                                     <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
+
 
 
                             </tbody>

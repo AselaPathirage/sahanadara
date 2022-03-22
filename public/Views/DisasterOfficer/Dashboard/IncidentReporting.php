@@ -31,8 +31,8 @@
             <h1>Incident Reporting</h1>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-fun">Create Final Incident</a>
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-fun">Add Expense Note</a>
+                    <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-fun">Create Final Incident</a>
+                    <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-fun">Add Expense Note</a>
                 </div>
             </div>
  
@@ -93,7 +93,7 @@
                                     <td>Final</td>
                                     <td>Approved</td>
                                     <td>Pending</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
 
@@ -103,7 +103,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>09/20/2021 13:56</td>
@@ -111,7 +111,7 @@
                                     <td>Final</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>10/22/2021 13:56</td>
@@ -119,7 +119,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Pending</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/22/2021 13:56</td>
@@ -127,7 +127,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/20/2021 13:56</td>
@@ -135,7 +135,7 @@
                                     <td>Final</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>07/22/2021 13:56</td>
@@ -143,7 +143,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                             </tbody>
                         </table>

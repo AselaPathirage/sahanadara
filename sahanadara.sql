@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 10:57 AM
+-- Generation Time: Mar 22, 2022 at 12:45 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -178,8 +178,16 @@ CREATE TABLE `distributeservice` (
   `recordId` int(3) NOT NULL,
   `inventoryId` int(3) NOT NULL,
   `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
-  `approvalStatus` char(1) DEFAULT 'p'
+  `approvalStatus` char(1) DEFAULT 'p',
+  `serviceRequestId` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `distributeservice`
+--
+
+INSERT INTO `distributeservice` (`recordId`, `inventoryId`, `createdDate`, `approvalStatus`, `serviceRequestId`) VALUES
+(1, 1, '2022-03-22 17:08:48', 'p', 3);
 
 -- --------------------------------------------------------
 
@@ -798,14 +806,9 @@ CREATE TABLE `inventoryitem` (
 --
 
 INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `transactionDate`, `remarks`) VALUES
-(1, 1, 1, '2.00', '2022-03-20 00:36:54', ''),
-(2, 2, 1, '2.00', '2022-03-20 00:37:01', ''),
-(3, 5, 1, '200.00', '2022-03-20 00:37:07', ''),
-(4, 6, 1, '50.00', '2022-03-20 00:37:14', ''),
-(5, 4, 1, '20.00', '2022-03-20 00:37:20', ''),
-(6, 7, 1, '2.00', '2022-03-20 00:37:25', ''),
-(7, 27, 1, '100.00', '2022-03-20 20:56:59', ''),
-(8, 28, 1, '50.00', '2022-03-20 20:57:09', '');
+(1, 6, 1, '50.00', '2022-03-21 16:48:05', ''),
+(2, 6, 1, '-10.00', '2022-03-22 16:48:12', ''),
+(3, 6, 1, '-10.00', '2022-03-22 17:08:48', '');
 
 -- --------------------------------------------------------
 
@@ -1190,6 +1193,13 @@ CREATE TABLE `servicedistributeitemrecord` (
   `itemRecordId` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `servicedistributeitemrecord`
+--
+
+INSERT INTO `servicedistributeitemrecord` (`recordId`, `itemRecordId`) VALUES
+(1, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -1321,7 +1331,8 @@ ALTER TABLE `distributeitemrecord`
 --
 ALTER TABLE `distributeservice`
   ADD PRIMARY KEY (`recordId`),
-  ADD KEY `inventoryId` (`inventoryId`);
+  ADD KEY `inventoryId` (`inventoryId`),
+  ADD KEY `serviceRequestId` (`serviceRequestId`);
 
 --
 -- Indexes for table `district`
@@ -1638,7 +1649,7 @@ ALTER TABLE `distributeitem`
 -- AUTO_INCREMENT for table `distributeservice`
 --
 ALTER TABLE `distributeservice`
-  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -1734,7 +1745,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -1837,14 +1848,15 @@ ALTER TABLE `distributeitem`
 -- Constraints for table `distributeitemrecord`
 --
 ALTER TABLE `distributeitemrecord`
-  ADD CONSTRAINT `distributeitemrecord_ibfk_1` FOREIGN KEY (`recordId`) REFERENCES `distributeservice` (`recordId`),
+  ADD CONSTRAINT `distributeitemrecord_ibfk_1` FOREIGN KEY (`recordId`) REFERENCES `distributeitem` (`recordId`),
   ADD CONSTRAINT `distributeitemrecord_ibfk_2` FOREIGN KEY (`itemRecord`) REFERENCES `inventoryitem` (`recId`);
 
 --
 -- Constraints for table `distributeservice`
 --
 ALTER TABLE `distributeservice`
-  ADD CONSTRAINT `distributeservice_ibfk_1` FOREIGN KEY (`inventoryId`) REFERENCES `inventory` (`inventoryId`);
+  ADD CONSTRAINT `distributeservice_ibfk_1` FOREIGN KEY (`inventoryId`) REFERENCES `inventory` (`inventoryId`),
+  ADD CONSTRAINT `distributeservice_ibfk_2` FOREIGN KEY (`serviceRequestId`) REFERENCES `servicerequest` (`r_id`);
 
 --
 -- Constraints for table `districtofficecontact`

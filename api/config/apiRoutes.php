@@ -20,8 +20,7 @@ Route::GET("item/{id}", array("InventoryManager@getItem"));
 Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("Admin@searchUser"));
 Route::GET("user/count/{data}", array("Admin@getUserCount"));
-Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));
-Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser"));
+Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser","InventoryManager@getMySelf"));
 Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
@@ -100,6 +99,7 @@ Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));
  
 // Inventory Manager
 Route::GET("unit", array("InventoryManager@getUnit"));
+Route::GET("test/yu/{j}", array("InventoryManager@test"));
 Route::GET("inventory", array("InventoryManager@getInventory","DivisionalSecretariat@getInventory"));
 Route::GET("inventory/offices", array("InventoryManager@getInventoryOffices"));
 Route::GET("availableItem", array("InventoryManager@availableItem"));
@@ -109,12 +109,14 @@ Route::GET("aids", array("InventoryManager@getAids"));
 Route::GET("aids/safeHouse", array("InventoryManager@getAidsSafeHouse"));
 Route::GET("aids/{safeHouseId}", array("InventoryManager@getAids"));
 Route::GET("serviceRequest", array("InventoryManager@getServiceRequest"));
-Route::GET("serviceRequest/{requestId}", array("InventoryManager@getServiceRequestById"));
+Route::GET("serviceRequest/{requestId}", array("InventoryManager@getServiceRequest"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::POST("distribute", array("InventoryManager@addDistribute"));
 //Route::POST("distribute/", array("InventoryManager@addDistribute"));
 Route::POST("serviceRequest", array("InventoryManager@addServiceRequest"));
+Route::PUT("serviceRequest/decline/{requestId}", array("InventoryManager@declineServiceRequest"));
+Route::PUT("serviceRequest/accept/{requestId}", array("InventoryManager@addServiceRequest"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
 
 // Div Sec

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 21, 2022 at 08:46 AM
+-- Generation Time: Mar 22, 2022 at 09:45 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -166,6 +166,19 @@ CREATE TABLE `distributeitem` (
 CREATE TABLE `distributeitemrecord` (
   `recordId` int(3) NOT NULL,
   `itemRecordId` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `distributeservice`
+--
+
+CREATE TABLE `distributeservice` (
+  `recordId` int(3) NOT NULL,
+  `inventoryId` int(3) NOT NULL,
+  `createdDate` datetime NOT NULL DEFAULT current_timestamp(),
+  `approvalStatus` char(1) DEFAULT 'p'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -422,7 +435,8 @@ INSERT INTO `donationreqnotice` (`recordId`, `safehouseId`, `title`, `numOfFamil
 (2, 2, 'test', 20, 20, '2022-03-18 15:56:34', NULL, '5ef', 'n', NULL),
 (4, 1, 'test 2', 12, 35, '2022-03-18 16:00:12', NULL, 'err', 'n', NULL),
 (5, 1, 'test 2', 5, 25, '2022-03-19 21:20:41', NULL, 'tessgs sh', 'n', NULL),
-(6, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-20 00:24:12', NULL, '', 'n', NULL);
+(6, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-20 00:24:12', NULL, '', 'n', NULL),
+(9, 1, 'Bolossagama Safe House Need Your Donations', 1, 5, '2022-03-22 14:14:11', NULL, '', 'n', NULL);
 
 -- --------------------------------------------------------
 
@@ -760,7 +774,9 @@ CREATE TABLE `inventory` (
 
 INSERT INTO `inventory` (`inventoryId`, `inventoryAddress`, `dvId`) VALUES
 (1, 'Divisional Office, Dodangoda', 10),
-(2, 'Divisional Office, Horane', 3);
+(2, 'Divisional Office, Horane', 3),
+(3, 'Divisional Office, Palindanuwara', 13),
+(4, 'Divisional Office, Walallavita', 14);
 
 -- --------------------------------------------------------
 
@@ -787,7 +803,9 @@ INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `tran
 (3, 5, 1, '200.00', '2022-03-20 00:37:07', ''),
 (4, 6, 1, '50.00', '2022-03-20 00:37:14', ''),
 (5, 4, 1, '20.00', '2022-03-20 00:37:20', ''),
-(6, 7, 1, '2.00', '2022-03-20 00:37:25', '');
+(6, 7, 1, '2.00', '2022-03-20 00:37:25', ''),
+(7, 27, 1, '100.00', '2022-03-20 20:56:59', ''),
+(8, 28, 1, '50.00', '2022-03-20 20:57:09', '');
 
 -- --------------------------------------------------------
 
@@ -911,7 +929,8 @@ INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
 (1, 'Lentils', '50.00'),
 (1, 'Tent', '10.00'),
 (4, 'Tent', '5.00'),
-(6, 'Boat', '1.00');
+(6, 'Boat', '1.00'),
+(9, 'Tent', '5.00');
 
 -- --------------------------------------------------------
 
@@ -1005,6 +1024,13 @@ CREATE TABLE `resident` (
   `gndvId` int(5) DEFAULT NULL,
   `residentNIC` char(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resident`
+--
+
+INSERT INTO `resident` (`residentId`, `residentName`, `residentTelNo`, `residentAddress`, `gndvId`, `residentNIC`) VALUES
+(2, 'Naween Lakshan', '0719867863', 'Hene Gedara Hena, Ullala', 5, '981060920v');
 
 -- --------------------------------------------------------
 
@@ -1156,13 +1182,24 @@ INSERT INTO `safehousestatusrequesteditem` (`statusId`, `itemId`, `quantity`, `s
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `servicedistributeitemrecord`
+--
+
+CREATE TABLE `servicedistributeitemrecord` (
+  `recordId` int(3) NOT NULL,
+  `itemRecordId` int(3) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `servicerequest`
 --
 
 CREATE TABLE `servicerequest` (
   `r_id` int(4) NOT NULL,
   `inventoryId` int(3) NOT NULL,
-  `requestedDate` datetime NOT NULL,
+  `requestedDate` date NOT NULL,
   `currentStatus` char(1) DEFAULT 'p',
   `acceptedBy` int(3) DEFAULT NULL,
   `acceptedDate` datetime DEFAULT NULL,
@@ -1175,7 +1212,9 @@ CREATE TABLE `servicerequest` (
 --
 
 INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentStatus`, `acceptedBy`, `acceptedDate`, `requestingFrom`, `note`) VALUES
-(1, 1, '2021-11-18 20:26:01', 'p', NULL, '0000-00-00 00:00:00', 0, NULL);
+(1, 3, '2022-03-23', 'p', NULL, NULL, 0, ''),
+(2, 2, '2022-03-31', 'r', NULL, NULL, 10, ''),
+(3, 4, '2022-03-29', 'p', NULL, NULL, 0, '');
 
 -- --------------------------------------------------------
 
@@ -1185,8 +1224,23 @@ INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentSt
 
 CREATE TABLE `servicerequestitem` (
   `r_id` int(4) NOT NULL,
-  `itemId` int(2) NOT NULL
+  `itemId` int(2) NOT NULL,
+  `quantity` decimal(6,2) DEFAULT NULL,
+  `acceptedBy` int(3) DEFAULT NULL,
+  `acceptedDate` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `servicerequestitem`
+--
+
+INSERT INTO `servicerequestitem` (`r_id`, `itemId`, `quantity`, `acceptedBy`, `acceptedDate`) VALUES
+(1, 27, '50.00', NULL, NULL),
+(2, 28, '14.00', NULL, NULL),
+(3, 2, '2.00', NULL, NULL),
+(3, 6, '10.00', NULL, NULL),
+(3, 23, '5.00', NULL, NULL),
+(3, 27, '20.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1261,6 +1315,13 @@ ALTER TABLE `distributeitem`
 ALTER TABLE `distributeitemrecord`
   ADD PRIMARY KEY (`recordId`,`itemRecordId`),
   ADD KEY `itemRecordId` (`itemRecordId`);
+
+--
+-- Indexes for table `distributeservice`
+--
+ALTER TABLE `distributeservice`
+  ADD PRIMARY KEY (`recordId`),
+  ADD KEY `inventoryId` (`inventoryId`);
 
 --
 -- Indexes for table `district`
@@ -1512,6 +1573,13 @@ ALTER TABLE `safehousestatusrequesteditem`
   ADD KEY `safehousestatusrequesteditem_ibfk_1` (`statusId`);
 
 --
+-- Indexes for table `servicedistributeitemrecord`
+--
+ALTER TABLE `servicedistributeitemrecord`
+  ADD PRIMARY KEY (`recordId`,`itemRecordId`),
+  ADD KEY `itemRecordId` (`itemRecordId`);
+
+--
 -- Indexes for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
@@ -1612,7 +1680,7 @@ ALTER TABLE `dmc`
 -- AUTO_INCREMENT for table `donationreqnotice`
 --
 ALTER TABLE `donationreqnotice`
-  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `gndivision`
@@ -1654,13 +1722,13 @@ ALTER TABLE `initialincident`
 -- AUTO_INCREMENT for table `inventory`
 --
 ALTER TABLE `inventory`
-  MODIFY `inventoryId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `inventoryId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -1702,7 +1770,7 @@ ALTER TABLE `resetpass`
 -- AUTO_INCREMENT for table `resident`
 --
 ALTER TABLE `resident`
-  MODIFY `residentId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `residentId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `responsibleperson`
@@ -1732,7 +1800,7 @@ ALTER TABLE `safehousestatus`
 -- AUTO_INCREMENT for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
-  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `unit`
@@ -1765,6 +1833,12 @@ ALTER TABLE `distributeitem`
 ALTER TABLE `distributeitemrecord`
   ADD CONSTRAINT `distributeitemrecord_ibfk_1` FOREIGN KEY (`recordId`) REFERENCES `distributeitem` (`recordId`),
   ADD CONSTRAINT `distributeitemrecord_ibfk_2` FOREIGN KEY (`itemRecordId`) REFERENCES `inventoryitem` (`recId`);
+
+--
+-- Constraints for table `distributeservice`
+--
+ALTER TABLE `distributeservice`
+  ADD CONSTRAINT `distributeservice_ibfk_1` FOREIGN KEY (`inventoryId`) REFERENCES `inventory` (`inventoryId`);
 
 --
 -- Constraints for table `districtofficecontact`
@@ -1931,6 +2005,13 @@ ALTER TABLE `safehousestatusrequesteditem`
   ADD CONSTRAINT `safehousestatusrequesteditem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
 
 --
+-- Constraints for table `servicedistributeitemrecord`
+--
+ALTER TABLE `servicedistributeitemrecord`
+  ADD CONSTRAINT `servicedistributeitemrecord_ibfk_1` FOREIGN KEY (`itemRecordId`) REFERENCES `inventoryitem` (`recId`),
+  ADD CONSTRAINT `servicedistributeitemrecord_ibfk_2` FOREIGN KEY (`recordId`) REFERENCES `distributeservice` (`recordId`);
+
+--
 -- Constraints for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
@@ -1941,7 +2022,7 @@ ALTER TABLE `servicerequest`
 -- Constraints for table `servicerequestitem`
 --
 ALTER TABLE `servicerequestitem`
-  ADD CONSTRAINT `servicerequestitem_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `servicerequest` (`inventoryId`),
+  ADD CONSTRAINT `servicerequestitem_ibfk_1` FOREIGN KEY (`r_id`) REFERENCES `servicerequest` (`r_id`),
   ADD CONSTRAINT `servicerequestitem_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `item` (`itemId`);
 
 DELIMITER $$

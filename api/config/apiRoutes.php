@@ -79,6 +79,15 @@ Route::POST("propertycomp", array("GramaNiladari@addPropertycomp"));
 Route::PUT("residents/{id}", array("GramaNiladari@updateResident"));
 Route::DELETE("residents/{id}", array("GramaNiladari@deleteResident"));
 
+// DMC
+Route::GET("dmccomp", array("Dmc@getCompensations"));
+Route::GET("dmcprop/{id}", array("Dmc@getProperty"));
+Route::GET("dmcdeath/{id}", array("Dmc@getDeath"));
+
+Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
+
+
+
 // Disaster Mgt officer
 Route::GET("doalert", array("DisasterOfficer@getAlerts"));
 Route::GET("domsg", array("DisasterOfficer@getMessages"));

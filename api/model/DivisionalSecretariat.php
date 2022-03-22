@@ -108,5 +108,234 @@ class DivisionalSecretariat extends Employee
             exit();
         }
     }
+
+
+
+     // Comps
+     public function getCompensations(array $data)
+     {
+         $uid = $data['userId'];
+         $sql = "(
+             
+                 SELECT
+                     death.deathId AS reportId,
+                     death.aname AS aname,
+                     death.atelno AS atel,
+                     death.timestamp,
+                     death.dvapproved,
+                     death.disapproved,
+                     death.dmcapproved,
+                     death.collected,
+                     'Death' AS report,
+                     g.gnDvName,
+                     d.dvName
+                 FROM
+                     deathcompensation death,
+                     gndivision g,
+                     division d,
+                     divisionaloffice dis
+                 WHERE
+                     dis.divisionalSecretariatID = " . $uid . " AND dis.dvId = g.dvId AND g.gndvId = death.gndvId AND g.dvId = d.dvId AND death.dvapproved='a'
+             )
+             UNION
+                 (
+                 SELECT
+                     f.propcomId AS reportId,
+                     f.aname AS aname,
+                     f.atpnumber AS atel,
+                     f.timestamp,
+                     f.dvapproved,
+                     f.disapproved,
+                     f.dmcapproved,
+                     f.collected,
+                     'Property' AS report,
+                     g.gnDvName,
+                     d.dvName
+                 FROM
+                     propertycompensation f,
+                     gndivision g,
+                     division d,
+                     divisionaloffice dis
+                 WHERE
+                     dis.divisionalSecretariatID = " . $uid . " AND dis.dvId = g.dvId AND g.gndvId = f.gndvId AND g.dvId = d.dvId AND f.dvapproved='a'
+             )
+             ORDER BY
+                 TIMESTAMP
+             DESC
+                 ;";
+         $excute = $this->connection->query($sql);
+         $results = array();
+         while ($r = $excute->fetch_assoc()) {
+             $results[] = $r;
+         }
+         $json = json_encode($results);
+         echo $json;
+     }
+ 
+     public function getProperty(array $data)
+     {
+         $uid = $data['userId'];
+         $initialId = $data['receivedParams'][0];
+         // "SELECT * 
+         // FROM gramaniladari g 
+         // JOIN gndivision d 
+         // ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 
+         // JOIN division s ON d.dvId=s.dvId 
+         // JOIN district t ON t.dsId=s.dsId";
+         $results = array();
+         $resultsprop = array();
+         $resultsserv = array();
+         $resultsapp = array();
+ 
+         $sql = "
+         SELECT
+     initial.*,
+     gndivision.gnDvName,
+     district.dsName,
+     division.dvName,
+     gramaniladari.empName AS gnname,
+     divisionalsecretariat.empName AS dsname
+ FROM
+     propertycompensation initial,
+     gndivision,
+     district,
+     division,
+     gramaniladari,
+     divisionalsecretariat,
+     divisionaloffice
+ WHERE
+     gndivision.gndvId = initial.gndvId AND initial.propcomId =" . $initialId . " AND gndivision.dvId = division.dvId AND division.dsId = district.dsId AND gramaniladari.gramaNiladariID = gndivision.gramaNiladariID AND divisionalsecretariat.divisionalSecretariatID = divisionaloffice.divisionalSecretariatID AND divisionaloffice.dvId = division.dvId;
+             ";
+         $excute = $this->connection->query($sql);
+         $r = $excute->fetch_assoc();
+         $results['main'] = $r;
+ 
+         $sql = "
+             SELECT
+                 *
+             FROM
+             propcomprop initial  
+             WHERE
+                 initial.propcomId  = " . $initialId . "";
+         // echo($sql);exit;
+         $excute = $this->connection->query($sql);
+         while ($r = $excute->fetch_assoc()) {
+             $resultsprop[] = $r;
+         }
+         $results['prop'] = $resultsprop;
+         // print_r($results);exit;
+         $sql = "
+             SELECT
+                 *
+             FROM
+             propservice initial  
+             WHERE
+                 initial.propcomId  = " . $initialId . "";
+         $excute = $this->connection->query($sql);
+         while ($r = $excute->fetch_assoc()) {
+             $resultsserv[] = $r;
+         }
+         $results['serv'] = $resultsserv;
+ 
+         $sql = "
+             SELECT
+                 *
+             FROM
+             propapp initial  
+             WHERE
+                 initial.propcomId  = " . $initialId . "";
+         $excute = $this->connection->query($sql);
+         while ($r = $excute->fetch_assoc()) {
+             $resultsapp[] = $r;
+         }
+         $results['app'] = $resultsapp;
+ 
+         // $json = json_encode($r);
+         $json = json_encode($results);
+         echo $json;
+     }
+ 
+     public function getDeath(array $data)
+     {
+         $uid = $data['userId'];
+         $initialId = $data['receivedParams'][0];
+         // "SELECT * 
+         // FROM gramaniladari g 
+         // JOIN gndivision d 
+         // ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 
+         // JOIN division s ON d.dvId=s.dvId 
+         // JOIN district t ON t.dsId=s.dsId";
+         $results = array();
+         $resultsheir = array();
+ 
+         $sql = "
+             SELECT
+             initial.*,
+             gndivision.gnDvName,
+     district.dsName,
+     division.dvName,
+     gramaniladari.empName AS gnname,
+     divisionalsecretariat.empName AS dsname
+             FROM
+             deathcompensation initial,
+             gndivision,
+             district,
+             division,
+             gramaniladari,
+             divisionalsecretariat,
+             divisionaloffice
+             WHERE
+             gndivision.gndvId = initial.gndvId AND initial.deathId =" . $initialId . " AND gndivision.dvId = division.dvId AND division.dsId = district.dsId AND gramaniladari.gramaNiladariID = gndivision.gramaNiladariID AND divisionalsecretariat.divisionalSecretariatID = divisionaloffice.divisionalSecretariatID AND divisionaloffice.dvId = division.dvId";
+         $excute = $this->connection->query($sql);
+         $r = $excute->fetch_assoc();
+         $results['main'] = $r;
+ 
+         $sql = "
+             SELECT
+                 *
+             FROM
+             deathheir initial  
+             WHERE
+                 initial.deathid   = " . $initialId . "";
+         // echo($sql);exit;
+         $excute = $this->connection->query($sql);
+         while ($r = $excute->fetch_assoc()) {
+             $resultsheir[] = $r;
+         }
+         $results['heir'] = $resultsheir;
+         // print_r($results);exit;
+ 
+         // $json = json_encode($r);
+         $json = json_encode($results);
+         echo $json;
+     }
+ 
+ 
+ 
+     public function approvecomp(array $data)
+     {
+         global $errorCode;
+         // print_r($data);
+         // exit;
+ 
+         // $uid = $data['userId'];
+         $dmcremarks = $data['dmcremarks'];
+         $dmcapproved = $data['dmcapproved'];
+         $report = $data['report'];
+         $reportId = $data['reportId'];
+         // $residentId = $data['receivedParams'][0];
+         if (!empty($report)) {
+             if ($report == "Property") {
+                 $sql = "UPDATE `propertycompensation` SET `disapproved`='$dmcapproved', `disremarks`='$dmcremarks' WHERE `propcomId`='$reportId'";
+             } else {
+                 $sql = "UPDATE `deathcompensation` SET `disapproved`='$dmcapproved', `disremarks`='$dmcremarks' WHERE `deathId`='$reportId'";
+             }
+             $this->connection->query($sql);
+             echo json_encode(array("code" => $errorCode['success']));
+         } else {
+             echo json_encode(array("code" => $errorCode['attributeMissing']));
+             exit();
+         }
+     }
     
 }

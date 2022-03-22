@@ -45,6 +45,7 @@ Route::POST("renew", array("Employee@renew"));
 Route::POST("rewoke", array("Employee@rewoke"));
 Route::POST("user", array("Admin@register", "DivisionalSecretariat@register", "DisasterOfficer@register"));
 Route::POST("notice", array("InventoryManager@addNotice", "DisasterOfficer@addNotice"));
+Route::POST("notice/{safeHouseId}", array("InventoryManager@addAidNotice"));
 
 Route::DELETE("notice/{id}", array("InventoryManager@deleteNotice", "DisasterOfficer@deleteNotice"));
 
@@ -137,7 +138,7 @@ Route::GET("serviceRequest/{requestId}", array("InventoryManager@getServiceReque
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::POST("distribute", array("InventoryManager@addDistribute"));
-//Route::POST("distribute/", array("InventoryManager@addDistribute"));
+Route::POST("distribute/{safeHouseId}", array("InventoryManager@addDistributeStatus"));
 Route::POST("serviceRequest", array("InventoryManager@addServiceRequest"));
 Route::PUT("serviceRequest/decline/{requestId}", array("InventoryManager@declineServiceRequest"));
 Route::PUT("serviceRequest/accept/{requestId}", array("InventoryManager@acceptServiceRequest"));

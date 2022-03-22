@@ -2,28 +2,28 @@
     {
         "language":"si",
         "menu":{
-            "home":"නිවස",
-            "about":"ගැන",
-            "help":"උදව්",
+            "home":"මුල් පිටුව",
+            "about":"අප ගැන",
+            "help":"උපකාර",
             "donate":"පරිත්‍යාග කරන්න",
             "staff":"කාර්ය මණ්ඩලය"
         },
         "homePage":{
-            "header":"",
-            "subHeader":"",
-            "cardH" :"",
-            "cardP":"",
-            "topic":"",
-            "paragraph":"",
-            "topicTwo":""
+            "header":"සහනාදාර",
+            "subHeader":"ස්වාභාවික විපත් වලින් පීඩා විදින ඔබේම අසල්වාසීන්ට උපකාර කිරීමට සූදානම්ද?",
+            "cardH" :"උපකාර",
+            "cardP":"පරිත්‍යාග කරන්න",
+            "topic":"ස්වාභාවික විපත්වලින් පීඩාවට පත් වූ මිනිසුන්ට උපකාර කිරීමට විශ්වාසදායක මාර්ගයක් සොයනවාද?",
+            "paragraph":"ඔබේ අවස්ථාව අවශ්‍යතා ඇති අසල්වැසියන් සඳහා අරමුදල් රැස් කිරීමේ අවස්ථාවක් බවට පත් කරන්න. සහනාදාර විසින් අරමුදල් රැස්කිරීම ක්‍රියාවට නැංවීම සඳහා පුද්ගලයන්ට සහ ලාභ නොලබන දෙවර්ගයටම බලය ලබාදේ",
+            "topicTwo":"පරිත්‍යාග ඉල්ලීමේ දැන්වීම්"
         },
         "aboutUs":{
-            "topic":"",
-            "paragraph":""
+            "topic":"අප ගැන",
+            "paragraph":"සහනාදාර යනු ශ්‍රී ලංකාවේ ආපදා කළමනාකරණය සඳහා වන ප්‍රමුඛ වේදිකාවකි. සියලුම අදාළ පාර්ශ්වකරුවන්ගේ සහභාගීත්වයෙන් ආපදා අවදානම අවම කිරීම සඳහා ජාතික සහ උප ජාතික මට්ටමේ වැඩසටහන් ක්‍රියාත්මක කිරීම සහ සම්බන්ධීකරණය කිරීමේ වගකීම එය පැවරී ඇත. සහනදරා 2005 අංක 13 දරන ශ්‍රී ලංකා ආපදා කළමනාකරණ පනතේ විධිවිධාන අනුව ආපදා කළමනාකරණය සඳහා වූ ජාතික කවුන්සිලයේ ක්‍රියාත්මක කිරීමේ නියෝජිතායතනය ලෙස ස්ථාපිත කරන ලදී. සහනදරා ආපදා කළමනාකරණ පද්ධතියේ ප්‍රධාන ක්‍රියාකාරකම් වන්නේ අවම කිරීම, සැලසුම් සකස් කිරීම, අවදානමට ලක්විය හැකි ජනගහනය සඳහා පූර්ව අනතුරු ඇඟවීම් බෙදා හැරීම, හදිසි ප්‍රතිචාර දැක්වීම, සහන සම්බන්ධීකරණය සහ අනෙකුත් ප්‍රධාන ආයතන සමඟ සහයෝගයෙන් පසු ආපදා ක්‍රියාකාරකම් ය. සියලුම ආපදා කළමනාකරණ කටයුතු සම්බන්ධීකරණය පහසු කරවීම සඳහා දිවයින පුරා දිස්ත්‍රික්, ප්‍රාදේශීය, ග්‍රාම නිලධාරී වසම් වශයෙන් ආපදා කළමනාකරණ කමිටු පිහිටුවන ලදී. එසේම උප ජාතික මට්ටමින් ආපදා අවදානම් අවම කිරීමේ කටයුතු සිදු කිරීම සඳහා සියලුම දිස්ත්‍රික්කවල දිස්ත්‍රික් ආපදා කළමනාකරණ සම්බන්ධීකරණ ඒකක ස්ථාපිත කරන ලදී."
         },
         "help":{
-            "topic":"",
-            "subTopic":"",
+            "topic":"පරිත්‍යාග ඉල්ලීමේ දැන්වීම්",
+            "subTopic":"අදම පරිත්‍යාග කිරීමෙන් සහනදරා හරහා ඔබේ අසල්වැසියන්ට උදව් කරන්න! <br>සියලු පරිත්‍යාගයන් අපගේ අරමුණ වෙනුවෙන් වෙනසක් කිරීමට සෘජුවම යොමු වේ.",
             "district":"",
             "division":"",
             "search":""
@@ -73,7 +73,7 @@
         },
         "aboutUs":{
             "topic":"About Us",
-            "paragraph":"SAHANDARA is a leading platform for disaster management in Sri Lanka. It is mandated with the responsibility of implementing and coordinating national and sub-national level programmes for reducing the risk of disasters with the participation of all relevant stakeholders. Sahanadara was established as per the provisions of the Sri Lanka Disaster Management Act No. 13 of 2005 as the executing agency of the National Council for Disaster Management. The main activities of the Sahanadara Disaster Management System are Mitigation, Planning Preparedness, Dissemination of Early Warning for the vulnerable population, Emergency Response, Coordination of Relief and Post Disaster Activities in collaboration with other key agencies. In order to facilitate the coordination and implement all Disaster Management activities, Disaster Management Committees were established at District, Divisional, Grama Niladhari Wasams, across the country. Also District Disaster Management Coordination Units were established in all districts to carry out Disaster Risk Reduction activities at the sub national level."
+            "paragraph":"SAHANADARA is a leading platform for disaster management in Sri Lanka. It is mandated with the responsibility of implementing and coordinating national and sub-national level programmes for reducing the risk of disasters with the participation of all relevant stakeholders. Sahanadara was established as per the provisions of the Sri Lanka Disaster Management Act No. 13 of 2005 as the executing agency of the National Council for Disaster Management. The main activities of the Sahanadara Disaster Management System are Mitigation, Planning Preparedness, Dissemination of Early Warning for the vulnerable population, Emergency Response, Coordination of Relief and Post Disaster Activities in collaboration with other key agencies. In order to facilitate the coordination and implement all Disaster Management activities, Disaster Management Committees were established at District, Divisional, Grama Niladhari Wasams, across the country. Also District Disaster Management Coordination Units were established in all districts to carry out Disaster Risk Reduction activities at the sub national level."
         },
         "help":{
             "topic":"Donation Requesting Notices",

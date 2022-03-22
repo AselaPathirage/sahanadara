@@ -132,6 +132,6 @@
             }
         }
     </script>
-    <!-- <script src="/<?php echo baseUrl; ?>/public/assets/js/table.js"></script> -->
+    <!-- <script src="<?php echo HOST; ?>/public/assets/js/table.js"></script> -->
 </body>
 </html>

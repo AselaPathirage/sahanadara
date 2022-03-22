@@ -30,7 +30,7 @@
                     <div class=" container col9">
                         <h1 class="title" id="header"></h1>
                         <h3 class=" sub" id="subHeader"></h3>
-                        <!-- <a href="/<?php echo baseUrl; ?>/donate" class="btn_donate">Donate</a> -->
+                        <!-- <a href="<?php echo HOST; ?>/donate" class="btn_donate">Donate</a> -->
                         <div class="space"></div>
                         <section class="services">
                             <a href="<?php echo HOST; ?>donate">

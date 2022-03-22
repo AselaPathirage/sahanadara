@@ -166,8 +166,8 @@
                                     <td>Millaniya Maha Vidyalya</td>
                                     <td>Halthota</td>
                                     <td>0756787634</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/updatesafeHouse" class="btn_blue">Update</a>
-                                        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_delete">Delete</a>
+                                    <td><a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/updatesafeHouse" class="btn_blue">Update</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_delete">Delete</a>
                                     </td>
 
                                 </tr>
@@ -177,8 +177,8 @@
                                     <td>Ballapitiya Maha Vidyalya</td>
                                     <td>Ballapitiya</td>
                                     <td>0756787634</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/updatesafeHouse" class="btn_blue">Update</a>
-                                        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_delete">Delete</a>
+                                    <td><a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/updatesafeHouse" class="btn_blue">Update</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_delete">Delete</a>
                                     </td>
                                 </tr> -->
                             </tbody>

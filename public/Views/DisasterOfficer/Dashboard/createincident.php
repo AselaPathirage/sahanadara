@@ -279,6 +279,61 @@
         }
         getGNDivision();
 
+        function getIncident(){
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>incident",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                // console.log(obj);
+                let row = table.insertRow(-1);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
+
+                var attribute = document.createElement("a");
+                attribute.id = obj['incidentId'];
+                // attribute.href = "";
+                attribute.className = "btn_update btn_blue";
+                attribute.name = "update";
+                attribute.innerHTML = "Update";
+                attribute.setAttribute("data-title", obj['title'])
+                attribute.setAttribute("data-description", obj['description'])
+                attribute.setAttribute("data-gndivision", obj['gndivision'])
+                var attribute2 = document.createElement("a");
+
+                attribute2.id = obj['incidentId'];
+                // attribute2.href = "";
+                attribute2.className = "btn_delete";
+                attribute2.name = "delete";
+                attribute2.innerHTML = "Delete";
+
+                cell1.innerHTML = obj['title'];
+                cell2.innerHTML = obj['description'];
+                cell3.innerHTML = obj['gndivision'];
+                var attribute3 = document.createElement("span");
+                attribute3.innerHTML = " ";
+                cell4.appendChild(attribute);
+                cell4.appendChild(attribute3);
+                cell4.appendChild(attribute2);
+                // console.log(attribute);
+                // console.log(attribute2);
+            }
+        }
+
+
         // popup
         $(".Click-here").on('click', function() {
             $(".addform").fadeIn();

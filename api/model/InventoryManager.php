@@ -215,7 +215,7 @@ class InventoryManager extends Employee{
             $id=ServiceRequestNotice::getId($id);
             $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
         }else{
-            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  ORDER BY id;";
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
         }
         $excute = $this->connection->query($sql);
         $results = array();
@@ -247,8 +247,62 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
-    public function getServiceRequestById(array $data){
-
+    public function acceptServiceRequest(array $data){
+        global $errorCode;
+        if(isset($data['requestId']) && isset($data['item'])){
+            if(count($data['item'])>0){
+                $uid = $data['userId'];
+                $id = ServiceRequestNotice::getId($data['requestId']);
+                $this->inventory->setInfo($uid);
+                $inventoryId = $this->inventory->getId();
+                $sql = "SELECT recordId  FROM distributeservice WHERE serviceRequestId=".$id;
+                $query= $this->connection->query($sql);
+                if($query->num_rows==0){
+                    $sql = "INSERT INTO distributeservice(inventoryId,serviceRequestId) VALUES ($inventoryId,$id);";
+                    $this->connection->query($sql);
+                    $sql = "SELECT LAST_INSERT_ID();";
+                    $excute = $this->connection->query($sql);
+                    $r = $excute-> fetch_assoc();
+                    $distributeserviceId = $r['LAST_INSERT_ID()'];
+                    $sql = "";
+                    foreach($data['item'] as $itemId => $quantity){
+                        $itemId = $itemId=Item::getId(trim($itemId));
+                        $quantity = -1*$quantity;
+                        $sql .= "INSERT INTO inventoryitem(itemId,inventoryId,quantity) VALUES ($itemId,$inventoryId,$quantity);SET @last_id = LAST_INSERT_ID();INSERT INTO servicedistributeitemrecord VALUES ($distributeserviceId,@last_id);";
+                    }
+                    $this->connection->multi_query($sql);
+                }
+                echo json_encode(array("code"=>$errorCode['success']));
+            }else{
+                http_response_code(200);                       
+                echo json_encode(array("code"=>$errorCode['attributeMissing']));
+                exit();
+            }
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }  
+    }
+    public function declineServiceRequest(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        $division = $this->getDivision($uid);
+        $divisionId = $division['id'];
+        if(count($data['receivedParams'])>0){
+            $id = ServiceRequestNotice::getId($data['receivedParams'][0]);
+            $sql = "UPDATE servicerequest
+            SET servicerequest.currentStatus ='r'
+            WHERE servicerequest.r_id = $id AND servicerequest.requestingFrom = $divisionId";
+            $this->connection->query($sql);
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['success']));
+            exit(); 
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit(); 
+        }
     }
     public function getInventoryOffices(array $data){
         $uid = $data['userId'];

@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Dashboard </title>
     <!-- CSS -->
+
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <?php
         include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
@@ -163,12 +167,7 @@
                             <thead>
                                 <tr>
 
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>NIC</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    <th>TP Number</th>
+                                    <th>Name</th>
                                     <th>Safe House</th>
                                     <th>Action</th>
 
@@ -508,7 +507,7 @@
 				}); 
         });
         
-        function getResponsibleperson() {
+        function getResponsible() {
             // var object = {};
 
 
@@ -535,42 +534,30 @@
                 let cell1 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
-                let cell4 = row.insertCell(-1);
-                let cell5 = row.insertCell(-1);
 
                 var attribute = document.createElement("a");
-                attribute.id = obj['responsibleId'];
+                attribute.id = obj['responsiblePersonID'];
                 // attribute.href = "";
                 attribute.className = "btn_update btn_blue";
                 attribute.name = "update";
                 attribute.innerHTML = "Update";
-                attribute.setAttribute("data-fname", obj['responsiblefName'])
-                attribute.setAttribute("data-fname", obj['responsiblelName'])
-                attribute.setAttribute("data-nic", obj['responsibleNIC'])
-                attribute.setAttribute("data-email", obj['responsibleemail'])
-                attribute.setAttribute("data-address", obj['responsibleAddress'])
-                attribute.setAttribute("data-telno", obj['responsibleTelNo'])
-                attribute.setAttribute("data-safehouse", obj['responsibleSafehouse'])
+                attribute.setAttribute("data-name", obj['empName'])
+                attribute.setAttribute("data-safehouse", obj['safeHouseName'])
                 var attribute2 = document.createElement("a");
                 
-                attribute2.id = obj['responsibleId'];
+                attribute2.id = obj['responsiblePersonID'];
                 // attribute2.href = "";
                 attribute2.className = "btn_delete";
                 attribute2.name = "delete";
                 attribute2.innerHTML = "Delete";
 
-                cell1.innerHTML = obj['responsiblefName'];
-                cell1.innerHTML = obj['responsiblelName'];
-                cell2.innerHTML = obj['residentNIC'];
-                cell2.innerHTML = obj['responsibleemail'];
-                cell3.innerHTML = obj['residentAddress'];
-                cell4.innerHTML = obj['residentTelNo'];
-                cell4.innerHTML = obj['responsibleSafehouse'];
+                cell1.innerHTML = obj['empName'];
+                cell2.innerHTML = obj['safeHouseName'];
                 var attribute3 = document.createElement("span");
                 attribute3.innerHTML = " ";
-                cell5.appendChild(attribute);
-                cell5.appendChild(attribute3);
-                cell5.appendChild(attribute2);
+                cell3.appendChild(attribute);
+                cell3.appendChild(attribute3);
+                cell3.appendChild(attribute2);
                 // console.log(attribute);
                 // console.log(attribute2);
             }

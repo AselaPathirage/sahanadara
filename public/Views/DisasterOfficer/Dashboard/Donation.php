@@ -115,10 +115,10 @@
                                 </select> 
                             </th>
                             <th style="width: 25%;text-align: center;">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/DonationRequests" class="create">Create Request</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/DonationRequests" class="create">Create Request</a>
                             </th> 
                             <th style="width: 25%;text-align:center;">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/viewDonationRequests" class="view">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/viewDonationRequests" class="view">View</a>
                             </th>
                         </tr>
                     </thead>

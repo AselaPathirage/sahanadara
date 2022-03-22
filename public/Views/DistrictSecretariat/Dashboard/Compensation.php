@@ -79,7 +79,7 @@
                                 <td>Approved</td>
                                 <td>Not Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
 
                             </tr>
@@ -91,7 +91,7 @@
                                 <td>Approved</td>
                                 <td>Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
                             </tr>
 
@@ -101,7 +101,7 @@
                                 <td>Approved</td>
                                 <td>Not Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
                             </tr>
 
@@ -111,7 +111,7 @@
                                 <td>Approved</td>
                                 <td>Not Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
                             </tr>
 
@@ -121,7 +121,7 @@
                                 <td>Approved</td>
                                 <td>Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
                             </tr>
 
@@ -131,7 +131,7 @@
                                 <td>Approved</td>
                                 <td>Not Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
                             </tr>
 
@@ -141,7 +141,7 @@
                                 <td>Approved</td>
                                 <td>Not Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
                             </tr>
 
@@ -151,7 +151,7 @@
                                 <td>Not Approved</td>
                                 <td>Not Approved</td>
                                 <td>Active</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
+                                <td><a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/ViewCompensation" class="btn-box">View</a></td>
 
                             </tr>
 

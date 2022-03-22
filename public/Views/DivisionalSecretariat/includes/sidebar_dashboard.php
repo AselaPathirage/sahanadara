@@ -7,43 +7,43 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/" id="Dashboard">
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/" id="Dashboard">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Home</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Compensation" id="Compensation">
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/Compensation" id="Compensation">
                 <i class='bx bx-error-circle' ></i>
                 <span class="links_name">Compensation</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Incidents" id="Incidents">
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/Incidents" id="Incidents">
                 <i class='bx bx-message-square-edit' ></i>
                 <span class="links_name">Incidents</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/FundRaising" id="FundRaising">
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising" id="FundRaising">
                 <i class='bx bxs-report'></i>
                 <span class="links_name">Fund Raising</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/Donation" id="Donation">
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/Donation" id="Donation">
                 <i class='bx bx-donate-heart' ></i>
                 <span class="links_name">Donation</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/BorrowRequests" id="BorrowRequests">
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/BorrowRequests" id="BorrowRequests">
                 <i class='bx bx-donate-heart' ></i>
                 <span class="links_name">Borrow Requests</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/InventoryManager" id="InventoryManager">
+            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/InventoryManager" id="InventoryManager">
                 <i class='bx bxs-user-rectangle' ></i>
                 <span class="links_name">Inventory Manager</span>
             </a>

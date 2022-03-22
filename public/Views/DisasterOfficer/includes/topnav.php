@@ -8,25 +8,25 @@
                 <i class='bx bx-search'></i>
             </div> -->
     <div class="mid">
-        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/">
+        <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/">
             <span class="links_name">Dashboard</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/SafeHouse/SafeHouseDetails">
+        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/SafeHouseDetails">
             <span class="links_name">Safe House</span>
         </a>
-        <!-- <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/Search">
+        <!-- <a href="<?php echo HOST; ?>/DisasterOfficer/Notice/Search">
             <span class="links_name">Notice</span>
         </a> -->
-        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Report/IncidentReport">
+        <a href="<?php echo HOST; ?>/DisasterOfficer/Report/IncidentReport">
             <span class="links_name">Reports</span>
         </a>
     </div>
     <div class="rightcorner">
-        <a href="/<?php echo baseUrl; ?>/DisasterOfficer/profile">
+        <a href="<?php echo HOST; ?>/DisasterOfficer/profile">
             <i class='bx bx-user'></i>
             <span class="links_name">Profile</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
+        <a href="<?php echo HOST; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
         </a>

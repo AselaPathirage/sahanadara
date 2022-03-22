@@ -8,19 +8,19 @@
                 <i class='bx bx-search'></i>
             </div> -->
     <div class="mid">
-        <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/">
+        <a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/">
             <span class="links_name">Dashboard</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Report/IncidentReport">
+        <a href="<?php echo HOST; ?>/DistrictSecretariat/Report/IncidentReport">
             <span class="links_name">Reports</span>
         </a>
     </div>
     <div class="rightcorner">
-        <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/profile">
+        <a href="<?php echo HOST; ?>/DistrictSecretariat/profile">
             <i class='bx bx-user'></i>
             <span class="links_name">Profile</span>
         </a>
-        <a href="/<?php echo baseUrl; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
+        <a href="<?php echo HOST; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
         </a>

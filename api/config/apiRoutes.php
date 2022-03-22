@@ -84,6 +84,7 @@ Route::GET("dmcprop/{id}", array("Dmc@getProperty"));
 Route::GET("dmcdeath/{id}", array("Dmc@getDeath"));
 
 Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
+Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
 
 
 
@@ -104,10 +105,15 @@ Route::POST("dofinal", array("DisasterOfficer@addFinal"));
 Route::GET("dofinal/{id}", array("DisasterOfficer@getFinal"));
 Route::GET("doinitial/{id}", array("DisasterOfficer@getInitial"));
 Route::GET("dorelief/{id}", array("DisasterOfficer@getRelief"));
+Route::GET("dodeath/{id}", array("DisasterOfficer@getDeath"));
+Route::GET("doprop/{id}", array("DisasterOfficer@getProperty"));
+Route::GET("dismgrcomp", array("DisasterOfficer@getCompensations"));
 
 Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
 Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
 
+Route::PUT("docompapprove", array("DisasterOfficer@approvecomp"));
+Route::PUT("docollected", array("DisasterOfficer@collectedcomp"));
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));

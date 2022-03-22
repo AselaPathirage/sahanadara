@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 09:45 AM
+-- Generation Time: Mar 22, 2022 at 10:57 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -165,7 +165,7 @@ CREATE TABLE `distributeitem` (
 
 CREATE TABLE `distributeitemrecord` (
   `recordId` int(3) NOT NULL,
-  `itemRecordId` int(3) NOT NULL
+  `itemRecord` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -1313,8 +1313,8 @@ ALTER TABLE `distributeitem`
 -- Indexes for table `distributeitemrecord`
 --
 ALTER TABLE `distributeitemrecord`
-  ADD PRIMARY KEY (`recordId`,`itemRecordId`),
-  ADD KEY `itemRecordId` (`itemRecordId`);
+  ADD PRIMARY KEY (`recordId`,`itemRecord`),
+  ADD KEY `itemRecord` (`itemRecord`);
 
 --
 -- Indexes for table `distributeservice`
@@ -1635,6 +1635,12 @@ ALTER TABLE `distributeitem`
   MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `distributeservice`
+--
+ALTER TABLE `distributeservice`
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `district`
 --
 ALTER TABLE `district`
@@ -1831,8 +1837,8 @@ ALTER TABLE `distributeitem`
 -- Constraints for table `distributeitemrecord`
 --
 ALTER TABLE `distributeitemrecord`
-  ADD CONSTRAINT `distributeitemrecord_ibfk_1` FOREIGN KEY (`recordId`) REFERENCES `distributeitem` (`recordId`),
-  ADD CONSTRAINT `distributeitemrecord_ibfk_2` FOREIGN KEY (`itemRecordId`) REFERENCES `inventoryitem` (`recId`);
+  ADD CONSTRAINT `distributeitemrecord_ibfk_1` FOREIGN KEY (`recordId`) REFERENCES `distributeservice` (`recordId`),
+  ADD CONSTRAINT `distributeitemrecord_ibfk_2` FOREIGN KEY (`itemRecord`) REFERENCES `inventoryitem` (`recId`);
 
 --
 -- Constraints for table `distributeservice`

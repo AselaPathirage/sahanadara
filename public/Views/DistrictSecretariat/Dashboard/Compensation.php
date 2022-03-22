@@ -69,6 +69,11 @@
                                 <tr>
                                     <th>Date</th>
                                     <th>Applicant Name</th>
+                                   
+                                    <th>DS Division</th>
+                                    <th>GN Division</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
 
                                 </tr>
                             </thead>
@@ -216,7 +221,7 @@
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
+            console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
 
@@ -246,8 +251,8 @@
                             cell1.innerHTML = obj['timestamp'].split(" ")[0];
                             cell2.innerHTML = obj['aname'];
 
-                            cell3.innerHTML = obj['dsName'];
-                            cell4.innerHTML = obj['dvName'];
+                            cell3.innerHTML = obj['dvName'];
+                            cell4.innerHTML = obj['gnDvName'];
                             let app = "";
                             if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
@@ -302,8 +307,8 @@
                             cell1.innerHTML = obj['timestamp'].split(" ")[0];
                             cell2.innerHTML = obj['aname'];
 
-                            cell3.innerHTML = obj['dsName'];
-                            cell4.innerHTML = obj['dvName'];
+                            cell3.innerHTML = obj['dvName'];
+                            cell4.innerHTML = obj['gnDvName'];
                             let app = "";
                             if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
@@ -340,8 +345,8 @@
                             cell1.innerHTML = obj['timestamp'].split(" ")[0];
                             cell2.innerHTML = obj['aname'];
 
-                            cell3.innerHTML = obj['dsName'];
-                            cell4.innerHTML = obj['dvName'];
+                            cell3.innerHTML = obj['dvName'];
+                            cell4.innerHTML = obj['gnDvName'];
                             let app = "";
                             if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
@@ -379,8 +384,8 @@
                             cell1.innerHTML = obj['timestamp'].split(" ")[0];
                             cell2.innerHTML = obj['aname'];
 
-                            cell3.innerHTML = obj['dsName'];
-                            cell4.innerHTML = obj['dvName'];
+                            cell3.innerHTML = obj['dvName'];
+                            cell4.innerHTML = obj['gnDvName'];
                             let app = "";
                             if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
@@ -418,8 +423,8 @@
                             cell1.innerHTML = obj['timestamp'].split(" ")[0];
                             cell2.innerHTML = obj['aname'];
 
-                            cell3.innerHTML = obj['dsName'];
-                            cell4.innerHTML = obj['dvName'];
+                            cell3.innerHTML = obj['dvName'];
+                            cell4.innerHTML = obj['gnDvName'];
                             let app = "";
                             if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";

@@ -85,7 +85,7 @@ Route::GET("dmcprop/{id}", array("Dmc@getProperty"));
 Route::GET("dmcdeath/{id}", array("Dmc@getDeath"));
 
 Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
-Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
+
 
 
 
@@ -138,6 +138,11 @@ Route::POST("distribute", array("InventoryManager@addDistribute"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
 
 // Div Sec
-
 Route::GET("inventorymgr", array("DivisionalSecretariat@getInventorymgr"));
 Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));
+
+// District Sec
+Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));
+Route::GET("dsecprop/{id}", array("DistrictSecretariat@getProperty"));
+
+Route::PUT("dseccompapprove", array("DistrictSecretariat@approvecomp"));

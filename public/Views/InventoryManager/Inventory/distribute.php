@@ -313,9 +313,15 @@ $array = explode("/", $_GET["url"]);
                     alertGen("Please add items.",2);
                     return;
                 }
+                var check = "<?php echo end($array); ?>";
+                if(check.indexOf('SH')=== -1){
+                    var api = "<?php echo API; ?>distribute";
+                }else{
+                    var api = "<?php echo API; ?>distribute/"+check;
+                }
                 $.ajax({
 					type: "POST",
-					url: "<?php echo API; ?>distribute",
+					url: api,
 					data: json,
                     headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
 					cache: false,

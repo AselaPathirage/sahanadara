@@ -59,6 +59,45 @@ class InventoryManager extends Employee{
             exit();
         }
     }
+    public function addDistributeStatus(array $data){
+        global $errorCode;
+        if(isset($data['safeHouseId']) && isset($data['item'])){
+            $uid = $data['userId'];
+            $safeHouseId=SafeHouse::getId($data['safeHouseId']);
+            $sql="INSERT INTO distributeitem(safeHouseId) VALUES ($safeHouseId);";
+            $this->connection->query($sql);
+            $sql = "SELECT LAST_INSERT_ID();";
+            $excute = $this->connection->query($sql);
+            $r = $excute-> fetch_assoc();
+            $distributeId = $r['LAST_INSERT_ID()']; //$id=Item::getId($id);
+            $this->inventory->setInfo($uid);
+            $inventoryId = $this->inventory->getId();
+            $sql = "";
+            foreach($data['item'] as $item=>$quantity){
+                $itemId=Item::getId($item); 
+                $sql="SELECT safehousestatus.r_id,safehousestatusrequesteditem.quantity FROM safehousestatus,safehousestatusrequesteditem WHERE safehousestatusrequesteditem.statusId = safehousestatus.r_id AND safehousestatus.safehouseId = $safeHouseId AND safehousestatusrequesteditem.itemId =$itemId ORDER BY safehousestatus.createdDate DESC;";
+                $excute = $this->connection->query($sql);
+                while($r = $excute-> fetch_assoc()) {
+                    if($quantity - $r['quantity'] >= 0){
+                        $quantity -= $r['quantity'];
+                        $r_id=$r['r_id'];
+                        $sql="UPDATE safehousestatusrequesteditem SET safehousestatusrequesteditem.status='s' WHERE safehousestatusrequesteditem.statusId = $r_id AND safehousestatusrequesteditem.itemId = $itemId";
+                        $this->connection->query($sql);//echo $sql;
+                    }else if($quantity>0){
+                        $r_id=$r['r_id'];
+                        $quantity = $r['quantity'] - $quantity;
+                        $sql="UPDATE safehousestatusrequesteditem SET safehousestatusrequesteditem.quantity=$quantity WHERE safehousestatusrequesteditem.statusId = $r_id AND safehousestatusrequesteditem.itemId = $itemId";
+                        $this->connection->query($sql);//echo $sql;
+                    }
+                }
+            }
+            $this->addDistribute($data);
+        }else{
+            http_response_code(200);  
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
     public function updateItem(array $data){
         global $errorCode;
         if(isset($data['value']) && count($data['receivedParams'])==1){

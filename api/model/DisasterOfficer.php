@@ -357,7 +357,7 @@ class DisasterOfficer extends Employee
         }
     }
 
-    public function getResponsibleperson(array $data)
+    public function getResponsible(array $data)
     {
         $uid = $data['userId'];
         // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
@@ -365,7 +365,7 @@ class DisasterOfficer extends Employee
         // $r = $excute->fetch_assoc();
         // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
         // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
-        $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID JOIN gndivision g ON g.safeHouseID=s.safeHouseID WHERE g.gramaNiladariID=" . $uid . ";";
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN divisionaloffice divoff ON divoff.dvId=g.dvId WHERE divoff.disasterManager=" . $uid . ";";
         $excute = $this->connection->query($sql);
         // $results = array();
         $r = $excute->fetch_assoc();

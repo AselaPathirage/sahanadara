@@ -113,7 +113,7 @@
             </div>
         </div>
     </section>
-    <script  src="/<?php echo baseUrl; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
+    <script  src="<?php echo HOST; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
     <script>
         var thisPage = "#inventory";
         $(document).ready(function() {

@@ -63,7 +63,8 @@ class Core{
             global $errorCode;
             global $route;
             $url = trim($this->requestRoute);
-            $array = $route->checkAvailibility($url);
+            $return = $route->checkAvailibility($url);
+            $array = $return['output'];
             $userTypeByNameIndex = array_search($this->userType,array_values($this->permission));
             $userTypeByName = array_keys($this->permission)[$userTypeByNameIndex];
             //$contains = preg_grep("/\b".$userTypeByName."/",$array); "/\b".$userTypeByName."/"
@@ -76,7 +77,17 @@ class Core{
                             $this->currentModel = $temp[0];
                             $this->currentModel =  new $this->currentModel($this->connection);
                             $this->setMthod($temp[1]);
-                            array_shift($this->params['receivedParams']);
+                            $route = $return['route'];
+                            if (str_contains($route, '{')) { 
+                                $strip = strtok($route,"{");
+                                $strip=str_replace('/','\/',$strip);
+                                $url=preg_replace('/^'.$strip.'/i', '',$url);
+                                $data = explode('/', $url);
+                                unset($this->params['receivedParams']);
+                                $this->params['receivedParams']=$data;
+                            }else{
+                                array_shift($this->params['receivedParams']);
+                            }
                             $this->params['userId'] = $this->userId;
                             $this->params['userType'] = $this->userType;
                             return;
@@ -90,7 +101,17 @@ class Core{
                         $this->currentModel = $temp[0];
                         $this->currentModel =  new $this->currentModel($this->connection);
                         $this->setMthod($temp[1]);
-                        array_shift($this->params['receivedParams']);
+                        $route = $return['route'];
+                        if (str_contains($route, '{')) { 
+                            $strip = strtok($route,"{");
+                            $strip=str_replace('/','\/',$strip);
+                            $url=preg_replace('/^'.$strip.'/i', '',$url);
+                            $data = explode('/', $url);
+                            unset($this->params['receivedParams']);
+                            $this->params['receivedParams']=$data;
+                        }else{
+                            array_shift($this->params['receivedParams']);
+                        }
                         //unset($this->params['receivedParams'][0]);
                         return;
                     }

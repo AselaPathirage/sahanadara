@@ -7,19 +7,19 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/Admin/" id="stats">
+            <a href="<?php echo HOST; ?>/Admin/" id="stats">
                 <i class='bx bx-stats'></i>
                 <span class="links_name">Home</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/Admin/NewUser" id="new">
+            <a href="<?php echo HOST; ?>/Admin/NewUser" id="new">
                 <i class='bx bx-user-plus'></i>
                 <span class="links_name">Add New User</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/Admin/ManageUser" id="manage">
+            <a href="<?php echo HOST; ?>/Admin/ManageUser" id="manage">
                 <i class='bx bx-user'></i>
                 <span class="links_name">Manage User</span>
             </a>

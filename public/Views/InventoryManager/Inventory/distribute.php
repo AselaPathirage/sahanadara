@@ -308,14 +308,20 @@ $array = explode("/", $_GET["url"]);
                     object['item'][item] = quantity;
                 });
                 var json = JSON.stringify(object);console.log(json);
-                console.log(object['item'].length);
+
                 if( Object.keys(object['item']).length ==0){ 
                     alertGen("Please add items.",2);
                     return;
                 }
+                var check = "<?php echo end($array); ?>";
+                if(check.indexOf('SH')=== -1){
+                    var api = "<?php echo API; ?>distribute";
+                }else{
+                    var api = "<?php echo API; ?>distribute/"+check;
+                }
                 $.ajax({
 					type: "POST",
-					url: "<?php echo API; ?>distribute",
+					url: api,
 					data: json,
                     headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
 					cache: false,

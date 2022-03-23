@@ -20,8 +20,7 @@ Route::GET("item/{id}", array("InventoryManager@getItem"));
 Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("Admin@searchUser"));
 Route::GET("user/count/{data}", array("Admin@getUserCount"));
-Route::GET("user/self/{data}", array("InventoryManager@getMySelf"));
-Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser"));
+Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser","InventoryManager@getMySelf"));
 Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
@@ -46,6 +45,7 @@ Route::POST("renew", array("Employee@renew"));
 Route::POST("rewoke", array("Employee@rewoke"));
 Route::POST("user", array("Admin@register", "DivisionalSecretariat@register", "DisasterOfficer@register"));
 Route::POST("notice", array("InventoryManager@addNotice", "DisasterOfficer@addNotice"));
+Route::POST("notice/{safeHouseId}", array("InventoryManager@addAidNotice"));
 
 Route::DELETE("notice/{id}", array("InventoryManager@deleteNotice", "DisasterOfficer@deleteNotice"));
 
@@ -79,6 +79,16 @@ Route::POST("propertycomp", array("GramaNiladari@addPropertycomp"));
 Route::PUT("residents/{id}", array("GramaNiladari@updateResident"));
 Route::DELETE("residents/{id}", array("GramaNiladari@deleteResident"));
 
+// DMC
+Route::GET("dmccomp", array("Dmc@getCompensations"));
+Route::GET("dmcprop/{id}", array("Dmc@getProperty"));
+Route::GET("dmcdeath/{id}", array("Dmc@getDeath"));
+
+Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
+
+
+
+
 // Disaster Mgt officer
 Route::GET("doalert", array("DisasterOfficer@getAlerts"));
 Route::GET("domsg", array("DisasterOfficer@getMessages"));
@@ -96,12 +106,18 @@ Route::POST("dofinal", array("DisasterOfficer@addFinal"));
 Route::GET("dofinal/{id}", array("DisasterOfficer@getFinal"));
 Route::GET("doinitial/{id}", array("DisasterOfficer@getInitial"));
 Route::GET("dorelief/{id}", array("DisasterOfficer@getRelief"));
+Route::GET("dodeath/{id}", array("DisasterOfficer@getDeath"));
+Route::GET("doprop/{id}", array("DisasterOfficer@getProperty"));
+Route::GET("dismgrcomp", array("DisasterOfficer@getCompensations"));
 
 Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
 Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
-Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
+
+Route::PUT("docompapprove", array("DisasterOfficer@approvecomp"));
+Route::PUT("docollected", array("DisasterOfficer@collectedcomp"));
 
 Route::PUT("responsible/{id}", array("DisasterOfficer@updateResponsible"));
+Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));
@@ -111,20 +127,39 @@ Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));
  
 // Inventory Manager
 Route::GET("unit", array("InventoryManager@getUnit"));
+Route::GET("unit/{id}", array("InventoryManager@getUnit"));
 Route::GET("inventory", array("InventoryManager@getInventory","DivisionalSecretariat@getInventory"));
+Route::GET("inventory/offices", array("InventoryManager@getInventoryOffices"));
 Route::GET("availableItem", array("InventoryManager@availableItem"));
 Route::GET("neighbour", array("InventoryManager@getneighbourInventoryItem"));
 Route::GET("count", array("InventoryManager@countItem"));
 Route::GET("aids", array("InventoryManager@getAids"));
 Route::GET("aids/safeHouse", array("InventoryManager@getAidsSafeHouse"));
 Route::GET("aids/{safeHouseId}", array("InventoryManager@getAids"));
+Route::GET("serviceRequest", array("InventoryManager@getServiceRequest"));
+Route::GET("serviceRequest/{requestId}", array("InventoryManager@getServiceRequest"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::POST("distribute", array("InventoryManager@addDistribute"));
-//Route::POST("distribute/", array("InventoryManager@addDistribute"));
+Route::POST("distribute/{safeHouseId}", array("InventoryManager@addDistributeStatus"));
+Route::POST("serviceRequest", array("InventoryManager@addServiceRequest"));
+Route::PUT("serviceRequest/decline/{requestId}", array("InventoryManager@declineServiceRequest"));
+Route::PUT("serviceRequest/accept/{requestId}", array("InventoryManager@acceptServiceRequest"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
 
 // Div Sec
-
 Route::GET("inventorymgr", array("DivisionalSecretariat@getInventorymgr"));
 Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));
+Route::GET("divseccomp", array("DivisionalSecretariat@getCompensations"));
+Route::GET("divsecprop/{id}", array("DivisionalSecretariat@getProperty"));
+Route::GET("divsecdeath/{id}", array("DivisionalSecretariat@getDeath"));
+
+Route::PUT("divseccompapprove", array("DivisionalSecretariat@approvecomp"));
+
+
+
+// District Sec
+Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));
+Route::GET("dsecprop/{id}", array("DistrictSecretariat@getProperty"));
+
+Route::PUT("dseccompapprove", array("DistrictSecretariat@approvecomp"));

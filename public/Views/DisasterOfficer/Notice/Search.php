@@ -106,10 +106,10 @@
                             </th>
 
                             <th style="width: 15%;text-align: center;">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/viewNotice" class="btn-box">View</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Notice/viewNotice" class="btn-box">View</a>
                             </th> 
                             <th style="width: 15%;text-align:center;">
-                                <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Notice/editNotice" class="btn-box">Edit</a>
+                                <a href="<?php echo HOST; ?>/DisasterOfficer/Notice/editNotice" class="btn-box">Edit</a>
                             </th>
                             <th style="width: 15%;text-align:center;">
                                 <a href="#" class="btn-box">Remove</a>

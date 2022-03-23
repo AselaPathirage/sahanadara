@@ -204,7 +204,7 @@ $array = explode("/", $_GET["url"]);
                                             <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody id="trow"></tbody>
                                 </table>
                             </div>
                             <div style="float: right;width:30%">
@@ -282,15 +282,26 @@ $array = explode("/", $_GET["url"]);
                 });
                 var json = JSON.stringify(object);
                 console.log(json);
+                var check = "<?php echo end($array); ?>";
+                if(check.indexOf('SH')=== -1){
+                    var api = "<?php echo API; ?>notice";
+                }else{
+                    var api = "<?php echo API; ?>notice/"+check;
+                }
                 $.ajax({
 					type: "POST",
-					url: "<?php echo API; ?>notice",
+					url: api,
 					data: json,
                     headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
 					cache: false,
 					success: function(result) {
                         if(result.code==806){
                             $("#add").trigger('reset');
+                            $('#trow').empty();
+                            sessionStorage.clear();
+                            document.getElementById('title').value ="";
+                            document.getElementById('numOfPeople').value ="";
+                            document.getElementById('numOfFamillies').value ="";
                             alertGen("Record Added Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);

@@ -10,17 +10,17 @@
 </head>
 <body>
 this is add item<br>
-<a href="/<?php echo baseUrl; ?>/">Home</a><br>
-<a href="/<?php echo baseUrl; ?>/InventoryManager/SafeHouse/dashboard">Safe House</a><br>
-<a href="/<?php echo baseUrl; ?>/a">a</a><br>
-<a href="/<?php echo baseUrl; ?>/b">b</a><br>
+<a href="<?php echo HOST; ?>/">Home</a><br>
+<a href="<?php echo HOST; ?>/InventoryManager/SafeHouse/dashboard">Safe House</a><br>
+<a href="<?php echo HOST; ?>/a">a</a><br>
+<a href="<?php echo HOST; ?>/b">b</a><br>
 <br><br>
 <form id='add' name="add" method="POST">
     <input type="text" name="company">
     <input type="text" name="email">
     <input type="submit" value="submit">   
 </form>
-<form action="/<?php echo baseUrl; ?>/a?formControl=1" method="POST">
+<form action="<?php echo HOST; ?>/a?formControl=1" method="POST">
 <input type="hidden" name="check" value="workss">
 <input type="submit" name="submit">
 </form>
@@ -53,7 +53,7 @@ var output;
                 console.log(json);
                 $.ajax({
 					type: "POST",
-					url: "localhost/<?php echo baseUrl; ?>/InventoryManager_addCompany/1234",
+					url: "localhost<?php echo HOST; ?>/InventoryManager_addCompany/1234",
 					data: json, 
 					cache: false,
 					success: function(result) {
@@ -71,7 +71,7 @@ var output;
         function getCompany(){
             output = $.parseJSON($.ajax({
                 type: "POST",
-                url: "localhost/<?php echo baseUrl; ?>/Home_viewDonations/1234",
+                url: "localhost<?php echo HOST; ?>/Home_viewDonations/1234",
                 dataType: "json", 
                 //data : JSON.stringify({'key': 'ABCD'}),
                 cache: false,
@@ -106,7 +106,7 @@ var output;
                 let id = output[val]['consumerId'];
                 $.ajax({
 					type: "POST",
-					url: "localhost/<?php echo baseUrl; ?>/InventoryManager_updateCompany/1234",
+					url: "localhost<?php echo HOST; ?>/InventoryManager_updateCompany/1234",
 					//data: {'key': 'ABCD',person,id}, 
                     data:JSON.stringify({'key': 'ABCD',person,id}),
 					cache: false,
@@ -125,7 +125,7 @@ var output;
                 let id = output[val]['consumerId'];
                 $.ajax({
 					type: "POST",
-					url: "localhost/<?php echo baseUrl; ?>/InventoryManager_deleteCompany/1234",
+					url: "localhost<?php echo HOST; ?>/InventoryManager_deleteCompany/1234",
 					//data: {'key': 'ABCD',person,id}, 
                     data:JSON.stringify({'key': 'ABCD',id}),
 					cache: false,

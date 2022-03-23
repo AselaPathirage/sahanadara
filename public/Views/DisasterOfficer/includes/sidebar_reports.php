@@ -7,19 +7,19 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Report/IncidentReport" id="incident">
+            <a href="<?php echo HOST; ?>/DisasterOfficer/Report/IncidentReport" id="incident">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Incident Report</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Report/SafeHouseReport" id="safe">
+            <a href="<?php echo HOST; ?>/DisasterOfficer/Report/SafeHouseReport" id="safe">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Safe House Report</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Report/CompensationReport" id="compensation">
+            <a href="<?php echo HOST; ?>/DisasterOfficer/Report/CompensationReport" id="compensation">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Compensation Report</span>
             </a>

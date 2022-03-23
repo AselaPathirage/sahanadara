@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Divisional Secretariat - Dashboard </title>
@@ -13,13 +14,14 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <?php
-        include_once('./public/Views/DivisionalSecretariat/includes/sidebar_dashboard.php');
-     ?>
+    include_once('./public/Views/DivisionalSecretariat/includes/sidebar_dashboard.php');
+    ?>
     <section class="dashboard-section">
-        <?php 
-        include_once('./public/Views/DivisionalSecretariat/includes/topnav.php'); 
+        <?php
+        include_once('./public/Views/DivisionalSecretariat/includes/topnav.php');
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
@@ -39,15 +41,15 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                        <form id='add' name="add" method="post" onSubmit="return validate_nic();">
-                            <h1 class="text-center">New Inventory Manager</h1>
-                            <div class="row-content">
+                            <form id='add' name="add" method="post" onSubmit="return validate_nic();">
+                                <h1 class="text-center">New Inventory Manager</h1>
+                                <div class="row-content">
                                     <label for="firstname">First Name</label>
                                     <input type="text" id="firstname" name="firstname" placeholder="First Name" required='true'>
-                                
+
                                     <label for="lastname">Last Name</label>
                                     <input type="text" id="lastname" name="lastname" placeholder="Last Name" required='true'>
-                                
+
                                     <label for="NIC">NIC</label>
                                     <input type="text" id="NIC" name="NIC" placeholder="NIC" maxlength="12" required='true'>
                                     <div id="nicCheck">
@@ -55,18 +57,18 @@
 
                                     <label for="email">Email</label>
                                     <input type="email" id="email" name="email" placeholder="Email" required='true'>
-                             
+
                                     <label for="address">Address</label>
-                                    <textarea type="text" id="address" name="address" placeholder="Address" required='true' ></textarea>
-                            
+                                    <textarea type="text" id="address" name="address" placeholder="Address" required='true'></textarea>
+
                                     <label for="TP number">TP Number</label>
                                     <div id="tpCheck">
                                     </div>
                                     <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="11" required='true'>
-                                
+
                                     <label for="inventory">Inventory</label>
-                                    <select id="inventory" name="inventory" required="true" >
-                                    <option>Select an Inventory</option>
+                                    <select id="inventory" name="inventory" required="true">
+                                        <option>Select an Inventory</option>
                                     </select>
 
                                     <div class="row " style="text-align:right;justify-content: right;">
@@ -74,26 +76,26 @@
                                         <input type="submit" style="background-color: darkblue;margin-top:0px" value="Submit">
                                     </div>
                                 </div>
-                        </form>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="bg-overlay"></div>
+                <div class="bg-overlay"></div>
             </div>
             <div class="custom-model-main" id="updateform">
                 <div class="custom-model-inner">
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                        <form id='update' name="update" method="POST" onSubmit="return validate_nic();">
-                            <h1 class="text-center">Update Record</h1>
-                            <div class="row-content">
+                            <form id='update' name="update" method="POST" onSubmit="return validate_nic();">
+                                <h1 class="text-center">Update Record</h1>
+                                <div class="row-content">
                                     <label for="firstname">First Name</label>
                                     <input type="text" id="upfirstname" name="upfirstname" required='true'>
-                                
+
                                     <label for="lastname">Last Name</label>
                                     <input type="text" id="uplastname" name="uplastname" required='true'>
-                                
+
                                     <label for="NIC">NIC</label>
                                     <input type="text" id="upNIC" name="upNIC" maxlength="12" required='true'>
                                     <div id="nicCheck">
@@ -101,18 +103,18 @@
 
                                     <label for="email">Email</label>
                                     <input type="email" id="upemail" name="upemail" required='true'>
-                             
+
                                     <label for="address">Address</label>
-                                    <textarea type="text" id="upaddress" name="upaddress" required='true' ></textarea>
-                            
+                                    <textarea type="text" id="upaddress" name="upaddress" required='true'></textarea>
+
                                     <label for="TP number">TP Number</label>
                                     <div id="tpCheck">
                                     </div>
                                     <input type="text" id="upTP_number" name="upTP_number" maxlength="11" required='true'>
-                                
+
                                     <label for="inventory">Inventory</label>
-                                    <select id="upinventory" name="upinventory" required="true" >
-                                    <option>Select an Inventory</option>
+                                    <select id="upinventory" name="upinventory" required="true">
+                                        <option>Select an Inventory</option>
                                     </select>
 
                                     <div class="row " style="text-align:right;justify-content: right;">
@@ -120,11 +122,11 @@
                                         <input type="submit" style="background-color: darkblue;margin-top:0px" value="Update">
                                     </div>
                                 </div>
-                        </form>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="bg-overlay"></div>
+                <div class="bg-overlay"></div>
             </div>
             <div class="custom-model-main" id="deleteform">
                 <div class="custom-model-inner">
@@ -209,15 +211,18 @@
     </section>
     <script>
         var thisPage = "#InventoryManager";
+        let sidebar = document.querySelector(".sidebar");
+        let sidebarBtn = document.querySelector(".sidebarBtn");
+        sidebarBtn.onclick = function() {
+            sidebar.classList.toggle("active");
+        }
         $(document).ready(function() {
             $("#Home,#Compensation,#Incidents,#FundRaising,#Donation,#BorrowRequests,#InventoryManager").each(function() {
-                if ($(this).hasClass('active')){
+                if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }
                 $(thisPage).addClass("active");
             });
-
-            getInventorymgr();
             $(".btn_update").on('click', function() {
                 var id = $(this).attr("id");
                 var fname = $(this).attr("data-fname");
@@ -259,11 +264,164 @@
                 // $("#upaddress").val(address);
                 $("#item2").val(id);
             });
+            $(".Click-here").on('click', function() {
+                $(".addform").fadeIn();
+                $("#add").trigger("reset");
+                $(".addform").addClass('model-open');
+            });
+            $(".close-btn, .bg-overlay, .cancel").click(function() {
+                $(".custom-model-main").removeClass('model-open');
+            });
 
+            $("#add").submit(function(e) {
+                e.preventDefault();
+                $(".custom-model-main").fadeOut();
+                $(".custom-model-main").removeClass('model-open');
+                var str = [];
+                var formElement = document.querySelector("#add");
+                var formData = new FormData(formElement);
+                var object = {};
+                formData.forEach(function(value, key) {
+                    object[key] = value;
+                });
+                var json = JSON.stringify(object);
+                console.log(json);
+                //$("#add").trigger("reset");
+                $.ajax({
+                    type: "POST",
+                    url: "<?php echo API; ?>user",
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        console.log(result);
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                });
+            });
+
+            $("#update").submit(function(e) {
+                e.preventDefault();
+                $("#updateform").fadeOut();
+                $("#updateform").removeClass('model-open');
+                var str = [];
+                var formElement = document.querySelector("#update");
+                var formData = new FormData(formElement);
+                var object = {};
+                formData.forEach(function(value, key) {
+                    object[key] = value;
+                });
+                $("#update").trigger('reset');
+                var json = JSON.stringify(object);
+                console.log(json);
+                //$("#add").trigger("reset");
+                $.ajax({
+                    type: "PUT",
+                    url: "<?php echo API; ?>user/" + id,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $('#trow').empty();
+                        getResponsible();
+                        location.reload();
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Something went wrong.", 3);
+                        console.log(err);
+                    }
+                });
+            });
+
+            $("#delete-confirm").submit(function(e) {
+                e.preventDefault();
+                $("#deleteform").fadeOut();
+                $("#deleteform").removeClass('model-open');
+                var str = [];
+                //var array = {'key':'ABCD'}
+                var object = {};
+                var id = document.getElementById("item2").value;
+                object["id"] = id;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "DELETE",
+                    url: "<?php echo API; ?>user/" + id,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $('#trow').empty();
+                        getResponsible();
+                        location.reload();
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Something went wrong.", 3);
+                        console.log(err);
+                    }
+                });
+            });
+            $('#District').change(function() {
+                var val = $(this).val();
+                var divOptions = "<option value=''>Select Division</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == val) {
+                            $.each(district.division, function(j, division) {
+                                divOptions += "<option value='" + division.dvId + "'>" + division.name + "</option>";
+                            })
+                        }
+                    });
+                    $('#Division').html(divOptions);
+                })
+            });
+
+            $('#Division').change(function() {
+                var div = $(this).val();
+                var dist = $('#District').val();
+                var gnOptions = "<option value=''>Select GNDivision</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == dist) {
+                            $.each(district.division, function(j, division) {
+                                if (division.dvId == div) {
+                                    $.each(division.gnArea, function(k, gnArea) {
+                                        gnOptions += "<option value='" + gnArea.gndvId + "'>" + gnArea.name + "</option>";
+                                    })
+                                }
+                            })
+                        }
+                    });
+                    $('#Gndivision').html(gnOptions);
+                })
+            });
         });
 
         //validations
-        document.getElementById("NIC").addEventListener("keyup",function(e){
+        document.getElementById("NIC").addEventListener("keyup", function(e) {
             var nicNum = document.getElementById("NIC").value;
             var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
             var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
@@ -275,7 +433,7 @@
                 $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
             }
         });
-        document.getElementById("TP_number").addEventListener("keyup",function(e){
+        document.getElementById("TP_number").addEventListener("keyup", function(e) {
             var nicNum = document.getElementById("TP_number").value;
             console.log(nicNum);
             var cnic_no_regex = new RegExp('/([07][0-9]{1})[-. ]([0-9]{7})$');
@@ -313,195 +471,32 @@
             }
         }
 
-        $('#District').change(function(){
-            var val = $(this).val();
-            var divOptions = "<option value=''>Select Division</option>";
-            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
-                $.each(result,function(i,district){
-                    if(district.dsId == val){
-                        $.each(district.division,function(j,division){
-                           divOptions += "<option value='"+division.dvId+"'>"+division.name+"</option>";  
-                        })
-                    }
-                });
-                $('#Division').html(divOptions);
-            })
-        })
-        
-        $('#Division').change(function(){
-            var div = $(this).val();
-            var dist = $('#District').val();
-            var gnOptions = "<option value=''>Select GNDivision</option>";
-            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
-                $.each(result,function(i,district){
-                    if(district.dsId == dist){
-                        $.each(district.division,function(j,division){
-                           if(division.dvId == div){
-                               $.each(division.gnArea, function(k,gnArea){
-                                gnOptions += "<option value='"+gnArea.gndvId+"'>"+gnArea.name+"</option>"; 
-                               })
-                           }
-                        })
-                    }
-                });
-                $('#Gndivision').html(gnOptions);
-            })
-        })
-
-        
-        function alertGen($messege,$type){
-            if ($type == 1){
-                $("#alertBox").html("  <div class='alert success-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
-            }else if($type == 2){
-                $("#alertBox").html("  <div class='alert warning-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
-            }else{
-                $("#alertBox").html("  <div class='alert danger-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
             }
         }
 
-
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
-
-        // popup
-        $(".Click-here").on('click', function() {
-            $(".addform").fadeIn();
-            $("#add").trigger("reset");
-            $(".addform").addClass('model-open');
-        });
-        $(".close-btn, .bg-overlay, .cancel").click(function() {
-            $(".custom-model-main").removeClass('model-open');
-        });
-
-        $("#add").submit(function(e) {
-                e.preventDefault();
-                $(".custom-model-main").fadeOut();
-                $(".custom-model-main").removeClass('model-open');
-                var str = [];
-                var formElement = document.querySelector("#add");
-                var formData = new FormData(formElement);
-                var object = {};
-                formData.forEach(function(value, key){
-                    object[key] = value;
-                }); 
-                var json = JSON.stringify(object);
-                console.log(json);
-                //$("#add").trigger("reset");
-                $.ajax({
-					type: "POST",
-					url: "<?php echo API; ?>user",
-					data: json,
-                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-					cache: false,
-					success: function(result) {
-                        console.log(result);
-                        if(result.code==806){
-                            alertGen("Record Added Successfully!",1);
-                        }else{
-                            alertGen("Unable to handle request.",2);
-                        }
-					},
-					error: function(err) {
-						alertGen("Unable to handle request.",2);
-					}
-				}); 
-        });
-
-        $("#update").submit(function(e) {
-                e.preventDefault();
-                $("#updateform").fadeOut();
-                $("#updateform").removeClass('model-open');
-                var str = [];
-                var formElement = document.querySelector("#update");
-                var formData = new FormData(formElement);
-                var object = {};
-                formData.forEach(function(value, key){
-                    object[key] = value;
-                });
-                $("#update").trigger('reset');
-                var json = JSON.stringify(object);
-                console.log(json);
-                //$("#add").trigger("reset");
-                $.ajax({
-					type: "PUT",
-					url: "<?php echo API; ?>user/" + id,
-					data: json,
-                    headers: {
-                        'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-					cache: false,
-					success: function(result) {
-                        $('#trow').empty();
-                        getResponsible();
-                        location.reload();
-                        if(result.code==806){
-                            alertGen("Record Added Successfully!",1);
-                        }else{
-                            alertGen("Unable to handle request.",2);
-                        }
-					},
-					error: function(err) {
-						alertGen("Something went wrong.", 3);
-                    console.log(err);
-					}
-				}); 
-        });
-
-        $("#delete-confirm").submit(function(e) {
-                e.preventDefault();
-                $("#deleteform").fadeOut();
-                $("#deleteform").removeClass('model-open');
-                var str = [];
-                //var array = {'key':'ABCD'}
-                var object = {};
-                var id = document.getElementById("item2").value;
-                object["id"] = id;
-                var json = JSON.stringify(object);
-                console.log(json);
-                $.ajax({
-					type: "DELETE",
-					url: "<?php echo API; ?>user/" + id,
-					data: json,
-                    headers: {
-                        'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-					cache: false,
-					success: function(result) {
-                        $('#trow').empty();
-                        getResponsible();
-                        location.reload();
-                        if(result.code==806){
-                            alertGen("Record Added Successfully!",1);
-                        }else{
-                            alertGen("Unable to handle request.",2);
-                        }
-					},
-					error: function(err) {
-						alertGen("Something went wrong.", 3);
-                    console.log(err);
-					}
-				}); 
-        });
-        
+        getInventorymgr();
+        var output;
         function getInventorymgr() {
             // var object = {};
-
-
-            // var json = JSON.stringify(object);
-            // console.log(object);
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>inventorymgr",
@@ -540,7 +535,7 @@
                 attribute.setAttribute("data-telno", obj['inventorymgrTelNo'])
                 attribute.setAttribute("data-inventory", obj['inventorymgrInventory'])
                 var attribute2 = document.createElement("a");
-                
+
                 attribute2.id = obj['inventoryId'];
                 // attribute2.href = "";
                 attribute2.className = "btn_delete";
@@ -585,7 +580,7 @@
             });
         }.call(this));
 
-        function filterInventory(){
+        function filterInventory() {
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>inventory/name",
@@ -611,28 +606,28 @@
         }
         filterInventory();
 
-      
+
         $(function() {
-            $('#user_role').change(function(){
+            $('#user_role').change(function() {
                 console.log($(this).val());
                 var value = $(this).val();
-                if(value==0){
+                if (value == 0) {
                     $('#DistrictBox').hide();
                     $('#DivisionBox').hide();
                     $('#GndivisionBox').hide();
-                }else if(value==1){
+                } else if (value == 1) {
                     $('#DistrictBox').show();
                     $('#DivisionBox').show();
                     $('#GndivisionBox').show();
-                }else if(value==4){
+                } else if (value == 4) {
                     $('#DistrictBox').show();
                     $('#DivisionBox').show();
                     $('#GndivisionBox').hide();
-                }else if(value==3){
+                } else if (value == 3) {
                     $('#DistrictBox').show();
                     $('#DivisionBox').hide();
                     $('#GndivisionBox').hide();
-                }else if(value==6){
+                } else if (value == 6) {
                     $('#DistrictBox').show();
                     $('#DivisionBox').show();
                     $('#GndivisionBox').hide();
@@ -641,4 +636,5 @@
         });
     </script>
 </body>
+
 </html>

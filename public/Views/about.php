@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -23,7 +23,7 @@
             <div class="space"></div>
             <div class="container aboutsec_aboutpage">
                 <h1 class="heading_landing" id="topic">About Us</h1>
-                <p>SAHANDARA is a leading platform for disaster management in Sri Lanka. It is mandated with the responsibility of implementing and coordinating national and sub-national level programmes for reducing the risk of disasters with the participation of all relevant stakeholders.
+                <p id="paragraph">SAHANDARA is a leading platform for disaster management in Sri Lanka. It is mandated with the responsibility of implementing and coordinating national and sub-national level programmes for reducing the risk of disasters with the participation of all relevant stakeholders.
                     Sahanadara was established as per the provisions of the Sri Lanka Disaster Management Act No. 13 of 2005 as the executing agency of the National Council for Disaster Management.
                     The main activities of the Sahanadara Disaster Management System are Mitigation, Planning Preparedness, Dissemination of Early Warning for the vulnerable population, Emergency Response, Coordination of Relief and Post Disaster Activities in collaboration with other key agencies.
                     In order to facilitate the coordination and implement all Disaster Management activities, Disaster Management Committees were established at District, Divisional, Grama Niladhari Wasams, across the country. Also District Disaster Management Coordination Units were established in all districts to carry out Disaster Risk Reduction activities at the sub national level.
@@ -83,6 +83,8 @@
 
                 //body items
                 document.getElementById("topic").innerHTML= dataJson[sub].aboutUs.topic;
+                document.getElementById("paragraph").innerHTML= dataJson[sub].aboutUs.paragraph;
+
                 //console.log(dataJson);
             }catch (e) {
                 console.error(e);
@@ -91,10 +93,11 @@
                 document.getElementById("about").innerHTML="About";
                 document.getElementById("help").innerHTML="Help";
                 document.getElementById("donate").innerHTML="Donate";
-                document.getElementById("staff").innerHTML="Donate";
+                document.getElementById("staff").innerHTML="Staff";
 
                 //body items
                 document.getElementById("topic").innerHTML= "About Us";
+                document.getElementById("paragraph").innerHTML= "SAHANDARA is a leading platform for disaster management in Sri Lanka. It is mandated with the responsibility of implementing and coordinating national and sub-national level programmes for reducing the risk of disasters with the participation of all relevant stakeholders. Sahanadara was established as per the provisions of the Sri Lanka Disaster Management Act No. 13 of 2005 as the executing agency of the National Council for Disaster Management. The main activities of the Sahanadara Disaster Management System are Mitigation, Planning Preparedness, Dissemination of Early Warning for the vulnerable population, Emergency Response, Coordination of Relief and Post Disaster Activities in collaboration with other key agencies. In order to facilitate the coordination and implement all Disaster Management activities, Disaster Management Committees were established at District, Divisional, Grama Niladhari Wasams, across the country. Also District Disaster Management Coordination Units were established in all districts to carry out Disaster Risk Reduction activities at the sub national level.";
             }
         };
     </script>

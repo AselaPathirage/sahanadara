@@ -40,12 +40,12 @@
                     <div class="col6">
                         <div class="space"></div>
                         <div class="staff_bluebox">
-                            <h1 class="heading_landing">Reset Password </h1>
-                            <p>Enter your email</p>
+                            <h1 class="heading_landing" id="topic">Reset Password </h1>
+                            <p id="subtopic">Enter your email</p>
                             <div class="row-content">
                                 <div class="container">
                                     <form action="<?php echo HOST; ?>Handler/resetHandle" method="post">
-                                        <label for="e_email">Email Address</label>
+                                        <label for="e_email" id="email">Email Address</label>
                                         <?php
                                             if(isset($_GET['reply'])){
                                                 if($_GET['reply']==1){
@@ -62,8 +62,8 @@
                                         
                                         <input type="email" id="e_email" name="e_email" required />
                                         <div class="login-bar"> 
-                                            <input type="submit" name="submit" value="Send" class="btn-login" />
-                                            <a href="staff" class="forget-password" style="color: wheat;">Back to Login</a>
+                                            <input type="submit" name="submit" value="Send" class="btn-login" id="send"/>
+                                            <a href="<?php echo HOST; ?>staff" class="forget-password" style="color: wheat;" id="login">Back to Login</a>
                                         </div>
                                     </form>
                                 </div>
@@ -109,6 +109,12 @@
                 }
 
                 //body items
+                document.getElementById("topic").innerHTML= dataJson[sub].resetPassword.topic;
+                document.getElementById("subtopic").innerHTML= dataJson[sub].resetPassword.subtopic;
+                document.getElementById("email").innerHTML= dataJson[sub].resetPassword.email;
+                document.getElementById("send").innerHTML= dataJson[sub].resetPassword.send;
+                document.getElementById("login").innerHTML= dataJson[sub].resetPassword.login;
+                
 
                 //console.log(dataJson);
             }catch (e) {
@@ -121,6 +127,11 @@
                 document.getElementById("staff").innerHTML="Donate";
 
                 //body items
+                document.getElementById("topic").innerHTML= "Reset Password";
+                document.getElementById("subtopic").innerHTML= "Enter your email";
+                document.getElementById("email").innerHTML= "Email Address";
+                document.getElementById("send").innerHTML= "Send";
+                document.getElementById("login").innerHTML= "Back to Login";
             }
         };
     </script>

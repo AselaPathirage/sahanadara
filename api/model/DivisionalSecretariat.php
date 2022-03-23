@@ -6,7 +6,6 @@ class DivisionalSecretariat extends Employee
     public function register(array $data)
     {
         global $errorCode;
-        $uid = $data['userId'];
         if (isset($data['firstname']) && isset($data['NIC'])  && isset($data['email'])  && isset($data['address'])  && isset($data['TP_number'])) {
             $firstname = $data['firstname'];
             $lastname = $data['lastname'];
@@ -14,18 +13,21 @@ class DivisionalSecretariat extends Employee
             $email = $data['email'];
             $address = $data['address'];
             $TP_number = $data['TP_number'];
-            $inventory = $data['inventory'];
-
+            $uid = $data['userId'];
+            $division = $this->getDivision($uid);
+            $dvId = $division['id'];
+            $sql ="SELECT inventoryId FROM inventory WHERE inventory.dvId=".$dvId;
+            $excute = $this->connection->query($sql);
+            $temp =$excute->fetch_assoc();
+            $inventory=$temp['inventoryId'];
             $mail = new mail();
             $name = $data['firstname'] . " " . $data['lastname'];
-
-
             $sql0 = "SELECT empEmail FROM InventoryMgtOfficer WHERE empEmail = '" . $data['email'] . "'";
-            $sql = "INSERT INTO InventoryMgtOfficer (empName,empAddress,empEmail,empTele,inventoryID) VALUES ('$name','" . $data['address'] . "','" . $data['email'] . "','" . $data['TP_number'] . "',$inventory);";
-
+            $sql = "INSERT INTO InventoryMgtOfficer (empName,empAddress,empEmail,empTele,inventoryID,assignedDate) VALUES ('$name','" . $data['address'] . "','" . $data['email'] . "','" . $data['TP_number'] . "',$inventory,'NOW()');";
             $query = $this->connection->query($sql0);
-
-            if ($query->num_rows == 0) {
+            if ($query->num_rows == 0){
+                $sql0="UPDATE InventoryMgtOfficer SET inventoryID=0,isAssigned='n',resignedDate='NOW()' WHERE inventoryID=".$inventory;
+                $this->connection->query($sql0);
                 $this->connection->query($sql);
                 $tokenKey = $this->tokenKey(10);
                 $password = $this->tokenKey(8);
@@ -36,14 +38,12 @@ class DivisionalSecretariat extends Employee
                 $role = 2;
                 $sql = "INSERT INTO login VALUES ($userId,'" . md5($data['NIC']) . "','" . md5($password) . "','$tokenKey',$role)";
                 $this->connection->query($sql);
-
-
                 $body = "Please use these creadentials to login Sahanadara. You need to change your password after the login.<ul><li>User Name: " . $data['NIC'] . " </li><li>Password: $password </li></ul>";
                 $mail->emailBody("About your account", "Dear " . $data['firstname'], $body);
                 $mail->sendMail($data['email'], "Account Information");
                 echo json_encode(array("code" => $errorCode['success']));
                 exit();
-            } else {
+            }else{
                 echo json_encode(array("code" => $errorCode['emailAlreadyInUse']));
                 exit();
             }
@@ -62,7 +62,7 @@ class DivisionalSecretariat extends Employee
         $uid = $data['userId'];
         $division = $this->getDivision($uid);
         $dvId = $division['id'];
-        $sql = "SELECT inventorymgtofficer.* FROM inventorymgtofficer,inventory WHERE inventorymgtofficer.inventoryID = inventory.inventoryId AND  inventory.dvId =".$dvId;
+        $sql = "SELECT inventoryMgtOfficerID,empName,empAddress,empEmail,isAssigned,DATE(assignedDate) AS assignedDate,empTele,resignedDate FROM inventorymgtofficer,inventory WHERE inventorymgtofficer.inventoryID = inventory.inventoryId AND  inventory.dvId =".$dvId;
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
@@ -70,6 +70,139 @@ class DivisionalSecretariat extends Employee
         }
         $json = json_encode($results);
         echo $json;
+    }
+    public function getBorrowRequests(array $data){
+        $uid = $data['userId'];
+        $division = $this->getDivision($uid);
+        $dvId = $division['id'];
+        $sql = "(SELECT distributeitem.recordId AS recordId,distributeitem.safeHouseId AS createrID,'itemRequest' AS type,DATE(distributeitem.createdDate) AS createdDate,NULL AS requestSource, safehouse.safeHouseName AS name ,distributeitem.approvalStatus FROM distributeitem,safehouse WHERE distributeitem.safeHouseId=safehouse.safeHouseID AND distributeitem.safeHouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $dvId) ORDER BY CASE WHEN distributeitem.approvalStatus ='a' THEN 2 WHEN distributeitem.approvalStatus ='r' THEN 3 WHEN distributeitem.approvalStatus ='p' THEN 1 ELSE 4 END ASC,createdDate DESC) UNION (SELECT distributeservice.recordId AS recordId,distributeservice.inventoryId AS createrID,'serviceRequest' AS type,DATE(distributeservice.createdDate) AS createdDate,distributeservice.serviceRequestId AS requestSource,inventory.inventoryAddress AS name,distributeservice.approvalStatus FROM distributeservice,inventory WHERE inventory.inventoryId=distributeservice.inventoryId AND inventory.dvId= $dvId ORDER BY CASE WHEN distributeservice.approvalStatus ='a' THEN 2 WHEN distributeservice.approvalStatus ='r' THEN 3 WHEN distributeservice.approvalStatus ='p' THEN 1 ELSE 4 END ASC,createdDate DESC);";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()){
+            if($r['type']=='itemRequest'){
+                $text = SafeHouse::getSafeHouseCode($r['createrID']);
+                $id=GoodsRequest::getGoodsRequest($r['recordId']);
+            }else{
+                $text=ServiceRequestNotice::getServiceRequestNoticeCode($r['createrID']);
+                $id=GoodsTransfer::getGoodsTransfer($r['recordId']);
+            }
+            $temp=array();
+            $temp['id']=$id;
+            $temp['source']=$text;
+            $temp['type']=$r['type'];
+            $temp['createdDate']=$r['createdDate'];
+            $temp['requestSource']=$r['requestSource'];
+            $temp['name']=$r['name'];
+            if($r['approvalStatus']=='p'){
+                $temp['approvalStatus']="Pending";
+            }elseif($r['approvalStatus']=='a'){
+                $temp['approvalStatus']="Approved";
+            }else{
+                $temp['approvalStatus']="Rejected";
+            }
+            $results[] = $temp;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function filterBorrowRequests(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $id=$data['receivedParams'][0];
+            $division = $this->getDivision($uid);
+            $dvId = $division['id'];
+            if(str_contains(strtoupper($id),"GR")){
+                $id = GoodsRequest::getId($id);
+                $sql="SELECT distributeitem.recordId AS recordId,distributeitem.safeHouseId AS createrID,'itemRequest' AS type,DATE(distributeitem.createdDate) AS createdDate,NULL AS requestSource, safehouse.safeHouseName AS name ,distributeitem.approvalStatus FROM distributeitem,safehouse WHERE distributeitem.safeHouseId=safehouse.safeHouseID AND distributeitem.recordId=$id AND distributeitem.safeHouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $dvId)";
+                $excute = $this->connection->query($sql);
+                $r = $excute-> fetch_assoc();
+                $text = SafeHouse::getSafeHouseCode($r['createrID']);
+                $id2=GoodsRequest::getGoodsRequest($r['recordId']);
+                $temp=array();
+                $temp['id']=$id2;
+                $temp['source']=$text;
+                $temp['type']=$r['type'];
+                $temp['createdDate']=$r['createdDate'];
+                $temp['requestSource']=$r['requestSource'];
+                $temp['name']=$r['name'];
+                if($r['approvalStatus']=='p'){
+                    $temp['approvalStatus']="Pending";
+                }elseif($r['approvalStatus']=='a'){
+                    $temp['approvalStatus']="Approved";
+                }else{
+                    $temp['approvalStatus']="Rejected";
+                }
+                $temp['item']=array();
+                $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity FROM item,unit,inventoryitem,distributeitemrecord WHERE item.itemId=inventoryitem.itemId AND item.unitType=unit.unitId AND inventoryitem.recId=distributeitemrecord.itemRecord AND distributeitemrecord.recordId=$id;";
+                $excute = $this->connection->query($sql);
+                while ($r = $excute->fetch_assoc()) {
+                    $r['itemId'] =Item::getItemCode($r['itemId']);
+                    $r['quantity'] = -1*$r['quantity'];
+                    $temp['item'][] = $r;
+                }
+                $json = json_encode($temp);
+                echo $json;
+            }elseif(str_contains(strtoupper($id),"GT")){
+                $id = GoodsTransfer::getId($id);
+                $sql="SELECT distributeservice.recordId AS recordId,distributeservice.inventoryId AS createrID,'serviceRequest' AS type,DATE(distributeservice.createdDate) AS createdDate,distributeservice.serviceRequestId AS requestSource,inventory.inventoryAddress AS name,distributeservice.approvalStatus FROM distributeservice,inventory WHERE inventory.inventoryId=distributeservice.inventoryId AND distributeservice.recordId=$id  AND inventory.dvId= $dvId;";
+                $excute = $this->connection->query($sql);
+                $r = $excute-> fetch_assoc();
+                $text=ServiceRequestNotice::getServiceRequestNoticeCode($r['createrID']);
+                $id2=GoodsTransfer::getGoodsTransfer($r['recordId']);
+                $temp=array();
+                $temp['id']=$id2;
+                $temp['source']=$text;
+                $temp['type']=$r['type'];
+                $temp['createdDate']=$r['createdDate'];
+                $temp['requestSource']=$r['requestSource'];
+                $temp['name']=$r['name'];
+                if($r['approvalStatus']=='p'){
+                    $temp['approvalStatus']="Pending";
+                }elseif($r['approvalStatus']=='a'){
+                    $temp['approvalStatus']="Approved";
+                }else{
+                    $temp['approvalStatus']="Rejected";
+                }
+                $temp['item']=array();
+                $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity FROM item,unit,inventoryitem,servicedistributeitemrecord WHERE item.itemId=inventoryitem.itemId AND item.unitType=unit.unitId AND inventoryitem.recId=servicedistributeitemrecord.itemRecordId AND servicedistributeitemrecord.recordId=$id;";
+                $excute = $this->connection->query($sql);
+                while ($r = $excute->fetch_assoc()) {
+                    $r['itemId'] =Item::getItemCode($r['itemId']);
+                    $r['quantity'] = -1*$r['quantity'];
+                    $temp['item'][] = $r;
+                }
+                $json = json_encode($temp);
+                echo $json;
+            }else{
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function filterInventory(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $division = $this->getDivision($uid);
+            $dvId = $division['id'];
+            if(strtolower($data['receivedParams'][0])=='name'){
+                $sql="SELECT inventory.* FROM inventory WHERE inventory.dvId=".$dvId;
+                $excute = $this->connection->query($sql);
+                $temp =$excute->fetch_assoc();
+                $json = json_encode($temp);
+                echo $json;
+            }else{
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
     }
     public function getDistrict($userId){
         $division = $this->getDivision($userId);
@@ -93,7 +226,7 @@ class DivisionalSecretariat extends Employee
     public function getProfileDetails(array $data)
     {
         $uid = $data['userId'];
-        //$sql = "SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
+        $sql = "SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
         // SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=1 AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;
         $excute = $this->connection->query($sql);
         while ($r = $excute->fetch_assoc()) {

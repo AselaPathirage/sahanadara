@@ -150,6 +150,8 @@ Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
 // Div Sec
 Route::GET("inventorymgr", array("DivisionalSecretariat@getInventorymgr"));
 Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));
+Route::GET("borrowRequests", array("DivisionalSecretariat@getBorrowRequests"));
+Route::GET("borrowRequests/{id}", array("DivisionalSecretariat@filterBorrowRequests"));
 Route::GET("divseccomp", array("DivisionalSecretariat@getCompensations"));
 Route::GET("divsecprop/{id}", array("DivisionalSecretariat@getProperty"));
 Route::GET("divsecdeath/{id}", array("DivisionalSecretariat@getDeath"));

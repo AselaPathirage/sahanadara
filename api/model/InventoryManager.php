@@ -84,14 +84,14 @@ class InventoryManager extends Employee{
         if(isset($data['safeHouseId']) && isset($data['item'])){
             $uid = $data['userId'];
             $safeHouseId=SafeHouse::getId($data['safeHouseId']);
-            $sql="INSERT INTO distributeitem(safeHouseId) VALUES ($safeHouseId);";
-            $this->connection->query($sql);
-            $sql = "SELECT LAST_INSERT_ID();";
-            $excute = $this->connection->query($sql);
-            $r = $excute-> fetch_assoc();
-            $distributeId = $r['LAST_INSERT_ID()']; //$id=Item::getId($id);
-            $this->inventory->setInfo($uid);
-            $inventoryId = $this->inventory->getId();
+            // $sql="INSERT INTO distributeitem(safeHouseId) VALUES ($safeHouseId);";
+            // $this->connection->query($sql);
+            // $sql = "SELECT LAST_INSERT_ID();";
+            // $excute = $this->connection->query($sql);
+            // $r = $excute-> fetch_assoc();
+            // $distributeId = $r['LAST_INSERT_ID()']; //$id=Item::getId($id);
+            // $this->inventory->setInfo($uid);
+            // $inventoryId = $this->inventory->getId();
             $sql = "";
             foreach($data['item'] as $item=>$quantity){
                 $itemId=Item::getId($item); 

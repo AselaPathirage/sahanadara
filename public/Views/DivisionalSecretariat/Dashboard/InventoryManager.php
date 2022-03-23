@@ -67,8 +67,7 @@
                                     <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="11" required='true'>
 
                                     <label for="inventory">Inventory</label>
-                                    <select id="inventory" name="inventory" required="true">
-                                        <option>Select an Inventory</option>
+                                    <input type="text" id="inventory" name="inventory" value="" disabled="true">
                                     </select>
 
                                     <div class="row " style="text-align:right;justify-content: right;">
@@ -114,7 +113,6 @@
 
                                     <label for="inventory">Inventory</label>
                                     <select id="upinventory" name="upinventory" required="true">
-                                        <option>Select an Inventory</option>
                                     </select>
 
                                     <div class="row " style="text-align:right;justify-content: right;">
@@ -152,8 +150,6 @@
                     <table class="table" style="margin: 15px auto;">
                         <thead>
                             <tr class="filters">
-
-
                                 <th>Search
                                     <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                                 </th>
@@ -164,43 +160,15 @@
                         <table id="table2" class="table">
                             <thead>
                                 <tr>
-
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>NIC</th>
+                                    <th>Name</th>
                                     <th>Email</th>
                                     <th>Address</th>
                                     <th>TP Number</th>
-                                    <th>Inventory</th>
+                                    <th>Assigned Date</th>
                                     <th>Action</th>
-
                                 </tr>
                             </thead>
-
                             <tbody id="tbodyid">
-
-                                <!-- <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-
-                                    <td>N Nimesh </td>
-                                    <td>991237564V</td>
-                                    <td>111, Maithree Rd, Horana</td>
-                                    <td>0756787634</td>
-                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
-                                        <a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
-                                    </td>
-
-                                </tr>
-
-                                <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-
-                                    <td>Y Abeysinghe</td>
-                                    <td>985637555V</td>
-                                    <td>14/D, Samagi Rd, Bellapitiya, Horana</td>
-                                    <td>0778987655</td>
-                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
-                                        <a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
-                                    </td>
-                                </tr> -->
                             </tbody>
                         </table>
                     </div>
@@ -249,19 +217,9 @@
             });
             $(".btn_delete").on('click', function() {
                 var id = $(this).attr("id");
-                // var nic = $(this).attr("data-nic");
-                // var name = $(this).attr("data-name");
-                // var address = $(this).attr("data-address");
-                // var telno = $(this).attr("data-telno");
-
                 $("#deleteform").fadeIn();
 
                 $("#deleteform").addClass('model-open');
-
-                // $("#upname").val(name);
-                // $("#upnic").val(nic);
-                // $("#upphone").val(telno);
-                // $("#upaddress").val(address);
                 $("#item2").val(id);
             });
             $(".Click-here").on('click', function() {
@@ -272,7 +230,10 @@
             $(".close-btn, .bg-overlay, .cancel").click(function() {
                 $(".custom-model-main").removeClass('model-open');
             });
-
+            $("#alertBox").click(function(){
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
+            });
             $("#add").submit(function(e) {
                 e.preventDefault();
                 $(".custom-model-main").fadeOut();
@@ -286,7 +247,7 @@
                 });
                 var json = JSON.stringify(object);
                 console.log(json);
-                //$("#add").trigger("reset");
+                $("#add").trigger("reset");
                 $.ajax({
                     type: "POST",
                     url: "<?php echo API; ?>user",
@@ -307,116 +268,6 @@
                         alertGen("Unable to handle request.", 2);
                     }
                 });
-            });
-
-            $("#update").submit(function(e) {
-                e.preventDefault();
-                $("#updateform").fadeOut();
-                $("#updateform").removeClass('model-open');
-                var str = [];
-                var formElement = document.querySelector("#update");
-                var formData = new FormData(formElement);
-                var object = {};
-                formData.forEach(function(value, key) {
-                    object[key] = value;
-                });
-                $("#update").trigger('reset');
-                var json = JSON.stringify(object);
-                console.log(json);
-                //$("#add").trigger("reset");
-                $.ajax({
-                    type: "PUT",
-                    url: "<?php echo API; ?>user/" + id,
-                    data: json,
-                    headers: {
-                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                    },
-                    cache: false,
-                    success: function(result) {
-                        $('#trow').empty();
-                        getResponsible();
-                        location.reload();
-                        if (result.code == 806) {
-                            alertGen("Record Added Successfully!", 1);
-                        } else {
-                            alertGen("Unable to handle request.", 2);
-                        }
-                    },
-                    error: function(err) {
-                        alertGen("Something went wrong.", 3);
-                        console.log(err);
-                    }
-                });
-            });
-
-            $("#delete-confirm").submit(function(e) {
-                e.preventDefault();
-                $("#deleteform").fadeOut();
-                $("#deleteform").removeClass('model-open');
-                var str = [];
-                //var array = {'key':'ABCD'}
-                var object = {};
-                var id = document.getElementById("item2").value;
-                object["id"] = id;
-                var json = JSON.stringify(object);
-                console.log(json);
-                $.ajax({
-                    type: "DELETE",
-                    url: "<?php echo API; ?>user/" + id,
-                    data: json,
-                    headers: {
-                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                    },
-                    cache: false,
-                    success: function(result) {
-                        $('#trow').empty();
-                        getResponsible();
-                        location.reload();
-                        if (result.code == 806) {
-                            alertGen("Record Added Successfully!", 1);
-                        } else {
-                            alertGen("Unable to handle request.", 2);
-                        }
-                    },
-                    error: function(err) {
-                        alertGen("Something went wrong.", 3);
-                        console.log(err);
-                    }
-                });
-            });
-            $('#District').change(function() {
-                var val = $(this).val();
-                var divOptions = "<option value=''>Select Division</option>";
-                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
-                    $.each(result, function(i, district) {
-                        if (district.dsId == val) {
-                            $.each(district.division, function(j, division) {
-                                divOptions += "<option value='" + division.dvId + "'>" + division.name + "</option>";
-                            })
-                        }
-                    });
-                    $('#Division').html(divOptions);
-                })
-            });
-
-            $('#Division').change(function() {
-                var div = $(this).val();
-                var dist = $('#District').val();
-                var gnOptions = "<option value=''>Select GNDivision</option>";
-                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
-                    $.each(result, function(i, district) {
-                        if (district.dsId == dist) {
-                            $.each(district.division, function(j, division) {
-                                if (division.dvId == div) {
-                                    $.each(division.gnArea, function(k, gnArea) {
-                                        gnOptions += "<option value='" + gnArea.gndvId + "'>" + gnArea.name + "</option>";
-                                    })
-                                }
-                            })
-                        }
-                    });
-                    $('#Gndivision').html(gnOptions);
-                })
             });
         });
 
@@ -495,8 +346,8 @@
 
         getInventorymgr();
         var output;
+
         function getInventorymgr() {
-            // var object = {};
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>inventorymgr",
@@ -507,20 +358,19 @@
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
+            console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
 
             for (var i = 0; i < output.length; i++) {
                 let obj = output[i];
-                // console.log(obj);
                 let row = table.insertRow(-1);
                 let cell1 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
                 let cell5 = row.insertCell(-1);
-
+                let cell6 = row.insertCell(-1);
                 var attribute = document.createElement("a");
                 attribute.id = obj['responsibleId'];
                 // attribute.href = "";
@@ -542,15 +392,12 @@
                 attribute2.name = "delete";
                 attribute2.innerHTML = "Delete";
 
-                cell1.innerHTML = obj['inventorymgrfName'];
-                cell1.innerHTML = obj['inventorymgrlName'];
-                cell2.innerHTML = obj['inventorymgrNIC'];
-                cell2.innerHTML = obj['inventorymgremail'];
-                cell3.innerHTML = obj['inventorymgrAddress'];
-                cell4.innerHTML = obj['inventorymgrTelNo'];
-                cell4.innerHTML = obj['inventorymgrInventory'];
-                var attribute3 = document.createElement("span");
-                attribute3.innerHTML = " ";
+                cell1.innerHTML = obj['empName'];
+                cell2.innerHTML = obj['empEmail'];
+                cell3.innerHTML = obj['empAddress'];
+                cell4.innerHTML = obj['empTele'];
+                cell5.innerHTML = obj['assignedDate'];
+                cell6.innerHTML = obj['inventorymgrTelNo'];
                 cell5.appendChild(attribute);
                 cell5.appendChild(attribute3);
                 cell5.appendChild(attribute2);
@@ -558,9 +405,6 @@
                 // console.log(attribute2);
             }
         }
-
-
-        // search
 
         (function() {
             var showResults;
@@ -580,8 +424,8 @@
             });
         }.call(this));
 
-        function filterInventory() {
-            output = $.parseJSON($.ajax({
+        function getInventory() {
+            var inventory = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>inventory/name",
                 dataType: "json",
@@ -591,21 +435,11 @@
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
-            var select = document.getElementById("inventory");
-
-            for (var i = 0; i < output.length; i++) {
-                //console.log(i);
-                var opt = document.createElement('option');
-                opt.value = output[i]['inventoryid'];
-                opt.innerHTML = output[i]['inventoryAddress'];
-                select.appendChild(opt);
-
-
-            }
+            console.log(inventory.inventoryAddress);
+            //document.getElementById("inventory").value = inventory.inventoryAddress;
+            document.getElementById("inventory").setAttribute('value', inventory.inventoryAddress);
         }
-        filterInventory();
-
+        getInventory();
 
         $(function() {
             $('#user_role').change(function() {

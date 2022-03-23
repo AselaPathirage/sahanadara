@@ -206,7 +206,7 @@ $array = explode("/", $_GET["url"]);
                                             <th style="width: 10%;"></th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody id='trow'></tbody>
                                 </table>
                             </div>
                             <div style="float: right;width:30%">
@@ -328,6 +328,9 @@ $array = explode("/", $_GET["url"]);
 					success: function(result) {
                         if(result.code==806){
                             $("#add").trigger('reset');
+                            $('#trow').empty();
+                            sessionStorage.clear();
+                            document.getElementById("safeHouseId").disabled = 'false';
                             alertGen("Record Added Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);

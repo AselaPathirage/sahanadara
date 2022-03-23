@@ -39,7 +39,7 @@
             <div class="row">
                 <div class="col6">
                     <div class="space"></div>
-                    <h1 class="heading_landing">Staff</h1>
+                    <h1 class="heading_landing" id="topic1">Staff</h1>
                     <div class="container aboutsec">
                         <img src="<?php echo HOST; ?>/public/assets/img/staff.jpg" alt="" style="border-radius: 5px;width:75%;">
                     </div>
@@ -47,27 +47,27 @@
                 <div class="col6">
                     <div class="space"></div>
                     <div class="staff_bluebox">
-                        <h1 class="heading_landing">Welcome </h1>
-                        <p>Enter your username and password</p>
+                        <h1 class="heading_landing" id="welcome">Welcome </h1>
+                        <p id="paragraph">Enter your username and password</p>
                         <div class="row-content">
                             <div class="container">
                                 <form action="<?php echo HOST; ?>/Handler/loginHandle" method="post">
-                                    <h2>Login</h2>
+                                    <h2 id="header">Login</h2>
                                     <?php
                                         if(isset($_GET['error'])){
                                             echo "<p style='color:red'>User Name or password is wrong. Please try again</p>";
                                         }
                                     ?>
-                                    <label for="username">Username</label>
+                                    <label for="username" id="username">Username</label>
                                     <input type="text" id="username" name="username" required />
 
-                                    <label for="password">Password</label>
+                                    <label for="password" id="password">Password</label>
                                     <input type="password" id="password" name="password" required />
                                     <br>
                                     <div class="login-bar">
-                                        <input type="submit" name="submit" value="Login" class="btn-login" />
+                                        <input type="submit" name="submit" value="Login" class="btn-login" id="button"/>
 
-                                        <a href="<?php echo HOST; ?>forget" class="forget-password">Forget Password?</a>
+                                        <a href="<?php echo HOST; ?>forget" class="forget-password" id="link">Forget Password?</a>
                                     </div>
                                 </form>
                             </div>
@@ -113,6 +113,14 @@
                 }
 
                 //body items
+                document.getElementById("topic1").innerHTML= dataJson[sub].staff.topic1;
+                document.getElementById("welcome").innerHTML= dataJson[sub].staff.welcome;
+                document.getElementById("paragraph").innerHTML= dataJson[sub].staff.paragraph;
+                document.getElementById("header").innerHTML= dataJson[sub].staff.header;
+                document.getElementById("username").innerHTML= dataJson[sub].staff.username;
+                document.getElementById("password").innerHTML= dataJson[sub].staff.password;
+                document.getElementById("button").innerHTML= dataJson[sub].staff.button;
+                document.getElementById("link").innerHTML= dataJson[sub].staff.link;
 
                 //console.log(dataJson);
             }catch (e) {
@@ -122,9 +130,17 @@
                 document.getElementById("about").innerHTML="About";
                 document.getElementById("help").innerHTML="Help";
                 document.getElementById("donate").innerHTML="Donate";
-                document.getElementById("staff").innerHTML="Donate";
+                document.getElementById("staff").innerHTML="Staff";
 
                 //body items
+                document.getElementById("topic").innerHTML= "Staff";
+                document.getElementById("welcome").innerHTML= "Welcome";
+                document.getElementById("paragraph").innerHTML= "Enter your username and password";
+                document.getElementById("header").innerHTML= "Login";
+                document.getElementById("username").innerHTML= "Username";
+                document.getElementById("password").innerHTML= "Password";
+                document.getElementById("button").innerHTML= "Login";
+                document.getElementById("link").innerHTML= "Forget Password?";
             }
         };
     </script>

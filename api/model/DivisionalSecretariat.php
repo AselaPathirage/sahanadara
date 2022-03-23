@@ -105,6 +105,50 @@ class DivisionalSecretariat extends Employee
         $json = json_encode($results);
         echo $json;
     }
+    public function getNotice(array $data){
+        global $errorCode;
+        $userId = $data['userId'];
+        $division = $this->getDivision($userId);
+        $division = $division['id'];
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id=Notice::getId($id);
+            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName,safehousecontact.safeHouseTelno AS contact FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.recordId = $id AND safehousecontact.safeHouseID=safehouse.safeHouseID  AND donationreqnotice.appovalStatus <> 'd' AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC,donationreqnotice.recordId ASC;";
+        }else{
+            $sql = "SELECT donationreqnotice.*,safehouse.safeHouseName,safehousecontact.safeHouseTelno AS contact FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID = donationreqnotice.safehouseId AND donationreqnotice.appovalStatus <> 'd' AND safehousecontact.safeHouseID=safehouse.safeHouseID AND  donationreqnotice.safehouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $division) ORDER BY CASE WHEN appovalStatus ='a' THEN 1 WHEN appovalStatus ='n' THEN 2 WHEN appovalStatus ='u' THEN 3 ELSE 4 END DESC,donationreqnotice.recordId ASC;";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $sql = "SELECT noticeitem.itemName,noticeitem.quantitity FROM noticeitem WHERE noticeitem.noticeId =".$r['recordId'];
+            $itemList = $this->connection->query($sql);
+            $r['item'] = array();
+            while($row = $itemList-> fetch_assoc()) {
+                $sql = "SELECT unit.unitName FROM item,unit WHERE item.unitType = unit.unitId AND item.itemName LIKE '%".$row['itemName']."%' LIMIT 1";
+                $query = $this->connection->query($sql);
+                if($query->num_rows==0){
+                    $unit = "Units";
+                }else{
+                    $unit = $query-> fetch_assoc()['unitName'];
+                }
+                $temp = array("item"=>$row['itemName'],"unit"=>$unit,"quantity"=>$row['quantitity']);
+                array_push($r['item'],$temp);
+            }
+
+            $r['recordId'] = Notice::getNoticeCode($r['recordId']);
+            $r['safehouseId'] = SafeHouse::getSafeHouseCode($r['safehouseId']);
+            if($r['appovalStatus']== 'a'){
+                $r['appovalStatus'] = "Approved"; 
+            }else if($r['appovalStatus']== 'u'){
+                $r['appovalStatus'] = "Need Updates";
+            }else{
+                $r['appovalStatus'] = "Pending";
+            }
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
     public function filterBorrowRequests(array $data){
         global $errorCode;
         $uid = $data['userId'];

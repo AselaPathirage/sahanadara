@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 23, 2022 at 10:01 AM
+-- Generation Time: Mar 23, 2022 at 01:49 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -100,6 +100,73 @@ INSERT INTO `alertdisdivgn` (`alertId`, `dsId`, `dvId`, `gndvId`) VALUES
 (5, 3, 10, 5),
 (6, 3, 10, 5),
 (8, 3, 10, 5);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deathcompensation`
+--
+
+CREATE TABLE `deathcompensation` (
+  `deathId` int(11) NOT NULL,
+  `gndvId` int(5) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `disaster` varchar(50) DEFAULT NULL,
+  `disasterdate` date DEFAULT NULL,
+  `deathdate` date DEFAULT NULL,
+  `dname` varchar(50) DEFAULT NULL,
+  `dnic` varchar(50) DEFAULT NULL,
+  `daddress` varchar(50) DEFAULT NULL,
+  `doccupation` varchar(50) DEFAULT NULL,
+  `aname` varchar(50) DEFAULT NULL,
+  `anic` varchar(50) DEFAULT NULL,
+  `arelationship` varchar(50) DEFAULT NULL,
+  `dvapproved` varchar(1) DEFAULT 'p',
+  `dvremarks` varchar(50) DEFAULT NULL,
+  `disapproved` varchar(1) DEFAULT 'p',
+  `disremarks` varchar(50) DEFAULT NULL,
+  `dmcapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `dmcremarks` varchar(50) DEFAULT '',
+  `atelno` int(10) DEFAULT NULL,
+  `collected` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deathcompensation`
+--
+
+INSERT INTO `deathcompensation` (`deathId`, `gndvId`, `timestamp`, `disaster`, `disasterdate`, `deathdate`, `dname`, `dnic`, `daddress`, `doccupation`, `aname`, `anic`, `arelationship`, `dvapproved`, `dvremarks`, `disapproved`, `disremarks`, `dmcapproved`, `dmcremarks`, `atelno`, `collected`) VALUES
+(8, 5, '2022-03-21 23:43:50', 'rterty', '2022-03-16', '2022-03-02', 'wert', '245245', 'No. 252D,\nAnanda Maithree Rd,\nBellapitiya', 'wertwert', 'wertewrt', '523452345', 'Husband', 'p', NULL, 'a', 'asas', 'a', 'asdfdf sssssss', 2147483647, 1),
+(11, 5, '2022-03-22 16:58:58', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'a', 'asdfdf sssssss', 'p', NULL, 'p', '', 0, 0),
+(12, 5, '2022-03-19 08:06:55', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0),
+(13, 5, '2022-03-19 08:25:24', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0),
+(14, 5, '2022-03-19 08:33:49', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0),
+(15, 5, '2022-03-19 08:36:59', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deathheir`
+--
+
+CREATE TABLE `deathheir` (
+  `heirid` int(11) NOT NULL,
+  `deathid` int(11) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `bank` varchar(20) DEFAULT NULL,
+  `branch` varchar(20) DEFAULT NULL,
+  `accno` int(20) DEFAULT NULL,
+  `nic` varchar(20) DEFAULT NULL,
+  `relationship` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deathheir`
+--
+
+INSERT INTO `deathheir` (`heirid`, `deathid`, `name`, `bank`, `branch`, `accno`, `nic`, `relationship`) VALUES
+(3, 8, 'Asela Devinda Pathir', 'rth', 'ertherth', 2147483647, '2345', 'rewert'),
+(4, 8, 'University of Colomb', 'wertwert', 'wertwert', 3452345, '23452345', 'wertwert');
 
 -- --------------------------------------------------------
 
@@ -971,6 +1038,129 @@ INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `propapp`
+--
+
+CREATE TABLE `propapp` (
+  `propcomId` int(11) NOT NULL,
+  `detype` varchar(50) DEFAULT NULL,
+  `deev` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propapp`
+--
+
+INSERT INTO `propapp` (`propcomId`, `detype`, `deev`) VALUES
+(1, 'werwer', 234234),
+(2, '', 0),
+(3, 'sdfsdf', 45),
+(4, 'sadfadsf', 34),
+(5, 'wer', 44),
+(5, '234234', 34);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `propcomprop`
+--
+
+CREATE TABLE `propcomprop` (
+  `propcomId` int(11) NOT NULL,
+  `dptype` varchar(20) DEFAULT NULL,
+  `dpdes` varchar(50) DEFAULT NULL,
+  `dpta` double DEFAULT NULL,
+  `dpda` double DEFAULT NULL,
+  `dpvod` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propcomprop`
+--
+
+INSERT INTO `propcomprop` (`propcomId`, `dptype`, `dpdes`, `dpta`, `dpda`, `dpvod`) VALUES
+(1, 'Roof', '4545', 45, 45, NULL),
+(1, 'Foundation', '45erert', 45, 5, NULL),
+(1, 'Floor', '', 0, 0, NULL),
+(2, 'Floor', '', 0, 0, NULL),
+(3, 'Floor', 'asdfadf', 34343434, 232323, 23),
+(3, 'Roof', '343', 0, 34, 0),
+(4, 'Floor', 'asdf', 34, 345, 45),
+(4, 'Floor', 'rtrt', 0, 45, 0),
+(5, 'Floor', 'asdf', 23, 234, 23),
+(5, 'Floor', 'afdfasdf', 234, 234, 34);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `propertycompensation`
+--
+
+CREATE TABLE `propertycompensation` (
+  `propcomId` int(11) NOT NULL,
+  `gndvId` int(5) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `disaster` varchar(50) DEFAULT NULL,
+  `aname` varchar(50) DEFAULT NULL,
+  `anic` varchar(20) DEFAULT NULL,
+  `aaddress` varchar(50) DEFAULT NULL,
+  `atpnumber` int(20) DEFAULT NULL,
+  `arelationship` varchar(50) DEFAULT NULL,
+  `tla` double DEFAULT NULL,
+  `htype` varchar(50) DEFAULT NULL,
+  `totcomp` double DEFAULT NULL,
+  `hname` varchar(50) DEFAULT NULL,
+  `hbank` varchar(50) DEFAULT NULL,
+  `hacc` varchar(50) DEFAULT NULL,
+  `hbranch` varchar(50) DEFAULT NULL,
+  `collected` tinyint(1) NOT NULL DEFAULT 0,
+  `dvapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `dvremarks` varchar(50) DEFAULT NULL,
+  `disapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `disremarks` varchar(50) DEFAULT NULL,
+  `dmcapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `dmcremarks` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propertycompensation`
+--
+
+INSERT INTO `propertycompensation` (`propcomId`, `gndvId`, `timestamp`, `disaster`, `aname`, `anic`, `aaddress`, `atpnumber`, `arelationship`, `tla`, `htype`, `totcomp`, `hname`, `hbank`, `hacc`, `hbranch`, `collected`, `dvapproved`, `dvremarks`, `disapproved`, `disremarks`, `dmcapproved`, `dmcremarks`) VALUES
+(1, 5, '2022-03-22 20:46:13', '6', '1', '2', '33', 4, '5', 3, 'Storey', 20000, 'Asela Devinda Pathirage', 'wqer', '234234234', 'wer', 0, 'a', NULL, 'a', 'sdfasdfsdfsdf', 'p', ''),
+(2, 5, '2022-03-23 06:12:43', '', 'dfgdfgdfg', '', '', 0, '', 0, 'Single building', 0, '', '', '', '', 0, 'a', 'asdfdf sssssss', 'a', 'asdfdf sssssss', 'p', NULL),
+(3, 5, '2022-03-20 05:57:49', '2345245asdfadf', 'asdfsdf', '2435345', 'No. 252D,\nAnanda Maithree Rd,\nBellapitiya', 767877818, 'asdfadf', 4555, 'Single building', 147, 'Asela Devinda Pathirage', 'dfgdfg', '234234234', 'dfgdfg', 0, 'p', NULL, 'p', NULL, 'p', NULL),
+(4, 5, '2022-03-22 20:47:00', '', 'aerf', 'asdf', '', 0, '', 0, 'Single building', 180, 'asdf', 'asdf', '234', 'sadf', 1, 'a', NULL, 'a', NULL, 'a', 'sadfsdf'),
+(5, 5, '2022-03-20 06:18:03', '', '', '', '', 0, '', 0, 'Single building', 203, 'Asela Devinda Pathirage', 'dfg', '234234234', 'sdf', 0, 'p', NULL, 'p', NULL, 'p', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `propservice`
+--
+
+CREATE TABLE `propservice` (
+  `propcomId` int(11) NOT NULL,
+  `dstype` varchar(50) DEFAULT NULL,
+  `dsev` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propservice`
+--
+
+INSERT INTO `propservice` (`propcomId`, `dstype`, `dsev`) VALUES
+(1, 'werqwerqwer', 234),
+(1, 'qwerwer', 234234),
+(2, '', 0),
+(3, 'sdfsdf', 45),
+(4, 'asdfsadf', 56),
+(5, 'wer', 23),
+(5, 'sfsdf', 45);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `relief`
 --
 
@@ -1333,6 +1523,20 @@ ALTER TABLE `alertdisdivgn`
   ADD KEY `alertId` (`alertId`);
 
 --
+-- Indexes for table `deathcompensation`
+--
+ALTER TABLE `deathcompensation`
+  ADD PRIMARY KEY (`deathId`),
+  ADD KEY `fk_gndvId8` (`gndvId`);
+
+--
+-- Indexes for table `deathheir`
+--
+ALTER TABLE `deathheir`
+  ADD PRIMARY KEY (`heirid`),
+  ADD KEY `fk_deathId` (`deathid`);
+
+--
 -- Indexes for table `disaster`
 --
 ALTER TABLE `disaster`
@@ -1539,6 +1743,31 @@ ALTER TABLE `noticeitem`
   ADD PRIMARY KEY (`noticeId`,`itemName`);
 
 --
+-- Indexes for table `propapp`
+--
+ALTER TABLE `propapp`
+  ADD KEY `fk_propId4` (`propcomId`);
+
+--
+-- Indexes for table `propcomprop`
+--
+ALTER TABLE `propcomprop`
+  ADD KEY `fk_proId` (`propcomId`);
+
+--
+-- Indexes for table `propertycompensation`
+--
+ALTER TABLE `propertycompensation`
+  ADD PRIMARY KEY (`propcomId`),
+  ADD KEY `fk_gndvId9` (`gndvId`);
+
+--
+-- Indexes for table `propservice`
+--
+ALTER TABLE `propservice`
+  ADD KEY `fk_propId2` (`propcomId`);
+
+--
 -- Indexes for table `relief`
 --
 ALTER TABLE `relief`
@@ -1659,6 +1888,18 @@ ALTER TABLE `admin`
 --
 ALTER TABLE `alert`
   MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `deathcompensation`
+--
+ALTER TABLE `deathcompensation`
+  MODIFY `deathId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `deathheir`
+--
+ALTER TABLE `deathheir`
+  MODIFY `heirid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `disaster`
@@ -1793,6 +2034,12 @@ ALTER TABLE `item`
   MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
+-- AUTO_INCREMENT for table `propertycompensation`
+--
+ALTER TABLE `propertycompensation`
+  MODIFY `propcomId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT for table `relief`
 --
 ALTER TABLE `relief`
@@ -1870,6 +2117,18 @@ ALTER TABLE `alertdisdivgn`
   ADD CONSTRAINT `fk_dis` FOREIGN KEY (`dsId`) REFERENCES `district` (`dsId`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_div` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_gn` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `deathcompensation`
+--
+ALTER TABLE `deathcompensation`
+  ADD CONSTRAINT `fk_gndvId8` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`);
+
+--
+-- Constraints for table `deathheir`
+--
+ALTER TABLE `deathheir`
+  ADD CONSTRAINT `fk_deathId` FOREIGN KEY (`deathid`) REFERENCES `deathcompensation` (`deathId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `distributeitem`
@@ -2002,6 +2261,30 @@ ALTER TABLE `login`
 --
 ALTER TABLE `noticeitem`
   ADD CONSTRAINT `noticeitem_ibfk_1` FOREIGN KEY (`noticeId`) REFERENCES `donationreqnotice` (`recordId`);
+
+--
+-- Constraints for table `propapp`
+--
+ALTER TABLE `propapp`
+  ADD CONSTRAINT `fk_propId4` FOREIGN KEY (`propcomId`) REFERENCES `propertycompensation` (`propcomId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `propcomprop`
+--
+ALTER TABLE `propcomprop`
+  ADD CONSTRAINT `fk_proId` FOREIGN KEY (`propcomId`) REFERENCES `propertycompensation` (`propcomId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `propertycompensation`
+--
+ALTER TABLE `propertycompensation`
+  ADD CONSTRAINT `fk_gndvId9` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `propservice`
+--
+ALTER TABLE `propservice`
+  ADD CONSTRAINT `fk_propId2` FOREIGN KEY (`propcomId`) REFERENCES `propertycompensation` (`propcomId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `relief`

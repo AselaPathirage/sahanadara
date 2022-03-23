@@ -379,7 +379,7 @@
                 document.getElementById("about").innerHTML="About";
                 document.getElementById("help").innerHTML="Help";
                 document.getElementById("donate").innerHTML="Donate";
-                document.getElementById("staff").innerHTML="Donate";
+                document.getElementById("staff").innerHTML="Staff";
 
                 //body items
                 document.getElementById("header").innerHTML= "S A H A N A D A R A";

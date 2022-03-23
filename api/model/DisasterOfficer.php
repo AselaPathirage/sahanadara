@@ -367,33 +367,73 @@ class DisasterOfficer extends Employee
         // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
         $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN divisionaloffice divoff ON divoff.dvId=g.dvId WHERE divoff.disasterManager=" . $uid . ";";
         $excute = $this->connection->query($sql);
-        // $results = array();
-        $r = $excute->fetch_assoc();
-        // while ($r = $excute->fetch_assoc()) {
-        //     $results[] = $r;
-        // }
-        $json = json_encode($r);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
         echo $json;
     }
 
-    // public function filterSafehouse(array $data)
-    // {
-    //     $uid = $data['userId'];
-    //     if (count($data['receivedParams']) == 1) {
+    public function deleteResponsible(array $data)
+    {
+        global $errorCode;
+        if (count($data['receivedParams']) == 1) {
 
-    //         $sql = "SELECT s.* FROM safeHouse s WHERE s.safeHouseID IN (SELECT gn.safeHouseID FROM gndivision gn,divisionaloffice dv, safehouse sh WHERE gn.dvId = dv.dvId AND dv.disasterManager = 1 AND sh.isUsing = 'n' AND sh.safeHouseID = gn.safeHouseID);";
+            $responsiblePersonID = $data['receivedParams'][0];
+            $sql = "DELETE FROM `responsibleperson` WHERE responsiblePersonID =$responsiblePersonID ";
+            $this->connection->query($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+    public function updateResponsible(array $data)
+    {
+        global $errorCode;
+        if (count($data['receivedParams']) == 1) {
+            $uid = $data['userId'];
+            $fname = $data['upfirstname'];
+            $lname = $data['uplastname'];
+            $nic = $data['upNIC'];
+            $email = $data['upemail'];
+            $address = $data['upaddress'];
+            $telno = $data['upTP_number'];
+            $safehouse = $data['upsafehouse'];
+            $responsiblePersonID = $data['receivedParams'][0];
+
+            $name = $data['upfirstname'] . " " . $data['uplastname'];
+
+
+            $sql = "UPDATE `responsibleperson` SET `empName`='$name', `empAddress`='$address',`empTele`='$telno' WHERE responsiblePersonID =$responsiblePersonID ";
+            $this->connection->query($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+    public function filtermySafehouse(array $data)
+    {
+        $uid = $data['userId'];
+        if (count($data['receivedParams']) == 1) {
+
+            $sql = "SELECT s.* FROM safeHouse s WHERE s.safeHouseID IN (SELECT gn.safeHouseID FROM gndivision gn,divisionaloffice dv, safehouse sh WHERE gn.dvId = dv.dvId AND dv.disasterManager = 1 AND sh.isUsing = 'n' AND sh.safeHouseID = gn.safeHouseID);";
 
 
 
-    //         $excute = $this->connection->query($sql);
-    //         $results = array();
-    //         while ($r = $excute->fetch_assoc()) {
-    //             $results[] = $r;
-    //         }
-    //         $json = json_encode($results);
-    //         echo $json;
-    //     }
-    // }
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while ($r = $excute->fetch_assoc()) {
+                $results[] = $r;
+            }
+            $json = json_encode($results);
+            echo $json;
+        }
+    }
 
     public function getSafehouseCount(array $data)
     {
@@ -414,7 +454,7 @@ class DisasterOfficer extends Employee
     public function addIncidents(array $data)
     {   
         global $errorCode;
-        $uid = $data['userId'];
+        //$uid = $data['userId'];
         $title = $data['title'];
         $description = $data['description'];
         $gndvId = $data['gnDiv'];
@@ -422,13 +462,14 @@ class DisasterOfficer extends Employee
         //$sql = "SELECT d.* FROM division d, divisionaloffice divoff WHERE d.dvId=divoff.dvId AND divoff.disasterManager=$uid";
         // $excute = $this->connection->query($sql);
         // $r = $excute-> fetch_assoc();
-        $sql = "INSERT INTO incident (title, description, dvId) VALUES ('$title','$description'," . $r['dvId'] . ");";
+        $sql = "INSERT INTO incident (title, description) VALUES ('$title','$description');";
         $this->connection->query($sql);
         $result = array();
         $sql = "SELECT LAST_INSERT_ID();";
         $execute = $this->connection->query($sql);
         $r = $execute->fetch_assoc();
         $incidentId = $r["LAST_INSERT_ID()"];
+        $sql = "INSERT INTO `incidentgn`(`incidentId`, `gndvId`) VALUES ('$incidentId','$gndvId');";
         $this->connection->query($sql);
         //$sql = "INSERT INTO `incidentgn`(`incidentId`, `gndvId`) VALUES (".$r['incidentId'].",'$')";
     }   
@@ -441,7 +482,7 @@ class DisasterOfficer extends Employee
         // $r = $excute->fetch_assoc();
         // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
         // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
-        $sql = "SELECT s.*,t.* FROM incident s JOIN incidentgn t ON t.incidentId=s.incidentId JOIN gndivision g ON g.gndvId=t.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY s.isActive DESC, s.incidentId DESC;";
+        $sql = "SELECT s.*,t.*,g.* FROM incident s JOIN incidentgn t ON t.incidentId=s.incidentId JOIN gndivision g ON g.gndvId=t.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY s.isActive DESC, s.incidentId DESC;";
         $excute = $this->connection->query($sql);
         $results = array();
         // $r = $excute->fetch_assoc();

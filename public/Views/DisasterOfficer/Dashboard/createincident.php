@@ -311,7 +311,7 @@
                 attribute.innerHTML = "Update";
                 attribute.setAttribute("data-title", obj['title'])
                 attribute.setAttribute("data-description", obj['description'])
-                attribute.setAttribute("data-gndivision", obj['gndivision'])
+                attribute.setAttribute("data-gndivision", obj['gnDvName'])
                 var attribute2 = document.createElement("a");
 
                 attribute2.id = obj['incidentId'];
@@ -322,7 +322,7 @@
 
                 cell1.innerHTML = obj['title'];
                 cell2.innerHTML = obj['description'];
-                cell3.innerHTML = obj['gndivision'];
+                cell3.innerHTML = obj['gnDvName'];
                 var attribute3 = document.createElement("span");
                 attribute3.innerHTML = " ";
                 cell4.appendChild(attribute);

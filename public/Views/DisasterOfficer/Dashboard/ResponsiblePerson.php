@@ -250,7 +250,6 @@
                 $("#upaddress").val(address);
                 $("#upTP_number").val(telno);
                 $("#upsafehouse").val(safehouse);
-
                 $("#item").val(id);
             });
             $(".btn_delete").on('click', function() {
@@ -450,7 +449,7 @@
                 //$("#add").trigger("reset");
                 $.ajax({
 					type: "PUT",
-					url: "<?php echo API; ?>user/" + id,
+					url: "<?php echo API; ?>responsible/" + id,
 					data: json,
                     headers: {
                         'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
@@ -485,17 +484,18 @@
                 console.log(json);
                 $.ajax({
 					type: "DELETE",
-					url: "<?php echo API; ?>user/" + id,
+					url: "<?php echo API; ?>responsible/" + id,
 					data: json,
                     headers: {
-                        'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'
+                    },
 					cache: false,
 					success: function(result) {
                         $('#trow').empty();
                         getResponsible();
                         location.reload();
                         if(result.code==806){
-                            alertGen("Record Added Successfully!",1);
+                            alertGen("Record Updated Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);
                         }
@@ -523,7 +523,7 @@
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
+            console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
 
@@ -584,7 +584,7 @@
             });
         }.call(this));
 
-        function filterSafehouse(){
+        function filtermySafehouse(){
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>safehouse/name",
@@ -608,7 +608,7 @@
 
             }
         }
-        filterSafehouse();
+        filtermySafehouse();
 
       
         $(function() {

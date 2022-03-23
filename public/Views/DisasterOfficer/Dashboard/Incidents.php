@@ -8,7 +8,9 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>

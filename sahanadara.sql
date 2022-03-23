@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 12:45 PM
+-- Generation Time: Mar 23, 2022 at 10:01 AM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -157,6 +157,15 @@ CREATE TABLE `distributeitem` (
   `approvalStatus` char(1) DEFAULT 'p'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `distributeitem`
+--
+
+INSERT INTO `distributeitem` (`recordId`, `safeHouseId`, `createdDate`, `approvalStatus`) VALUES
+(1, 1, '2022-03-22 17:16:37', 'p'),
+(2, 3, '2022-03-23 01:28:20', 'p'),
+(3, 3, '2022-03-23 01:28:20', 'p');
+
 -- --------------------------------------------------------
 
 --
@@ -167,6 +176,14 @@ CREATE TABLE `distributeitemrecord` (
   `recordId` int(3) NOT NULL,
   `itemRecord` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `distributeitemrecord`
+--
+
+INSERT INTO `distributeitemrecord` (`recordId`, `itemRecord`) VALUES
+(1, 4),
+(3, 11);
 
 -- --------------------------------------------------------
 
@@ -181,13 +198,6 @@ CREATE TABLE `distributeservice` (
   `approvalStatus` char(1) DEFAULT 'p',
   `serviceRequestId` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `distributeservice`
---
-
-INSERT INTO `distributeservice` (`recordId`, `inventoryId`, `createdDate`, `approvalStatus`, `serviceRequestId`) VALUES
-(1, 1, '2022-03-22 17:08:48', 'p', 3);
 
 -- --------------------------------------------------------
 
@@ -440,11 +450,17 @@ CREATE TABLE `donationreqnotice` (
 
 INSERT INTO `donationreqnotice` (`recordId`, `safehouseId`, `title`, `numOfFamilies`, `numOfPeople`, `createdDate`, `approvedDate`, `note`, `appovalStatus`, `remark`) VALUES
 (1, 1, '12', 12, 12, '2022-03-17 22:28:32', NULL, 'yggiu', 'd', NULL),
-(2, 2, 'test', 20, 20, '2022-03-18 15:56:34', NULL, '5ef', 'n', NULL),
-(4, 1, 'test 2', 12, 35, '2022-03-18 16:00:12', NULL, 'err', 'n', NULL),
-(5, 1, 'test 2', 5, 25, '2022-03-19 21:20:41', NULL, 'tessgs sh', 'n', NULL),
-(6, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-20 00:24:12', NULL, '', 'n', NULL),
-(9, 1, 'Bolossagama Safe House Need Your Donations', 1, 5, '2022-03-22 14:14:11', NULL, '', 'n', NULL);
+(2, 2, 'test', 20, 20, '2022-03-18 15:56:34', NULL, '5ef', 'd', NULL),
+(4, 1, 'test 2', 12, 35, '2022-03-18 16:00:12', NULL, 'err', 'd', NULL),
+(5, 1, 'test 2', 5, 25, '2022-03-19 21:20:41', NULL, 'tessgs sh', 'd', NULL),
+(6, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-20 00:24:12', NULL, '', 'd', NULL),
+(9, 1, 'Bolossagama Safe House Need Your Donations', 1, 5, '2022-03-22 14:14:11', NULL, '', 'd', NULL),
+(10, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 17:50:00', NULL, '', 'd', NULL),
+(11, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 17:51:04', NULL, '', 'd', NULL),
+(12, 1, 'Bolossagama Safe House Need Your Donations', 1, 5, '2022-03-22 17:57:35', NULL, '', 'n', NULL),
+(13, 1, 'test', 12, 30, '2022-03-22 19:01:16', NULL, '', 'd', NULL),
+(14, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 19:35:38', NULL, '', 'n', NULL),
+(15, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 19:47:35', NULL, '', 'n', NULL);
 
 -- --------------------------------------------------------
 
@@ -808,7 +824,16 @@ CREATE TABLE `inventoryitem` (
 INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `transactionDate`, `remarks`) VALUES
 (1, 6, 1, '50.00', '2022-03-21 16:48:05', ''),
 (2, 6, 1, '-10.00', '2022-03-22 16:48:12', ''),
-(3, 6, 1, '-10.00', '2022-03-22 17:08:48', '');
+(3, 6, 1, '-10.00', '2022-03-22 17:08:48', ''),
+(4, 6, 1, '-5.00', '2022-03-22 17:16:37', ''),
+(5, 4, 1, '50.00', '2022-03-21 17:17:12', ''),
+(6, 27, 1, '100.00', '2022-03-21 17:17:18', ''),
+(7, 7, 1, '2.00', '2022-03-21 17:17:24', ''),
+(8, 5, 1, '200.00', '2022-03-21 17:17:31', ''),
+(9, 1, 1, '1.00', '2022-03-21 17:17:39', ''),
+(10, 2, 1, '3.00', '2022-03-21 17:27:36', ''),
+(11, 2, 1, '-1.00', '2022-03-23 01:28:20', ''),
+(12, 27, 1, '-50.00', '2022-03-23 12:46:57', '');
 
 -- --------------------------------------------------------
 
@@ -824,15 +849,16 @@ CREATE TABLE `inventorymgtofficer` (
   `isAssigned` char(1) DEFAULT 'y',
   `assignedDate` datetime NOT NULL,
   `inventoryID` int(3) NOT NULL,
-  `empTele` char(10) NOT NULL
+  `empTele` char(10) NOT NULL,
+  `resignedDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `inventorymgtofficer`
 --
 
-INSERT INTO `inventorymgtofficer` (`inventoryMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `assignedDate`, `inventoryID`, `empTele`) VALUES
-(1, 'Naween Pasindu', 'Hene Gedara Hena,Ullala,Kamburupitiya', 'htnaweenpasindu@gmail.com', 'y', '2021-10-21 20:47:22', 1, '');
+INSERT INTO `inventorymgtofficer` (`inventoryMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `assignedDate`, `inventoryID`, `empTele`, `resignedDate`) VALUES
+(1, 'Naween Pasindu', 'Hene Gedara Hena,Ullala,Kamburupitiya', 'htnaweenpasindu@gmail.com', 'y', '2021-10-21 20:47:22', 1, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -933,7 +959,14 @@ INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
 (1, 'Tent', '10.00'),
 (4, 'Tent', '5.00'),
 (6, 'Boat', '1.00'),
-(9, 'Tent', '5.00');
+(9, 'Tent', '5.00'),
+(10, 'Boat', '0.00'),
+(11, 'Boat', '1.00'),
+(12, 'Tent', '5.00'),
+(13, 'Lentils', '20.00'),
+(13, 'Rice', '50.00'),
+(14, 'Boat', '1.00'),
+(15, 'Boat', '0.00');
 
 -- --------------------------------------------------------
 
@@ -1154,7 +1187,8 @@ INSERT INTO `safehousestatus` (`r_id`, `safehouseId`, `adultMale`, `adultFemale`
 (3, 1, 12, 12, 12, 12, 'test 2', '2022-03-16 12:16:00'),
 (4, 2, 15, 18, 6, 0, 'run', '2022-03-16 12:30:58'),
 (5, 1, 15, 18, 6, 0, '', '2022-03-16 12:31:55'),
-(6, 1, 2, 2, 1, 0, 'xddxg', '2022-03-16 19:57:15');
+(6, 1, 2, 2, 1, 0, 'xddxg', '2022-03-16 19:57:15'),
+(7, 1, 10, 12, 3, 0, '', '2022-03-23 13:21:46');
 
 -- --------------------------------------------------------
 
@@ -1175,12 +1209,16 @@ CREATE TABLE `safehousestatusrequesteditem` (
 
 INSERT INTO `safehousestatusrequesteditem` (`statusId`, `itemId`, `quantity`, `status`) VALUES
 (5, 1, '1.00', 'n'),
-(2, 2, '1.00', 'n'),
-(5, 3, '5.00', 'n'),
+(2, 2, '1.00', 's'),
+(5, 3, '5.00', 's'),
+(7, 3, '2.00', 'n'),
 (4, 5, '20.00', 'n'),
 (6, 5, '5.00', 'n'),
+(7, 5, '20.00', 'n'),
+(7, 6, '10.00', 'n'),
 (4, 7, '1.00', 'n'),
-(6, 7, '1.00', 'n');
+(6, 7, '1.00', 'n'),
+(7, 9, '2.00', 'n');
 
 -- --------------------------------------------------------
 
@@ -1192,13 +1230,6 @@ CREATE TABLE `servicedistributeitemrecord` (
   `recordId` int(3) NOT NULL,
   `itemRecordId` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `servicedistributeitemrecord`
---
-
-INSERT INTO `servicedistributeitemrecord` (`recordId`, `itemRecordId`) VALUES
-(1, 3);
 
 -- --------------------------------------------------------
 
@@ -1214,17 +1245,19 @@ CREATE TABLE `servicerequest` (
   `acceptedBy` int(3) DEFAULT NULL,
   `acceptedDate` datetime DEFAULT NULL,
   `requestingFrom` int(3) DEFAULT 0,
-  `note` varchar(200) DEFAULT NULL
+  `note` varchar(200) DEFAULT NULL,
+  `createdDate` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `servicerequest`
 --
 
-INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentStatus`, `acceptedBy`, `acceptedDate`, `requestingFrom`, `note`) VALUES
-(1, 3, '2022-03-23', 'p', NULL, NULL, 0, ''),
-(2, 2, '2022-03-31', 'r', NULL, NULL, 10, ''),
-(3, 4, '2022-03-29', 'p', NULL, NULL, 0, '');
+INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentStatus`, `acceptedBy`, `acceptedDate`, `requestingFrom`, `note`, `createdDate`) VALUES
+(1, 2, '2022-03-29', 'p', NULL, NULL, 0, '', '2022-03-23'),
+(2, 2, '2022-03-26', 'p', NULL, NULL, 0, '', '2022-03-23'),
+(3, 3, '2022-03-25', 'p', NULL, NULL, 0, '', '2022-03-23'),
+(4, 4, '2022-03-22', 'p', NULL, NULL, 0, '', '2022-03-23');
 
 -- --------------------------------------------------------
 
@@ -1245,12 +1278,12 @@ CREATE TABLE `servicerequestitem` (
 --
 
 INSERT INTO `servicerequestitem` (`r_id`, `itemId`, `quantity`, `acceptedBy`, `acceptedDate`) VALUES
-(1, 27, '50.00', NULL, NULL),
-(2, 28, '14.00', NULL, NULL),
-(3, 2, '2.00', NULL, NULL),
-(3, 6, '10.00', NULL, NULL),
-(3, 23, '5.00', NULL, NULL),
-(3, 27, '20.00', NULL, NULL);
+(1, 10, '1.00', NULL, NULL),
+(2, 1, '1.00', NULL, NULL),
+(3, 3, '4.00', NULL, NULL),
+(3, 5, '100.00', NULL, NULL),
+(3, 6, '20.00', NULL, NULL),
+(4, 8, '1.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1643,13 +1676,13 @@ ALTER TABLE `dismgtofficer`
 -- AUTO_INCREMENT for table `distributeitem`
 --
 ALTER TABLE `distributeitem`
-  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `distributeservice`
 --
 ALTER TABLE `distributeservice`
-  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -1697,7 +1730,7 @@ ALTER TABLE `dmc`
 -- AUTO_INCREMENT for table `donationreqnotice`
 --
 ALTER TABLE `donationreqnotice`
-  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `gndivision`
@@ -1745,7 +1778,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -1811,13 +1844,13 @@ ALTER TABLE `safehouse`
 -- AUTO_INCREMENT for table `safehousestatus`
 --
 ALTER TABLE `safehousestatus`
-  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
-  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `unit`

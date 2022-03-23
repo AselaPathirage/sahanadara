@@ -26,7 +26,7 @@ Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails"));
 Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
-Route::GET("safehouse/name", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
+Route::GET("safehouse/name", array("DisasterOfficer@filtermySafehouse", "InventoryManager@filterSafehouse"));
 Route::GET("safehouse/{safeHouseId}", array("DisasterOfficer@filterSafehouse","InventoryManager@filterSafehouse"));
 Route::GET("incident", array("GramaNiladari@getIncidents","DisasterOfficer@getIncidents"));
 Route::GET("incident/{id}", array("GramaNiladari@getIncidentById,DisasterOfficer@getIncidentById"));
@@ -115,6 +115,9 @@ Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
 
 Route::PUT("docompapprove", array("DisasterOfficer@approvecomp"));
 Route::PUT("docollected", array("DisasterOfficer@collectedcomp"));
+
+Route::PUT("responsible/{id}", array("DisasterOfficer@updateResponsible"));
+Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));

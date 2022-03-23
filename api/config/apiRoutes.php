@@ -8,7 +8,7 @@ DELETE - delete
 
 Route::GET("/", array("Home@creadits"));
 Route::GET("donation", array("Home@viewDonations"));
-Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice"));
+Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice","DivisionalSecretariat@getNotice"));
 Route::GET("notice/{id}", array("InventoryManager@getNotice","DisasterOfficer@getNotice"));
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));

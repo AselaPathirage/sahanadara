@@ -105,6 +105,64 @@ class DivisionalSecretariat extends Employee
         $json = json_encode($results);
         echo $json;
     }
+    public function commandBorrowRequests(array $data){
+        global $errorCode;
+        $userId = $data['userId'];
+        if(count($data['receivedParams'])==2){
+            $filter=$data['receivedParams'][0];
+            if(strtolower($filter)=='approve'){
+                $id=$data['receivedParams'][1];
+                if(str_contains(strtoupper($id),"GR")){
+                    $id = GoodsRequest::getId($id);
+                    $sql="UPDATE distributeitem SET approvalStatus='a' WHERE recordId=$id";
+                    $this->connection->query($sql);
+                }elseif(str_contains(strtoupper($id),"GT")){
+
+                }else{
+                    echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                    exit();
+                }
+                echo json_encode(array("code"=>$errorCode['success']));
+                exit();
+            }elseif(strtolower($filter)=='reject'){
+                $id=$data['receivedParams'][1];
+                if(str_contains(strtoupper($id),"GR")){
+                    $id = GoodsRequest::getId($id);
+                    $sql="UPDATE distributeitem SET approvalStatus='r' WHERE recordId=$id";
+                    $this->connection->query($sql);
+                    $sql="SELECT inventoryitem.* FROM inventoryitem WHERE inventoryitem.recId IN (SELECT distributeitemrecord.itemRecord FROM distributeitemrecord WHERE distributeitemrecord.recordId=$id)";
+                    $excute = $this->connection->query($sql);
+                    $sql="";
+                    while($r = $excute-> fetch_assoc()) {
+                        $itemId=$r['itemId'];
+                        $inventoryId=$r['inventoryId'];
+                        $quantity= -1*$r['quantity'];
+                        $remarks=$r['remarks'];
+                        $sql .="INSERT INTO inventoryitem(itemId,inventoryId,quantity,remarks) VALUES ($itemId,$inventoryId,$quantity,'$remarks');";
+                    }
+                    $this->connection->multi_query($sql);
+                }elseif(str_contains(strtoupper($id),"GT")){
+                    $id = GoodsTransfer::getId($id);
+                    $sql="";
+                    $excute = $this->connection->query($sql);
+                    $r = $excute-> fetch_assoc();
+                    $text=ServiceRequestNotice::getServiceRequestNoticeCode($r['createrID']);
+                    $id2=GoodsTransfer::getGoodsTransfer($r['recordId']);
+                }else{
+                    echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                    exit();
+                }
+                echo json_encode(array("code"=>$errorCode['success']));
+                exit();
+            }else{
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
     public function getNotice(array $data){
         global $errorCode;
         $userId = $data['userId'];

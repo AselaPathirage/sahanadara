@@ -155,12 +155,11 @@ Route::GET("borrowRequests/{id}", array("DivisionalSecretariat@filterBorrowReque
 Route::GET("divseccomp", array("DivisionalSecretariat@getCompensations"));
 Route::GET("divsecprop/{id}", array("DivisionalSecretariat@getProperty"));
 Route::GET("divsecdeath/{id}", array("DivisionalSecretariat@getDeath"));
-
-Route::PUT("divseccompapprove", array("DivisionalSecretariat@approvecomp"));
-
-Route::POST("fundraiser", array("DivisionalSecretariat@addFundraiser"));
 Route::GET("fundraiser", array("DivisionalSecretariat@getFundraiser"));
+Route::POST("fundraiser", array("DivisionalSecretariat@addFundraiser"));
+Route::PUT("divseccompapprove", array("DivisionalSecretariat@approvecomp"));
 Route::PUT("fundraiser/{id}", array("DivisionalSecretariat@updateFundraiser"));
+Route::PUT("borrowRequests/{command}/{requestId}", array("DivisionalSecretariat@commandBorrowRequests"));
 Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
 
 // District Sec

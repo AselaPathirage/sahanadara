@@ -116,7 +116,7 @@ $array = explode("/", $_GET["url"]);
                         </form>
                     </div>
                     <h4 id='stat'></h4>
-                    <div style="float: right;width:50%">
+                    <div style="float: right;width:50%" id="command">
                         <table style="border: none !important;width:100%;height:40%">
                             <tr>
                                 <td style="border: none !important;width:50%;"><input type="button" style="height:100%;font-size:20px" class="form-control btn_delete" id="decline" value="Reject"></td>
@@ -143,16 +143,10 @@ $array = explode("/", $_GET["url"]);
             $("#accept").on('click', function() {
                 var object = {};
                 object['requestId'] = "<?php echo end($array); ?>";
-                object['item'] = new Object();
-                $.each($("input[name='items']:checked"), function() {
-                    let quantity = $(this).data("quantity");
-                    object['item'][$(this).data("id")] = quantity;
-                });
                 var json = JSON.stringify(object);
-                console.log(json);
                 $.ajax({
                     type: "PUT",
-                    url: "<?php echo API; ?>serviceRequest/accept/<?php echo end($array); ?>",
+                    url: "<?php echo API; ?>borrowRequests/approve/<?php echo end($array); ?>",
                     headers: {
                         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
                     },
@@ -160,7 +154,7 @@ $array = explode("/", $_GET["url"]);
                     cache: false,
                     success: function(result) {
                         if (result.code == 806) {
-                            $("#add").trigger('reset');
+                            $("#command").hide();
                             alertGen("Record Added Successfully!", 1);
                         } else {
                             alertGen("Unable to handle request.", 2);
@@ -174,16 +168,19 @@ $array = explode("/", $_GET["url"]);
                 });
             });
             $("#decline").on('click', function() {
+                var object = {};
+                object['requestId'] = "<?php echo end($array); ?>";
+                var json = JSON.stringify(object);
                 $.ajax({
                     type: "PUT",
-                    url: "<?php echo API; ?>serviceRequest/decline/<?php echo end($array); ?>",
+                    url: "<?php echo API; ?>borrowRequests/reject/<?php echo end($array); ?>",
                     headers: {
                         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
                     },
                     cache: false,
                     success: function(result) {
                         if (result.code == 806) {
-                            $("#add").trigger('reset');
+                            $("#command").hide();
                             alertGen("Record Added Successfully!", 1);
                         } else {
                             alertGen("Unable to handle request.", 2);
@@ -227,6 +224,11 @@ $array = explode("/", $_GET["url"]);
             document.getElementById('header').innerHTML = "Request From - " + request['name']; 
             document.getElementById('requiredDate').value = request['createdDate'];
             document.getElementById('requiredId').value = request['id'];
+            if (request['approvalStatus'] == 'Approved') {
+                $("#command").html("<Font color='green'><h3>Request approved</h3></font>");
+            }else if(request['approvalStatus'] == 'Rejected'){
+                $("#command").html("<Font color='red'><h3>Request rejected</h3></font>");
+            }
             var table = document.getElementById("trow");
             for (var i = 0; i < request['item'].length; i++) {
                 let obj = request['item'][i];

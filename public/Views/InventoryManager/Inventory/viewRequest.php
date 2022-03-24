@@ -165,14 +165,14 @@ $array = explode("/", $_GET["url"]);
             });
             $("#accept").on('click', function(){
                 if ($(":checkbox:checked").length == 0) {
-                    var difference = request[0]['item'].length - available;
-                    if(difference == 0){
-                        alertGen("Unable to process with default selection. Please select items.",2);
-                    }else{
-                        $("#confirmProcess").fadeIn();
-                        $("#find").val("notice");
-                        $("#confirmProcess").addClass('model-open');
-                    }
+                    // var difference = request[0]['item'].length - available;
+                    // if(difference == 0){
+                    //     alertGen("Unable to process with default selection. Please select items.",2);
+                    // }else{
+                    $("#confirmProcess").fadeIn();
+                    $("#find").val("notice");
+                    $("#confirmProcess").addClass('model-open');
+                    
                 } else {
                     var object = {};
                     object['requestId']="<?php echo end($array); ?>";

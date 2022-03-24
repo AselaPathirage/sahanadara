@@ -7,7 +7,7 @@ $array = explode("/", $_GET["url"]);
 
 <head>
     <meta charset="UTF-8">
-    <title> Inventory Manager - Inventory </title>
+    <title> Divisional Secretariat - Dashboard </title>
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">

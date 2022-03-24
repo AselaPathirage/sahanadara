@@ -13,6 +13,12 @@
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        .btn_active,
+        .btn_remove {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
 <body>
@@ -60,7 +66,9 @@
                     </div>
                 </div>
             </div>
+            <div id="alertBox">
 
+            </div>
     </section>
     <script>
         var thisPage = "#Donation";
@@ -71,11 +79,66 @@
                 }
                 $(thisPage).addClass("active");
             });
+            $('.btn_active').on('click', function() {
+                var id = $(this).attr("data-id");
+                if (id) {
+                    $.ajax({
+                        type: "PUT",
+                        url: "<?php echo API; ?>notice/approve/" + id,
+                        headers: {
+                            'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                        },
+                        cache: false,
+                        success: function(result) {
+                            $('#box').empty();
+                            getRecords();
+                            if (result.code == 806) {
+                                alertGen("Record Updated Successfully!", 1);
+                            } else {
+                                alertGen("Unable to handle request.", 2);
+                            }
+                        },
+                        error: function(err) {
+                            alertGen("Something went wrong.", 3);
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+            $('.btn_remove').on('click', function() {
+                var id = $(this).attr("data-id");
+                if (id) {
+                    $.ajax({
+                        type: "PUT",
+                        url: "<?php echo API; ?>notice/reject/" + id,
+                        headers: {
+                            'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                        },
+                        cache: false,
+                        success: function(result) {
+                            $('#box').empty();
+                            getRecords();
+                            if (result.code == 806) {
+                                alertGen("Record Updated Successfully!", 1);
+                            } else {
+                                alertGen("Unable to handle request.", 2);
+                            }
+                        },
+                        error: function(err) {
+                            alertGen("Something went wrong.", 3);
+                            console.log(err);
+                        }
+                    });
+                }
+            });
+            $("#alertBox").click(function() {
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
+            });
             $('#approvalStatus').on('change', function() {
                 let value = $('#approvalStatus').val();
                 $('#trow').empty();
                 var text = "";
-                console.log(value);
                 if (output.length > 0) {
                     let obj = output[0];
                     if (obj['appovalStatus'] == value || !value) {
@@ -83,7 +146,13 @@
                         for (var j = 0; j < obj['item'].length; j++) {
                             text += "<p class='small'>" + obj['item'][j]['item'] + "-" + obj['item'][j]['quantity'] + " " + obj['item'][j]['unit'] + "</p>";
                         }
-                        text += "<br><a href='' class='btn_active'>Approve</a><a style='margin-left:4px' href='' class='btn_remove'>Reject</a></div>";
+                        if (obj['appovalStatus'] == "Pending") {
+                            text += "<br><a data-id='" + obj['recordId'] + "' class='btn_active'>Approve</a><a style='margin-left:4px' data-id='" + obj['recordId'] + "'  class='btn_remove'>Reject</a></div>"
+                        } else if (obj['appovalStatus'] == "Approved") {
+                            text += "<br><font color='green'><h4>Approved</h4></font></div>";
+                        } else {
+                            text += "<br><font color='red'><h4>Rejected</h4></font></div>";
+                        }
                     }
                 }
 
@@ -95,13 +164,26 @@
                             for (var j = 0; j < obj['item'].length; j++) {
                                 text += "<p class='small'>" + obj['item'][j]['item'] + "-" + obj['item'][j]['quantity'] + " " + obj['item'][j]['unit'] + "</p>";
                             }
-                            text += "<br><a href='' class='btn_active'>Approve</a><a style='margin-left:4px' href='' class='btn_remove'>Reject</a></div>"
+                            if (obj['appovalStatus'] == "Pending") {
+                                text += "<br><a data-id='" + obj['recordId'] + "' class='btn_active'>Approve</a><a style='margin-left:4px' data-id='" + obj['recordId'] + "'  class='btn_remove'>Reject</a></div>"
+                            } else if (obj['appovalStatus'] == "Approved") {
+                                text += "<br><font color='green'><h4>Approved</h4></font></div>";
+                            } else {
+                                text += "<br><font color='red'><h4>Rejected</h4></font></div>";
+                            }
                         } else {
                             text += "<div class='card row-content col5'><h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><p>" + obj['note'] + "</p><p class='small'><b>Telephone Number - </b>" + obj['contact'] + "</p><p class='small'><b>People -</b> " + obj['numOfPeople'] + "</p>";
                             for (var j = 0; j < obj['item'].length; j++) {
                                 text += "<p class='small'>" + obj['item'][j]['item'] + "-" + obj['item'][j]['quantity'] + " " + obj['item'][j]['unit'] + "</p>";
                             }
-                            text += "<br><a href='' class='btn_active'>Approve</a><a style='margin-left:4px' href='' class='btn_remove'>Reject</a></div></div>"
+                            if (obj['appovalStatus'] == "Pending") {
+                                text += "<br><a data-id='" + obj['recordId'] + "' class='btn_active'>Approve</a><a style='margin-left:4px' data-id='" + obj['recordId'] + "'  class='btn_remove'>Reject</a></div>"
+                            } else if (obj['appovalStatus'] == "Approved") {
+                                text += "<br><font color='green'><h4>Approved</h4></font></div>";
+                            } else {
+                                text += "<br><font color='red'><h4>Rejected</h4></font></div>";
+                            }
+                            text += "</div>";
                         }
                     }
                 }
@@ -136,7 +218,13 @@
                 for (var j = 0; j < obj['item'].length; j++) {
                     text += "<p class='small'>" + obj['item'][j]['item'] + "-" + obj['item'][j]['quantity'] + " " + obj['item'][j]['unit'] + "</p>";
                 }
-                text += "<br><a href='' class='btn_active'>Approve</a><a style='margin-left:4px' href='' class='btn_remove'>Reject</a></div>"
+                if (obj['appovalStatus'] == "Pending") {
+                    text += "<br><a data-id='" + obj['recordId'] + "' class='btn_active'>Approve</a><a style='margin-left:4px' data-id='" + obj['recordId'] + "'  class='btn_remove'>Reject</a></div>"
+                } else if (obj['appovalStatus'] == "Approved") {
+                    text += "<br><font color='green'><h4>Approved</h4></font></div>";
+                } else {
+                    text += "<br><font color='red'><h4>Rejected</h4></font></div>";
+                }
             }
 
             for (var i = 1; i < output.length; i++) {
@@ -146,16 +234,51 @@
                     for (var j = 0; j < obj['item'].length; j++) {
                         text += "<p class='small'>" + obj['item'][j]['item'] + "-" + obj['item'][j]['quantity'] + " " + obj['item'][j]['unit'] + "</p>";
                     }
-                    text += "<br><a href='' class='btn_active'>Approve</a><a style='margin-left:4px' href='' class='btn_remove'>Reject</a></div>"
+                    if (obj['appovalStatus'] == "Pending") {
+                        text += "<br><a data-id='" + obj['recordId'] + "' class='btn_active'>Approve</a><a style='margin-left:4px' data-id='" + obj['recordId'] + "'  class='btn_remove'>Reject</a></div>"
+                    } else if (obj['appovalStatus'] == "Approved") {
+                        text += "<br><font color='green'><h4>Approved</h4></font></div>";
+                    } else {
+                        text += "<br><font color='red'><h4>Rejected</h4></font></div>";
+                    }
                 } else {
                     text += "<div class='card row-content col5'><h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><p>" + obj['note'] + "</p><p class='small'><b>Telephone Number - </b>" + obj['contact'] + "</p><p class='small'><b>People -</b> " + obj['numOfPeople'] + "</p>";
                     for (var j = 0; j < obj['item'].length; j++) {
                         text += "<p class='small'>" + obj['item'][j]['item'] + "-" + obj['item'][j]['quantity'] + " " + obj['item'][j]['unit'] + "</p>";
                     }
-                    text += "<br><a href='' class='btn_active'>Approve</a><a style='margin-left:4px' href='' class='btn_remove'>Reject</a></div></div>"
+                    if (obj['appovalStatus'] == "Pending") {
+                        text += "<br><a data-id='" + obj['recordId'] + "' class='btn_active'>Approve</a><a style='margin-left:4px' data-id='" + obj['recordId'] + "'  class='btn_remove'>Reject</a></div>"
+                    } else if (obj['appovalStatus'] == "Approved") {
+                        text += "<br><font color='green'><h4>Approved</h4></font></div>";
+                    } else {
+                        text += "<br><font color='red'><h4>Rejected</h4></font></div>";
+                    }
+                    text += "</div>";
                 }
             }
             document.getElementById('box').innerHTML = text;
+        }
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            }
         }
         $("#search").keyup(function() {
             // Retrieve the input field text and reset the count to zero

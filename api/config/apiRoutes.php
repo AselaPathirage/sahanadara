@@ -160,6 +160,7 @@ Route::POST("fundraiser", array("DivisionalSecretariat@addFundraiser"));
 Route::PUT("divseccompapprove", array("DivisionalSecretariat@approvecomp"));
 Route::PUT("fundraiser/{id}", array("DivisionalSecretariat@updateFundraiser"));
 Route::PUT("borrowRequests/{command}/{requestId}", array("DivisionalSecretariat@commandBorrowRequests"));
+Route::PUT("notice/{command}/{noticeId}", array("DivisionalSecretariat@commandNotice"));
 Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
 
 // District Sec

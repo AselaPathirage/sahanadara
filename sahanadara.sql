@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 22, 2022 at 12:45 PM
+-- Generation Time: Mar 23, 2022 at 01:49 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -104,6 +104,73 @@ INSERT INTO `alertdisdivgn` (`alertId`, `dsId`, `dvId`, `gndvId`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `deathcompensation`
+--
+
+CREATE TABLE `deathcompensation` (
+  `deathId` int(11) NOT NULL,
+  `gndvId` int(5) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `disaster` varchar(50) DEFAULT NULL,
+  `disasterdate` date DEFAULT NULL,
+  `deathdate` date DEFAULT NULL,
+  `dname` varchar(50) DEFAULT NULL,
+  `dnic` varchar(50) DEFAULT NULL,
+  `daddress` varchar(50) DEFAULT NULL,
+  `doccupation` varchar(50) DEFAULT NULL,
+  `aname` varchar(50) DEFAULT NULL,
+  `anic` varchar(50) DEFAULT NULL,
+  `arelationship` varchar(50) DEFAULT NULL,
+  `dvapproved` varchar(1) DEFAULT 'p',
+  `dvremarks` varchar(50) DEFAULT NULL,
+  `disapproved` varchar(1) DEFAULT 'p',
+  `disremarks` varchar(50) DEFAULT NULL,
+  `dmcapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `dmcremarks` varchar(50) DEFAULT '',
+  `atelno` int(10) DEFAULT NULL,
+  `collected` tinyint(1) DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deathcompensation`
+--
+
+INSERT INTO `deathcompensation` (`deathId`, `gndvId`, `timestamp`, `disaster`, `disasterdate`, `deathdate`, `dname`, `dnic`, `daddress`, `doccupation`, `aname`, `anic`, `arelationship`, `dvapproved`, `dvremarks`, `disapproved`, `disremarks`, `dmcapproved`, `dmcremarks`, `atelno`, `collected`) VALUES
+(8, 5, '2022-03-21 23:43:50', 'rterty', '2022-03-16', '2022-03-02', 'wert', '245245', 'No. 252D,\nAnanda Maithree Rd,\nBellapitiya', 'wertwert', 'wertewrt', '523452345', 'Husband', 'p', NULL, 'a', 'asas', 'a', 'asdfdf sssssss', 2147483647, 1),
+(11, 5, '2022-03-22 16:58:58', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'a', 'asdfdf sssssss', 'p', NULL, 'p', '', 0, 0),
+(12, 5, '2022-03-19 08:06:55', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0),
+(13, 5, '2022-03-19 08:25:24', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0),
+(14, 5, '2022-03-19 08:33:49', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0),
+(15, 5, '2022-03-19 08:36:59', '', '0000-00-00', '0000-00-00', '', '', '', '', '', '', '', 'p', NULL, 'p', NULL, 'p', '', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `deathheir`
+--
+
+CREATE TABLE `deathheir` (
+  `heirid` int(11) NOT NULL,
+  `deathid` int(11) DEFAULT NULL,
+  `name` varchar(20) DEFAULT NULL,
+  `bank` varchar(20) DEFAULT NULL,
+  `branch` varchar(20) DEFAULT NULL,
+  `accno` int(20) DEFAULT NULL,
+  `nic` varchar(20) DEFAULT NULL,
+  `relationship` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `deathheir`
+--
+
+INSERT INTO `deathheir` (`heirid`, `deathid`, `name`, `bank`, `branch`, `accno`, `nic`, `relationship`) VALUES
+(3, 8, 'Asela Devinda Pathir', 'rth', 'ertherth', 2147483647, '2345', 'rewert'),
+(4, 8, 'University of Colomb', 'wertwert', 'wertwert', 3452345, '23452345', 'wertwert');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `disaster`
 --
 
@@ -157,6 +224,15 @@ CREATE TABLE `distributeitem` (
   `approvalStatus` char(1) DEFAULT 'p'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `distributeitem`
+--
+
+INSERT INTO `distributeitem` (`recordId`, `safeHouseId`, `createdDate`, `approvalStatus`) VALUES
+(1, 1, '2022-03-22 17:16:37', 'p'),
+(2, 3, '2022-03-23 01:28:20', 'p'),
+(3, 3, '2022-03-23 01:28:20', 'p');
+
 -- --------------------------------------------------------
 
 --
@@ -167,6 +243,14 @@ CREATE TABLE `distributeitemrecord` (
   `recordId` int(3) NOT NULL,
   `itemRecord` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `distributeitemrecord`
+--
+
+INSERT INTO `distributeitemrecord` (`recordId`, `itemRecord`) VALUES
+(1, 4),
+(3, 11);
 
 -- --------------------------------------------------------
 
@@ -181,13 +265,6 @@ CREATE TABLE `distributeservice` (
   `approvalStatus` char(1) DEFAULT 'p',
   `serviceRequestId` int(4) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `distributeservice`
---
-
-INSERT INTO `distributeservice` (`recordId`, `inventoryId`, `createdDate`, `approvalStatus`, `serviceRequestId`) VALUES
-(1, 1, '2022-03-22 17:08:48', 'p', 3);
 
 -- --------------------------------------------------------
 
@@ -440,11 +517,17 @@ CREATE TABLE `donationreqnotice` (
 
 INSERT INTO `donationreqnotice` (`recordId`, `safehouseId`, `title`, `numOfFamilies`, `numOfPeople`, `createdDate`, `approvedDate`, `note`, `appovalStatus`, `remark`) VALUES
 (1, 1, '12', 12, 12, '2022-03-17 22:28:32', NULL, 'yggiu', 'd', NULL),
-(2, 2, 'test', 20, 20, '2022-03-18 15:56:34', NULL, '5ef', 'n', NULL),
-(4, 1, 'test 2', 12, 35, '2022-03-18 16:00:12', NULL, 'err', 'n', NULL),
-(5, 1, 'test 2', 5, 25, '2022-03-19 21:20:41', NULL, 'tessgs sh', 'n', NULL),
-(6, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-20 00:24:12', NULL, '', 'n', NULL),
-(9, 1, 'Bolossagama Safe House Need Your Donations', 1, 5, '2022-03-22 14:14:11', NULL, '', 'n', NULL);
+(2, 2, 'test', 20, 20, '2022-03-18 15:56:34', NULL, '5ef', 'd', NULL),
+(4, 1, 'test 2', 12, 35, '2022-03-18 16:00:12', NULL, 'err', 'd', NULL),
+(5, 1, 'test 2', 5, 25, '2022-03-19 21:20:41', NULL, 'tessgs sh', 'd', NULL),
+(6, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-20 00:24:12', NULL, '', 'd', NULL),
+(9, 1, 'Bolossagama Safe House Need Your Donations', 1, 5, '2022-03-22 14:14:11', NULL, '', 'd', NULL),
+(10, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 17:50:00', NULL, '', 'd', NULL),
+(11, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 17:51:04', NULL, '', 'd', NULL),
+(12, 1, 'Bolossagama Safe House Need Your Donations', 1, 5, '2022-03-22 17:57:35', NULL, '', 'n', NULL),
+(13, 1, 'test', 12, 30, '2022-03-22 19:01:16', NULL, '', 'd', NULL),
+(14, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 19:35:38', NULL, '', 'n', NULL),
+(15, 3, 'Bombuwala North Safe House Need Your Donations', 4, 20, '2022-03-22 19:47:35', NULL, '', 'n', NULL);
 
 -- --------------------------------------------------------
 
@@ -808,7 +891,16 @@ CREATE TABLE `inventoryitem` (
 INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `transactionDate`, `remarks`) VALUES
 (1, 6, 1, '50.00', '2022-03-21 16:48:05', ''),
 (2, 6, 1, '-10.00', '2022-03-22 16:48:12', ''),
-(3, 6, 1, '-10.00', '2022-03-22 17:08:48', '');
+(3, 6, 1, '-10.00', '2022-03-22 17:08:48', ''),
+(4, 6, 1, '-5.00', '2022-03-22 17:16:37', ''),
+(5, 4, 1, '50.00', '2022-03-21 17:17:12', ''),
+(6, 27, 1, '100.00', '2022-03-21 17:17:18', ''),
+(7, 7, 1, '2.00', '2022-03-21 17:17:24', ''),
+(8, 5, 1, '200.00', '2022-03-21 17:17:31', ''),
+(9, 1, 1, '1.00', '2022-03-21 17:17:39', ''),
+(10, 2, 1, '3.00', '2022-03-21 17:27:36', ''),
+(11, 2, 1, '-1.00', '2022-03-23 01:28:20', ''),
+(12, 27, 1, '-50.00', '2022-03-23 12:46:57', '');
 
 -- --------------------------------------------------------
 
@@ -824,15 +916,16 @@ CREATE TABLE `inventorymgtofficer` (
   `isAssigned` char(1) DEFAULT 'y',
   `assignedDate` datetime NOT NULL,
   `inventoryID` int(3) NOT NULL,
-  `empTele` char(10) NOT NULL
+  `empTele` char(10) NOT NULL,
+  `resignedDate` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `inventorymgtofficer`
 --
 
-INSERT INTO `inventorymgtofficer` (`inventoryMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `assignedDate`, `inventoryID`, `empTele`) VALUES
-(1, 'Naween Pasindu', 'Hene Gedara Hena,Ullala,Kamburupitiya', 'htnaweenpasindu@gmail.com', 'y', '2021-10-21 20:47:22', 1, '');
+INSERT INTO `inventorymgtofficer` (`inventoryMgtOfficerID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `assignedDate`, `inventoryID`, `empTele`, `resignedDate`) VALUES
+(1, 'Naween Pasindu', 'Hene Gedara Hena,Ullala,Kamburupitiya', 'htnaweenpasindu@gmail.com', 'y', '2021-10-21 20:47:22', 1, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -933,7 +1026,137 @@ INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
 (1, 'Tent', '10.00'),
 (4, 'Tent', '5.00'),
 (6, 'Boat', '1.00'),
-(9, 'Tent', '5.00');
+(9, 'Tent', '5.00'),
+(10, 'Boat', '0.00'),
+(11, 'Boat', '1.00'),
+(12, 'Tent', '5.00'),
+(13, 'Lentils', '20.00'),
+(13, 'Rice', '50.00'),
+(14, 'Boat', '1.00'),
+(15, 'Boat', '0.00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `propapp`
+--
+
+CREATE TABLE `propapp` (
+  `propcomId` int(11) NOT NULL,
+  `detype` varchar(50) DEFAULT NULL,
+  `deev` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propapp`
+--
+
+INSERT INTO `propapp` (`propcomId`, `detype`, `deev`) VALUES
+(1, 'werwer', 234234),
+(2, '', 0),
+(3, 'sdfsdf', 45),
+(4, 'sadfadsf', 34),
+(5, 'wer', 44),
+(5, '234234', 34);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `propcomprop`
+--
+
+CREATE TABLE `propcomprop` (
+  `propcomId` int(11) NOT NULL,
+  `dptype` varchar(20) DEFAULT NULL,
+  `dpdes` varchar(50) DEFAULT NULL,
+  `dpta` double DEFAULT NULL,
+  `dpda` double DEFAULT NULL,
+  `dpvod` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propcomprop`
+--
+
+INSERT INTO `propcomprop` (`propcomId`, `dptype`, `dpdes`, `dpta`, `dpda`, `dpvod`) VALUES
+(1, 'Roof', '4545', 45, 45, NULL),
+(1, 'Foundation', '45erert', 45, 5, NULL),
+(1, 'Floor', '', 0, 0, NULL),
+(2, 'Floor', '', 0, 0, NULL),
+(3, 'Floor', 'asdfadf', 34343434, 232323, 23),
+(3, 'Roof', '343', 0, 34, 0),
+(4, 'Floor', 'asdf', 34, 345, 45),
+(4, 'Floor', 'rtrt', 0, 45, 0),
+(5, 'Floor', 'asdf', 23, 234, 23),
+(5, 'Floor', 'afdfasdf', 234, 234, 34);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `propertycompensation`
+--
+
+CREATE TABLE `propertycompensation` (
+  `propcomId` int(11) NOT NULL,
+  `gndvId` int(5) NOT NULL,
+  `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `disaster` varchar(50) DEFAULT NULL,
+  `aname` varchar(50) DEFAULT NULL,
+  `anic` varchar(20) DEFAULT NULL,
+  `aaddress` varchar(50) DEFAULT NULL,
+  `atpnumber` int(20) DEFAULT NULL,
+  `arelationship` varchar(50) DEFAULT NULL,
+  `tla` double DEFAULT NULL,
+  `htype` varchar(50) DEFAULT NULL,
+  `totcomp` double DEFAULT NULL,
+  `hname` varchar(50) DEFAULT NULL,
+  `hbank` varchar(50) DEFAULT NULL,
+  `hacc` varchar(50) DEFAULT NULL,
+  `hbranch` varchar(50) DEFAULT NULL,
+  `collected` tinyint(1) NOT NULL DEFAULT 0,
+  `dvapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `dvremarks` varchar(50) DEFAULT NULL,
+  `disapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `disremarks` varchar(50) DEFAULT NULL,
+  `dmcapproved` varchar(1) NOT NULL DEFAULT 'p',
+  `dmcremarks` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propertycompensation`
+--
+
+INSERT INTO `propertycompensation` (`propcomId`, `gndvId`, `timestamp`, `disaster`, `aname`, `anic`, `aaddress`, `atpnumber`, `arelationship`, `tla`, `htype`, `totcomp`, `hname`, `hbank`, `hacc`, `hbranch`, `collected`, `dvapproved`, `dvremarks`, `disapproved`, `disremarks`, `dmcapproved`, `dmcremarks`) VALUES
+(1, 5, '2022-03-22 20:46:13', '6', '1', '2', '33', 4, '5', 3, 'Storey', 20000, 'Asela Devinda Pathirage', 'wqer', '234234234', 'wer', 0, 'a', NULL, 'a', 'sdfasdfsdfsdf', 'p', ''),
+(2, 5, '2022-03-23 06:12:43', '', 'dfgdfgdfg', '', '', 0, '', 0, 'Single building', 0, '', '', '', '', 0, 'a', 'asdfdf sssssss', 'a', 'asdfdf sssssss', 'p', NULL),
+(3, 5, '2022-03-20 05:57:49', '2345245asdfadf', 'asdfsdf', '2435345', 'No. 252D,\nAnanda Maithree Rd,\nBellapitiya', 767877818, 'asdfadf', 4555, 'Single building', 147, 'Asela Devinda Pathirage', 'dfgdfg', '234234234', 'dfgdfg', 0, 'p', NULL, 'p', NULL, 'p', NULL),
+(4, 5, '2022-03-22 20:47:00', '', 'aerf', 'asdf', '', 0, '', 0, 'Single building', 180, 'asdf', 'asdf', '234', 'sadf', 1, 'a', NULL, 'a', NULL, 'a', 'sadfsdf'),
+(5, 5, '2022-03-20 06:18:03', '', '', '', '', 0, '', 0, 'Single building', 203, 'Asela Devinda Pathirage', 'dfg', '234234234', 'sdf', 0, 'p', NULL, 'p', NULL, 'p', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `propservice`
+--
+
+CREATE TABLE `propservice` (
+  `propcomId` int(11) NOT NULL,
+  `dstype` varchar(50) DEFAULT NULL,
+  `dsev` double DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `propservice`
+--
+
+INSERT INTO `propservice` (`propcomId`, `dstype`, `dsev`) VALUES
+(1, 'werqwerqwer', 234),
+(1, 'qwerwer', 234234),
+(2, '', 0),
+(3, 'sdfsdf', 45),
+(4, 'asdfsadf', 56),
+(5, 'wer', 23),
+(5, 'sfsdf', 45);
 
 -- --------------------------------------------------------
 
@@ -1154,7 +1377,8 @@ INSERT INTO `safehousestatus` (`r_id`, `safehouseId`, `adultMale`, `adultFemale`
 (3, 1, 12, 12, 12, 12, 'test 2', '2022-03-16 12:16:00'),
 (4, 2, 15, 18, 6, 0, 'run', '2022-03-16 12:30:58'),
 (5, 1, 15, 18, 6, 0, '', '2022-03-16 12:31:55'),
-(6, 1, 2, 2, 1, 0, 'xddxg', '2022-03-16 19:57:15');
+(6, 1, 2, 2, 1, 0, 'xddxg', '2022-03-16 19:57:15'),
+(7, 1, 10, 12, 3, 0, '', '2022-03-23 13:21:46');
 
 -- --------------------------------------------------------
 
@@ -1175,12 +1399,16 @@ CREATE TABLE `safehousestatusrequesteditem` (
 
 INSERT INTO `safehousestatusrequesteditem` (`statusId`, `itemId`, `quantity`, `status`) VALUES
 (5, 1, '1.00', 'n'),
-(2, 2, '1.00', 'n'),
-(5, 3, '5.00', 'n'),
+(2, 2, '1.00', 's'),
+(5, 3, '5.00', 's'),
+(7, 3, '2.00', 'n'),
 (4, 5, '20.00', 'n'),
 (6, 5, '5.00', 'n'),
+(7, 5, '20.00', 'n'),
+(7, 6, '10.00', 'n'),
 (4, 7, '1.00', 'n'),
-(6, 7, '1.00', 'n');
+(6, 7, '1.00', 'n'),
+(7, 9, '2.00', 'n');
 
 -- --------------------------------------------------------
 
@@ -1192,13 +1420,6 @@ CREATE TABLE `servicedistributeitemrecord` (
   `recordId` int(3) NOT NULL,
   `itemRecordId` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `servicedistributeitemrecord`
---
-
-INSERT INTO `servicedistributeitemrecord` (`recordId`, `itemRecordId`) VALUES
-(1, 3);
 
 -- --------------------------------------------------------
 
@@ -1214,17 +1435,19 @@ CREATE TABLE `servicerequest` (
   `acceptedBy` int(3) DEFAULT NULL,
   `acceptedDate` datetime DEFAULT NULL,
   `requestingFrom` int(3) DEFAULT 0,
-  `note` varchar(200) DEFAULT NULL
+  `note` varchar(200) DEFAULT NULL,
+  `createdDate` date DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `servicerequest`
 --
 
-INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentStatus`, `acceptedBy`, `acceptedDate`, `requestingFrom`, `note`) VALUES
-(1, 3, '2022-03-23', 'p', NULL, NULL, 0, ''),
-(2, 2, '2022-03-31', 'r', NULL, NULL, 10, ''),
-(3, 4, '2022-03-29', 'p', NULL, NULL, 0, '');
+INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentStatus`, `acceptedBy`, `acceptedDate`, `requestingFrom`, `note`, `createdDate`) VALUES
+(1, 2, '2022-03-29', 'p', NULL, NULL, 0, '', '2022-03-23'),
+(2, 2, '2022-03-26', 'p', NULL, NULL, 0, '', '2022-03-23'),
+(3, 3, '2022-03-25', 'p', NULL, NULL, 0, '', '2022-03-23'),
+(4, 4, '2022-03-22', 'p', NULL, NULL, 0, '', '2022-03-23');
 
 -- --------------------------------------------------------
 
@@ -1245,12 +1468,12 @@ CREATE TABLE `servicerequestitem` (
 --
 
 INSERT INTO `servicerequestitem` (`r_id`, `itemId`, `quantity`, `acceptedBy`, `acceptedDate`) VALUES
-(1, 27, '50.00', NULL, NULL),
-(2, 28, '14.00', NULL, NULL),
-(3, 2, '2.00', NULL, NULL),
-(3, 6, '10.00', NULL, NULL),
-(3, 23, '5.00', NULL, NULL),
-(3, 27, '20.00', NULL, NULL);
+(1, 10, '1.00', NULL, NULL),
+(2, 1, '1.00', NULL, NULL),
+(3, 3, '4.00', NULL, NULL),
+(3, 5, '100.00', NULL, NULL),
+(3, 6, '20.00', NULL, NULL),
+(4, 8, '1.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1298,6 +1521,20 @@ ALTER TABLE `alertdisdivgn`
   ADD KEY `fk_gn` (`gndvId`),
   ADD KEY `fk_div` (`dvId`),
   ADD KEY `alertId` (`alertId`);
+
+--
+-- Indexes for table `deathcompensation`
+--
+ALTER TABLE `deathcompensation`
+  ADD PRIMARY KEY (`deathId`),
+  ADD KEY `fk_gndvId8` (`gndvId`);
+
+--
+-- Indexes for table `deathheir`
+--
+ALTER TABLE `deathheir`
+  ADD PRIMARY KEY (`heirid`),
+  ADD KEY `fk_deathId` (`deathid`);
 
 --
 -- Indexes for table `disaster`
@@ -1506,6 +1743,31 @@ ALTER TABLE `noticeitem`
   ADD PRIMARY KEY (`noticeId`,`itemName`);
 
 --
+-- Indexes for table `propapp`
+--
+ALTER TABLE `propapp`
+  ADD KEY `fk_propId4` (`propcomId`);
+
+--
+-- Indexes for table `propcomprop`
+--
+ALTER TABLE `propcomprop`
+  ADD KEY `fk_proId` (`propcomId`);
+
+--
+-- Indexes for table `propertycompensation`
+--
+ALTER TABLE `propertycompensation`
+  ADD PRIMARY KEY (`propcomId`),
+  ADD KEY `fk_gndvId9` (`gndvId`);
+
+--
+-- Indexes for table `propservice`
+--
+ALTER TABLE `propservice`
+  ADD KEY `fk_propId2` (`propcomId`);
+
+--
 -- Indexes for table `relief`
 --
 ALTER TABLE `relief`
@@ -1628,6 +1890,18 @@ ALTER TABLE `alert`
   MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
+-- AUTO_INCREMENT for table `deathcompensation`
+--
+ALTER TABLE `deathcompensation`
+  MODIFY `deathId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT for table `deathheir`
+--
+ALTER TABLE `deathheir`
+  MODIFY `heirid` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
 -- AUTO_INCREMENT for table `disaster`
 --
 ALTER TABLE `disaster`
@@ -1643,13 +1917,13 @@ ALTER TABLE `dismgtofficer`
 -- AUTO_INCREMENT for table `distributeitem`
 --
 ALTER TABLE `distributeitem`
-  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT;
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `distributeservice`
 --
 ALTER TABLE `distributeservice`
-  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -1697,7 +1971,7 @@ ALTER TABLE `dmc`
 -- AUTO_INCREMENT for table `donationreqnotice`
 --
 ALTER TABLE `donationreqnotice`
-  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `gndivision`
@@ -1745,7 +2019,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -1758,6 +2032,12 @@ ALTER TABLE `inventorymgtofficer`
 --
 ALTER TABLE `item`
   MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+
+--
+-- AUTO_INCREMENT for table `propertycompensation`
+--
+ALTER TABLE `propertycompensation`
+  MODIFY `propcomId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `relief`
@@ -1811,13 +2091,13 @@ ALTER TABLE `safehouse`
 -- AUTO_INCREMENT for table `safehousestatus`
 --
 ALTER TABLE `safehousestatus`
-  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
-  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `unit`
@@ -1837,6 +2117,18 @@ ALTER TABLE `alertdisdivgn`
   ADD CONSTRAINT `fk_dis` FOREIGN KEY (`dsId`) REFERENCES `district` (`dsId`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_div` FOREIGN KEY (`dvId`) REFERENCES `division` (`dvId`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_gn` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `deathcompensation`
+--
+ALTER TABLE `deathcompensation`
+  ADD CONSTRAINT `fk_gndvId8` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`);
+
+--
+-- Constraints for table `deathheir`
+--
+ALTER TABLE `deathheir`
+  ADD CONSTRAINT `fk_deathId` FOREIGN KEY (`deathid`) REFERENCES `deathcompensation` (`deathId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `distributeitem`
@@ -1969,6 +2261,30 @@ ALTER TABLE `login`
 --
 ALTER TABLE `noticeitem`
   ADD CONSTRAINT `noticeitem_ibfk_1` FOREIGN KEY (`noticeId`) REFERENCES `donationreqnotice` (`recordId`);
+
+--
+-- Constraints for table `propapp`
+--
+ALTER TABLE `propapp`
+  ADD CONSTRAINT `fk_propId4` FOREIGN KEY (`propcomId`) REFERENCES `propertycompensation` (`propcomId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `propcomprop`
+--
+ALTER TABLE `propcomprop`
+  ADD CONSTRAINT `fk_proId` FOREIGN KEY (`propcomId`) REFERENCES `propertycompensation` (`propcomId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `propertycompensation`
+--
+ALTER TABLE `propertycompensation`
+  ADD CONSTRAINT `fk_gndvId9` FOREIGN KEY (`gndvId`) REFERENCES `gndivision` (`gndvId`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `propservice`
+--
+ALTER TABLE `propservice`
+  ADD CONSTRAINT `fk_propId2` FOREIGN KEY (`propcomId`) REFERENCES `propertycompensation` (`propcomId`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `relief`

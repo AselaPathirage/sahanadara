@@ -26,6 +26,26 @@ class InventoryManager extends Employee{
             exit();
         }
     }
+    public function getStats(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        $results = array();
+        $sql = "SELECT i.itemId FROM inventoryitem v, item i, inventorymgtofficer m WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  GROUP BY v.itemId HAVING SUM(v.quantity) > 0";
+        $excute = $this->connection->query($sql);
+        $results['numberOfItems']= $excute->num_rows;
+        $division = $this->getDivision($uid);
+        $divisionId = $division['id'];
+        $this->inventory->setInfo($uid);
+        $inventoryId = $this->inventory->getId();
+        $sql = "SELECT servicerequest.r_id AS `id`FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) AND servicerequest.createdDate = CURDATE()  AND servicerequest.requestedDate >= CURDATE() AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
+        $excute = $this->connection->query($sql);
+        $results['serviceRequest']= $excute->num_rows;
+        $sql = "WITH cte AS (SELECT sf.safehouseId, ROW_NUMBER() OVER (PARTITION BY sf.safehouseId ORDER BY sf.createdDate DESC) AS rn FROM safehousestatusrequesteditem s, safehousestatus sf, gndivision gn, safehouse sh WHERE s.statusId = sf.r_id AND sf.safehouseId = gn.safeHouseID AND sh.isUsing <> 'n' AND gn.safeHouseID = sh.safeHouseID AND s.status ='n' AND gn.gndvId IN (SELECT gndivision.gndvId FROM gndivision,division WHERE gndivision.dvId = division.dvId AND division.dvId = 10) ORDER BY sf.createdDate)SELECT * FROM cte WHERE rn = 1;";
+        $excute = $this->connection->query($sql);
+        $results['aidRequests']= $excute->num_rows;
+        $json = json_encode($results);
+        echo $json;
+    }
     public function addAidNotice(array $data){
         global $errorCode;
         $uid = $data['userId'];
@@ -265,7 +285,7 @@ class InventoryManager extends Employee{
             $sql = "INSERT INTO servicerequest(inventoryId,requestedDate,requestingFrom,note) VALUES ($inventoryId,'$requiredDate',$requestingFrom,'$note'); SET @last_id_in_table = LAST_INSERT_ID();";
             foreach($data['item'] as $item => $quantity){
                 $itemId=Item::getId(trim($item));
-                $sql .="INSERT INTO  servicerequestitem VALUES (@last_id_in_table,$itemId,$quantity);";
+                $sql .="INSERT INTO  servicerequestitem(r_id,itemId,quantity) VALUES (@last_id_in_table,$itemId,$quantity);";
             }
             //echo $sql;
             $this->connection->multi_query($sql);
@@ -287,7 +307,7 @@ class InventoryManager extends Employee{
             $id=ServiceRequestNotice::getId($id);
             $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
         }else{
-            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  AND servicerequest.requestedDate >= CURDATE()  AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
         }
         $excute = $this->connection->query($sql);
         $results = array();

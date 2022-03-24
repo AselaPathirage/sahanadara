@@ -58,6 +58,37 @@ class DivisionalSecretariat extends Employee
         return substr(str_shuffle("aAQEWAbcERWREdefghiHLafgdffhvcJHjklmnopqrSFSEREESGSEGst0123456789"), 0, $length);
     }
 
+    public function getInventorymgr(array $data){
+        $uid = $data['userId'];
+        $division = $this->getDivision($uid);
+        $dvId = $division['id'];
+        $sql = "SELECT inventorymgtofficer.* FROM inventorymgtofficer,inventory WHERE inventorymgtofficer.inventoryID = inventory.inventoryId AND  inventory.dvId =".$dvId;
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getDistrict($userId){
+        $division = $this->getDivision($userId);
+        $dvId = $division['id'];
+        $sql = "SELECT district.dsId,district.dsName FROM district,division WHERE division.dsId=district.dsId AND division.dvId = $dvId;";
+        $excute = $this->connection->query($sql);
+        $temp =$excute->fetch_assoc();
+        $district['name'] = $temp['dsName'];
+        $district['id'] = $temp['dsId'];
+        return $district;
+    }
+    public function getDivision($userId){
+        $sql = "SELECT division.dvId,division.dvName FROM divisionalsecretariat,division,divisionaloffice WHERE divisionalsecretariat.divisionalSecretariatID = divisionaloffice.divisionalSecretariatID AND division.dvId = divisionaloffice.dvId AND divisionalsecretariat.divisionalSecretariatID = $userId;";
+        $excute = $this->connection->query($sql);
+        $temp =$excute->fetch_assoc();
+        $division['name'] = $temp['dvName'];
+        $division['id'] = $temp['dvId'];
+        return $division;
+    }
     // Profile Details
     public function getProfileDetails(array $data)
     {

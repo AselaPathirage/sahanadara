@@ -35,17 +35,14 @@
                                 <i class='bx bx-task'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                40
+                            <h2 class="services__title" id="item" style="color: black; font-size: 52px; font-weight: bold;">
+                                
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
                             <h2 class="services__title">
                                 Items Available
                             </h2>
-                            <!-- <p class="services__description">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
-                                        </p> -->
                         </div>
                     </div>
                 </a>
@@ -56,17 +53,14 @@
                                 <i class='bx bx-package'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                2
+                            <h2 class="services__title" id="aids" style="color: black; font-size: 52px; font-weight: bold;">
+                                
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 130px;">
                             <h2 class="services__title">
-                                New Aid Requests
+                                Total Aid Requests
                             </h2>
-                            <!-- <p class="services__description">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
-                                        </p> -->
                         </div>
                     </div>
                 </a>
@@ -77,17 +71,14 @@
                                 <i class='bx bx-cog'></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                7
+                            <h2  id='service' class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                                
                             </h2>
                         </figure>
                         <div class="services__content">
                             <h2 class="services__title">
                                 New Service Requests
                             </h2>
-                            <!-- <p class="services__description">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
-                                        </p> -->
                         </div>
                     </div>
                 </a>
@@ -111,6 +102,21 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        addDetails();
+        function addDetails(){
+            var x = "<?php echo $_SESSION['key'] ?>"; 
+            var text = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>statistics",
+                dataType: "json", 
+                headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                cache: false,
+                async: false
+            }).responseText);
+            document.getElementById("item").innerHTML = text.numberOfItems;
+            document.getElementById("aids").innerHTML = text.aidRequests;
+            document.getElementById("service").innerHTML = text.serviceRequest;
         }
     </script>
 </body>

@@ -545,5 +545,84 @@ class DivisionalSecretariat extends Employee
              exit();
          }
      }
+
+     public function addFundraiser(array $data)
+     {
+        global $errorCode;
+        //$uid = $data['userId'];
+        $title = $data['title'];
+        $description = $data['description'];
+        $goal = $data['goal'];
+
+        $sql = "INSERT INTO fundraising (title, description, goal) VALUES ('$title','$description','$goal');";
+        $this->connection->query($sql);
+        
+        if ($this->connection->query($sql)) {
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['unknownError']));
+        }
+    
+     }
+
+     public function getFundraiser(array $data)
+     {
+        $uid = $data['userId'];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        
+        $sql = "SELECT f.* FROM fundraising f";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+         
+     }
+
+     public function updateFundraiser(array $data)
+     {
+        global $errorCode;
+        // print_r($data['receivedParams']);
+        // print_r($data);
+        if (count($data['receivedParams']) == 1) {
+            $uid = $data['userId'];
+            $title = $data['uptitle'];
+            $description = $data['updescription'];
+            $goal = $data['upgoal'];
+            $recordId = $data['receivedParams'][0];
+
+            $sql = "UPDATE `fundraising` SET `title`='$title', `description`='$description', `goal`='$goal' WHERE recordId =$recordId";
+            $this->connection->query($sql);
+            // echo($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+     public function deleteFundraiser(array $data)
+     {
+        global $errorCode;
+        if (count($data['receivedParams']) == 1) {
+
+            $recordId = $data['receivedParams'][0];
+
+            $sql = "DELETE FROM `fundraising` WHERE recordId =$recordId";
+            $this->connection->query($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
     
 }

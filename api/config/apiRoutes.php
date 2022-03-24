@@ -156,7 +156,10 @@ Route::GET("divsecdeath/{id}", array("DivisionalSecretariat@getDeath"));
 
 Route::PUT("divseccompapprove", array("DivisionalSecretariat@approvecomp"));
 
-
+Route::POST("fundraiser", array("DivisionalSecretariat@addFundraiser"));
+Route::GET("fundraiser", array("DivisionalSecretariat@getFundraiser"));
+Route::PUT("fundraiser/{id}", array("DivisionalSecretariat@updateFundraiser"));
+Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
 
 // District Sec
 Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));

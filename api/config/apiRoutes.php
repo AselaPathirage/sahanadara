@@ -157,7 +157,7 @@ Route::GET("divsecprop/{id}", array("DivisionalSecretariat@getProperty"));
 Route::GET("divsecdeath/{id}", array("DivisionalSecretariat@getDeath"));
 
 Route::PUT("divseccompapprove", array("DivisionalSecretariat@approvecomp"));
-
+Route::PUT("borrowRequests/{command}/{requestId}", array("DivisionalSecretariat@commandBorrowRequests"));
 
 
 // District Sec

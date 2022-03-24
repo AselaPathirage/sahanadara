@@ -102,15 +102,13 @@
                         cell3.innerHTML = obj['name'];
                         cell4.innerHTML = obj['createdDate'];
                         cell5.innerHTML = obj['approvalStatus'];
-                        if (obj['approvalStatus'] != 'Rejected') {
-                            var attribute = document.createElement("a");
-                            attribute.id = obj['responsibleId'];
-                            attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
-                            attribute.className = "btn-box";
-                            attribute.innerHTML = "View";
-                            attribute.target = "_blank";
-                            cell6.appendChild(attribute);
-                        }
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['responsibleId'];
+                        attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
+                        attribute.className = "btn-box";
+                        attribute.innerHTML = "View";
+                        attribute.target = "_blank";
+                        cell6.appendChild(attribute);
                     }
                 }
             });
@@ -155,15 +153,13 @@
                 cell3.innerHTML = obj['name'];
                 cell4.innerHTML = obj['createdDate'];
                 cell5.innerHTML = obj['approvalStatus'];
-                if (obj['approvalStatus'] != 'Rejected') {
-                    var attribute = document.createElement("a");
-                    attribute.id = obj['responsibleId'];
-                    attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
-                    attribute.className = "btn-box";
-                    attribute.innerHTML = "View";
-                    attribute.target = "_blank";
-                    cell6.appendChild(attribute);
-                }
+                var attribute = document.createElement("a");
+                attribute.id = obj['responsibleId'];
+                attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
+                attribute.className = "btn-box";
+                attribute.innerHTML = "View";
+                attribute.target = "_blank";
+                cell6.appendChild(attribute);
             }
         }
         (function() {

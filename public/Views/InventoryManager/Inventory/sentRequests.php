@@ -76,9 +76,6 @@
         <div class="space"></div>
         <div class="container">
             <div class="box">
-                <div style="display:block;text-align: right;">
-                    <a href="<?php echo HOST; ?>InventoryManager/Inventory/sentRequests" class="btn-fun">View Sent Requests</a>
-                </div>
                 <form>
                     <table class="table">
                         <thead>
@@ -166,7 +163,7 @@
         function serviceRequests() {
             requests = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>serviceRequest",
+                url: "<?php echo API; ?>serviceRequest/self",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'

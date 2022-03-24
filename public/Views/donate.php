@@ -469,7 +469,9 @@
                 document.getElementById("about").innerHTML="About";
                 document.getElementById("help").innerHTML="Help";
                 document.getElementById("donate").innerHTML="Donate";
-                document.getElementById("staff").innerHTML="Staff";
+                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
+                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                }
 
                 //body items
                 document.getElementById("topic").innerHTML= "Fund Raises";

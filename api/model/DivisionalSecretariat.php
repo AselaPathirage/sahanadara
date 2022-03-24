@@ -105,6 +105,34 @@ class DivisionalSecretariat extends Employee
         $json = json_encode($results);
         echo $json;
     }
+    public function commandNotice(array $data){
+        global $errorCode;
+        $userId = $data['userId'];
+        if(count($data['receivedParams'])==2){
+            $filter=$data['receivedParams'][0];
+            $id=Notice::getId($data['receivedParams'][1]);
+            if(strtolower($filter)=='approve'){
+                $sql="UPDATE donationreqnotice SET donationreqnotice.appovalStatus='a',donationreqnotice.approvedDate=NOW() WHERE donationreqnotice.recordId=$id";
+            }elseif(strtolower($filter)=='reject'){
+                $sql="UPDATE donationreqnotice SET donationreqnotice.appovalStatus='u',donationreqnotice.approvedDate=NOW() WHERE donationreqnotice.recordId=$id";
+            }else{
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+            $this->connection->query($sql);
+            $count=$this->connection->affected_rows;
+            if($count==0){
+                echo json_encode(array("code"=>$errorCode['unknownError']));
+                exit();
+            }else{
+                echo json_encode(array("code"=>$errorCode['success']));
+                exit();
+            }
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
     public function commandBorrowRequests(array $data){
         global $errorCode;
         $userId = $data['userId'];
@@ -117,7 +145,30 @@ class DivisionalSecretariat extends Employee
                     $sql="UPDATE distributeitem SET approvalStatus='a' WHERE recordId=$id";
                     $this->connection->query($sql);
                 }elseif(str_contains(strtoupper($id),"GT")){
-
+                    $id = GoodsTransfer::getId($id);
+                    $sql="SELECT distributeservice.inventoryId,distributeservice.serviceRequestId FROM distributeservice WHERE distributeservice.recordId=$id";
+                    $excute=$this->connection->query($sql);
+                    $temp=$excute->fetch_assoc();
+                    $inventoryId=$temp['inventoryId'];
+                    $serviceRequestId=$temp['serviceRequestId'];
+                    $sql="SELECT inventoryitem.recId,inventoryitem.itemId FROM inventoryitem WHERE inventoryitem.recId IN (SELECT servicedistributeitemrecord.itemRecordId FROM servicedistributeitemrecord WHERE servicedistributeitemrecord.recordId=$serviceRequestId)";
+                    $excute=$this->connection->query($sql);
+                    while($r = $excute-> fetch_assoc()) {
+                        $sql="UPDATE servicerequestitem SET acceptedBy= ,acceptedDate= WHERE r_id= AND itemId=  AND acceptedBy IS NULL AND acceptedDate IS NULL";
+                        $this->connection->query($sql); 
+                        $count=$this->connection->affected_rows;
+                        if($count==0){
+                            $sql="SELECT * FROM inventoryitem WHERE recId=".$r['recId'];
+                            $itemId=$r['itemId'];
+                            $inventoryId=$r['inventoryId'];
+                            $quantity= -1*$r['quantity'];
+                            $remarks='reverse the service request item';
+                            $sql ="INSERT INTO inventoryitem(itemId,inventoryId,quantity,remarks) VALUES ($itemId,$inventoryId,$quantity,'$remarks');";
+                            $this->connection->query($sql); 
+                        }
+                    }
+                    $sql="UPDATE distributeservice SET approvalStatus='a' WHERE recordId=$id";
+                    $this->connection->query($sql); 
                 }else{
                     echo json_encode(array("code"=>$errorCode['unableToHandle']));
                     exit();
@@ -137,17 +188,26 @@ class DivisionalSecretariat extends Employee
                         $itemId=$r['itemId'];
                         $inventoryId=$r['inventoryId'];
                         $quantity= -1*$r['quantity'];
-                        $remarks=$r['remarks'];
+                        $remarks='Goods distribution rejected';
                         $sql .="INSERT INTO inventoryitem(itemId,inventoryId,quantity,remarks) VALUES ($itemId,$inventoryId,$quantity,'$remarks');";
                     }
                     $this->connection->multi_query($sql);
                 }elseif(str_contains(strtoupper($id),"GT")){
                     $id = GoodsTransfer::getId($id);
-                    $sql="";
+                    $sql="UPDATE distributeservice SET approvalStatus='r' WHERE recordId=$id";
+                    $this->connection->query($sql);
+                    $sql="SELECT inventoryitem.* FROM inventoryitem WHERE inventoryitem.recId IN (SELECT servicedistributeitemrecord.itemRecordId FROM servicedistributeitemrecord WHERE servicedistributeitemrecord.recordId=$id)";
+                    $this->connection->query($sql);
                     $excute = $this->connection->query($sql);
-                    $r = $excute-> fetch_assoc();
-                    $text=ServiceRequestNotice::getServiceRequestNoticeCode($r['createrID']);
-                    $id2=GoodsTransfer::getGoodsTransfer($r['recordId']);
+                    $sql="";
+                    while($r = $excute-> fetch_assoc()) {
+                        $itemId=$r['itemId'];
+                        $inventoryId=$r['inventoryId'];
+                        $quantity= -1*$r['quantity'];
+                        $remarks=$r['remarks'];
+                        $sql .="INSERT INTO inventoryitem(itemId,inventoryId,quantity,remarks) VALUES ($itemId,$inventoryId,$quantity,'$remarks');";
+                    }
+                    $this->connection->multi_query($sql);
                 }else{
                     echo json_encode(array("code"=>$errorCode['unableToHandle']));
                     exit();

@@ -72,7 +72,7 @@
         <div class="space"></div>
         <div class="container">
             <div class="box">
-                <center><h1 id="header">Service Request Form - Kamburupitiya</h1></center>
+                <center><h1 id="header"></h1></center>
                 <form id="add">
                 <fieldset>
                         <div style="padding-left:15% ;">

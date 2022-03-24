@@ -136,24 +136,7 @@ class InventoryManager extends Employee{
             exit();
         }
     }
-    public function getItem(array $data){
-        if(count($data['receivedParams'])==1){
-            $id = $data['receivedParams'][0];
-            $id=Item::getId($id);
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id ORDER BY item.itemId";
-        }else{
-            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId  ORDER BY item.itemId";
-        } 
-        
-        $excute = $this->connection->query($sql);
-        $results = array();
-        while($r = $excute-> fetch_assoc()) {
-            $r['itemId'] = Item::getItemCode($r['itemId']);
-            $results[] = $r;
-        }
-        $json = json_encode($results);
-        echo $json;
-    }
+
     public function getAllItem(array $data){
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
@@ -338,6 +321,20 @@ class InventoryManager extends Employee{
         }
         $json = json_encode($results);
         echo $json;
+    }
+    public function viewSentServiceRequest(array $data){
+        $uid = $data['userId'];
+        $division = $this->getDivision($uid);
+        $divisionId = $division['id'];
+        $this->inventory->setInfo($uid);
+        $inventoryId = $this->inventory->getId();
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id=ServiceRequestNotice::getId($id);
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
+        }else{
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  AND servicerequest.requestedDate >= CURDATE()  AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
+        }echo $sql;
     }
     public function acceptServiceRequest(array $data){
         global $errorCode;

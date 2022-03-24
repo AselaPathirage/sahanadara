@@ -105,8 +105,10 @@
                             <thead>
                                 <tr>
                                     <th style="width:10%;">Request Id</th>
-                                    <th style="width:50%;">DS Office</th>
-                                    <th style="width:30%;">Requesting Date</th>
+                                    <th style="width:40%;">DS Office</th>
+                                    <th style="width:15%;">Created Date</th>
+                                    <th style="width:15%;">Requesting Date</th>
+                                    <th style="width:10%;"></th>
                                     <th style="width:10%;"></th>
                                 </tr>
                             </thead>
@@ -181,19 +183,31 @@
                 //let cell1 = row.insertCell(-1);
                 let cell11 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
+                let cell22 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
                 var attribute2 = document.createElement("a");
                 attribute2.id = obj['id'];
                 attribute2.href = "viewRequest/" + obj['id'];
                 attribute2.target = "_blank"
                 attribute2.className = "btn_views";
-                attribute2.name = "delete";
+                attribute2.name = "View";
                 attribute2.innerHTML = "View";
+                var attribute = document.createElement("a");
+                attribute.id = obj['id'];
+                //attribute.href = "viewRequest/" + obj['id'];
+                attribute.target = "_blank"
+                attribute.className = "btn_delete";
+                attribute.name = "delete";
+                attribute.value = obj['id'];
+                attribute.innerHTML = "delete";
                 cell11.innerHTML = obj['id'];
                 cell2.innerHTML = obj['name'];
+                cell22.innerHTML = obj['createdDate'];
                 cell3.innerHTML = obj['requestedDate'];
                 cell4.appendChild(attribute2);
+                cell5.appendChild(attribute);
             }
         }
     </script>

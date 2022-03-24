@@ -288,9 +288,9 @@ class InventoryManager extends Employee{
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
             $id=ServiceRequestNotice::getId($id);
-            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,divisionaloffice.dvId  AS `dvId`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
         }else{
-            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  AND servicerequest.requestedDate >= CURDATE()  AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,divisionaloffice.dvId  AS `dvId`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  AND servicerequest.requestedDate >= CURDATE()  AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
         }
         $excute = $this->connection->query($sql);
         $results = array();
@@ -331,10 +331,42 @@ class InventoryManager extends Employee{
         if(count($data['receivedParams'])==1){
             $id = $data['receivedParams'][0];
             $id=ServiceRequestNotice::getId($id);
-            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.createdDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId  AND servicerequest.currentStatus <> 'd' AND servicerequest.r_id= $id AND servicerequest.inventoryId= $inventoryId ORDER BY id;";
         }else{
-            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  AND servicerequest.requestedDate >= CURDATE()  AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice)  ORDER BY id;";
-        }echo $sql;
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,servicerequest.requestedDate,servicerequest.createdDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId  AND servicerequest.currentStatus <> 'd' AND servicerequest.inventoryId = $inventoryId ORDER BY id;";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $serviceRequestId = $r['id'];
+            if(strtotime($r['requestedDate']) < strtotime($r['createdDate'])){
+                $r['status']='e';
+            }
+            $sql= "(SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount,SUM(inventoryitem.quantity) AS quantity
+            FROM servicerequestitem,item,unit,inventoryitem
+            WHERE servicerequestitem.itemId = item.itemId AND inventoryitem.itemId = item.itemId AND item.unitType = unit.unitId AND servicerequestitem.r_id = $serviceRequestId AND inventoryitem.inventoryId = $inventoryId GROUP BY servicerequestitem.r_id,servicerequestitem.itemId)
+            UNION
+            (SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount, 0 AS quantity
+             FROM servicerequestitem,item,unit
+             WHERE servicerequestitem.itemId = item.itemId AND item.unitType = unit.unitId AND servicerequestitem.r_id = $serviceRequestId AND servicerequestitem.itemId NOT IN (SELECT inventoryitem.itemId FROM inventoryitem WHERE inventoryitem.inventoryId = $inventoryId GROUP BY inventoryitem.itemId));";
+             $temp = $this->connection->query($sql);
+             $requestItem = array();
+             while($p = $temp-> fetch_assoc()) {
+                $p['itemId'] = Item::getItemCode($p['itemId']);
+                array_push($requestItem,$p);
+             }
+             $id = ServiceRequestNotice::getServiceRequestNoticeCode($r['id']);
+             $r['id']= $id;
+             if($r['requestingFrom']==0){
+                $r['requestingFrom']='All';
+             }else{
+                $r['requestingFrom']='us';
+             }
+             $r['item'] = $requestItem;
+             $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
     public function acceptServiceRequest(array $data){
         global $errorCode;
@@ -470,6 +502,18 @@ class InventoryManager extends Employee{
                     $output = $this->getDistrict($uid);
                 }else if(strcasecmp("division",$data['receivedParams'][1])==0){
                     $output = $this->getDivision($uid);
+                }else if(strcasecmp("all",$data['receivedParams'][1])==0){
+                    $temp = $this->getDivision($uid);
+                    $temp2= $this->getDistrict($uid);
+                    $sql="SELECT inventorymgtofficer.empName,inventorymgtofficer.empAddress,inventorymgtofficer.empEmail,inventorymgtofficer.empTele
+                    FROM inventorymgtofficer WHERE inventorymgtofficer.inventoryMgtOfficerID=$uid";
+                    $execute = $this->connection->query($sql);
+                    $r = $execute-> fetch_assoc();
+                    $r['division']=$temp['name'];
+                    $r['divisionId']=$temp['id'];
+                    $r['district']=$temp2['name'];
+                    $r['districtId']=$temp2['id'];
+                    $output=$r;
                 }else{
                     http_response_code(200);                       
                     echo json_encode(array("code"=>$errorCode['unableToHandle']));

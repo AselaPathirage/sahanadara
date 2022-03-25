@@ -284,11 +284,11 @@
                     if (i % 2 == 0) {
                         $sample += "<div class='row'>";
                     }
-                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><p> Goal :" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
                     if (obj['isActive'] == 1) {
                         $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                     }
-                    $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                    $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
                         $sample += "</div>";
                     }
@@ -318,7 +318,7 @@
                         if (obj['isActive'] == 1) {
                             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                         }
-                        $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                        $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
                         if ((i % 2 == 1) || (i == output.length - 1)) {
                             $sample += "</div>";
                         }
@@ -331,7 +331,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }
@@ -345,7 +345,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }

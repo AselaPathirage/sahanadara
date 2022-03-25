@@ -35,6 +35,7 @@ Route::GET("GnDivision/{data}", array("DisasterOfficer@getGNDivision"));
 Route::GET("statistics", array("ResponsiblePerson@getStats", "InventoryManager@getStats"));
 Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "InventoryManager@getStatsFiltered"));
 
+Route::PUT("user/trasfer/inventoryManager/{userId}", array("DivisionalSecretariat@transferUser"));
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
 Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));

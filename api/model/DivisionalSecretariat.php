@@ -22,11 +22,11 @@ class DivisionalSecretariat extends Employee
             $inventory=$temp['inventoryId'];
             $mail = new mail();
             $name = $data['firstname'] . " " . $data['lastname'];
-            $sql0 = "SELECT empEmail FROM InventoryMgtOfficer WHERE empEmail = '" . $data['email'] . "'";
+            $sql0 = "SELECT empEmail,inventoryMgtOfficerID  FROM InventoryMgtOfficer WHERE empEmail = '" . $data['email'] . "'";
             $sql = "INSERT INTO InventoryMgtOfficer (empName,empAddress,empEmail,empTele,inventoryID,assignedDate) VALUES ('$name','" . $data['address'] . "','" . $data['email'] . "','" . $data['TP_number'] . "',$inventory,'NOW()');";
             $query = $this->connection->query($sql0);
             if ($query->num_rows == 0){
-                $sql0="UPDATE InventoryMgtOfficer SET inventoryID=0,isAssigned='n',resignedDate='NOW()' WHERE inventoryID=".$inventory;
+                $sql0="UPDATE InventoryMgtOfficer SET isAssigned='n',resignedDate='NOW()' WHERE inventoryID=".$inventory;
                 $this->connection->query($sql0);
                 $this->connection->query($sql);
                 $tokenKey = $this->tokenKey(10);
@@ -44,7 +44,11 @@ class DivisionalSecretariat extends Employee
                 echo json_encode(array("code" => $errorCode['success']));
                 exit();
             }else{
-                echo json_encode(array("code" => $errorCode['emailAlreadyInUse']));
+                $excute = $this->connection->query($sql0);
+                $temp =$excute->fetch_assoc();
+                $inventoryId=$temp['inventoryMgtOfficerID'];
+                $user=Employee::getEmployeeCode($inventoryId,2);
+                echo json_encode(array("code" => $errorCode['emailAlreadyInUse'],'employeeId'=>$user));
                 exit();
             }
         } else {
@@ -52,7 +56,34 @@ class DivisionalSecretariat extends Employee
             exit();
         }
     }
-
+    public function transferUser(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $id=Employee::getEmployeeId($data['receivedParams'][0],2);
+            if($id==0){
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+            $division = $this->getDivision($uid);
+            $dvId = $division['id'];
+            $sql="SELECT @id:=inventory.inventoryId FROM inventory WHERE inventory.dvId=$dvId;
+            UPDATE inventorymgtofficer SET inventorymgtofficer.inventoryID=@id
+            WHERE inventorymgtofficer.inventoryMgtOfficerID=$id;";
+            $this->connection->multi_query($sql);
+            $count=$this->connection->affected_rows;
+            if($count==0){
+                echo json_encode(array("code"=>$errorCode['unknownError']));
+                exit();
+            }else{
+                echo json_encode(array("code"=>$errorCode['success']));
+                exit();
+            }
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
     protected function tokenKey($length = 10)
     {
         return substr(str_shuffle("aAQEWAbcERWREdefghiHLafgdffhvcJHjklmnopqrSFSEREESGSEGst0123456789"), 0, $length);
@@ -62,7 +93,7 @@ class DivisionalSecretariat extends Employee
         $uid = $data['userId'];
         $division = $this->getDivision($uid);
         $dvId = $division['id'];
-        $sql = "SELECT inventoryMgtOfficerID,empName,empAddress,empEmail,isAssigned,DATE(assignedDate) AS assignedDate,empTele,resignedDate FROM inventorymgtofficer,inventory WHERE inventorymgtofficer.inventoryID = inventory.inventoryId AND  inventory.dvId =".$dvId;
+        $sql = "SELECT inventoryMgtOfficerID,empName,empAddress,empEmail,isAssigned,DATE(assignedDate) AS assignedDate,empTele,resignedDate FROM inventorymgtofficer,inventory WHERE inventorymgtofficer.inventoryID = inventory.inventoryId AND isAssigned='y' AND  inventory.dvId =".$dvId;
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {

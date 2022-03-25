@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -33,7 +34,13 @@
             </div>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a class="btn_blue Click-here">Create Inventory Manager</a>
+                    <a class="btn_blue Click-here" style="cursor:pointer;">Create New Inventory Manager</a>
+                </div>
+            </div>
+            <br>
+            <div class="container" style="text-align: right;">
+                <div style="display:block;">
+                    <a class="btn_blue Click-transfer" style="cursor:pointer;">Add Transfered Inventory Manager</a>
                 </div>
             </div>
             <div class="custom-model-main addform">
@@ -65,14 +72,9 @@
                                     <div id="tpCheck">
                                     </div>
                                     <input type="text" id="TP_number" name="TP_number" placeholder="Phone number" maxlength="11" required='true'>
-
-                                    <label for="inventory">Inventory</label>
-                                    <input type="text" id="inventory" name="inventory" value="" disabled="true">
-                                    </select>
-
                                     <div class="row " style="text-align:right;justify-content: right;">
-                                        <input type="reset" style="background-color: red;" value="Cancel">
-                                        <input type="submit" style="background-color: darkblue;margin-top:0px" value="Submit">
+                                        <input type="reset" class="btn-alerts btn_cancel cancel" class="btn-alerts" style="background-color: red;" value="Cancel">
+                                        <input type="submit" class="btn-alerts" style="background-color: darkblue;" value="Submit">
                                     </div>
                                 </div>
                             </form>
@@ -83,41 +85,16 @@
             </div>
             <div class="custom-model-main" id="updateform">
                 <div class="custom-model-inner">
-                    <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form id='update' name="update" method="POST" onSubmit="return validate_nic();">
-                                <h1 class="text-center">Update Record</h1>
+                            <form id='update' name="update">
+                                <h1 class="text-center">Email Already in use.</h1>
+                                <h3>Transfer <span id="empId0"></span> to our inventory?</h3>
                                 <div class="row-content">
-                                    <label for="firstname">First Name</label>
-                                    <input type="text" id="upfirstname" name="upfirstname" required='true'>
-
-                                    <label for="lastname">Last Name</label>
-                                    <input type="text" id="uplastname" name="uplastname" required='true'>
-
-                                    <label for="NIC">NIC</label>
-                                    <input type="text" id="upNIC" name="upNIC" maxlength="12" required='true'>
-                                    <div id="nicCheck">
-                                    </div>
-
-                                    <label for="email">Email</label>
-                                    <input type="email" id="upemail" name="upemail" required='true'>
-
-                                    <label for="address">Address</label>
-                                    <textarea type="text" id="upaddress" name="upaddress" required='true'></textarea>
-
-                                    <label for="TP number">TP Number</label>
-                                    <div id="tpCheck">
-                                    </div>
-                                    <input type="text" id="upTP_number" name="upTP_number" maxlength="11" required='true'>
-
-                                    <label for="inventory">Inventory</label>
-                                    <select id="upinventory" name="upinventory" required="true">
-                                    </select>
-
+                                    <input type="hidden" id="empId3" name="empId3">
                                     <div class="row " style="text-align:right;justify-content: right;">
-                                        <input type="reset" style="background-color: red;" value="Cancel">
-                                        <input type="submit" style="background-color: darkblue;margin-top:0px" value="Update">
+                                        <input type="reset" class="btn-alerts btn_cancel cancel" style="background-color: red;" value="Cancel">
+                                        <input type="submit" style="background-color: darkblue;" value="Transfer">
                                     </div>
                                 </div>
                             </form>
@@ -126,54 +103,75 @@
                 </div>
                 <div class="bg-overlay"></div>
             </div>
-            <div class="custom-model-main" id="deleteform">
+            <div class="custom-model-main" id="transfer">
                 <div class="custom-model-inner">
-                    <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <div class="row-content">
-                                <h2>Are you sure?</h2>
-                                <input type="hidden" id="item2" value="">
-                                <p>Do you really want to delete this record? This process cannot be undone.</p>
-                                <div class="row" style="justify-content: center;">
-                                    <button type="button" class="btn-alerts btn_cancel cancel">Cancel</button>
-                                    <button type="button" class="btn-alerts btn_danger" id="delete-confirm">Delete</button>
+                            <form id='transferForm' name="transferForm">
+                                <h1 class="text-center">Add transferd user</h1>
+                                <input type="text" id="transferId" placeholder="Employee Id...." required='true'>
+                                <div class="row-content">
+                                    <input type="hidden" id="empId" name="empId">
+                                    <div class="row " style="text-align:right;justify-content: right;">
+                                        <input type="reset" class="btn-alerts btn_cancel cancel" style="background-color: red;" value="Cancel">
+                                        <input type="submit" style="background-color: darkblue;" value="Transfer">
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
                 <div class="bg-overlay"></div>
             </div>
-            <div class="container">
-                <div class="">
-                    <table class="table" style="margin: 15px auto;">
-                        <thead>
-                            <tr class="filters">
-                                <th>Search
-                                    <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
-                                </th>
-                            </tr>
-                        </thead>
-                    </table>
-                    <div class="panel panel-primary filterable">
-                        <table id="table2" class="table">
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    <th>TP Number</th>
-                                    <th>Assigned Date</th>
-                                    <th>Action</th>
-                                </tr>
-                            </thead>
-                            <tbody id="tbodyid">
-                            </tbody>
-                        </table>
+            <!-- <table class="table">
+                <thead>
+                    <tr class="filters">
+                        <th>Active Status
+                            <select id="status-filter" class="form-control">
+                                <option>Active</option>
+                                <option>Not Started</option>
+                                <option>In Progress</option>
+                                <option>Completed</option>
+                            </select>
+                        </th>
+
+
+                        <th>Search
+                            <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                        </th>
+                    </tr>
+                </thead>
+            </table> -->
+        </div>
+        <div class="container" id="tbodyid">
+            <div class="row">
+                <div class="col6">
+                    <div class="box row-content">
+                        <h4>Name 1</h4>
+                        <p>email 1</p>
+
+                        <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                            <a class="btn_active">Active</a>
+                            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising" class="btn_views">View</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col6">
+                    <div class="box row-content">
+                        <h4>Name 2</h4>
+                        <p>Email 2</p>
+
+                        <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                            <a class="btn_active">Active</a>
+
+                            <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising" class="btn_views">View</a>
+                        </div>
                     </div>
                 </div>
             </div>
+
+        </div>
         </div>
 
     </section>
@@ -191,34 +189,17 @@
                 }
                 $(thisPage).addClass("active");
             });
-            $(".btn_update").on('click', function() {
-                var id = $(this).attr("id");
-                var fname = $(this).attr("data-fname");
-                var lname = $(this).attr("data-lname");
-                var nic = $(this).attr("data-nic");
-                var email = $(this).attr("data-email");
-                var address = $(this).attr("data-address");
-                var telno = $(this).attr("data-telno");
-                var safehouse = $(this).attr("data-inventory");
-
-                $("#updateform").fadeIn();
-                $("#update").trigger("reset");
-                $("#updateform").addClass('model-open');
-
-                $("#upfirstname").val(fname);
-                $("#uplastname").val(lname);
-                $("#upNIC").val(nic);
-                $("#upemail").val(email);
-                $("#upaddress").val(address);
-                $("#upTP_number").val(telno);
-                $("#upsafehouse").val(inventory);
-
-                $("#item").val(id);
+            $("#alertBox").click(function() {
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
+            });
+            $(".Click-transfer").on('click', function() {
+                $("#transfer").fadeIn();
+                $("#transfer").addClass('model-open');
             });
             $(".btn_delete").on('click', function() {
                 var id = $(this).attr("id");
                 $("#deleteform").fadeIn();
-
                 $("#deleteform").addClass('model-open');
                 $("#item2").val(id);
             });
@@ -230,9 +211,68 @@
             $(".close-btn, .bg-overlay, .cancel").click(function() {
                 $(".custom-model-main").removeClass('model-open');
             });
-            $("#alertBox").click(function(){
-                $(".alert").fadeOut(100)
-                $("#alertBox").html("");
+            $("#update").submit(function(e){
+                e.preventDefault();
+                $(".custom-model-main").fadeOut();
+                $(".custom-model-main").removeClass('model-open');
+                var object = {};
+                var empId=$('#empId3').val();
+                object['employeeId']=empId;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "PUT",
+                    url: "<?php echo API; ?>user/trasfer/inventoryManager/"+empId,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        console.log(result);
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                            getInventorymgr();
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                });
+            });
+            $("#transferForm").submit(function(e){
+                e.preventDefault();
+                $(".custom-model-main").fadeOut();
+                $(".custom-model-main").removeClass('model-open');
+                var object = {};
+                var empId=$('#transferId').val();
+                object['employeeId']=empId;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "PUT",
+                    url: "<?php echo API; ?>user/trasfer/inventoryManager/"+empId,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        console.log(result);
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                            $("#transferForm").trigger("reset");
+                            getInventorymgr();
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                });
             });
             $("#add").submit(function(e) {
                 e.preventDefault();
@@ -247,7 +287,7 @@
                 });
                 var json = JSON.stringify(object);
                 console.log(json);
-                $("#add").trigger("reset");
+                //$("#add").trigger("reset");
                 $.ajax({
                     type: "POST",
                     url: "<?php echo API; ?>user",
@@ -260,6 +300,15 @@
                         console.log(result);
                         if (result.code == 806) {
                             alertGen("Record Added Successfully!", 1);
+                            $("#add").trigger("reset");
+                            getInventorymgr();
+                        } else if (result.code == 814) {
+                            $("#empId0").html(result.employeeId);
+                            $("#empId3").val(result.employeeId);
+                            
+                            $("#updateform").fadeIn();
+                            $("#add").trigger("reset");
+                            $("#updateform").addClass('model-open');
                         } else {
                             alertGen("Unable to handle request.", 2);
                         }
@@ -268,6 +317,76 @@
                         alertGen("Unable to handle request.", 2);
                     }
                 });
+            });
+
+            $("#delete-confirm").submit(function(e) {
+                e.preventDefault();
+                $("#deleteform").fadeOut();
+                $("#deleteform").removeClass('model-open');
+                var str = [];
+                //var array = {'key':'ABCD'}
+                var object = {};
+                var id = document.getElementById("item2").value;
+                object["id"] = id;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "DELETE",
+                    url: "<?php echo API; ?>user/" + id,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        $('#trow').empty();
+                        getResponsible();
+                        location.reload();
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Something went wrong.", 3);
+                        console.log(err);
+                    }
+                });
+            });
+            $('#District').change(function() {
+                var val = $(this).val();
+                var divOptions = "<option value=''>Select Division</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == val) {
+                            $.each(district.division, function(j, division) {
+                                divOptions += "<option value='" + division.dvId + "'>" + division.name + "</option>";
+                            })
+                        }
+                    });
+                    $('#Division').html(divOptions);
+                })
+            });
+
+            $('#Division').change(function() {
+                var div = $(this).val();
+                var dist = $('#District').val();
+                var gnOptions = "<option value=''>Select GNDivision</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == dist) {
+                            $.each(district.division, function(j, division) {
+                                if (division.dvId == div) {
+                                    $.each(division.gnArea, function(k, gnArea) {
+                                        gnOptions += "<option value='" + gnArea.gndvId + "'>" + gnArea.name + "</option>";
+                                    })
+                                }
+                            })
+                        }
+                    });
+                    $('#Gndivision').html(gnOptions);
+                })
             });
         });
 
@@ -348,6 +467,7 @@
         var output;
 
         function getInventorymgr() {
+            // var object = {};
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>inventorymgr",
@@ -358,53 +478,93 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
+            // console.log(output);
             $("#tbodyid").empty();
-            var table = document.getElementById("tbodyid");
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No inventorymgr data</p>";
+            } else {
+                for (var i = 0; i < output.length; i++) {
+                    let obj = output[i];
+                    console.log(obj);
 
-            for (var i = 0; i < output.length; i++) {
-                let obj = output[i];
-                let row = table.insertRow(-1);
-                let cell1 = row.insertCell(-1);
-                let cell2 = row.insertCell(-1);
-                let cell3 = row.insertCell(-1);
-                let cell4 = row.insertCell(-1);
-                let cell5 = row.insertCell(-1);
-                let cell6 = row.insertCell(-1);
-                var attribute = document.createElement("a");
-                attribute.id = obj['responsibleId'];
-                // attribute.href = "";
-                attribute.className = "btn_update btn_blue";
-                attribute.name = "update";
-                attribute.innerHTML = "Update";
-                attribute.setAttribute("data-fname", obj['inventorymgrfName'])
-                attribute.setAttribute("data-fname", obj['inventorymgrlName'])
-                attribute.setAttribute("data-nic", obj['inventorymgrNIC'])
-                attribute.setAttribute("data-email", obj['inventorymgremail'])
-                attribute.setAttribute("data-address", obj['inventorymgrAddress'])
-                attribute.setAttribute("data-telno", obj['inventorymgrTelNo'])
-                attribute.setAttribute("data-inventory", obj['inventorymgrInventory'])
-                var attribute2 = document.createElement("a");
-
-                attribute2.id = obj['inventoryId'];
-                // attribute2.href = "";
-                attribute2.className = "btn_delete";
-                attribute2.name = "delete";
-                attribute2.innerHTML = "Delete";
-
-                cell1.innerHTML = obj['empName'];
-                cell2.innerHTML = obj['empEmail'];
-                cell3.innerHTML = obj['empAddress'];
-                cell4.innerHTML = obj['empTele'];
-                cell5.innerHTML = obj['assignedDate'];
-                cell6.innerHTML = obj['inventorymgrTelNo'];
-                cell5.appendChild(attribute);
-                cell5.appendChild(attribute3);
-                cell5.appendChild(attribute2);
-                // console.log(attribute);
-                // console.log(attribute2);
+                    if (i % 2 == 0) {
+                        $sample += "<div class='row'>";
+                    }
+                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['empName'] + "</h4><p>" + obj['empEmail'] + "</p><p> Contact :" + obj['empTele'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                    if (obj['isActive'] == 1) {
+                        $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                    }
+                    $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/InventoryManager/" + obj['inventoryMgtOfficerID'] + "' class='btn_views'>View</a></div></div></div>";
+                    if ((i % 2 == 1) || (i == output.length - 1)) {
+                        $sample += "</div>";
+                    }
+                }
             }
+            $("#tbodyid").append($sample);
         }
+        $("#status").on('change', function() {
+            var status = $('#status').val();
+            console.log(status);
+            $("#tbodyid").empty();
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No fundraiser data</p>";
+            } else {
+                for (var i = 0; i < output.length; i++) {
+
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (status == "Any") {
+                        if (i % 2 == 0) {
+                            $sample += "<div class='row'>";
+                        }
+                        $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['empName'] + "</h4><p>" + obj['empEmail'] + "</p><p> Contact :" + obj['empTele'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                        if (obj['isActive'] == 1) {
+                            $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                        }
+                        $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/InventoryManager/" + obj['inventoryMgtOfficerID'] + "' class='btn_views'>View</a></div></div></div>";
+                        if ((i % 2 == 1) || (i == output.length - 1)) {
+                            $sample += "</div>";
+                        }
+                    } else if (status == "1") {
+                        if (obj['isActive'] == 1) {
+                            if (i % 2 == 0) {
+                                $sample += "<div class='row'>";
+                            }
+                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['empName'] + "</h4><p>" + obj['empEmail'] + "</p><p> Contact :" + obj['empTele'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                            if (obj['isActive'] == 1) {
+                                $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                            }
+                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/InventoryManager/" + obj['inventoryMgtOfficerID'] + "' class='btn_views'>View</a></div></div></div>";
+                            if ((i % 2 == 1) || (i == output.length - 1)) {
+                                $sample += "</div>";
+                            }
+                        }
+                    } else {
+                        if (obj['isActive'] == 0) {
+                            if (i % 2 == 0) {
+                                $sample += "<div class='row'>";
+                            }
+                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['empName'] + "</h4><p>" + obj['empEmail'] + "</p><p> Contact :" + obj['empTele'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                            if (obj['isActive'] == 1) {
+                                $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                            }
+                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/InventoryManager/" + obj['inventoryMgtOfficerID'] + "' class='btn_views'>View</a></div></div></div>";
+                            if ((i % 2 == 1) || (i == output.length - 1)) {
+                                $sample += "</div>";
+                            }
+                        }
+                    }
+                }
+            }
+            console.log($sample);
+            $("#tbodyid").append($sample);
+
+        });
+
+        // search
 
         (function() {
             var showResults;
@@ -423,23 +583,6 @@
                 };
             });
         }.call(this));
-
-        function getInventory() {
-            var inventory = $.parseJSON($.ajax({
-                type: "GET",
-                url: "<?php echo API; ?>inventory/name",
-                dataType: "json",
-                headers: {
-                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                },
-                cache: false,
-                async: false
-            }).responseText);
-            console.log(inventory.inventoryAddress);
-            //document.getElementById("inventory").value = inventory.inventoryAddress;
-            document.getElementById("inventory").setAttribute('value', inventory.inventoryAddress);
-        }
-        getInventory();
 
         $(function() {
             $('#user_role').change(function() {

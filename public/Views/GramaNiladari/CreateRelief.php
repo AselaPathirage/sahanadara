@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 
+<?php
+$array = explode("/", $_GET["url"]);
+// echo end($array);
+// exit;
+?>
+
 <head>
     <meta charset="UTF-8">
     <title> Grama Niladari</title>
@@ -310,7 +316,7 @@
             formData.forEach(function(value, key) {
                 object[key] = value;
             });
-
+            object['incidentId'] = "<?php echo end($array); ?>";
             var json = JSON.stringify(object);
             console.log(json);
             $.ajax({

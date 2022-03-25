@@ -76,28 +76,22 @@
         <div class="space"></div>
         <div class="container">
             <div class="box">
-                <div style="display:block;text-align: right;">
-                    <a href="<?php echo HOST; ?>InventoryManager/Inventory/sentRequests" class="btn-fun">View Sent Requests</a>
-                </div>
                 <form>
                     <table class="table">
                         <thead>
                             <tr class="filters">
-                                <th style="width: 20%;">DV Office
+                                <th style="width: 25%;">DV Office
                                     <select id="division" class="form-control">
                                         <option value="">Any</option>
                                     </select>
                                 </th>
                                 <th>
                                     Starting:
-                                    <input type="date" class="form-control searchInput" id="start" name="start" max="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" class="form-control" id="start" name="start" max="<?php echo date("Y-m-d"); ?>">
                                 </th>
                                 <th>
                                     Ending:
-                                    <input type="date" class="form-control searchInput" id="end" name="end">
-                                </th>
-                                <th style="width: 25%;">Search
-                                    <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                                    <input type="date" class="form-control" id="end" name="end" max="<?php echo date("Y-m-d"); ?>">
                                 </th>
                                 <th style="width: 25%;text-align: center;">
                                     <a href="<?php echo HOST; ?>InventoryManager/Inventory/serviceRequestForm" class="create">Create Request</a>
@@ -111,8 +105,10 @@
                             <thead>
                                 <tr>
                                     <th style="width:10%;">Request Id</th>
-                                    <th style="width:50%;">DS Office</th>
-                                    <th style="width:30%;">Requesting Date</th>
+                                    <th style="width:40%;">DS Office</th>
+                                    <th style="width:15%;">Created Date</th>
+                                    <th style="width:15%;">Requesting Date</th>
+                                    <th style="width:10%;"></th>
                                     <th style="width:10%;"></th>
                                 </tr>
                             </thead>
@@ -133,59 +129,7 @@
                 }
                 $(thisPage).addClass("active");
             });
-            $("#start").on("change", function() {
-                var from = $("#start").val();
-                var input = document.getElementById("end");
-                input.setAttribute("min", from);
-            });
-            $(".searchInput").on("change", function() {
-                var from = $("#start").val();
-                var to = $("#end").val();
-                $("#trow tr").each(function() {
-                    var row = $(this);
-                    var date = row.find("td").eq(2).text();
-                    console.log(date);
-                    var show = true;
-                    if (from && date < from)
-                        show = false;
-                    if (to && date > to)
-                        show = false;
-                    if (show)
-                        row.show();
-                    else
-                        row.hide();
-                });
-            });
-            $('#division').on('change', function() {
-                let value = $('#division').val();
-                $('#trow').empty();
-                var table = document.getElementById("trow");
-                for (var i = 0; i < requests.length; i++) {
-                    if (requests[i]['dvId'] == value || !value) {
-                        let obj = requests[i];
-                        let row = table.insertRow(-1);
-                        let id = "data_" + i;
-                        row.id = id;
-                        row.className = "task-list-row";
-                        //let cell1 = row.insertCell(-1);
-                        let cell11 = row.insertCell(-1);
-                        let cell2 = row.insertCell(-1);
-                        let cell3 = row.insertCell(-1);
-                        let cell4 = row.insertCell(-1);
-                        var attribute2 = document.createElement("a");
-                        attribute2.id = obj['id'];
-                        attribute2.href = "viewRequest/" + obj['id'];
-                        attribute2.target = "_blank"
-                        attribute2.className = "btn_views";
-                        attribute2.name = "delete";
-                        attribute2.innerHTML = "View";
-                        cell11.innerHTML = obj['id'];
-                        cell2.innerHTML = obj['name'];
-                        cell3.innerHTML = obj['requestedDate'];
-                        cell4.appendChild(attribute2);
-                    }
-                }
-            });
+
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -221,7 +165,7 @@
         function serviceRequests() {
             requests = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>serviceRequest",
+                url: "<?php echo API; ?>serviceRequest/self",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -239,38 +183,33 @@
                 //let cell1 = row.insertCell(-1);
                 let cell11 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
+                let cell22 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
                 var attribute2 = document.createElement("a");
                 attribute2.id = obj['id'];
                 attribute2.href = "viewRequest/" + obj['id'];
                 attribute2.target = "_blank"
                 attribute2.className = "btn_views";
-                attribute2.name = "delete";
+                attribute2.name = "View";
                 attribute2.innerHTML = "View";
+                var attribute = document.createElement("a");
+                attribute.id = obj['id'];
+                //attribute.href = "viewRequest/" + obj['id'];
+                attribute.target = "_blank"
+                attribute.className = "btn_delete";
+                attribute.name = "delete";
+                attribute.value = obj['id'];
+                attribute.innerHTML = "delete";
                 cell11.innerHTML = obj['id'];
                 cell2.innerHTML = obj['name'];
+                cell22.innerHTML = obj['createdDate'];
                 cell3.innerHTML = obj['requestedDate'];
                 cell4.appendChild(attribute2);
+                cell5.appendChild(attribute);
             }
         }
-        (function () {
-        var showResults;
-        $('#search').keyup(function () {
-            var searchText;
-            searchText = $('#search').val();
-            return showResults(searchText);
-        });
-        showResults = function (searchText) {
-            $('tbody tr').hide();
-            return $('tbody tr:Contains(' + searchText + ')').show();
-        };
-        jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function (arg) {
-            return function (elem) {
-                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
-            };
-        });
-    }.call(this));
     </script>
 </body>
 

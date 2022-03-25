@@ -86,7 +86,7 @@ class Core{
                                 unset($this->params['receivedParams']);
                                 $this->params['receivedParams']=$data;
                             }else{
-                                array_shift($this->params['receivedParams']);
+                                $this->params['receivedParams']=[];
                             }
                             $this->params['userId'] = $this->userId;
                             $this->params['userType'] = $this->userType;
@@ -110,7 +110,8 @@ class Core{
                             unset($this->params['receivedParams']);
                             $this->params['receivedParams']=$data;
                         }else{
-                            array_shift($this->params['receivedParams']);
+                            $this->params['receivedParams']=[];
+                            //array_shift($this->params['receivedParams']);
                         }
                         //unset($this->params['receivedParams'][0]);
                         return;

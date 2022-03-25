@@ -673,7 +673,7 @@ class DivisionalSecretariat extends Employee
         $goal = $data['goal'];
 
         $sql = "INSERT INTO fundraising (title, description, goal) VALUES ('$title','$description','$goal');";
-        $this->connection->query($sql);
+        //$this->connection->query($sql);
         
         if ($this->connection->query($sql)) {
             echo json_encode(array("code" => $errorCode['success']));
@@ -691,8 +691,9 @@ class DivisionalSecretariat extends Employee
         // $r = $excute->fetch_assoc();
         // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
         // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
-        
         $sql = "SELECT f.* FROM fundraising f";
+        // $sql = "SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
+        // WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId;";
         $excute = $this->connection->query($sql);
         $results = array();
         // $r = $excute->fetch_assoc();

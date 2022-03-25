@@ -8,15 +8,15 @@ DELETE - delete
 
 Route::GET("/", array("Home@creadits"));
 Route::GET("donation", array("Home@viewDonations"));
-Route::GET("notice", array("Home@viewNotice", "InventoryManager@getNotice"));
-Route::GET("notice/{id}", array("InventoryManager@getNotice", "DisasterOfficer@getNotice"));
+
+Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice","DivisionalSecretariat@getNotice"));
+Route::GET("notice/{id}", array("InventoryManager@getNotice","DisasterOfficer@getNotice"));
+
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
 Route::GET("item", array("InventoryManager@getAllItem"));
-Route::GET("item/id", array("InventoryManager@getItemFiltered", "DisasterOfficer@getItemFiltered", "ResponsiblePerson@getItemFiltered"));
-Route::GET("item/value", array("InventoryManager@getItemFiltered", "DisasterOfficer@getItemFiltered", "ResponsiblePerson@getItemFiltered"));
-Route::GET("item/{id}", array("InventoryManager@getItem"));
+Route::GET("item/{filter}", array("InventoryManager@getItemFiltered", "DisasterOfficer@getItemFiltered", "ResponsiblePerson@getItemFiltered"));
 Route::GET("district", array("Admin@getDistrict"));
 Route::GET("user", array("Admin@searchUser"));
 Route::GET("user/count/{data}", array("Admin@getUserCount"));
@@ -30,6 +30,7 @@ Route::GET("safehouse/name", array("DisasterOfficer@filtermySafehouse", "Invento
 Route::GET("safehouse/{safeHouseId}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
 Route::GET("incident", array("GramaNiladari@getIncidents", "DisasterOfficer@getIncidents"));
 Route::GET("incident/{id}", array("GramaNiladari@getIncidentById", "DisasterOfficer@getIncidentById"));
+
 Route::GET("GnDivision/{data}", array("DisasterOfficer@getGNDivision"));
 Route::GET("statistics", array("ResponsiblePerson@getStats", "InventoryManager@getStats"));
 Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "InventoryManager@getStatsFiltered"));
@@ -142,6 +143,8 @@ Route::GET("aids", array("InventoryManager@getAids"));
 Route::GET("aids/safeHouse", array("InventoryManager@getAidsSafeHouse"));
 Route::GET("aids/{safeHouseId}", array("InventoryManager@getAids"));
 Route::GET("serviceRequest", array("InventoryManager@getServiceRequest"));
+Route::GET("serviceRequest/self", array("InventoryManager@viewSentServiceRequest"));
+Route::GET("serviceRequest/self/{requestId}", array("InventoryManager@viewSentServiceRequest"));
 Route::GET("serviceRequest/{requestId}", array("InventoryManager@getServiceRequest"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
@@ -155,13 +158,18 @@ Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
 // Div Sec
 Route::GET("inventorymgr", array("DivisionalSecretariat@getInventorymgr"));
 Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));
+Route::GET("borrowRequests", array("DivisionalSecretariat@getBorrowRequests"));
+Route::GET("borrowRequests/{id}", array("DivisionalSecretariat@filterBorrowRequests"));
 Route::GET("divseccomp", array("DivisionalSecretariat@getCompensations"));
 Route::GET("divsecprop/{id}", array("DivisionalSecretariat@getProperty"));
 Route::GET("divsecdeath/{id}", array("DivisionalSecretariat@getDeath"));
-
+Route::GET("fundraiser", array("DivisionalSecretariat@getFundraiser"));
+Route::POST("fundraiser", array("DivisionalSecretariat@addFundraiser"));
 Route::PUT("divseccompapprove", array("DivisionalSecretariat@approvecomp"));
-
-
+Route::PUT("fundraiser/{id}", array("DivisionalSecretariat@updateFundraiser"));
+Route::PUT("borrowRequests/{command}/{requestId}", array("DivisionalSecretariat@commandBorrowRequests"));
+Route::PUT("notice/{command}/{noticeId}", array("DivisionalSecretariat@commandNotice"));
+Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
 
 // District Sec
 Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));

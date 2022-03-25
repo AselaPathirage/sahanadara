@@ -98,11 +98,11 @@
                                 </th>
                                 <th>
                                     Starting:
-                                    <input type="date" class="form-control" id="start" name="start" max="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" class="form-control searchInput" id="start" name="start" max="<?php echo date("Y-m-d"); ?>">
                                 </th>
                                 <th>
                                     Ending:
-                                    <input type="date" class="form-control" id="end" name="end" max="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" class="form-control searchInput" id="end" name="end" max="<?php echo date("Y-m-d"); ?>">
                                 </th>
                                 <th>Search
                                     <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
@@ -144,7 +144,29 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            $("#start").on("change", function() {
+                var from = $("#start").val();
+                var input = document.getElementById("end");
+                input.setAttribute("min",from);
+            });
+            $(".searchInput").on("change", function() {
+                var from = $("#start").val();
+                var to = $("#end").val();
+                $("#trow tr").each(function() {
+                    var row = $(this);
+                    var date = row.find("td").eq(3).text();
+                    console.log(date);
+                    var show = true;
+                    if (from && date < from)
+                        show = false;
+                    if (to && date > to)
+                        show = false;
+                    if (show)
+                        row.show();
+                    else
+                        row.hide();
+                });
+            });
         });
         document.getElementById('end').value = new Date().toISOString().slice(0, 10);
         let sidebar = document.querySelector(".sidebar");

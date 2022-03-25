@@ -87,6 +87,9 @@ trait Noticer{
             }elseif(strtolower($filter)=="value"){
                 $sql = "SELECT itemName  FROM item ORDER BY itemName";
                 $temp = "itemName";
+            }elseif(preg_match('~[0-9]+~', $filter)){
+                $this->getItem($data);
+                exit();
             }else{
                 http_response_code(200);                       
                 echo json_encode(array("code"=>$errorCode['unableToHandle']));
@@ -104,6 +107,24 @@ trait Noticer{
             echo json_encode(array("code"=>$errorCode['attributeMissing']));
             exit();
         }
+    }
+    public function getItem(array $data){
+        if(count($data['receivedParams'])==1){
+            $id = $data['receivedParams'][0];
+            $id=Item::getId($id);
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId AND item.itemId=$id ORDER BY item.itemId";
+        }else{
+            $sql = "SELECT * FROM `item`, `unit` WHERE item.unitType=unit.unitId  ORDER BY item.itemId";
+        } 
+        
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $r['itemId'] = Item::getItemCode($r['itemId']);
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
     public function filterSafehouse($data){
         global $errorCode;

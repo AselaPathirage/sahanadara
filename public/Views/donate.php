@@ -21,16 +21,16 @@
         <?php include 'landing_topnav.php'; ?>
         <div id="page-content">
             <div class="space"></div>
-            <h1 class="heading_landing">Fund Raises</h1>
+            <h1 class="heading_landing" id="topic">Fund Raises</h1>
             <div class="container aboutsec">
-                <p class="text-center" style="font-size: large;">MAKE A DONATION & SPREAD A SMILE <br> SAHANADARA ensures that every single Rupee what you donate will be solely used for Charity purpose.
+                <p class="text-center" style="font-size: large;" id="subTopic">MAKE A DONATION & SPREAD A SMILE <br> SAHANADARA ensures that every single Rupee what you donate will be solely used for Charity purpose.
                 </p>
 
 
                 <table class="table">
                     <thead>
                         <tr class="filters">
-                            <th>District
+                            <th> <span id="district">District</span>
                                 <select id="assigned-user-filter" class="form-control">
                                     <option>All</option>
                                     <option>Kalutara</option>
@@ -39,7 +39,7 @@
 
                                 </select>
                             </th>
-                            <th>DS Division
+                            <th> <span id="division">DS Division</span>
                                 <select id="status-filter" class="form-control">
                                     <option>All</option>
                                     <option>Madurawala</option>
@@ -47,7 +47,7 @@
                                     <option>Millaniya</option>
                                 </select>
                             </th>
-                            <th>Search
+                            <th> <span id="search">Search</span>
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
                         </tr>
@@ -452,6 +452,14 @@
                 }
 
                 //body items
+                document.getElementById("topic").innerHTML= dataJson[sub].donate.topic;
+                document.getElementById("subTopic").innerHTML= dataJson[sub].donate.subTopic;
+                document.getElementById("district").innerHTML= dataJson[sub].donate.district;
+                document.getElementById("division").innerHTML= dataJson[sub].donate.division;
+                document.getElementById("search").innerHTML= dataJson[sub].donate.search;
+                
+                
+                
 
                 //console.log(dataJson);
             }catch (e) {
@@ -461,9 +469,18 @@
                 document.getElementById("about").innerHTML="About";
                 document.getElementById("help").innerHTML="Help";
                 document.getElementById("donate").innerHTML="Donate";
-                document.getElementById("staff").innerHTML="Donate";
+                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
+                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                }
 
                 //body items
+                document.getElementById("topic").innerHTML= "Fund Raises";
+                document.getElementById("subTopic").innerHTML= "MAKE A DONATION & SPREAD A SMILE <br> SAHANADARA ensures that every single Rupee what you donate will be solely used for Charity purpose.";
+                document.getElementById("district").innerHTML= "District";
+                document.getElementById("division").innerHTML= "DS Division";
+                document.getElementById("search").innerHTML= "Search";
+                
+
             }
         };
     </script>

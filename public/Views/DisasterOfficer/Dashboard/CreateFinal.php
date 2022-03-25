@@ -9,12 +9,13 @@ $array = explode("/", $_GET["url"]);
 
 <head>
     <meta charset="UTF-8">
-    <title> Grama Niladari</title>
+    <title>Disaster Officer</title>
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -25,20 +26,20 @@ $array = explode("/", $_GET["url"]);
 
 <body>
     <?php
-    include_once('./public/Views/GramaNiladari/includes/sidebar_dashboard.php');
+    include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
     ?>
     <section class="dashboard-section">
         <?php
-        include_once('./public/Views/GramaNiladari/includes/topnav.php');
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php');
         ?>
         <div class="space"></div>
         <div id="alertBox">
         </div>
-        <div class="container col8">
+        <div class="container col10">
             <form id="add">
                 <div class="box">
                     <div class="box1">
-                        <h1 class="text-center">Final Incident Report</h1>
+                        <h1 class="text-center">Divisional Final Incident Report</h1>
                         <!-- <div class="row">
                         <div class="col6">
                             <div class="row">
@@ -113,18 +114,15 @@ $array = explode("/", $_GET["url"]);
                                 <label for="user role">Disaster</label>
                             </div>
                             <div class="col9">
-                                <select id="disaster" name="disaster">
-
-
-                                </select>
+                                <input type="text" id="disaster" name="disaster" placeholder="Disaster" required>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col3">
-                                <label for="fname">Location of incident</label>
+                                <label for="fname">GN Divisions</label>
                             </div>
                             <div class="col9">
-                                <input type="text" id="location" name="location" placeholder="Location of incident" required>
+                                <input type="text" id="gns" name="gns" placeholder="GN divisions" required>
                             </div>
                         </div>
                         <div class="row">
@@ -137,84 +135,80 @@ $array = explode("/", $_GET["url"]);
                         </div>
                         <h4 class="text-center">Reporting on the Impact of Disaster</h4>
 
-                        <div class="row">
-                            <div class="col6">
-                                <div class="col12">
-                                    <h4 class="" style="padding:0 80px">Affected</h4>
-                                </div>
+                        <div class="row" style="display:block;">
+                            <div class="panel panel-primary filterable">
+                                <table id="task-list-tbl" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>GN Division</th>
+                                            <th>Description</th>
+                                            <th>Type</th>
+                                            <th>GN</th>
+                                            <th>Status</th>
+                                            <th>View</th>
+                                            <th>Incident</th>
+                                            <th><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></th>
 
-                                <div class="row">
-                                    <div class="col4">
-                                        <label for="TP number">Families</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="afam" name="afam" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col4">
-                                        <label for="TP number">People</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="apeople" name="apeople" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="col12" style="margin-top: 10px;">
-                                    <h4 class="" style="padding:0 80px">Resettled</h4>
-                                </div>
 
-                                <div class="row">
-                                    <div class="col4">
-                                        <label for="TP number">Families</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="efam" name="efam" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col4">
-                                        <label for="TP number">People</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="epeople" name="epeople" placeholder="0">
-                                    </div>
-                                </div>
+                                        </tr>
+                                    </thead>
 
+                                    <tbody id="tbodyid">
+
+                                        <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
+                                            <td>01/24/2021 12:50</td>
+                                            <td>Initial</td>
+                                            <td>Approved</td>
+                                            <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+
+                                        </tr>
+
+                                        <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                            <td>03/14/2021 13:56</td>
+                                            <td>Relief</td>
+                                            <td>Approved</td>
+                                            <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                        </tr>
+                                        <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                            <td>03/20/2021 13:56</td>
+                                            <td>Relief</td>
+                                            <td>Approved</td>
+                                            <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                        </tr>
+                                        <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                            <td>03/21/2021 13:56</td>
+                                            <td>Relief</td>
+                                            <td>Approved</td>
+                                            <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                        </tr>
+                                        <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                            <td>03/25/2021 13:56</td>
+                                            <td>Relief</td>
+                                            <td>Approved</td>
+                                            <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                        </tr>
+                                        <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                            <td>03/28/2021 13:56</td>
+                                            <td>Final</td>
+                                            <td>Not Approved</td>
+                                            <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                        </tr>
+                                    </tbody>
+                                    <tfoot>
+                                        <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
+                                            <td>Total</td>
+                                            <td>Final</td>
+                                            <td>Not Approved</td>
+                                            <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                        </tr>
+
+                                    </tfoot>
+                                </table>
                             </div>
-                            <div class="col6">
-                                <div class="row">
-                                    <div class="col4">
-                                        <label for="TP number">Deaths</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="deaths" name="deaths" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col4">
-                                        <label for="TP number">Injured</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="injured" name="injured" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="row" id="missingrow">
-                                    <div class="col4">
-                                        <label for="TP number">Missing</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="missing" name="missing" placeholder="0">
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col4" style="text-align: right;">
-                                        <label for="TP number">Hospitalized</label>
-                                    </div>
-                                    <div class="col8">
-                                        <input type="number" id="hos" name="hos" placeholder="0">
-                                    </div>
-                                </div>
-                            </div>
+
+
+
+
                         </div>
                         <div class="row">
                             <div class="col6">
@@ -398,13 +392,13 @@ $array = explode("/", $_GET["url"]);
             var obj = output[0];
             console.log(obj);
 
-            var tot=(900*obj['sumf1'])+ (1200*obj['sumf2'])+ (1400*obj['sumf3']) +(1600*obj['sumf4'])+ (1800*obj['sumf5']);
+            var tot = (900 * obj['sumf1']) + (1200 * obj['sumf2']) + (1400 * obj['sumf3']) + (1600 * obj['sumf4']) + (1800 * obj['sumf5']);
 
             $('#dry').val(tot);
             $('#cooked').val(obj['sumcooked']);
             $('#emer').val(obj['sumemer']);
-            
-            
+
+
         }
 
         function getDisasterType() {

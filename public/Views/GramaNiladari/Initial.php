@@ -326,6 +326,8 @@ $array = explode("/", $_GET["url"]);
                         </div>
                         <div class="col6">
                             <h3>Approved Status : <span id="dsname"></span></h3>
+                            <h4 style="text-align:left;padding-top:0;padding-left: 25px;"> <span id="dsremarks">* </span></h4>
+                     
                         </div>
 
 
@@ -418,6 +420,11 @@ $array = explode("/", $_GET["url"]);
                 $('#dsname').text("Approved");
             } else {
                 $('#dsname').text("Rejeted");
+            }
+            if (obj['disRemarks'] != null) {
+                $('#dsremarks').append(obj['disRemarks']);
+            } else {
+                $('#dsremarks').text("");
             }
         }
 

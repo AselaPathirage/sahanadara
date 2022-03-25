@@ -32,7 +32,7 @@ $array = explode("/", $_GET["url"]);
         <div class="space"></div>
         <div class="container">
             <h1>Incident Reporting</h1>
-
+            <a class='btn_active' style='position: absolute; top:120px;right:30px;' id="btn_active">Status : Active</a>
             <h2 style="margin:0;padding:0 15px!important;" id="incidentTitle">sadf</h2>
             <h4 style="padding-top:0!important;padding-left:15px;" id="incidentDes">sdfasdf</h4>
             <div class="container" style="text-align: right;">
@@ -42,6 +42,7 @@ $array = explode("/", $_GET["url"]);
 
                 </div>
             </div>
+           
             <div class="container">
                 <div class="">
                     <table class="table">
@@ -167,9 +168,13 @@ $array = explode("/", $_GET["url"]);
                 async: false
             }).responseText);
             let obj = output[0];
-            console.log(obj);
+            console.log(output);
             $('#incidentTitle').text(obj['title']);
             $('#incidentDes').text(obj['description']);
+            if(obj['isActive'] == 0){
+                $('#btn_active').hide();
+            }
+
         }
 
         function getReportsbyIncident() {
@@ -188,7 +193,7 @@ $array = explode("/", $_GET["url"]);
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
+            console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
 

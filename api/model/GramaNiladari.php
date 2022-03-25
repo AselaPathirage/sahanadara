@@ -386,15 +386,25 @@ class GramaNiladari extends ResponsiblePerson
         $injured = $data['injured'];
         $missing = $data['missing'];
         $remarks = $data['remarks'];
+        $incidentId = $data['incidentId'];
 
         $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $sql = "INSERT INTO `relief`( `date`, `description`, `f1`, `f2`, `f3`, `f4`, `f5`, `cooked`, `emergency`, `fam`, 
-        `people`, `death`, `injured`, `missing`, `remarks`, `gndvId`) VALUES 
-        ('$datePicker','$cause','$m1','$m2','$m3','$m4','$m5','$cooked',
-        '$emer','$fam','$people','$deaths','$injured','$missing','$remarks'," . $r['gndvId'] . ");";
+        `people`, `death`, `injured`, `missing`, `remarks`, `gndvId`";
+        if (!($incidentId == "CreateRelief")) {
+            $sql .= ",`incidentId`";
+        }
 
+        $sql .= ") VALUES ('$datePicker','$cause','$m1','$m2','$m3','$m4','$m5','$cooked',
+        '$emer','$fam','$people','$deaths','$injured','$missing','$remarks'," . $r['gndvId'] . "";
+
+        if (!($incidentId == "CreateRelief")) {
+            $sql .= ",'$incidentId'";
+        }
+
+        $sql .= ");";
 
         if ($this->connection->query($sql)) {
             echo json_encode(array("code" => $errorCode['success']));
@@ -430,6 +440,7 @@ class GramaNiladari extends ResponsiblePerson
         $dry = $data['dry'];
         $cooked = $data['cooked'];
         $remarks = $data['remarks'];
+        $incidentId = $data['incidentId'];
 
         $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
@@ -437,11 +448,11 @@ class GramaNiladari extends ResponsiblePerson
         $sql = "INSERT INTO `gnfinalincident`(`startDate`, `endDate`, `disaster`, `location`,
          `cause`, `fam`, `people`, `death`, `injured`, `evafam`, `hospitalized`, `missing`, `evapeople`, 
          `hfull`, `hpartial`, `enterprise`, `infras`, `numofsafe`, `sfpeople`, `sffamily`, 
-         `dryrationsRs`, `cookingRs`, `emergencyRs`, `remarks`, `gndvid`) VALUES 
+         `dryrationsRs`, `cookingRs`, `emergencyRs`, `remarks`, `gndvid`,`incidentId`) VALUES 
         ('$datePicker1','$datePicker2','$disaster','$location','$cause','$afam','$apeople',
         '$deaths','$injured','$efam','$hos','$missing',
         '$epeople','$hfull','$hpartial','$enterprises','$infra','$safenum','$speople','$sfam',
-        '$dry','$cooked','$emer', '$remarks'," . $r['gndvId'] . ");";
+        '$dry','$cooked','$emer', '$remarks'," . $r['gndvId'] . ",'$incidentId');";
 
 
         if ($this->connection->query($sql)) {
@@ -450,6 +461,45 @@ class GramaNiladari extends ResponsiblePerson
             echo json_encode(array("code" => $errorCode['unknownError']));
         }
     }
+
+    // fill gn final incident data based on the reliefs
+
+    public function fillFinalIncident(array $data)
+    {
+        $uid = $data['userId'];
+        $incidentId = $data['receivedParams'][0];
+        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+        // $excute = $this->connection->query($sql);
+        // $r = $excute->fetch_assoc();
+        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+        $sql = "SELECT
+        SUM(relief.f1) AS sumf1,
+        SUM(relief.f2) AS sumf2,
+        SUM(relief.f3) AS sumf3,
+        SUM(relief.f4) AS sumf4,
+        SUM(relief.f5) AS sumf5,
+        SUM(relief.cooked) AS sumcooked,
+        SUM(relief.emergency) AS sumemer
+    FROM
+        `relief`,
+        gndivision
+    WHERE
+        gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = relief.gndvId AND relief.incidentId=" . $incidentId . ";";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+
+
+
+
 
     public function getReports(array $data)
     {

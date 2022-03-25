@@ -54,7 +54,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row text-center">
+                        <!-- <div class="row text-center">
 
                             <div class="row">
                                 <div class="col3">
@@ -66,7 +66,7 @@
                             </div>
 
 
-                        </div>
+                        </div> -->
 
                         <h4 class="text-center">Personal Details</h4>
 
@@ -221,20 +221,20 @@
 
             var dis = data['dsName'];
             var ds = data['dvName'];
-            var gn = data['gnDvName'];
+            // var gn = data['gnDvName'];
             var name = data['empName'];
-            var nic = data['nid'];
+            //var nic = data['nid'];
             var email = data['empEmail'];
             var add = data['empAddress'];
             var tel = data['empTele'];
-            var ofAdd = data['officeAddress'];
+            var ofAdd = data['divisionalofficeAddress'];
             var ofTel = data['officeTele'];
 
             $("#dis").val(dis);
             $("#ds").val(ds);
-            $("#gn").val(gn);
+            // $("#gn").val(gn);
             $("#name").val(name);
-            $("#nic").val(nic);
+            //$("#nic").val(nic);
             $("#email").val(email);
             $("#tel").val(tel);
             $("#add").val(add);

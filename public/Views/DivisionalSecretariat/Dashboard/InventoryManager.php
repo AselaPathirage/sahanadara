@@ -34,7 +34,13 @@
             </div>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a class="btn_blue Click-here">Create Inventory Manager</a>
+                    <a class="btn_blue Click-here" style="cursor:pointer;">Create New Inventory Manager</a>
+                </div>
+            </div>
+            <br>
+            <div class="container" style="text-align: right;">
+                <div style="display:block;">
+                    <a class="btn_blue Click-transfer" style="cursor:pointer;">Add Transfered Inventory Manager</a>
                 </div>
             </div>
             <div class="custom-model-main addform">
@@ -81,11 +87,11 @@
                 <div class="custom-model-inner">
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form id='update' name="update" method="POST">
+                            <form id='update' name="update">
                                 <h1 class="text-center">Email Already in use.</h1>
                                 <h3>Transfer <span id="empId0"></span> to our inventory?</h3>
                                 <div class="row-content">
-                                    <input type="hidden" id="empId" name="empId">
+                                    <input type="hidden" id="empId3" name="empId3">
                                     <div class="row " style="text-align:right;justify-content: right;">
                                         <input type="reset" class="btn-alerts btn_cancel cancel" style="background-color: red;" value="Cancel">
                                         <input type="submit" style="background-color: darkblue;" value="Transfer">
@@ -97,20 +103,21 @@
                 </div>
                 <div class="bg-overlay"></div>
             </div>
-            <div class="custom-model-main" id="deleteform">
+            <div class="custom-model-main" id="transfer">
                 <div class="custom-model-inner">
-                    <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <div class="row-content">
-                                <h2>Are you sure?</h2>
-                                <input type="hidden" id="item2" value="">
-                                <p>Do you really want to delete this record? This process cannot be undone.</p>
-                                <div class="row" style="justify-content: center;">
-                                    <button type="button" class="btn-alerts btn_cancel cancel">Cancel</button>
-                                    <button type="button" class="btn-alerts btn_danger" id="delete-confirm">Delete</button>
+                            <form id='transferForm' name="transferForm">
+                                <h1 class="text-center">Add transferd user</h1>
+                                <input type="text" id="transferId" placeholder="Employee Id...." required='true'>
+                                <div class="row-content">
+                                    <input type="hidden" id="empId" name="empId">
+                                    <div class="row " style="text-align:right;justify-content: right;">
+                                        <input type="reset" class="btn-alerts btn_cancel cancel" style="background-color: red;" value="Cancel">
+                                        <input type="submit" style="background-color: darkblue;" value="Transfer">
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -186,8 +193,9 @@
                 $(".alert").fadeOut(100)
                 $("#alertBox").html("");
             });
-            $(".btn_update").on('click', function() {
-
+            $(".Click-transfer").on('click', function() {
+                $("#transfer").fadeIn();
+                $("#transfer").addClass('model-open');
             });
             $(".btn_delete").on('click', function() {
                 var id = $(this).attr("id");
@@ -202,6 +210,69 @@
             });
             $(".close-btn, .bg-overlay, .cancel").click(function() {
                 $(".custom-model-main").removeClass('model-open');
+            });
+            $("#update").submit(function(e){
+                e.preventDefault();
+                $(".custom-model-main").fadeOut();
+                $(".custom-model-main").removeClass('model-open');
+                var object = {};
+                var empId=$('#empId3').val();
+                object['employeeId']=empId;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "PUT",
+                    url: "<?php echo API; ?>user/trasfer/inventoryManager/"+empId,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        console.log(result);
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                            getInventorymgr();
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                });
+            });
+            $("#transferForm").submit(function(e){
+                e.preventDefault();
+                $(".custom-model-main").fadeOut();
+                $(".custom-model-main").removeClass('model-open');
+                var object = {};
+                var empId=$('#transferId').val();
+                object['employeeId']=empId;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "PUT",
+                    url: "<?php echo API; ?>user/trasfer/inventoryManager/"+empId,
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        console.log(result);
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                            $("#transferForm").trigger("reset");
+                            getInventorymgr();
+                        } else {
+                            alertGen("Unable to handle request.", 2);
+                        }
+                    },
+                    error: function(err) {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                });
             });
             $("#add").submit(function(e) {
                 e.preventDefault();
@@ -229,12 +300,14 @@
                         console.log(result);
                         if (result.code == 806) {
                             alertGen("Record Added Successfully!", 1);
+                            $("#add").trigger("reset");
                             getInventorymgr();
                         } else if (result.code == 814) {
                             $("#empId0").html(result.employeeId);
-                            $("#empId").val(result.employeeId);
+                            $("#empId3").val(result.employeeId);
+                            
                             $("#updateform").fadeIn();
-                            $("#update").trigger("reset");
+                            $("#add").trigger("reset");
                             $("#updateform").addClass('model-open');
                         } else {
                             alertGen("Unable to handle request.", 2);
@@ -428,7 +501,6 @@
                     }
                 }
             }
-            console.log($sample);
             $("#tbodyid").append($sample);
         }
         $("#status").on('change', function() {

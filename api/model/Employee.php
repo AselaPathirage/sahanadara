@@ -294,21 +294,21 @@ class Employee
     {
         $numlength = strlen((string)$id);
         if ($role == 1) {
-            $code = "EG0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "EG0" . str_repeat("0", 5 - $numlength) . $id;
         } elseif ($role == 2) {
-            $code = "EI0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "EI0" . str_repeat("0", 5 - $numlength) . $id;
         } elseif ($role == 3) {
-            $code = "ED0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "ED0" . str_repeat("0", 5 - $numlength) . $id;
         } elseif ($role == 4) {
-            $code = "ES0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "ES0" . str_repeat("0", 5 - $numlength) . $id;
         } elseif ($role == 5) {
-            $code = "EA0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "EA0" . str_repeat("0", 5 - $numlength) . $id;
         } elseif ($role == 6) {
-            $code = "EO0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "EO0" . str_repeat("0", 5 - $numlength) . $id;
         } elseif ($role == 7) {
-            $code = "EM0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "EM0" . str_repeat("0", 5 - $numlength) . $id;
         } elseif ($role == 8) {
-            $code = "ER0" . str_repeat("0", 2 - $numlength) . $id;
+            $code = "ER0" . str_repeat("0", 5 - $numlength) . $id;
         }
         return $code;
     }

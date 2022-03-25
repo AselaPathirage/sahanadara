@@ -57,7 +57,32 @@ class DivisionalSecretariat extends Employee
         }
     }
     public function transferUser(array $data){
-        
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $id=Employee::getEmployeeId($data['receivedParams'][0],2);
+            if($id==0){
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+            $division = $this->getDivision($uid);
+            $dvId = $division['id'];
+            $sql="SELECT @id:=inventory.inventoryId FROM inventory WHERE inventory.dvId=$dvId;
+            UPDATE inventorymgtofficer SET inventorymgtofficer.inventoryID=@id
+            WHERE inventorymgtofficer.inventoryMgtOfficerID=$id;";
+            $this->connection->multi_query($sql);
+            $count=$this->connection->affected_rows;
+            if($count==0){
+                echo json_encode(array("code"=>$errorCode['unknownError']));
+                exit();
+            }else{
+                echo json_encode(array("code"=>$errorCode['success']));
+                exit();
+            }
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
     }
     protected function tokenKey($length = 10)
     {

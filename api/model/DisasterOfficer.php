@@ -172,7 +172,7 @@ class DisasterOfficer extends Employee
     {
         $uid = $data['userId'];
         //$sql = "SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=" . $uid . " AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
-        $sql = "SELECT * FROM dismgtofficer do JOIN divisionaloffice d ON do.disMgtOfficerID=" . $uid . " AND JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
+        $sql = "SELECT * FROM dismgtofficer m JOIN divisionaloffice d ON m.disMgtOfficerID=" . $uid . " AND d.disasterManager=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;";
         // SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=1 AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;
         $excute = $this->connection->query($sql);
         while ($r = $excute->fetch_assoc()) {

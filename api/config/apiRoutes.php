@@ -8,6 +8,7 @@ DELETE - delete
 
 Route::GET("/", array("Home@creadits"));
 Route::GET("donation", array("Home@viewDonations"));
+Route::GET("fundraiser", array("Home@viewFundraises"));
 Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice"));
 Route::GET("notice/{id}", array("InventoryManager@getNotice","DisasterOfficer@getNotice"));
 Route::GET("role", array("Employee@getRole"));
@@ -23,7 +24,7 @@ Route::GET("user/count/{data}", array("Admin@getUserCount"));
 Route::GET("user/{data}/{data}", array("Admin@searchUser","DistrictSecretariat@searchUser","InventoryManager@getMySelf"));
 Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("report", array("Employee@report"));
-Route::GET("profile", array("GramaNiladari@getProfileDetails"));
+Route::GET("profile", array("GramaNiladari@getProfileDetails","DisasterOfficer@getProfileDetails"));
 Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("safehouse/name", array("DisasterOfficer@filtermySafehouse", "InventoryManager@filterSafehouse"));

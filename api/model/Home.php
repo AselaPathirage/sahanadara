@@ -51,6 +51,17 @@ class Home{
 
     }
     public function viewFundraises(){
- 
+        $sql = "(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
+                WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)
+                UNION
+                (SELECT fundraising.*, 0 AS currentAmount FROM fundraising WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords))";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
 }

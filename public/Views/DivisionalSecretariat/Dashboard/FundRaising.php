@@ -288,7 +288,7 @@
                     if (obj['isActive'] == 1) {
                         $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                     }
-                    $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
+                    $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
                         $sample += "</div>";
                     }

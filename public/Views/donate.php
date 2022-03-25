@@ -55,7 +55,7 @@
                 </table>
 
 
-                <div class="container">
+                <div class="container" id="tbodyid">
                     <!-- <div class="row">
                         <div class="col6">
                             <div class="box row-content">
@@ -362,6 +362,7 @@
             $thisCard.removeClass('is-expanded').addClass('is-collapsed');
             $cards.not($thisCard).removeClass('is-inactive');
         });
+        
     </script>
 
     <script>
@@ -481,6 +482,58 @@
 
             }
         };
+    </script>
+
+    <script>
+        
+
+        viewFundraises();
+        var output;
+        function viewFundraises() {
+            /// var object = {};
+
+
+            // var json = JSON.stringify(object);
+            // console.log(object);
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>fundraiser",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#tbodyid").empty();
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No fundraiser data</p>";
+            } else {
+                for (var i = 0; i < output.length; i++) {
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (i % 2 == 0) {
+                        $sample += "<div class='row'>";
+                    }
+                    $sample += "<div class='col5 card_donation is-collapsed row-content'><div class='card__inner js-expander' style='position:relative;'><h2>" + obj['title'] + "</h2><p>" + obj['description'] + "</p><p> Goal :" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                    if (obj['isActive'] == 1) {
+                        $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                    }
+                    $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
+                    if ((i % 2 == 1) || (i == output.length - 1)) {
+                        $sample += "</div>";
+                    }
+                }
+            }
+            console.log($sample);
+            $("#tbodyid").append($sample);
+        }
+            
+        
+
     </script>
 
 </body>

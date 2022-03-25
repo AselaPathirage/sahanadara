@@ -33,7 +33,7 @@
                         <!-- <a href="<?php echo HOST; ?>/donate" class="btn_donate">Donate</a> -->
                         <div class="space"></div>
                         <section class="services">
-                            <a href="<?php echo HOST; ?>donate">
+                            <a href="<?php echo HOST; ?>help">
                                 <div class="services__box">
                                     <figure class="services__icon" style="--i:#ffb508">
                                         <ion-icon name="videocam-outline">
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="<?php echo HOST; ?>help">
+                            <a href="<?php echo HOST; ?>donation">
                                 <div class="services__box">
                                     <figure class="services__icon" style="--i:#C60606">
                                         <ion-icon name="videocam-outline"><i class="fas fa-donate"></i></ion-icon>

@@ -134,14 +134,14 @@
                                     <option>Completed</option>
                                 </select>
                             </th>
-                            <th>GN Division
+                            <!-- <th>GN Division
                                 <select id="milestone-filter" class="form-control">
                                     <option>None</option>
                                     <option>Palannoruwa</option>
                                     <option>Koralaema</option>
                                     <option>Olaboduwa </option>
                                 </select>
-                            </th>
+                            </th> -->
                             
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
@@ -193,6 +193,7 @@
             });
 
             getFundraiser();
+            getmyFundraiser();
             $(".btn_update").on('click', function() {
                 var id = $(this).attr("id");
                 var title = $(this).attr("data-title");
@@ -318,7 +319,7 @@
                         if (obj['isActive'] == 1) {
                             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                         }
-                        $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
+                        $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
 
                         if ((i % 2 == 1) || (i == output.length - 1)) {
                             $sample += "</div>";
@@ -332,7 +333,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
 
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
@@ -347,7 +348,7 @@
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a href='<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising/" + obj['recordId'] + "' class='btn_views'>View</a></div></div></div>";
+                            $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
 
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
@@ -360,6 +361,53 @@
             $("#tbodyid").append($sample);
 
         });
+
+        function getmyFundraiser() {
+            
+            // var object = {};
+
+
+            // var json = JSON.stringify(object);
+            // console.log(object);
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>fundraiser/id",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            var table = document.getElementById("tbodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                // console.log(obj);
+                
+                var attribute = document.createElement("a");
+                attribute.id = obj['recordId'];
+                // attribute.href = "";
+                attribute.className = "btn_update btn_blue";
+                attribute.name = "update";
+                attribute.innerHTML = "Update";
+                attribute.setAttribute("data-title", obj['title'])
+                attribute.setAttribute("data-description", obj['description'])
+                attribute.setAttribute("data-goal", obj['goal'])
+                var attribute2 = document.createElement("a");
+
+
+                attribute2.id = obj['recordId'];
+                // attribute2.href = "";
+                attribute2.className = "btn_delete";
+                attribute2.name = "delete";
+                attribute2.innerHTML = "Delete";
+                var attribute3 = document.createElement("span");
+                attribute3.innerHTML = " ";
+                // console.log(attribute);
+                // console.log(attribute2);
+            }
+        }
 
         $('#search').keyup(function () {
             var filter = $(this).val();

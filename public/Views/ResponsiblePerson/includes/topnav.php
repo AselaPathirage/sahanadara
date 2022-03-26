@@ -8,7 +8,7 @@
                 <i class='bx bx-search'></i>
             </div> -->
     <div class="mid">
-        <a href="<?php echo HOST; ?>/ResponsiblePerson/SafeHouse/">
+        <a href="<?php echo HOST; ?>ResponsiblePerson/SafeHouse/">
             <span class="links_name">Safe House</span>
         </a>
         <!-- <a href="<?php echo HOST; ?>/ResponsiblePerson/Report/SafeHouseReport">
@@ -17,11 +17,11 @@
 
     </div>
     <div class="rightcorner">
-        <a href="<?php echo HOST; ?>/ResponsiblePerson/profile">
+        <a href="<?php echo HOST; ?>ResponsiblePerson/profile">
             <i class='bx bx-user'></i>
             <span class="links_name">Profile</span>
         </a>
-        <a href="<?php echo HOST; ?>/logout" style="border: 2px solid rgb(194, 5, 5);">
+        <a href="<?php echo HOST; ?>logout" style="border: 2px solid rgb(194, 5, 5);">
             <i class='bx bx-log-out'></i>
             <span class="links_name">Log out</span>
         </a>

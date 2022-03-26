@@ -181,7 +181,10 @@
                 $('#item_table > tbody').append(html);
                 count++;
             });
-
+            $("#alertBox").click(function() {
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
+            });
             $(document).on('click', '.remove', function() {
                 $(this).closest('tr').remove();
             });

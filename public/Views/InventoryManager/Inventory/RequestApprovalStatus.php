@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title> Divisional Secretariat - Dashboard </title>
+    <title> Inventory Manager - Inventory </title>
     <!-- CSS -->
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
@@ -104,7 +104,7 @@
                         cell5.innerHTML = obj['approvalStatus'];
                         var attribute = document.createElement("a");
                         attribute.id = obj['responsibleId'];
-                        attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
+                        attribute.href = "<?php echo HOST; ?>InventoryManager/Inventory/ViewBorrowRequests/" + obj['id'];
                         attribute.className = "btn-box";
                         attribute.innerHTML = "View";
                         attribute.target = "_blank";
@@ -155,7 +155,7 @@
                 cell5.innerHTML = obj['approvalStatus'];
                 var attribute = document.createElement("a");
                 attribute.id = obj['responsibleId'];
-                attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
+                attribute.href = "<?php echo HOST; ?>InventoryManager/Inventory/ViewBorrowRequests/" + obj['id'];
                 attribute.className = "btn-box";
                 attribute.innerHTML = "View";
                 attribute.target = "_blank";

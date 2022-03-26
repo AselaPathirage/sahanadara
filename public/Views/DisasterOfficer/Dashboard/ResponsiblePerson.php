@@ -76,7 +76,7 @@
 
                                     <div class="row " style="text-align:right;justify-content: right;">
                                         <input type="reset" style="background-color: red;" value="Cancel">
-                                        <input type="submit" style="background-color: darkblue;margin-top:0px" value="Submit">
+                                        <input type="submit" style="background-color: darkblue;" value="Submit">
                                     </div>
                                 </div>
                         </form>

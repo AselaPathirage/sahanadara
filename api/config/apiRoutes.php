@@ -17,7 +17,7 @@ Route::GET("fundraisingNotice", array("Home@viewfundraisingNotice"));
 Route::GET("fundraisingNotice/language/{lanCode}", array("Home@getfundraisingNotice"));
 Route::GET("fundraisingNotice/language/{lanCode}/limit/{number}", array("Home@getLimitedfundraisingNotice"));
 Route::GET("borrowRequests", array("DivisionalSecretariat@getBorrowRequests","InventoryManager@getBorrowRequests"));
-Route::GET("borrowRequests/{id}", array("DivisionalSecretariat@filterBorrowRequests","InventoryManager@getBorrowRequests"));
+Route::GET("borrowRequests/{id}", array("DivisionalSecretariat@filterBorrowRequests","InventoryManager@filterBorrowRequests"));
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
@@ -45,6 +45,7 @@ Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
 Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails", "Admin@updateProfileDetails", "DistrictSecretariat@updateProfileDetails"));
+Route::PUT("notice/{id}", array("InventoryManager@updateNotice","DisasterOfficer@updateNotice"));
 
 Route::POST("login", array("Employee@login"));
 Route::POST("resetPassword", array("Employee@resetPassword"));

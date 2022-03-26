@@ -886,11 +886,12 @@ $array = explode("/", $_GET["url"]);
                 var object = {};
                 formData.forEach(function(value, key) {
                     // if (key.includes("h")) {
-                    if (key.startsWith('h')) {
+                    if (key.startsWith('im')||key.startsWith('sf')||key.startsWith('dam')||key.startsWith('rel')) {
                         return;
                     }
                     object[key] = value;
                 });
+                console.log(object);return;
                 // let e = document.getElementById("safeHouseId");
                 // let safeHouseId = e.value;
                 // object['safeHouseId'] = safeHouseId;

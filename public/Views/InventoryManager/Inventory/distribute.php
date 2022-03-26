@@ -206,7 +206,7 @@ $array = explode("/", $_GET["url"]);
                                             <th style="width: 10%;"></th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody id='trow'></tbody>
                                 </table>
                             </div>
                             <div style="float: right;width:30%">
@@ -308,20 +308,29 @@ $array = explode("/", $_GET["url"]);
                     object['item'][item] = quantity;
                 });
                 var json = JSON.stringify(object);console.log(json);
-                console.log(object['item'].length);
+
                 if( Object.keys(object['item']).length ==0){ 
                     alertGen("Please add items.",2);
                     return;
                 }
+                var check = "<?php echo end($array); ?>";
+                if(check.indexOf('SH')=== -1){
+                    var api = "<?php echo API; ?>distribute";
+                }else{
+                    var api = "<?php echo API; ?>distribute/"+check;
+                }
                 $.ajax({
 					type: "POST",
-					url: "<?php echo API; ?>distribute",
+					url: api,
 					data: json,
                     headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
 					cache: false,
 					success: function(result) {
                         if(result.code==806){
                             $("#add").trigger('reset');
+                            $('#trow').empty();
+                            sessionStorage.clear();
+                            document.getElementById("safeHouseId").disabled = 'false';
                             alertGen("Record Added Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);

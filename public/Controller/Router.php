@@ -41,7 +41,7 @@ class Router{
 
     public function __construct(){
         $url = $this->getUrl();
-        //print_r($url);exit;
+        //print_r($url);
         if (array_key_exists($url[0], Router::$defaultController) && count($url) == 1) {
             $this->currentController = 'public/Views/' . Router::$defaultController[$url[0]];
         } else if (array_key_exists($url[0], Router::$defaultController)) {
@@ -68,7 +68,16 @@ class Router{
                 } else {
                     //if requested page not in routes array
                     if (file_exists('public/Views/' . $url[0] . '/' . $url[1] . '.php')) {
-                        $this->currentController = 'public/Views/' . $url[0] . '/' . $url[1] . '.php';
+                        if(in_array($url[0],array_keys($this->permission))){
+                            if($this->checkPermission($this->permission[$url[0]],$url[0])){                        
+                                $this->currentController = 'public/Views/' . $url[0] . '/' . $url[1] . '.php';
+                            }else{
+                                $this->currentController = 'public/Views/noPermission.php';
+                            }
+                        }else{
+                            $this->currentController = 'public/Views/' . $url[0] . '/' . $url[1] . '.php';
+                        }
+                        
                     } else {
                         $this->currentController = 'public/Views/404.php';
                     }

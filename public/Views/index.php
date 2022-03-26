@@ -30,10 +30,10 @@
                     <div class=" container col9">
                         <h1 class="title" id="header"></h1>
                         <h3 class=" sub" id="subHeader"></h3>
-                        <!-- <a href="/<?php echo baseUrl; ?>/donate" class="btn_donate">Donate</a> -->
+                        <!-- <a href="<?php echo HOST; ?>/donate" class="btn_donate">Donate</a> -->
                         <div class="space"></div>
                         <section class="services">
-                            <a href="<?php echo HOST; ?>donate">
+                            <a href="<?php echo HOST; ?>help">
                                 <div class="services__box">
                                     <figure class="services__icon" style="--i:#ffb508">
                                         <ion-icon name="videocam-outline">
@@ -51,7 +51,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="<?php echo HOST; ?>help">
+                            <a href="<?php echo HOST; ?>donation">
                                 <div class="services__box">
                                     <figure class="services__icon" style="--i:#C60606">
                                         <ion-icon name="videocam-outline"><i class="fas fa-donate"></i></ion-icon>
@@ -379,7 +379,9 @@
                 document.getElementById("about").innerHTML="About";
                 document.getElementById("help").innerHTML="Help";
                 document.getElementById("donate").innerHTML="Donate";
-                document.getElementById("staff").innerHTML="Donate";
+                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
+                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                }
 
                 //body items
                 document.getElementById("header").innerHTML= "S A H A N A D A R A";

@@ -7,9 +7,10 @@ class Employee
     {
         $this->connection = $con;
     }
-    public function checkAssigned($userId,$userRole){
+    public function checkAssigned($userId, $userRole)
+    {
         global $errorCode;
-        if($userRole == 8){
+        if ($userRole == 8) {
             $sql = "SELECT isAssigned FROM responsibleperson WHERE responsiblePersonID = $userId AND isAssigned='y'";
             $excute = $this->connection->query($sql);
             if ($excute->num_rows == 0) {
@@ -37,43 +38,49 @@ class Employee
             $data = $excute->fetch_assoc();
             $id = $data['empId'];
             $userRole = $data['roleId'];
-            $this->checkAssigned($id,$userRole);
+            //$this->checkAssigned($id, $userRole);
             switch ($data['roleId']) {
                 case 1:
-                    $sql = "SELECT empName FROM gramaniladari WHERE gramaNiladariID = $id";
+                    $sql = "SELECT empName FROM gramaniladari WHERE gramaNiladariID = $id AND isAssigned='y'";
                     break;
                 case 2:
-                    $sql = "SELECT empName FROM inventorymgtofficer WHERE 	inventoryMgtOfficerID = $id";
+                    $sql = "SELECT empName FROM inventorymgtofficer WHERE 	inventoryMgtOfficerID = $id AND isAssigned='y'";
                     break;
                 case 3:
-                    $sql = "SELECT empName FROM districtsecretariat WHERE districtSecretariatID = $id";
+                    $sql = "SELECT empName FROM districtsecretariat WHERE districtSecretariatID = $id AND isAssigned='y'";
                     break;
                 case 4:
-                    $sql = "SELECT empName FROM divisionalsecretariat WHERE divisionalSecretariatID = $id";
+                    $sql = "SELECT empName FROM divisionalsecretariat WHERE divisionalSecretariatID = $id AND isAssigned='y'";
                     break;
                 case 5:
-                    $sql = "SELECT empName FROM admin WHERE 	adminID = $id";
+                    $sql = "SELECT empName FROM admin WHERE 	adminID = $id AND isAssigned='y'";
                     break;
                 case 6:
-                    $sql = "SELECT empName FROM dismgtofficer WHERE disMgtOfficerID = $id";
+                    $sql = "SELECT empName FROM dismgtofficer WHERE disMgtOfficerID = $id AND isAssigned='y'";
                     break;
                 case 7:
-                    $sql = "SELECT empName FROM dmc WHERE dmcID = $id";
+                    $sql = "SELECT empName FROM dmc WHERE dmcID = $id AND isAssigned='y'";
                     break;
                 case 8:
-                    $sql = "SELECT empName FROM responsibleperson WHERE responsiblePersonID = $id";
+                    $sql = "SELECT empName FROM responsibleperson WHERE responsiblePersonID = $id AND isAssigned='y'";
                     break;
             }
             $excute = $this->connection->query($sql);
-            $userName = $excute->fetch_assoc()['empName'];
-            $auth = true;
-            $array = array("auth" => $auth, "userRole" => $data['roleId'], "issue" => time(), "tokenKey" => $data['keyAuth'], "userId" => $data['empId']);
-            $string = json_encode($array);
-            $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
-            //echo is_string($encrpt);exit(); 
-            $token = array("key" => base64_encode($encrpt), "userRole" => $data['roleId'], "userId" => $data['empId'], "userName" => $userName);
-            $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
-            echo $JSON;
+            if($excute->num_rows >0){
+                $userName = $excute->fetch_assoc()['empName'];
+                $auth = true;
+                $array = array("auth" => $auth, "userRole" => $data['roleId'], "issue" => time(), "tokenKey" => $data['keyAuth'], "userId" => $data['empId']);
+                $string = json_encode($array);
+                $encrpt = $secure->encrypt($string, ENCRYPTION_KEY);
+                //echo is_string($encrpt);exit(); 
+                $token = array("key" => base64_encode($encrpt), "userRole" => $data['roleId'], "userId" => $data['empId'], "userName" => $userName);
+                $JSON = json_encode($token, JSON_UNESCAPED_UNICODE);
+                echo $JSON;
+            }else{
+                echo json_encode(array("code" => $errorCode['attributeMissing']));
+                exit();
+            }
+
         } else {
             echo json_encode(array("code" => $errorCode['userCreadentialWrong']));
             exit();
@@ -255,7 +262,62 @@ class Employee
         $report = new Report();
         $report->generatePdf();
         http_response_code(200);
-        echo json_encode(array("url" =>$report->getFileUrl() ));
+        echo json_encode(array("url" => $report->getFileUrl()));
         exit();
     }
+    public static function getEmployeeId($input, $role)
+    {
+        $input = strtoupper($input);
+        if ($role == 1) {
+            $id = explode("EG0", $input);
+        } elseif ($role == 2) {
+            $id = explode("EI0", $input);
+        } elseif ($role == 3) {
+            $id = explode("ED0", $input);
+        } elseif ($role == 4) {
+            $id = explode("ES0", $input);
+        } elseif ($role == 5) {
+            $id = explode("EA0", $input);
+        } elseif ($role == 6) {
+            $id = explode("EO0", $input);
+        } elseif ($role == 7) {
+            $id = explode("EM0", $input);
+        } elseif ($role == 8) {
+            $id = explode("ER0", $input);
+        }
+        if (count($id) == 2) {
+            return (int)$id[1];
+        }
+        return (int)$id[0];
+    }
+    public static function getEmployeeCode($id, $role)
+    {
+        $numlength = strlen((string)$id);
+        if ($role == 1) {
+            $code = "EG0" . str_repeat("0", 5 - $numlength) . $id;
+        } elseif ($role == 2) {
+            $code = "EI0" . str_repeat("0", 5 - $numlength) . $id;
+        } elseif ($role == 3) {
+            $code = "ED0" . str_repeat("0", 5 - $numlength) . $id;
+        } elseif ($role == 4) {
+            $code = "ES0" . str_repeat("0", 5 - $numlength) . $id;
+        } elseif ($role == 5) {
+            $code = "EA0" . str_repeat("0", 5 - $numlength) . $id;
+        } elseif ($role == 6) {
+            $code = "EO0" . str_repeat("0", 5 - $numlength) . $id;
+        } elseif ($role == 7) {
+            $code = "EM0" . str_repeat("0", 5 - $numlength) . $id;
+        } elseif ($role == 8) {
+            $code = "ER0" . str_repeat("0", 5 - $numlength) . $id;
+        }
+        return $code;
+    }
+// Admin - EA  5
+// inventory - EI 2
+// grama niladara - EG 1
+// responsible - ER 8
+// district - ED 3
+// divisional - ES 4
+// disaster o - EO 6
+// dmc - EM 7
 }

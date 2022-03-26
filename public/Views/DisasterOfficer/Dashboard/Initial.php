@@ -11,10 +11,11 @@ $array = explode("/", $_GET["url"]);
     <meta charset="UTF-8">
     <title> Disaster Officer</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -62,8 +63,8 @@ $array = explode("/", $_GET["url"]);
         // include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
         ?>
         <div class="space"></div>
-    <!-- <div id="alertBox">
-    </div> -->
+    <div id="alertBox">
+    </div>
     <!-- Print  -->
     <a id="btnprint">Print</a>
     
@@ -382,7 +383,7 @@ $array = explode("/", $_GET["url"]);
                         <div class="col6">
                             <h3>Prepared by : <span id="gnname"></span> - <span id="gntel"></span><br>(<span id="timestamp"></span>)</h3>
                         </div>
-                        <div class="col6">
+                        <div class="col6" id="mystatus">
                             <h3>Approved Status : <span id="dsname"></span></h3>
                             <h4 style="text-align:left;padding-top:0;padding-left: 25px;"> <span id="dsremarks">* </span></h4>
                         </div>
@@ -393,6 +394,26 @@ $array = explode("/", $_GET["url"]);
 
 
 
+                </div>
+                <div id="mystatus2">
+
+                    <div class="row">
+                        <div class="col3">
+                            <label for="nic">Remarks</label>
+                        </div>
+                        <div class="col9">
+                            <input type="text" id="dmcremarksnew" name="dmcremarksnew" placeholder="Remarks">
+                        </div>
+                    </div>
+                    <br>
+                    <div class="row " style="text-align:right;justify-content: right;">
+                        <div class="" style="text-align: right;margin-right: 0;">
+                            <div style="display:block;">
+                                <a id="reject" data-app="r" class="btn_blue" style="background-color: #9B0000;">Reject</a>&nbsp; &nbsp;
+                                <a id="accept" data-app="a" class="btn_blue" style="background-color: #357C3C;">Approve</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -421,6 +442,51 @@ $array = explode("/", $_GET["url"]);
                 $("#btnprint").show();
             });
             getInitial();
+            $(document).on('click', '.btn_blue', function(e) {
+                e.preventDefault();
+                var x = $(this).data('app');
+                var report = "<?php echo $array[count($array) - 2]; ?>";
+                var last = <?php echo $array[count($array) - 1]; ?>;
+                console.log(x);
+                var object = {};
+
+                object['dmcremarks'] = $('#dmcremarksnew').val();
+                object['dmcapproved'] = x;
+                object['report'] = report;
+                object['reportId'] = last;
+
+
+
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                    type: "PUT",
+                    url: "<?php echo API; ?>doincapprove",
+                    data: json,
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    success: function(result) {
+                        console.log(result);
+                        var url = "<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentReporting";
+                        console.log(result.code);
+                        if (result.code == 806) {
+                            alertGen("Record Added Successfully!", 1);
+                        } else {
+                            alertGen(" Unable to handle request.", 2);
+                        }
+                        setTimeout(function() {
+                            $(location).attr('href', url);
+                        }, 500);
+                    },
+                    error: function(err) {
+                        alertGen(" Something went wrong.", 3);
+                        console.log(err);
+                    }
+                });
+
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -475,17 +541,20 @@ $array = explode("/", $_GET["url"]);
             $('#gnname').text(obj['empName']);
             $('#gntel').text(obj['empTele']);
             $('#timestamp').text(obj['timestamp']);
-            if (obj['disoffapproved'] == 'p') {
-                $('#dsname').text("Pending");
-            } else if (obj['disoffapproved'] == 'a') {
-                $('#dsname').text("Approved");
-            } else {
-                $('#dsname').text("Rejected");
-            }
             if (obj['disRemarks'] != null) {
                 $('#dsremarks').append(obj['disRemarks']);
             } else {
                 $('#dsremarks').text("");
+            }
+            if (obj['disoffapproved'] == 'p') {
+                $('#dsname').text("Pending");
+                $('#mystatus').hide();
+            } else if (obj['disoffapproved'] == 'a') {
+                $('#dsname').text("Approved");
+                $('#mystatus2').hide();
+            } else {
+                $('#dsname').text("Rejected");
+                $('#mystatus2').hide();
             }
         }
 

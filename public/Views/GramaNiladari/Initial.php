@@ -11,10 +11,10 @@ $array = explode("/", $_GET["url"]);
     <meta charset="UTF-8">
     <title> Grama Niladari</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_admin.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -326,6 +326,8 @@ $array = explode("/", $_GET["url"]);
                         </div>
                         <div class="col6">
                             <h3>Approved Status : <span id="dsname"></span></h3>
+                            <h4 style="text-align:left;padding-top:0;padding-left: 25px;"> <span id="dsremarks">* </span></h4>
+                     
                         </div>
 
 
@@ -418,6 +420,11 @@ $array = explode("/", $_GET["url"]);
                 $('#dsname').text("Approved");
             } else {
                 $('#dsname').text("Rejeted");
+            }
+            if (obj['disRemarks'] != null) {
+                $('#dsremarks').append(obj['disRemarks']);
+            } else {
+                $('#dsremarks').text("");
             }
         }
 

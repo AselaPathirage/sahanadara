@@ -32,16 +32,17 @@ $array = explode("/", $_GET["url"]);
         <div class="space"></div>
         <div class="container">
             <h1>Incident Reporting</h1>
-
+            <a class='btn_active' style='position: absolute; top:120px;right:30px;' id="btn_active">Status : Active</a>
             <h2 style="margin:0;padding:0 15px!important;" id="incidentTitle">sadf</h2>
             <h4 style="padding-top:0!important;padding-left:15px;" id="incidentDes">sdfasdf</h4>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreateFinal/<?php echo end($array); ?>" class="btn_blue">Create Final Report</a>
-                    <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreateRelief/<?php echo end($array); ?>" class="btn_blue">Create Relief Report</a>
+                    <a href="<?php echo HOST; ?>/GramaNiladari/CreateFinal/<?php echo end($array); ?>" class="btn_blue">Create Final Report</a>
+                    <a href="<?php echo HOST; ?>/GramaNiladari/CreateRelief/<?php echo end($array); ?>" class="btn_blue">Create Relief Report</a>
 
                 </div>
             </div>
+           
             <div class="container">
                 <div class="">
                     <table class="table">
@@ -93,7 +94,7 @@ $array = explode("/", $_GET["url"]);
                                     <td>01/24/2021 12:50</td>
                                     <td>Initial</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
 
@@ -101,31 +102,31 @@ $array = explode("/", $_GET["url"]);
                                     <td>03/14/2021 13:56</td>
                                     <td>Relief</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>03/20/2021 13:56</td>
                                     <td>Relief</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>03/21/2021 13:56</td>
                                     <td>Relief</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>03/25/2021 13:56</td>
                                     <td>Relief</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>03/28/2021 13:56</td>
                                     <td>Final</td>
                                     <td>Not Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -167,9 +168,13 @@ $array = explode("/", $_GET["url"]);
                 async: false
             }).responseText);
             let obj = output[0];
-            console.log(obj);
+            console.log(output);
             $('#incidentTitle').text(obj['title']);
             $('#incidentDes').text(obj['description']);
+            if(obj['isActive'] == 0){
+                $('#btn_active').hide();
+            }
+
         }
 
         function getReportsbyIncident() {
@@ -188,7 +193,7 @@ $array = explode("/", $_GET["url"]);
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
+            console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
 
@@ -206,7 +211,7 @@ $array = explode("/", $_GET["url"]);
                 attribute.id = obj['residentId'];
                 // attribute.href = "";
                 attribute.target = "_blank";
-                attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                 attribute.className = "btn_views";
                 attribute.name = "view";
                 attribute.innerHTML = "View";
@@ -262,7 +267,7 @@ $array = explode("/", $_GET["url"]);
                         attribute.id = obj['residentId'];
                         // attribute.href = "";
                         attribute.target = "_blank";
-                        attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                        attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                         attribute.className = "btn_views";
                         attribute.name = "view";
                         attribute.innerHTML = "View";
@@ -299,7 +304,7 @@ $array = explode("/", $_GET["url"]);
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -331,7 +336,7 @@ $array = explode("/", $_GET["url"]);
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -363,7 +368,7 @@ $array = explode("/", $_GET["url"]);
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -416,7 +421,7 @@ $array = explode("/", $_GET["url"]);
                         attribute.id = obj['residentId'];
                         // attribute.href = "";
                         attribute.target = "_blank";
-                        attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                        attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                         attribute.className = "btn_views";
                         attribute.name = "view";
                         attribute.innerHTML = "View";
@@ -453,7 +458,7 @@ $array = explode("/", $_GET["url"]);
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -492,7 +497,7 @@ $array = explode("/", $_GET["url"]);
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";
@@ -531,7 +536,7 @@ $array = explode("/", $_GET["url"]);
                             attribute.id = obj['residentId'];
                             // attribute.href = "";
                             attribute.target = "_blank";
-                            attribute.href = "/<?php echo baseUrl; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
+                            attribute.href = "<?php echo HOST; ?>/GramaNiladari/" + obj['report'] + "/" + obj['reportId'];
                             attribute.className = "btn_views";
                             attribute.name = "view";
                             attribute.innerHTML = "View";

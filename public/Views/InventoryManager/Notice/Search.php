@@ -127,7 +127,7 @@
                                     <a id="view" style="cursor:pointer" class="create">View</a>
                                 </th>
                                 <th style="width: 15%;text-align:center;">
-                                    <a id="edit" style="cursor:pointer" href="/<?php echo baseUrl; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
+                                    <a id="edit" style="cursor:pointer" href="<?php echo HOST; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
                                 </th>
                                 <th style="width: 15%;text-align:center;">
                                     <a id="remove" style="background-color: rgb(245, 66, 66);cursor:pointer" class="view">Remove</a>
@@ -269,6 +269,10 @@
                     }
                 });
                 });
+            });
+            $("#alertBox").click(function(){
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
             });
         });
 

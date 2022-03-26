@@ -196,7 +196,7 @@ class Admin extends Employee{
 
     public function getUserCount(array $data){
         global $errorCode;
-        $roleId = $data['receivedParams'][1];
+        $roleId = $data['receivedParams'][0];
         switch ($roleId) {
             case 1:
                 $sql ="SELECT COUNT(gramaniladari.gramaNiladariID) as total FROM gramaniladari";

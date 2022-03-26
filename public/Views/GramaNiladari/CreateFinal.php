@@ -11,10 +11,10 @@ $array = explode("/", $_GET["url"]);
     <meta charset="UTF-8">
     <title> Grama Niladari</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_admin.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -310,7 +310,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">Dry rations</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="text" id="dry" name="dry" placeholder="Rs 0">
+                                        <input type="number" id="dry" name="dry" placeholder="Rs 0">
                                     </div>
                                 </div>
 
@@ -387,7 +387,7 @@ $array = explode("/", $_GET["url"]);
         function getFinalDetails() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>countfinal",
+                url: "<?php echo API; ?>countfinal/<?php echo end($array); ?>",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -395,16 +395,18 @@ $array = explode("/", $_GET["url"]);
                 cache: false,
                 async: false
             }).responseText);
-            console.log("1");
-            var select = document.getElementById("disaster");
-            for (var i = 0; i < output.length; i++) {
-                if (output[i]['disId'] == 3) continue;
-                var opt = document.createElement('option');
-                opt.value = output[i]['disId'];
-                opt.innerHTML = output[i]['dis'];
-                select.appendChild(opt);
-            }
+            var obj = output[0];
+            console.log(obj);
+
+            var tot=(900*obj['sumf1'])+ (1200*obj['sumf2'])+ (1400*obj['sumf3']) +(1600*obj['sumf4'])+ (1800*obj['sumf5']);
+
+            $('#dry').val(tot);
+            $('#cooked').val(obj['sumcooked']);
+            $('#emer').val(obj['sumemer']);
+            
+            
         }
+
         function getDisasterType() {
             output = $.parseJSON($.ajax({
                 type: "GET",
@@ -449,7 +451,7 @@ $array = explode("/", $_GET["url"]);
             formData.forEach(function(value, key) {
                 object[key] = value;
             });
-
+            object['incidentId'] = <?php echo end($array); ?>;
             var json = JSON.stringify(object);
             console.log(json);
             $.ajax({

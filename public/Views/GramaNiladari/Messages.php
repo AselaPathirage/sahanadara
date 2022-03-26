@@ -28,7 +28,7 @@
             <h1>Messages</h1>
             <div class="container">
                 <div style="display:block;text-align: right;">
-                    <a href="/<?php echo baseUrl; ?>/GramaNiladari/SendMessage" class="btn_alerts">Send Message</a>
+                    <a href="<?php echo HOST; ?>/GramaNiladari/SendMessage" class="btn_alerts">Send Message</a>
                 </div>
             </div>
             <div class="container">

@@ -1,18 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Disaster Management Officer - Dashboard </title>
     <!-- CSS -->
+
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <?php
         include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
@@ -163,12 +168,7 @@
                             <thead>
                                 <tr>
 
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>NIC</th>
-                                    <th>Email</th>
-                                    <th>Address</th>
-                                    <th>TP Number</th>
+                                    <th>Name</th>
                                     <th>Safe House</th>
                                     <th>Action</th>
 
@@ -183,8 +183,8 @@
                                     <td>991237564V</td>
                                     <td>111, Maithree Rd, Horana</td>
                                     <td>0756787634</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
-                                        <a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
+                                        <a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
                                     </td>
 
                                 </tr>
@@ -195,8 +195,8 @@
                                     <td>985637555V</td>
                                     <td>14/D, Samagi Rd, Bellapitiya, Horana</td>
                                     <td>0778987655</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
-                                        <a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_blue">Update</a>
+                                        <a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_delete">Delete</a>
                                     </td>
                                 </tr> -->
                             </tbody>
@@ -251,7 +251,6 @@
                 $("#upaddress").val(address);
                 $("#upTP_number").val(telno);
                 $("#upsafehouse").val(safehouse);
-
                 $("#item").val(id);
             });
             $(".btn_delete").on('click', function() {
@@ -451,7 +450,7 @@
                 //$("#add").trigger("reset");
                 $.ajax({
 					type: "PUT",
-					url: "<?php echo API; ?>user/" + id,
+					url: "<?php echo API; ?>responsible/" + id,
 					data: json,
                     headers: {
                         'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
@@ -486,17 +485,18 @@
                 console.log(json);
                 $.ajax({
 					type: "DELETE",
-					url: "<?php echo API; ?>user/" + id,
+					url: "<?php echo API; ?>responsible/" + id,
 					data: json,
                     headers: {
-                        'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+                        'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'
+                    },
 					cache: false,
 					success: function(result) {
                         $('#trow').empty();
                         getResponsible();
                         location.reload();
                         if(result.code==806){
-                            alertGen("Record Added Successfully!",1);
+                            alertGen("Record Updated Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);
                         }
@@ -508,7 +508,7 @@
 				}); 
         });
         
-        function getResponsibleperson() {
+        function getResponsible() {
             // var object = {};
 
 
@@ -524,7 +524,7 @@
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
+            console.log(output);
             $("#tbodyid").empty();
             var table = document.getElementById("tbodyid");
 
@@ -535,42 +535,30 @@
                 let cell1 = row.insertCell(-1);
                 let cell2 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
-                let cell4 = row.insertCell(-1);
-                let cell5 = row.insertCell(-1);
 
                 var attribute = document.createElement("a");
-                attribute.id = obj['responsibleId'];
+                attribute.id = obj['responsiblePersonID'];
                 // attribute.href = "";
                 attribute.className = "btn_update btn_blue";
                 attribute.name = "update";
                 attribute.innerHTML = "Update";
-                attribute.setAttribute("data-fname", obj['responsiblefName'])
-                attribute.setAttribute("data-fname", obj['responsiblelName'])
-                attribute.setAttribute("data-nic", obj['responsibleNIC'])
-                attribute.setAttribute("data-email", obj['responsibleemail'])
-                attribute.setAttribute("data-address", obj['responsibleAddress'])
-                attribute.setAttribute("data-telno", obj['responsibleTelNo'])
-                attribute.setAttribute("data-safehouse", obj['responsibleSafehouse'])
+                attribute.setAttribute("data-name", obj['empName'])
+                attribute.setAttribute("data-safehouse", obj['safeHouseName'])
                 var attribute2 = document.createElement("a");
                 
-                attribute2.id = obj['responsibleId'];
+                attribute2.id = obj['responsiblePersonID'];
                 // attribute2.href = "";
                 attribute2.className = "btn_delete";
                 attribute2.name = "delete";
                 attribute2.innerHTML = "Delete";
 
-                cell1.innerHTML = obj['responsiblefName'];
-                cell1.innerHTML = obj['responsiblelName'];
-                cell2.innerHTML = obj['residentNIC'];
-                cell2.innerHTML = obj['responsibleemail'];
-                cell3.innerHTML = obj['residentAddress'];
-                cell4.innerHTML = obj['residentTelNo'];
-                cell4.innerHTML = obj['responsibleSafehouse'];
+                cell1.innerHTML = obj['empName'];
+                cell2.innerHTML = obj['safeHouseName'];
                 var attribute3 = document.createElement("span");
                 attribute3.innerHTML = " ";
-                cell5.appendChild(attribute);
-                cell5.appendChild(attribute3);
-                cell5.appendChild(attribute2);
+                cell3.appendChild(attribute);
+                cell3.appendChild(attribute3);
+                cell3.appendChild(attribute2);
                 // console.log(attribute);
                 // console.log(attribute2);
             }
@@ -597,7 +585,7 @@
             });
         }.call(this));
 
-        function filterSafehouse(){
+        function filtermySafehouse(){
             output = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>safehouse/name",
@@ -621,7 +609,7 @@
 
             }
         }
-        filterSafehouse();
+        filtermySafehouse();
 
       
         $(function() {

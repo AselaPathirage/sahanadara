@@ -36,5 +36,6 @@ $errorCode = array(
                     'urlTokenExpired' => 816,
                     'unableToHandle' => 817,
                     'smsSendFailed' => 818,
-                    'translatorError' => 819
+                    'translatorError' => 819,
+                    'wrongLanguageCode' => 820
                     );

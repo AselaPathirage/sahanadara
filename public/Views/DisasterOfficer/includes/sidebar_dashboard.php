@@ -42,12 +42,12 @@
                 <span class="links_name">Compensation</span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/Donation" id="Donation">
                 <i class='bx bx-donate-heart' ></i>
                 <span class="links_name">Donation</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/ResponsiblePerson" id="ResponsiblePerson">
                 <i class='bx bxs-user-rectangle' ></i>

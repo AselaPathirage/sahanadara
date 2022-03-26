@@ -14,9 +14,9 @@
         <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/SafeHouseDetails">
             <span class="links_name">Safe House</span>
         </a>
-        <!-- <a href="<?php echo HOST; ?>/DisasterOfficer/Notice/Search">
+        <a href="<?php echo HOST; ?>/DisasterOfficer/Notice/Search">
             <span class="links_name">Notice</span>
-        </a> -->
+        </a>
         <a href="<?php echo HOST; ?>/DisasterOfficer/Report/IncidentReport">
             <span class="links_name">Reports</span>
         </a>

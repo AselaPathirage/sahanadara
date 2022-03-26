@@ -44,7 +44,7 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form action="#" id='add' name="add" method="POST" onSubmit="return validate_nic();">
+                            <form action="#" id='add' name="add" method="POST" ">
                                 <h1>New Fundraise</h1>
 
                                 <div class="row-content">
@@ -74,7 +74,7 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form action="#" id='update' name="update" method="POST" onSubmit="return validate_nic();">
+                            <form action="#" id='update' name="update" method="POST" ">
                                 <h1>Update Fundraiser</h1>
 
                                 <div class="row-content">
@@ -134,14 +134,6 @@
                                     <option>Completed</option>
                                 </select>
                             </th>
-                            <!-- <th>GN Division
-                                <select id="milestone-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Palannoruwa</option>
-                                    <option>Koralaema</option>
-                                    <option>Olaboduwa </option>
-                                </select>
-                            </th> -->
                             
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
@@ -151,32 +143,7 @@
                 </table>
             </div>
             <div class="container" id="tbodyid">
-                <div class="row">
-                    <div class="col6">
-                        <div class="box row-content">
-                        <h4>Funds for displaced person</h4>
-                            <p>Bellapitiya</p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising" class="btn_views">View</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col6">
-                        <div class="box row-content">
-                            <h4>Funds for property damages</h4>
-                            <p>Millaniya</p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                            <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-
-                                <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising" class="btn_views">View</a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                
 
             </div>
         </div>
@@ -195,35 +162,34 @@
             getFundraiser();
             getmyFundraiser();
             $(".btn_update").on('click', function() {
-                var id = $(this).attr("id");
-                var title = $(this).attr("data-title");
-                var description = $(this).attr("data-description");
-                var goal = $(this).attr("data-goal");
+                var id = $(this).attr("data-id");
 
+
+                var out = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>fundraiser/"+id,
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+                $("#uptitle").val(out[0]['title']);
+                $("#updescription").val(out[0]['description']);
+                $("#upgoal").val(out[0]['goal']);
                 $("#updateform").fadeIn();
-                $("#update").trigger("reset");
                 $("#updateform").addClass('model-open');
 
-                $("#uptitle").val(title);
-                $("#updescription").val(description);
-                $("#upgoal").val(goal);
+                
 
             });
             $(".btn_delete").on('click', function() {
                 var id = $(this).attr("id");
-                // var nic = $(this).attr("data-nic");
-                // var name = $(this).attr("data-name");
-                // var address = $(this).attr("data-address");
-                // var telno = $(this).attr("data-telno");
 
                 $("#deleteform").fadeIn();
 
                 $("#deleteform").addClass('model-open');
-
-                // $("#upname").val(name);
-                // $("#upnic").val(nic);
-                // $("#upphone").val(telno);
-                // $("#upaddress").val(address);
                 $("#item2").val(id);
             });
         });
@@ -285,11 +251,11 @@
                     if (i % 2 == 0) {
                         $sample += "<div class='row'>";
                     }
-                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><p> Goal :" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['recordId']+"-"+ obj['title'] + "</h4><p>" + obj['description'] + "</p><p> Goal :" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
                     if (obj['isActive'] == 1) {
                         $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                     }
-                    $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
+                    $sample += "<a class='btn_update btn_blue' data-id='" + obj['recordId'] + "'>Update</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
                         $sample += "</div>";
                     }
@@ -315,7 +281,7 @@
                         if (i % 2 == 0) {
                             $sample += "<div class='row'>";
                         }
-                        $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                        $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['recordId'] +"-"+ obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
                         if (obj['isActive'] == 1) {
                             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                         }
@@ -329,7 +295,7 @@
                             if (i % 2 == 0) {
                                 $sample += "<div class='row'>";
                             }
-                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['recordId']+"-"+ obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
@@ -344,7 +310,7 @@
                             if (i % 2 == 0) {
                                 $sample += "<div class='row'>";
                             }
-                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                            $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['recordId']+"-"+ obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
                             if (obj['isActive'] == 1) {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }

@@ -733,6 +733,7 @@ class DivisionalSecretariat extends Employee
         $results = array();
         // $r = $excute->fetch_assoc();
         while ($r = $excute->fetch_assoc()) {
+            $r['recordId']=FundRaisingNotice::getNoticeCode($r['recordId']);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -744,11 +745,13 @@ class DivisionalSecretariat extends Employee
      {
         if (count($data['receivedParams']) == 1) {
         $recordId = $data['receivedParams'][0];
+        $recordId=FundRaisingNotice::getId($recordId);
         $sql = "SELECT * FROM fundraising WHERE `recordId`='$recordId'";
         }
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
+            $r['recordId']=FundRaisingNotice::getNoticeCode($recordId);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -759,13 +762,13 @@ class DivisionalSecretariat extends Employee
      {
         global $errorCode;
         // print_r($data['receivedParams']);
-        // print_r($data);
         if (count($data['receivedParams']) == 1) {
             $uid = $data['userId'];
             $title = $data['uptitle'];
             $description = $data['updescription'];
             $goal = $data['upgoal'];
             $recordId = $data['receivedParams'][0];
+            $recordId=FundRaisingNotice::getId($recordId);
 
             $sql = "UPDATE `fundraising` SET `title`='$title', `description`='$description', `goal`='$goal' WHERE recordId =$recordId";
             $this->connection->query($sql);

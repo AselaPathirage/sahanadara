@@ -225,9 +225,11 @@
                         attribute2.setAttribute("style", "cursor:pointer");
                         var attribute3 = document.createElement("span");
                         attribute3.innerHTML = " ";
-                        cell4.appendChild(attribute);
-                        cell4.appendChild(attribute3);
                         cell4.appendChild(attribute2);
+                        cell4.appendChild(attribute3);
+                        if (obj['appovalStatus'] != "Approved") {
+                            cell4.appendChild(attribute);
+                        }
                     }
                 }
             });
@@ -352,9 +354,11 @@
                 attribute2.setAttribute("style", "cursor:pointer");
                 var attribute3 = document.createElement("span");
                 attribute3.innerHTML = " ";
-                cell4.appendChild(attribute);
-                cell4.appendChild(attribute3);
                 cell4.appendChild(attribute2);
+                cell4.appendChild(attribute3);
+                if (obj['appovalStatus'] != "Approved") {
+                    cell4.appendChild(attribute);
+                }
             }
         }
 

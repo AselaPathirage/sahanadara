@@ -48,6 +48,57 @@ trait Noticer{
     }
     public function updateNotice(array $data){
         global $errorCode;
+        if(count($data['receivedParams'])==1){
+            if(isset($data['title']) && isset($data['numOfFamillies']) && isset($data['numOfPeople']) && isset($data['safeHouseId']) && isset($data['item'])){
+                $title = $data['title'];
+                $numOfFamillies = $data['numOfFamillies'];
+                $numOfPeople = $data['numOfPeople'];
+                $safeHouseId = SafeHouse::getId($data['safeHouseId']);
+                $noticeId=$data['receivedParams'][0];
+                $noticeId=Notice::getId($noticeId);
+                $description = "";
+                if(isset($data['description'])){
+                    $description = $data['description'];
+                }
+                $sql = "UPDATE donationreqnotice SET safehouseId=$safeHouseId, title='$title', numOfFamilies='$numOfFamillies', numOfPeople='$numOfPeople', note='$description', appovalStatus='n'
+                WHERE donationreqnotice.recordId=$noticeId;";
+                $this->connection->query($sql);
+                $sql="DELETE FROM noticeitem WHERE noticeId=$noticeId;";
+                $this->connection->query($sql);
+                if(count($data['item'])>0){
+                    $len = count($data['item']);
+                    $items = array_keys($data['item']);
+                    $values = array_values($data['item']);
+                    $sql ="INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES ";
+                    for ($x = 0; $x < $len; $x++) { 
+                        $item = $items[$x];
+                        $sql0 = "SELECT itemId FROM item WHERE itemName = '$item' LIMIT 1;";
+                        $execute = $this->connection->query($sql0);
+                        if($execute->num_rows == 0){
+                            $sql1 = "INSERT INTO item( itemName, unitType ) VALUES ('$item' , 4);";
+                            $this->connection->query($sql1);
+                        }
+                        $value = $values[$x];
+                        $sql  .= "($noticeId, '$item', $value)";
+                        if(($x+1) != $len){
+                            $sql .= ", ";
+                        }
+
+                    }
+                    $this->connection->query($sql);
+                }
+                echo json_encode(array("code"=>$errorCode['success']));
+                exit();
+            }else{
+                http_response_code(200);                       
+                echo json_encode(array("code"=>$errorCode['attributeMissing']));
+                exit();
+            }
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
     }
     public function deleteNotice(array $data){
         global $errorCode;

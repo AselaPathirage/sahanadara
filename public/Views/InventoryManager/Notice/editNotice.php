@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<?php
+$array = explode("/", $_GET["url"]);
+// echo end($array);
+?>
+
 <head>
     <meta charset="UTF-8">
     <title> Inventory Manager - Notice </title>
@@ -144,10 +149,11 @@
         }
     </style>
 </head>
+
 <body>
     <?php
-        include_once('./public/Views/InventoryManager/includes/sidebar_notice.php');
-     ?>
+    include_once('./public/Views/InventoryManager/includes/sidebar_notice.php');
+    ?>
     <section class="dashboard-section">
         <?php
         include_once('./public/Views/InventoryManager/includes/topnav.php');
@@ -164,7 +170,7 @@
                             <table style="border: none !important;width:70%;">
                                 <tr>
                                     <td>Title</td>
-                                    <td><input type="text" id="title" name="title" required="true"/></td>
+                                    <td><input type="text" id="title" name="title" required="true" /></td>
                                 </tr>
                                 <tr>
                                     <td>Number of Families</td>
@@ -205,8 +211,8 @@
                             <div style="float: right;width:30%">
                                 <table style="border: none !important;width:100%;">
                                     <tr>
-                                        <td><input type="reset" style="margin-top: 0px;"  class="view" value="Cancel"></td>
-                                        <td><input type="submit" class="create" value="Create"></td>
+                                        <td><input type="reset" style="margin-top: 0px;" class="view" value="Cancel"></td>
+                                        <td><input type="submit" class="create" value="Edit"></td>
                                     </tr>
                                 </table>
                             </div>
@@ -220,14 +226,89 @@
     </div>
     <script>
         var thisPage = "#search";
+        var output;
+        var count = 0;
         $(document).ready(function() {
             $("#search,#add").each(function() {
-                if ($(this).hasClass('active')){
+                if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }
                 $(thisPage).addClass("active");
             });
+            $(document).on('click', '.add', function() {
+                var html = '';
+                html += "<tr>";
+                html += "<td><input type='text' style='text-transform: capitalize;' required='true' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                html += "<td><input type='text' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
+                html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
+                $('#item_table > tbody').append(html);
+                count++;
+            });
 
+            $(document).on('click', '.remove', function() {
+                $(this).closest('tr').remove();
+            });
+            $(document).on('click', '.view', function() {
+                $('#trow').empty();
+            });
+            $("form").on('submit', function(event) {
+                event.preventDefault();
+                var formElement = document.querySelector("form");
+                var formData = new FormData(formElement);
+                var object = {};
+                formData.forEach(function(value, key) {
+                    if(key.includes("quantity")){
+                        return;
+                    }
+                    object[key] = value;
+                });
+                let e = document.getElementById("safeHouseId");
+                let safeHouseId = e.value;
+                object['safeHouseId'] = safeHouseId;
+                object['item'] = new Object();
+                $('#item_table  tbody  tr').each(function() {
+                    var item = $(this).find("td:first").find("input").val();
+                    var words = item.split(" ");
+                    for (let i = 0; i < words.length; i++) {
+                        words[i] = words[i][0].toUpperCase() + words[i].substr(1);
+                    }
+                    words = words.join(" ");
+                    var quantity = $(this).find("td:nth-child(2)").find("input").val();
+                    object['item'][words] = quantity;
+                });
+                var json = JSON.stringify(object);
+                console.log(json);//return;
+                var check = "<?php echo end($array); ?>";
+                $.ajax({
+					type: "PUT",
+					url: "<?php echo API; ?>notice/"+check,
+					data: json,
+                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
+					cache: false,
+					success: function(result) {
+                        if(result.code==806){
+                            $("#add").trigger('reset');
+                            $('#trow').empty();
+                            sessionStorage.clear();
+                            document.getElementById('title').value ="";
+                            document.getElementById('numOfPeople').value ="";
+                            document.getElementById('numOfFamillies').value ="";
+                            alertGen("Record Added Successfully!",1);
+                        }else{
+                            alertGen("Unable to handle request.",2);
+                        }
+                        console.log(result);
+					},
+					error: function(err) {
+						alertGen("Something went wrong.",3);
+                        console.log(err);  
+					}
+				});
+            });
+            $("#alertBox").click(function() {
+                $(".alert").fadeOut(100)
+                $("#alertBox").html("");
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -236,15 +317,10 @@
             sidebar.classList.toggle("active");
         }
         getNotice();
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
         function getNotice() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>notice/<?php echo $record; ?>",
+                url: "<?php echo API; ?>notice/<?php echo end($array); ?>",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -253,51 +329,199 @@
                 async: false
             }).responseText);
             console.log(output);
-            document.getElementById("title").value = output[0].title ;
-            document.getElementById("family").value = output[0].numOfFamilies ;
-            document.getElementById("people").value = output[0].numOfPeople ;
-            document.getElementById("location").value = output[0].safeHouseName ;
-            document.getElementById("notes").innerHTML = output[0].note;
-            var table = document.getElementById("data");
-            if(output[0].item.length>0){
-                output[0].item.forEach(function(item) {
-                    let row = table.insertRow(-1);
-                    let cell1 = row.insertCell(-1);
-                    let cell2 = row.insertCell(-1);
-                    cell1.className  = "align";
-                    cell2.className  = "align";
-                    cell1.innerHTML = item.item;
-                    cell2.innerHTML = item.quantity + " " + item.unit;
-                });
-            }else{
+            document.getElementById("title").value = output[0].title;
+            document.getElementById("numOfFamillies").value = output[0].numOfFamilies;
+            document.getElementById("numOfPeople").value = output[0].numOfPeople;
+            document.getElementById("description").innerHTML = output[0].note;
+            safeHouseList(output[0].safehouseId);
+            var table = document.getElementById("trow");
+            if (output[0].item.length > 0) {
+                var data = output[0]['item'];
+                for (var i = 0; i < data.length; i++) {
+                    let item = data[i];
+                    var html = '';
+                    html += "<tr>";
+                    html += "<td><input type='text' value='" + item['item'] + "' style='text-transform: capitalize;' required='true' id='search-bar-" + count + "' onfocus='filter(" + count + ")' autocomplete='off' /><ul id='output-" + count + "'' class='output' style='display:none;'></ul></td>";
+                    html += "<td><input type='text' value='" + item['quantity'] + "' id='quantity" + count + "' name='quantity" + count + "'  onkeypress='return isNumber(event,2)' class='form-control item_quantity' required='true'/></td>";
+                    html += "<td><button type='button' name='remove' class='form-control remove'>Remove</button></td></tr>";
+                    $('#item_table > tbody').append(html);
+                    count++;
+                }
+            } else {
                 let row = table.insertRow(-1);
                 let cell = row.insertCell(-1);
                 cell.colSpan = 2;
-                cell.className  = "align";
+                cell.className = "align";
                 cell.innerHTML = "<p>There aren't requiered items.</p>";
             }
         }
-        function alertGen($messege,$type){
-            if ($type == 1){
-                $("#alertBox").append("  <div class='alert success-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+
+        function safeHouseList(safeHouse) {
+            var request =
+                $.parseJSON($.ajax({
+                    type: "GET",
+                    url: "<?php echo API; ?>safehouse/name",
+                    dataType: "json",
+                    headers: {
+                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                    },
+                    cache: false,
+                    async: false
+                }).responseText);
+            for (var i = 0; i < request.length; i++) {
+                var option = document.createElement("option");
+                option.text = request[i].safeHouseName;
+                option.value = request[i].safeHouseID;
+                if (request[i].safeHouseID == safeHouse) {
+                    option.selected = 'true';
+                    document.getElementById("safeHouseId").disabled = 'true';
+                }
+                var select = document.getElementById("safeHouseId");
+                select.appendChild(option);
+            }
+        }
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").append("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
-            }else if($type == 2){
-                $("#alertBox").append("  <div class='alert warning-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+            } else if ($type == 2) {
+                $("#alertBox").append("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
-            }else{
-                $("#alertBox").append("  <div class='alert danger-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+            } else {
+                $("#alertBox").append("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
             }
         }
+        //begginning of the text box filter
+        //Copyright (c) 2022 by Sarah Wulf (https://codepen.io/slwulf/pen/vczhJ)
+
+        // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+        // The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+        // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+        var terms =
+            $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>item/value",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText),
+            returnList = [];
+
+        function strInArray(str, strArray) {
+            for (var j = 0; j < strArray.length; j++) {
+                var original = str;
+                str = str.toLowerCase();
+                var text = strArray[j].toLowerCase();
+                if (text.match(str) && returnList.length < 5) {
+                    let searchMask = original;
+                    let regEx = new RegExp(searchMask, "ig");
+                    let $h = strArray[j].replace(regEx, '<strong>' + original + '</strong>');
+                    returnList.push('<li class="prediction-item"><span class="prediction-text">' + $h + '</span></li>');
+                }
+            }
+        }
+
+        function nextItem(kp) {
+            if ($('.focus').length > 0) {
+                var $next = $('.focus').next(),
+                    $prev = $('.focus').prev();
+            }
+
+            if (kp == 38) { // Up
+
+                if ($('.focus').is(':first-child')) {
+                    $prev = $('.prediction-item:last-child');
+                }
+
+                $('.prediction-item').removeClass('focus');
+                $prev.addClass('focus');
+
+            } else if (kp == 40) { // Down
+
+                if ($('.focus').is(':last-child')) {
+                    $next = $('.prediction-item:first-child');
+                }
+
+                $('.prediction-item').removeClass('focus');
+                $next.addClass('focus');
+            }
+        }
+
+        function filter(id) {
+            const activeText = document.activeElement;
+            $(function() {
+                $(activeText).keydown(function(e) {
+                    $key = e.keyCode;
+                    if ($key == 38 || $key == 40) {
+                        nextItem($key);
+                        return;
+                    }
+
+                    setTimeout(function() {
+                        var $search = $(activeText).val();
+                        returnList = [];
+
+                        strInArray($search, terms);
+
+                        if ($search == '' || !$('input').val) {
+                            $('#output-' + id).html('').slideUp();
+                        } else {
+                            $('#output-' + id).html(returnList).slideDown();
+                        }
+
+                        $('.prediction-item').on('click', function() {
+                            $text = $(this).find('span').text();
+                            $('#output-' + id).slideUp(function() {
+                                $(this).html('');
+                            });
+                            $(activeText).val($text);
+                        });
+
+                        $('.prediction-item:first-child').addClass('focus');
+
+                    }, 50);
+                });
+            });
+
+            $(activeText).focus(function() {
+                if ($('.prediction-item').length > 0) {
+                    $('#output-' + id).slideDown();
+                }
+
+                $('#searchform').submit(function(e) {
+                    e.preventDefault();
+                    $text = $('.focus').find('span').text();
+                    $('#output-' + id).slideUp();
+                    $(activeText).val($text);
+                    $('input').blur();
+                });
+            });
+
+            $(activeText).blur(function() {
+                if ($('.prediction-item').length > 0) {
+                    $('#output-' + id).slideUp();
+                }
+            });
+        }
+        //end of the text box filter
     </script>
 </body>
+
 </html>

@@ -45,6 +45,7 @@ Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
 Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails", "Admin@updateProfileDetails", "DistrictSecretariat@updateProfileDetails"));
+Route::PUT("notice/{id}", array("InventoryManager@updateNotice","DisasterOfficer@updateNotice"));
 
 Route::POST("login", array("Employee@login"));
 Route::POST("resetPassword", array("Employee@resetPassword"));

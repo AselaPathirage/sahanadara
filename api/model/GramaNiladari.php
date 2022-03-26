@@ -463,7 +463,6 @@ class GramaNiladari extends ResponsiblePerson
     }
 
     // fill gn final incident data based on the reliefs
-
     public function fillFinalIncident(array $data)
     {
         $uid = $data['userId'];

@@ -91,94 +91,8 @@
 
             <div class="help container text-center" id="help">
                 <h1 id="topicTwo"></h1>
-
-                <div class="row text-center">
-                    <!-- <div class="col5 box row-content">
-                        <h4>Bellapitiya Maha Vidyalaya</h4>
-                        <h3>Bellapitiya, Horana</h3>
-                        <p>Telephone Number - 0778787878</p>
-                        <p>People - 100</p>
-                        <p>Water bottles-100</p>
-                    </div> -->
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row text-center" style="justify-content: space-around;" id="box">
                 </div>
-                <div class="row text-center">
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div class="row text-center">
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
                 <a href="<?php echo HOST; ?>help" class="seemore">See more</a>
             </div>
             <div class="help container text-center" id="help">
@@ -307,6 +221,41 @@
             vid.playbackRate = 0.7;
 
         });
+        var output;
+        getNotice();
+        function getNotice(){
+            var val = getCookieValue('lan');
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>notice/language/"+val+"/limit/4",
+                dataType: "json",
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            for (var i = 0; i < output.length; i++) {
+                var obj=output[i];
+                var div = document.createElement('div');
+                div.className="card row-content col5";
+                var html="";
+                var count = obj['item'].length;
+                for (var j = 0; j < count; j++) { 
+                    let item=obj['item'][j];
+                    html+=item['itemName']+"-"+item['quantitity']+" "+item['unit'];
+                    if((j+1)!=count){
+                        html+=", ";
+                    }
+                }
+                if(val == 'si'){
+                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>දුරකතන අංකය -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                }else if(val == 'ta'){
+                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>தொடர்பு எண் -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>இடப்பெயர்ச்சியின் அளவு -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                }else{
+                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>Contact Number -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>People -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                }
+                document.getElementById('box').appendChild(div);
+            }
+        }
     </script>
     <script src="https://kit.fontawesome.com/9e8a3f781b.js" crossorigin="anonymous"></script>
     <script>

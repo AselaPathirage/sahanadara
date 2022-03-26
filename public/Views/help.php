@@ -23,7 +23,7 @@
             <div class="space"></div>
             <h1 class="heading_landing" id="topic">Donation Requesting Notices</h1>
             <div class="container aboutsec">
-                <p class="text-center" style="font-size: large;"  id="subTopic">Help your neighbours through SAHANADARA by donating today! <br>All donations go directly to making a difference for our cause.
+                <p class="text-center" style="font-size: large;" id="subTopic">Help your neighbours through SAHANADARA by donating today! <br>All donations go directly to making a difference for our cause.
                 </p>
 
 
@@ -39,7 +39,7 @@
 
                                 </select>
                             </th>
-                            <th> <span id="division">Division</span> 
+                            <th> <span id="division">Division</span>
                                 <select id="status-filter" class="form-control">
                                     <option>All</option>
                                     <option>Madurawala</option>
@@ -47,158 +47,18 @@
                                     <option>Millaniya</option>
                                 </select>
                             </th>
-                            <th><span id="search">Search</span>
-                                <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                            <th><span id="lable">Search</span>
+                                <input type="text" id="search" name="search" placeholder="Search" title="Type " class="form-control">
                             </th>
                         </tr>
                     </thead>
                 </table>
-
-
-                <div class="row text-center">
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row text-center">
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card row-content col5">
-                        <h3>Bellapitiya Maha Vidyalaya</h3>
-                        <p>Bellapitiya, Horana.</p>
-                        <p class="small"><b>Telephone Number -</b> 0778787878</p>
-                        <p class="small"><b>People -</b> 100</p>
-                        <p class="small">Water bottles-100</p>
-                        <div class="go-corner" href="#">
-                            <div class="go-arrow">
-                                <i class="fas fa-hands-helping"></i>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row text-center" style="justify-content: space-around;" id="box">
                 </div>
             </div>
-
         </div>
-
-
-
-
         <?php include 'footer.php'; ?>
-
-
-
     </div>
-
-
     <script type="text/javascript">
         $(document).ready(function() {
             // Toggle menu on click
@@ -209,63 +69,111 @@
             function toggleBodyClass(className) {
                 document.body.classList.toggle(className);
             }
+            $("#search").keyup(function() {
+                var filter = $(this).val(),
+                    count = 0;
+                $('#box div').each(function() {
+                    if ($(this).text().search(new RegExp(filter, "i")) < 0) {
+                        $(this).hide(); // MY CHANGE
+                    } else {
+                        $(this).show(); // MY CHANGE
+                        count++;
+                    }
+                });
+            });
 
         });
-        window.onload = async function (){
+        var output;
+        getNotice();
+        function getNotice(){
+            var val = getCookieValue('lan');
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>notice/language/"+val,
+                dataType: "json",
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            for (var i = 0; i < output.length; i++) {
+                var obj=output[i];
+                var div = document.createElement('div');
+                div.className="card row-content col5";
+                var html="";
+                var count = obj['item'].length;
+                for (var j = 0; j < count; j++) { 
+                    let item=obj['item'][j];
+                    html+=item['itemName']+"-"+item['quantitity']+" "+item['unit'];
+                    if((j+1)!=count){
+                        html+=", ";
+                    }
+                }
+                if(val == 'si'){
+                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>දුරකතන අංකය -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                }else if(val == 'ta'){
+                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>தொடர்பு எண் -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>இடப்பெயர்ச்சியின் அளவு -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                }else{
+                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>Contact Number -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>People -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                }
+                document.getElementById('box').appendChild(div);
+            }
+        }
+
+        window.onload = async function() {
             var language = getCookieValue('lan');
             try {
-                const response = await fetch("<?php echo HOST; ?>" + "public/assets/json/lanSupport.json", {method: "GET"});
+                const response = await fetch("<?php echo HOST; ?>" + "public/assets/json/lanSupport.json", {
+                    method: "GET"
+                });
                 let dataJson = JSON.parse(await response.text());
                 if (language == 'si') {
                     var sub = 0;
                 } else if (language == 'en') {
                     var sub = 1;
-                } else if(language == 'ta'){
+                } else if (language == 'ta') {
                     var sub = 2;
                 }
                 //menu items
-                document.getElementById("home").innerHTML= dataJson[sub].menu.home;
-                document.getElementById("about").innerHTML= dataJson[sub].menu.about;
-                document.getElementById("help").innerHTML= dataJson[sub].menu.help;
-                document.getElementById("donate").innerHTML= dataJson[sub].menu.donate;
-                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
-                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                document.getElementById("home").innerHTML = dataJson[sub].menu.home;
+                document.getElementById("about").innerHTML = dataJson[sub].menu.about;
+                document.getElementById("help").innerHTML = dataJson[sub].menu.help;
+                document.getElementById("donate").innerHTML = dataJson[sub].menu.donate;
+                if (!document.getElementById("staff").innerHTML.includes("Hi,")) {
+                    document.getElementById("staff").innerHTML = dataJson[sub].menu.staff;
                 }
 
                 //body items
-                document.getElementById("topic").innerHTML= dataJson[sub].help.topic;
-                document.getElementById("subTopic").innerHTML= dataJson[sub].help.subTopic;
-                document.getElementById("district").innerHTML= dataJson[sub].help.district;
-                document.getElementById("division").innerHTML= dataJson[sub].help.division;
-                document.getElementById("search").innerHTML= dataJson[sub].help.search;
-                
-                
+                document.getElementById("topic").innerHTML = dataJson[sub].help.topic;
+                document.getElementById("subTopic").innerHTML = dataJson[sub].help.subTopic;
+                document.getElementById("district").innerHTML = dataJson[sub].help.district;
+                document.getElementById("division").innerHTML = dataJson[sub].help.division;
+                document.getElementById("search").innerHTML = dataJson[sub].help.search;
+
+
 
 
                 //console.log(dataJson);
-            }catch (e) {
+            } catch (e) {
                 console.error(e);
                 //menu items
-                document.getElementById("home").innerHTML="Home";
-                document.getElementById("about").innerHTML="About";
-                document.getElementById("help").innerHTML="Help";
-                document.getElementById("donate").innerHTML="Donate";
-                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
-                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                document.getElementById("home").innerHTML = "Home";
+                document.getElementById("about").innerHTML = "About";
+                document.getElementById("help").innerHTML = "Help";
+                document.getElementById("donate").innerHTML = "Donate";
+                if (!document.getElementById("staff").innerHTML.includes("Hi,")) {
+                    document.getElementById("staff").innerHTML = dataJson[sub].menu.staff;
                 }
 
                 //body items
-                document.getElementById("topic").innerHTML= "Donation Requesting Notices";
-                document.getElementById("subTopic").innerHTML= "Help your neighbours through SAHANADARA by donating today! <br>All donations go directly to making a difference for our cause.";
-                document.getElementById("district").innerHTML= "District";
-                document.getElementById("division").innerHTML= "DS Division";
-                document.getElementById("search").innerHTML= "Search";
-                
+                document.getElementById("topic").innerHTML = "Donation Requesting Notices";
+                document.getElementById("subTopic").innerHTML = "Help your neighbours through SAHANADARA by donating today! <br>All donations go directly to making a difference for our cause.";
+                document.getElementById("district").innerHTML = "District";
+                document.getElementById("division").innerHTML = "DS Division";
+                document.getElementById("search").innerHTML = "Search";
+
             }
         };
     </script>
     <script src="https://kit.fontawesome.com/9e8a3f781b.js" crossorigin="anonymous"></script>
-
 </body>
-
 </html>

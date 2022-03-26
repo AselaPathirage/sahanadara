@@ -179,7 +179,7 @@
                 if(unit=='units'){
                     step = 1;
                 }
-                html += "<td><input type='number' style='width:60%;display:inline !important;' id='quantity" + count + "' name='quantity" + count + "'  step='"+step+"' class='form-control item_quantity' min='0' required='true'/><lable for='quantity" + count + "' style='width:40%'>"+unit+"</lable></td>";
+                html += "<td><input type='number' style='width:60%;display:inline !important;' id='quantity" + count + "' name='quantity" + count + "'  step='"+step+"' class='form-control item_quantity' min='0' required='true'/><lable for='quantity" + count + "' style='width:40%;margin-left:3px;'>"+unit+"</lable></td>";
                 html += "<td><button type='button' name='remove' data-index='"+index+"' class='form-control remove'>Remove</button></td></tr>";
                 $('#item_table > tbody').append(html);
                 count++;

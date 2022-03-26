@@ -185,7 +185,8 @@ class DivisionalSecretariat extends Employee
                     $sql="SELECT inventoryitem.recId,inventoryitem.itemId FROM inventoryitem WHERE inventoryitem.recId IN (SELECT servicedistributeitemrecord.itemRecordId FROM servicedistributeitemrecord WHERE servicedistributeitemrecord.recordId=$serviceRequestId)";
                     $excute=$this->connection->query($sql);
                     while($r = $excute-> fetch_assoc()) {
-                        $sql="UPDATE servicerequestitem SET acceptedBy= ,acceptedDate= WHERE r_id= AND itemId=  AND acceptedBy IS NULL AND acceptedDate IS NULL";
+                        $itemId=$r['itemId'];
+                        $sql="UPDATE servicerequestitem SET acceptedBy=$inventoryId,acceptedDate=CURDATE() WHERE r_id=$serviceRequestId AND itemId=$itemId  AND acceptedBy IS NULL AND acceptedDate IS NULL";
                         $this->connection->query($sql); 
                         $count=$this->connection->affected_rows;
                         if($count==0){

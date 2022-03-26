@@ -36,7 +36,7 @@ class Home{
                 exit();
             }
             $lanCode=strtolower($data['receivedParams'][0]);
-            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate;";
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate;";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
@@ -83,7 +83,7 @@ class Home{
             }
             $lanCode=strtolower($data['receivedParams'][0]);
             $limit=$data['receivedParams'][2];
-            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate LIMIT $limit;";
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate LIMIT $limit;";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {

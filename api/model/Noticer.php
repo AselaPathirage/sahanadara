@@ -22,8 +22,14 @@ trait Noticer{
                 $items = array_keys($data['item']);
                 $values = array_values($data['item']);
                 $sql ="INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES ";
-                for ($x = 0; $x < $len; $x++) {
+                for ($x = 0; $x < $len; $x++) { 
                     $item = $items[$x];
+                    $sql0 = "SELECT itemId FROM item WHERE itemName = '$item' LIMIT 1;";
+                    $execute = $this->connection->query($sql0);
+                    if($execute->num_rows == 0){
+                        $sql1 = "INSERT INTO item( itemName, unitType ) VALUES ('$item' , 4);";
+                        $this->connection->query($sql1);
+                    }
                     $value = $values[$x];
                     $sql  .= "($noticeId, '$item', $value)";
                     if(($x+1) != $len){

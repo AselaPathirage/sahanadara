@@ -1,5 +1,27 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+<?php
+if(isset($_POST['Generate']) && isset($_POST['choice'])){
+    $choice=$_POST['choice'];
+    $from=$_POST['from'];
+    $to=$_POST['to'];
+    if($from==""){
+        $from="beggining";
+    }
+    if($to==""){
+        $to="end";
+    }
+    if($choice==1){
+        echo "<script>window.open('availableItemReport/from/".$from."/to/".$to."', '_blank') || window.location.replace('availableItemReport/from/".$from."/to/".$to."');</script>";
+    }else if($choice==2){
+        echo "<script>window.open('goodsTransactionReport/from/".$from."/to/".$to."', '_blank') || window.location.replace('goodsTransactionReport/from/".$from."/to/".$to."');</script>";
+    }else if($choice==3){
+        echo "<script>window.open('receivedGoodsReport/from/".$from."/to/".$to."', '_blank') || window.location.replace('receivedGoodsReport/from/".$from."/to/".$to."');</script>";
+    }else if($choice==4){
+        echo "<script>window.open('sendingGoodsReport/from/".$from."/to/".$to."', '_blank') || window.location.replace('sendingGoodsReport/from/".$from."/to/".$to."');</script>";
+    }
+}
+?>
 <head>
     <meta charset="UTF-8">
     <title> Inventory Manager - Report </title>
@@ -31,36 +53,40 @@
         <div class="space"></div>
         <div class="space"></div>
         <div class="container">
-        <div class="box">
-                <center><h1>Inventory Report</h1></center>
-                <h3>Time Period</h3>
-                <form>
-                    <div style="display:flex;">
-                            <div style="width: 70%;padding-left:10%">
-                                <table style="border: none !important;width:100%;">
-                                    <tr>
-                                        <td>
-                                        <label for="your_name">Starting Date</label>
-                                        </td>
-                                        <td>
-                                        <input type="date" id="birthday" name="birthday">
-                                        </td>
-                                        <td>
-                                        <label for="your_name">End Date</label>
-                                        </td>
-                                        <td>
-                                        <input type="date" id="birthday" name="birthday">
-                                        </td>
-                                    </tr>
-                                </table>
+            <div class="box">
+                <center>
+                    <h1>Inventory Report</h1>
+                </center>
+                <form method="POST">
+                    <div class="row-content">
+                        <div class="row">
+
+                            <div class="col4">
+                                <label for="crusttype">Report Type</label>
+                                <select id="choice" name="choice">
+                                    <option value="1">Available Items Report</option>
+                                    <option value="2">Goods Transaction Report</option>
+                                    <option value="3">Received Goods Report</option>
+                                    <option value="4">Sending Goods Report</option>
+                                </select>
                             </div>
-                            <div style="float: right;padding-left:5%">
-                                <div class="row" style="justify-content: center;">
-                                    <input type="submit" value="Generate" class="btn-alerts" />
-                                    <input type="reset" value="Cancel" class="btn-alerts" />
-                                </div>
+                            <div class="col4">
+                                <label for="crusttype">From</label>
+                                <input type="date" id="from" name="from" max="<?php echo date("Y-m-d"); ?>">
                             </div>
+                            <div class="col4">
+                                <label for="crusttype">To</label>
+                                <input type="date" id="to" name="to" max="<?php echo date("Y-m-d"); ?>">
+                            </div>
+                        </div>
+
+                        <div class="row" style="justify-content: center;">
+
+                            <input type="submit" id="Generate" name="Generate" value="Generate" class="btn-alerts" />
+                            <!-- <input type="reset" value="Cancel" class="btn-alerts" /> -->
+                        </div>
                     </div>
+
                 </form>
             </div>
         </div>
@@ -74,7 +100,11 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            $("#from").on("change", function() {
+                var from = $("#from").val();
+                var input = document.getElementById("to");
+                input.setAttribute("min", from);
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");

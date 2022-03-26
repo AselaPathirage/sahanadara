@@ -122,7 +122,7 @@ Route::GET("dismgrcomp", array("DisasterOfficer@getCompensations"));
 
 Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
 Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
-
+Route::GET("Safehouse/{id}", array("DisasterOfficer@getmySafehouse"));
 Route::PUT("rincident", array("DisasterOfficer@reportIntoIncident"));
 Route::PUT("docompapprove", array("DisasterOfficer@approvecomp"));
 Route::PUT("doincapprove", array("DisasterOfficer@approveinc"));

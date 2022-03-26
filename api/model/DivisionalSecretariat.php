@@ -740,6 +740,21 @@ class DivisionalSecretariat extends Employee
          
      }
 
+     public function getmyFundraiser(array $data)
+     {
+        if (count($data['receivedParams']) == 1) {
+        $recordId = $data['receivedParams'][0];
+        $sql = "SELECT * FROM fundraising WHERE `recordId`='$recordId'";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
      public function updateFundraiser(array $data)
      {
         global $errorCode;

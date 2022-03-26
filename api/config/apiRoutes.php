@@ -8,7 +8,7 @@ DELETE - delete
 
 Route::GET("/", array("Home@creadits"));
 Route::GET("donation", array("Home@viewDonations"));
-
+//Route::GET("fundraiser", array("Home@viewFundraises"));
 Route::GET("notice", array("Home@viewNotice","InventoryManager@getNotice","DivisionalSecretariat@getNotice"));
 Route::GET("notice/language/{lanCode}", array("Home@getNotice"));
 Route::GET("notice/language/{lanCode}/limit/{number}", array("Home@getLimitedNotice"));
@@ -175,6 +175,8 @@ Route::PUT("fundraiser/{id}", array("DivisionalSecretariat@updateFundraiser"));
 Route::PUT("borrowRequests/{command}/{requestId}", array("DivisionalSecretariat@commandBorrowRequests"));
 Route::PUT("notice/{command}/{noticeId}", array("DivisionalSecretariat@commandNotice"));
 Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
+Route::GET("fundraiser/{id}", array("DivisionalSecretariat@getmyFundraiser"));
+
 
 // District Sec
 Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));

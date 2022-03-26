@@ -36,5 +36,11 @@
                 <span class="links_name">Service Requests</span>
             </a>
         </li>
+        <li>
+            <a href="<?php echo HOST; ?>/InventoryManager/Inventory/RequestApprovalStatus" id="BorrowRequests">
+                <i class='bx bx-donate-heart' ></i>
+                <span class="links_name">Requests Status</span>
+            </a>
+        </li>
     </ul>
 </div>

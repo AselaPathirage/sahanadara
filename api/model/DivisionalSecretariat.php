@@ -797,5 +797,20 @@ class DivisionalSecretariat extends Employee
         }
     }
 
+    public function changeFundraiserStatus(array $data)
+    {
+        global $errorCode;
+        $isUsing = $data['isUsing'];
+        $recordId = $data['recordId'];
+        // $recordId = $data['receivedParams'][0];
+        $sql = "UPDATE `fundraising` SET `isUsing`='$isUsing' WHERE `recordId`='$recordId'";
+        if ($this->connection->query($sql)) {;
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
     
 }

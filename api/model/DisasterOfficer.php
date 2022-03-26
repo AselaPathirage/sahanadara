@@ -604,6 +604,21 @@ class DisasterOfficer extends Employee
         }
     }
 
+    public function changeSafehouseStatus(array $data)
+    {
+        global $errorCode;
+        $isUsing = $data['isUsing'];
+        $safeHouseID = $data['safeHouseID'];
+        // $residentId = $data['receivedParams'][0];
+        $sql = "UPDATE `safehouse` SET `isUsing`='$isUsing' WHERE `safeHouseID`='$safeHouseID'";
+        if ($this->connection->query($sql)) {;
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
     protected function tokenKey($length = 10)
     {
         return substr(str_shuffle("aAQEWAbcERWREdefghiHLafgdffhvcJHjklmnopqrSFSEREESGSEGst0123456789"), 0, $length);

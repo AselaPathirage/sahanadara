@@ -128,7 +128,7 @@ Route::PUT("docompapprove", array("DisasterOfficer@approvecomp"));
 Route::PUT("doincapprove", array("DisasterOfficer@approveinc"));
 Route::PUT("docollected", array("DisasterOfficer@collectedcomp"));
 Route::PUT("incidentstatus", array("DisasterOfficer@changeIncidentStatus"));
-
+Route::PUT("safehousestatus", array("DisasterOfficer@changeSafehouseStatus"));
 Route::PUT("responsible/{id}", array("DisasterOfficer@updateResponsible"));
 Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
 
@@ -176,7 +176,7 @@ Route::PUT("borrowRequests/{command}/{requestId}", array("DivisionalSecretariat@
 Route::PUT("notice/{command}/{noticeId}", array("DivisionalSecretariat@commandNotice"));
 Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
 Route::GET("fundraiser/{id}", array("DivisionalSecretariat@getmyFundraiser"));
-
+Route::PUT("fundraiserstatus", array("DivisionalSecretariat@changeFundraiserStatus"));
 
 // District Sec
 Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));

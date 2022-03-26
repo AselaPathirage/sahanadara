@@ -328,59 +328,20 @@
             function toggleBodyClass(className) {
                 document.body.classList.toggle(className);
             }
-
-        });
-    </script>
-    <script src="https://kit.fontawesome.com/9e8a3f781b.js" crossorigin="anonymous"></script>
-    <script>
-        let $cards = $('.card_donation');
-
-        //open and close card when clicked on card
-        $cards.find('.js-expander').click(function() {
-            let $thisCard = $(this).closest('.card_donation');
-
-            if ($thisCard.hasClass('is-collapsed')) {
-                $cards.not($thisCard).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
-                $thisCard.removeClass('is-collapsed').addClass('is-expanded');
-
-                if ($cards.not($thisCard).hasClass('is-inactive')) {
-                    //do nothing
-                } else {
-                    $cards.not($thisCard).addClass('is-inactive');
-                }
-
-            } else {
-                $thisCard.removeClass('is-expanded').addClass('is-collapsed');
-                $cards.not($thisCard).removeClass('is-inactive');
-            }
+            progressBar("asdfasdf",20,100,1);
         });
 
-        //close card when click on cross
-        $cards.find('.js-collapser').click(function() {
-            let $thisCard = $(this).closest('.card_donation');
 
-            $thisCard.removeClass('is-expanded').addClass('is-collapsed');
-            $cards.not($thisCard).removeClass('is-inactive');
-        });
-        
-    </script>
 
-    <script>
-        "use strict";
 
-        // Function to find percentage
-        function percentage(a, b) {
-            return a / b * 100 > 100 ? 100 : a / b * 100;
-        }
 
-        //On Window Load
-        window.onload = function() {
-
+        function progressBar(nam,donationcollec,goal,id1) {
             //User Object
             var User = {
-                name: "Flood",
-                donationCollect: 56,
-                donationGoal: 125
+                name: nam,
+                donationCollect: donationcollec,
+                donationGoal: goal,
+                i:id1
             };
 
             // IDs
@@ -429,114 +390,111 @@
                 donationStatus.innerHTML = User.donationGoal - newDonationNumber > 0 ? "<i class='fa fa-window-close red'></i> You need <span class='red'>$" + (User.donationGoal - newDonationNumber) + "</span> to reach your Donation Goal" : "<i class='fa fa-exclamation-circle green'></i> Your campaign has been funded";
 
             };
+        }
+    </script>
+    <script src="https://kit.fontawesome.com/9e8a3f781b.js" crossorigin="anonymous"></script>
+    <script>
+        let $cards = $('.card_donation');
 
-        };
-        window.onload = async function (){
+        //open and close card when clicked on card
+        $cards.find('.js-expander').click(function() {
+            let $thisCard = $(this).closest('.card_donation');
+
+            if ($thisCard.hasClass('is-collapsed')) {
+                $cards.not($thisCard).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
+                $thisCard.removeClass('is-collapsed').addClass('is-expanded');
+
+                if ($cards.not($thisCard).hasClass('is-inactive')) {
+                    //do nothing
+                } else {
+                    $cards.not($thisCard).addClass('is-inactive');
+                }
+
+            } else {
+                $thisCard.removeClass('is-expanded').addClass('is-collapsed');
+                $cards.not($thisCard).removeClass('is-inactive');
+            }
+        });
+
+        //close card when click on cross
+        $cards.find('.js-collapser').click(function() {
+            let $thisCard = $(this).closest('.card_donation');
+
+            $thisCard.removeClass('is-expanded').addClass('is-collapsed');
+            $cards.not($thisCard).removeClass('is-inactive');
+        });
+    </script>
+
+    <script>
+        "use strict";
+
+        // Function to find percentage
+        function percentage(a, b) {
+            return a / b * 100 > 100 ? 100 : a / b * 100;
+        }
+
+        //On Window Load
+        window.onload = async function() {
             var language = getCookieValue('lan');
             try {
-                const response = await fetch("<?php echo HOST; ?>" + "public/assets/json/lanSupport.json", {method: "GET"});
+                const response = await fetch("<?php echo HOST; ?>" + "public/assets/json/lanSupport.json", {
+                    method: "GET"
+                });
                 let dataJson = JSON.parse(await response.text());
                 if (language == 'si') {
                     var sub = 0;
                 } else if (language == 'en') {
                     var sub = 1;
-                } else if(language == 'ta'){
+                } else if (language == 'ta') {
                     var sub = 2;
                 }
                 //menu items
-                document.getElementById("home").innerHTML= dataJson[sub].menu.home;
-                document.getElementById("about").innerHTML= dataJson[sub].menu.about;
-                document.getElementById("help").innerHTML= dataJson[sub].menu.help;
-                document.getElementById("donate").innerHTML= dataJson[sub].menu.donate;
-                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
-                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                document.getElementById("home").innerHTML = dataJson[sub].menu.home;
+                document.getElementById("about").innerHTML = dataJson[sub].menu.about;
+                document.getElementById("help").innerHTML = dataJson[sub].menu.help;
+                document.getElementById("donate").innerHTML = dataJson[sub].menu.donate;
+                if (!document.getElementById("staff").innerHTML.includes("Hi,")) {
+                    document.getElementById("staff").innerHTML = dataJson[sub].menu.staff;
                 }
 
                 //body items
-                document.getElementById("topic").innerHTML= dataJson[sub].donate.topic;
-                document.getElementById("subTopic").innerHTML= dataJson[sub].donate.subTopic;
-                document.getElementById("district").innerHTML= dataJson[sub].donate.district;
-                document.getElementById("division").innerHTML= dataJson[sub].donate.division;
-                document.getElementById("search").innerHTML= dataJson[sub].donate.search;
-                
-                
-                
+                document.getElementById("topic").innerHTML = dataJson[sub].donate.topic;
+                document.getElementById("subTopic").innerHTML = dataJson[sub].donate.subTopic;
+                document.getElementById("district").innerHTML = dataJson[sub].donate.district;
+                document.getElementById("division").innerHTML = dataJson[sub].donate.division;
+                document.getElementById("search").innerHTML = dataJson[sub].donate.search;
+
+
+
 
                 //console.log(dataJson);
-            }catch (e) {
+            } catch (e) {
                 console.error(e);
                 //menu items
-                document.getElementById("home").innerHTML="Home";
-                document.getElementById("about").innerHTML="About";
-                document.getElementById("help").innerHTML="Help";
-                document.getElementById("donate").innerHTML="Donate";
-                if(!document.getElementById("staff").innerHTML.includes("Hi,")){
-                    document.getElementById("staff").innerHTML= dataJson[sub].menu.staff;
+                document.getElementById("home").innerHTML = "Home";
+                document.getElementById("about").innerHTML = "About";
+                document.getElementById("help").innerHTML = "Help";
+                document.getElementById("donate").innerHTML = "Donate";
+                if (!document.getElementById("staff").innerHTML.includes("Hi,")) {
+                    document.getElementById("staff").innerHTML = dataJson[sub].menu.staff;
                 }
 
                 //body items
-                document.getElementById("topic").innerHTML= "Fund Raises";
-                document.getElementById("subTopic").innerHTML= "MAKE A DONATION & SPREAD A SMILE <br> SAHANADARA ensures that every single Rupee what you donate will be solely used for Charity purpose.";
-                document.getElementById("district").innerHTML= "District";
-                document.getElementById("division").innerHTML= "DS Division";
-                document.getElementById("search").innerHTML= "Search";
-                
+                document.getElementById("topic").innerHTML = "Fund Raises";
+                document.getElementById("subTopic").innerHTML = "MAKE A DONATION & SPREAD A SMILE <br> SAHANADARA ensures that every single Rupee what you donate will be solely used for Charity purpose.";
+                document.getElementById("district").innerHTML = "District";
+                document.getElementById("division").innerHTML = "DS Division";
+                document.getElementById("search").innerHTML = "Search";
+
 
             }
+
+
         };
+        // window.onload = 
     </script>
 
-    <script>
-        
-
-        viewFundraises();
-        var output;
-        function viewFundraises() {
-            /// var object = {};
-
-
-            // var json = JSON.stringify(object);
-            // console.log(object);
-            output = $.parseJSON($.ajax({
-                type: "GET",
-                url: "<?php echo API; ?>fundraiser",
-                dataType: "json",
-                headers: {
-                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                },
-                cache: false,
-                async: false
-            }).responseText);
-            // console.log(output);
-            $("#tbodyid").empty();
-            var $sample = "";
-            if (output == null) {
-                $sample += "<p>No fundraiser data</p>";
-            } else {
-                for (var i = 0; i < output.length; i++) {
-                    let obj = output[i];
-                    console.log(obj);
-
-                    if (i % 2 == 0) {
-                        $sample += "<div class='row'>";
-                    }
-                    $sample += "<div class='col5 card_donation is-collapsed row-content'><div class='card__inner js-expander' style='position:relative;'><h2>" + obj['title'] + "</h2><p>" + obj['description'] + "</p><p> Goal :" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                    if (obj['isActive'] == 1) {
-                        $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
-                    }
-                    $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
-                    if ((i % 2 == 1) || (i == output.length - 1)) {
-                        $sample += "</div>";
-                    }
-                }
-            }
-            console.log($sample);
-            $("#tbodyid").append($sample);
-        }
-            
-        
-
-    </script>
+  
 
 </body>
 

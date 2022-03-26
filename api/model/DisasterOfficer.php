@@ -546,7 +546,9 @@ class DisasterOfficer extends Employee
         $results = array();
         // $r = $excute->fetch_assoc();
         while ($r = $excute->fetch_assoc()) {
-            $sql = "SELECT gndivision.* FROM gndivision,incidentgn,incident WHERE gndivision.gndvId=incidentgn.gndvId AND incident.incidentId=" . $r['incidentId'];
+
+            $sql = "SELECT gndivision.* FROM gndivision,incidentgn,incident WHERE gndivision.gndvId=incidentgn.gndvId AND incidentgn.incidentId=incident.incidentId AND incident.incidentId=" . $r['incidentId'];
+            // echo $sql;exit;
             $temp = array();
             $e = $this->connection->query($sql);
             while ($r2 = $e->fetch_assoc()) {
@@ -1056,7 +1058,7 @@ WHERE
 
         // $uid = $data['userId'];
         $incidentId = $data['inc'][0];
-        
+
         $report = $data['rtype'];
         $reportId = $data['rid'];
         // echo $incidentId;exit;
@@ -1064,9 +1066,9 @@ WHERE
         if (!empty($incidentId)) {
             if ($report == "Initial") {
                 $sql = "UPDATE `initialincident` SET `incidentId`='$incidentId' WHERE `initialId`='$reportId'";
-            } else if ($report == "Final"){
+            } else if ($report == "Final") {
                 $sql = "UPDATE `gnfinalincident` SET `incidentId`='$incidentId' WHERE `finalIncidentId`='$reportId'";
-            }else{
+            } else {
                 $sql = "UPDATE `relief` SET `incidentId`='$incidentId' WHERE `reliefId`='$reportId'";
             }
             $this->connection->query($sql);
@@ -1124,5 +1126,26 @@ WHERE
             echo json_encode(array("code" => $errorCode['attributeMissing']));
             exit();
         }
+    }
+
+
+    // get counts of finals to the given incident
+    public function getFinalsbyIncident(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        $incidentId = $data['receivedParams'][0];
+       
+        $sql = "SELECT gndivision.gnDvName, gnfinalincident.* 
+        FROM gnfinalincident, gndivision 
+        WHERE gnfinalincident.incidentId = ".$incidentId." AND gnfinalincident.disoffapproved = 'a' AND gnfinalincident.gndvid = gndivision.gndvId;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
 }

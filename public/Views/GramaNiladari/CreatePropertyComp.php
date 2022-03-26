@@ -571,6 +571,8 @@
             $(".deev").each(function() {
                 if ($(this).val() != NaN) {
                     $sum += parseFloat($(this).val());
+                }else{
+                    $sum +=0;
                 }
                 console.log($sum);
                 $("#tvde").val($sum);
@@ -584,6 +586,8 @@
             $(".dsev").each(function() {
                 if ($(this).val() != NaN) {
                     $sum2 += parseFloat($(this).val());
+                }else{
+                    $sum2 +=0;
                 }
                 console.log($sum2);
                 $("#tvser").val($sum2);
@@ -598,6 +602,8 @@
             $(".dpvod").each(function() {
                 if ($(this).val() != NaN) {
                     $sum3 += parseFloat($(this).val());
+                }else{
+                    $sum3 +=0;
                 }
                 console.log($sum3);
                 $("#tvprop").val($sum3);

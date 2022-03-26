@@ -17,7 +17,7 @@ class Item{
     }
     public static function getItemCode($id){
         $numlength = strlen((string)$id);
-        $code = "II0".str_repeat("0",2-$numlength).$id;
+        $code = "II0".str_repeat("0",3-$numlength).$id;
         return $code;
     }
 }

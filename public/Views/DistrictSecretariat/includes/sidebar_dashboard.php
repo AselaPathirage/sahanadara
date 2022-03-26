@@ -7,13 +7,13 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/" id="Home">
+            <a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/" id="Home">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Home</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/DistrictSecretariat/Dashboard/Compensation" id="Compensation">
+            <a href="<?php echo HOST; ?>/DistrictSecretariat/Dashboard/Compensation" id="Compensation">
                 <i class='bx bx-error-circle' ></i>
                 <span class="links_name">Compensation</span>
             </a>

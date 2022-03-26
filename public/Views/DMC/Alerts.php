@@ -28,7 +28,7 @@
             <h1>Alerts</h1>
             <div class="container">
                 <div style="display:block;text-align: right;">
-                    <a href="/<?php echo baseUrl; ?>/DMC/SendAlert" class="btn_alerts">Send Alert</a>
+                    <a href="<?php echo HOST; ?>/DMC/SendAlert" class="btn_alerts">Send Alert</a>
                 </div>
             </div>
             <div class="container">

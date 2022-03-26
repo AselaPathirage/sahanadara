@@ -7,13 +7,13 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/ResponsiblePerson/Report/SafeHouseReport" id="safe">
+            <a href="<?php echo HOST; ?>/ResponsiblePerson/Report/SafeHouseReport" id="safe">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Safe House Report</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/ResponsiblePerson/Report/AidRequestReport" id="inventory">
+            <a href="<?php echo HOST; ?>/ResponsiblePerson/Report/AidRequestReport" id="inventory">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">AID Requests Report</span>
             </a>

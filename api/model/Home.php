@@ -25,6 +25,174 @@ class Home{
         $result = $this->translator->translate($text, [
             'target' => $lanCode
         ]);
+        return $result;
+    }
+    public function getNotice(array $data){
+        global  $errorCode;
+        if(count($data['receivedParams'])==1){
+            if(! $this->innitiation){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['translatorError']));
+                exit();
+            }
+            $lanCode=strtolower($data['receivedParams'][0]);
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate;";
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $recordId=$r['recordId'];
+                $r['recordId']=Notice::getNoticeCode($recordId);
+                if($lanCode!='en'){
+                    $title=$r['title'];
+                    $result=$this->translate($title,$lanCode); //print_r($result);
+                    $r['title']= $result['text'];
+                    $note=$this->translate($r['note'],$lanCode);//print_r($note);
+                    $r['note']= $note['text'];
+                    $safeHouseName=$this->translate($r['safeHouseName'],$lanCode);//print_r($note);
+                    $r['safeHouseName']= $safeHouseName['text'];
+                    $safeHouseAddress=$this->translate($r['safeHouseAddress'],$lanCode);//print_r($note);
+                    $r['safeHouseAddress']= $safeHouseAddress['text'];
+                }
+                $sql="SELECT noticeitem.itemName,noticeitem.quantitity,unit.unitName AS unit FROM noticeitem,item,unit WHERE noticeitem.noticeId=$recordId AND unit.unitId=item.unitType AND item.itemName LIKE noticeitem.itemName;";
+                $r['item']=array();
+                $itemQuey=$this->connection->query($sql);
+                while($p = $itemQuey-> fetch_assoc()) {
+                    if($lanCode!='en'){
+                        $itemName=$this->translate($p['itemName'],$lanCode);
+                        $p['itemName']=$itemName['text'];
+                    }
+                    $r['item'][]=$p;
+                }
+                $results[] =$r;
+            }
+            $json = json_encode($results,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            echo $json;
+        }else{
+            http_response_code(200);  
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function getLimitedNotice(array $data){
+        global  $errorCode;
+        if(count($data['receivedParams'])==3){
+            if(! $this->innitiation){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['translatorError']));
+                exit();
+            }
+            $lanCode=strtolower($data['receivedParams'][0]);
+            $limit=$data['receivedParams'][2];
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate LIMIT $limit;";
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $recordId=$r['recordId'];
+                $r['recordId']=Notice::getNoticeCode($recordId);
+                if($lanCode!='en'){
+                    $title=$r['title'];
+                    $result=$this->translate($title,$lanCode); //print_r($result);
+                    $r['title']= $result['text'];
+                    $note=$this->translate($r['note'],$lanCode);//print_r($note);
+                    $r['note']= $note['text'];
+                    $safeHouseName=$this->translate($r['safeHouseName'],$lanCode);//print_r($note);
+                    $r['safeHouseName']= $safeHouseName['text'];
+                    $safeHouseAddress=$this->translate($r['safeHouseAddress'],$lanCode);//print_r($note);
+                    $r['safeHouseAddress']= $safeHouseAddress['text'];
+                }
+                $sql="SELECT noticeitem.itemName,noticeitem.quantitity,unit.unitName AS unit FROM noticeitem,item,unit WHERE noticeitem.noticeId=$recordId AND unit.unitId=item.unitType AND item.itemName LIKE noticeitem.itemName;";
+                $r['item']=array();
+                $itemQuey=$this->connection->query($sql);
+                while($p = $itemQuey-> fetch_assoc()) {
+                    if($lanCode!='en'){
+                        $itemName=$this->translate($p['itemName'],$lanCode);
+                        $p['itemName']=$itemName['text'];
+                    }
+                    $r['item'][]=$p;
+                }
+                $results[] =$r;
+            }
+            $json = json_encode($results,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            echo $json;
+        }else{
+            http_response_code(200);  
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function getfundraisingNotice(array $data){
+        global  $errorCode;
+        if(count($data['receivedParams'])==1){
+            if(! $this->innitiation){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['translatorError']));
+                exit();
+            }
+            $lanCode=strtolower($data['receivedParams'][0]);
+            $sql="(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
+            WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)
+            UNION
+            (SELECT fundraising.*, 0 AS currentAmount FROM fundraising WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords));";
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $recordId=$r['recordId'];
+                $r['recordId']=FundRaisingNotice::getNoticeCode($recordId);
+                if($lanCode!='en'){
+                    $title=$r['title'];
+                    $result=$this->translate($title,$lanCode);
+                    $r['title']= $result['text'];
+                    $description=$this->translate($r['description'],$lanCode);
+                    $r['description']= $description['text'];
+                }
+                $results[] =$r;
+            }
+            $json = json_encode($results,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            echo $json;
+        }else{
+            http_response_code(200);  
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function getLimitedfundraisingNotice(array $data){
+        global  $errorCode;
+        if(count($data['receivedParams'])==3){
+            if(! $this->innitiation){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['translatorError']));
+                exit();
+            }
+            $lanCode=strtolower($data['receivedParams'][0]);
+            $limit=$data['receivedParams'][2];
+            $sql="(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
+            WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)
+            UNION
+            (SELECT fundraising.*, 0 AS currentAmount FROM fundraising WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords)) LIMIT $limit;";
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $recordId=$r['recordId'];
+                $r['recordId']=FundRaisingNotice::getNoticeCode($recordId);
+                if($lanCode!='en'){
+                    $title=$r['title'];
+                    $result=$this->translate($title,$lanCode);
+                    $r['title']= $result['text'];
+                    $description=$this->translate($r['description'],$lanCode);
+                    $r['description']= $description['text'];
+                }
+                $results[] =$r;
+            }
+            $json = json_encode($results,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+            echo $json;
+        }else{
+            http_response_code(200);  
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function viewfundraisingNotice(array $data){
+
     }
     public function viewNotice(){
         if($this->innitiation){
@@ -32,11 +200,11 @@ class Home{
         }else{
             //return original  notice
         }
-        // $result = $this->translator->translate('ආයුබෝවන්', [
-        //     'target' => 'ta'
-        // ]);
-        
-        // echo $result['text'] . "\n";
+        $result = $this->translator->translate('ආයුබෝවන්', [
+            'target' => 'ta'
+        ]);
+        echo $result['text'] . "\n";
+        //echo "uu";
     }
     public function creadits(){
         $array = array(
@@ -51,6 +219,17 @@ class Home{
 
     }
     public function viewFundraises(){
- 
+        $sql = "(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
+                WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)
+                UNION
+                (SELECT fundraising.*, 0 AS currentAmount FROM fundraising WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords))";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
 }

@@ -7,7 +7,7 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/Admin/UserReport" id="incident">
+            <a href="<?php echo HOST; ?>/Admin/UserReport" id="incident">
                 <i class='bx bxs-report'></i>
                 <span class="links_name">User Report</span>
             </a>

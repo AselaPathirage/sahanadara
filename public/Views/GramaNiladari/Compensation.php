@@ -28,8 +28,8 @@
             <h1>Compensation Requests</h1>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreateDeathComp" class="btn_blue">Create Death Compensation</a>
-                    <a href="/<?php echo baseUrl; ?>/GramaNiladari/CreatePropertyComp" class="btn_blue">Create Property Compensation</a>
+                    <a href="<?php echo HOST; ?>/GramaNiladari/CreateDeathComp" class="btn_blue">Create Death Compensation</a>
+                    <a href="<?php echo HOST; ?>/GramaNiladari/CreatePropertyComp" class="btn_blue">Create Property Compensation</a>
                 </div>
             </div>
             <div class="container">
@@ -88,7 +88,7 @@
                                     <td>Approved</td>
                                     <td>Pending</td>
                                     <td>Not Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -98,7 +98,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -108,7 +108,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
@@ -118,7 +118,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
 
@@ -129,7 +129,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/12/2021 15:45</td>
@@ -138,7 +138,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/04/2021 15:45</td>
@@ -147,7 +147,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>07/14/2021 15:45</td>
@@ -156,7 +156,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>07/10/2021 15:45</td>
@@ -165,7 +165,7 @@
                                     <td>Approved</td>
                                     <td>Approved</td>
                                     <td>Collected</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
 
 
@@ -244,12 +244,19 @@
                 cell3.innerHTML = obj['report'];
 
                 let app = "";
-                if (obj['dvapproved'] == 'p') {
+                if (obj['collected'] == '0') {
+                    app = "Not Collected";
+                } else if (obj['collected'] == '1') {
+                    app = "Collected";
+                }
+                cell6.innerHTML = app;
+                if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                     app = "Pending";
-                } else if (obj['dvapproved'] == 'a') {
+                } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                     app = "Approved";
-                } else if (obj['dvapproved'] == 'r') {
+                } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                     app = "Rejected";
+                    cell6.innerHTML = app;
                 }
                 cell4.innerHTML = app;
                 if (obj['dmcapproved'] == 'p') {
@@ -258,16 +265,9 @@
                     app = "Approved";
                 } else if (obj['dmcapproved'] == 'r') {
                     app = "Rejected";
+                    cell6.innerHTML = app;
                 }
                 cell5.innerHTML = app;
-                if (obj['collected'] == '0') {
-                    app = "Not Collected";
-                } else if (obj['collected'] == '1') {
-                    app = "Collected";
-                }
-                cell6.innerHTML = app;
-
-
                 cell7.appendChild(attribute);
 
                 // console.log(attribute);
@@ -317,12 +317,19 @@
                         cell3.innerHTML = obj['report'];
 
                         let app = "";
-                        if (obj['dvapproved'] == 'p') {
+                        if (obj['collected'] == '0') {
+                            app = "Not Collected";
+                        } else if (obj['collected'] == '1') {
+                            app = "Collected";
+                        }
+                        cell6.innerHTML = app;
+                        if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                             app = "Pending";
-                        } else if (obj['dvapproved'] == 'a') {
+                        } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                             app = "Approved";
-                        } else if (obj['dvapproved'] == 'r') {
+                        } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                             app = "Rejected";
+                            cell6.innerHTML = app;
                         }
                         cell4.innerHTML = app;
                         if (obj['dmcapproved'] == 'p') {
@@ -331,17 +338,9 @@
                             app = "Approved";
                         } else if (obj['dmcapproved'] == 'r') {
                             app = "Rejected";
+                            cell6.innerHTML = app;
                         }
                         cell5.innerHTML = app;
-                        if (obj['collected'] == '0') {
-                            app = "Collected";
-                        } else if (obj['dmcapproved'] == '1') {
-                            app = "Not Collected";
-                        }
-
-                        cell6.innerHTML = app;
-
-
                         cell7.appendChild(attribute);
 
                     } else if (status == "1") {
@@ -371,31 +370,30 @@
                             cell3.innerHTML = obj['report'];
 
                             let app = "";
-                            if (obj['dvapproved'] == 'p') {
+                            if (obj['collected'] == '0') {
+                                app = "Not Collected";
+                            } else if (obj['collected'] == '1') {
+                                app = "Collected";
+                            }
+                            cell6.innerHTML = app;
+                            if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                                 app = "Pending";
-                            } else if (obj['dvapproved'] == 'a') {
+                            } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                                 app = "Approved";
-                            } else if (obj['dvapproved'] == 'r') {
+                            } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell4.innerHTML = app;
-
                             if (obj['dmcapproved'] == 'p') {
                                 app = "Pending";
                             } else if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
                             } else if (obj['dmcapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell5.innerHTML = app;
-                            if (obj['collected'] == '0') {
-                                app = "Collected";
-                            } else if (obj['dmcapproved'] == '1') {
-                                app = "Not Collected";
-                            }
-                            cell6.innerHTML = app;
-
-
                             cell7.appendChild(attribute);
 
                         }
@@ -426,36 +424,35 @@
                             cell3.innerHTML = obj['report'];
 
                             let app = "";
-                            if (obj['dvapproved'] == 'p') {
+                            if (obj['collected'] == '0') {
+                                app = "Not Collected";
+                            } else if (obj['collected'] == '1') {
+                                app = "Collected";
+                            }
+                            cell6.innerHTML = app;
+                            if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                                 app = "Pending";
-                            } else if (obj['dvapproved'] == 'a') {
+                            } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                                 app = "Approved";
-                            } else if (obj['dvapproved'] == 'r') {
+                            } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell4.innerHTML = app;
-
                             if (obj['dmcapproved'] == 'p') {
                                 app = "Pending";
                             } else if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
                             } else if (obj['dmcapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell5.innerHTML = app;
-                            if (obj['collected'] == '0') {
-                                app = "Collected";
-                            } else if (obj['dmcapproved'] == '1') {
-                                app = "Not Collected";
-                            }
-                            cell6.innerHTML = app;
-
-
                             cell7.appendChild(attribute);
 
                         }
                     } else if (status == "3") {
-                        if (obj['dmcapproved'] == 'r') {
+                        if (obj['dmcapproved'] == 'r' || obj['disapproved'] == 'r' || obj['dvapproved'] == 'r') {
                             let row = table.insertRow(-1);
                             let cell1 = row.insertCell(-1);
                             let cell2 = row.insertCell(-1);
@@ -481,31 +478,30 @@
                             cell3.innerHTML = obj['report'];
 
                             let app = "";
-                            if (obj['dvapproved'] == 'p') {
+                            if (obj['collected'] == '0') {
+                                app = "Not Collected";
+                            } else if (obj['collected'] == '1') {
+                                app = "Collected";
+                            }
+                            cell6.innerHTML = app;
+                            if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                                 app = "Pending";
-                            } else if (obj['dvapproved'] == 'a') {
+                            } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                                 app = "Approved";
-                            } else if (obj['dvapproved'] == 'r') {
+                            } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell4.innerHTML = app;
-
                             if (obj['dmcapproved'] == 'p') {
                                 app = "Pending";
                             } else if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
                             } else if (obj['dmcapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell5.innerHTML = app;
-                            if (obj['collected'] == '0') {
-                                app = "Collected";
-                            } else if (obj['dmcapproved'] == '1') {
-                                app = "Not Collected";
-                            }
-                            cell6.innerHTML = app;
-
-
                             cell7.appendChild(attribute);
 
                         }
@@ -560,32 +556,33 @@
                         cell3.innerHTML = obj['report'];
 
                         let app = "";
-                        if (obj['dvapproved'] == 'p') {
+                        if (obj['collected'] == '0') {
+                            app = "Not Collected";
+                        } else if (obj['collected'] == '1') {
+                            app = "Collected";
+                        }
+                        cell6.innerHTML = app;
+                        if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                             app = "Pending";
-                        } else if (obj['dvapproved'] == 'a') {
+                        } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                             app = "Approved";
-                        } else if (obj['dvapproved'] == 'r') {
+                        } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                             app = "Rejected";
+                            cell6.innerHTML = app;
                         }
                         cell4.innerHTML = app;
-
                         if (obj['dmcapproved'] == 'p') {
                             app = "Pending";
                         } else if (obj['dmcapproved'] == 'a') {
                             app = "Approved";
                         } else if (obj['dmcapproved'] == 'r') {
                             app = "Rejected";
+                            cell6.innerHTML = app;
                         }
                         cell5.innerHTML = app;
-                        if (obj['collected'] == '0') {
-                            app = "Collected";
-                        } else if (obj['dmcapproved'] == '1') {
-                            app = "Not Collected";
-                        }
-                        cell6.innerHTML = app;
-
-
                         cell7.appendChild(attribute);
+
+
 
                     } else if (status == "1") {
                         if (obj['report'] == 'Death') {
@@ -614,33 +611,31 @@
                             cell3.innerHTML = obj['report'];
 
                             let app = "";
-                            if (obj['dvapproved'] == 'p') {
+                            if (obj['collected'] == '0') {
+                                app = "Not Collected";
+                            } else if (obj['collected'] == '1') {
+                                app = "Collected";
+                            }
+                            cell6.innerHTML = app;
+                            if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                                 app = "Pending";
-                            } else if (obj['dvapproved'] == 'a') {
+                            } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                                 app = "Approved";
-                            } else if (obj['dvapproved'] == 'r') {
+                            } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell4.innerHTML = app;
-
                             if (obj['dmcapproved'] == 'p') {
                                 app = "Pending";
                             } else if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
                             } else if (obj['dmcapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell5.innerHTML = app;
-                            if (obj['collected'] == '0') {
-                                app = "Collected";
-                            } else if (obj['dmcapproved'] == '1') {
-                                app = "Not Collected";
-                            }
-                            cell6.innerHTML = app;
-
-
                             cell7.appendChild(attribute);
-
 
                         }
                     } else if (status == "2") {
@@ -670,33 +665,31 @@
                             cell3.innerHTML = obj['report'];
 
                             let app = "";
-                            if (obj['dvapproved'] == 'p') {
+                            if (obj['collected'] == '0') {
+                                app = "Not Collected";
+                            } else if (obj['collected'] == '1') {
+                                app = "Collected";
+                            }
+                            cell6.innerHTML = app;
+                            if (obj['dvapproved'] == 'p' || (obj['dvapproved'] == 'a' && obj['disapproved'] == 'p')) {
                                 app = "Pending";
-                            } else if (obj['dvapproved'] == 'a') {
+                            } else if (obj['dvapproved'] == 'a' && obj['disapproved'] == 'a') {
                                 app = "Approved";
-                            } else if (obj['dvapproved'] == 'r') {
+                            } else if (obj['dvapproved'] == 'r' || obj['disapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell4.innerHTML = app;
-
                             if (obj['dmcapproved'] == 'p') {
                                 app = "Pending";
                             } else if (obj['dmcapproved'] == 'a') {
                                 app = "Approved";
                             } else if (obj['dmcapproved'] == 'r') {
                                 app = "Rejected";
+                                cell6.innerHTML = app;
                             }
                             cell5.innerHTML = app;
-                            if (obj['collected'] == '0') {
-                                app = "Collected";
-                            } else if (obj['dmcapproved'] == '1') {
-                                app = "Not Collected";
-                            }
-                            cell6.innerHTML = app;
-
-
                             cell7.appendChild(attribute);
-
 
                         }
                     }

@@ -180,7 +180,7 @@
                 $(thisPage).addClass("active");
             });
             var distOptions = "<option value='All'>Select District</option>";
-            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+            $.getJSON('<?php echo HOST; ?>/public/assets/json/data.json',function(result){
                 $.each(result,function(i,district){
                     distOptions += "<option value='"+district.dsId+"'>"+district.name+"</option>";
                 });
@@ -322,7 +322,7 @@
         $('#District').change(function(){
             var val = $(this).val();
             var divOptions = "<option value='All'>Select Division</option>";
-            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+            $.getJSON('<?php echo HOST; ?>/public/assets/json/data.json',function(result){
                 $.each(result,function(i,district){
                     if(district.dsId == val){
                         $.each(district.division,function(j,division){
@@ -337,7 +337,7 @@
             var div = $(this).val();
             var dist = $('#District').val();
             var gnOptions = "<option value='All'>Select GNDivision</option>";
-            $.getJSON('/<?php echo baseUrl; ?>/public/assets/json/data.json',function(result){
+            $.getJSON('<?php echo HOST; ?>/public/assets/json/data.json',function(result){
                 $.each(result,function(i,district){
                     if(district.dsId == dist){
                         $.each(district.division,function(j,division){

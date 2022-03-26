@@ -131,7 +131,7 @@
         <div class="space"></div>
         <div class="container">
             <div class="text-center" style="display:block;">
-                <a href="/<?php echo baseUrl; ?>/DMC/Alerts" class="btn_alerts">Send Alert</a>
+                <a href="<?php echo HOST; ?>/DMC/Alerts" class="btn_alerts">Send Alert</a>
             </div>
         </div>
     </section>

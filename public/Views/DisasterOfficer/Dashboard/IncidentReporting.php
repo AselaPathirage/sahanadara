@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/searchselect.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -17,27 +18,64 @@
 
 <body>
     <?php
-        include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
-     ?>
+    include_once('./public/Views/DisasterOfficer/includes/sidebar_dashboard.php');
+    ?>
     <section class="dashboard-section">
-        <?php 
-        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
+        <?php
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php');
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
+
         <div class="container">
             <h1>Incident Reporting</h1>
             <div class="container" style="text-align: right;">
-                <div style="display:block;">
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/FinalIncidents" class="btn-fun">Create Final Incident</a>
-                    <a href="/<?php echo baseUrl; ?>/DisasterOfficer/Dashboard/ExpenseNote" class="btn-fun">Add Expense Note</a>
-                </div>
+
             </div>
- 
-        <!-- TABLE -->
-        <div class="container">
+            <div class="custom-model-main addform">
+                <div class="custom-model-inner">
+                    <div class="close-btn">×</div>
+                    <div class="custom-model-wrap">
+                        <div class="pop-up-content-wrap">
+                            <form action="#" id='add' name="add" method="POST">
+                                <h1>Select Incident</h1>
+
+                                <div class="row-content">
+                                    <input type="hidden" id="rid" value="" name="rid">
+                                    <input type="hidden" id="rtype" value="" name="rtype">
+                                    <input type="hidden" id="rinc" value="" name="rinc">
+
+                                    <label for="gndivision">Incident</label>
+                                    <!-- <select id="gndivision" name="gndivision" required="true">
+                                                <option>Select a Grama Niladhari Division</option>
+                                            </select> -->
+                                    <select id="gndivision" name="incident" data-multi-select-plugin>
+
+                                        <!-- <option value="Mercedes" selected>Mercedes</option>
+                                                <option value="Hilux">Hilux</option>
+                                                <option value="Corsa">Corsa</option>
+                                                <option value="BMW">BMW</option>
+                                                <option value="Ferrari">Ferrari</option> -->
+                                    </select>
+
+                                    <div class="row " style="text-align:right;justify-content: right;">
+                                        <input type="submit" class="btn-alerts" value="Submit">
+                                        <input type="reset" class="btn-alerts" value="Cancel">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-overlay"></div>
+            </div>
+
+
+
+
+            <div class="container">
                 <div class="">
                     <table class="table">
                         <thead>
@@ -76,10 +114,9 @@
                                     <th>Date/Time</th>
                                     <th>Description</th>
                                     <th>Type</th>
-                                    <th>DS note</th>
-
-                                    <th>Actions</th>
-                                    <th>GN Division</th>
+                                    <th>GN</th>
+                                    <th>Status</th>
+                                    <th>View</th>
                                     <th>Incident</th>
 
                                 </tr>
@@ -93,7 +130,7 @@
                                     <td>Final</td>
                                     <td>Approved</td>
                                     <td>Pending</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
 
                                 </tr>
 
@@ -103,7 +140,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>09/20/2021 13:56</td>
@@ -111,7 +148,7 @@
                                     <td>Final</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>10/22/2021 13:56</td>
@@ -119,7 +156,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Pending</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/22/2021 13:56</td>
@@ -127,7 +164,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>08/20/2021 13:56</td>
@@ -135,7 +172,7 @@
                                     <td>Final</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                                 <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
                                     <td>07/22/2021 13:56</td>
@@ -143,7 +180,7 @@
                                     <td>Initial</td>
                                     <td>Approved</td>
                                     <td>Approved</td>
-                                    <td><a href="/<?php echo baseUrl; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
+                                    <td><a href="<?php echo HOST; ?>/DMC/ViewIncident" class="btn_views">View</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -152,18 +189,40 @@
             </div>
         </div>
 
+
     </section>
+    <script src="<?php echo HOST; ?>/public/assets/js/searchselect.js"></script>
+
     <script>
         var thisPage = "#IncidentReporting";
         $(document).ready(function() {
             $("#Dashboard,#Alerts,#Messages,#Incidents,#IncidentReporting,#Compensation,#Donation,#ResponsiblePerson").each(function() {
-                if ($(this).hasClass('active')){
+                if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }
                 $(thisPage).addClass("active");
             });
 
             getReports();
+            getIncidents();
+            $(".incidentchange").on('click', function() {
+                var rid = $(this).attr("data-id");
+                var rtype = $(this).attr("data-type");
+                var inc = $(this).attr("data-inc");
+
+
+                $(".addform").fadeIn();
+                $("#add").trigger("reset");
+                $(".addform").addClass('model-open');
+
+
+                $("#rinc").val(inc);
+                $("#rtype").val(rtype);
+                $("#rid").val(rid);
+
+            });
+
+
 
         });
 
@@ -172,7 +231,36 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-        
+
+        function getIncidents() {
+            output5 = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>incident",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output5);
+            var select = document.getElementById("gndivision");
+
+            for (var y = 0; y < output5.length; y++) {
+                console.log(output5[y]['title']);
+                var opt = document.createElement('option');
+                opt.value = output5[y]['title'];
+                opt.innerHTML = output5[y]['title'];
+                opt.setAttribute("data-gnId", output5[y]['incidentId']);
+                // opt.data("gnid", output[i]['gndvId']);  
+                // opt.attr('data-name',output[i]['gndvId']);    
+                // opt.setAttribute("data-id",output[i]['gndvId'])          
+                select.appendChild(opt);
+
+
+            }
+        }
+
         function getReports() {
             // var object = {};
 
@@ -202,6 +290,8 @@
                 let cell3 = row.insertCell(-1);
                 let cell4 = row.insertCell(-1);
                 let cell5 = row.insertCell(-1);
+                let cell6 = row.insertCell(-1);
+                let cell7 = row.insertCell(-1);
 
                 var attribute = document.createElement("a");
                 attribute.id = obj['residentId'];
@@ -212,11 +302,30 @@
                 attribute.innerHTML = "View";
                 attribute.setAttribute("data-type", obj['report'])
                 attribute.setAttribute("data-Id", obj['reportId'])
+                cell6.appendChild(attribute);
+
+                var attribute2 = document.createElement("a");
+                attribute2.id = obj['residentId'];
+                // attribute2.target = "_blank";
+                // attribute2.href = obj['report'] + "/" + obj['reportId'];
+                attribute2.className = "btn_views incidentchange";
+                attribute2.name = "view";
+                if (obj['incidentId'] == null) {
+                    attribute2.innerHTML = "Select";
+                } else {
+                    attribute2.innerHTML = getincidentbyid(obj['incidentId']);
+                }
+
+                attribute2.setAttribute("data-type", obj['report']);
+                attribute2.setAttribute("data-id", obj['reportId']);
+                attribute2.setAttribute("data-inc", obj['incidentId']);
+                cell7.appendChild(attribute2);
 
 
                 cell1.innerHTML = obj['timestamp'];
                 cell2.innerHTML = obj['cause'];
                 cell3.innerHTML = obj['report'];
+                cell4.innerHTML = obj['gnDvName'];
 
                 let app = "";
                 if (obj['approved'] == 'p') {
@@ -226,13 +335,90 @@
                 } else if (obj['approved'] == 'r') {
                     app = "Rejected";
                 }
-                cell4.innerHTML = app;
+                cell5.innerHTML = app;
 
-                cell5.appendChild(attribute);
+
 
                 // console.log(attribute);
                 // console.log(attribute2);
             }
+        }
+
+        $(".close-btn, .bg-overlay, .cancel").click(function() {
+            $(".custom-model-main").removeClass('model-open');
+        });
+
+        $("#add").submit(function(e) {
+            e.preventDefault();
+            $(".custom-model-main").fadeOut();
+            $(".custom-model-main").removeClass('model-open');
+            var str = [];
+            var formElement = document.querySelector("#add");
+            var formData = new FormData(formElement);
+            //var array = {'key':'ABCD'}
+            var object = {};
+            formData.forEach(function(value, key) {
+                object[key] = value;
+            });
+            object['inc'] = new Object();
+            var count = 0;
+            $('.multi-select-component .selected-wrapper').each(function() {
+                var item = $(this).find("span").data("gnid");
+                console.log(item);
+                object['inc'][count++] = item;
+            });
+
+            var json = JSON.stringify(object);
+            console.log(json);
+            $.ajax({
+                type: "PUT",
+                url: "<?php echo API; ?>rincident",
+                data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                success: function(result) {
+                    console.log(result);
+                    $("#tbodyid").empty();
+                    getReports();
+                    console.log(result.code);
+                    if (result.code == 806) {
+                        alertGen("Added Successfully!", 1);
+
+                    } else {
+                        alertGen(" Unable to handle request.", 2);
+
+                    }
+                },
+                error: function(err) {
+                    alertGen(" Something went wrong.", 3);
+                    console.log(err);
+                }
+            });
+        });
+
+        function getincidentbyid(id) {
+            output2 = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>incident",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            for (var i = 0; i < output.length; i++) {
+                let obj2 = output2[i];
+
+                if (obj2['incidentId'] == id) {
+                    console.log(obj2);
+                    return obj2['title'];
+                }
+
+            }
+            return "Select";
         }
 
 

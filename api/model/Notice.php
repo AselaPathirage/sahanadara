@@ -15,7 +15,7 @@ class Notice{
     }
     public static function getNoticeCode($id){
         $numlength = strlen((string)$id);
-        $code = "DN0".str_repeat("0",2-$numlength).$id;
+        $code = "DN0".str_repeat("0",4-$numlength).$id;
         return $code;
     }
 }

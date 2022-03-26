@@ -25,7 +25,6 @@
         include_once('./public/Views/InventoryManager/includes/topnav.php');
         ?>
         <div class="space"></div>
-
         <div class="container col8">
             <div class="box">
                 <div class="box1">
@@ -34,160 +33,106 @@
                         <div class="col6">
                             <div class="row">
                                 <div class="col3">
-                                    <label for="user role">District</label>
+                                    <label for="district">District</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
+                                    <input type="text" id="district" value="" disabled='true'>
                                 </div>
                             </div>
                         </div>
                         <div class="col6">
                             <div class="row">
                                 <div class="col3">
-                                    <label for="user role">DS Office</label>
+                                    <label for="division">DS Office</label>
                                 </div>
                                 <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
+                                    <input type="text" id="division" value="" disabled='true'>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <h4 class="text-center">Personal Details</h4>
-
-                    <div class="row">
-                        <div class="col3">
-                            <label for="fname">First Name</label>
-                        </div>
-                        <div class="col9">
-                            <input type="text" id="fname" name="firstname" placeholder="First Name">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="lname">Last Name</label>
-                        </div>
-                        <div class="col9">
-                            <input type="text" id="lname" name="lastname" placeholder="Last Name">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="fname">NIC</label>
-                        </div>
-                        <div class="col9">
-                            <input type="text" id="NIC" name="NIC" placeholder="NIC">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="email">Email</label>
-                        </div>
-                        <div class="col9">
-                            <input type="text" id="email" name="email" placeholder="Email">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="address">Address</label>
-                        </div>
-                        <div class="col9">
-                            <textarea type="text" id="address" name="address" placeholder="Address"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="TP number">Telephone Number</label>
-                        </div>
-                        <div class="col9">
-                            <input type="text" id="TP number" name="TP number" placeholder="Phone number">
-                        </div>
-                    </div>
-
-                    <h4 class="text-center">Office Details</h4>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="address">Address</label>
-                        </div>
-                        <div class="col9">
-                            <textarea type="text" id="address" name="address" placeholder="Address"></textarea>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col3">
-                            <label for="TP number">Telephone Number</label>
-                        </div>
-                        <div class="col9">
-                            <input type="text" id="TP number" name="TP number" placeholder="Phone number">
-                        </div>
-                    </div>
-                    <div class="row">
-
+                    <form>
                         <div class="row">
-
                             <div class="col3">
-                                <label for="TP number">Password</label>
+                                <label for="firstname">First Name</label>
                             </div>
                             <div class="col9">
-                                <input type="password" id="TP number" name="TP number" placeholder="Password">
+                                <input type="text" id="firstname" name="firstname" placeholder="First Name">
                             </div>
                         </div>
                         <div class="row">
-
                             <div class="col3">
-                                <label for="TP number"> </label>
+                                <label for="lastname">Last Name</label>
                             </div>
-                            <div class="col9 row-content">
-                                <span>* Enter password to save changes</span>
+                            <div class="col9">
+                                <input type="text" id="lastname" name="lastname" placeholder="Last Name">
                             </div>
                         </div>
-
-
-
-
-                    </div>
+                        <div class="row">
+                            <div class="col3">
+                                <label for="email">Email</label>
+                            </div>
+                            <div class="col9">
+                                <input type="text" id="email" name="email" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3">
+                                <label for="address">Address</label>
+                            </div>
+                            <div class="col9">
+                                <textarea type="text" id="address" name="address" placeholder="Address"></textarea>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col3">
+                                <label for="TPnumber">Telephone Number</label>
+                            </div>
+                            <div class="col9">
+                                <input type="text" id="TPnumber" name="TPnumber" placeholder="Phone number">
+                            </div>
+                        </div>
+                        <div class="row " style="text-align:right;justify-content: right;">
+                            <input type="submit" style="background-color: darkblue;width:25%;" value="Update Data">
+                        </div>
+                    </form>
+                    <form>
                     <h4 class="text-center">Reset Password</h4>
                     <div class="row">
                         <div class="col3">
-                            <label for="TP number">New Password</label>
+                            <label for="oldpassword">Current Password</label>
                         </div>
                         <div class="col9">
-                            <input type="password" id="TP number" name="TP number" placeholder="New Password">
+                            <input type="password" id="oldpassword" name="oldpassword" placeholder="New Password">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col3">
-                            <label for="TP number">Confirm Password</label>
+                            <label for="newpassword1">New Password</label>
                         </div>
                         <div class="col9">
-                            <input type="password" id="TP number" name="TP number" placeholder="Confirm Password">
+                            <input type="password" id="newpassword1" name="newpassword1" placeholder="New Password">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col3">
+                            <label for="newpassword2">Confirm Password</label>
+                        </div>
+                        <div class="col9">
+                            <input type="password" id="newpassword2" name="newpassword2" placeholder="Confirm Password">
                         </div>
                     </div>
 
                     <div class="row " style="text-align:right;justify-content: right;">
-                        <input type="submit" style="background-color: red;" value="Cancel">
-                        <input type="submit" style="background-color: darkblue;" value="Submit">
+                        <input type="reset" style="background-color: red;width:25%;" value="Cancel">
+                        <input type="submit" style="background-color: darkblue;width:25%;" value="Reset Password">
                     </div>
                     </form>
                 </div>
             </div>
-
-
-
         </div>
-
-
-
     </section>
     <script>
         var thisPage = "#new";
@@ -205,6 +150,31 @@
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        loadData();
+
+        function loadData() {
+            var requests = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>user/self/all",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(requests);
+            document.getElementById('district').value = requests.district;
+            document.getElementById('division').value = requests.division;
+            var name = requests.empName.split(" ");
+            document.getElementById('firstname').value = name[0];
+            name.shift();
+            var myString = name.join(' ')
+            document.getElementById('lastname').value = myString;
+            document.getElementById('email').value = requests.empEmail;
+            document.getElementById('address').value = requests.empAddress;
+            document.getElementById('TPnumber').value = requests.empTele;
         }
     </script>
 </body>

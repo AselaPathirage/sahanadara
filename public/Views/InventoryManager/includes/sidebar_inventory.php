@@ -7,31 +7,31 @@
     </div>
     <ul class="nav-links">
         <li>
-            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/" id="Dashboard">
+            <a href="<?php echo HOST; ?>/InventoryManager/Inventory/" id="Dashboard">
                 <i class='bx bx-grid-alt'></i>
                 <span class="links_name">Dashboard</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/maintain" id="Maintain">
+            <a href="<?php echo HOST; ?>/InventoryManager/Inventory/maintain" id="Maintain">
                 <i class='bx bx-box'></i>
                 <span class="links_name">Maintain</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/AddNewItem" id="Add">
+            <a href="<?php echo HOST; ?>/InventoryManager/Inventory/AddNewItem" id="Add">
                 <i class='bx bx-add-to-queue' ></i>
                 <span class="links_name">Manage Item</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/AidRequests" id="Aid">
+            <a href="<?php echo HOST; ?>/InventoryManager/Inventory/AidRequests" id="Aid">
                 <i class='bx bx-first-aid'></i>
                 <span class="links_name">Aid Requests</span>
             </a>
         </li>
         <li>
-            <a href="/<?php echo baseUrl; ?>/InventoryManager/Inventory/ServiceRequests" id="Service">
+            <a href="<?php echo HOST; ?>/InventoryManager/Inventory/ServiceRequests" id="Service">
                 <i class='bx bxs-cog' ></i>
                 <span class="links_name">Service Requests</span>
             </a>

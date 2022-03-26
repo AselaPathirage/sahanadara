@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <title> Divisional Secretariat - Dashboard </title>
@@ -13,13 +14,14 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
     <?php
-        include_once('./public/Views/DivisionalSecretariat/includes/sidebar_dashboard.php');
-     ?>
+    include_once('./public/Views/DivisionalSecretariat/includes/sidebar_dashboard.php');
+    ?>
     <section class="dashboard-section">
-        <?php 
-        include_once('./public/Views/DivisionalSecretariat/includes/topnav.php'); 
+        <?php
+        include_once('./public/Views/DivisionalSecretariat/includes/topnav.php');
         ?>
         <div class="space"></div>
         <!-- ======================================================================================================================================= -->
@@ -29,17 +31,18 @@
         <div class="container">
             <div class="">
 
-            <table class="table">
+                <table class="table">
                     <thead>
                         <tr class="filters">
                             <th>Approved
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Approved</option>
-                                    <option>Not Approved</option>
+                                <select id="approvalStatus" class="form-control">
+                                    <option value="">All</option>
+                                    <option value="Approved">Approved</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Rejected">Rejected</option>
                                 </select>
                             </th>
-                            
+
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                             </th>
@@ -52,55 +55,15 @@
                     <table id="task-list-tbl" class="table">
                         <thead>
                             <tr>
-                                <th>Date/Time</th>
-                                <th>Item Code</th>
-                                <th>Item Name</th>
-                                <th>Quantity</th>
-                                <th>Status</th>
+                                <th style="width:10%">ID</th>
+                                <th style="width:10%">Source</th>
+                                <th style="width:45%">For</th>
+                                <th style="width:15%">Date</th>
+                                <th style="width:10%">Status</th>
+                                <th style="width:10%"></th>
                             </tr>
                         </thead>
-
-                        <tbody>
-
-                            
-
-                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021 12:50</td>
-                                <td>11001</td>
-                                <td>Generator</td>
-                                <td>1</td>
-                                <td>Approved</td>
-                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
-                            </tr>
-
-                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021 12:50</td>
-                                <td>11002</td>
-                                <td>Boat</td>
-                                <td>1</td>
-                                <td>Approved</td>
-                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
-                            </tr>
-
-                            <tr id="task-2" class="task-list-row" data-task-id="2" data-user="Larry" data-status="Not Started" data-milestone="Milestone 2" data-priority="Low" data-tags="Tag 1">
-                            <td>01/24/2021 12:50</td>
-                                <td>11003</td>
-                                <td>Tent</td>
-                                <td>2</td>
-                                <td>Approved</td>
-                            <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
-                            </tr>
-
-                            <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
-                            
-                                <td>01/24/2021 1:50</td>
-                                <td>11010</td>
-                                <td>Water Tank</td>
-                                <td>1</td>
-                                <td>Approved</td>
-                                <td><a href="/<?php echo baseUrl; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests" class="btn-box">View</a></td>
-                            </tr>
-                            
+                        <tbody id="trow">
                         </tbody>
                     </table>
                 </div>
@@ -111,12 +74,44 @@
         var thisPage = "#BorrowRequests";
         $(document).ready(function() {
             $("#Home,#Compensation,#Incidents,#FundRaising,#Donation,#BorrowRequests,#InventoryManager").each(function() {
-                if ($(this).hasClass('active')){
+                if ($(this).hasClass('active')) {
                     $(this).removeClass("active");
                 }
                 $(thisPage).addClass("active");
             });
-
+            $('#approvalStatus').on('change', function() {
+                let value = $('#approvalStatus').val();
+                $('#trow').empty();
+                var table = document.getElementById("trow");
+                for (var i = 0; i < output.length; i++) {
+                    if (output[i]['approvalStatus'] == value || !value) {
+                        let obj = output[i];
+                        let row = table.insertRow(-1);
+                        let id = "data_" + i;
+                        row.id = id;
+                        row.className = "task-list-row";
+                        $("#data_" + i).attr('data-unit', obj['unitName']);
+                        let cell1 = row.insertCell(-1);
+                        let cell2 = row.insertCell(-1);
+                        let cell3 = row.insertCell(-1);
+                        let cell4 = row.insertCell(-1);
+                        let cell5 = row.insertCell(-1);
+                        let cell6 = row.insertCell(-1);
+                        cell1.innerHTML = obj['id'];
+                        cell2.innerHTML = obj['source'];
+                        cell3.innerHTML = obj['name'];
+                        cell4.innerHTML = obj['createdDate'];
+                        cell5.innerHTML = obj['approvalStatus'];
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['responsibleId'];
+                        attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
+                        attribute.className = "btn-box";
+                        attribute.innerHTML = "View";
+                        attribute.target = "_blank";
+                        cell6.appendChild(attribute);
+                    }
+                }
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -124,6 +119,67 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+        var output;
+        getRecords();
+
+        function getRecords() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>borrowRequests",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            var table = document.getElementById("trow");
+            $('#trow').empty();
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                let row = table.insertRow(-1);
+                let id = "data_" + i;
+                row.id = id;
+                row.className = "task-list-row";
+                $("#data_" + i).attr('data-unit', obj['unitName']);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
+                let cell6 = row.insertCell(-1);
+                cell1.innerHTML = obj['id'];
+                cell2.innerHTML = obj['source'];
+                cell3.innerHTML = obj['name'];
+                cell4.innerHTML = obj['createdDate'];
+                cell5.innerHTML = obj['approvalStatus'];
+                var attribute = document.createElement("a");
+                attribute.id = obj['responsibleId'];
+                attribute.href = "<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/ViewBorrowRequests/" + obj['id'];
+                attribute.className = "btn-box";
+                attribute.innerHTML = "View";
+                attribute.target = "_blank";
+                cell6.appendChild(attribute);
+            }
+        }
+        (function() {
+            var showResults;
+            $('#search').keyup(function() {
+                var searchText;
+                searchText = $('#search').val();
+                return showResults(searchText);
+            });
+            showResults = function(searchText) {
+                $('tbody tr').hide();
+                return $('tbody tr:Contains(' + searchText + ')').show();
+            };
+            jQuery.expr[':'].Contains = jQuery.expr.createPseudo(function(arg) {
+                return function(elem) {
+                    return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                };
+            });
+        }.call(this));
     </script>
 </body>
+
 </html>

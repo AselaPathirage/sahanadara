@@ -667,7 +667,7 @@ text-align: left;
 }
 
 .donation--goal {
-  width: 80px;
+  width: 130px;
   font-size: 15px;
   text-align: center;
   color: #fff;
@@ -687,7 +687,7 @@ text-align: left;
 
 .donation--bar {
   position: relative;
-  width: calc(100% - 85px);
+  width: calc(100% - 125px);
   height: 25px;
   background-color: #e7edf4;
   border-radius: 100px 0 0 100px;
@@ -698,7 +698,7 @@ text-align: left;
   max-width: 100%;
   height: 100%;
   background-color: #47cf73;
-  transition: width 2s linear;
+  transition: width 1s linear;
 }
 
 .donation--number {

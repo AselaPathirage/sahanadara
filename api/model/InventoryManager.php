@@ -364,6 +364,35 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
+    public function availableItemReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==2){
+            $from=$data['receivedParams'][0];
+            $to=$data['receivedParams'][1];
+            if(strtolower($from)=='beggining'){
+                if(strtolower($to)=='end'){
+                    $sql = "SELECT i.itemId,i.itemName, unitName,SUM(v.quantity) AS inInventory FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId GROUP BY v.itemId HAVING SUM(v.quantity) > 0 ORDER BY i.itemId";
+                }else{
+                    $sql = "SELECT i.itemId,i.itemName, unitName,SUM(v.quantity) AS inInventory FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId AND DATE(v.transactionDate)<='$to' GROUP BY v.itemId HAVING SUM(v.quantity) > 0 ORDER BY i.itemId";
+                }
+            }else{
+                    $sql = "SELECT i.itemId,i.itemName, unitName,SUM(v.quantity) AS inInventory FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId AND DATE(v.transactionDate) BETWEEN '$from' AND '$to' GROUP BY v.itemId HAVING SUM(v.quantity) > 0 ORDER BY i.itemId";
+            }
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $r['itemId'] = Item::getItemCode($r['itemId']);
+                $results[] = $r;
+            }
+            $json = json_encode($results);
+            echo $json;
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
     public function addServiceRequest(array $data){
         global $errorCode;
         $uid = $data['userId'];
@@ -618,14 +647,17 @@ class InventoryManager extends Employee{
                 }else if(strcasecmp("all",$data['receivedParams'][1])==0){
                     $temp = $this->getDivision($uid);
                     $temp2= $this->getDistrict($uid);
-                    $sql="SELECT inventorymgtofficer.empName,inventorymgtofficer.empAddress,inventorymgtofficer.empEmail,inventorymgtofficer.empTele
-                    FROM inventorymgtofficer WHERE inventorymgtofficer.inventoryMgtOfficerID=$uid";
+                    $this->inventory->setInfo($uid);
+                    $this->inventory->setAddress();
+                    $sql="SELECT inventorymgtofficer.empName, inventorymgtofficer.empAddress, inventorymgtofficer.empEmail, inventorymgtofficer.empTele FROM inventorymgtofficer WHERE inventorymgtofficer.inventoryMgtOfficerID=$uid";
                     $execute = $this->connection->query($sql);
                     $r = $execute-> fetch_assoc();
                     $r['division']=$temp['name'];
                     $r['divisionId']=$temp['id'];
                     $r['district']=$temp2['name'];
                     $r['districtId']=$temp2['id'];
+                    $r['inventoryId']=$this->inventory->getInventoryCode();
+                    $r['inventoryAddress']=$this->inventory->getAddress();
                     $output=$r;
                 }else{
                     http_response_code(200);                       

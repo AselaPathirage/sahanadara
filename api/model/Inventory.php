@@ -22,7 +22,8 @@ class Inventory{
         $excute = $this->connection->query($sql);
         $this->district = $excute-> fetch_assoc();
     }
-    public function setAddress($inventoryId){
+    public function setAddress(){
+        $inventoryId=$this->inventoryId;
         $sql = "SELECT inventoryAddress  FROM inventory WHERE inventoryId  = $inventoryId";
         $excute = $this->connection->query($sql);
         $excute = $excute-> fetch_assoc();
@@ -39,5 +40,19 @@ class Inventory{
     }
     public function getDivision(){
         return $this->division;
+    }
+    public static function getInventoryId($input){
+        $input =strtoupper($input);
+        $id = explode("WH0",$input);
+        if(count($id)==2){
+            return (int)$id[1];
+        }
+        return (int)$id[0];
+    }
+    public function getInventoryCode(){
+        $id=$this->inventoryId;
+        $numlength = strlen((string)$id);
+        $code = "WH0".str_repeat("0",3-$numlength).$id;
+        return $code;
     }
 }

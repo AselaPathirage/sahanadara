@@ -114,6 +114,29 @@ $t = $_GET['to'];
                         </div>
 
                     </div>
+                    <div class="row ">
+                        <div class="col6">
+                            <div class="row">
+                                <div class="col4" style="text-align: right;">
+                                    <label for="user role">From</label>
+                                </div>
+                                <div class="col8">
+                                    <input type="text" id="gn" name="gn" placeholder="<?php echo $f; ?>" readonly>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col6">
+                            <div class="row">
+                                <div class="col4" style="text-align: right;">
+                                    <label for="user role">To</label>
+                                </div>
+                                <div class="col8">
+                                    <input type="text" id="gn" name="gn" placeholder="<?php echo $t; ?>" readonly>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                     <hr style="margin:10px;">
 
                     <div class="report-container">

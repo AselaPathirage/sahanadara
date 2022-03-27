@@ -93,14 +93,14 @@ $array = explode("/", $_GET["url"]);
                                     <input type="text" id="disaster" name="disaster" placeholder="Disaster" required>
                                 </div>
                             </div>
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col3">
                                     <label for="fname">GN Divisions</label>
                                 </div>
                                 <div class="col9">
                                     <input type="text" id="gns" name="gns" placeholder="GN divisions" required>
                                 </div>
-                            </div>
+                            </div> -->
                             <div class="row">
                                 <div class="col3">
                                     <label for="fname">Cause</label>
@@ -886,41 +886,85 @@ $array = explode("/", $_GET["url"]);
                 var object = {};
                 formData.forEach(function(value, key) {
                     // if (key.includes("h")) {
-                    if (key.startsWith('im')||key.startsWith('sf')||key.startsWith('dam')||key.startsWith('rel')) {
+                    if (key.startsWith('im') || key.startsWith('sf') || key.startsWith('dam') || key.startsWith('rel')) {
                         return;
                     }
                     object[key] = value;
                 });
-                console.log(object);return;
+                // console.log(object);return;
                 // let e = document.getElementById("safeHouseId");
                 // let safeHouseId = e.value;
                 // object['safeHouseId'] = safeHouseId;
-                object['heir'] = new Object();
+                object['impact'] = new Object();
                 count = 0
-                $('#heirs #heir1').each(function() {
-                    // console.log("w");
-                    var hname = $(this).find("input[id^='hname']").val();
-                    var hnic = $(this).find("input[id^='hnic']").val();
-                    var hrelationship = $(this).find("input[id^='hrelationship']").val();
-                    var hbranch = $(this).find("input[id^='hbranch']").val();
-                    var haccnum = $(this).find("input[id^='haccnum']").val();
-                    var hbank = $(this).find("input[id^='hbank']").val();
-                    // var words = item.split(" ");
-                    // for (let i = 0; i < words.length; i++) {
-                    //     words[i] = words[i][0].toUpperCase() + words[i].substr(1);
-                    // }
-                    // words = words.join(" ");
-                    // var quantity = $(this).find("td:nth-child(2)").find("input").val();
-                    // object['item'][words] = quantity;
+                $('#tbodyidimpact tr').each(function() {
+                    var fam = $(this).find("input[id^='fam']").val();
+                    var people = $(this).find("input[id^='people']").val();
+                    var death = $(this).find("input[id^='death']").val();
+                    var hos = $(this).find("input[id^='hos']").val();
+                    var inj = $(this).find("input[id^='inj']").val();
+                    var miss = $(this).find("input[id^='miss']").val();
+                    var gnid = $(this).find("input[id^='miss']").data('gnid');
                     var h = {};
-                    h['hname'] = hname;
-                    h['hnic'] = hnic;
-                    h['hrelationship'] = hrelationship;
-                    h['hbranch'] = hbranch;
-                    h['haccnum'] = haccnum;
-                    h['hbank'] = hbank;
-                    object['heir'][count++] = h;
+                    h['fam'] = fam;
+                    h['people'] = people;
+                    h['death'] = death;
+                    h['hos'] = hos;
+                    h['inj'] = inj;
+                    h['miss'] = miss;
+                    h['gnId'] = gnid;
+                    object['impact'][count++] = h;
+                });
+                // console.log(object);return;
+                object['safehouse'] = new Object();
+                count = 0
+                $('#tbodysafehouse tr').each(function() {
+                    // console.log("w");
+                    var safenum = $(this).find("input[id^='safenum']").val();
+                    var sffam = $(this).find("input[id^='sffam']").val();
+                    var sfpeople = $(this).find("input[id^='sfpeople']").val();
+                    var gnid = $(this).find("input[id^='sfpeople']").data('gnid');
 
+                    var h = {};
+                    h['safenum'] = safenum;
+                    h['sffam'] = sffam;
+                    h['sfpeople'] = sfpeople;
+                    h['gnId'] = gnid;
+                    object['safehouse'][count++] = h;
+                });
+                object['damages'] = new Object();
+                count = 0
+                $('#tbodydamages tr').each(function() {
+                    // console.log("w");
+                    var damhfull = $(this).find("input[id^='damhfull']").val();
+                    var damhpartial = $(this).find("input[id^='damhpartial']").val();
+                    var damenter = $(this).find("input[id^='damenter']").val();
+                    var daminfra = $(this).find("input[id^='daminfra']").val();
+                    var gnid = $(this).find("input[id^='daminfra']").data('gnid');
+
+                    var h = {};
+                    h['damhfull'] = damhfull;
+                    h['damhpartial'] = damhpartial;
+                    h['damenter'] = damenter;
+                    h['daminfra'] = daminfra;
+                    h['gnId'] = gnid;
+                    object['damages'][count++] = h;
+                });
+                object['relief'] = new Object();
+                count = 0
+                $('#tbodyrelief tr').each(function() {
+                    // console.log("w");
+                    var reldry = $(this).find("input[id^='reldry']").val();
+                    var relcooked = $(this).find("input[id^='relcooked']").val();
+                    var relemer = $(this).find("input[id^='relemer']").val();
+                    var gnid = $(this).find("input[id^='relemer']").data('gnid');
+
+                    var h = {};
+                    h['reldry'] = damhfull;
+                    h['relcooked'] = damhpartial;
+                    h['relemer'] = damenter;
+                    h['gnId'] = gnid;
+                    object['relief'][count++] = h;
                 });
                 var json = JSON.stringify(object);
                 console.log(json);
@@ -933,7 +977,7 @@ $array = explode("/", $_GET["url"]);
                     },
                     cache: false,
                     success: function(result) {
-                        var url = "<?php echo HOST; ?>/GramaNiladari/Compensation";
+                        var url = "<?php echo HOST; ?>/DisasterOfficer/Dashboard/Incidents";
                         if (result.code == 806) {
                             $("#regForm").trigger('reset');
                             alertGen("Record Added Successfully!", 1);

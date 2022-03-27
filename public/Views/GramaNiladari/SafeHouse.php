@@ -55,7 +55,7 @@
                                     <h4 class="name">Bellapitiya Maha Vidyalaya</h4>
                                     <p class="address">Bellapitiya, Horana</p>
 
-                                    <div class="row active" style="text-align: right; margin: 0 auto;display:block">
+                                    <div class="row activelbl" style="text-align: right; margin: 0 auto;display:block">
                                         <a class="btn_active">Status : Active</a>
                                         <!-- <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a> -->
                                     </div>
@@ -74,7 +74,7 @@
                             </div>
                             <div class="col6">
                                 <div class="box row-content" style="height:100%;min-height: 300px;">
-                                    <div class="row active" style="text-align: right; margin: 0 auto;display:block">
+                                    <div class="row activelbl" style="text-align: right; margin: 0 auto;display:block">
                                         <a class="btn_active">Status : Active</a>
                                     </div>
                                     <h4 class="name">Bellapitiya Maha Vidyalaya</h4>
@@ -112,7 +112,7 @@
 
     </section>
     <script>
-        var thisPage = "#safehouse";
+        var thisPage = "#safehousepage";
         $(document).ready(function() {
             $("#stats,#alerts").each(function() {
                 if ($(this).hasClass('active')) {
@@ -156,7 +156,7 @@
                 $(".name").text(output['safeHouseName'])
                 $(".address").text(output['safeHouseAddress'])
                 if (output['isUsing'] == 'n') {
-                    $(".active").empty();
+                    $(".activelbl").empty();
                 }
                 $("#tel").text(output['safeHouseTelno'])
             }

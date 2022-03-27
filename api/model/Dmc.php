@@ -221,4 +221,80 @@ WHERE
             exit();
         }
     }
+
+
+    // Index page counts
+    public function getIncidentCount(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT COUNT(dvfinalincident.dvfinalincidentId) AS c FROM dvfinalincident WHERE dvfinalincident.dmcapproved='p' AND dvfinalincident.disapproved='a'";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+    public function getSafeCount(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT COUNT(s.safeHouseID) AS c FROM safehouse s WHERE s.isUsing='y'";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+    public function getCompCount(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT SUM(tbl.ct) AS c FROM ( ( SELECT COUNT(p.propcomId) as ct FROM propertycompensation p WHERE p.dmcapproved = 'p' AND p.disapproved = 'a' AND p.dvapproved = 'a' ) UNION ( SELECT COUNT(d.deathId) as ct FROM deathcompensation d WHERE d.dmcapproved = 'p' AND d.disapproved = 'a' AND d.dvapproved = 'a' ) )tbl";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+
+
+
+    // Safehouse page
+    public function getSafeHouse(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId ORDER BY isUsing DESC";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function getSafeHouseById(array $data)
+    {
+        $uid = $data['userId'];
+        $safeId = $data['receivedParams'][0];
+        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId WHERE s.safeHouseID=".$safeId;
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+    public function getSafehouseRecent(array $data)
+    {
+        $uid = $data['userId'];
+        $safeId = $data['receivedParams'][0];
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN safehousestatus t ON t.safehouseId=s.safeHouseID where s.safehouseId=".$safeId." ORDER BY t.createdDate DESC LIMIT 1";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+    public function getResponsible(array $data)
+    {
+        $uid = $data['userId'];
+        $safeId = $data['receivedParams'][0];
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID WHERE s.safehouseId=".$safeId."";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
 }

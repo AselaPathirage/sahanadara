@@ -97,7 +97,7 @@ $array = explode("/", $_GET["url"]);
                                 <label for="crusttype">Date of commenced</label>
                             </div>
                             <div class="col9 row-content" style="align-items: center;">
-                                <input type="date" id="datePicker1" name="datePicker1" class="datesInForms">
+                                <input type="date" id="datePicker1" name="datePicker1" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
                         <div class="row">
@@ -105,7 +105,7 @@ $array = explode("/", $_GET["url"]);
                                 <label for="crusttype">End date</label>
                             </div>
                             <div class="col9 row-content" style="align-items: center;">
-                                <input type="date" id="datePicker2" name="datePicker2" class="datesInForms">
+                                <input type="date" id="datePicker2" name="datePicker2" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
                         <div class="row">
@@ -373,7 +373,11 @@ $array = explode("/", $_GET["url"]);
             });
             document.getElementById('datePicker1').valueAsDate = new Date();
             document.getElementById('datePicker2').valueAsDate = new Date();
-
+            $("#datePicker1").on("change", function() {
+                var from = $("#datePicker1").val();
+                var input = document.getElementById("datePicker2");
+                input.setAttribute("min", from);
+            });
             getDisasterType();
             getFinalDetails();
         });
@@ -398,13 +402,13 @@ $array = explode("/", $_GET["url"]);
             var obj = output[0];
             console.log(obj);
 
-            var tot=(900*obj['sumf1'])+ (1200*obj['sumf2'])+ (1400*obj['sumf3']) +(1600*obj['sumf4'])+ (1800*obj['sumf5']);
+            var tot = (900 * obj['sumf1']) + (1200 * obj['sumf2']) + (1400 * obj['sumf3']) + (1600 * obj['sumf4']) + (1800 * obj['sumf5']);
 
             $('#dry').val(tot);
             $('#cooked').val(obj['sumcooked']);
             $('#emer').val(obj['sumemer']);
-            
-            
+
+
         }
 
         function getDisasterType() {

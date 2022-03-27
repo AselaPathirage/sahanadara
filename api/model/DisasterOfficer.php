@@ -435,15 +435,71 @@ class DisasterOfficer extends Employee
         }
     }
 
+    public function addFinalReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(isset($data['datePicker1']) && isset($data['datePicker2']) && isset($data['disaster']) && isset($data['cause']) && isset($data['remarks']) && isset($data['task']) && isset($data['impact']) && isset($data['safehouse']) && isset($data['damages']) && isset($data['relief']) && isset($data['incidentId'])){
+            $datePicker1=$data['datePicker1'];
+            $datePicker2=$data['datePicker2'];
+            $disaster=$data['disaster'];
+            $division = $this->getDivision($uid);
+            $divisionId = $division['id'];
+            $cause=$data['cause'];
+            $remarks=$data['remarks'];
+            $incidentId=$data['incidentId'];
+            $sql="INSERT INTO dvfinalincident(startDate, endDate, disaster, cause, dvId, remarks, incidentId) VALUES ('$datePicker1','$datePicker2','$disaster','$cause',$divisionId,'$remarks',$incidentId);";
+            $this->connection->query($sql);
+            $sql = "SELECT LAST_INSERT_ID();";
+            $excute = $this->connection->query($sql);
+            $r = $excute-> fetch_assoc();
+            $finalReportId = $r['LAST_INSERT_ID()'];
+            $sql="";
+            foreach ($data['impact'] as $record) {
+                $fam =$record['fam'];
+                $people =$record['people'];
+                $death =$record['death'];
+                $hos =$record['hos'];
+                $inj =$record['inj'];
+                $miss =$record['miss'];
+                $gnId =$record['gnId'];
+                $sql .="INSERT INTO dvfinalimpact VALUES ($finalReportId,$gnId,$fam,$people,$death,$hos,$inj,$miss);";
+            }
+            foreach ($data['safehouse'] as $record) {
+                $safenum =$record['safenum'];
+                $sffam =$record['sffam'];
+                $sfpeople =$record['sfpeople'];
+                $gnId =$record['gnId'];
+                $sql .="INSERT INTO dvfinalsafehouse VALUES ($finalReportId,$gnId,$safenum,$sfpeople,$sffam);";
+            }
+            foreach ($data['damages'] as $record) {
+                $damhfull =$record['damhfull'];
+                $damhpartial =$record['damhpartial'];
+                $damenter =$record['damenter'];
+                $daminfra =$record['daminfra'];
+                $gnId =$record['gnId']; //hf he kiyanne monawada yako :(
+                $sql .="INSERT INTO dvfinaldamage VALUES ($finalReportId,$gnId,$damhfull,$damhpartial,$damenter,$daminfra);";
+            }
+            foreach ($data['relief'] as $record) {
+                $reldry =$record['reldry'];
+                $relcooked =$record['relcooked'];
+                $relemer =$record['relemer'];
+                $gnId =$record['gnId'];
+                $sql .="INSERT INTO dvfinalrelief VALUES ($finalReportId,$gnId,$reldry,$relcooked,$relemer);";
+            }
+            $this->connection->multi_query($sql);
+            echo json_encode(array("code"=>$errorCode['success']));
+            exit();
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
     public function filtermySafehouse(array $data)
     {
         $uid = $data['userId'];
         if (count($data['receivedParams']) == 1) {
-
             $sql = "SELECT s.* FROM safeHouse s WHERE s.safeHouseID IN (SELECT gn.safeHouseID FROM gndivision gn,divisionaloffice dv, safehouse sh WHERE gn.dvId = dv.dvId AND dv.disasterManager = 1 AND sh.isUsing = 'n' AND sh.safeHouseID = gn.safeHouseID);";
-
-
-
             $excute = $this->connection->query($sql);
             $results = array();
             while ($r = $excute->fetch_assoc()) {
@@ -509,8 +565,6 @@ class DisasterOfficer extends Employee
                     while ($r2 = $excute->fetch_assoc()) {
                         $sql .= "INSERT INTO `incidentgn`(`incidentId`, `gndvId`) VALUES ('$incidentId','" . $r2['gndvId'] . "');";
                     }
-
-
                     if ($this->connection->multi_query($sql)) {
                         echo json_encode(array("code" => $errorCode['success']));
                         exit;

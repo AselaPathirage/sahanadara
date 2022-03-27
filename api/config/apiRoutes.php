@@ -117,6 +117,7 @@ Route::GET("doreports", array("DisasterOfficer@getReports"));
 Route::GET("doreports/{id}", array("DisasterOfficer@getReportsbyIncident"));
 Route::GET("countdvfinal/{id}", array("DisasterOfficer@getFinalsbyIncident"));
 Route::POST("dofinal", array("DisasterOfficer@addFinal"));
+Route::POST("disasterOfficer/final", array("DisasterOfficer@addFinalReport"));
 Route::GET("dofinal/{id}", array("DisasterOfficer@getFinal"));
 Route::GET("doinitial/{id}", array("DisasterOfficer@getInitial"));
 Route::GET("dorelief/{id}", array("DisasterOfficer@getRelief"));
@@ -162,6 +163,7 @@ Route::GET("report/availableItemReport/{from}/{to}", array("InventoryManager@ava
 Route::GET("report/goodsTransactionReport", array("InventoryManager@goodsTransactionReport"));
 Route::GET("report/receivedGoodsReport", array("InventoryManager@receivedGoodsReport"));
 Route::GET("report/sendingGoodsReport", array("InventoryManager@sendingGoodsReport"));
+Route::GET("report/safeHouseReport/{safeHouseId}/{from}/{to}", array("InventoryManager@safeHouseReport"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));
 Route::POST("distribute", array("InventoryManager@addDistribute"));

@@ -377,7 +377,12 @@ class InventoryManager extends Employee{
                     $sql = "SELECT i.itemId,i.itemName, unitName,SUM(v.quantity) AS inInventory FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId AND DATE(v.transactionDate)<='$to' GROUP BY v.itemId HAVING SUM(v.quantity) > 0 ORDER BY i.itemId";
                 }
             }else{
+                if(strtolower($to)=='end'){
+                    $sql = "SELECT i.itemId,i.itemName, unitName,SUM(v.quantity) AS inInventory FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId AND DATE(v.transactionDate)>='$from' GROUP BY v.itemId HAVING SUM(v.quantity) > 0 ORDER BY i.itemId";//echo $sql;
+
+                }else{
                     $sql = "SELECT i.itemId,i.itemName, unitName,SUM(v.quantity) AS inInventory FROM inventoryitem v, item i, inventorymgtofficer m, unit u WHERE m.inventoryID = v.inventoryId AND v.itemId = i.itemId AND m.inventoryMgtOfficerID = $uid  AND i.unitType =u.unitId AND DATE(v.transactionDate) BETWEEN '$from' AND '$to' GROUP BY v.itemId HAVING SUM(v.quantity) > 0 ORDER BY i.itemId";
+                }
             }
             $excute = $this->connection->query($sql);
             $results = array();
@@ -387,6 +392,19 @@ class InventoryManager extends Employee{
             }
             $json = json_encode($results);
             echo $json;
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
+    public function safeHouseReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==3){
+            $safeHouseId=$data['receivedParams'][0];
+            $from=$data['receivedParams'][1];
+            $to=$data['receivedParams'][2];
         }else{
             http_response_code(200);                       
             echo json_encode(array("code"=>$errorCode['attributeMissing']));
@@ -415,6 +433,7 @@ class InventoryManager extends Employee{
             //echo $sql;
             $this->connection->multi_query($sql);
             echo json_encode(array("code"=>$errorCode['success']));
+            exit();
         }else{
             http_response_code(200);                       
             echo json_encode(array("code"=>$errorCode['attributeMissing']));
@@ -499,10 +518,14 @@ class InventoryManager extends Employee{
              }
              $id = ServiceRequestNotice::getServiceRequestNoticeCode($r['id']);
              $r['id']= $id;
+             $r['requestingDivisionId']=$r['requestingFrom'];
              if($r['requestingFrom']==0){
                 $r['requestingFrom']='All';
              }else{
-                $r['requestingFrom']='us';
+                $sql="SELECT divisionaloffice.divisionalSofficeName FROM divisionaloffice WHERE divisionaloffice.divisionalOfficeId=".$r['requestingFrom'];
+                $temp1=$this->connection->query($sql);
+                $r1 = $temp1-> fetch_assoc();
+                $r['requestingFrom']=$r1['divisionalSofficeName'];
              }
              $r['item'] = $requestItem;
              $results[] = $r;

@@ -15,7 +15,7 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .create {
+        /* .create {
             background-color: rgb(2, 58, 255);
             height: 50px;
             display: block;
@@ -30,7 +30,7 @@
 
         .create:hover {
             background-color: rgb(153, 176, 255);
-        }
+        } */
 
         .view {
             background-color: rgb(109, 91, 208);
@@ -100,7 +100,7 @@
                                     <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                                 </th>
                                 <th style="width: 25%;text-align: center;">
-                                    <a href="<?php echo HOST; ?>InventoryManager/Inventory/serviceRequestForm" class="create">Create Request</a>
+                                    <a href="<?php echo HOST; ?>InventoryManager/Inventory/serviceRequestForm" class="create btn_blue">Create Request</a>
                                 </th>
                             </tr>
                         </thead>
@@ -111,7 +111,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:10%;">Request Id</th>
-                                    <th style="width:50%;">DS Office</th>
+                                    <th style="width:50%;">Divisional Office</th>
                                     <th style="width:30%;">Requesting Date</th>
                                     <th style="width:10%;"></th>
                                 </tr>

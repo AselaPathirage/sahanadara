@@ -43,6 +43,8 @@ Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "Inv
 Route::PUT("user/trasfer/inventoryManager/{userId}", array("DivisionalSecretariat@transferUser"));
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
+Route::PUT("user", array("Admin@updateUser"));
+Route::PUT("user/office", array("Admin@changeUserOffice"));
 Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails", "Admin@updateProfileDetails", "DistrictSecretariat@updateProfileDetails"));
 
@@ -133,6 +135,7 @@ Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));
+Route::DELETE("user/{id}/{id}", array("Admin@deleteUser"));
 
 //ResponsiblePerson
 Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));

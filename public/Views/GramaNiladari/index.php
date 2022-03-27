@@ -28,33 +28,7 @@
         <div class="container">
             <h1 class="text-center">Welcome Grama Niladari</h1>
             <div class="space"></div>
-            <!-- <div class="stat-row">
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Approved Compensation Requests</div>
-                        <div class="number">40</div>
-
-                    </div>
-                    <i class='bx bxs-report cart one'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Approved Incident Reports</div>
-                        <div class="number">38</div>
-
-                    </div>
-                    <i class='bx bxs-report cart two'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Residents</div>
-                        <div class="number">320</div>
-
-                    </div>
-                    <i class='bx bx-building-house cart three'></i>
-                </div>
-
-            </div> -->
+           
 
             <section class="services">
                 <a href="">
@@ -209,7 +183,7 @@
         function getCompCount() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>compcount",
+                url: "<?php echo API; ?>gncompcount",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'

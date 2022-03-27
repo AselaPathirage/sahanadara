@@ -69,7 +69,7 @@
                                 </div>
 
                                 <div class="col9 row-content" style="align-items: center;">
-                                    <input type="date" id="disdate" name="disdate" class="datesInForms">
+                                    <input type="date" id="disdate" name="disdate" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                                 </div>
 
                             </div>
@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="col9 row-content" style="align-items: center;">
-                                    <input type="date" id="ddate" name="ddate" class="datesInForms">
+                                    <input type="date" id="ddate" name="ddate" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                                 </div>
 
                             </div>

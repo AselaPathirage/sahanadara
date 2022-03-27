@@ -56,49 +56,7 @@
 
 
                 <div class="container" id="tbodyid">
-                    <!-- <div class="row">
-                        <div class="col6">
-                            <div class="box row-content">
-                                <h4>Fund for displaced persons</h4>
-                                <p>Bellapitiya</p>
-                                <a href="./donate.php" class="donate">Donate</a>
-                            </div>
-                            <div class="box row-content">
-                                <h4>Fund for displaced persons</h4>
-                                <p>Bellapitiya</p>
-                                <a href="./donate.php" class="donate">Donate</a>
-                            </div>
-                            <div class="box row-content">
-                                <h4>Fund for displaced persons</h4>
-                                <p>Bellapitiya</p>
-                                <a href="./donate.php" class="donate">Donate</a>
-                            </div>
-                            <div class="box row-content">
-                                <h4>Fund for displaced persons</h4>
-                                <p>Bellapitiya</p>
-                                <a href="./donate.php" class="donate">Donate</a>
-                            </div>
-                            <div class="box row-content">
-                                <h4>Fund for displaced persons</h4>
-                                <p>Bellapitiya</p>
-                                <a href="./donate.php" class="donate">Donate</a>
-                            </div>
-
-                        </div>
-                        <div class="col6" style="overflow: auto">
-                            <div class="box row-content" style="max-height: 500px;">
-                                <h4>Fund for displaced persons</h4>
-                                <p>Bellapitiya</p>
-                                <label for="your_name">Name</label>
-                                <input type="text" id="your_name" name="yourname" />
-
-                                <label for="your_phone">Amount</label>
-                                <input type="tel" id="your_phone" name="yourphone" />
-                                <div class="space2"></div>
-                                <a href="./donate.php" class="donate">Donate</a>
-                            </div>
-                        </div>
-                    </div> -->
+                   
                     <div class="row ">
 
                         <div class="col5 card_donation is-collapsed row-content">

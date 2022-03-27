@@ -36,7 +36,12 @@ class Home{
                 exit();
             }
             $lanCode=strtolower($data['receivedParams'][0]);
-            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate;";
+            if(!($lanCode=='en' or $lanCode=='ta' or $lanCode=='si')){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['wrongLanguageCode']));
+                exit();
+            }
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate;";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
@@ -82,8 +87,13 @@ class Home{
                 exit();
             }
             $lanCode=strtolower($data['receivedParams'][0]);
+            if(!($lanCode=='en' or $lanCode=='ta' or $lanCode=='si')){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['wrongLanguageCode']));
+                exit();
+            }
             $limit=$data['receivedParams'][2];
-            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate LIMIT $limit;";
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate LIMIT $limit;";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
@@ -129,6 +139,11 @@ class Home{
                 exit();
             }
             $lanCode=strtolower($data['receivedParams'][0]);
+            if(!($lanCode=='en' or $lanCode=='ta' or $lanCode=='si')){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['wrongLanguageCode']));
+                exit();
+            }
             $sql="(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
             WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)
             UNION
@@ -164,6 +179,11 @@ class Home{
                 exit();
             }
             $lanCode=strtolower($data['receivedParams'][0]);
+            if(!($lanCode=='en' or $lanCode=='ta' or $lanCode=='si')){
+                http_response_code(200);  
+                echo json_encode(array("code"=>$errorCode['wrongLanguageCode']));
+                exit();
+            }
             $limit=$data['receivedParams'][2];
             $sql="(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
             WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)

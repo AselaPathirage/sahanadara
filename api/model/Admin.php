@@ -242,6 +242,100 @@ class Admin extends Employee{
         echo $json;
     }
 
+    public function updateUser(array $data){
+        global $errorCode;
+        if(isset($data['empName']) && isset($data['empEmail']) && isset($data['empTele']) && isset($data['empAddress']) && isset($data['roleId'])){
+            switch ($data['roleId']) {
+                case 1:
+                    $sql0 = "UPDATE gramaniladari SET gramaniladari.empName = '".$data['empName']."', gramaniladari.empAddress = '".$data['empAddress']."' , gramaniladari.empEmail = '".$data['empEmail']."', gramaniladari.empTele = '".$data['empTele']."' WHERE gramaniladari.gramaNiladariID = '".$data['empId']."'";
+                    break;
+                case 3:
+                    $sql0 = "UPDATE districtsecretariat SET districtsecretariat.empName = '".$data['empName']."', districtsecretariat.empAddress = '".$data['empAddress']."' , districtsecretariat.empEmail = '".$data['empEmail']."', districtsecretariat.empTele = '".$data['empTele']."' WHERE districtsecretariat.districtSecretariatID = '".$data['empId']."'";
+                    break;
+                case 4:
+                    $sql0 = "UPDATE divisionalsecretariat SET divisionalsecretariat.empName = '".$data['empName']."', divisionalsecretariat.empAddress = '".$data['empAddress']."' , divisionalsecretariat.empEmail = '".$data['empEmail']."', divisionalsecretariat.empTele = '".$data['empTele']."' WHERE divisionalsecretariat.divisionalSecretariatID = '".$data['empId']."'";
+                    break;
+                case 6:
+                    $sql0 = "UPDATE dismgtofficer SET dismgtofficer.empName = '".$data['empName']."', dismgtofficer.empAddress = '".$data['empAddress']."' , dismgtofficer.empEmail = '".$data['empEmail']."', dismgtofficer.empTele = '".$data['empTele']."' WHERE dismgtofficer.divisionalSecretariatID = '".$data['empId']."'";
+            }
+            $this->connection->query($sql0);
+            echo json_encode(array("code"=>$errorCode['success']));
+            exit();
+        }else{ 
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+         
+    }
+
+    public function changeUserOffice(array $data){
+        global $errorCode;
+        if(isset($data['empName']) && isset($data['empEmail']) && isset($data['empTele']) && isset($data['empAddress']) && isset($data['roleId'])){
+            switch ($data['roleId']) {
+                case 1:
+                    $sql0 = "UPDATE gramaniladari SET gramaniladari.empName = '".$data['empName']."', gramaniladari.empAddress = '".$data['empAddress']."' , gramaniladari.empEmail = '".$data['empEmail']."', gramaniladari.empTele = '".$data['empTele']."' WHERE gramaniladari.gramaNiladariID = '".$data['empId']."'";
+                    $sql1 = "UPDATE gndivision set gndivision.gramaNiladariID = null WHERE gndivision.gramaNiladariID = '".$data['empId']."'";
+                    $sql = "UPDATE gndivision set gndivision.gramaNiladariID = '".$data['empId']."' WHERE gndivision.gndvId = '".$data['gndivId']."'";
+                    break;
+                case 3:
+                    $sql0 = "UPDATE districtsecretariat SET districtsecretariat.empName = '".$data['empName']."', districtsecretariat.empAddress = '".$data['empAddress']."' , districtsecretariat.empEmail = '".$data['empEmail']."', districtsecretariat.empTele = '".$data['empTele']."' WHERE districtsecretariat.districtSecretariatID = '".$data['empId']."'";
+                    $sql1 = "UPDATE districtsoffice set districtsoffice.districtSecretariat = null WHERE ddistrictsoffice.districtSecretariat = '".$data['empId']."'";
+                    $sql = "UPDATE districtsoffice set districtsoffice.districtSecretariat = '".$data['empId']."' WHERE districtsoffice.districtSOfficeID = '".$data['distId']."'";
+                    break;
+                case 4:
+                    $sql0 = "UPDATE divisionalsecretariat SET divisionalsecretariat.empName = '".$data['empName']."', divisionalsecretariat.empAddress = '".$data['empAddress']."' , divisionalsecretariat.empEmail = '".$data['empEmail']."', divisionalsecretariat.empTele = '".$data['empTele']."' WHERE divisionalsecretariat.divisionalSecretariatID = '".$data['empId']."'";
+                    $sql = "UPDATE divisionaloffice set divisionaloffice.divisionalSecretariatID = '".$data['empId']."' WHERE divisionaloffice.divisionalOfficeId = '".$data['divId']."'";
+                    $sql1 = "UPDATE divisionaloffice set divisionaloffice.divisionalSecretariatID = null WHERE divisionaloffice.divisionalSecretariatID = '".$data['empId']."'";
+                    break;
+                case 6:
+                    $sql0 = "UPDATE dismgtofficer SET dismgtofficer.empName = '".$data['empName']."', dismgtofficer.empAddress = '".$data['empAddress']."' , dismgtofficer.empEmail = '".$data['empEmail']."', dismgtofficer.empTele = '".$data['empTele']."' WHERE dismgtofficer.divisionalSecretariatID = '".$data['empId']."'";
+                    $sql = "UPDATE divisionaloffice set divisionaloffice.disasterManager = '".$data['empId']."' WHERE divisionaloffice.divisionalOfficeId = '".$data['divId']."'";
+                    $sql1 = "UPDATE divisionaloffice set divisionaloffice.disasterManager = null WHERE divisionaloffice.disasterManager = '".$data['empId']."'";
+            }
+            $this->connection->query($sql0);
+            $this->connection->query($sql1);
+            $this->connection->query($sql);
+            echo json_encode(array("code"=>$errorCode['success']));
+            exit();
+        }else{ 
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+         
+    }
+
+    public function deleteUser(array $data){
+        global $errorCode;
+        $roleId = $data['receivedParams'][0];
+        $empId = $data['receivedParams'][1];
+        switch ($roleId) {
+            case 1:
+                $sql0 = "DELETE FROM login WHERE login.empId = $empId and login.roleId = $roleId";
+                $sql1 = "DELETE FROM gramaniladari WHERE gramaniladari.gramaNiladariID = $empId";
+                $sql2 = "UPDATE gndivision set gndivision.gramaNiladariID = null WHERE gndivision.gramaNiladariID = $empId";
+                break;
+            case 3:
+                $sql0 = "DELETE FROM login WHERE login.empId = $empId and login.roleId = $roleId";
+                $sql1 = "DELETE FROM districtsecretariat WHERE districtsecretariat.districtSecretariatID = $empId";
+                $sql2 = "UPDATE districtsoffice set districtsoffice.districtSecretariat = null WHERE ddistrictsoffice.districtSecretariat = $empId";
+                break;
+            case 4:
+                $sql0 = "DELETE FROM login WHERE login.empId = $empId and login.roleId = $roleId";
+                $sql1 = "DELETE FROM divisionalsecretariat WHERE divisionalsecretariat.divisionalSecretariatID = $empId";
+                $sql2 = "UPDATE divisionaloffice set divisionaloffice.divisionalSecretariatID = null WHERE divisionaloffice.divisionalSecretariatID = $empId";
+                break;
+            case 6:
+                $sql0 = "DELETE FROM login WHERE login.empId = $empId and login.roleId = $roleId";
+                $sql1 = "DELETE FROM dismgtofficer WHERE dismgtofficer.disMgtOfficerID = $empId";
+                $sql2 = "UPDATE divisionaloffice set divisionaloffice.disasterManager = null WHERE divisionaloffice.disasterManager =  $empId";
+        }
+        $this->connection->query($sql2);
+        $this->connection->query($sql1);
+        $this->connection->query($sql0);
+        echo json_encode(array("code"=>$errorCode['success']));
+        exit();
+    }
+
 } 
 
 

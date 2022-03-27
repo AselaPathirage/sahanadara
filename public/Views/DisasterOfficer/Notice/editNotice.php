@@ -45,6 +45,7 @@
     }
     td{
         border: none;
+        background-color:#fff;
     }
     </style>
 </head>
@@ -59,7 +60,7 @@
         <div class="space"></div>
         <div class="container">
             <div class="box">
-            <center><h1>Service Request Form - Horana</h1></center>
+            <center><h1>Service Request Form - Kamburupitiya</h1></center>
             <fieldset>
                         <div style="padding-left:15% ;">
                                     <div class="column" style="width:90%;float: none;padding-left:5%;padding-top:2px;">

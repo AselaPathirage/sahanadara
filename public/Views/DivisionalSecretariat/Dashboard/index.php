@@ -152,7 +152,7 @@
         </div>
 
 
-        <div class="container">
+        <!-- <div class="container">
                 <div class="row">
                     <div class="col6">
                         <div class="box row-content">
@@ -196,7 +196,7 @@
                 </div>
 
             </div>
-        </div>
+        </div> -->
         
     </section>
     <script>

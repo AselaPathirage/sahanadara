@@ -9,11 +9,87 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
-    
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/searchselect.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style type="text/css">
+        /* .switch-container {
+            display: inline-block;
+            margin: 10px 10px;
+        } */
+
+        /*** iOS Style ***/
+        input.ios {
+            max-height: 0;
+            max-width: 0;
+            opacity: 0;
+            position: absolute;
+            left: -9999px;
+            pointer-event: none;
+        }
+
+        input.ios+label {
+            display: block;
+            position: relative;
+            box-shadow: inset 0 0 0px 1px #a6a6a6;
+            text-indent: -5000px;
+            height: 30px;
+            width: 50px;
+            border-radius: 15px;
+        }
+
+        input.ios+label:before {
+            content: "";
+            position: absolute;
+            display: block;
+            height: 30px;
+            width: 30px;
+            top: 0;
+            left: 0;
+            border-radius: 15px;
+            background: transparent;
+            -moz-transition: 0.2s ease-in-out;
+            -webkit-transition: 0.2s ease-in-out;
+            transition: 0.2s ease-in-out;
+        }
+
+        input.ios+label:after {
+            content: "";
+            position: absolute;
+            display: block;
+            height: 30px;
+            width: 30px;
+            top: 0;
+            left: 0px;
+            border-radius: 15px;
+            background: white;
+            box-shadow: inset 0px 0px 0px 1px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.2);
+            -moz-transition: 0.2s ease-in-out;
+            -webkit-transition: 0.2s ease-in-out;
+            transition: 0.2s ease-in-out;
+        }
+
+        input.ios:checked+label:before {
+            width: 50px;
+            background: #13bf11;
+        }
+
+        input.ios:checked+label:after {
+            left: 20px;
+            box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        .btn-fun{
+            padding: 5px 20px;
+            border-radius:4px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #fff;
+            background-color:lightslategrey;
+        }
+    </style>
 </head>
 <body>
     <?php
@@ -44,7 +120,7 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form action="#" id='add' name="add" method="POST" onSubmit="return validate_nic();">
+                            <form action="#" id='add' name="add" method="POST" ">
                                 <h1>New Fundraise</h1>
 
                                 <div class="row-content">
@@ -74,7 +150,7 @@
                     <div class="close-btn">×</div>
                     <div class="custom-model-wrap">
                         <div class="pop-up-content-wrap">
-                            <form action="#" id='update' name="update" method="POST" onSubmit="return validate_nic();">
+                            <form action="#" id='update' name="update" method="POST" ">
                                 <h1>Update Fundraiser</h1>
 
                                 <div class="row-content">
@@ -134,14 +210,6 @@
                                     <option>Completed</option>
                                 </select>
                             </th>
-                            <!-- <th>GN Division
-                                <select id="milestone-filter" class="form-control">
-                                    <option>None</option>
-                                    <option>Palannoruwa</option>
-                                    <option>Koralaema</option>
-                                    <option>Olaboduwa </option>
-                                </select>
-                            </th> -->
                             
                             <th>Search
                                 <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
@@ -151,37 +219,13 @@
                 </table>
             </div>
             <div class="container" id="tbodyid">
-                <div class="row">
-                    <div class="col6">
-                        <div class="box row-content">
-                        <h4>Funds for displaced person</h4>
-                            <p>Bellapitiya</p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising" class="btn_views">View</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col6">
-                        <div class="box row-content">
-                            <h4>Funds for property damages</h4>
-                            <p>Millaniya</p>
-
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                            <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-
-                                <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/FundRaising" class="btn_views">View</a>
-                        </div>
-                    </div>
-                    </div>
-                </div>
+                
 
             </div>
         </div>
 
     </section>
+    <script src="<?php echo HOST; ?>/public/assets/js/searchselect.js"></script>
     <script>
         var thisPage = "#FundRaising";
         $(document).ready(function() {
@@ -195,36 +239,74 @@
             getFundraiser();
             getmyFundraiser();
             $(".btn_update").on('click', function() {
-                var id = $(this).attr("id");
-                var title = $(this).attr("data-title");
-                var description = $(this).attr("data-description");
-                var goal = $(this).attr("data-goal");
+                var id = $(this).attr("data-id");
 
+
+                var out = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>fundraiser/"+id,
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+                $("#uptitle").val(out[0]['title']);
+                $("#updescription").val(out[0]['description']);
+                $("#upgoal").val(out[0]['goal']);
                 $("#updateform").fadeIn();
-                $("#update").trigger("reset");
                 $("#updateform").addClass('model-open');
 
-                $("#uptitle").val(title);
-                $("#updescription").val(description);
-                $("#upgoal").val(goal);
+                
 
             });
             $(".btn_delete").on('click', function() {
                 var id = $(this).attr("id");
-                // var nic = $(this).attr("data-nic");
-                // var name = $(this).attr("data-name");
-                // var address = $(this).attr("data-address");
-                // var telno = $(this).attr("data-telno");
 
                 $("#deleteform").fadeIn();
 
                 $("#deleteform").addClass('model-open');
-
-                // $("#upname").val(name);
-                // $("#upnic").val(nic);
-                // $("#upphone").val(telno);
-                // $("#upaddress").val(address);
                 $("#item2").val(id);
+            });
+
+            $("input[type='checkbox']").change(function(e) {
+                console.log((this).id);
+                e.preventDefault();
+                var object = {};
+
+                if (this.checked) {
+                    object['isActive'] = 'y';
+                } else {
+                    object['isActive'] = 'n';
+                }
+                var id = $(this).data("incid");
+                object['recordId'] = id;
+                var json = JSON.stringify(object);
+                console.log(json);
+                $.ajax({
+                type: "PUT",
+                url: "<?php echo API; ?>fundraiserstatus",
+                data: json,
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                success: function(result) {
+                    
+                    getFundraiser();
+                    location.reload();
+                    if (result.code == 806) {
+                        // alertGen("Record Updated Successfully!", 1);
+                    } else {
+                        alertGen("Unable to handle request.", 2);
+                    }
+                },
+                error: function(err) {
+                    alertGen("Something went wrong.", 3);
+                    console.log(err);
+                }
+            });
             });
         });
 
@@ -285,11 +367,15 @@
                     if (i % 2 == 0) {
                         $sample += "<div class='row'>";
                     }
-                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><p> Goal :" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                    if (obj['isActive'] == 1) {
-                        $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                    $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><div class='button-row-container' style='position: absolute; top:15px;right:35px;'><div class='switch-container switch-ios'><input type='checkbox' name='ios" + i + "' id='ios" + i + "' class='ios' data-incid='" + obj['recordId'] + "' ";
+                    if (obj['isActive'] == 'y') {
+                        $sample += "checked";
                     }
-                    $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
+                    $sample += "/><label for='ios" + i + "'></label></div></div><h4>" + obj['recordId']+"-"+ obj['title'] + "</h4><p>" + obj['description'] + "</p><p>" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                    if (obj['isActive'] == 'y') {
+                        $sample += "<a class='btn_active' style='position: absolute; top:33px;right:95px;'>Status : Active</a>";
+                    }
+                    $sample += "<a class='btn_update btn_blue' data-id='" + obj['recordId'] + "'>Update</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
                         $sample += "</div>";
                     }
@@ -316,40 +402,37 @@
                             $sample += "<div class='row'>";
                         }
                         $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                        if (obj['isActive'] == 1) {
+                        if (obj['isActive'] == 'y') {
                             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                         }
                         $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
-
                         if ((i % 2 == 1) || (i == output.length - 1)) {
                             $sample += "</div>";
                         }
                     } else if (status == "1") {
-                        if (obj['isActive'] == 1) {
+                        if (obj['isActive'] == 'y') {
                             if (i % 2 == 0) {
                                 $sample += "<div class='row'>";
                             }
                             $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                            if (obj['isActive'] == 1) {
+                            if (obj['isActive'] == 'y') {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
                             $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
-
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }
                         }
                     } else {
-                        if (obj['isActive'] == 0) {
+                        if (obj['isActive'] == 'n') {
                             if (i % 2 == 0) {
                                 $sample += "<div class='row'>";
                             }
                             $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                            if (obj['isActive'] == 1) {
+                            if (obj['isActive'] == 'n') {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
                             $sample += "<a ' class='btn_update btn_blue'" + obj['recordId'] + ">Update</a></div></div></div>";
-
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }
@@ -379,34 +462,34 @@
                 cache: false,
                 async: false
             }).responseText);
-            var table = document.getElementById("tbodyid");
+            // var table = document.getElementById("tbodyid");
 
-            for (var i = 0; i < output.length; i++) {
-                let obj = output[i];
-                // console.log(obj);
+            // for (var i = 0; i < output.length; i++) {
+            //     let obj = output[i];
+            //     // console.log(obj);
                 
-                var attribute = document.createElement("a");
-                attribute.id = obj['recordId'];
-                // attribute.href = "";
-                attribute.className = "btn_update btn_blue";
-                attribute.name = "update";
-                attribute.innerHTML = "Update";
-                attribute.setAttribute("data-title", obj['title'])
-                attribute.setAttribute("data-description", obj['description'])
-                attribute.setAttribute("data-goal", obj['goal'])
-                var attribute2 = document.createElement("a");
+            //     var attribute = document.createElement("a");
+            //     attribute.id = obj['recordId'];
+            //     // attribute.href = "";
+            //     attribute.className = "btn_update btn_blue";
+            //     attribute.name = "update";
+            //     attribute.innerHTML = "Update";
+            //     attribute.setAttribute("data-title", obj['title'])
+            //     attribute.setAttribute("data-description", obj['description'])
+            //     attribute.setAttribute("data-goal", obj['goal'])
+            //     var attribute2 = document.createElement("a");
 
 
-                attribute2.id = obj['recordId'];
-                // attribute2.href = "";
-                attribute2.className = "btn_delete";
-                attribute2.name = "delete";
-                attribute2.innerHTML = "Delete";
-                var attribute3 = document.createElement("span");
-                attribute3.innerHTML = " ";
-                // console.log(attribute);
-                // console.log(attribute2);
-            }
+            //     attribute2.id = obj['recordId'];
+            //     // attribute2.href = "";
+            //     attribute2.className = "btn_delete";
+            //     attribute2.name = "delete";
+            //     attribute2.innerHTML = "Delete";
+            //     var attribute3 = document.createElement("span");
+            //     attribute3.innerHTML = " ";
+            //     // console.log(attribute);
+            //     // console.log(attribute2);
+            // }
         }
 
         $('#search').keyup(function () {

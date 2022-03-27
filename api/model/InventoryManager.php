@@ -46,6 +46,118 @@ class InventoryManager extends Employee{
         $json = json_encode($results);
         echo $json;
     }
+    public function getBorrowRequests(array $data){
+        $uid = $data['userId'];
+        $division = $this->getDivision($uid);
+        $dvId = $division['id'];
+        $sql = "(SELECT distributeitem.recordId AS recordId,distributeitem.safeHouseId AS createrID,'itemRequest' AS type,DATE(distributeitem.createdDate) AS createdDate,NULL AS requestSource, safehouse.safeHouseName AS name ,distributeitem.approvalStatus FROM distributeitem,safehouse WHERE distributeitem.safeHouseId=safehouse.safeHouseID AND distributeitem.safeHouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $dvId) ORDER BY CASE WHEN distributeitem.approvalStatus ='a' THEN 2 WHEN distributeitem.approvalStatus ='r' THEN 3 WHEN distributeitem.approvalStatus ='p' THEN 1 ELSE 4 END ASC,createdDate DESC) UNION (SELECT distributeservice.recordId AS recordId,distributeservice.inventoryId AS createrID,'serviceRequest' AS type,DATE(distributeservice.createdDate) AS createdDate,distributeservice.serviceRequestId AS requestSource,inventory.inventoryAddress AS name,distributeservice.approvalStatus FROM distributeservice,inventory WHERE inventory.inventoryId=distributeservice.inventoryId AND inventory.dvId= $dvId ORDER BY CASE WHEN distributeservice.approvalStatus ='a' THEN 2 WHEN distributeservice.approvalStatus ='r' THEN 3 WHEN distributeservice.approvalStatus ='p' THEN 1 ELSE 4 END ASC,createdDate DESC);";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()){
+            if($r['type']=='itemRequest'){
+                $text = SafeHouse::getSafeHouseCode($r['createrID']);
+                $id=GoodsRequest::getGoodsRequest($r['recordId']);
+            }else{
+                $text=ServiceRequestNotice::getServiceRequestNoticeCode($r['createrID']);
+                $id=GoodsTransfer::getGoodsTransfer($r['recordId']);
+            }
+            $temp=array();
+            $temp['id']=$id;
+            $temp['source']=$text;
+            $temp['type']=$r['type'];
+            $temp['createdDate']=$r['createdDate'];
+            $temp['requestSource']=$r['requestSource'];
+            $temp['name']=$r['name'];
+            if($r['approvalStatus']=='p'){
+                $temp['approvalStatus']="Pending";
+            }elseif($r['approvalStatus']=='a'){
+                $temp['approvalStatus']="Approved";
+            }else{
+                $temp['approvalStatus']="Rejected";
+            }
+            $results[] = $temp;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function filterBorrowRequests(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $id=$data['receivedParams'][0];
+            $division = $this->getDivision($uid);
+            $dvId = $division['id'];
+            if(str_contains(strtoupper($id),"GR")){
+                $id = GoodsRequest::getId($id);
+                $sql="SELECT distributeitem.recordId AS recordId,distributeitem.safeHouseId AS createrID,'itemRequest' AS type,DATE(distributeitem.createdDate) AS createdDate,NULL AS requestSource, safehouse.safeHouseName AS name ,distributeitem.approvalStatus FROM distributeitem,safehouse WHERE distributeitem.safeHouseId=safehouse.safeHouseID AND distributeitem.recordId=$id AND distributeitem.safeHouseId IN (SELECT gndivision.safeHouseID FROM gndivision WHERE gndivision.dvId = $dvId)";
+                $excute = $this->connection->query($sql);
+                $r = $excute-> fetch_assoc();
+                $text = SafeHouse::getSafeHouseCode($r['createrID']);
+                $id2=GoodsRequest::getGoodsRequest($r['recordId']);
+                $temp=array();
+                $temp['id']=$id2;
+                $temp['source']=$text;
+                $temp['type']=$r['type'];
+                $temp['createdDate']=$r['createdDate'];
+                $temp['requestSource']=$r['requestSource'];
+                $temp['name']=$r['name'];
+                if($r['approvalStatus']=='p'){
+                    $temp['approvalStatus']="Pending";
+                }elseif($r['approvalStatus']=='a'){
+                    $temp['approvalStatus']="Approved";
+                }else{
+                    $temp['approvalStatus']="Rejected";
+                }
+                $temp['item']=array();
+                $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity FROM item,unit,inventoryitem,distributeitemrecord WHERE item.itemId=inventoryitem.itemId AND item.unitType=unit.unitId AND inventoryitem.recId=distributeitemrecord.itemRecord AND distributeitemrecord.recordId=$id;";
+                $excute = $this->connection->query($sql);
+                while ($r = $excute->fetch_assoc()) {
+                    $r['itemId'] =Item::getItemCode($r['itemId']);
+                    $r['quantity'] = -1*$r['quantity'];
+                    $temp['item'][] = $r;
+                }
+                $json = json_encode($temp);
+                echo $json;
+            }elseif(str_contains(strtoupper($id),"GT")){
+                $id = GoodsTransfer::getId($id);
+                $sql="SELECT distributeservice.recordId AS recordId,distributeservice.inventoryId AS createrID,'serviceRequest' AS type,DATE(distributeservice.createdDate) AS createdDate,distributeservice.serviceRequestId AS requestSource,inventory.inventoryAddress AS name,distributeservice.approvalStatus FROM distributeservice,inventory WHERE inventory.inventoryId=distributeservice.inventoryId AND distributeservice.recordId=$id  AND inventory.dvId= $dvId;";
+                $excute = $this->connection->query($sql);
+                $r = $excute-> fetch_assoc();
+                $text=ServiceRequestNotice::getServiceRequestNoticeCode($r['createrID']);
+                $id2=GoodsTransfer::getGoodsTransfer($r['recordId']);
+                $temp=array();
+                $temp['id']=$id2;
+                $temp['source']=$text;
+                $temp['type']=$r['type'];
+                $temp['createdDate']=$r['createdDate'];
+                $temp['requestSource']=$r['requestSource'];
+                $temp['name']=$r['name'];
+                if($r['approvalStatus']=='p'){
+                    $temp['approvalStatus']="Pending";
+                }elseif($r['approvalStatus']=='a'){
+                    $temp['approvalStatus']="Approved";
+                }else{
+                    $temp['approvalStatus']="Rejected";
+                }
+                $temp['item']=array();
+                $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity FROM item,unit,inventoryitem,servicedistributeitemrecord WHERE item.itemId=inventoryitem.itemId AND item.unitType=unit.unitId AND inventoryitem.recId=servicedistributeitemrecord.itemRecordId AND servicedistributeitemrecord.recordId=$id;";
+                $excute = $this->connection->query($sql);
+                while ($r = $excute->fetch_assoc()) {
+                    $r['itemId'] =Item::getItemCode($r['itemId']);
+                    $r['quantity'] = -1*$r['quantity'];
+                    $temp['item'][] = $r;
+                }
+                $json = json_encode($temp);
+                echo $json;
+            }else{
+                echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                exit();
+            }
+        }else{
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
+    }
     public function addAidNotice(array $data){
         global $errorCode;
         $uid = $data['userId'];
@@ -70,6 +182,7 @@ class InventoryManager extends Employee{
                         $sql="UPDATE safehousestatusrequesteditem SET safehousestatusrequesteditem.quantity=$quantity WHERE safehousestatusrequesteditem.statusId = $r_id AND safehousestatusrequesteditem.itemId = $itemId";
                         $this->connection->query($sql);//echo $sql;
                     }
+                    
                 }
             }
             $this->addNotice($data);
@@ -290,7 +403,7 @@ class InventoryManager extends Employee{
             $id=ServiceRequestNotice::getId($id);
             $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,divisionaloffice.dvId  AS `dvId`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.r_id= $id AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId) ORDER BY id;";
         }else{
-            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,divisionaloffice.dvId  AS `dvId`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  AND servicerequest.requestedDate >= CURDATE()  AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice WHERE approvalStatus='a' OR approvalStatus='r')  ORDER BY id;";
+            $sql = "SELECT servicerequest.r_id AS `id`,divisionaloffice.divisionalSofficeName AS `name`,divisionaloffice.dvId  AS `dvId`,servicerequest.requestedDate,servicerequest.currentStatus AS `status`,servicerequest.note,servicerequest.requestingFrom FROM servicerequest,divisionaloffice,inventory WHERE divisionaloffice.dvId = inventory.dvId AND inventory.inventoryId = servicerequest.inventoryId AND servicerequest.inventoryId <> $inventoryId AND servicerequest.currentStatus = 'p'  AND (servicerequest.requestingFrom = 0 OR servicerequest.requestingFrom =$divisionId)  AND servicerequest.requestedDate >= CURDATE()  AND servicerequest.r_id NOT IN (SELECT DISTINCT distributeservice.serviceRequestId FROM distributeservice WHERE approvalStatus='a' OR approvalStatus='p' OR approvalStatus='r')  ORDER BY id;";
         }
         $excute = $this->connection->query($sql);
         $results = array();

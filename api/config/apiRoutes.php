@@ -28,6 +28,7 @@ Route::GET("user", array("Admin@searchUser"));
 Route::GET("user/count/{data}", array("Admin@getUserCount"));
 Route::GET("user/{data}/{data}", array("Admin@searchUser", "DistrictSecretariat@searchUser", "InventoryManager@getMySelf"));
 Route::GET("user/{data}", array("Admin@searchUser"));
+Route::GET("user/filter/{data}/{data}",array("Admin@getFilteredUser"));
 Route::GET("report", array("Employee@report"));
 Route::GET("profile", array("GramaNiladari@getProfileDetails","DisasterOfficer@getProfileDetails"));
 Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
@@ -43,6 +44,8 @@ Route::GET("statistics/{data}", array("ResponsiblePerson@getStatsFiltered", "Inv
 Route::PUT("user/trasfer/inventoryManager/{userId}", array("DivisionalSecretariat@transferUser"));
 Route::PUT("resetPassword", array("Employee@updatePassword"));
 Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
+Route::PUT("user", array("Admin@updateUser"));
+Route::PUT("user/office", array("Admin@changeUserOffice"));
 Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails", "Admin@updateProfileDetails", "DistrictSecretariat@updateProfileDetails"));
 Route::PUT("notice/{id}", array("InventoryManager@updateNotice","DisasterOfficer@updateNotice"));
@@ -135,6 +138,7 @@ Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));
+Route::DELETE("user/{id}/{id}", array("Admin@deleteUser"));
 
 //ResponsiblePerson
 Route::POST("statusUpdate", array("ResponsiblePerson@addStatusUpdate"));

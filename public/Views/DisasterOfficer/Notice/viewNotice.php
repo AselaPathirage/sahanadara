@@ -1,3 +1,7 @@
+<?php
+$array = explode("/", $_GET["url"]);
+$record = $array[3];
+?>
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
@@ -77,11 +81,11 @@
 </head>
 <body>
     <?php
-        include_once('./public/Views/InventoryManager/includes/sidebar_notice.php');
+        include_once('./public/Views/disasterOfficer/includes/sidebar_notice.php');
      ?>
     <section class="dashboard-section">
         <?php 
-        include_once('./public/Views/InventoryManager/includes/topnav.php'); 
+        include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
         ?>
         <div class="space"></div>
         <div class="container">
@@ -191,7 +195,7 @@
                     cache: false,
                     success: function(result) {
                         if (result.code == 806) {
-                            window.location = "<?php echo HOST;?>InventoryManager/Notice/Search";
+                            window.location = "<?php echo HOST;?>DisasterOfficer/Notice/Search";
                         } else {
                             alertGen("Unable to handle request.", 2);
                         }

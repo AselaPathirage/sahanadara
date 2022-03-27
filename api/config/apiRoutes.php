@@ -16,7 +16,8 @@ Route::GET("notice/{id}", array("InventoryManager@getNotice","DisasterOfficer@ge
 Route::GET("fundraisingNotice", array("Home@viewfundraisingNotice"));
 Route::GET("fundraisingNotice/language/{lanCode}", array("Home@getfundraisingNotice"));
 Route::GET("fundraisingNotice/language/{lanCode}/limit/{number}", array("Home@getLimitedfundraisingNotice"));
-
+Route::GET("borrowRequests", array("DivisionalSecretariat@getBorrowRequests","InventoryManager@getBorrowRequests"));
+Route::GET("borrowRequests/{id}", array("DivisionalSecretariat@filterBorrowRequests","InventoryManager@filterBorrowRequests"));
 Route::GET("role", array("Employee@getRole"));
 Route::GET("division", array("Admin@getDivision", "InventoryManager@getDvOfficeList"));
 Route::GET("GnDivision", array("Admin@getGnDivision", "DisasterOfficer@getGNDivision", "InventoryManager@getGNDivision"));
@@ -47,6 +48,7 @@ Route::PUT("user", array("Admin@updateUser"));
 Route::PUT("user/office", array("Admin@changeUserOffice"));
 Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
 Route::PUT("profile", array("GramaNiladari@updateProfileDetails", "Admin@updateProfileDetails", "DistrictSecretariat@updateProfileDetails"));
+Route::PUT("notice/{id}", array("InventoryManager@updateNotice","DisasterOfficer@updateNotice"));
 
 Route::POST("login", array("Employee@login"));
 Route::POST("resetPassword", array("Employee@resetPassword"));
@@ -113,6 +115,7 @@ Route::PUT("incident", array("DisasterOfficer@updateIncidents"));
 Route::GET("gns/{id}", array("DisasterOfficer@getGNsOnIncident"));
 Route::GET("doreports", array("DisasterOfficer@getReports"));
 Route::GET("doreports/{id}", array("DisasterOfficer@getReportsbyIncident"));
+Route::GET("countdvfinal/{id}", array("DisasterOfficer@getFinalsbyIncident"));
 Route::POST("dofinal", array("DisasterOfficer@addFinal"));
 Route::GET("dofinal/{id}", array("DisasterOfficer@getFinal"));
 Route::GET("doinitial/{id}", array("DisasterOfficer@getInitial"));
@@ -123,13 +126,13 @@ Route::GET("dismgrcomp", array("DisasterOfficer@getCompensations"));
 
 Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
 Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
-
+Route::GET("Safehouse/{id}", array("DisasterOfficer@getmySafehouse"));
 Route::PUT("rincident", array("DisasterOfficer@reportIntoIncident"));
 Route::PUT("docompapprove", array("DisasterOfficer@approvecomp"));
 Route::PUT("doincapprove", array("DisasterOfficer@approveinc"));
 Route::PUT("docollected", array("DisasterOfficer@collectedcomp"));
 Route::PUT("incidentstatus", array("DisasterOfficer@changeIncidentStatus"));
-
+Route::PUT("safehousestatus", array("DisasterOfficer@changeSafehouseStatus"));
 Route::PUT("responsible/{id}", array("DisasterOfficer@updateResponsible"));
 Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
 
@@ -167,8 +170,6 @@ Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
 // Div Sec
 Route::GET("inventorymgr", array("DivisionalSecretariat@getInventorymgr"));
 Route::GET("inventory/{dataType}", array("DivisionalSecretariat@filterInventory"));
-Route::GET("borrowRequests", array("DivisionalSecretariat@getBorrowRequests"));
-Route::GET("borrowRequests/{id}", array("DivisionalSecretariat@filterBorrowRequests"));
 Route::GET("divseccomp", array("DivisionalSecretariat@getCompensations"));
 Route::GET("divsecprop/{id}", array("DivisionalSecretariat@getProperty"));
 Route::GET("divsecdeath/{id}", array("DivisionalSecretariat@getDeath"));
@@ -180,7 +181,7 @@ Route::PUT("borrowRequests/{command}/{requestId}", array("DivisionalSecretariat@
 Route::PUT("notice/{command}/{noticeId}", array("DivisionalSecretariat@commandNotice"));
 Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
 Route::GET("fundraiser/{id}", array("DivisionalSecretariat@getmyFundraiser"));
-
+Route::PUT("fundraiserstatus", array("DivisionalSecretariat@changeFundraiserStatus"));
 
 // District Sec
 Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));

@@ -70,7 +70,7 @@ class ResponsiblePerson  extends Employee{
         $excute = $this->connection->query($sql);
         $results = $excute-> fetch_assoc();
         $output['days'] = $results['days'];
-        $sql = "SELECT st.adultMale + st.adultFemale + st.adultFemale + st.children + st.disabledPerson AS count FROM safehouse s, responsibleperson r, safehousestatus st WHERE r.responsiblePersonID = $userId AND s.safeHouseID = r.safeHouseID AND s.safeHouseID = st.safehouseId ORDER BY st.r_id DESC LIMIT 1";
+        $sql = "SELECT st.adultMale + st.adultFemale + st.children + st.disabledPerson AS count FROM safehouse s, responsibleperson r, safehousestatus st WHERE r.responsiblePersonID = $userId AND s.safeHouseID = r.safeHouseID AND s.safeHouseID = st.safehouseId ORDER BY st.r_id DESC LIMIT 1";
         $excute = $this->connection->query($sql);
         $results = $excute-> fetch_assoc();
         if(! isset($results['count'])){
@@ -108,14 +108,15 @@ class ResponsiblePerson  extends Employee{
                     $recordId = $r["LAST_INSERT_ID()"];
                     $input = "INSERT INTO safehousestatusrequesteditem(statusId,itemId,quantity) VALUES ";
                     foreach($data['item'] as $item => $quantity){
-                        $item1 = "%".str_replace(" ","%",$item)."%";
-                        $sql = "SELECT itemId FROM item WHERE itemName LIKE '$item1' LIMIT 1;";
+                        //$item1 = "%".str_replace(" ","%",$item)."%";
+                        $sql = "SELECT itemId FROM item WHERE itemName = '$item' LIMIT 1;";
                         $execute = $this->connection->query($sql);
                         if($execute->num_rows > 0){
                             $r = $execute->fetch_assoc();
                             $itemId = $r["itemId"];
                         }else{
                             $sql = "INSERT INTO item( itemName, unitType ) VALUES ('$item' , 4);";
+                            $this->connection->query($sql);
                             $sql = "SELECT LAST_INSERT_ID();";
                             $execute = $this->connection->query($sql);
                             $r = $execute->fetch_assoc();

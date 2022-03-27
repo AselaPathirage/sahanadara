@@ -23,39 +23,10 @@
         include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
         ?>
         <div class="space"></div>
-        <!-- ======================================================================================================================================= -->
-        <!-- content frome below -->
-        <!-- STATS -->
         <div class="container">
-            <center><h1 style="text-align:center;">Welcome Disaster Management Officer</h1></center>
-            <!-- <div class="stat-row">
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Incident Reports</div>
-                        <div class="number">10</div>
-
-                    </div>
-                    <i class='bx bxs-report cart one'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Donation Requests Notices</div>
-                        <div class="number">5</div>
-
-                    </div>
-                    <i class='bx bxs-report cart two'></i>
-                </div>
-                <div class="box">
-                    <div class="right-side">
-                        <div class="box-topic">Active Safe Houses</div>
-                        <div class="number">6</div>
-
-                    </div>
-                    <i class='bx bxs-report cart three'></i>
-                </div>
-            </div> -->
-
+            <h1 class="text-center">Welcome Disaster Officer</h1>
             <div class="space"></div>
+            
 
             <section class="services">
                 <a href="">
@@ -173,21 +144,24 @@
                 </div> -->
 
             
-            <div class="space"></div>
-        <div class="container text-center">
+        <div class="space"></div>
+        <div class="container text-center" id="bodyid">
             <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
                 <button type="button" class="close-alert">×</button>
                 <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
-                    of minor flooding in low lying areas. Area residents requested to be alert. DMC 118
+                    of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
                 </p>
             </div>
             <div class="row-content alert-div" style="margin: 10px auto;">
                 <button type="button" class="close-alert">×</button>
-                <p>High possibility of the current minor flood situation in low line areas of Kalu River Valley situated in Horana, Agalawatta, Ingiriya, Palinda Nuwara, Bulathsinhala, Dodangoda, Millaniya, Madurawala and Kalutara D/S Divisions further worsening. DMC
+                <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                    of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
+                </p>
             </div>
 
 
         </div>
+        <div class="space"></div>
     </section>
     <script>
         var thisPage = "#Dashboard";
@@ -199,12 +173,14 @@
                 $(thisPage).addClass("active");
             });
 
-        });
-        
-        getAlerts();
-        $(".close-alert").click(function(e) {
-                $(this).parent().remove();
-                e.preventDefault();
+            getAlerts();
+            $(".close-alert").click(function(e) {
+                    $(this).parent().remove();
+                    e.preventDefault();
+            });
+
+            getSafehouseCount();
+
         });
 
         let sidebar = document.querySelector(".sidebar");

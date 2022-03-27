@@ -316,7 +316,7 @@ class DisasterOfficer extends Employee
         // $r = $excute->fetch_assoc();
         // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
         // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
-        $sql = "SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=" . $uid . " ORDER BY a.timestamp DESC";
+        $sql = "SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN divisionaloffice divoff ON divoff.dvId=d.dvId WHERE divoff.disasterManager=" . $uid . " AND a.onlyOfficers = 1 ORDER BY a.timestamp DESC";
         $excute = $this->connection->query($sql);
         $results = array();
         while ($r = $excute->fetch_assoc()) {
@@ -546,7 +546,9 @@ class DisasterOfficer extends Employee
         $results = array();
         // $r = $excute->fetch_assoc();
         while ($r = $excute->fetch_assoc()) {
-            $sql = "SELECT gndivision.* FROM gndivision,incidentgn,incident WHERE gndivision.gndvId=incidentgn.gndvId AND incident.incidentId=" . $r['incidentId'];
+
+            $sql = "SELECT gndivision.* FROM gndivision,incidentgn,incident WHERE gndivision.gndvId=incidentgn.gndvId AND incidentgn.incidentId=incident.incidentId AND incident.incidentId=" . $r['incidentId'];
+            // echo $sql;exit;
             $temp = array();
             $e = $this->connection->query($sql);
             while ($r2 = $e->fetch_assoc()) {
@@ -594,6 +596,21 @@ class DisasterOfficer extends Employee
         $incidentId = $data['incidentId'];
         // $residentId = $data['receivedParams'][0];
         $sql = "UPDATE `incident` SET `isActive`='$isActive' WHERE `incidentId`='$incidentId'";
+        if ($this->connection->query($sql)) {;
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+    public function changeSafehouseStatus(array $data)
+    {
+        global $errorCode;
+        $isUsing = $data['isUsing'];
+        $safeHouseID = $data['safeHouseID'];
+        // $residentId = $data['receivedParams'][0];
+        $sql = "UPDATE `safehouse` SET `isUsing`='$isUsing' WHERE `safeHouseID`='$safeHouseID'";
         if ($this->connection->query($sql)) {;
             echo json_encode(array("code" => $errorCode['success']));
         } else {
@@ -1056,7 +1073,7 @@ WHERE
 
         // $uid = $data['userId'];
         $incidentId = $data['inc'][0];
-        
+
         $report = $data['rtype'];
         $reportId = $data['rid'];
         // echo $incidentId;exit;
@@ -1064,9 +1081,9 @@ WHERE
         if (!empty($incidentId)) {
             if ($report == "Initial") {
                 $sql = "UPDATE `initialincident` SET `incidentId`='$incidentId' WHERE `initialId`='$reportId'";
-            } else if ($report == "Final"){
+            } else if ($report == "Final") {
                 $sql = "UPDATE `gnfinalincident` SET `incidentId`='$incidentId' WHERE `finalIncidentId`='$reportId'";
-            }else{
+            } else {
                 $sql = "UPDATE `relief` SET `incidentId`='$incidentId' WHERE `reliefId`='$reportId'";
             }
             $this->connection->query($sql);
@@ -1124,5 +1141,26 @@ WHERE
             echo json_encode(array("code" => $errorCode['attributeMissing']));
             exit();
         }
+    }
+
+
+    // get counts of finals to the given incident
+    public function getFinalsbyIncident(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        $incidentId = $data['receivedParams'][0];
+       
+        $sql = "SELECT gndivision.gnDvName, gnfinalincident.* 
+        FROM gnfinalincident, gndivision 
+        WHERE gnfinalincident.incidentId = ".$incidentId." AND gnfinalincident.disoffapproved = 'a' AND gnfinalincident.gndvid = gndivision.gndvId;";
+        $excute = $this->connection->query($sql);
+        $results = array();
+        // $r = $excute->fetch_assoc();
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
     }
 }

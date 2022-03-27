@@ -79,7 +79,7 @@
             background-color: rgb(153, 176, 255);
         }
 
-        .view {
+        .view1 {
             background-color: rgb(66, 245, 96);
             height: 50px;
             display: block;
@@ -122,15 +122,8 @@
                                         <option value="Need Updates">Need Updates</option>
                                     </select>
                                 </th>
-
-                                <th style="width: 15%;text-align: center;">
-                                    <a id="view" style="cursor:pointer" class="create">View</a>
-                                </th>
                                 <th style="width: 15%;text-align:center;">
-                                    <a id="edit" style="cursor:pointer" href="<?php echo HOST; ?>/InventoryManager/Notice/editNotice" class="view">Edit</a>
-                                </th>
-                                <th style="width: 15%;text-align:center;">
-                                    <a id="remove" style="background-color: rgb(245, 66, 66);cursor:pointer" class="view">Remove</a>
+                                    <a id="remove" style="background-color: rgb(245, 66, 66);width:100%;cursor:pointer;" class="btn_delete">Remove</a>
                                 </th>
                             </tr>
                         </thead>
@@ -142,9 +135,10 @@
                                 <tr>
                                     <th style="width:5%;"></th>
                                     <th style="width:10%;">Notice Id</th>
-                                    <th style="width:45%;">Topic</th>
-                                    <th style="width:20%;">Created Date</th>
-                                    <th style="width:20%;">Approval State</th>
+                                    <th style="width:35%;">Topic</th>
+                                    <th style="width:15%;">Created Date</th>
+                                    <th style="width:15%;">Approval State</th>
+                                    <th style="width:25%;">Action</th>
                                 </tr>
                             </thead>
                             <tbody id="trow">
@@ -204,7 +198,8 @@
                         let cell2 = row.insertCell(-1);
                         let cell23 = row.insertCell(-1);
                         let cell3 = row.insertCell(-1);
-                        cell1.innerHTML = "<input id='" + obj['recordId'] + "' value='" + obj['recordId'] + "' data-recordId='" + obj['recordId'] + "' data-status='" + obj['appovalStatus'] + "' class='radio-custom' name='radio-group' type='radio' checked><label for='" + obj['recordId'] + "' class='radio-custom-label'></label>";
+                        let cell4 = row.insertCell(-1);
+                        cell1.innerHTML = "<input id='" + obj['recordId'] + "' value='" + obj['recordId'] + "' data-recordId='" + obj['recordId'] + "' data-status='" + obj['appovalStatus'] + "' class='radio-custom' name='radio-group' type='radio'><label for='" + obj['recordId'] + "' class='radio-custom-label'></label>";
                         cell11.innerHTML = obj['recordId'];
                         if (obj['remark']) {
                             cell2.innerHTML = "<span class='tool' data-tip='" + obj['remark'] + "' tabindex='1'>" + obj['title'] + "</span>";
@@ -213,6 +208,28 @@
                         }
                         cell23.innerHTML = obj['createdDate'];
                         cell3.innerHTML = obj['appovalStatus'];
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['recordId'];
+                        attribute.className = "update btn_views";
+                        attribute.name = "update";
+                        attribute.innerHTML = "Update";
+                        attribute.setAttribute("data-name", obj['recordId'])
+                        attribute.setAttribute("data-safehouse", obj['safeHouseName'])
+                        attribute.setAttribute("style", "background-color:green;cursor:pointer");
+                        var attribute2 = document.createElement("a");
+                        attribute2.id = obj['recordId'];
+                        attribute2.className = "view btn_views";
+                        attribute2.name = "View";
+                        attribute2.setAttribute("data-name", obj['recordId'])
+                        attribute2.innerHTML = "View";
+                        attribute2.setAttribute("style", "cursor:pointer");
+                        var attribute3 = document.createElement("span");
+                        attribute3.innerHTML = " ";
+                        cell4.appendChild(attribute2);
+                        cell4.appendChild(attribute3);
+                        if (obj['appovalStatus'] != "Approved") {
+                            cell4.appendChild(attribute);
+                        }
                     }
                 }
             });
@@ -220,20 +237,24 @@
                 $("#deleteform").fadeIn();
                 $("#deleteform").addClass('model-open');
             });
-            $('#view').on('click', function() {
-                var id = new Array();
-                $("input:checkbox[name=radio-group]:checked").each(function(){
-                    id.push($(this).val());
-                });
-                id.forEach(function(item) {
-                    let url = "<?php echo HOST; ?>/InventoryManager/Notice/viewNotice/"+item;
+            $('.view').on('click', function() {
+                var id = $(this).attr('data-name');
+                if (id) {
+                    let url = "<?php echo HOST; ?>/InventoryManager/Notice/viewNotice/" + id;
                     window.open(url, '_blank');
-                });
+                }
+            });
+            $('.update').on('click', function() {
+                var id = $(this).attr('data-name');
+                if (id) {
+                    let url = "<?php echo HOST; ?>/InventoryManager/Notice/editNotice/" + id;
+                    window.open(url, '_blank');
+                }
             });
             $(".close-btn, .bg-overlay, .cancel").click(function() {
                 $(".custom-model-main").removeClass('model-open');
             });
-            $(".closeMessege").click(function(){
+            $(".closeMessege").click(function() {
                 $(".alert").fadeOut(100)
                 $("#alertBox").html("");
             });
@@ -242,35 +263,35 @@
                 $("#deleteform").fadeOut();
                 $("#deleteform").removeClass('model-open');
                 var id = new Array();
-                $("input:checkbox[name=radio-group]:checked").each(function(){
+                $("input:checkbox[name=radio-group]:checked").each(function() {
                     id.push($(this).val());
                 });
-                var url ="<?php echo API; ?>notice/";
+                var url = "<?php echo API; ?>notice/";
                 id.forEach(function(item) {
                     $.ajax({
-                    type: "DELETE",
-                    url:  url + item,
-                    headers: {
-                        'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
-                    },
-                    cache: false,
-                    success: function(result) {
-                        $('#trow').empty();
-                        getNotices();
-                        if (result.code == 806) {
-                            alertGen("Records Deleted Successfully!", 1);
-                        } else {
-                            alertGen("Unable to handle request.", 2);
+                        type: "DELETE",
+                        url: url + item,
+                        headers: {
+                            'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                        },
+                        cache: false,
+                        success: function(result) {
+                            $('#trow').empty();
+                            getNotices();
+                            if (result.code == 806) {
+                                alertGen("Records Deleted Successfully!", 1);
+                            } else {
+                                alertGen("Unable to handle request.", 2);
+                            }
+                        },
+                        error: function(err) {
+                            alertGen("Something went wrong.", 3);
+                            console.log(err);
                         }
-                    },
-                    error: function(err) {
-                        alertGen("Something went wrong.", 3);
-                        console.log(err);
-                    }
-                });
+                    });
                 });
             });
-            $("#alertBox").click(function(){
+            $("#alertBox").click(function() {
                 $(".alert").fadeOut(100)
                 $("#alertBox").html("");
             });
@@ -306,7 +327,8 @@
                 let cell2 = row.insertCell(-1);
                 let cell23 = row.insertCell(-1);
                 let cell3 = row.insertCell(-1);
-                cell1.innerHTML = "<input id='" + obj['recordId'] + "' value='" + obj['recordId'] + "' data-recordId='" + obj['recordId'] + "' data-status='" + obj['appovalStatus'] + "' class='radio-custom' value='" + obj['recordId'] + "' name='radio-group' type='checkbox'><label for='" + obj['recordId'] + "' class='radio-custom-label'></label>";
+                let cell4 = row.insertCell(-1);
+                cell1.innerHTML = "<input id='" + obj['recordId'] + "' value='" + obj['recordId'] + "' data-recordId='" + obj['recordId'] + "' data-status='" + obj['appovalStatus'] + "' class='radio-custom' name='radio-group' type='radio'><label for='" + obj['recordId'] + "' class='radio-custom-label'></label>";
                 cell11.innerHTML = obj['recordId'];
                 if (obj['remark']) {
                     cell2.innerHTML = "<span class='tool' data-tip='" + obj['remark'] + "' tabindex='1'>" + obj['title'] + "</span>";
@@ -315,24 +337,47 @@
                 }
                 cell23.innerHTML = obj['createdDate'];
                 cell3.innerHTML = obj['appovalStatus'];
+                var attribute = document.createElement("a");
+                attribute.id = obj['recordId'];
+                attribute.className = "update btn_views";
+                attribute.name = "update";
+                attribute.innerHTML = "Update";
+                attribute.setAttribute("data-name", obj['recordId'])
+                attribute.setAttribute("data-safehouse", obj['safeHouseName'])
+                attribute.setAttribute("style", "background-color:green;cursor:pointer");
+                var attribute2 = document.createElement("a");
+                attribute2.id = obj['recordId'];
+                attribute2.className = "view btn_views";
+                attribute2.name = "View";
+                attribute2.setAttribute("data-name", obj['recordId'])
+                attribute2.innerHTML = "View";
+                attribute2.setAttribute("style", "cursor:pointer");
+                var attribute3 = document.createElement("span");
+                attribute3.innerHTML = " ";
+                cell4.appendChild(attribute2);
+                cell4.appendChild(attribute3);
+                if (obj['appovalStatus'] != "Approved") {
+                    cell4.appendChild(attribute);
+                }
             }
         }
-        function alertGen($messege,$type){
-            if ($type == 1){
-                $("#alertBox").append("  <div class='alert success-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").append("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
-            }else if($type == 2){
-                $("#alertBox").append("  <div class='alert warning-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+            } else if ($type == 2) {
+                $("#alertBox").append("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);
-            }else{
-                $("#alertBox").append("  <div class='alert danger-alert'><h3>"+$messege+"</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
-                setTimeout(function() { 
+            } else {
+                $("#alertBox").append("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
                 }, 4000);

@@ -221,7 +221,7 @@ $array = explode("/", $_GET["url"]);
             </div>
         </div>
     </section>
-    <!-- <script  src="<?php echo HOST; ?>public/assets/js/responsiblePersonAidReport.js"></script> -->
+
     <div id="alertBox">
     </div>
     <script defer>
@@ -485,7 +485,7 @@ $array = explode("/", $_GET["url"]);
                 sessionStorage.clear();
             }else{
                 if (sessionStorage.getItem("safeHouseId") !== null) {
-                    document.getElementById('title').value =sessionStorage.getItem("safeHouseName")+" Need Your Donations";
+                    document.getElementById('title').value =sessionStorage.getItem("safeHouseName")+" Needs Your Donations";
                 }
                 if (sessionStorage.getItem("numberOfPeople") !== null) {
                     document.getElementById('numOfPeople').value =sessionStorage.getItem("numberOfPeople");

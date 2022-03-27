@@ -81,6 +81,14 @@
             left: 20px;
             box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);
         }
+        .btn-fun{
+            padding: 5px 20px;
+            border-radius:4px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #fff;
+            background-color:lightslategrey;
+        }
     </style>
 </head>
 <body>
@@ -96,7 +104,7 @@
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-        <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-blue">Manage safehouse</a>
+        <center><a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-fun">Manage safehouse</a></center>
         <div class="container">
             <div id="alertBox">
             </div>
@@ -281,27 +289,65 @@
                                 </div>
 
                             </div>
-                            <!-- <div class="col6" style="overflow: auto">
-                        <div class="box row-content">
-                            <h4>Flood in Ingiriya</h4>
-                            <p>A flood situation in low line areas of river Kalu</p>
+                                    <!-- <div class="col6" style="overflow: auto">
+                                <div class="box row-content">
+                                    <h4>Flood in Ingiriya</h4>
+                                    <p>A flood situation in low line areas of river Kalu</p>
 
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
-                            </div>
-                        </div>
-                        <div class="box row-content">
-                            <h4>Flood in Galpatha</h4>
-                            <p>A flood situation in low line areas of river Kalu</p>
+                                    <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                    </div>
+                                </div>
+                                <div class="box row-content">
+                                    <h4>Flood in Galpatha</h4>
+                                    <p>A flood situation in low line areas of river Kalu</p>
 
-                            <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
-                            </div>
+                                    <div class="row" style="text-align: right; margin: 0 auto;display:block">
+                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                        <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
+                                    </div>
+                                </div>
+                            </div> -->
+                            
+
+
                         </div>
-                    </div> -->
-                        </div>
+
+                        <div class="container" id="tbodyid2">
+                                <!-- <div class="row">
+                                    <div class="col6">
+                                        <div class="box row-content" style="height:100%;min-height: 300px;">
+                                            <div class="row active" style="text-align: right; margin: 0 auto;display:block">
+                                                <a class="btn_active">Status : Active</a>
+                                            </div>
+                                            <h4 class="name">Bellapitiya Maha Vidyalaya</h4>
+                                            <p class="address">Bellapitiya, Horana</p>
+                                            <p>Telephone Number - <span id="tel">0778765367</span> </p>
+
+                                            <div>
+                                                <h4 style="font-size:15px;">Responsible Person</h4>
+                                                <p>Name - <span id="rname"></span></p>
+                                                <p>Contact Number - <span id="rtele"></span></p>
+
+                                            </div>
+
+                                            <div>
+                                                <h4 style="font-size:15px;padding-bottom:0;">Recent Status</h4>
+                                                <h6 style="font-size:12px;margin: 3px 0;">Last updated - <span id="date"></span></h6>
+                                                <p>Adult Males - <span id="male"></span></p>
+                                                <p>Adult Females - <span id="female"></span></p>
+                                                <p>Children - <span id="children"></span></p>
+                                                <p>Disabled - <span id="disabled"></span></p>
+                                                <p>Note - <span id="note"></span></p><br>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
 
                     </div>
                 </div>
@@ -317,6 +363,7 @@
         
         $(document).ready(function() {
             viewSafehouse();
+            
             $(".btn_update").on('click', function() {
                 var id = $(this).attr("id");
                 var safeHouseAddress = $(this).attr("data-safeHouseAddress");
@@ -362,6 +409,28 @@
                 $("#upgnDiv").val(gnDiv);
                 $("#item").val(id);
             });
+            $(".button_view").on('click', function() {
+                var id = $(this).attr("data-id");
+
+
+                var out = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>safehouse/"+id,
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+                $("#rname").val(out[0]['empName']);
+                $("#rtele").val(out[0]['empTele']);
+                $("#male").val(out[0]['adultMale']);
+                $("#female").val(out[0]['adultFemale']);
+                $("#children").val(out[0]['children']);
+                $("#disabled").val(out[0]['disabledPerson']);
+                $("#note").val(out[0]['note']);
+            });
             $(".btn_delete").on('click', function() {
                 var id = $(this).attr("id");
                 // var nic = $(this).attr("data-nic");
@@ -386,17 +455,17 @@
                 var object = {};
 
                 if (this.checked) {
-                    object['isActive'] = 1;
+                    object['isUsing'] = "y";
                 } else {
-                    object['isActive'] = 0;
+                    object['isUsing'] = "n";
                 }
                 var id = $(this).data("incid");
-                object['incidentId'] = id;
+                object['safeHouseID'] = id;
                 var json = JSON.stringify(object);
                 console.log(json);
                 $.ajax({
                 type: "PUT",
-                url: "<?php echo API; ?>incidentstatus",
+                url: "<?php echo API; ?>safehousestatus",
                 data: json,
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -404,7 +473,7 @@
                 cache: false,
                 success: function(result) {
                     
-                    getIncidents();
+                    viewSafehouse();
                     location.reload();
                     if (result.code == 806) {
                         // alertGen("Record Updated Successfully!", 1);
@@ -504,14 +573,14 @@
                         $sample += "<div class='row'>";
                     }
                     $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><div class='button-row-container' style='position: absolute; top:15px;right:35px;'><div class='switch-container switch-ios'><input type='checkbox' name='ios" + i + "' id='ios" + i + "' class='ios' data-incid='" + obj['safeHouseID'] + "' ";
-                    if (obj['isActive'] == 1) {
+                    if (obj['isUsing'] == 'y') {
                         $sample += "checked";
                     }
                     $sample += "/><label for='ios" + i + "'></label></div></div><h4>" + obj['safeHouseAddress'] + "</h4><p>" + obj['safeHouseName'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                    if (obj['isActive'] == 1) {
+                    if (obj['isUsing'] == 'y') {
                         $sample += "<a class='btn_active' style='position: absolute; top:33px;right:95px;'>Status : Active</a>";
                     }
-                    $sample += "<a ' class='btn_update btn_blue'" + obj['safeHouseID'] + ">Update</a></div></div></div>";
+                    $sample += "<a ' class='btn_update btn_blue' data-id='" + obj['safeHouseID'] + "'>View</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
                         $sample += "</div>";
                     }
@@ -520,6 +589,40 @@
             console.log($sample);
             $("#tbodyid").append($sample);
         }
+
+        function getSafeHouseDetails() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>safehouse/id",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            // if (output == null && output['isUsing'] == 'y') {
+            //     $("#tbodyid2").empty();
+            //     var $sample2 = $(" <p> No recent activity found</p> ");
+            //     $("#tbodyid2").append($sample2);
+
+            // } else if (output['isUsing'] == 'y') {
+            //     console.log(output['safeHouseName']);
+
+            //     $("#rname").text(output['empName'])
+            //     $("#rtele").text(output['empTele'])
+            //     $("#male").text(output['adultMale']);
+            //     $("#female").text(output['adultFemale']);
+            //     $("#children").text(output['children']);
+            //     $("#disabled").text(output['disabledPerson']);
+            //     $("#note").text(output['note']);
+
+            // } else if (output['isUsing'] == 'n') {
+            //     $("#tbodyid2").empty();
+            // }
+        }
+
         $("#status").on('change', function() {
             var status = $('#status').val();
             console.log(status);
@@ -538,48 +641,50 @@
                             $sample += "<div class='row'>";
                         }
                         $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                        if (obj['isActive'] == 1) {
+                        if (obj['isUsing'] == 'y') {
                             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                         }
-                        $sample += "<a ' class='btn_update btn_blue'" + obj['safeHouseID'] + ">Update</a></div></div></div>";
+                        $sample += "<a ' class='btn_update btn_blue' data-id='" + obj['safeHouseID'] + "'>View</a></div></div></div>";
                         if ((i % 2 == 1) || (i == output.length - 1)) {
                             $sample += "</div>";
                         }
-                    } else if (status == "1") {
-                        if (obj['isActive'] == 1) {
+                    } else if (status == '1') {
+                        if (obj['isUsing'] == 'y') {
                             if (i % 2 == 0) {
                                 $sample += "<div class='row'>";
                             }
                             $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                            if (obj['isActive'] == 1) {
+                            if (obj['isUsing'] == 'y') {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a ' class='btn_update btn_blue'" + obj['safeHouseID'] + ">Update</a></div></div></div>";
+                            $sample += "<a ' class='btn_update btn_blue' data-id='" + obj['safeHouseID'] + "'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }
                         }
                     } else {
-                        if (obj['isActive'] == 0) {
+                        if (obj['isUsing'] == "n") {
                             if (i % 2 == 0) {
                                 $sample += "<div class='row'>";
                             }
                             $sample += "<div class='col6'><div class='box row-content' style='position:relative;'><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
-                            if (obj['isActive'] == 1) {
+                            if (obj['isUsing'] == "y") {
                                 $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
                             }
-                            $sample += "<a ' class='btn_update btn_blue'" + obj['safeHouseID'] + ">Update</a></div></div></div>";
+                            $sample += "<a ' class='btn_update btn_blue' data-id='" + obj['safeHouseID'] + "'>View</a></div></div></div>";
                             if ((i % 2 == 1) || (i == output.length - 1)) {
                                 $sample += "</div>";
                             }
                         }
                     }
                 }
+                
             }
             console.log($sample);
             $("#tbodyid").append($sample);
 
         });
+        
         $('#search').keyup(function() {
             var filter = $(this).val();
             $('.box').each(function() {

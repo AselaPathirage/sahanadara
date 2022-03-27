@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_disofficer.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -22,37 +22,35 @@
         include_once('./public/Views/DisasterOfficer/includes/topnav.php');
         ?>
         <div class="space"></div>
-        <!-- ======================================================================================================================================= -->
-        <!-- content frome below -->
         <div class="container">
-            <center>
             <h1>Alerts</h1>
-            </center>
-            <div class="container text-center">
+            <div id="bodyid" class="container text-center">
                 <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
+                    <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                        of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
+                    </p>
+                    <div style="text-align: right">
+                        <p>asdfasdfsdaf</p>
+                    </div>
+                </div>
+                <div class="row-content alert-div" style="margin: 10px auto;">
                     <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
                         of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
                     </p>
                 </div>
                 <div class="row-content alert-div" style="margin: 10px auto;">
-                    <p>High possibility of the current minor flood situation in low line areas of Kalu River Valley 
-                        situated in Horana, Agalawatta and Kalutara D/S Divisions further worsening. DMC
-                    </p>
-                </div>
-                <div class="row-content alert-div" style="margin: 10px auto;">
-                    <p>Rainfall over 225mm recorded in catchment areas Kalu river Basin. High risk of
-                        of minor flooding in low lying areas. Area residents requested to be alert. DMC
+                    <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                        of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
                     </p>
                 </div>
                 <div class="row-content alert-div alert-warning" style="margin: 10px auto;">
-                    <p>High possibility of the current minor flood situation in low line areas of Kalu River Valley 
-                        situated in Ingiriya, Palinda Nuwara, Bulathsinhala, Dodangoda, Millaniya and
-                        Madurawala  D/S Divisions further worsening. DMC
+                    <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                        of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
                     </p>
                 </div>
 
                 <div class="row-content alert-div" style="margin: 10px auto;">
-                    <p>Rainfall over 225mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
+                    <p>Rainfall over 150mm recorded in catchment areas Aththanagalu Oya Basin. High risk of
                         of minor flooding in low lying areas. Area residents requested to be alert. DMC 117
                     </p>
                 </div>
@@ -70,6 +68,8 @@
                 $(thisPage).addClass("active");
             });
 
+            getAlerts();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -77,7 +77,41 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-    </script>
-    <script src="<?php echo HOST; ?>/public/assets/js/table.js"></script>
+
+        function getAlerts() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>doalert",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            $("#bodyid").empty();
+            // var table = document.getElementById("bodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                console.log(obj);
+                // let row = table.insertRow(-1);
+                // let cell1 = row.insertCell(-1);
+                // let cell2 = row.insertCell(-1);
+                // cell1.innerHTML = obj['timestamp'];
+                // cell2.innerHTML = obj['message'];
+                if (obj['onlyOfficers'] == 1) {
+                    var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                } else {
+                    var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+                }
+
+                $("#bodyid").append($sample);
+
+            }
+        }
+</script>
 </body>
+
 </html>

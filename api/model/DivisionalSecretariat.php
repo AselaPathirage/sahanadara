@@ -185,7 +185,8 @@ class DivisionalSecretariat extends Employee
                     $sql="SELECT inventoryitem.recId,inventoryitem.itemId FROM inventoryitem WHERE inventoryitem.recId IN (SELECT servicedistributeitemrecord.itemRecordId FROM servicedistributeitemrecord WHERE servicedistributeitemrecord.recordId=$serviceRequestId)";
                     $excute=$this->connection->query($sql);
                     while($r = $excute-> fetch_assoc()) {
-                        $sql="UPDATE servicerequestitem SET acceptedBy= ,acceptedDate= WHERE r_id= AND itemId=  AND acceptedBy IS NULL AND acceptedDate IS NULL";
+                        $itemId=$r['itemId'];
+                        $sql="UPDATE servicerequestitem SET acceptedBy=$inventoryId,acceptedDate=CURDATE() WHERE r_id=$serviceRequestId AND itemId=$itemId  AND acceptedBy IS NULL AND acceptedDate IS NULL";
                         $this->connection->query($sql); 
                         $count=$this->connection->affected_rows;
                         if($count==0){
@@ -733,6 +734,7 @@ class DivisionalSecretariat extends Employee
         $results = array();
         // $r = $excute->fetch_assoc();
         while ($r = $excute->fetch_assoc()) {
+            $r['recordId']=FundRaisingNotice::getNoticeCode($r['recordId']);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -744,11 +746,13 @@ class DivisionalSecretariat extends Employee
      {
         if (count($data['receivedParams']) == 1) {
         $recordId = $data['receivedParams'][0];
+        $recordId=FundRaisingNotice::getId($recordId);
         $sql = "SELECT * FROM fundraising WHERE `recordId`='$recordId'";
         }
         $excute = $this->connection->query($sql);
         $results = array();
         while($r = $excute-> fetch_assoc()) {
+            $r['recordId']=FundRaisingNotice::getNoticeCode($recordId);
             $results[] = $r;
         }
         $json = json_encode($results);
@@ -759,13 +763,13 @@ class DivisionalSecretariat extends Employee
      {
         global $errorCode;
         // print_r($data['receivedParams']);
-        // print_r($data);
         if (count($data['receivedParams']) == 1) {
             $uid = $data['userId'];
             $title = $data['uptitle'];
             $description = $data['updescription'];
             $goal = $data['upgoal'];
             $recordId = $data['receivedParams'][0];
+            $recordId=FundRaisingNotice::getId($recordId);
 
             $sql = "UPDATE `fundraising` SET `title`='$title', `description`='$description', `goal`='$goal' WHERE recordId =$recordId";
             $this->connection->query($sql);
@@ -786,6 +790,21 @@ class DivisionalSecretariat extends Employee
 
             $sql = "DELETE FROM `fundraising` WHERE recordId =$recordId";
             $this->connection->query($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+    public function changeFundraiserStatus(array $data)
+    {
+        global $errorCode;
+        $isUsing = $data['isUsing'];
+        $recordId = $data['recordId'];
+        // $recordId = $data['receivedParams'][0];
+        $sql = "UPDATE `fundraising` SET `isUsing`='$isUsing' WHERE `recordId`='$recordId'";
+        if ($this->connection->query($sql)) {;
             echo json_encode(array("code" => $errorCode['success']));
         } else {
             echo json_encode(array("code" => $errorCode['attributeMissing']));

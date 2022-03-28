@@ -123,6 +123,8 @@ Route::GET("gns/{id}", array("DisasterOfficer@getGNsOnIncident"));
 Route::GET("doreports", array("DisasterOfficer@getReports"));
 Route::GET("doreports/{id}", array("DisasterOfficer@getReportsbyIncident"));
 Route::GET("countdvfinal/{id}", array("DisasterOfficer@getFinalsbyIncident"));
+Route::GET("disasterOfficer/final", array("DisasterOfficer@getFinalReport"));
+Route::GET("disasterOfficer/final/{reportId}", array("DisasterOfficer@getFinalReport"));
 Route::POST("dofinal", array("DisasterOfficer@addFinal"));
 Route::POST("disasterOfficer/final", array("DisasterOfficer@addFinalReport"));
 Route::GET("dofinal/{id}", array("DisasterOfficer@getFinal"));

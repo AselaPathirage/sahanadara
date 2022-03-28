@@ -510,7 +510,7 @@ class InventoryManager extends Employee{
             (SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount, 0 AS quantity
              FROM servicerequestitem,item,unit
              WHERE servicerequestitem.itemId = item.itemId AND item.unitType = unit.unitId AND servicerequestitem.r_id = $serviceRequestId AND servicerequestitem.itemId NOT IN (SELECT inventoryitem.itemId FROM inventoryitem WHERE inventoryitem.inventoryId = $inventoryId GROUP BY inventoryitem.itemId));";
-             $temp = $this->connection->query($sql);
+             $temp = $this->connection->query($sql);echo $sql;
              $requestItem = array();
              while($p = $temp-> fetch_assoc()) {
                 $p['itemId'] = Item::getItemCode($p['itemId']);

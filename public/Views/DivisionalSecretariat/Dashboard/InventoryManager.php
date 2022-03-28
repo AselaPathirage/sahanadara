@@ -34,12 +34,7 @@
             </div>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
-                    <a class="btn_blue Click-here" style="cursor:pointer;">Create New Inventory Manager</a>
-                </div>
-            </div>
-            <br>
-            <div class="container" style="text-align: right;">
-                <div style="display:block;">
+                    <a class="btn_blue Click-here" style="cursor:pointer;">Create Inventory Manager</a>
                     <a class="btn_blue Click-transfer" style="cursor:pointer;">Add Transfered Inventory Manager</a>
                 </div>
             </div>
@@ -123,25 +118,25 @@
                 </div>
                 <div class="bg-overlay"></div>
             </div>
-            <!-- <table class="table">
+            <table class="table">
                 <thead>
                     <tr class="filters">
-                        <th>Active Status
+                        <!-- <th>Active Status
                             <select id="status-filter" class="form-control">
                                 <option>Active</option>
                                 <option>Not Started</option>
                                 <option>In Progress</option>
                                 <option>Completed</option>
                             </select>
-                        </th>
+                        </th> -->
 
 
                         <th>Search
-                            <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
+                            <input type="text" id="search1" placeholder="Search" title="Type " class="form-control">
                         </th>
                     </tr>
                 </thead>
-            </table> -->
+            </table>
         </div>
         <div class="container" id="tbodyid">
             <div class="row">

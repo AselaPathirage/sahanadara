@@ -36,27 +36,19 @@
 
                         <h2>Select the area</h2>
                         <div class="row">
-                            <div class="col4"><label for="crusttype">District</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="white">All</option>
-                                    <option value="wheat">Kaluatara</option>
-                                    <option value="thin">Gampaha</option>
-                                </select>
-                            </div>
-                            <div class="col4"><label for="crusttype">DS Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Horana</option>
-                                    <option value="white">Millaniya</option>
+                            <div class="col4"><label for="district">District</label>
+                                <select id="district" name="district">
 
                                 </select>
                             </div>
-                            <div class="col4"><label for="crusttype">GN Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Bellapitiya West</option>
-                                    <option value="white">Bellapitiya North</option>
-                                    <option value="thin">Horana North</option>
+                            <div class="col4"><label for="dividion">DS Division</label>
+                                <select id="dividion" name="dividion">
+                                    <option value="null">Select Division</option>
+                                </select>
+                            </div>
+                            <div class="col4"><label for="gnDivision">GN Division</label>
+                                <select id="gnDivision" name="gnDivision">
+                                    <option value="null">Select GN Division</option>
                                 </select>
                             </div>
 
@@ -73,7 +65,7 @@
             </div>
         </div>
     </section>
-    <script src="<?php echo HOST; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
+
     <script>
         var thisPage = "#safehouse";
         $(document).ready(function() {
@@ -83,7 +75,46 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            var distOptions = "<option value=''>Select District</option>";
+            $.getJSON('<?php echo HOST; ?>/public/assets/json/data.json', function(result) {
+                $.each(result, function(i, district) {
+                    distOptions += "<option value='" + district.dsId + "'>" + district.name + "</option>";
+                });
+                $('#district').html(distOptions);
+            })
+            $('#district').change(function() {
+                var val = $(this).val();
+                var divOptions = "<option value=''>Select Division</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == val) {
+                            $.each(district.division, function(j, division) {
+                                divOptions += "<option value='" + division.dvId + "'>" + division.name + "</option>";
+                            })
+                        }
+                    });
+                    $('#dividion').html(divOptions);
+                })
+            })
+            $('#dividion').change(function() {
+                var div = $(this).val();
+                var dist = $('#district').val();
+                var gnOptions = "<option value=''>Select GNDivision</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == dist) {
+                            $.each(district.division, function(j, division) {
+                                if (division.dvId == div) {
+                                    $.each(division.gnArea, function(k, gnArea) {
+                                        gnOptions += "<option value='" + gnArea.gndvId + "'>" + gnArea.name + "</option>";
+                                    })
+                                }
+                            })
+                        }
+                    });
+                    $('#gnDivision').html(gnOptions);
+                })
+            })
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -91,9 +122,9 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
-        document.getElementById('reset').onclick = function() {
+        //document.getElementById('reset').onclick = function() {
 
-        }
+        //}
     </script>
 </body>
 

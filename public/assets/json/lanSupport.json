@@ -15,7 +15,8 @@
             "cardP":"පරිත්‍යාග කරන්න",
             "topic":"ස්වාභාවික විපත්වලින් පීඩාවට පත් වූ මිනිසුන්ට උපකාර කිරීමට විශ්වාසදායක මාර්ගයක් සොයනවාද?",
             "paragraph":"ඔබේ අවස්ථාව අවශ්‍යතා ඇති අසල්වැසියන් සඳහා අරමුදල් රැස් කිරීමේ අවස්ථාවක් බවට පත් කරන්න. සහනාදාර විසින් අරමුදල් රැස්කිරීම ක්‍රියාවට නැංවීම සඳහා පුද්ගලයන්ට සහ ලාභ නොලබන දෙවර්ගයටම බලය ලබාදේ",
-            "topicTwo":"පරිත්‍යාග ඉල්ලීමේ දැන්වීම්"
+            "topicTwo":"පරිත්‍යාග ඉල්ලීමේ දැන්වීම්",
+            "topicThree":"අරමුදල් රැස් කිරීම්"
         },
         "aboutUs":{
             "topic":"අප ගැන",
@@ -69,7 +70,8 @@
             "cardP":"Donate",
             "topic":"Looking for a reliable way to support people who are affected by natural disasters?",
             "paragraph":"Turn your occasion into a fundraising opportunity for neighbours in need. SAHANADARA empowers both individuals and non profits to fundraising into action",
-            "topicTwo":"Donation Requesting Notices"
+            "topicTwo":"Donation Requesting Notices",
+            "topicThree":"Fund Raises"
         },
         "aboutUs":{
             "topic":"About Us",
@@ -123,7 +125,8 @@
             "cardP":"தானம் செய்",
             "topic":"இயற்கை பேரழிவுகளால் பாதிக்கப்பட்ட மக்களுக்கு ஆதரவளிக்க நம்பகமான வழியைத் தேடுகிறீர்களா?",
             "paragraph":"உங்கள் சந்தர்ப்பத்தை தேவைப்படும் அண்டை நாடுகளுக்கு நிதி திரட்டும் வாய்ப்பாக மாற்றவும். SAHANADARA தனிநபர்கள் மற்றும் இலாப நோக்கற்றவர்கள் ஆகிய இரண்டிற்கும் நிதி திரட்டுவதற்கு அதிகாரம் அளிக்கிறது",
-            "topicTwo":"நன்கொடை கோரும் அறிவிப்புகள்"
+            "topicTwo":"நன்கொடை கோரும் அறிவிப்புகள்",
+            "topicThree":"நிதி திரட்டுகிறது"
         },
         "aboutUs":{
             "topic":"எங்களை பற்றி",

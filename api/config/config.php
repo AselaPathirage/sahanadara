@@ -37,5 +37,6 @@ $errorCode = array(
                     'unableToHandle' => 817,
                     'smsSendFailed' => 818,
                     'translatorError' => 819,
-                    'wrongLanguageCode' => 820
+                    'wrongLanguageCode' => 820,
+                    'recordNoteFound' => 820,
                     );

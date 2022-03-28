@@ -41,7 +41,7 @@ class Home{
                 echo json_encode(array("code"=>$errorCode['wrongLanguageCode']));
                 exit();
             }
-            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate;";
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note,district.dsId,division.dvId,gndivision.gndvId FROM donationreqnotice,safehouse,safehousecontact,district,division,gndivision WHERE district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate;";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
@@ -93,7 +93,7 @@ class Home{
                 exit();
             }
             $limit=$data['receivedParams'][2];
-            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note FROM donationreqnotice,safehouse,safehousecontact WHERE safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate LIMIT $limit;";
+            $sql="SELECT donationreqnotice.recordId, safehouse.safeHouseName, safehouse.safeHouseAddress,safehousecontact.safeHouseTelno ,donationreqnotice.title, donationreqnotice.numOfFamilies, donationreqnotice.numOfPeople, donationreqnotice.createdDate, donationreqnotice.note,district.dsId,division.dvId,gndivision.gndvId FROM donationreqnotice,safehouse,safehousecontact,district,division,gndivision WHERE district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND safehouse.safeHouseID=donationreqnotice.safehouseId AND safehouse.safeHouseID=safehousecontact.safeHouseID AND donationreqnotice.appovalStatus='a' ORDER BY donationreqnotice.createdDate LIMIT $limit;";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
@@ -144,10 +144,7 @@ class Home{
                 echo json_encode(array("code"=>$errorCode['wrongLanguageCode']));
                 exit();
             }
-            $sql="(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
-            WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)
-            UNION
-            (SELECT fundraising.*, 0 AS currentAmount FROM fundraising WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords));";
+            $sql="(SELECT fundraising.*,district.dsId, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords,district,division WHERE fundraisingrecords.recordId=fundraising.recordId AND fundraising.division=division.dvId AND division.dsId=district.dsId GROUP BY fundraising.recordId) UNION (SELECT fundraising.*,district.dsId, 0 AS currentAmount FROM fundraising,district,division WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords) AND fundraising.division=division.dvId AND division.dsId=district.dsId );";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {
@@ -185,10 +182,7 @@ class Home{
                 exit();
             }
             $limit=$data['receivedParams'][2];
-            $sql="(SELECT fundraising.*, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords
-            WHERE fundraisingrecords.recordId=fundraising.recordId GROUP BY fundraising.recordId)
-            UNION
-            (SELECT fundraising.*, 0 AS currentAmount FROM fundraising WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords)) LIMIT $limit;";
+            $sql="(SELECT fundraising.*,district.dsId, SUM(fundraisingrecords.amount) AS currentAmout FROM fundraising,fundraisingrecords,district,division WHERE fundraisingrecords.recordId=fundraising.recordId AND fundraising.division=division.dvId AND division.dsId=district.dsId GROUP BY fundraising.recordId) UNION (SELECT fundraising.*,district.dsId, 0 AS currentAmount FROM fundraising,district,division WHERE fundraising.recordId NOT IN (SELECT DISTINCT fundraisingrecords.recordId FROM fundraisingrecords) AND fundraising.division=division.dvId AND division.dsId=district.dsId ) LIMIT $limit;";
             $excute = $this->connection->query($sql);
             $results = array();
             while($r = $excute-> fetch_assoc()) {

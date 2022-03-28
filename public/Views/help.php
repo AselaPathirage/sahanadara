@@ -31,20 +31,11 @@
                     <thead>
                         <tr class="filters">
                             <th> <span id="district">District</span>
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Kalutara</option>
-                                    <option>Gampaha</option>
-                                    <option>Colombo</option>
-
+                                <select id="district1" class="form-control">
                                 </select>
                             </th>
                             <th> <span id="division">Division</span>
-                                <select id="status-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Madurawala</option>
-                                    <option>Horana</option>
-                                    <option>Millaniya</option>
+                                <select id="dividion1" class="form-control">
                                 </select>
                             </th>
                             <th><span id="lable">Search</span>
@@ -81,7 +72,31 @@
                     }
                 });
             });
-
+            var distOptions = "<option value=''>Select District</option>";
+            $.getJSON('<?php echo HOST; ?>/public/assets/json/data.json', function(result) {
+                $.each(result, function(i, district) {
+                    distOptions += "<option value='" + district.dsId + "'>" + district.name + "</option>";
+                });
+                $('#district1').html(distOptions);
+            })
+            $('#district1').change(function() {
+                var val = $(this).val();
+                var divOptions = "<option value=''>Select Division</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == val) {
+                            $.each(district.division, function(j, division) {
+                                divOptions += "<option value='" + division.dvId + "'>" + division.name + "</option>";
+                            })
+                        }
+                    });
+                    $('#dividion1').html(divOptions);
+                })
+                getNotice();
+            })
+            $('#dividion1').change(function() {
+                getNotice();
+            })
         });
         var output;
         getNotice();
@@ -95,27 +110,33 @@
                 async: false
             }).responseText);
             console.log(output);
+            $("#box").empty();
+            let district = document.getElementById('district1').value;
+            let division = document.getElementById('dividion1').value;
+
             for (var i = 0; i < output.length; i++) {
                 var obj=output[i];
-                var div = document.createElement('div');
-                div.className="card row-content col5";
-                var html="";
-                var count = obj['item'].length;
-                for (var j = 0; j < count; j++) { 
-                    let item=obj['item'][j];
-                    html+=item['itemName']+"-"+item['quantitity']+" "+item['unit'];
-                    if((j+1)!=count){
-                        html+=", ";
+                if((district==obj['dsId'] || !district ) && (division==obj['dvId'] || !division)){
+                    var div = document.createElement('div');
+                    div.className="card row-content col5";
+                    var html="";
+                    var count = obj['item'].length;
+                    for (var j = 0; j < count; j++) { 
+                        let item=obj['item'][j];
+                        html+=item['itemName']+"-"+item['quantitity']+" "+item['unit'];
+                        if((j+1)!=count){
+                            html+=", ";
+                        }
                     }
+                    if(val == 'si'){
+                        div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>දුරකතන අංකය -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                    }else if(val == 'ta'){
+                        div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>தொடர்பு எண் -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>இடப்பெயர்ச்சியின் அளவு -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                    }else{
+                        div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>Contact Number -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>People -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                    }
+                    document.getElementById('box').appendChild(div);
                 }
-                if(val == 'si'){
-                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>දුරකතන අංකය -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
-                }else if(val == 'ta'){
-                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>தொடர்பு எண் -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>இடப்பெயர்ச்சியின் அளவு -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
-                }else{
-                    div.innerHTML="<h3>"+obj['recordId']+"-"+obj['title']+"</h3><address>"+obj['safeHouseAddress']+"</address><p class='small'><b>Contact Number -</b> "+obj['safeHouseTelno']+"</p><p class='small'><b>People -</b> 100</p><p class='small'>"+html+"</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
-                }
-                document.getElementById('box').appendChild(div);
             }
         }
 

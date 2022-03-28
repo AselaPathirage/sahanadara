@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_dmc.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -119,6 +120,9 @@
                 </form>
             </div>
         </div>
+        <div id="alertBox">
+
+        </div>
     </section>
     <script>
         var thisPage = "#Service";
@@ -147,6 +151,34 @@
                         row.hide();
                 });
             });
+            $(".btn_delete").on("click", function() {
+                let id = $(this).attr('data-id');
+                if (id) {
+                    $.ajax({
+                        type: "DELETE",
+                        url: "<?php echo API; ?>serviceRequest/" + id,
+                        headers: {
+                            'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                        },
+                        cache: false,
+                        success: function(result) {
+                            if (result.code == 806) {
+                                alertGen("Record Deleted Successfully!", 1);
+                                $('#trow').empty();
+                                serviceRequests();
+                            } else if (result.code == 817) {
+                                alertGen("Unable to delete. The request is on processing.", 2);
+                            } else {
+                                alertGen("Unable to handle request.", 2);
+                            }
+                        },
+                        error: function(err) {
+                            alertGen("Something went wrong.", 3);
+                            console.log(err);
+                        }
+                    });
+                }
+            });
             $('#division').on('change', function() {
                 let value = $('#division').val();
                 $('#trow').empty();
@@ -174,12 +206,14 @@
                         attribute2.innerHTML = "View";
                         var attribute = document.createElement("a");
                         attribute.id = obj['id'];
+                        attribute.setAttribute("data-id", obj['id']);
                         //attribute.href = "viewRequest/" + obj['id'];
                         attribute.target = "_blank"
                         attribute.className = "btn_delete";
                         attribute.name = "delete";
                         attribute.value = obj['id'];
                         attribute.innerHTML = "delete";
+                        attribute.setAttribute("style", "cursor:pointer;");
                         cell11.innerHTML = obj['id'];
                         cell2.innerHTML = obj['requestingFrom'];
                         cell22.innerHTML = obj['createdDate'];
@@ -264,13 +298,37 @@
                 attribute.className = "btn_delete";
                 attribute.name = "delete";
                 attribute.value = obj['id'];
+                attribute.setAttribute("data-id", obj['id']);
                 attribute.innerHTML = "delete";
+                attribute.setAttribute("style", "cursor:pointer;");
                 cell11.innerHTML = obj['id'];
                 cell2.innerHTML = obj['requestingFrom'];
                 cell22.innerHTML = obj['createdDate'];
                 cell3.innerHTML = obj['requestedDate'];
                 cell4.appendChild(attribute2);
                 cell5.appendChild(attribute);
+            }
+        }
+
+        function alertGen($messege, $type) {
+            if ($type == 1) {
+                $("#alertBox").html("  <div class='alert success-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else if ($type == 2) {
+                $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
+            } else {
+                $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
+                setTimeout(function() {
+                    $(".alert").fadeOut(100)
+                    $("#alertBox").html("");
+                }, 4000);
             }
         }
     </script>

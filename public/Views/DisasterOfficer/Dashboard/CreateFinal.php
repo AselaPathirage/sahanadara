@@ -45,7 +45,7 @@ $array = explode("/", $_GET["url"]);
         .inputs_in_table {
             width: 50px;
             padding: 5px 10px;
-            
+
 
         }
     </style>
@@ -967,12 +967,12 @@ $array = explode("/", $_GET["url"]);
                     h['gnId'] = gnid;
                     object['relief'][count++] = h;
                 });
-                object['incidentId']="<?php echo end($array)?>";
+                object['incidentId'] = "<?php echo end($array) ?>";
                 var json = JSON.stringify(object);
                 console.log(json);
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo API; ?>deathcomp",
+                    url: "<?php echo API; ?>disasterOfficer/final",
                     data: json,
                     headers: {
                         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'

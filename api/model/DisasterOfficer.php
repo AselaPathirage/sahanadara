@@ -1092,7 +1092,128 @@ WHERE
         echo $json;
     }
 
+    // Reporting
 
+    public function getinitialsforreports(array $data)
+    {
+        $uid = $data['userId'];
+
+        $results = array();
+        $resultsreports = array();
+        $sql = "
+        SELECT
+            *
+        FROM
+        
+            divisionaloffice,
+            dismgtofficer,district,division
+        WHERE
+            divisionaloffice.disasterManager = " . $uid . " AND dismgtofficer.disMgtOfficerID=" . $uid . " AND divisionaloffice.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+        $sql = "
+        SELECT
+        initial.initialId AS reportId,
+        initial.cause AS cause,
+        initial.disaster,
+        initial.date,
+        initial.location,
+        initial.fam,
+        initial.people,
+        initial.death,
+        initial.injured,
+        initial.missing
+    FROM
+        initialincident initial,
+        gndivision,division,district,
+    WHERE
+        gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.disoffapproved='a' AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+
+        // echo($sql);exit;
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $resultsreports[] = $r;
+        }
+        $results['reports'] = $resultsreports;
+        // print_r($results);exit;
+
+        // $json = json_encode($r);
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function getCompensationsforreports(array $data)
+    {
+        $uid = $data['userId'];
+        $results = array();
+        $resultsreports = array();
+        $sql = "
+        SELECT
+            *
+        FROM
+        
+            divisionaloffice,
+            dismgtofficer,district,division
+        WHERE
+            divisionaloffice.disasterManager = " . $uid . " AND dismgtofficer.disMgtOfficerID=" . $uid . " AND divisionaloffice.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+
+        $sql = "(
+            SELECT
+                    death.deathId AS reportId,
+                    death.aname AS aname,
+                    death.atelno AS atel,
+                    death.timestamp,
+                    death.dvapproved,
+                    death.disapproved,
+                    death.dmcapproved,
+                    death.collected,
+                    'Death' AS report,
+                    g.gnDvName,
+                    d.dvName
+                FROM
+                    deathcompensation death,
+                    gndivision g,
+                    division d,
+                    divisionaloffice dis
+                WHERE
+                    dis.disasterManager = " . $uid . " AND dis.dvId = g.dvId AND g.gndvId = death.gndvId AND g.dvId = d.dvId
+            )
+        UNION
+            (
+            SELECT
+            f.propcomId AS reportId,
+                    f.aname AS aname,
+                    f.atpnumber AS atel,
+                    f.timestamp,
+                    f.dvapproved,
+                    f.disapproved,
+                    f.dmcapproved,
+                    f.collected,
+                    'Property' AS report,
+                    g.gnDvName,
+                    d.dvName
+                FROM
+                    propertycompensation f,
+                    gndivision g,
+                    division d,
+                    divisionaloffice dis
+                WHERE
+                    dis.disasterManager = " . $uid . " AND dis.dvId = g.dvId AND g.gndvId = f.gndvId AND g.dvId = d.dvId;";
+        $excute = $this->connection->query($sql);
+        // $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $resultsreports[] = $r;
+        }
+        $results['reports'] = $resultsreports;
+        $json = json_encode($results);
+        echo $json;
+    }
 
     public function approvecomp(array $data)
     {

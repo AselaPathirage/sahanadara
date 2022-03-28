@@ -127,11 +127,12 @@ Route::POST("dofinal", array("DisasterOfficer@addFinal"));
 Route::POST("disasterOfficer/final", array("DisasterOfficer@addFinalReport"));
 Route::GET("dofinal/{id}", array("DisasterOfficer@getFinal"));
 Route::GET("doinitial/{id}", array("DisasterOfficer@getInitial"));
+Route::GET("doinitial", array("DisasterOfficer@getinitialsforreports"));
 Route::GET("dorelief/{id}", array("DisasterOfficer@getRelief"));
 Route::GET("dodeath/{id}", array("DisasterOfficer@getDeath"));
 Route::GET("doprop/{id}", array("DisasterOfficer@getProperty"));
 Route::GET("dismgrcomp", array("DisasterOfficer@getCompensations"));
-
+Route::GET("docompreports", array("DisasterOfficer@getCompensationsforreports"));
 Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
 Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
 Route::GET("Safehouse/{id}", array("DisasterOfficer@getmySafehouse"));

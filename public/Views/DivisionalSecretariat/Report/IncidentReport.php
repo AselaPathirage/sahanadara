@@ -22,64 +22,39 @@
         include_once('./public/Views/DivisionalSecretariat/includes/topnav.php'); 
         ?>
         <div class="space"></div>
-        <!-- ======================================================================================================================================= -->
-        <!-- content frome below -->
-        <!-- STATS -->
+        <div class="space"></div>
         <div class="container">
-        <div class="box">
+            <div class="box">
                 <center>
                     <h1>Incident Report</h1>
                 </center>
-                <form>
+                <form action="<?php echo HOST;?>/DivisionalSecretariat/Report/ViewIncident" target="_blank">
                     <div class="row-content">
 
-                        <h2>Select the area</h2>
+                        <h2>Select</h2>
                         <div class="row">
-                            <div class="col3"><label for="crusttype">District</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="white">All</option>
-                                    <option value="wheat">Kaluatara</option>
-                                    <option value="thin">Gampaha</option>
-                                </select>
-                            </div>
-                            <div class="col3"><label for="crusttype">DS Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Horana</option>
-                                    <option value="white">Millaniya</option>
 
-                                </select>
-                            </div>
-                            <div class="col3"><label for="crusttype">GN Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Bellapitiya West</option>
-                                    <option value="white">Bellapitiya North</option>
-                                    <option value="thin">Horana North</option>
-                                </select>
-                            </div>
-                            <div class="col3">
+                            <div class="col4">
                                 <label for="crusttype">Incident</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Landslide</option>
-                                    <option value="white">Flood</option>
+                                <select id="disaster" name="disaster">
+                                    <option value="all">All</option>
+                                    
                                 </select>
                             </div>
-                            <div class="col3">
-                                <label for="crusttype">Start Date</label>
-                                <input type="date" id="birthday" name="birthday">
+                            <div class="col4">
+                                <label for="crusttype">From</label>
+                                <input type="date" id="from" name="from">
                             </div>
-                            <div class="col3">
-                                <label for="crusttype">End Date</label>
-                                <input type="date" id="birthday" name="birthday">
+                            <div class="col4">
+                                <label for="crusttype">To</label>
+                                <input type="date" id="to" name="to">
                             </div>
                         </div>
 
                         <div class="row" style="justify-content: center;">
 
                             <input type="submit" value="Generate" class="btn-alerts" />
-                            <input type="reset" value="Cancel" class="btn-alerts" />
+                            <!-- <input type="reset" value="Cancel" class="btn-alerts" /> -->
                         </div>
                     </div>
 
@@ -87,6 +62,7 @@
             </div>
         </div>
     </section>
+    <!-- <script src="<?php echo HOST; ?>/public/assets/js/responsiblePersonAidReport.js"></script> -->
     <script>
         var thisPage = "#incident";
         $(document).ready(function() {
@@ -97,6 +73,8 @@
                 $(thisPage).addClass("active");
             });
 
+            getDisasterType();
+
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -104,6 +82,35 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+        document.getElementById('reset').onclick = function() {
+
+        }
+
+        function getDisasterType() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>disaster",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log("1");
+            var select = document.getElementById("disaster");
+            for (var i = 0; i < output.length; i++) {
+                var opt = document.createElement('option');
+                opt.value = output[i]['disId'];
+                opt.innerHTML = output[i]['dis'];
+                select.appendChild(opt);
+            }
+        }
+
+        // $('form').submit(function{
+        //     window.location = string +
+        // });
     </script>
 </body>
+
 </html>

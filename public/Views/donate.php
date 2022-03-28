@@ -31,20 +31,12 @@
                     <thead>
                         <tr class="filters">
                             <th> <span id="district">District</span>
-                                <select id="assigned-user-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Kalutara</option>
-                                    <option>Gampaha</option>
-                                    <option>Colombo</option>
+                                <select id="district1" class="form-control">
 
                                 </select>
                             </th>
                             <th> <span id="division">DS Division</span>
-                                <select id="status-filter" class="form-control">
-                                    <option>All</option>
-                                    <option>Madurawala</option>
-                                    <option>Horana</option>
-                                    <option>Millaniya</option>
+                                <select id="division1" class="form-control">
                                 </select>
                             </th>
                             <th> <span id="search">Search</span>
@@ -179,7 +171,31 @@
                 $cards.not($thisCard).removeClass('is-inactive');
             });
 
-
+            var distOptions = "<option value=''>Select District</option>";
+            $.getJSON('<?php echo HOST; ?>/public/assets/json/data.json', function(result) {
+                $.each(result, function(i, district) {
+                    distOptions += "<option value='" + district.dsId + "'>" + district.name + "</option>";
+                });
+                $('#district1').html(distOptions);
+            })
+            $('#district1').change(function() {
+                var val = $(this).val();
+                var divOptions = "<option value=''>Select Division</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == val) {
+                            $.each(district.division, function(j, division) {
+                                divOptions += "<option value='" + division.dvId + "'>" + division.name + "</option>";
+                            })
+                        }
+                    });
+                    $('#division1').html(divOptions);
+                })
+                getNotice();
+            })
+            $('#division1').change(function() {
+                getNotice();
+            })
             // progressBar("asdfasdf", 20, 100, 1);
         });
 
@@ -193,30 +209,35 @@
                 async: false
             }).responseText);
             console.log(output);
+            let district = document.getElementById('district1').value;
+            let division = document.getElementById('division1').value;
+            $("#box").empty();
             for (var i = 0; i < output.length; i++) {
                 var obj = output[i];
                 if (obj['isActive'] == 'y') {
-                    let div = document.createElement('div');
-                    div.className = "col5 card_donation is-collapsed row-content";
-                    let html = "";
-                    let description = obj['description'];
-                    let goal = obj['goal'];
-                    let recordId = obj['recordId'];
-                    let title = obj['title'];
-                    let currentAmout = obj['currentAmout'];
-                    html += "<div class='card__inner js-expander'><div class='donation--container'><h1 id='donation--user" + i + "' class='donation--user'></h1><p id='donation--description" + i + "' style='padding-bottom: 10px'>Bellapitiya</p><span class='donation--title'>Reached:</span> <span id='donation--goal" + i + "' class='donation--goal'></span>";
-                    html += "<div class='donation--bar'><div class='donation--rounded'><div id='donation--progress" + i + "' class='donation--progress' style='width: 0;'></div></div><div id='donation--number" + i + "' class='donation--number' style='left: 0;'></div><span id='donation--status" + i + "' class='donation--status'></span></div></div></div>";
-                    html += "<div class='card__expander'><i class='fa fa-close js-collapser'> </i><form class='form--container'><input id='donation--name' class='input_donate' type='text' placeholder='Enter name' name='donator'><input id='donation--amount" + i + "' class='input_donate' type='number' min='1' placeholder='Enter amount(Rs)' name='amount'><input id='donate' class='button_donate' type='submit' value='Donate' data-frid='" + recordId + "'></form></div>";
-                    div.innerHTML = html;
-                    // if (val == 'si') {
-                    //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>දුරකතන අංකය -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
-                    // } else if (val == 'ta') {
-                    //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>தொடர்பு எண் -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>இடப்பெயர்ச்சியின் அளவு -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
-                    // } else {
-                    //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>Contact Number -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>People -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
-                    // }
-                    document.getElementById('box').appendChild(div);
-                    progressBar(title, currentAmout, goal, i, description);
+                    if((district==obj['dsId'] || !district ) && (division==obj['division'] || !division)){
+                        let div = document.createElement('div');
+                        div.className = "col5 card_donation is-collapsed row-content";
+                        let html = "";
+                        let description = obj['description'];
+                        let goal = obj['goal'];
+                        let recordId = obj['recordId'];
+                        let title = obj['title'];
+                        let currentAmout = obj['currentAmout'];
+                        html += "<div class='card__inner js-expander'><div class='donation--container'><h1 id='donation--user" + i + "' class='donation--user'></h1><p id='donation--description" + i + "' style='padding-bottom: 10px'>Bellapitiya</p><span class='donation--title'>Reached:</span> <span id='donation--goal" + i + "' class='donation--goal'></span>";
+                        html += "<div class='donation--bar'><div class='donation--rounded'><div id='donation--progress" + i + "' class='donation--progress' style='width: 0;'></div></div><div id='donation--number" + i + "' class='donation--number' style='left: 0;'></div><span id='donation--status" + i + "' class='donation--status'></span></div></div></div>";
+                        html += "<div class='card__expander'><i class='fa fa-close js-collapser'> </i><form class='form--container'><input id='donation--name' class='input_donate' type='text' placeholder='Enter name' name='donator'><input id='donation--amount" + i + "' class='input_donate' type='number' min='1' placeholder='Enter amount(Rs)' name='amount'><input id='donate' class='button_donate' type='submit' value='Donate' data-frid='" + recordId + "'></form></div>";
+                        div.innerHTML = html;
+                        // if (val == 'si') {
+                        //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>දුරකතන අංකය -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                        // } else if (val == 'ta') {
+                        //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>தொடர்பு எண் -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>இடப்பெயர்ச்சியின் அளவு -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                        // } else {
+                        //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>Contact Number -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>People -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
+                        // }
+                        document.getElementById('box').appendChild(div);
+                        progressBar(title, currentAmout, goal, i, description);
+                    }
                 }
 
             }

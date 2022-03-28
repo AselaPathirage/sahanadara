@@ -699,12 +699,13 @@ class DivisionalSecretariat extends Employee
      public function addFundraiser(array $data)
      {
         global $errorCode;
-        //$uid = $data['userId'];
+        $uid = $data['userId'];
         $title = $data['title'];
         $description = $data['description'];
         $goal = $data['goal'];
-
-        $sql = "INSERT INTO fundraising (title, description, goal) VALUES ('$title','$description','$goal');";
+        $division = $this->getDivision($uid);
+        $division=$division['id'];
+        $sql = "INSERT INTO fundraising (title, description, goal,division) VALUES ('$title','$description','$goal',$division);";
         //$this->connection->query($sql);
         
         if ($this->connection->query($sql)) {

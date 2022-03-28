@@ -100,7 +100,7 @@
                 <a href="<?php echo HOST; ?>help" class="seemore">See more</a>
             </div>
             <div class="help container text-center" id="help">
-                <h1>Fund Raises</h1>
+                <h1 id="topicThree"></h1>
                 <div class="row text-center " style="justify-content: space-around;" id="boxfund">
 
 
@@ -344,6 +344,7 @@
                 document.getElementById("topic").innerHTML = dataJson[sub].homePage.topic;
                 document.getElementById("paragraph").innerHTML = dataJson[sub].homePage.paragraph;
                 document.getElementById("topicTwo").innerHTML = dataJson[sub].homePage.topicTwo;
+                document.getElementById("topicThree").innerHTML = dataJson[sub].homePage.topicThree;
                 console.log(dataJson);
             } catch (e) {
                 console.error(e);
@@ -364,6 +365,7 @@
                 document.getElementById("topic").innerHTML = "Looking for a reliable way to support people who are affected by natural disasters?";
                 document.getElementById("paragraph").innerHTML = "Turn your occasion into a fundraising opportunity for neighbours in need. SAHANADARA empowers both individuals and non profits to fundraising into action";
                 document.getElementById("topicTwo").innerHTML = "Donation Requesting Notices";
+                document.getElementById("topicThree").innerHTML = "Fund Raises";
             }
         };
     </script>

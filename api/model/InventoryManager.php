@@ -1,4 +1,7 @@
 <?php
+
+use GuzzleHttp\Psr7\ServerRequest;
+
 class InventoryManager extends Employee{
     private $inventory = null;
     use Noticer;
@@ -351,6 +354,57 @@ class InventoryManager extends Employee{
         }
         $json = json_encode($results);
         echo $json;
+    }
+    public function deleteServiceRequest(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==1){
+            $this->inventory->setInfo($uid);
+            $inventoryId = $this->inventory->getId();
+            $requestId=ServiceRequestNotice::getId($data['receivedParams'][0]);
+            $sql="SELECT servicerequest.inventoryId FROM servicerequest WHERE servicerequest.r_id=$requestId";
+            $excute = $this->connection->query($sql);
+            if($excute->num_rows>0){
+                $temp=$excute->fetch_assoc();
+                if($temp['inventoryId']==$inventoryId){
+                    $sql="SELECT distributeservice.approvalStatus FROM distributeservice WHERE distributeservice.serviceRequestId=$requestId ";
+                    $excute = $this->connection->query($sql);
+                    if($excute->num_rows==0){
+                        $sql="UPDATE `servicerequest` SET `currentStatus` = 'd' WHERE `servicerequest`.`r_id` = $requestId;";
+                        $this->connection->query($sql);
+                        http_response_code(200);                       
+                        echo json_encode(array("code"=>$errorCode['success']));
+                        exit();
+                    }else{
+                        $temp=$excute->fetch_assoc();
+                        if($temp['approvalStatus']=='r'){
+                            $sql="UPDATE `servicerequest` SET `currentStatus` = 'd' WHERE `servicerequest`.`r_id` = $requestId;";
+                            $this->connection->query($sql);
+                            http_response_code(200);                       
+                            echo json_encode(array("code"=>$errorCode['success']));
+                            exit(); 
+                        }else{
+                            http_response_code(200);                       
+                            echo json_encode(array("code"=>$errorCode['unableToHandle']));
+                            exit();
+                        }
+                    }
+                }else{
+                    http_response_code(200);                       
+                    echo json_encode(array("code"=>$errorCode['permissionError']));
+                    exit();
+                }
+
+            }else{
+                http_response_code(200);                       
+                echo json_encode(array("code"=>$errorCode['recordNoteFound']));
+                exit();
+            }
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit();
+        }
     }
     public function availableItem(array $data){
         $uid = $data['userId'];

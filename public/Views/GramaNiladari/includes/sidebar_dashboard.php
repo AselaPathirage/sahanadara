@@ -43,7 +43,7 @@
             </a>
         </li>
         <li>
-            <a href="<?php echo HOST; ?>/GramaNiladari/SafeHouse" id="safehouse">
+            <a href="<?php echo HOST; ?>/GramaNiladari/SafeHouse" id="safehousepage">
                 <i class='bx bx-buildings'></i>
                 <span class="links_name">Safehouse</span>
             </a>

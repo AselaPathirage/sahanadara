@@ -146,7 +146,7 @@ class DistrictSecretariat extends Employee
                 propertycompensation f,
                 gndivision g,division d, district dis,districtsoffice diso
             WHERE
-            g.gndvId = f.gndvId AND g.dvId = d.dvId AND diso.districtSecretariat=" . $uid . " AND diso.dsId=dis.dsId AND d.dsId = dis.dsId AND f.disapproved='a' AND f.totcomp<=10000 Order by timestamp DESC;";
+            g.gndvId = f.gndvId AND g.dvId = d.dvId AND diso.districtSecretariat=" . $uid . " AND diso.dsId=dis.dsId AND d.dsId = dis.dsId AND f.disapproved='a' AND f.totcomp<=25000 Order by timestamp DESC;";
         $excute = $this->connection->query($sql);
         $results = array();
         while ($r = $excute->fetch_assoc()) {

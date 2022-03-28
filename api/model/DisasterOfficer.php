@@ -434,16 +434,126 @@ class DisasterOfficer extends Employee
             exit();
         }
     }
+    public function getFinalReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(count($data['receivedParams'])==0){
+            $division = $this->getDivision($uid);
+            $divisionId = $division['id'];
+            $sql="SELECT * FROM dvfinalincident WHERE dvfinalincident.dvId=$divisionId;";
+        }elseif(count($data['receivedParams'])==1){
+            $recordId=$data['receivedParams'][0];
+            $sql="SELECT * FROM dvfinalincident WHERE dvfinalincident.dvfinalincidentId=$recordId;";
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['unableToHandle']));
+            exit(); 
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $recordId=$r['dvfinalincidentId'];
+            $sql="SELECT * FROM dvfinalimpact WHERE dvfinalimpact.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1=array();
+            while($p = $excute1-> fetch_assoc()) {
+                $temp1[]=$p;
+            }
+            $r['impact']=$temp1;
+            $temp1=array();
+            $sql="SELECT * FROM dvfinalrelief WHERE dvfinalrelief.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1=array();
+            while($p = $excute1-> fetch_assoc()) {
+                $temp1[]=$p;
+            }
+            $r['relief']=$temp1;
+            $temp1=array();
+            $sql="SELECT * FROM dvfinalsafehouse WHERE dvfinalsafehouse.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1=array();
+            while($p = $excute1-> fetch_assoc()) {
+                $temp1[]=$p;
+            }
+            $r['safehouse']=$temp1;
+            $temp1=array();
+            $sql="SELECT * FROM dvfinaldamage WHERE dvfinaldamage.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1=array();
+            while($p = $excute1-> fetch_assoc()) {
+                $temp1[]=$p;
+            }
+            $r['damage']=$temp1;
+            $results[]=$r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+    public function addFinalReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        if(isset($data['datePicker1']) && isset($data['datePicker2']) && isset($data['disaster']) && isset($data['cause']) && isset($data['remarks']) && isset($data['task']) && isset($data['impact']) && isset($data['safehouse']) && isset($data['damages']) && isset($data['relief']) && isset($data['incidentId'])){
+            $datePicker1=$data['datePicker1'];
+            $datePicker2=$data['datePicker2'];
+            $disaster=$data['disaster'];
+            $division = $this->getDivision($uid);
+            $divisionId = $division['id'];
+            $cause=$data['cause'];
+            $remarks=$data['remarks'];
+            $incidentId=$data['incidentId'];
+            $sql="INSERT INTO dvfinalincident(startDate, endDate, disaster, cause, dvId, remarks, incidentId) VALUES ('$datePicker1','$datePicker2','$disaster','$cause',$divisionId,'$remarks',$incidentId);";
+            $this->connection->query($sql);
+            $sql = "SELECT LAST_INSERT_ID();";
+            $excute = $this->connection->query($sql);
+            $r = $excute-> fetch_assoc();
+            $finalReportId = $r['LAST_INSERT_ID()'];
+            $sql="";
+            foreach ($data['impact'] as $record) {
+                $fam =$record['fam'];
+                $people =$record['people'];
+                $death =$record['death'];
+                $hos =$record['hos'];
+                $inj =$record['inj'];
+                $miss =$record['miss'];
+                $gnId =$record['gnId'];
+                $sql .="INSERT INTO dvfinalimpact VALUES ($finalReportId,$gnId,$fam,$people,$death,$hos,$inj,$miss);";
+            }
+            foreach ($data['safehouse'] as $record) {
+                $safenum =$record['safenum'];
+                $sffam =$record['sffam'];
+                $sfpeople =$record['sfpeople'];
+                $gnId =$record['gnId'];
+                $sql .="INSERT INTO dvfinalsafehouse VALUES ($finalReportId,$gnId,$safenum,$sfpeople,$sffam);";
+            }
+            foreach ($data['damages'] as $record) {
+                $damhfull =$record['damhfull'];
+                $damhpartial =$record['damhpartial'];
+                $damenter =$record['damenter'];
+                $daminfra =$record['daminfra'];
+                $gnId =$record['gnId']; //hf he kiyanne monawada yako :(
+                $sql .="INSERT INTO dvfinaldamage VALUES ($finalReportId,$gnId,$damhfull,$damhpartial,$damenter,$daminfra);";
+            }
+            foreach ($data['relief'] as $record) {
+                $reldry =$record['reldry'];
+                $relcooked =$record['relcooked'];
+                $relemer =$record['relemer'];
+                $gnId =$record['gnId'];
+                $sql .="INSERT INTO dvfinalrelief VALUES ($finalReportId,$gnId,$reldry,$relcooked,$relemer);";
+            }
+            $this->connection->multi_query($sql);
+            echo json_encode(array("code"=>$errorCode['success']));
+            exit();
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
 
     public function filtermySafehouse(array $data)
     {
         $uid = $data['userId'];
         if (count($data['receivedParams']) == 1) {
-
             $sql = "SELECT s.* FROM safeHouse s WHERE s.safeHouseID IN (SELECT gn.safeHouseID FROM gndivision gn,divisionaloffice dv, safehouse sh WHERE gn.dvId = dv.dvId AND dv.disasterManager = 1 AND sh.isUsing = 'n' AND sh.safeHouseID = gn.safeHouseID);";
-
-
-
             $excute = $this->connection->query($sql);
             $results = array();
             while ($r = $excute->fetch_assoc()) {
@@ -509,8 +619,6 @@ class DisasterOfficer extends Employee
                     while ($r2 = $excute->fetch_assoc()) {
                         $sql .= "INSERT INTO `incidentgn`(`incidentId`, `gndvId`) VALUES ('$incidentId','" . $r2['gndvId'] . "');";
                     }
-
-
                     if ($this->connection->multi_query($sql)) {
                         echo json_encode(array("code" => $errorCode['success']));
                         exit;
@@ -1038,7 +1146,128 @@ WHERE
         echo $json;
     }
 
+    // Reporting
 
+    public function getinitialsforreports(array $data)
+    {
+        $uid = $data['userId'];
+
+        $results = array();
+        $resultsreports = array();
+        $sql = "
+        SELECT
+            *
+        FROM
+        
+            divisionaloffice,
+            dismgtofficer,district,division
+        WHERE
+            divisionaloffice.disasterManager = " . $uid . " AND dismgtofficer.disMgtOfficerID=" . $uid . " AND divisionaloffice.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+        $sql = "
+        SELECT
+        initial.initialId AS reportId,
+        initial.cause AS cause,
+        initial.disaster,
+        initial.date,
+        initial.location,
+        initial.fam,
+        initial.people,
+        initial.death,
+        initial.injured,
+        initial.missing
+    FROM
+        initialincident initial,
+        gndivision,division,district,
+    WHERE
+        gndivision.gramaNiladariID = " . $uid . " AND gndivision.gndvId = initial.gndvId AND initial.disoffapproved='a' AND gndivision.dvId=division.dvId AND division.dsId = district.dsId";
+
+        // echo($sql);exit;
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $resultsreports[] = $r;
+        }
+        $results['reports'] = $resultsreports;
+        // print_r($results);exit;
+
+        // $json = json_encode($r);
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function getCompensationsforreports(array $data)
+    {
+        $uid = $data['userId'];
+        $results = array();
+        $resultsreports = array();
+        $sql = "
+        SELECT
+            *
+        FROM
+        
+            divisionaloffice,
+            dismgtofficer,district,division
+        WHERE
+            divisionaloffice.disasterManager = " . $uid . " AND dismgtofficer.disMgtOfficerID=" . $uid . " AND divisionaloffice.dvId=division.dvId AND division.dsId = district.dsId";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $results['main'] = $r;
+
+
+        $sql = "(
+            SELECT
+                    death.deathId AS reportId,
+                    death.aname AS aname,
+                    death.atelno AS atel,
+                    death.timestamp,
+                    death.dvapproved,
+                    death.disapproved,
+                    death.dmcapproved,
+                    death.collected,
+                    'Death' AS report,
+                    g.gnDvName,
+                    d.dvName
+                FROM
+                    deathcompensation death,
+                    gndivision g,
+                    division d,
+                    divisionaloffice dis
+                WHERE
+                    dis.disasterManager = " . $uid . " AND dis.dvId = g.dvId AND g.gndvId = death.gndvId AND g.dvId = d.dvId
+            )
+        UNION
+            (
+            SELECT
+            f.propcomId AS reportId,
+                    f.aname AS aname,
+                    f.atpnumber AS atel,
+                    f.timestamp,
+                    f.dvapproved,
+                    f.disapproved,
+                    f.dmcapproved,
+                    f.collected,
+                    'Property' AS report,
+                    g.gnDvName,
+                    d.dvName
+                FROM
+                    propertycompensation f,
+                    gndivision g,
+                    division d,
+                    divisionaloffice dis
+                WHERE
+                    dis.disasterManager = " . $uid . " AND dis.dvId = g.dvId AND g.gndvId = f.gndvId AND g.dvId = d.dvId;";
+        $excute = $this->connection->query($sql);
+        // $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $resultsreports[] = $r;
+        }
+        $results['reports'] = $resultsreports;
+        $json = json_encode($results);
+        echo $json;
+    }
 
     public function approvecomp(array $data)
     {

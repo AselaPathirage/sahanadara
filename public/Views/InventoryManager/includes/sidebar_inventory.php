@@ -33,7 +33,7 @@
         <li>
             <a href="<?php echo HOST; ?>InventoryManager/Inventory/ServiceRequests" id="Service">
                 <i class='bx bxs-cog' ></i>
-                <span class="links_name">Service Requests</span>
+                <span class="links_name">Borrow Requests</span>
             </a>
         </li>
         <li>

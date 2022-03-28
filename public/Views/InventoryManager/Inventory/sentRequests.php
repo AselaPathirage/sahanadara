@@ -15,7 +15,7 @@
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        .create {
+        /* .create {
             background-color: rgb(2, 58, 255);
             height: 50px;
             display: block;
@@ -30,7 +30,7 @@
 
         .create:hover {
             background-color: rgb(153, 176, 255);
-        }
+        } */
 
         .view {
             background-color: rgb(109, 91, 208);
@@ -87,14 +87,14 @@
                                 </th>
                                 <th>
                                     Starting:
-                                    <input type="date" class="form-control" id="start" name="start" max="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" class="form-control searchInput" id="start" name="start" max="<?php echo date("Y-m-d"); ?>">
                                 </th>
                                 <th>
                                     Ending:
-                                    <input type="date" class="form-control" id="end" name="end" max="<?php echo date("Y-m-d"); ?>">
+                                    <input type="date" class="form-control searchInput" id="end" name="end" max="<?php echo date("Y-m-d"); ?>">
                                 </th>
                                 <th style="width: 25%;text-align: center;">
-                                    <a href="<?php echo HOST; ?>InventoryManager/Inventory/serviceRequestForm" class="create">Create Request</a>
+                                    <a href="<?php echo HOST; ?>InventoryManager/Inventory/serviceRequestForm" class="create btn_blue">Create Request</a>
                                 </th>
                             </tr>
                         </thead>
@@ -105,7 +105,7 @@
                             <thead>
                                 <tr>
                                     <th style="width:10%;">Request Id</th>
-                                    <th style="width:40%;">DS Office</th>
+                                    <th style="width:40%;">Requesting From</th>
                                     <th style="width:15%;">Created Date</th>
                                     <th style="width:15%;">Requesting Date</th>
                                     <th style="width:10%;"></th>
@@ -129,7 +129,66 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            $(".searchInput").on("change", function() {
+                var from = $("#start").val();
+                var to = $("#end").val();
+                $("#trow tr").each(function() {
+                    var row = $(this);
+                    var date = row.find("td").eq(2).text();
+                    console.log(date);
+                    var show = true;
+                    if (from && date < from)
+                        show = false;
+                    if (to && date > to)
+                        show = false;
+                    if (show)
+                        row.show();
+                    else
+                        row.hide();
+                });
+            });
+            $('#division').on('change', function() {
+                let value = $('#division').val();
+                $('#trow').empty();
+                var table = document.getElementById("trow");
+                for (var i = 0; i < requests.length; i++) {
+                    if (requests[i]['requestingDivisionId'] == value || !value) {
+                        let obj = requests[i];
+                        let row = table.insertRow(-1);
+                        let id = "data_" + i;
+                        row.id = id;
+                        row.className = "task-list-row";
+                        //let cell1 = row.insertCell(-1);
+                        let cell11 = row.insertCell(-1);
+                        let cell2 = row.insertCell(-1);
+                        let cell22 = row.insertCell(-1);
+                        let cell3 = row.insertCell(-1);
+                        let cell4 = row.insertCell(-1);
+                        let cell5 = row.insertCell(-1);
+                        var attribute2 = document.createElement("a");
+                        attribute2.id = obj['id'];
+                        attribute2.href = "viewSentRequest/" + obj['id'];
+                        attribute2.target = "_blank"
+                        attribute2.className = "btn_views";
+                        attribute2.name = "View";
+                        attribute2.innerHTML = "View";
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['id'];
+                        //attribute.href = "viewRequest/" + obj['id'];
+                        attribute.target = "_blank"
+                        attribute.className = "btn_delete";
+                        attribute.name = "delete";
+                        attribute.value = obj['id'];
+                        attribute.innerHTML = "delete";
+                        cell11.innerHTML = obj['id'];
+                        cell2.innerHTML = obj['requestingFrom'];
+                        cell22.innerHTML = obj['createdDate'];
+                        cell3.innerHTML = obj['requestedDate'];
+                        cell4.appendChild(attribute2);
+                        cell5.appendChild(attribute);
+                    }
+                }
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -154,8 +213,12 @@
             }).responseText);
             //console.log(output);
             var select = document.getElementById("division");
+            var opt = document.createElement('option');
+            opt.value = 0;
+            opt.innerHTML = "All";
+            select.appendChild(opt);
             for (var i = 0; i < output.length; i++) {
-                var opt = document.createElement('option');
+                opt = document.createElement('option');
                 opt.value = output[i]['id'];
                 opt.innerHTML = output[i]['division'];
                 select.appendChild(opt);
@@ -189,7 +252,7 @@
                 let cell5 = row.insertCell(-1);
                 var attribute2 = document.createElement("a");
                 attribute2.id = obj['id'];
-                attribute2.href = "viewRequest/" + obj['id'];
+                attribute2.href = "viewSentRequest/" + obj['id'];
                 attribute2.target = "_blank"
                 attribute2.className = "btn_views";
                 attribute2.name = "View";
@@ -203,7 +266,7 @@
                 attribute.value = obj['id'];
                 attribute.innerHTML = "delete";
                 cell11.innerHTML = obj['id'];
-                cell2.innerHTML = obj['name'];
+                cell2.innerHTML = obj['requestingFrom'];
                 cell22.innerHTML = obj['createdDate'];
                 cell3.innerHTML = obj['requestedDate'];
                 cell4.appendChild(attribute2);

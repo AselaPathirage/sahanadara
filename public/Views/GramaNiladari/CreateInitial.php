@@ -91,7 +91,7 @@
                                 <label for="crusttype">Date of commenced</label>
                             </div>
                             <div class="col9 row-content" style="align-items: center;">
-                                <input type="date" id="datePicker" name="datePicker" class="datesInForms">
+                                <input type="date" id="datePicker" name="datePicker" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
                         <div class="row">

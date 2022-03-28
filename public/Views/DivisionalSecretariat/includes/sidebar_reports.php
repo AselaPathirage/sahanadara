@@ -12,23 +12,23 @@
                 <span class="links_name">Incident </span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="<?php echo HOST; ?>/DivisionalSecretariat/Report/SafeHouseReport" id="safe">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Safe House </span>
             </a>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
             <a href="<?php echo HOST; ?>/DivisionalSecretariat/Report/CompensationReport" id="compensation">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Compensation </span>
             </a>
-        </li>
-        <li>
+        </li> -->
+        <!-- <li>
             <a href="<?php echo HOST; ?>/DivisionalSecretariat/Report/InventoryReport" id="inventory">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Inventory </span>
             </a>
-        </li>
+        </li> -->
     </ul>
 </div>

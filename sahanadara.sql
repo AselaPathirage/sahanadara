@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 26, 2022 at 04:49 PM
+-- Generation Time: Mar 28, 2022 at 08:34 PM
 -- Server version: 10.4.22-MariaDB
 -- PHP Version: 8.1.2
 
@@ -62,14 +62,7 @@ CREATE TABLE `alert` (
 --
 
 INSERT INTO `alert` (`msgId`, `msg`, `timestamp`, `assignedSafe`, `onlyOfficers`) VALUES
-(1, 'asdfsdf asdfsdfsf', '2022-01-06 20:31:52', 0, 0),
-(2, 'er asdfad 222 aeff', '2022-01-06 20:34:43', 0, 0),
-(3, 'er 33333 222 aeff', '2022-01-06 20:34:43', 1, 1),
-(4, 'er a444444 222 aeff', '2022-01-06 20:34:43', 1, 1),
-(5, 'er5555 aeff', '2022-01-06 20:34:43', 1, 0),
-(6, 'er56666666666666666 aeff', '2022-01-06 20:34:43', 1, 0),
-(7, 'er77777777777777aeff', '2022-01-06 20:34:43', 0, 1),
-(8, 'er8888888888aeff', '2022-01-06 20:34:44', 0, 1);
+(1, 'Flood alert for Bolossagama', '2022-03-27 03:04:32', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -83,23 +76,6 @@ CREATE TABLE `alertdisdivgn` (
   `dvId` int(11) NOT NULL,
   `gndvId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `alertdisdivgn`
---
-
-INSERT INTO `alertdisdivgn` (`alertId`, `dsId`, `dvId`, `gndvId`) VALUES
-(1, 3, 10, 5),
-(1, 3, 10, 6),
-(1, 3, 10, 7),
-(2, 3, 10, 5),
-(2, 3, 10, 6),
-(3, 3, 10, 5),
-(3, 3, 10, 7),
-(4, 3, 10, 6),
-(5, 3, 10, 5),
-(6, 3, 10, 5),
-(8, 3, 10, 5);
 
 -- --------------------------------------------------------
 
@@ -230,7 +206,8 @@ CREATE TABLE `distributeitem` (
 
 INSERT INTO `distributeitem` (`recordId`, `safeHouseId`, `createdDate`, `approvalStatus`) VALUES
 (1, 1, '2022-03-26 12:01:47', 'p'),
-(2, 1, '2022-03-26 15:58:49', 'r');
+(2, 1, '2022-03-26 15:58:49', 'r'),
+(3, 1, '2022-03-27 09:44:34', 'p');
 
 -- --------------------------------------------------------
 
@@ -249,7 +226,9 @@ CREATE TABLE `distributeitemrecord` (
 
 INSERT INTO `distributeitemrecord` (`recordId`, `itemRecord`) VALUES
 (1, 42),
-(2, 43);
+(2, 43),
+(3, 45),
+(3, 46);
 
 -- --------------------------------------------------------
 
@@ -271,7 +250,8 @@ CREATE TABLE `distributeservice` (
 
 INSERT INTO `distributeservice` (`recordId`, `inventoryId`, `createdDate`, `approvalStatus`, `serviceRequestId`) VALUES
 (1, 1, '2022-03-26 03:08:36', 'a', 1),
-(2, 1, '2022-03-26 03:25:59', 'r', 2);
+(2, 1, '2022-03-26 03:25:59', 'r', 2),
+(3, 1, '2022-03-27 09:46:48', 'p', 5);
 
 -- --------------------------------------------------------
 
@@ -497,7 +477,7 @@ CREATE TABLE `dmc` (
 --
 
 INSERT INTO `dmc` (`dmcID`, `empName`, `empAddress`, `empEmail`, `isAssigned`, `empTele`) VALUES
-(1, 'DMC', 'Vidya Mawatha, Colombo 00700', 'dmc@gmail.com', 'n', '');
+(1, 'DMC', 'Vidya Mawatha, Colombo 00700', 'dmc@gmail.com', 'y', '');
 
 -- --------------------------------------------------------
 
@@ -547,13 +527,15 @@ CREATE TABLE `donationreqnotice` (
 
 INSERT INTO `donationreqnotice` (`recordId`, `safehouseId`, `title`, `numOfFamilies`, `numOfPeople`, `createdDate`, `approvedDate`, `note`, `appovalStatus`, `remark`) VALUES
 (1, 1, 'Bolossagama Safe House Need Your Donations', 7, 33, '2022-03-26 02:36:55', '2022-03-26 12:18:57', '', 'a', NULL),
-(2, 1, 'Bolossagama Safe House Need Your Donations', 7, 33, '2022-03-26 02:37:36', '2022-03-26 12:19:20', '', 'u', NULL),
+(2, 1, 'Bolossagama Safe House Need Your Donations', 7, 33, '2022-03-26 02:37:36', '2022-03-26 23:30:52', '', 'a', NULL),
 (3, 1, 'Bolossagama Safe House Need Your Donations', 7, 33, '2022-03-26 02:38:17', '2022-03-26 12:19:39', '', 'a', NULL),
 (4, 1, 'Bolossagama Safe House Need Your Donations', 7, 32, '2022-03-26 12:00:50', NULL, '', 'n', NULL),
 (5, 1, 'Bolossagama Safe House Need Your Donations', 7, 32, '2022-03-26 12:01:10', '2022-03-26 12:19:43', '', 'a', NULL),
 (6, 3, 'Bombuwala Safe House Need Your Donations', 5, 27, '2022-03-26 13:11:07', '2022-03-26 13:11:35', '', 'a', NULL),
 (7, 1, 'Bolossagama Safe House Need Your Donations', 4, 17, '2022-03-26 15:57:58', NULL, '', 'n', NULL),
-(8, 2, 'Koholana South Safe House Needs Your Donations', 8, 30, '2022-03-26 16:33:59', NULL, '', 'n', NULL);
+(8, 2, 'Koholana South Safe House Needs Your Donations', 8, 30, '2022-03-26 16:33:59', NULL, '', 'n', NULL),
+(9, 1, 'Bolossagama Safe House Needs Your Donations', 8, 40, '2022-03-27 08:16:41', NULL, '', 'n', NULL),
+(10, 1, 'Bolossagama Safe House Needs Your Donations', 6, 28, '2022-03-27 09:44:58', NULL, '', 'n', NULL);
 
 -- --------------------------------------------------------
 
@@ -569,6 +551,18 @@ CREATE TABLE `dvfinaldamage` (
   `ent` int(11) NOT NULL DEFAULT 0,
   `infra` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dvfinaldamage`
+--
+
+INSERT INTO `dvfinaldamage` (`dvfinalincidentId`, `gndvId`, `hf`, `he`, `ent`, `infra`) VALUES
+(1, 5, 0, 0, 0, 0),
+(1, 5, 0, 0, 0, 0),
+(1, 5, 0, 0, 0, 0),
+(2, 5, 0, 0, 0, 0),
+(2, 5, 0, 0, 0, 0),
+(2, 5, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -586,6 +580,18 @@ CREATE TABLE `dvfinalimpact` (
   `injured` int(11) NOT NULL,
   `missing` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dvfinalimpact`
+--
+
+INSERT INTO `dvfinalimpact` (`dvfinalincidentId`, `gndvId`, `afam`, `apeople`, `deaths`, `hos`, `injured`, `missing`) VALUES
+(1, 5, 0, 0, 0, 0, 0, 0),
+(1, 5, 0, 0, 0, 0, 0, 0),
+(1, 5, 0, 0, 0, 0, 0, 0),
+(2, 5, 0, 0, 0, 0, 0, 0),
+(2, 5, 0, 0, 0, 0, 0, 0),
+(2, 5, 0, 0, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -609,6 +615,14 @@ CREATE TABLE `dvfinalincident` (
   `dmcremarks` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `dvfinalincident`
+--
+
+INSERT INTO `dvfinalincident` (`dvfinalincidentId`, `startDate`, `endDate`, `disaster`, `cause`, `dvId`, `remarks`, `incidentId`, `timestamp`, `disapproved`, `disremarks`, `dmcapproved`, `dmcremarks`) VALUES
+(1, '2022-03-27', '2022-03-27', '', '', 10, '', 2, '2022-03-27 16:08:03', 'p', NULL, 'p', NULL),
+(2, '2022-03-27', '2022-03-27', '', '', 10, '', 2, '2022-03-28 07:34:35', 'p', NULL, 'p', NULL);
+
 -- --------------------------------------------------------
 
 --
@@ -622,6 +636,18 @@ CREATE TABLE `dvfinalrelief` (
   `cook` int(11) NOT NULL DEFAULT 0,
   `emer` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `dvfinalrelief`
+--
+
+INSERT INTO `dvfinalrelief` (`dvfinalincidentId`, `gndvId`, `dry`, `cook`, `emer`) VALUES
+(1, 5, 4567, 0, 567),
+(1, 5, 0, 0, 23),
+(1, 5, 900, 4545, 0),
+(2, 5, 4567, 0, 567),
+(2, 5, 0, 0, 23),
+(2, 5, 900, 4545, 0);
 
 -- --------------------------------------------------------
 
@@ -637,6 +663,18 @@ CREATE TABLE `dvfinalsafehouse` (
   `sffamily` int(11) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
+--
+-- Dumping data for table `dvfinalsafehouse`
+--
+
+INSERT INTO `dvfinalsafehouse` (`dvfinalincidentId`, `gndvId`, `numofsafe`, `sfpeople`, `sffamily`) VALUES
+(1, 5, 0, 6, 0),
+(1, 5, 0, 0, 0),
+(1, 5, 0, 0, 0),
+(2, 5, 0, 6, 0),
+(2, 5, 0, 0, 0),
+(2, 5, 0, 0, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -649,15 +687,16 @@ CREATE TABLE `fundraising` (
   `description` varchar(150) NOT NULL,
   `goal` decimal(9,2) NOT NULL,
   `isActive` char(1) DEFAULT 'y',
-  `createdTime` datetime DEFAULT current_timestamp()
+  `createdTime` datetime DEFAULT current_timestamp(),
+  `division` int(3) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `fundraising`
 --
 
-INSERT INTO `fundraising` (`recordId`, `title`, `description`, `goal`, `isActive`, `createdTime`) VALUES
-(1, 'test', 'test test', '100000.00', 'y', '2022-03-25 12:37:33');
+INSERT INTO `fundraising` (`recordId`, `title`, `description`, `goal`, `isActive`, `createdTime`, `division`) VALUES
+(1, 'test', 'test test', '100000.00', 'y', '2022-03-25 12:37:33', 10);
 
 -- --------------------------------------------------------
 
@@ -857,19 +896,7 @@ CREATE TABLE `gnmsg` (
 --
 
 INSERT INTO `gnmsg` (`msgId`, `timestamp`, `message`, `gndvId`) VALUES
-(1, '2021-12-27 21:10:34', 'asdasasdasd', 5),
-(2, '2021-12-27 21:25:30', '22222', 5),
-(3, '2022-01-06 19:13:42', 'asasas', 5),
-(4, '2022-01-06 22:12:30', 'fgfg', 5),
-(5, '2022-01-06 22:57:52', 'sdfsdf ssdaf', 5),
-(6, '2022-01-06 23:01:36', 'dfdff affdf', 5),
-(7, '2022-01-06 23:08:08', 'aaaaaaaaaaaaaaaaaaaa', 5),
-(8, '2022-01-06 23:08:27', 'ffffff', 5),
-(9, '2022-01-06 23:08:46', 'ggg', 5),
-(10, '2022-01-06 23:09:44', 'sdsd', 5),
-(11, '2022-01-06 23:10:01', 'hhh', 5),
-(12, '2022-01-09 15:46:40', 'sddfsgdfsgfg', 5),
-(13, '2022-01-09 15:46:49', 'sdfgsdfgsdfg dfgsdfgsdfg', 5);
+(1, '2022-03-27 03:03:27', 'There will be an official meeting for elder people in Bolossagama on 2 nd of April,2022 at 10:00 am in Grama niladaari office,Bolossagama', 5);
 
 -- --------------------------------------------------------
 
@@ -1075,7 +1102,10 @@ INSERT INTO `inventoryitem` (`recId`, `itemId`, `inventoryId`, `quantity`, `tran
 (41, 7, 1, '1.00', '2022-03-26 03:27:06', ''),
 (42, 5, 1, '-30.00', '2022-03-26 12:01:47', ''),
 (43, 7, 1, '-1.00', '2022-03-26 15:58:49', ''),
-(44, 7, 1, '1.00', '2022-03-26 15:59:36', 'Goods distribution rejected');
+(44, 7, 1, '1.00', '2022-03-26 15:59:36', 'Goods distribution rejected'),
+(45, 6, 1, '-5.00', '2022-03-27 09:44:34', ''),
+(46, 9, 1, '-2.00', '2022-03-27 09:44:34', ''),
+(47, 27, 1, '-20.00', '2022-03-27 09:46:48', '');
 
 -- --------------------------------------------------------
 
@@ -1127,7 +1157,7 @@ INSERT INTO `item` (`itemId`, `itemName`, `unitType`) VALUES
 (4, 'Gasoline ', 3),
 (5, 'Rice', 1),
 (6, 'Lentils', 1),
-(7, '500 l Water Tank', 4),
+(7, 'Water Tank 500 L', 4),
 (8, 'Mini generator', 4),
 (9, 'Soya', 1),
 (10, 'Water Bowser', 4),
@@ -1139,7 +1169,8 @@ INSERT INTO `item` (`itemId`, `itemName`, `unitType`) VALUES
 (31, 'Safety Jacket', 4),
 (34, 'Chair', 4),
 (35, 'Water Bottles', 4),
-(36, 'Portable Sink', 4);
+(36, 'Portable Sink', 4),
+(37, 'Bed Sheets', 4);
 
 -- --------------------------------------------------------
 
@@ -1205,6 +1236,7 @@ CREATE TABLE `noticeitem` (
 
 INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
 (1, 'Tent', '3.00'),
+(2, 'Diesel', '50.00'),
 (2, 'Generator', '5.00'),
 (3, 'Generator', '3.00'),
 (4, 'Lentils', '10.00'),
@@ -1213,7 +1245,10 @@ INSERT INTO `noticeitem` (`noticeId`, `itemName`, `quantitity`) VALUES
 (6, 'Tent', '3.00'),
 (6, 'Water Bottles', '50.00'),
 (7, 'Soya', '2.00'),
-(8, 'Portable Sink', '2.00');
+(8, 'Portable Sink', '2.00'),
+(9, 'Bed Sheets', '5.00'),
+(10, 'Bed Sheets', '5.00'),
+(10, 'Portable Sink', '1.00');
 
 -- --------------------------------------------------------
 
@@ -1347,7 +1382,7 @@ INSERT INTO `propservice` (`propcomId`, `dstype`, `dsev`) VALUES
 CREATE TABLE `relief` (
   `reliefId` int(5) NOT NULL,
   `date` date NOT NULL,
-  `description` int(11) DEFAULT NULL,
+  `description` varchar(11) DEFAULT NULL,
   `incidentId` int(5) DEFAULT NULL,
   `f1` int(11) DEFAULT 0,
   `f2` int(11) DEFAULT 0,
@@ -1371,7 +1406,7 @@ CREATE TABLE `relief` (
 --
 
 INSERT INTO `relief` (`reliefId`, `date`, `description`, `incidentId`, `f1`, `f2`, `f3`, `f4`, `f5`, `cooked`, `emergency`, `fam`, `people`, `death`, `injured`, `missing`, `remarks`, `gndvId`, `timestamp`) VALUES
-(1, '2022-01-13', 0, NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, '2022-01-13 13:18:24');
+(1, '2022-01-13', '0', NULL, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 5, '2022-01-13 13:18:24');
 
 -- --------------------------------------------------------
 
@@ -1430,6 +1465,13 @@ CREATE TABLE `resident` (
   `gndvId` int(5) DEFAULT NULL,
   `residentNIC` char(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `resident`
+--
+
+INSERT INTO `resident` (`residentId`, `residentName`, `residentTelNo`, `residentAddress`, `gndvId`, `residentNIC`) VALUES
+(3, 'Piyadasa Sirisena', '0719867887', 'No 12, School Lane, Bolossagama', 5, '621060920v');
 
 -- --------------------------------------------------------
 
@@ -1547,7 +1589,9 @@ CREATE TABLE `safehousestatus` (
 INSERT INTO `safehousestatus` (`r_id`, `safehouseId`, `adultMale`, `adultFemale`, `children`, `disabledPerson`, `note`, `createdDate`) VALUES
 (1, 1, 15, 12, 3, 2, '', '2022-03-26 11:50:49'),
 (2, 1, 10, 12, 3, 0, '', '2022-03-26 15:49:23'),
-(3, 1, 8, 7, 2, 0, '', '2022-03-26 15:53:56');
+(3, 1, 8, 7, 2, 0, '', '2022-03-26 15:53:56'),
+(4, 1, 15, 18, 6, 1, '', '2022-03-27 08:16:15'),
+(5, 1, 10, 12, 4, 2, '', '2022-03-27 09:42:24');
 
 -- --------------------------------------------------------
 
@@ -1568,9 +1612,15 @@ CREATE TABLE `safehousestatusrequesteditem` (
 
 INSERT INTO `safehousestatusrequesteditem` (`statusId`, `itemId`, `quantity`, `status`) VALUES
 (1, 5, '30.00', 's'),
+(5, 5, '55.00', 'n'),
 (1, 6, '10.00', 's'),
+(5, 6, '5.00', 's'),
 (3, 7, '1.00', 's'),
-(3, 9, '2.00', 's');
+(4, 7, '1.00', 'n'),
+(3, 9, '2.00', 's'),
+(5, 9, '2.00', 's'),
+(4, 36, '1.00', 's'),
+(4, 37, '5.00', 's');
 
 -- --------------------------------------------------------
 
@@ -1591,7 +1641,8 @@ INSERT INTO `servicedistributeitemrecord` (`recordId`, `itemRecordId`) VALUES
 (1, 36),
 (1, 37),
 (2, 38),
-(2, 39);
+(2, 39),
+(3, 47);
 
 -- --------------------------------------------------------
 
@@ -1618,7 +1669,12 @@ CREATE TABLE `servicerequest` (
 INSERT INTO `servicerequest` (`r_id`, `inventoryId`, `requestedDate`, `currentStatus`, `acceptedBy`, `acceptedDate`, `requestingFrom`, `note`, `createdDate`) VALUES
 (1, 2, '2022-03-29', 'p', NULL, NULL, 0, '', '2022-03-26'),
 (2, 3, '2022-03-27', 'p', NULL, NULL, 0, '', '2022-03-26'),
-(3, 1, '2022-03-31', 'p', NULL, NULL, 0, '', '2022-03-26');
+(3, 1, '2022-03-31', 'p', NULL, NULL, 0, '', '2022-03-26'),
+(4, 4, '2022-03-28', 'p', NULL, NULL, 0, '', '2022-03-27'),
+(5, 3, '2022-03-31', 'p', NULL, NULL, 0, '', '2022-03-27'),
+(6, 2, '2022-03-31', 'p', NULL, NULL, 0, '', '2022-03-27'),
+(7, 1, '2022-04-01', 'd', NULL, NULL, 13, '', '2022-03-27'),
+(8, 1, '2022-03-30', 'd', NULL, NULL, 0, '', '2022-03-27');
 
 -- --------------------------------------------------------
 
@@ -1643,7 +1699,16 @@ INSERT INTO `servicerequestitem` (`r_id`, `itemId`, `quantity`, `acceptedBy`, `a
 (1, 10, '1.00', 1, '2022-03-26'),
 (2, 5, '50.00', NULL, NULL),
 (2, 7, '1.00', NULL, NULL),
-(3, 27, '50.00', NULL, NULL);
+(3, 27, '50.00', NULL, NULL),
+(4, 2, '2.00', NULL, NULL),
+(4, 31, '10.00', NULL, NULL),
+(5, 23, '5.00', NULL, NULL),
+(5, 27, '20.00', NULL, NULL),
+(6, 10, '1.00', NULL, NULL),
+(7, 29, '60.00', NULL, NULL),
+(7, 34, '50.00', NULL, NULL),
+(8, 23, '2.00', NULL, NULL),
+(8, 36, '2.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -2112,7 +2177,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `alert`
 --
 ALTER TABLE `alert`
-  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deathcompensation`
@@ -2142,13 +2207,13 @@ ALTER TABLE `dismgtofficer`
 -- AUTO_INCREMENT for table `distributeitem`
 --
 ALTER TABLE `distributeitem`
-  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `distributeservice`
 --
 ALTER TABLE `distributeservice`
-  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `recordId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `district`
@@ -2202,13 +2267,13 @@ ALTER TABLE `domsg`
 -- AUTO_INCREMENT for table `donationreqnotice`
 --
 ALTER TABLE `donationreqnotice`
-  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `recordId` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `dvfinalincident`
 --
 ALTER TABLE `dvfinalincident`
-  MODIFY `dvfinalincidentId` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `dvfinalincidentId` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fundraising`
@@ -2238,7 +2303,7 @@ ALTER TABLE `gnfinalincident`
 -- AUTO_INCREMENT for table `gnmsg`
 --
 ALTER TABLE `gnmsg`
-  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `msgId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `gramaniladari`
@@ -2268,7 +2333,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `inventoryitem`
 --
 ALTER TABLE `inventoryitem`
-  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `recId` int(3) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `inventorymgtofficer`
@@ -2280,7 +2345,7 @@ ALTER TABLE `inventorymgtofficer`
 -- AUTO_INCREMENT for table `item`
 --
 ALTER TABLE `item`
-  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `itemId` int(2) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `propertycompensation`
@@ -2316,7 +2381,7 @@ ALTER TABLE `resetpass`
 -- AUTO_INCREMENT for table `resident`
 --
 ALTER TABLE `resident`
-  MODIFY `residentId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `residentId` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `responsibleperson`
@@ -2340,13 +2405,13 @@ ALTER TABLE `safehouse`
 -- AUTO_INCREMENT for table `safehousestatus`
 --
 ALTER TABLE `safehousestatus`
-  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `r_id` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `servicerequest`
 --
 ALTER TABLE `servicerequest`
-  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `r_id` int(4) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `unit`

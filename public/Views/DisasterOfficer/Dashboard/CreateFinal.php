@@ -45,7 +45,7 @@ $array = explode("/", $_GET["url"]);
         .inputs_in_table {
             width: 50px;
             padding: 5px 10px;
-            type: number;
+
 
         }
     </style>
@@ -74,7 +74,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="crusttype">Date of commenced</label>
                                 </div>
                                 <div class="col9 row-content" style="align-items: center;">
-                                    <input type="date" id="datePicker1" name="datePicker1" class="datesInForms">
+                                    <input type="date" id="datePicker1" name="datePicker1" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                                 </div>
                             </div>
                             <div class="row">
@@ -82,7 +82,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="crusttype">End date</label>
                                 </div>
                                 <div class="col9 row-content" style="align-items: center;">
-                                    <input type="date" id="datePicker2" name="datePicker2" class="datesInForms">
+                                    <input type="date" id="datePicker2" name="datePicker2" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                                 </div>
                             </div>
                             <div class="row">
@@ -133,9 +133,6 @@ $array = explode("/", $_GET["url"]);
                                                 <th style="width:50px;">Hospitalized</th>
                                                 <th style="width:50px;">Injured</th>
                                                 <th style="width:50px;">Missing</th>
-
-
-
                                             </tr>
                                         </thead>
 
@@ -323,7 +320,11 @@ $array = explode("/", $_GET["url"]);
             document.getElementById('datePicker1').valueAsDate = new Date();
             document.getElementById('datePicker2').valueAsDate = new Date();
 
-
+            $("#datePicker1").on("change", function() {
+                var from = $("#datePicker1").val();
+                var input = document.getElementById("datePicker2");
+                input.setAttribute("min", from);
+            });
             getFinalDetails();
 
             $(".fam").each(function() {
@@ -960,17 +961,18 @@ $array = explode("/", $_GET["url"]);
                     var gnid = $(this).find("input[id^='relemer']").data('gnid');
 
                     var h = {};
-                    h['reldry'] = damhfull;
-                    h['relcooked'] = damhpartial;
-                    h['relemer'] = damenter;
+                    h['reldry'] = reldry;
+                    h['relcooked'] = relcooked;
+                    h['relemer'] = relemer;
                     h['gnId'] = gnid;
                     object['relief'][count++] = h;
                 });
+                object['incidentId'] = "<?php echo end($array) ?>";
                 var json = JSON.stringify(object);
                 console.log(json);
                 $.ajax({
                     type: "POST",
-                    url: "<?php echo API; ?>deathcomp",
+                    url: "<?php echo API; ?>disasterOfficer/final",
                     data: json,
                     headers: {
                         'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'

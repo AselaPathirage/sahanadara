@@ -73,7 +73,7 @@
                     </table>
                     <div class="container">
                         <div class="row">
-                            <div class="col6">
+                            <div class="col6" id="safehouses">
                                 <div class="box row-content">
                                     <h4>Bellapitiya Maha Vidyalaya</h4>
                                     <p>Bellapitiya, Horana</p>
@@ -100,19 +100,36 @@
                                     </div>
                                 </div>
 
-                                <!-- <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div>
-                    <div class="box">asdaeeeqqqqqqqqqqqqqqqqqqsdasd</div> -->
                             </div>
                             <div class="col6" style="overflow: auto">
-                                <div class="box row-content" style="height:100%;min-height: 300px;">
-                                    <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
+                                <div class="box row-content" style="height:100%;min-height: 300px;" id="view">
+                                    <h3 id="nosafe" class='text-center'>Select safehouse to view</h3>
+                                    <div id="details">
+                                        <div class="row activelbl" style="text-align: right; margin: 0 auto;display:block">
+                                            <a class="btn_active">Status : Active</a>
+                                        </div>
+                                        <h4 class="name">Bellapitiya Maha Vidyalaya</h4>
+                                        <p class="address">Bellapitiya, Horana</p>
+                                        <!-- <p>Telephone Number - <span id="tel">0778765367</span> </p> -->
+
+                                        <div id="responsible">
+                                            <h4 style="font-size:15px;">Responsible Person</h4>
+                                            <p>Name - <span id="rname"></span></p>
+                                            <p>Contact Number - <span id="rtele"></span></p>
+
+                                        </div>
+
+                                        <div id="recent">
+                                            <h4 style="font-size:15px;padding-bottom:0;">Recent Status</h4>
+                                            <h6 style="font-size:12px;margin: 3px 0;">Last updated - <span id="date"></span></h6>
+                                            <p>Adult Males - <span id="male"></span></p>
+                                            <p>Adult Females - <span id="female"></span></p>
+                                            <p>Children - <span id="children"></span></p>
+                                            <p>Disabled - <span id="disabled"></span></p>
+                                            <p>Note - <span id="note"></span></p><br>
+
+                                        </div>
                                     </div>
-                                    <h4>Bellapitiya Maha Vidyalaya</h4>
-                                    <p>Bellapitiya, Horana</p>
-                                    <p>Telephone Number - 0778765367</p>
-                                    <p>Families - 30</p>
-                                    <p>People - 100</p>
                                 </div>
                             </div>
                         </div>
@@ -134,12 +151,153 @@
                 $(thisPage).addClass("active");
             });
 
+            getSafeHouses();
+            $('#details').hide();
+            $('#nosafe').show();
+            // $('#view').html("<h3 class='text-center'>Select safehouse to view</h3>");
+            $('.btn_views').on('click', function() {
+                $('#nosafe').hide();
+                $('#details').show();
+                $(".activelbl").show();
+                $("#recent").show();
+                $("#responsible").show();
+
+
+                let sfid = $(this).data('safeid');
+                getSafeHouseById(sfid);
+                getSafeHouseRecent(sfid)
+                getResponsible(sfid);
+            })
+
+
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+
+        function getSafeHouses() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>dmcsafehouse",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#safehouses").empty();
+            if (output == null) {
+                var $sample = $(" <p> Safehouses not assigned </p> ");
+                $("#safehouses").append($sample);
+            } else {
+                for (var i = 0; i < output.length; i++) {
+                    let obj = output[i];
+                    console.log(obj);
+                    var $sample = "";
+                    $sample += "<div class='box row-content' style='position:relative;'><h4>" + obj['safeHouseName'] + "</h4><p>" + obj['safeHouseAddress'] + "</p>";
+                    $sample += "<div class='row' style='text-align: right; margin: 0 auto;display:block'>";
+                    if (obj['isUsing'] == "y") {
+                        $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+                    }
+                    $sample += "<a class='btn_views' data-safeid='" + obj['safeHouseID'] + "'>View</a></div></div>";
+                    $("#safehouses").append($sample);
+
+                }
+            }
+        }
+
+        function getSafeHouseById(i) {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>dmcsafehouse/" + i,
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            if (output == null) {
+                // $('#view').html("<h3 class='text-center'>Select safehouse to view</h3>");
+
+            } else {
+                console.log(output['safeHouseName']);
+                $(".name").text(output['safeHouseName'])
+                $(".address").text(output['safeHouseAddress'])
+                if (output['isUsing'] == 'n') {
+                    $(".activelbl").hide();
+                }
+                // $("#tel").text(output['safeHouseTelno'])
+            }
+        }
+
+        function getSafeHouseRecent(i) {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>recentsh/" + i,
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            if (output == null ) {
+                $("#recent").hide();
+                // var $sample = $(" <p> No recent activity found</p> ");
+                // $("#recent").append($sample);
+
+            } else if (output['isUsing'] == 'y') {
+                console.log(output['safeHouseName']);
+
+                $("#male").text(output['adultMale']);
+                $("#female").text(output['adultFemale']);
+                $("#children").text(output['children']);
+                $("#disabled").text(output['disabledPerson']);
+                $("#note").text(output['note']);
+                $("#date").text(output['createdDate']);
+
+            } else if (output['isUsing'] == 'n') {
+                $("#recent").hide();
+            }
+        }
+
+        function getResponsible(i) {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>responsible/" + i,
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            if (output == null) {
+                $("#responsible").hide();
+                // var $sample = $(" <h4> Responsible person not assigned.</h4> ");
+                // $("#responsible").append($sample);
+
+            } else if (output['isUsing'] == 'y') {
+                // console.log(output['safeHouseName']);
+
+                $("#rname").text(output['empName'])
+                $("#rtele").text(output['empTele'])
+
+
+            } else if (output['isUsing'] == 'n') {
+                // $("#responsible").empty();
+                $("#responsible").hide();
+
+            }
         }
     </script>
 </body>

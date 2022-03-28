@@ -65,7 +65,7 @@ Route::GET("residents", array("GramaNiladari@getResident"));
 Route::GET("gnmsg", array("GramaNiladari@getMessages"));
 Route::GET("gnalert", array("GramaNiladari@getAlerts"));
 Route::GET("residentcount", array("GramaNiladari@getResidentCount"));
-Route::GET("compcount", array("GramaNiladari@getCompCount"));
+Route::GET("gncompcount", array("GramaNiladari@getCompCount"));
 Route::GET("recentsh", array("GramaNiladari@getSafehouseRecent"));
 Route::GET("responsible", array("GramaNiladari@getResponsible", "DisasterOfficer@getResponsible"));
 Route::GET("disaster", array("GramaNiladari@getDisaster","DisasterOfficer@getDisaster"));
@@ -95,6 +95,13 @@ Route::DELETE("residents/{id}", array("GramaNiladari@deleteResident"));
 Route::GET("dmccomp", array("Dmc@getCompensations"));
 Route::GET("dmcprop/{id}", array("Dmc@getProperty"));
 Route::GET("dmcdeath/{id}", array("Dmc@getDeath"));
+Route::GET("incidentcount", array("Dmc@getIncidentCount"));
+Route::GET("safecount", array("Dmc@getSafeCount"));
+Route::GET("compcount", array("Dmc@getCompCount"));
+Route::GET("dmcsafehouse", array("Dmc@getSafeHouse"));
+Route::GET("dmcsafehouse/{id}", array("Dmc@getSafeHouseById"));
+Route::GET("recentsh/{id}", array("Dmc@getSafehouseRecent"));
+Route::GET("responsible/{id}", array("Dmc@getResponsible"));
 
 Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
 

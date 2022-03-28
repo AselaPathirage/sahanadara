@@ -216,6 +216,7 @@ class GramaNiladari extends ResponsiblePerson
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $results['pcount'] = $r;
+        // print_r($results) ;exit;
         $json = json_encode($results);
         echo $json;
     }

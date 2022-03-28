@@ -12,6 +12,8 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/searchselect.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -99,7 +101,7 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col7 box" style="margin:0 auto;">
-                    <form action="#" method="post">
+                    <form id="form">
                         <h1>New Alert</h1>
 
                         <div class="col10 text-center" style="margin: 10px auto;">
@@ -108,13 +110,7 @@
                             <textarea id="address" name="msg"></textarea>
 
                             <label for="gndivision">Select Divisions</label>
-                            <select id="gndivision" name="gndivision" multiple data-multi-select-plugin>
-                                <option value="All GN divisions" data-gnId="all">All</option>
-                                <!-- <option value="Mercedes" selected>Mercedes</option>
-                                                <option value="Hilux">Hilux</option>
-                                                <option value="Corsa">Corsa</option>
-                                                <option value="BMW">BMW</option>
-                                                <option value="Ferrari">Ferrari</option> -->
+                            <select id="gndivision" name="divisions[]" multiple="multiple">
                             </select>
 
 
@@ -137,8 +133,8 @@
 
                             <div class="row" style="justify-content: center;">
 
-                                <input type="submit" value="Send" class="btn-alerts" />
-                                <input type="reset" value="Cancel" class="btn-alerts" />
+                                <input id="submit" type="submit" value="Send" class="btn-alerts" />
+                                <input id="reset" type="reset" value="Cancel" class="btn-alerts" />
                             </div>
                         </div>
                     </form>
@@ -158,7 +154,21 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            $('#gndivision').select2();
+            var divOptions = "<option value='All Districts'>All Districts</option>";
+            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
+                $.each(result,function(i,district){
+                    divOptions += "<option value='"+district.name+"'>"+district.name+"</option>";
+                    $.each(district.division,function(j,division){
+                        divOptions += "<option value='"+division.name+"'>"+division.name+"</option>";
+                        $.each(division.gnArea, function(k,gnArea){
+                            divOptions += "<option value='"+gnArea.name+"'>"+gnArea.name+"</option>"; 
+                        })  
+                    })
+                });
+                $('#gndivision').html(divOptions);
+            })          
+            
         });
 
         let sidebar = document.querySelector(".sidebar");
@@ -166,6 +176,7 @@
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
         }
+
     </script>
 </body>
 

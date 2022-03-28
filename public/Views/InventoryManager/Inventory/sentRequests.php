@@ -167,7 +167,7 @@
                         let cell5 = row.insertCell(-1);
                         var attribute2 = document.createElement("a");
                         attribute2.id = obj['id'];
-                        attribute2.href = "viewRequest/" + obj['id'];
+                        attribute2.href = "viewSentRequest/" + obj['id'];
                         attribute2.target = "_blank"
                         attribute2.className = "btn_views";
                         attribute2.name = "View";
@@ -252,7 +252,7 @@
                 let cell5 = row.insertCell(-1);
                 var attribute2 = document.createElement("a");
                 attribute2.id = obj['id'];
-                attribute2.href = "viewRequest/" + obj['id'];
+                attribute2.href = "viewSentRequest/" + obj['id'];
                 attribute2.target = "_blank"
                 attribute2.className = "btn_views";
                 attribute2.name = "View";

@@ -503,17 +503,28 @@ class InventoryManager extends Employee{
             if(strtotime($r['requestedDate']) < strtotime($r['createdDate'])){
                 $r['status']='e';
             }
-            $sql= "(SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount,SUM(inventoryitem.quantity) AS quantity
+            $sql= "(SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount,SUM(inventoryitem.quantity) AS quantity,servicerequestitem.acceptedBy,servicerequestitem.acceptedDate
             FROM servicerequestitem,item,unit,inventoryitem
             WHERE servicerequestitem.itemId = item.itemId AND inventoryitem.itemId = item.itemId AND item.unitType = unit.unitId AND servicerequestitem.r_id = $serviceRequestId AND inventoryitem.inventoryId = $inventoryId GROUP BY servicerequestitem.r_id,servicerequestitem.itemId)
             UNION
-            (SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount, 0 AS quantity
+            (SELECT servicerequestitem.itemId,item.itemName,unit.unitName AS unit,servicerequestitem.quantity AS requestedAmount, 0 AS quantity,servicerequestitem.acceptedBy,servicerequestitem.acceptedDate
              FROM servicerequestitem,item,unit
              WHERE servicerequestitem.itemId = item.itemId AND item.unitType = unit.unitId AND servicerequestitem.r_id = $serviceRequestId AND servicerequestitem.itemId NOT IN (SELECT inventoryitem.itemId FROM inventoryitem WHERE inventoryitem.inventoryId = $inventoryId GROUP BY inventoryitem.itemId));";
-             $temp = $this->connection->query($sql);echo $sql;
+             $temp = $this->connection->query($sql);
              $requestItem = array();
              while($p = $temp-> fetch_assoc()) {
                 $p['itemId'] = Item::getItemCode($p['itemId']);
+                if($p['acceptedDate']==NULL){
+                    $p['acceptedDate']='Pending';
+                 }
+                if($p['acceptedBy']==NULL){
+                    $p['acceptedBy']='Pending';
+                 }else{
+                     $sql="SELECT divisionaloffice.divisionalSofficeName FROM divisionaloffice,inventory WHERE inventory.dvId=divisionaloffice.dvId AND inventory.inventoryId=".$p['acceptedBy'];
+                     $temp3=$this->connection->query($sql);
+                     $temp4=$temp3-> fetch_assoc();
+                     $p['acceptedBy']=$temp4['divisionalSofficeName'];
+                 }
                 array_push($requestItem,$p);
              }
              $id = ServiceRequestNotice::getServiceRequestNoticeCode($r['id']);

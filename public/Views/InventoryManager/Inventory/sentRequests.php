@@ -180,6 +180,7 @@
                         attribute.name = "delete";
                         attribute.value = obj['id'];
                         attribute.innerHTML = "delete";
+                        attribute.setAttribute("style", "cursor:pointer;");
                         cell11.innerHTML = obj['id'];
                         cell2.innerHTML = obj['requestingFrom'];
                         cell22.innerHTML = obj['createdDate'];
@@ -265,6 +266,7 @@
                 attribute.name = "delete";
                 attribute.value = obj['id'];
                 attribute.innerHTML = "delete";
+                attribute.setAttribute("style", "cursor:pointer;");
                 cell11.innerHTML = obj['id'];
                 cell2.innerHTML = obj['requestingFrom'];
                 cell22.innerHTML = obj['createdDate'];

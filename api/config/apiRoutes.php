@@ -102,6 +102,10 @@ Route::GET("dmcsafehouse", array("Dmc@getSafeHouse"));
 Route::GET("dmcsafehouse/{id}", array("Dmc@getSafeHouseById"));
 Route::GET("recentsh/{id}", array("Dmc@getSafehouseRecent"));
 Route::GET("responsible/{id}", array("Dmc@getResponsible"));
+Route::GET("safeHouseReport", array("Dmc@getSafeHouseReport"));
+Route::GET("safeHouseReport/{districtId}", array("Dmc@getSafeHouseReport"));
+Route::GET("safeHouseReport/{districtId}/{divisionId}", array("Dmc@getSafeHouseReport"));
+Route::GET("safeHouseReport/{districtId}/{divisionId}/{gnId}", array("Dmc@getSafeHouseReport"));
 
 Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
 
@@ -181,6 +185,7 @@ Route::POST("serviceRequest", array("InventoryManager@addServiceRequest"));
 Route::PUT("serviceRequest/decline/{requestId}", array("InventoryManager@declineServiceRequest"));
 Route::PUT("serviceRequest/accept/{requestId}", array("InventoryManager@acceptServiceRequest"));
 Route::PUT("item/{itemId}", array("InventoryManager@updateItem"));
+Route::DELETE("serviceRequest/{requestId}", array("InventoryManager@deleteServiceRequest"));
 
 // Div Sec
 Route::GET("inventorymgr", array("DivisionalSecretariat@getInventorymgr"));

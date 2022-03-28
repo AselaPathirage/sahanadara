@@ -194,7 +194,32 @@ WHERE
     }
 
 
-
+    public function getSafeHouseReport(array $data){
+        global $errorCode;
+        if(count($data['receivedParams'])==3){
+            $dsId=$data['receivedParams'][0];
+            $dvId=$data['receivedParams'][1];
+            $gndvId=$data['receivedParams'][2];
+            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId AND division.dvId=$dvId AND gndivision.gndvId=$gndvId";
+        }else if(count($data['receivedParams'])==2){
+            $dsId=$data['receivedParams'][0];
+            $dvId=$data['receivedParams'][1];
+            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId AND division.dvId=$dvId";
+        }else if(count($data['receivedParams'])==1){
+            $dsId=$data['receivedParams'][0];
+            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId";
+        }else{
+            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while($r = $excute-> fetch_assoc()) {
+            $r['safeHouseID'] = SafeHouse::getSafeHouseCode($r['safeHouseID']);
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
 
     public function approvecomp(array $data)
     {

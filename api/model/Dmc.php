@@ -221,6 +221,29 @@ WHERE
             exit();
         }
     }
+    public function approveinc(array $data)
+    {
+        global $errorCode;
+        // print_r($data);
+        // exit;
+
+        // $uid = $data['userId'];
+        $dmcremarks = $data['dmcremarks'];
+        $dmcapproved = $data['dmcapproved'];
+
+        $reportId = $data['reportId'];
+        // $residentId = $data['receivedParams'][0];
+        if (!empty($reportId)) {
+
+            $sql = "UPDATE `dvfinalincident` SET `dmcapproved`='$dmcapproved', `dmcremarks`='$dmcremarks' WHERE `dvfinalincidentId`='$reportId'";
+
+            $this->connection->query($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
 
 
     // Index page counts
@@ -271,7 +294,7 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
-        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId WHERE s.safeHouseID=".$safeId;
+        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId WHERE s.safeHouseID=" . $safeId;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $json = json_encode($r);
@@ -281,7 +304,7 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
-        $sql = "SELECT s.*,t.* FROM safehouse s JOIN safehousestatus t ON t.safehouseId=s.safeHouseID where s.safehouseId=".$safeId." ORDER BY t.createdDate DESC LIMIT 1";
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN safehousestatus t ON t.safehouseId=s.safeHouseID where s.safehouseId=" . $safeId . " ORDER BY t.createdDate DESC LIMIT 1";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $json = json_encode($r);
@@ -291,10 +314,119 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
-        $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID WHERE s.safehouseId=".$safeId."";
+        $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID WHERE s.safehouseId=" . $safeId . "";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $json = json_encode($r);
         echo $json;
+    }
+
+
+
+
+
+    // Incident Reporting 
+    public function getFinalReport(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        if (count($data['receivedParams']) == 0) {
+            $sql = "SELECT * FROM dvfinalincident WHERE dvfinalincident.disapproved='a';";
+        } elseif (count($data['receivedParams']) == 1) {
+            $recordId = $data['receivedParams'][0];
+            $sql = "SELECT * FROM dvfinalincident WHERE dvfinalincident.dvfinalincidentId=$recordId;";
+        } else {
+            http_response_code(200);
+            echo json_encode(array("code" => $errorCode['unableToHandle']));
+            exit();
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $recordId = $r['dvfinalincidentId'];
+            $sql = "SELECT * FROM dvfinalimpact WHERE dvfinalimpact.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['impact'] = $temp1;
+            $temp1 = array();
+            $sql = "SELECT * FROM dvfinalrelief WHERE dvfinalrelief.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['relief'] = $temp1;
+            $temp1 = array();
+            $sql = "SELECT * FROM dvfinalsafehouse WHERE dvfinalsafehouse.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['safehouse'] = $temp1;
+            $temp1 = array();
+            $sql = "SELECT * FROM dvfinaldamage WHERE dvfinaldamage.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['damage'] = $temp1;
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    public function divisionbyid(array $data)
+    {
+        global $errorCode;
+        if (count($data['receivedParams']) == 1) {
+            $recordId = $data['receivedParams'][0];
+            $sql = "SELECT * FROM division WHERE division.dvId=$recordId;";
+            $excute = $this->connection->query($sql);
+            $r = $excute->fetch_assoc();
+            $json = json_encode($r);
+            echo $json;
+        } else {
+            http_response_code(200);
+            echo json_encode(array("code" => $errorCode['unableToHandle']));
+            exit();
+        }
+    }
+    public function districtbydvid(array $data)
+    {
+        global $errorCode;
+        if (count($data['receivedParams']) == 1) {
+            $recordId = $data['receivedParams'][0];
+            $sql = "SELECT district.dsName FROM division,district WHERE district.dsId=division.dsId AND division.dvId=$recordId;";
+            $excute = $this->connection->query($sql);
+            $r = $excute->fetch_assoc();
+            $json = json_encode($r);
+            echo $json;
+        } else {
+            http_response_code(200);
+            echo json_encode(array("code" => $errorCode['unableToHandle']));
+            exit();
+        }
+    }
+    public function getgnbyid(array $data)
+    {
+        global $errorCode;
+        if (count($data['receivedParams']) == 1) {
+            $recordId = $data['receivedParams'][0];
+            $sql = "SELECT gndivision.gnDvName FROM gndivision WHERE gndivision.gndvId=$recordId;";
+            $excute = $this->connection->query($sql);
+            $r = $excute->fetch_assoc();
+            $json = json_encode($r);
+            echo $json;
+        } else {
+            http_response_code(200);
+            echo json_encode(array("code" => $errorCode['unableToHandle']));
+            exit();
+        }
     }
 }

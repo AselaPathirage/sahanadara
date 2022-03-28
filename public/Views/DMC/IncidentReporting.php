@@ -40,22 +40,22 @@
 
                                     </select>
                                 </th>
-                                <th>District
+                                <!-- <th>District
                                     <select id="status-filter" class="form-control">
                                         <option>All</option>
                                         <option>Kaluatara</option>
                                         <option>Gamapaha</option>
 
                                     </select>
-                                </th>
-                                <th>Divisional Sec office
+                                </th> -->
+                                <!-- <th>Divisional Sec office
                                     <select id="status-filter" class="form-control">
                                         <option>All</option>
                                         <option>Kaluatara</option>
                                         <option>Madurawala</option>
 
                                     </select>
-                                </th>
+                                </th> -->
                                 <th>Search
                                     <input type="text" id="search" placeholder="Search" title="Type " class="form-control">
                                 </th>
@@ -68,17 +68,16 @@
                         <table id="task-list-tbl" class="table">
                             <thead>
                                 <tr>
-                                    <th>Date/Time</th>
+                                    <th>Date</th>
                                     <th>Description</th>
-                                    <th>Approval Status</th>
-                                    <th>District</th>
                                     <th>Div S Office</th>
+                                    <th>Approval Status</th>
                                     <th>View</th>
 
                                 </tr>
                             </thead>
 
-                            <tbody>
+                            <tbody id="tbodyid">
 
                                 <tr id="task-1" class="task-list-row" data-task-id="1" data-user="Larry" data-status="In Progress" data-milestone="Milestone 2" data-priority="Urgent" data-tags="Tag 2">
                                     <td>10/24/2021 12:50</td>
@@ -169,13 +168,80 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            getReports();
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+
+        function getReports() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>incidentfinal",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            // console.log(output);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+
+            for (var i = 0; i < output.length; i++) {
+                let obj = output[i];
+                // console.log(obj);
+                let row = table.insertRow(-1);
+                let cell1 = row.insertCell(-1);
+                let cell2 = row.insertCell(-1);
+                let cell3 = row.insertCell(-1);
+                let cell4 = row.insertCell(-1);
+                let cell5 = row.insertCell(-1);
+
+                var attribute = document.createElement("a");
+                attribute.id = obj['dvfinalincidentId'];
+                attribute.target = "_blank";
+                attribute.href = "DVFinal/" + obj['dvfinalincidentId'];
+                attribute.className = "btn_views";
+                attribute.name = "view";
+                attribute.innerHTML = "View";
+                attribute.setAttribute("data-Id", obj['dvfinalincidentId'])
+
+                cell1.innerHTML = obj['timestamp'].split(" ")[0];
+                cell2.innerHTML = obj['disaster'];
+                cell3.innerHTML = getDVbyId(obj['dvId']);
+
+                let app = "";
+                if (obj['dmcapproved'] == 'a') {
+                    app = "Approved";
+                } else if (obj['dmcapproved'] == 'r') {
+                    app = "Rejected";
+                } else {
+                    app = "Pending";
+                }
+                cell4.innerHTML = app;
+                cell5.appendChild(attribute);
+
+            }
+        }
+
+        function getDVbyId(i) {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>divisionbyid/"+i,
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            return output['dvName'];
         }
     </script>
 </body>

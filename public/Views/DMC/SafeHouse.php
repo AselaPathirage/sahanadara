@@ -181,7 +181,7 @@
         function getSafeHouses() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>dmcsafehouse",
+                url: "<?php echo API; ?>safehouse",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -189,7 +189,7 @@
                 cache: false,
                 async: false
             }).responseText);
-            // console.log(output);
+            console.log(output);
             $("#safehouses").empty();
             if (output == null) {
                 var $sample = $(" <p> Safehouses not assigned </p> ");

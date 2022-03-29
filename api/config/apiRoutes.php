@@ -111,6 +111,13 @@ Route::GET("safeHouseReport", array("Dmc@getSafeHouseReport"));
 Route::GET("safeHouseReport/{districtId}", array("Dmc@getSafeHouseReport"));
 Route::GET("safeHouseReport/{districtId}/{divisionId}", array("Dmc@getSafeHouseReport"));
 Route::GET("safeHouseReport/{districtId}/{divisionId}/{gnId}", array("Dmc@getSafeHouseReport"));
+Route::GET("incidentReport", array("Dmc@getIncidentReport"));
+Route::GET("incidentReport/{districtId}", array("Dmc@getIncidentReport"));
+Route::GET("incidentReport/{districtId}/{divisionId}", array("Dmc@getIncidentReport"));
+Route::GET("incidentReport/{districtId}/{divisionId}/{gnId}", array("Dmc@getIncidentReport"));
+Route::GET("incidentReport/{districtId}/{divisionId}/{gnId}/none/{from}/{to}", array("Dmc@getIncidentReport"));
+Route::GET("incidentReport/{districtId}/{divisionId}/{gnId}/{incidentId}", array("Dmc@getIncidentReport"));
+Route::GET("incidentReport/{districtId}/{divisionId}/{gnId}/{incidentId}/{from}/{to}", array("Dmc@getIncidentReport"));
 
 Route::PUT("dmccompapprove", array("Dmc@approvecomp"));
 Route::PUT("dmcfinalapprove", array("Dmc@approveinc"));

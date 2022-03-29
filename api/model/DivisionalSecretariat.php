@@ -36,8 +36,8 @@ class DivisionalSecretariat extends Employee
                 $r = $execute->fetch_assoc();
                 $userId = $r["LAST_INSERT_ID()"];
                 $role = 2;
-                $sql = "INSERT INTO login VALUES ($userId,'" . md5($data['NIC']) . "','" . md5($password) . "','$tokenKey',$role)";
-                $this->connection->query($sql);
+                $sql = "INSERT INTO login VALUES ($userId,'" . md5($data['NIC']) . "','" . md5($password) . "','$tokenKey',$role)";$sql;
+                $this->connection->query($sql);echo $sql;
                 $body = "Please use these creadentials to login Sahanadara. You need to change your password after the login.<ul><li>User Name: " . $data['NIC'] . " </li><li>Password: $password </li></ul>";
                 $mail->emailBody("About your account", "Dear " . $data['firstname'], $body);
                 $mail->sendMail($data['email'], "Account Information");

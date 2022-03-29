@@ -813,5 +813,59 @@ class DivisionalSecretariat extends Employee
         }
     }
 
-    
+    // Incident Reporting 
+    public function getFinalReport(array $data)
+    {
+        global $errorCode;
+        $uid = $data['userId'];
+        if (count($data['receivedParams']) == 0) {
+            $sql = "SELECT * FROM dvfinalincident WHERE dvfinalincident.disapproved='a';";
+        } elseif (count($data['receivedParams']) == 1) {
+            $recordId = $data['receivedParams'][0];
+            $sql = "SELECT * FROM dvfinalincident WHERE dvfinalincident.dvfinalincidentId=$recordId;";
+        } else {
+            http_response_code(200);
+            echo json_encode(array("code" => $errorCode['unableToHandle']));
+            exit();
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $recordId = $r['dvfinalincidentId'];
+            $sql = "SELECT * FROM dvfinalimpact WHERE dvfinalimpact.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['impact'] = $temp1;
+            $temp1 = array();
+            $sql = "SELECT * FROM dvfinalrelief WHERE dvfinalrelief.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['relief'] = $temp1;
+            $temp1 = array();
+            $sql = "SELECT * FROM dvfinalsafehouse WHERE dvfinalsafehouse.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['safehouse'] = $temp1;
+            $temp1 = array();
+            $sql = "SELECT * FROM dvfinaldamage WHERE dvfinaldamage.dvfinalincidentId=$recordId";
+            $excute1 = $this->connection->query($sql);
+            $temp1 = array();
+            while ($p = $excute1->fetch_assoc()) {
+                $temp1[] = $p;
+            }
+            $r['damage'] = $temp1;
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
 }

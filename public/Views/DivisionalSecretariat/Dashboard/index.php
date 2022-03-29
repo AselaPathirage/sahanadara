@@ -22,11 +22,13 @@
         include_once('./public/Views/DivisionalSecretariat/includes/topnav.php'); 
         ?>
         <div class="space"></div>
+        <div class="space"></div>
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
         <div class="container">
             <center><h1>Welcome Divisional Secretariat Officer</h1></center>
+            <div class="space"></div>
             <!-- <div class="stat-row">
                 <div class="box">
                     <div class="right-side">
@@ -62,7 +64,7 @@
                 </div>
             </div> -->
             <section class="services">
-                <a href="">
+                <a href="<?php echo HOST; ?>DivisionalSecretariat/Dashboard/Incidents">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#ffb508">
                             <ion-icon name="videocam-outline">
@@ -83,7 +85,7 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="<?php echo HOST; ?>DivisionalSecretariat/Dashboard/Compensation">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#4eb7ff">
                             <ion-icon name="videocam-outline">
@@ -104,41 +106,20 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="<?php echo HOST; ?>DivisionalSecretariat/Dashboard/Donation">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#4eb7ff">
                             <ion-icon name="videocam-outline">
                                 <i class='bx bxs-report '></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                6
-                            </h2>
-                        </figure>
-                        <div class="services__content" style="margin-top: 150px;">
-                            <h2 class="services__title">
-                            Borrow Requests
-                            </h2>
-                            <!-- <p class="services__description">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
-                                        </p> -->
-                        </div>
-                    </div>
-                </a>
-                <a href="">
-                    <div class="services__box">
-                        <figure class="services__icon" style="--i:#4eb7ff">
-                            <ion-icon name="videocam-outline">
-                                <i class='bx bxs-report '></i>
-                                <!-- <i class="fas fa-hands-helping"></i> -->
-                            </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;" id="donationreqapproval">
                                 7
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 150px;">
                             <h2 class="services__title">
-                            Donation Requests
+                            Pending Donation Requests
                             </h2>
                             <!-- <p class="services__description">
                                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, ipsum nemo. Vel consequuntur ratione laborum.
@@ -209,7 +190,8 @@
                 $(thisPage).addClass("active");
             });
 
-            getAlerts();
+            //getAlerts();
+            getdonationreqapprovalCount();
             $(".close-alert").click(function(e) {
                 $(this).parent().remove();
                 e.preventDefault();
@@ -223,10 +205,44 @@
             sidebar.classList.toggle("active");
         }
 
-        function getAlerts() {
+        // function getAlerts() {
+        //     output = $.parseJSON($.ajax({
+        //         type: "GET",
+        //         url: "<?php echo API; ?>divsecalert",
+        //         dataType: "json",
+        //         headers: {
+        //             'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+        //         },
+        //         cache: false,
+        //         async: false
+        //     }).responseText);
+        //     console.log(output);
+        //     $("#bodyid").empty();
+        //     // var table = document.getElementById("bodyid");
+
+        //     for (var i = 0; i < 3; i++) {
+        //         let obj = output[i];
+        //         console.log(obj);
+        //         // let row = table.insertRow(-1);
+        //         // let cell1 = row.insertCell(-1);
+        //         // let cell2 = row.insertCell(-1);
+        //         // cell1.innerHTML = obj['timestamp'];
+        //         // cell2.innerHTML = obj['message'];
+        //         if (obj['onlyOfficers'] == 1) {
+        //             var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+        //         } else {
+        //             var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+        //         }
+
+        //         $("#bodyid").append($sample);
+
+        //     }
+        // }
+
+        function getdonationreqapprovalCount() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>divsecalert",
+                url: "<?php echo API; ?>donationreqapprovalcount",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -235,26 +251,7 @@
                 async: false
             }).responseText);
             console.log(output);
-            $("#bodyid").empty();
-            // var table = document.getElementById("bodyid");
-
-            for (var i = 0; i < 3; i++) {
-                let obj = output[i];
-                console.log(obj);
-                // let row = table.insertRow(-1);
-                // let cell1 = row.insertCell(-1);
-                // let cell2 = row.insertCell(-1);
-                // cell1.innerHTML = obj['timestamp'];
-                // cell2.innerHTML = obj['message'];
-                if (obj['onlyOfficers'] == 1) {
-                    var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
-                } else {
-                    var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
-                }
-
-                $("#bodyid").append($sample);
-
-            }
+            $("#donationreqapproval").text(output['c']);
         }
 
         

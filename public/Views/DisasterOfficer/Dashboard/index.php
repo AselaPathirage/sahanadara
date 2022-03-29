@@ -29,15 +29,15 @@
             
 
             <section class="services">
-                <a href="">
+                <a href="<?php echo HOST; ?>DisasterOfficer/Dashboard/IncidentReporting">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#ffb508">
                             <ion-icon name="videocam-outline">
                                 <i class='bx bxs-report '></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                5
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;" id="incidentreport">
+                                <!-- 5 -->
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 150px;">
@@ -50,15 +50,15 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="<?php echo HOST; ?>DisasterOfficer/Notice/Search">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#4eb7ff">
                             <ion-icon name="videocam-outline">
                                 <i class='bx bxs-report '></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;">
-                                6
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;" id="donationreq">
+                                <!-- 6 -->
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 150px;">
@@ -71,15 +71,15 @@
                         </div>
                     </div>
                 </a>
-                <a href="">
+                <a href="<?php echo HOST; ?>DisasterOfficer/SafeHouse/SafeHouseDetails">
                     <div class="services__box">
                         <figure class="services__icon" style="--i:#fd6494">
                             <ion-icon name="videocam-outline">
                                 <i class='bx bx-building-house '></i>
                                 <!-- <i class="fas fa-hands-helping"></i> -->
                             </ion-icon>
-                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;" id="safehouseCount">
-                                5
+                            <h2 class="services__title" style="color: black; font-size: 52px; font-weight: bold;" id="activesfs">
+                                <!-- 5 -->
                             </h2>
                         </figure>
                         <div class="services__content" style="margin-top: 150px;">
@@ -173,13 +173,15 @@
                 $(thisPage).addClass("active");
             });
 
-            getAlerts();
+            //getAlerts();
             $(".close-alert").click(function(e) {
                     $(this).parent().remove();
                     e.preventDefault();
             });
-
-            getSafehouseCount();
+            
+            getdonationreqCount();
+            getSafeCount();
+            getincidentreportCount();
 
         });
 
@@ -193,10 +195,44 @@
         //     e.preventDefault();
         // });
 
-        function getAlerts() {
+        // function getAlerts() {
+        //     output = $.parseJSON($.ajax({
+        //         type: "GET",
+        //         url: "<?php echo API; ?>doalert",
+        //         dataType: "json",
+        //         headers: {
+        //             'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+        //         },
+        //         cache: false,
+        //         async: false
+        //     }).responseText);
+        //     console.log(output);
+        //     $("#bodyid").empty();
+        //     // var table = document.getElementById("bodyid");
+
+        //     for (var i = 0; i < 3; i++) {
+        //         let obj = output[i];
+        //         console.log(obj);
+        //         // let row = table.insertRow(-1);
+        //         // let cell1 = row.insertCell(-1);
+        //         // let cell2 = row.insertCell(-1);
+        //         // cell1.innerHTML = obj['timestamp'];
+        //         // cell2.innerHTML = obj['message'];
+        //         if (obj['onlyOfficers'] == 1) {
+        //             var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+        //         } else {
+        //             var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
+        //         }
+
+        //         $("#bodyid").append($sample);
+
+        //     }
+        // }
+
+        function getSafeCount() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>doalert",
+                url: "<?php echo API; ?>safecount",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -205,32 +241,13 @@
                 async: false
             }).responseText);
             console.log(output);
-            $("#bodyid").empty();
-            // var table = document.getElementById("bodyid");
-
-            for (var i = 0; i < 3; i++) {
-                let obj = output[i];
-                console.log(obj);
-                // let row = table.insertRow(-1);
-                // let cell1 = row.insertCell(-1);
-                // let cell2 = row.insertCell(-1);
-                // cell1.innerHTML = obj['timestamp'];
-                // cell2.innerHTML = obj['message'];
-                if (obj['onlyOfficers'] == 1) {
-                    var $sample = $(" <div class='row-content alert-div alert-warning' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
-                } else {
-                    var $sample = $(" <div class='row-content alert-div' style='margin: 10px auto 2px;'><button type='button' class='close-alert'>×</button> <p> " + obj['msg'] + " </p><div style='text-align: right;font-size: 12px;'><p> " + obj['timestamp'] + " </p></div> </div > ");
-                }
-
-                $("#bodyid").append($sample);
-
-            }
+            $("#activesfs").text(output['c']);
         }
 
-        function getSafehouseCount() {
+        function getdonationreqCount() {
             output = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>SafehouseCount",
+                url: "<?php echo API; ?>donationreqcount",
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -238,12 +255,25 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output['count(s.SafeHouseID)']);
-            $("#SafehouseCount").empty();
-            // var table = document.getElementById("bodyid");
-            $("#SafehouseCount").text(output['count(s.SafeHouseID)']);
+            console.log(output);
+            $("#donationreq").text(output['c']);
         }
 
+        function getincidentreportCount() {
+            output = $.parseJSON($.ajax({
+                type: "GET",
+                url: "<?php echo API; ?>incidentreportcount",
+                dataType: "json",
+                headers: {
+                    'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
+                },
+                cache: false,
+                async: false
+            }).responseText);
+            console.log(output);
+            $("#incidentreport").text(output['c']);
+        }
+        //create function and call function
     </script>
 </body>
 </html>

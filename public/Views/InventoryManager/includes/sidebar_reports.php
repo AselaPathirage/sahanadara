@@ -12,11 +12,11 @@
                 <span class="links_name">Inventory Report</span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="<?php echo HOST; ?>/InventoryManager/Report/SafeHouseReport" id="safe">
                 <i class='bx bxs-report' ></i>
                 <span class="links_name">Safe House Report</span>
             </a>
-        </li>
+        </li> -->
     </ul>
 </div>

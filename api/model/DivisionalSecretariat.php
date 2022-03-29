@@ -813,7 +813,32 @@ class DivisionalSecretariat extends Employee
         }
     }
 
-    // Incident Reporting 
+    public function approveinc(array $data)
+    {
+        global $errorCode;
+        // print_r($data);
+        // exit;
+
+        // $uid = $data['userId'];
+        $dmcremarks = $data['dmcremarks'];
+        $dmcapproved = $data['dmcapproved'];
+
+        $reportId = $data['reportId'];
+        // $residentId = $data['receivedParams'][0];
+        if (!empty($reportId)) {
+
+            $sql = "UPDATE `dvfinalincident` SET `disapproved`='$dmcapproved', `disremarks`='$dmcremarks' WHERE `dvfinalincidentId`='$reportId'";
+
+            $this->connection->query($sql);
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
+            exit();
+        }
+    }
+
+
+    //Incident Reporting 
     public function getFinalReport(array $data)
     {
         global $errorCode;
@@ -868,4 +893,33 @@ class DivisionalSecretariat extends Employee
         $json = json_encode($results);
         echo $json;
     }
+
+    public function divisionbyid(array $data)
+    {
+        global $errorCode;
+        if (count($data['receivedParams']) == 1) {
+            $recordId = $data['receivedParams'][0];
+            $sql = "SELECT * FROM division WHERE division.dvId=$recordId;";
+            $excute = $this->connection->query($sql);
+            $r = $excute->fetch_assoc();
+            $json = json_encode($r);
+            echo $json;
+        } else {
+            http_response_code(200);
+            echo json_encode(array("code" => $errorCode['unableToHandle']));
+            exit();
+        }
+    }
+
+    public function getdonationreqapprovalCount(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT COUNT(d.recordId) AS c FROM donationreqnotice d WHERE d.appovalStatus='n'";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+
+
 }

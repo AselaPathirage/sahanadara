@@ -564,20 +564,20 @@ class DisasterOfficer extends Employee
         }
     }
 
-    public function getSafehouseCount(array $data)
-    {
-        $uid = $data['userId'];
-        // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
-        // $excute = $this->connection->query($sql);
-        // $r = $excute->fetch_assoc();
-        // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
-        // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
-        $sql = "SELECT count(s.safeHouseID) FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN divisionaloffice divoff ON g.dvId=divoff.dvId WHERE divoff.disasterManager=" . $uid;
-        $excute = $this->connection->query($sql);
-        $r = $excute->fetch_assoc();
-        $json = json_encode($r);
-        echo $json;
-    }
+    // public function getSafehouseCount(array $data)
+    // {
+    //     $uid = $data['userId'];
+    //     // $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
+    //     // $excute = $this->connection->query($sql);
+    //     // $r = $excute->fetch_assoc();
+    //     // SELECT a.*,d.* FROM alert a JOIN alertdisdivgn d ON d.alertId=a.msgId JOIN gndivision g ON g.gndvId=d.gndvId WHERE g.gramaNiladariID=1 ORDER BY a.timestamp DESC;
+    //     // SELECT a.* FROM alert a JOIN alertdisdivgn d ON d.gndvId=5 AND d.alertId=a.msgId ORDER BY a.timestamp DESC;
+    //     $sql = "SELECT count(s.safeHouseID) FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN divisionaloffice divoff ON g.dvId=divoff.dvId WHERE divoff.disasterManager=" . $uid;
+    //     $excute = $this->connection->query($sql);
+    //     $r = $excute->fetch_assoc();
+    //     $json = json_encode($r);
+    //     echo $json;
+    // }
 
 
     public function addIncidents(array $data)
@@ -1392,4 +1392,35 @@ WHERE
         $json = json_encode($results);
         echo $json;
     }
+
+    public function getSafeCount(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT COUNT(s.safeHouseID) AS c FROM safehouse s WHERE s.isUsing='y'";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+
+    public function getdonationreqCount(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT COUNT(d.recordId) AS c FROM donationreqnotice d";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+
+    public function getincidentreportCount(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT COUNT(m.initialId) AS c FROM initialincident m";
+        $excute = $this->connection->query($sql);
+        $r = $excute->fetch_assoc();
+        $json = json_encode($r);
+        echo $json;
+    }
+
 }

@@ -104,12 +104,13 @@
         <!-- ======================================================================================================================================= -->
         <!-- content frome below -->
         <!-- STATS -->
-        <center><a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn-fun">Manage safehouse</a></center>
         <div class="container">
             <div id="alertBox">
             </div>
             <div class="container" style="text-align: right;">
                 <div style="display:block;">
+                <a href="<?php echo HOST; ?>/DisasterOfficer/SafeHouse/addsafehouse" class="btn_blue">Manage safehouse</a>
+
                     <a class="btn_blue Click-here">Add Safe House</a>
                 </div>
             </div>

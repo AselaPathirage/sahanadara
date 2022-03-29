@@ -96,15 +96,15 @@ Route::GET("dmccomp", array("Dmc@getCompensations"));
 Route::GET("dmcprop/{id}", array("Dmc@getProperty"));
 Route::GET("dmcdeath/{id}", array("Dmc@getDeath"));
 Route::GET("incidentcount", array("Dmc@getIncidentCount"));
-Route::GET("safecount", array("Dmc@getSafeCount"));
+Route::GET("safecount", array("Dmc@getSafeCount" , "DisasterOfficer@getSafeCount"));
 Route::GET("compcount", array("Dmc@getCompCount"));
 Route::GET("dmcsafehouse", array("Dmc@getSafeHouse"));
 Route::GET("dmcsafehouse/{id}", array("Dmc@getSafeHouseById"));
 Route::GET("recentsh/{id}", array("Dmc@getSafehouseRecent"));
 Route::GET("responsible/{id}", array("Dmc@getResponsible"));
-Route::GET("incidentfinal", array("Dmc@getFinalReport"));
-Route::GET("incidentfinal/{reportId}", array("Dmc@getFinalReport"));
-Route::GET("divisionbyid/{id}", array("Dmc@divisionbyid"));
+Route::GET("incidentfinal", array("Dmc@getFinalReport" , "DivisionalSecretariat@getFinalReport"));
+Route::GET("incidentfinal/{reportId}", array("Dmc@getFinalReport" , "DivisionalSecretariat@getFinalReport"));
+Route::GET("divisionbyid/{id}", array("Dmc@divisionbyid" , "DivisionalSecretariat@divisionbyid"));
 Route::GET("districtbydvid/{id}", array("Dmc@districtbydvid"));
 Route::GET("getgnbyid/{id}", array("Dmc@getgnbyid"));
 Route::GET("safeHouseReport", array("Dmc@getSafeHouseReport"));
@@ -153,7 +153,6 @@ Route::GET("doprop/{id}", array("DisasterOfficer@getProperty"));
 Route::GET("dismgrcomp", array("DisasterOfficer@getCompensations"));
 Route::GET("docompreports", array("DisasterOfficer@getCompensationsforreports"));
 Route::GET("DOGnDivision", array("DisasterOfficer@getDOGNDivision"));
-Route::GET("SafehouseCount", array("DisasterOfficer@getSafehouseCount"));
 Route::GET("Safehouse/{id}", array("DisasterOfficer@getmySafehouse"));
 Route::PUT("rincident", array("DisasterOfficer@reportIntoIncident"));
 Route::PUT("docompapprove", array("DisasterOfficer@approvecomp"));
@@ -163,6 +162,8 @@ Route::PUT("incidentstatus", array("DisasterOfficer@changeIncidentStatus"));
 Route::PUT("safehousestatus", array("DisasterOfficer@changeSafehouseStatus"));
 Route::PUT("responsible/{id}", array("DisasterOfficer@updateResponsible"));
 Route::DELETE("responsible/{id}", array("DisasterOfficer@deleteResponsible"));
+Route::GET("donationreqcount", array("DisasterOfficer@getdonationreqCount"));
+Route::GET("incidentreportcount", array("DisasterOfficer@getincidentreportCount"));
 
 //Admin
 Route::GET("area", array("Admin@DBtoJson"));
@@ -216,6 +217,8 @@ Route::PUT("notice/{command}/{noticeId}", array("DivisionalSecretariat@commandNo
 Route::DELETE("fundraiser/{id}", array("DivisionalSecretariat@deleteFundraiser"));
 Route::GET("fundraiser/{id}", array("DivisionalSecretariat@getmyFundraiser"));
 Route::PUT("fundraiserstatus", array("DivisionalSecretariat@changeFundraiserStatus"));
+Route::PUT("divsecfinalapprove", array("DivisionalSecretariat@approveinc"));
+Route::GET("donationreqapprovalcount", array("DivisionalSecretariat@getdonationreqapprovalCount"));
 
 // District Sec
 Route::GET("dseccomp", array("DistrictSecretariat@getCompensations"));

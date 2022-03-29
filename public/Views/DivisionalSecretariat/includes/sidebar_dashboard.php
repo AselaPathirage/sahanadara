@@ -21,7 +21,7 @@
         <li>
             <a href="<?php echo HOST; ?>/DivisionalSecretariat/Dashboard/Incidents" id="Incidents">
                 <i class='bx bx-message-square-edit' ></i>
-                <span class="links_name">Incidents</span>
+                <span class="links_name">Incident Reporting</span>
             </a>
         </li>
         <li>

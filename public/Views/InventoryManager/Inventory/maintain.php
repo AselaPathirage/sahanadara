@@ -249,8 +249,8 @@
 
                                         </table>    -->
                                         <div class="row" style="justify-content: center;">
-                                            <input type="submit" value="Send" class="btn-alerts" />
-                                            <input type="reset" value="Reset" class="btn-alerts" />
+                                            <input type="submit" value="Send" class="form-control btn-alerts" />
+                                            <input type="reset" value="Reset" style="background-color: #eb6b34;" class="form-control btn-alerts" />
                                         </div>
                                     </div>
                                 </form>
@@ -309,8 +309,8 @@
                                         </table>                                      
                                         <div class="row" style="justify-content: center;">
                                             <input type="hidden" value="1" name="release" id="release">
-                                            <input type="submit" value="Update" class="btn-alerts" />
-                                            <input type="reset" value="Reset" class="btn-alerts" />
+                                            <input type="submit" value="Update" class="form-control btn-alerts" />
+                                            <input type="reset" value="Reset" style="background-color: #eb6b34;" class="form-control btn-alerts" />
                                         </div>
                                     </div>
                                 </form>

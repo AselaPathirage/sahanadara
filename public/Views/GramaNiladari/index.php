@@ -143,8 +143,8 @@
             console.log(output);
             $("#bodyid").empty();
             // var table = document.getElementById("bodyid");
-
-            for (var i = 0; i < 3; i++) {
+            if(output.length!=0){
+                for (var i = 0; i < 3; i++) {
                 let obj = output[i];
                 console.log(obj);
                 // let row = table.insertRow(-1);
@@ -161,10 +161,11 @@
                 $("#bodyid").append($sample);
 
             }
+            }
         }
 
         function getResidentCount() {
-            output = $.parseJSON($.ajax({
+            output2 = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>residentcount",
                 dataType: "json",
@@ -174,14 +175,14 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output['count(a.residentId)']);
+            console.log(output2['count(a.residentId)']);
             $("#residentCount").empty();
             // var table = document.getElementById("bodyid");
-            $("#residentCount").text(output['count(a.residentId)']);
+            $("#residentCount").text(output2['count(a.residentId)']);
         }
 
         function getCompCount() {
-            output = $.parseJSON($.ajax({
+            output3 = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>gncompcount",
                 dataType: "json",
@@ -191,14 +192,14 @@
                 cache: false,
                 async: false
             }).responseText);
-            var a = output['dcount']['count(a.deathId)'];
-            var bb = output['pcount']['count(a.propcomId)'];
+            var a = output3['dcount']['count(a.deathId)'];
+            var bb = output3['pcount']['count(a.propcomId)'];
             console.log(bb);
             // console.log(output['pcount']);
             // console.log(parseInt(output['dcount']['count(a.deathId)']) + parseInt(output['pcount']['count(a.propcomId)']));
             $("#compCount").empty();
             // var table = document.getElementById("bodyid");
-            $("#compCount").text(parseInt(output['dcount']['count(a.deathId)']) + parseInt(output['pcount']['count(a.propcomId)']));
+            $("#compCount").text(parseInt(output3['dcount']['count(a.deathId)']) + parseInt(output3['pcount']['count(a.propcomId)']));
         }
     </script>
 </body>

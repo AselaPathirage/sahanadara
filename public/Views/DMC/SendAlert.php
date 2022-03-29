@@ -158,11 +158,11 @@
             var divOptions = "<option value='All Districts'>All Districts</option>";
             $.getJSON('<?php echo HOST; ?>public/assets/json/data.json',function(result){
                 $.each(result,function(i,district){
-                    divOptions += "<option value='"+district.name+"'>"+district.name+"</option>";
+                    divOptions += "<option value='"+district.name+"' data-id='"+district.id+"'>"+district.name+"</option>";
                     $.each(district.division,function(j,division){
-                        divOptions += "<option value='"+division.name+"'>"+division.name+"</option>";
+                        divOptions += "<option value='"+division.name+"' data-id='"+district.id+"'>"+division.name+"</option>";
                         $.each(division.gnArea, function(k,gnArea){
-                            divOptions += "<option value='"+gnArea.name+"'>"+gnArea.name+"</option>"; 
+                            divOptions += "<option value='"+gnArea.name+"' data-id='"+district.id+"'>"+gnArea.name+"</option>"; 
                         })  
                     })
                 });

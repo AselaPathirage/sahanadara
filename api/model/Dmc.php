@@ -193,7 +193,65 @@ WHERE
         echo $json;
     }
 
+    public function getIncidentReport(array $data){
+        global $errorCode;
+        if (count($data['receivedParams']) == 6) {
+            $dsId = $data['receivedParams'][0];
+            $dvId = $data['receivedParams'][1];
+            $gndvId = $data['receivedParams'][2];
+            $incidentId = $data['receivedParams'][3];
+            $from = $data['receivedParams'][4];
+            $to = $data['receivedParams'][5];
+            if(strtolower($incidentId)=='none'){
+                $sql="SELECT initialincident.*,gndivision.gndvId,gndivision.gnDvName,disaster.disId,disaster.dis,division.dvId,division.dvName,district.dsId,district.dsName
+                FROM initialincident,gndivision,division,disaster,district
+                WHERE initialincident.disaster=disaster.disId AND initialincident.gndvId=gndivision.gndvId AND gndivision.dvId=division.dvId AND division.dsId=district.dsId AND initialincident.disoffapproved='a'  AND district.dsId=$dsId AND division.dvId=$dvId AND gndivision.gndvId=$gndvId AND DATE(initialincident.date) BETWEEN '$from' AND '$to';";
+            }else{
+                $sql="SELECT initialincident.*,gndivision.gndvId,gndivision.gnDvName,disaster.disId,disaster.dis,division.dvId,division.dvName,district.dsId,district.dsName
+                FROM initialincident,gndivision,division,disaster,district
+                WHERE initialincident.disaster=disaster.disId AND initialincident.gndvId=gndivision.gndvId AND gndivision.dvId=division.dvId AND division.dsId=district.dsId AND initialincident.disoffapproved='a'  AND district.dsId=$dsId AND division.dvId=$dvId AND gndivision.gndvId=$gndvId AND initialincident.incidentId=$incidentId AND DATE(initialincident.date) BETWEEN '$from' AND '$to';";
+            }
+        }else if (count($data['receivedParams']) == 4) {
+            $dsId = $data['receivedParams'][0];
+            $dvId = $data['receivedParams'][1];
+            $gndvId = $data['receivedParams'][2];
+            $incidentId = $data['receivedParams'][3];
+            $sql="SELECT initialincident.*,gndivision.gndvId,gndivision.gnDvName,disaster.disId,disaster.dis,division.dvId,division.dvName,district.dsId,district.dsName
+            FROM initialincident,gndivision,division,disaster,district
+            WHERE initialincident.disaster=disaster.disId AND initialincident.gndvId=gndivision.gndvId AND gndivision.dvId=division.dvId AND division.dsId=district.dsId AND initialincident.disoffapproved='a'  AND district.dsId=$dsId AND division.dvId=$dvId AND gndivision.gndvId=$gndvId AND initialincident.incidentId=$incidentId;";
 
+        }else if (count($data['receivedParams']) == 3) {
+            $dsId = $data['receivedParams'][0];
+            $dvId = $data['receivedParams'][1];
+            $gndvId = $data['receivedParams'][2];
+            $sql = "SELECT initialincident.*,gndivision.gndvId,gndivision.gnDvName,disaster.disId,disaster.dis,division.dvId,division.dvName,district.dsId,district.dsName
+            FROM initialincident,gndivision,division,disaster,district
+            WHERE initialincident.disaster=disaster.disId AND initialincident.gndvId=gndivision.gndvId AND gndivision.dvId=division.dvId AND division.dsId=district.dsId AND initialincident.disoffapproved='a' AND district.dsId=$dsId AND division.dvId=$dvId AND gndivision.gndvId=$gndvId";
+        } else if (count($data['receivedParams']) == 2) {
+            $dsId = $data['receivedParams'][0];
+            $dvId = $data['receivedParams'][1];
+            $sql = "SELECT initialincident.*,gndivision.gndvId,gndivision.gnDvName,disaster.disId,disaster.dis,division.dvId,division.dvName,district.dsId,district.dsName
+            FROM initialincident,gndivision,division,disaster,district
+            WHERE initialincident.disaster=disaster.disId AND initialincident.gndvId=gndivision.gndvId AND gndivision.dvId=division.dvId AND division.dsId=district.dsId AND initialincident.disoffapproved='a' AND district.dsId=$dsId AND division.dvId=$dvId";
+        } else if (count($data['receivedParams']) == 1) {
+            $dsId = $data['receivedParams'][0];
+            $sql = "SELECT initialincident.*,gndivision.gndvId,gndivision.gnDvName,disaster.disId,disaster.dis,division.dvId,division.dvName,district.dsId,district.dsName
+            FROM initialincident,gndivision,division,disaster,district
+            WHERE initialincident.disaster=disaster.disId AND initialincident.gndvId=gndivision.gndvId AND gndivision.dvId=division.dvId AND division.dsId=district.dsId AND initialincident.disoffapproved='a' AND district.dsId=$dsId";
+        } else {
+            $sql = "SELECT initialincident.*,gndivision.gndvId,gndivision.gnDvName,disaster.disId,disaster.dis,division.dvId,division.dvName,district.dsId,district.dsName
+            FROM initialincident,gndivision,division,disaster,district
+            WHERE initialincident.disaster=disaster.disId AND initialincident.gndvId=gndivision.gndvId AND gndivision.dvId=division.dvId AND division.dsId=district.dsId AND initialincident.disoffapproved='a';";
+        }
+        $excute = $this->connection->query($sql);
+        $results = array();
+        while ($r = $excute->fetch_assoc()) {
+            $r['safeHouseID'] = SafeHouse::getSafeHouseCode($r['safeHouseID']);
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
     public function getSafeHouseReport(array $data)
     {
         global $errorCode;

@@ -176,7 +176,7 @@
         });
         var output;
         getNotice();
-        getFundNotice();
+        //getFundNotice();
         function getNotice() {
             var val = getCookieValue('lan');
             output = $.parseJSON($.ajax({

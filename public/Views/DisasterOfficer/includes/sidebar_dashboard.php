@@ -18,12 +18,12 @@
                 <span class="links_name">Alerts</span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/messages" id="Messages">
             <i class='bx bx-message-dots'></i>
                 <span class="links_name">Messages</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/Incidents" id="Incidents">
                 <i class='bx bx-message-square-edit' ></i>

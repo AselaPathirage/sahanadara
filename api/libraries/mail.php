@@ -292,7 +292,7 @@ class mail{
                       <table border='0' cellpadding='0' cellspacing='0'>
                         <tr>
                           <td class='content-block'>
-                            <span class='apple-link'>webdms.live | Protection | Care | Law | Open</span>
+                            <span class='apple-link'>sahanadara.systems | Protection | Care | Law | Open</span>
                           </td>
                         </tr>
                         <tr>

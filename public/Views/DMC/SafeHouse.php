@@ -33,35 +33,22 @@
                         <thead>
                             <tr class="filters">
                                 <th>Active
-                                    <select id="assigned-user-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Active</option>
-                                        <option>Not Active</option>
-
+                                    <select id="status" class="form-control">
+                                        <option value="Any">All</option>
+                                        <option value="2">Active</option>
+                                        <option value="1">Inactive</option>
                                     </select>
                                 </th>
                                 <th>District
-                                    <select id="status-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Kaluatara</option>
-                                        <option>Gamapaha</option>
-
+                                    <select id="district" class="form-control">
                                     </select>
                                 </th>
                                 <th>Divisional Sec office
-                                    <select id="status-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Kaluatara</option>
-                                        <option>Madurawala</option>
-
+                                    <select id="division" class="form-control">
                                     </select>
                                 </th>
                                 <th>GN Division
-                                    <select id="status-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Kaluatara West</option>
-                                        <option>Madurawala South</option>
-
+                                    <select id="gnDivision" class="form-control">
                                     </select>
                                 </th>
 
@@ -74,13 +61,15 @@
                     <div class="container">
                         <div class="row">
                             <div class="col6" id="safehouses">
-                                <div class="box row-content">
+                                <!-- <div class="box row-content">
                                     <h4>Bellapitiya Maha Vidyalaya</h4>
                                     <p>Bellapitiya, Horana</p>
 
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>" class="btn_active">Active</a>
-                                        <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
+                                        <a href="/<?php //echo baseUrl; 
+                                                    ?>" class="btn_active">Active</a>
+                                        <a href="/<?php //echo baseUrl; 
+                                                    ?>" class="btn_views">View</a>
                                     </div>
                                 </div>
                                 <div class="box row-content">
@@ -88,7 +77,8 @@
                                     <p>Horana</p>
 
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
+                                        <a href="/<?php //echo baseUrl; 
+                                                    ?>" class="btn_views">View</a>
                                     </div>
                                 </div>
                                 <div class="box row-content">
@@ -96,9 +86,10 @@
                                     <p>Horana</p>
 
                                     <div class="row" style="text-align: right; margin: 0 auto;display:block">
-                                        <a href="/<?php echo baseUrl; ?>" class="btn_views">View</a>
+                                        <a href="/<?php //echo baseUrl; 
+                                                    ?>" class="btn_views">View</a>
                                     </div>
-                                </div>
+                                </div> -->
 
                             </div>
                             <div class="col6" style="overflow: auto">
@@ -142,7 +133,8 @@
 
     </section>
     <script>
-        var thisPage = "#safehouse";
+        var thisPage = "#safehouse",
+            output;
         $(document).ready(function() {
             $("#stats,#alerts").each(function() {
                 if ($(this).hasClass('active')) {
@@ -168,14 +160,108 @@
                 getSafeHouseRecent(sfid)
                 getResponsible(sfid);
             })
-
-
+            var distOptions = "<option value='Any'>Select District</option>";
+            $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                $.each(result, function(i, district) {
+                    distOptions += "<option value='" + district.dsId + "'>" + district.name + "</option>";
+                });
+                $('#district').html(distOptions);
+            });
+            $('#district').change(function() {
+                var val = $(this).val();
+                document.getElementById("division").selectedIndex = 0;;
+                var divOptions = "<option value='Any'>Select Division</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == val) {
+                            $.each(district.division, function(j, division) {
+                                divOptions += "<option value='" + division.dvId + "'>" + division.name + "</option>";
+                            })
+                        }
+                    });
+                    $('#division').html(divOptions);
+                });
+                viewDetails();
+            })
+            $('#division').change(function() {
+                var div = $(this).val();
+                var dist = $('#district').val();
+                var gnOptions = "<option value=''>Select GNDivision</option>";
+                $.getJSON('<?php echo HOST; ?>public/assets/json/data.json', function(result) {
+                    $.each(result, function(i, district) {
+                        if (district.dsId == dist) {
+                            $.each(district.division, function(j, division) {
+                                if (division.dvId == div) {
+                                    $.each(division.gnArea, function(k, gnArea) {
+                                        gnOptions += "<option value='" + gnArea.gndvId + "'>" + gnArea.name + "</option>";
+                                    })
+                                }
+                            })
+                        }
+                    });
+                    $('#gnDivision').html(gnOptions);
+                    viewDetails();
+                })
+            })
+            $('#status').change(function() {
+                viewDetails();
+            })
+            $('#gnDivision').change(function() {
+                viewDetails();
+            })
         });
 
         let sidebar = document.querySelector(".sidebar");
         let sidebarBtn = document.querySelector(".sidebarBtn");
         sidebarBtn.onclick = function() {
             sidebar.classList.toggle("active");
+        }
+        getSafeHouses()
+        viewDetails()
+
+        function viewDetails() {
+            var districtVal = $('#district').val();
+            var divisionVal = $('#division').val();
+            var gnVal = $('#gnDivision').val();
+            var status = $('#status').val();
+            var display = "";
+            $("#safehouses").empty();
+            $.each(output, function(i, district) {
+                if ((district.id == districtVal || districtVal == "Any") || (!districtVal || !divisionVal || !status || !gnVal)) {
+                    $.each(district.division, function(j, division) {
+                        $.each(division.gnArea, function(k, gnArea) {
+                            if ((division.id == divisionVal || divisionVal == "Any") || (!districtVal || !divisionVal || !status)) {
+                                $.each(gnArea.safeHouse, function(k, safeHouse) {
+                                    console.log(status)
+                                    if ((gnArea.id == gnVal) || (!districtVal || !divisionVal || !status || !gnVal)) {
+                                        if (status == "Any") {
+                                            if (safeHouse.active == "Yes") {
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
+                                            } else {
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
+                                            }
+                                        } else if (status == 2 && safeHouse.active == "No") {
+                                            if (safeHouse.active == "Yes") {
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
+                                            } else {
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
+                                            }
+
+                                        } else if (status == 1 && safeHouse.active == "Yes") {
+                                            if (safeHouse.active == "Yes") {
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
+                                            } else {
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
+                                            }
+                                        }
+                                    }
+                                });
+                            }
+                        });
+                    });
+                }
+            });
+            $('#safehouses').html(display);
         }
 
         function getSafeHouses() {
@@ -189,26 +275,26 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
-            $("#safehouses").empty();
-            if (output == null) {
-                var $sample = $(" <p> Safehouses not assigned </p> ");
-                $("#safehouses").append($sample);
-            } else {
-                for (var i = 0; i < output.length; i++) {
-                    let obj = output[i];
-                    console.log(obj);
-                    var $sample = "";
-                    $sample += "<div class='box row-content' style='position:relative;'><h4>" + obj['safeHouseName'] + "</h4><p>" + obj['safeHouseAddress'] + "</p>";
-                    $sample += "<div class='row' style='text-align: right; margin: 0 auto;display:block'>";
-                    if (obj['isUsing'] == "y") {
-                        $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
-                    }
-                    $sample += "<a class='btn_views' data-safeid='" + obj['safeHouseID'] + "'>View</a></div></div>";
-                    $("#safehouses").append($sample);
+            //console.log(output);
+            //$("#safehouses").empty();
+            // if (output == null) {
+            //     var $sample = $(" <p> Safehouses not assigned </p> ");
+            //     $("#safehouses").append($sample);
+            // } else {
+            //     for (var i = 0; i < output.length; i++) {
+            //         let obj = output[i];
+            //         console.log(obj);
+            //         var $sample = "";
+            //         $sample += "<div class='box row-content' style='position:relative;'><h4>" + obj['safeHouseName'] + "</h4><p>" + obj['safeHouseAddress'] + "</p>";
+            //         $sample += "<div class='row' style='text-align: right; margin: 0 auto;display:block'>";
+            //         if (obj['isUsing'] == "y") {
+            //             $sample += "<a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a>";
+            //         }
+            //         $sample += "<a class='btn_views' data-safeid='" + obj['safeHouseID'] + "'>View</a></div></div>";
+            //         $("#safehouses").append($sample);
 
-                }
-            }
+            //     }
+            // }
         }
 
         function getSafeHouseById(i) {
@@ -249,7 +335,7 @@
                 async: false
             }).responseText);
             console.log(output);
-            if (output == null ) {
+            if (output == null) {
                 $("#recent").hide();
                 // var $sample = $(" <p> No recent activity found</p> ");
                 // $("#recent").append($sample);

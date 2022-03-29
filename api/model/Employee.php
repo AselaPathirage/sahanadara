@@ -178,7 +178,7 @@ class Employee
                     UNION
                     (SELECT " . $roleTable[8]['primaryKey'] . " as empId,empEmail,empName,roleId FROM responsibleperson,role WHERE empEmail = '$email'  AND roleId= 8 )";
             $excute = $this->connection->query($sql);
-            echo $sql;
+            //echo $sql;
             if ($excute->num_rows == 0) {
                 http_response_code(412);
                 echo json_encode(array("code" => $errorCode['emailNotInUse']));
@@ -192,7 +192,7 @@ class Employee
             $sql = "INSERT INTO resetpass(empId,roleId,createdTime,valueIdentity) VALUES ($empId,$roleId,'$dateTime','$value')";
             $this->connection->query($sql);
             $mail = new mail();
-            $body = "Please follow this link to reset your password. Link is valid only for one day.If you didn't request for password change,please ignore this.Thank you!.<br> <a href='" . HOST . "ResetPassword?token=" . $value . "'>Click here</a>";
+            $body = "Please follow this link to reset your password. Link is valid only for one day.If you didn't request for password change,please ignore this.Thank you!.<br> <a href='" . HOST . "ResetPassword/token/" . $value . "'>Click here</a>";
             $mail->emailBody("Password reset Guidelines", "Dear " . $results['empName'], $body);
             $mail->sendMail($email, "Reset Password");
             echo json_encode(array("code" => $errorCode['success']));

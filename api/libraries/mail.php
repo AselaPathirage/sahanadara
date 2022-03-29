@@ -9,13 +9,13 @@ class mail{
         $this->email = new PHPMailer();
         //$this->email->SMTPDebug = 1;                   // Enable verbose debug output
         $this->email->isSMTP();                        // Set mailer to use SMTP
-        $this->email->Host       = 'svr2.educationhost.cloud';    // Specify main SMTP server
+        $this->email->Host       = 'smtp.gmail.com';    // Specify main SMTP server
         $this->email->SMTPAuth   = true;               // Enable SMTP authentication
-        $this->email->Username   = "no-reply@webdms.live" ;//'no-reply@webdms.live';     // SMTP username
-        $this->email->Password   = "HKfWoTOQ0p";//'QziR4t6v';         // SMTP password
+        $this->email->Username   = "sahanadarais14@gmail.com" ;//'no-reply@webdms.live';     // SMTP username
+        $this->email->Password   = "Sahanadara@14";//'QziR4t6v';         // SMTP password
         $this->email->SMTPSecure = 'tls';              // Enable TLS encryption, 'ssl' also accepted
         $this->email->Port       = 587; 
-        $this->email->setFrom('no-reply@webdms.live', 'Team Sahanadara');           // Set sender of the mail
+        $this->email->setFrom('sahanadarais14@gmail.com', 'Team Sahanadara');           // Set sender of the mail
         $this->email->isHTML(true);                                  
     }
 

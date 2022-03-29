@@ -321,8 +321,113 @@ class InventoryManager extends Employee{
             exit();
         }
     }
+    public function goodsTransactionReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $inventoryId = $this->inventory->getId();
+        if(count($data['receivedParams'])==2){
+            $from=$data['receivedParams'][0];
+            $to=$data['receivedParams'][1];
+            if(strtolower($from)=='beggining'){
+                if(strtolower($to)=='end'){
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId ORDER BY transactionDate";
+                }else{
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate)<='$to'  ORDER BY transactionDate";
+                }
+            }else{
+                if(strtolower($to)=='end'){
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate)>='$from'  ORDER BY transactionDate";
+                }else{
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate) BETWEEN '$from' AND '$to'  ORDER BY transactionDate";
+                }
+            }
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $r['itemId'] = Item::getItemCode($r['itemId']);
+                $results[] = $r;
+            }
+            $json = json_encode($results);
+            echo $json;
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit(); 
+        }
+    }
+    public function receivedGoodsReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $inventoryId = $this->inventory->getId();
+        if(count($data['receivedParams'])==2){
+            $from=$data['receivedParams'][0];
+            $to=$data['receivedParams'][1];
+            if(strtolower($from)=='beggining'){
+                if(strtolower($to)=='end'){
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND inventoryitem.quantity>0 ORDER BY transactionDate";
+                }else{
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate)<='$to' AND inventoryitem.quantity>0   ORDER BY transactionDate";
+                }
+            }else{
+                if(strtolower($to)=='end'){
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate)>='$from' AND inventoryitem.quantity>0   ORDER BY transactionDate";
+                }else{
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate) BETWEEN '$from' AND '$to' AND inventoryitem.quantity>0   ORDER BY transactionDate";
+                }
+            }
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $r['itemId'] = Item::getItemCode($r['itemId']);
+                $results[] = $r;
+            }
+            $json = json_encode($results);
+            echo $json;
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit(); 
+        }
+    }
+    public function sendingGoodsReport(array $data){
+        global $errorCode;
+        $uid = $data['userId'];
+        $this->inventory->setInfo($uid);
+        $inventoryId = $this->inventory->getId();
+        if(count($data['receivedParams'])==2){
+            $from=$data['receivedParams'][0];
+            $to=$data['receivedParams'][1];
+            if(strtolower($from)=='beggining'){
+                if(strtolower($to)=='end'){
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND inventoryitem.quantity<0 ORDER BY transactionDate";
+                }else{
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate)<='$to' AND inventoryitem.quantity<0   ORDER BY transactionDate";
+                }
+            }else{
+                if(strtolower($to)=='end'){
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate)>='$from' AND inventoryitem.quantity<0   ORDER BY transactionDate";
+                }else{
+                    $sql="SELECT item.itemId,item.itemName,unit.unitName,inventoryitem.quantity,DATE_FORMAT(inventoryitem.transactionDate,'%Y-%m-%d %h:%i %p')  AS transactionDate  FROM inventoryitem,item,unit WHERE inventoryitem.itemId=item.itemId AND item.unitType=unit.unitId AND inventoryitem.inventoryId=$inventoryId AND DATE(inventoryitem.transactionDate) BETWEEN '$from' AND '$to' AND inventoryitem.quantity<0   ORDER BY transactionDate";
+                }
+            }
+            $excute = $this->connection->query($sql);
+            $results = array();
+            while($r = $excute-> fetch_assoc()) {
+                $r['itemId'] = Item::getItemCode($r['itemId']);
+                $results[] = $r;
+            }
+            $json = json_encode($results);
+            echo $json;
+        }else{
+            http_response_code(200);                       
+            echo json_encode(array("code"=>$errorCode['attributeMissing']));
+            exit(); 
+        }
+    }
     public function updateInventory(array $data){
-        //print_r($data);
+        //print_r($data); 
     }
     public function getInventory(array $data){
         $uid = $data['userId'];

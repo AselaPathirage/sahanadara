@@ -180,9 +180,9 @@ Route::GET("serviceRequest/self", array("InventoryManager@viewSentServiceRequest
 Route::GET("serviceRequest/self/{requestId}", array("InventoryManager@viewSentServiceRequest"));
 Route::GET("serviceRequest/{requestId}", array("InventoryManager@getServiceRequest"));
 Route::GET("report/availableItemReport/{from}/{to}", array("InventoryManager@availableItemReport"));
-Route::GET("report/goodsTransactionReport", array("InventoryManager@goodsTransactionReport"));
-Route::GET("report/receivedGoodsReport", array("InventoryManager@receivedGoodsReport"));
-Route::GET("report/sendingGoodsReport", array("InventoryManager@sendingGoodsReport"));
+Route::GET("report/goodsTransactionReport/{from}/{to}", array("InventoryManager@goodsTransactionReport"));
+Route::GET("report/receivedGoodsReport/{from}/{to}", array("InventoryManager@receivedGoodsReport"));
+Route::GET("report/sendingGoodsReport/{from}/{to}", array("InventoryManager@sendingGoodsReport"));
 Route::GET("report/safeHouseReport/{safeHouseId}/{from}/{to}", array("InventoryManager@safeHouseReport"));
 Route::POST("item", array("InventoryManager@addItem"));
 Route::POST("inventory", array("InventoryManager@addInventory"));

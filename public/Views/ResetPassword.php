@@ -1,9 +1,12 @@
 <?php
+    $array = explode("/", $_GET["url"]);
     if(isset($_SESSION['userRole'])){
         header("location:".HOST."404");
     }
-    if(!isset($_GET['token'])){
-        header("location:".HOST."404");
+    if(count($array)<4){//print_r($array);//exit;
+        if(count($array)<=2){
+            header("location:".HOST."404");
+        }
     }
 ?>
 <!DOCTYPE html>
@@ -42,19 +45,19 @@
                                         <label for="newPass2">Confirm Password</label>
                                         <input type="password" id="newPass2" name="newPass2" required />
                                         <?php
-                                            if(isset($_GET['reply'])){
-                                                if($_GET['reply']==1){
+                                            if(strtolower($array[1])=='reply'){
+                                                if($array[2]==1){
                                                     echo "<p style='color:red'>Please input a new password</p>";
-                                                }elseif($_GET['reply']==2) {
+                                                }elseif($array[2]==2) {
                                                     echo "<p style='color:red'>Password reset link expired.</p>";
-                                                }elseif ($_GET['reply']==4){
+                                                }elseif ($array[2]==4){
                                                     echo "<p style='color:red'>Something went wrong. Please try again</p>";
                                                 }
                                             }
                                         ?>
                                         <p style="color: red;" id="messege"></p>
                                         <div class="login-bar"> 
-                                            <input type="hidden" name="code" value="<?php echo $_GET['token'] ?>">
+                                            <input type="hidden" name="code" value="<?php echo $array[2] ?>">
                                             <label>
                                                 <input type="checkbox" name="otherDevice" />
                                                 Logout from all other devices ?

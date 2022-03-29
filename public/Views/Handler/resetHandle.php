@@ -13,18 +13,18 @@ if(isset($_POST['submit'])){
         $response = json_decode($result,true);
         if(isset($response['code'])){
             if($response['code']== 806){
-                header("location:".HOST."forget?reply=3");
+                header("location:".HOST."forget/reply/3");
                 exit();
             }elseif($response['code']==815){
-                header("location:".HOST."forget?reply=2");
+                header("location:".HOST."forget/reply/2");
                 exit();
             }else{
-                header("location:".HOST."forget?reply=4");
+                header("location:".HOST."forget/reply/4");
                 exit();
             }
         }
     }else{
-        header("location:".HOST."forget?reply=1");
+        header("location:".HOST."forget/reply/1");
         exit();
     }
 }elseif(isset($_POST['reset'])){
@@ -52,15 +52,15 @@ if(isset($_POST['submit'])){
                 header("location:".HOST."staff");
                 exit();
             }elseif($response['code']==816){
-                header("location:".HOST."ResetPassword?reply=2");
+                header("location:".HOST."ResetPassword/reply/2");
                 exit();
             }else{
-                header("location:".HOST."ResetPassword?reply=4");
+                header("location:".HOST."ResetPassword/reply/4");
                 exit();
             }
         }
     }else{
-        header("location:".HOST."ResetPassword?reply=1");
+        header("location:".HOST."ResetPassword/reply/1");
         exit();
     }
 }

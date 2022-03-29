@@ -12,6 +12,7 @@
     if(isset($_SESSION['userRole'])){
         header("location:".HOST.$routes[$_SESSION['userRole']]);
     }
+    $array = explode("/", $_GET["url"]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,20 +48,20 @@
                                     <form action="<?php echo HOST; ?>Handler/resetHandle" method="post">
                                         <label for="e_email" id="email">Email Address</label>
                                         <?php
-                                            if(isset($_GET['reply'])){
-                                                if($_GET['reply']==1){
+                                            if(strtolower($array[1])=='reply'){
+                                                if($array[2]==1){
                                                     echo "<p style='color:red'>Please input a Email Address</p>";
-                                                }elseif($_GET['reply']==2) {
+                                                }elseif($array[2]==2) {
                                                     echo "<p style='color:red'>Unable to find this Email Address with associated account</p>";
-                                                }elseif ($_GET['reply']==3){
+                                                }elseif ($array[2]==3){
                                                     echo "<p>Password reset email send. Please follow the guidlines.</p>";
-                                                }elseif ($_GET['reply']==4){
+                                                }elseif ($array[2]==4){
                                                     echo "<p style='color:red'>Something went wrong. Please try again</p>";
                                                 }
                                             }
                                         ?>
                                         
-                                        <input type="email" id="e_email" name="e_email" required />
+                                        <input type="email" id="e_email" name="e_email" required='true' />
                                         <div class="login-bar"> 
                                             <input type="submit" name="submit" value="Send" class="btn-login" id="send"/>
                                             <a href="<?php echo HOST; ?>staff" class="forget-password" style="color: wheat;" id="login">Back to Login</a>

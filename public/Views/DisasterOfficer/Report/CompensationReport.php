@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/searchList.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -22,64 +23,40 @@
         include_once('./public/Views/DisasterOfficer/includes/topnav.php'); 
         ?>
         <div class="space"></div>
-        <!-- ======================================================================================================================================= -->
-        <!-- content frome below -->
-        <!-- STATS -->
+        <div class="space"></div>
         <div class="container">
-        <div class="box">
+            <div class="box">
                 <center>
                     <h1>Compensation Report</h1>
                 </center>
-                <form>
+                <form action="<?php echo HOST;?>/DisasterOfficer/Report/ViewCompensation" target="_blank">
                     <div class="row-content">
 
-                        <h2>Select the area</h2>
+                        <h2>Select </h2>
                         <div class="row">
-                            <div class="col3"><label for="crusttype">District</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="white">All</option>
-                                    <option value="wheat">Kaluatara</option>
-                                    <option value="thin">Gampaha</option>
-                                </select>
-                            </div>
-                            <div class="col3"><label for="crusttype">DS Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Horana</option>
-                                    <option value="white">Millaniya</option>
 
-                                </select>
-                            </div>
-                            <div class="col3"><label for="crusttype">GN Division</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Bellapitiya West</option>
-                                    <option value="white">Bellapitiya North</option>
-                                    <option value="thin">Horana North</option>
-                                </select>
-                            </div>
                             <div class="col3">
                                 <label for="crusttype">Type</label>
-                                <select id="crusttype" name="crust">
-                                    <option value="wheat">All</option>
-                                    <option value="wheat">Death</option>
-                                    <option value="white">Property</option>
+                                <select id="type" name="type">
+                                    <option value="all">All</option>
+                                    <option value="Death">Death</option>
+                                    <option value="Property">Property</option>
                                 </select>
                             </div>
                             <div class="col3">
-                                <label for="crusttype">Start Date</label>
-                                <input type="date" id="birthday" name="birthday">
+                                <label for="df">From</label>
+                                <input type="date" id="from" name="from">
                             </div>
                             <div class="col3">
-                                <label for="crusttype">End Date</label>
-                                <input type="date" id="birthday" name="birthday">
+                                <label for="crusttype">To</label>
+                                <input type="date" id="to" name="to">
                             </div>
                         </div>
 
                         <div class="row" style="justify-content: center;">
 
                             <input type="submit" value="Generate" class="btn-alerts" />
-                            <input type="reset" value="Cancel" class="btn-alerts" />
+                            <!-- <input type="reset" value="Cancel" class="btn-alerts" /> -->
                         </div>
                     </div>
 
@@ -87,6 +64,7 @@
             </div>
         </div>
     </section>
+    <script src="<?php echo HOST; ?>/public/assets/js/responsiblePersonAidReport.js"></script>
     <script>
         var thisPage = "#compensation";
         $(document).ready(function() {

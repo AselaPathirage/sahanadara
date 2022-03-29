@@ -11,10 +11,10 @@ $array = explode("/", $_GET["url"]);
     <meta charset="UTF-8">
     <title> Grama Niladari</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/main.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/dashboard_component.css">
-    <link rel="stylesheet" href="/<?php echo baseUrl; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/main.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_admin.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
@@ -412,11 +412,11 @@ $array = explode("/", $_GET["url"]);
             getFinal();
         });
 
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
+        // let sidebar = document.querySelector(".sidebar");
+        // let sidebarBtn = document.querySelector(".sidebarBtn");
+        // sidebarBtn.onclick = function() {
+        //     sidebar.classList.toggle("active");
+        // }
 
         function getFinal() {
             output = $.parseJSON($.ajax({
@@ -483,7 +483,7 @@ $array = explode("/", $_GET["url"]);
             if (obj !== null) {
                 $('#heirs-list').show();
                 for (var i = 0; i < obj.length; i++) {
-                    
+
                     var html = '';
                     html += "<div id='heir1'><div class='row'><div class='col3'><label for='fname'>Name</label></div><div class='col9'><input type='text' id='hname" + i + "' name='hname" + i + "' readonly></div></div><div class='row'><div class='col3'><label for='fname'>NIC</label></div><div class='col9'><input type='text' id='hnic" + i + "' name='hnic" + i + "' readonly></div></div>";
                     html += " <div class='row'><div class='col3'><label for='fname'>Relationship</label></div> <div class='col9'><input type='text' id='hrelationship" + i + "' name='hrelationship" + i + "' placeholder='' readonly></div></div><div class='row'><div class='col3'><label for='bank'>Bank</label></div><div class='col9'><input type='text' id='hbank" + i + "' name='hbank" + i + "' readonly></div></div>";
@@ -499,7 +499,7 @@ $array = explode("/", $_GET["url"]);
                     // $('#deev' + i).val(parseFloat(obj[i]['deev']));
 
                 }
-                
+
             }
 
 

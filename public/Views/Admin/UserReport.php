@@ -151,16 +151,13 @@
                 var str = [];
                 var formElement = document.querySelector("#generate");
                 var formData = new FormData(formElement);
-                var object = {};
+                var params = "";
                 formData.forEach(function(value, key){
-                    object[key] = value;
-                }); 
-                var json = JSON.stringify(object);
-                console.log(json);
+                    params= params + key + "="+ value+"&";
+                });
                 $("#generate").trigger("reset");
-                var userRole = object["user_role"];
-                getUsers(userRole,object);
-                renderUser(); 
+                var url = '<?php echo HOST; ?>/Admin/PrintReport?'+ params;
+                window.open(url, '_blank');
             });
 
         $('#user_role').change(function(){
@@ -192,139 +189,6 @@
                 $('#Gndivision').prop('disabled', true);
             }
         });
-
-        function getUsers(userRole,object){
-            var json = JSON.stringify(object);
-            if (userRole == 0){
-                output = $.parseJSON($.ajax({
-                    type: "GET",
-                    url: "<?php echo API; ?>user",
-                    dataType: "json", 
-                    headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                    cache: false,
-                    async: false
-                }).responseText);
-            }
-            if (userRole == 1){
-                var gndivision = object["Gndivision"];
-                if (gndivision == "null"){
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/1",
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    console.log(output);
-                }else{
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/filter/1/"+gndivision,
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    console.log(output);
-                }
-            }
-            if (userRole == 4){
-                var division = object["Division"];
-                if (division == "null"){
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/4",
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                }else{
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/filter/4/"+division,
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    console.log(output);
-                }
-            }
-            if (userRole == 6){
-                var division = object["Division"];
-                if (division == "null"){
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/6",
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    console.log(output);
-                }else{
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/filter/6/"+division,
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    console.log(output);
-                }
-            }
-            if (userRole == 3){
-                var district = object["District"];
-                if (district == "null" || district == ""){
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/3",
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    console.log(output);
-                }else{
-                    output = $.parseJSON($.ajax({
-                        type: "GET",
-                        url: "<?php echo API; ?>user/filter/3/"+district,
-                        dataType: "json", 
-                        headers: {'HTTP_APIKEY':'<?php echo $_SESSION['key'] ?>'},
-                        cache: false,
-                        async: false
-                    }).responseText);
-                    console.log(output);
-                }
-            }
-        }
-
-        function renderUser(){
-            var parent = document.getElementById('users');  
-            while (parent.hasChildNodes()){
-                parent.removeChild(parent.lastChild);
-            }
-            for (var i = 0; i < output.length; i++){
-                var district,division,gnDiv;
-                district = output[i]['dsId'];
-                division = output[i]['dvId'];
-                gnDiv = output[i]['gndvId'];
-                if(!district){
-                    district = "0";
-                }
-                if(!division){
-                    division = "0";
-                }
-                if(!gnDiv){
-                    gnDiv = "0";
-                }
-                let newChild = "<div class='box row-content userBox' data-role='"+output[i]['roleName']+"' data-empId='"+output[i]['empId']+"' data-roleId='"+output[i]['roleId']+"' data-district='"+district.toString()+"' data-division='"+division.toString()+"' data-gnDivision='"+gnDiv.toString()+"'><h4>"+output[i]['empName']+"</h4><p>"+output[i]['roleName']+"</p><p>"+output[i]['empAddress']+"</p><p>"+output[i]['empEmail']+"</p><p>"+output[i]['empTele']+"</p></div>";
-                parent.insertAdjacentHTML('beforeend', newChild);
-            }
-        }
     </script>
 </body>
 

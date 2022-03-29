@@ -136,7 +136,43 @@
 
             var vid = document.getElementById("video1");
             vid.playbackRate = 0.7;
-            //getFundNotice();
+            getFundNotice();
+
+
+
+            let $cards = $('.card_donation');
+
+            //open and close card when clicked on card
+            $cards.find('.js-expander').click(function() {
+                let $thisCard = $(this).closest('.card_donation');
+
+                if ($thisCard.hasClass('is-collapsed')) {
+                    $cards.not($thisCard).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
+                    $thisCard.removeClass('is-collapsed').addClass('is-expanded');
+
+                    if ($cards.not($thisCard).hasClass('is-inactive')) {
+                        //do nothing
+                    } else {
+                        $cards.not($thisCard).addClass('is-inactive');
+                    }
+
+                } else {
+                    $thisCard.removeClass('is-expanded').addClass('is-collapsed');
+                    $cards.not($thisCard).removeClass('is-inactive');
+                }
+            });
+
+            //close card when click on cross
+            $cards.find('.js-collapser').click(function() {
+                let $thisCard = $(this).closest('.card_donation');
+
+                $thisCard.removeClass('is-expanded').addClass('is-collapsed');
+                $cards.not($thisCard).removeClass('is-inactive');
+            });
+
+
+
+
         });
         var output;
         getNotice();
@@ -198,7 +234,7 @@
                     let currentAmout = obj['currentAmout'];
                     html += "<div class='card__inner js-expander'><div class='donation--container'><h1 id='donation--user" + i + "' class='donation--user'></h1><p id='donation--description" + i + "' style='padding-bottom: 10px'>Bellapitiya</p><span class='donation--title'>Reached:</span> <span id='donation--goal" + i + "' class='donation--goal'></span>";
                     html += "<div class='donation--bar'><div class='donation--rounded'><div id='donation--progress" + i + "' class='donation--progress' style='width: 0;'></div></div><div id='donation--number" + i + "' class='donation--number' style='left: 0;'></div><span id='donation--status" + i + "' class='donation--status'></span></div></div></div>";
-                    html += "<div class='card__expander'><i class='fa fa-close js-collapser'> </i><form class='form--container'><input id='donation--name' class='input_donate' type='text' placeholder='Enter name' name='donator'><input id='donation--amount" + i + "' class='input_donate' type='number' min='1' placeholder='Enter amount(Rs)' name='amount'><input id='donate' class='button_donate' type='submit' value='Donate' data-frid='" + recordId + "'></form></div>";
+                    html += "<div class='card__expander'><i class='fa fa-close js-collapser'> </i><form class='form--container'><input id='donation--name' class='input_donate' type='text' placeholder='Enter name' name='donator'><input id='donation--amount" + i + "' class='input_donate' type='number' min='1' placeholder='Enter amount(Rs)' name='amount'><input id='donate" + i + "' class='button_donate' type='submit' value='Donate' data-frid='" + recordId + "'></form></div>";
                     div.innerHTML = html;
                     // if (val == 'si') {
                     //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>දුරකතන අංකය -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";
@@ -238,7 +274,7 @@
                 donationStatus = document.getElementById("donation--status" + User.i),
                 donationAmount = document.getElementById("donation--amount" + User.i),
                 donationDescription = document.getElementById("donation--description" + User.i),
-                donate = document.getElementById("donate");
+                donate = document.getElementById("donate" + User.i);
 
             // How much percent to reach Goal
             var percent = percentage(User.donationCollect, User.donationGoal);
@@ -282,36 +318,6 @@
     </script>
     <script src="https://kit.fontawesome.com/9e8a3f781b.js" crossorigin="anonymous"></script>
     <script>
-        let $cards = $('.card_donation');
-
-        //open and close card when clicked on card
-        $cards.find('.js-expander').click(function() {
-            let $thisCard = $(this).closest('.card_donation');
-
-            if ($thisCard.hasClass('is-collapsed')) {
-                $cards.not($thisCard).removeClass('is-expanded').addClass('is-collapsed').addClass('is-inactive');
-                $thisCard.removeClass('is-collapsed').addClass('is-expanded');
-
-                if ($cards.not($thisCard).hasClass('is-inactive')) {
-                    //do nothing
-                } else {
-                    $cards.not($thisCard).addClass('is-inactive');
-                }
-
-            } else {
-                $thisCard.removeClass('is-expanded').addClass('is-collapsed');
-                $cards.not($thisCard).removeClass('is-inactive');
-            }
-        });
-
-        //close card when click on cross
-        $cards.find('.js-collapser').click(function() {
-            let $thisCard = $(this).closest('.card_donation');
-
-            $thisCard.removeClass('is-expanded').addClass('is-collapsed');
-            $cards.not($thisCard).removeClass('is-inactive');
-        });
-
         //Language translation part
         window.onload = async function() {
             var language = getCookieValue('lan');

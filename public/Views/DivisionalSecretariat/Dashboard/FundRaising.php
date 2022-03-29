@@ -371,7 +371,7 @@
                     if (obj['isActive'] == 'y') {
                         $sample += "checked";
                     }
-                    $sample += "/><label for='ios" + i + "'></label></div></div><h4>" + obj['recordId']+"-"+ obj['title'] + "</h4><p>" + obj['description'] + "</p><p>" + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
+                    $sample += "/><label for='ios" + i + "'></label></div></div><h4>" + obj['recordId']+"-"+ obj['title'] + "</h4><p>" + obj['description'] + "</p><p>Goal: " + obj['goal'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
                     if (obj['isActive'] == 'y') {
                         $sample += "<a class='btn_active' style='position: absolute; top:33px;right:95px;'>Status : Active</a>";
                     }

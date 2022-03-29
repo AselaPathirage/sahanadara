@@ -31,7 +31,7 @@
                 <center>
                     <h1>Safehouse Report</h1>
                 </center>
-                <form>
+                <form action="<?php echo HOST;?>/DMC/Report/ViewSafehouse" target="_blank">
                     <div class="row-content">
 
                         <h2>Select the area</h2>
@@ -57,7 +57,7 @@
                         <div class="row" style="justify-content: center;">
 
                             <input type="submit" value="Generate" class="btn-alerts" />
-                            <input type="reset" value="Cancel" class="btn-alerts" />
+                            <!-- <input type="reset" value="Cancel" class="btn-alerts" /> -->
                         </div>
                     </div>
 

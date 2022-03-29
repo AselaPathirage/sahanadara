@@ -148,6 +148,9 @@
             $('#nosafe').show();
             // $('#view').html("<h3 class='text-center'>Select safehouse to view</h3>");
             $('.btn_views').on('click', function() {
+                let sfid = $(this).data('safeid');
+                sfid=sfid.substring(2, sfid.length);
+                console.log(sfid);
                 $('#nosafe').hide();
                 $('#details').show();
                 $(".activelbl").show();
@@ -155,7 +158,6 @@
                 $("#responsible").show();
 
 
-                let sfid = $(this).data('safeid');
                 getSafeHouseById(sfid);
                 getSafeHouseRecent(sfid)
                 getResponsible(sfid);
@@ -298,7 +300,7 @@
         }
 
         function getSafeHouseById(i) {
-            output = $.parseJSON($.ajax({
+            output2 = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>dmcsafehouse/" + i,
                 dataType: "json",
@@ -308,15 +310,15 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
-            if (output == null) {
+            console.log(output2);
+            if (output2 == null) {
                 // $('#view').html("<h3 class='text-center'>Select safehouse to view</h3>");
 
             } else {
-                console.log(output['safeHouseName']);
-                $(".name").text(output['safeHouseName'])
-                $(".address").text(output['safeHouseAddress'])
-                if (output['isUsing'] == 'n') {
+                console.log(output2['safeHouseName']);
+                $(".name").text(output2['safeHouseName'])
+                $(".address").text(output2['safeHouseAddress'])
+                if (output2['isUsing'] == 'n') {
                     $(".activelbl").hide();
                 }
                 // $("#tel").text(output['safeHouseTelno'])
@@ -324,7 +326,7 @@
         }
 
         function getSafeHouseRecent(i) {
-            output = $.parseJSON($.ajax({
+            output3 = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>recentsh/" + i,
                 dataType: "json",
@@ -334,29 +336,29 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
-            if (output == null) {
+            console.log(output3);
+            if (output3 == null) {
                 $("#recent").hide();
                 // var $sample = $(" <p> No recent activity found</p> ");
                 // $("#recent").append($sample);
 
-            } else if (output['isUsing'] == 'y') {
-                console.log(output['safeHouseName']);
+            } else if (output3['isUsing'] == 'y') {
+                console.log(output3['safeHouseName']);
 
-                $("#male").text(output['adultMale']);
-                $("#female").text(output['adultFemale']);
-                $("#children").text(output['children']);
-                $("#disabled").text(output['disabledPerson']);
-                $("#note").text(output['note']);
-                $("#date").text(output['createdDate']);
+                $("#male").text(output3['adultMale']);
+                $("#female").text(output3['adultFemale']);
+                $("#children").text(output3['children']);
+                $("#disabled").text(output3['disabledPerson']);
+                $("#note").text(output3['note']);
+                $("#date").text(output3['createdDate']);
 
-            } else if (output['isUsing'] == 'n') {
+            } else if (output3['isUsing'] == 'n') {
                 $("#recent").hide();
             }
         }
 
         function getResponsible(i) {
-            output = $.parseJSON($.ajax({
+            output4 = $.parseJSON($.ajax({
                 type: "GET",
                 url: "<?php echo API; ?>responsible/" + i,
                 dataType: "json",
@@ -366,20 +368,20 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
-            if (output == null) {
+            console.log(output4);
+            if (output4 == null) {
                 $("#responsible").hide();
                 // var $sample = $(" <h4> Responsible person not assigned.</h4> ");
                 // $("#responsible").append($sample);
 
-            } else if (output['isUsing'] == 'y') {
+            } else if (output4['isUsing'] == 'y') {
                 // console.log(output['safeHouseName']);
 
-                $("#rname").text(output['empName'])
-                $("#rtele").text(output['empTele'])
+                $("#rname").text(output4['empName'])
+                $("#rtele").text(output4['empTele'])
 
 
-            } else if (output['isUsing'] == 'n') {
+            } else if (output4['isUsing'] == 'n') {
                 // $("#responsible").empty();
                 $("#responsible").hide();
 

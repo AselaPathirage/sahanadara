@@ -30,7 +30,7 @@ Route::GET("user/{data}/{data}", array("Admin@searchUser", "DistrictSecretariat@
 Route::GET("user/{data}", array("Admin@searchUser"));
 Route::GET("user/filter/{data}/{data}", array("Admin@getFilteredUser"));
 Route::GET("report", array("Employee@report"));
-Route::GET("profile", array("GramaNiladari@getProfileDetails", "DisasterOfficer@getProfileDetails"));
+Route::GET("profile", array("GramaNiladari@getProfileDetails", "DisasterOfficer@getProfileDetails","Dmc@getProfileDetails"));
 Route::GET("profile/{data}", array("DistrictSecretariat@getProfileDetails"));
 Route::GET("safehouse", array("GramaNiladari@getSafehouses", "DisasterOfficer@viewSafehouse", "InventoryManager@getSafeHouseAll", "DivisionalSecretariat@getSafeHouseAll", "Dmc@getSafeHouseAll"));
 Route::GET("safehouse/{safeHouseId}", array("DisasterOfficer@filterSafehouse", "InventoryManager@filterSafehouse"));
@@ -47,7 +47,7 @@ Route::PUT("resetPassword/admin", array("Admin@updatePassword"));
 Route::PUT("user", array("Admin@updateUser"));
 Route::PUT("user/office", array("Admin@changeUserOffice"));
 Route::PUT("resetPassword/districtsecretariat", array("DistrictSecretariat@updatePassword"));
-Route::PUT("profile", array("GramaNiladari@updateProfileDetails", "Admin@updateProfileDetails", "DistrictSecretariat@updateProfileDetails"));
+Route::PUT("profile", array("GramaNiladari@updateProfileDetails", "Admin@updateProfileDetails", "DistrictSecretariat@updateProfileDetails","Dmc@updateProfileDetails"));
 Route::PUT("notice/{id}", array("InventoryManager@updateNotice", "DisasterOfficer@updateNotice"));
 
 Route::POST("login", array("Employee@login"));

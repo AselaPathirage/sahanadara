@@ -119,6 +119,7 @@
                         success: function(result) {
                             $('#box').empty();
                             getRecords();
+                            location. reload();
                             if (result.code == 806) {
                                 alertGen("Record Updated Successfully!", 1);
                             } else {

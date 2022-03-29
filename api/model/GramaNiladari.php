@@ -140,7 +140,7 @@ class GramaNiladari extends ResponsiblePerson
         $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
-        $sql = "SELECT gnmsg.msgId,DATE_FORMAT(gnmsg.timestamp,'%Y-%m-%d %h:%i %p') AS timestamp,gnmsg.message,gnmsg.gndvId FROM gnmsg WHERE gnmsg.gndvId=" . $r['gndvId'] . " ORDER BY timestamp DESC";
+        $sql = "SELECT gnmsg.msgId,DATE_FORMAT(gnmsg.timestamp,'%Y-%m-%d %h:%i %p') AS timestamp,gnmsg.message,gnmsg.gndvId FROM gnmsg WHERE gnmsg.gndvId=" . $r['gndvId'] . " ORDER BY gnmsg.timestamp DESC";
         $excute = $this->connection->query($sql);
         $results = array();
         while ($r = $excute->fetch_assoc()) {
@@ -159,7 +159,19 @@ class GramaNiladari extends ResponsiblePerson
         $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
+        $sql = "SELECT resident.residentTelNo FROM resident,gndivision WHERE resident.gndvId=gndivision.gndvId AND gndivision.gndvId=" . $r['gndvId'];
+        $query = $this->connection->query($sql);
+        $sms = new SMS($this->connection);
+        $contact = array();
+        while ($row = $query->fetch_assoc()) {
+            $contact[] = $row['residentTelNo'];
+        }
+        $sms->addContact($contact, $msg);
+        $sms->sendAlert();
         $sql = "INSERT INTO gnmsg (message, gndvId ) VALUES ('$msg'," . $r['gndvId'] . ");";
+        // $sms = new SMS($this->connection);
+        // $sms->addContact(['94765693894'],"ghghghfd");
+        // $sms->sendAlert();
         if ($this->connection->query($sql)) {
             echo json_encode(array("code" => $errorCode['success']));
         } else {

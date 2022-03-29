@@ -30,7 +30,8 @@
                     <div class=" container col9">
                         <h1 class="title" id="header"></h1>
                         <h3 class=" sub" id="subHeader"></h3>
-                        <!-- <a href="<?php echo HOST; ?>/donate" class="btn_donate">Donate</a> -->
+                        <!-- <a href="<?php //echo HOST; 
+                                        ?>/donate" class="btn_donate">Donate</a> -->
                         <div class="space"></div>
                         <section class="services">
                             <a href="<?php echo HOST; ?>help">
@@ -51,7 +52,7 @@
                                     </div>
                                 </div>
                             </a>
-                            <a href="<?php echo HOST; ?>donation">
+                            <a href="<?php echo HOST; ?>donate">
                                 <div class="services__box">
                                     <figure class="services__icon" style="--i:#C60606">
                                         <ion-icon name="videocam-outline"><i class="fas fa-donate"></i></ion-icon>
@@ -93,7 +94,7 @@
                 <h1 id="topicTwo"></h1>
                 <div class="row text-center" style="justify-content: space-around;" id="box">
 
-                    
+
 
 
                 </div>
@@ -135,11 +136,11 @@
 
             var vid = document.getElementById("video1");
             vid.playbackRate = 0.7;
-            getFundNotice();
+            //getFundNotice();
         });
         var output;
         getNotice();
-
+        getFundNotice();
         function getNotice() {
             var val = getCookieValue('lan');
             output = $.parseJSON($.ajax({

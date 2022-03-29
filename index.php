@@ -11,9 +11,9 @@ date_default_timezone_set("Asia/Colombo");
 //     require  "public/index.php";
 // }
 
-define("baseUrl","sahanadara");
-define("HOST","http://localhost/sahanadara/");
-define("API","http://localhost/sahanadara/api/");
+define("baseUrl","sahanadara/sahanadara");
+define("HOST","http://localhost/sahanadara/sahanadara/");
+define("API","http://localhost/sahanadara/sahanadara/api/");
 
 require  "public/index.php";
 

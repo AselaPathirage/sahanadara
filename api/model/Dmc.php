@@ -194,26 +194,27 @@ WHERE
     }
 
 
-    public function getSafeHouseReport(array $data){
+    public function getSafeHouseReport(array $data)
+    {
         global $errorCode;
-        if(count($data['receivedParams'])==3){
-            $dsId=$data['receivedParams'][0];
-            $dvId=$data['receivedParams'][1];
-            $gndvId=$data['receivedParams'][2];
-            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId AND division.dvId=$dvId AND gndivision.gndvId=$gndvId";
-        }else if(count($data['receivedParams'])==2){
-            $dsId=$data['receivedParams'][0];
-            $dvId=$data['receivedParams'][1];
-            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId AND division.dvId=$dvId";
-        }else if(count($data['receivedParams'])==1){
-            $dsId=$data['receivedParams'][0];
-            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId";
-        }else{
-            $sql="SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID";
+        if (count($data['receivedParams']) == 3) {
+            $dsId = $data['receivedParams'][0];
+            $dvId = $data['receivedParams'][1];
+            $gndvId = $data['receivedParams'][2];
+            $sql = "SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId AND division.dvId=$dvId AND gndivision.gndvId=$gndvId";
+        } else if (count($data['receivedParams']) == 2) {
+            $dsId = $data['receivedParams'][0];
+            $dvId = $data['receivedParams'][1];
+            $sql = "SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId AND division.dvId=$dvId";
+        } else if (count($data['receivedParams']) == 1) {
+            $dsId = $data['receivedParams'][0];
+            $sql = "SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID AND district.dsId=$dsId";
+        } else {
+            $sql = "SELECT  safehouse.*,safehousecontact.safeHouseTelno,district.dsId,district.dsName,division.dvId,division.dvName,gndivision.gndvId,gndivision.gnDvName  FROM safehouse,district,division,gndivision,safehousecontact WHERE safehouse.safeHouseID=safehousecontact.safeHouseID AND district.dsId=division.dsId AND division.dvId=gndivision.dvId AND gndivision.safeHouseID=safehouse.safeHouseID";
         }
         $excute = $this->connection->query($sql);
         $results = array();
-        while($r = $excute-> fetch_assoc()) {
+        while ($r = $excute->fetch_assoc()) {
             $r['safeHouseID'] = SafeHouse::getSafeHouseCode($r['safeHouseID']);
             $results[] = $r;
         }
@@ -451,6 +452,60 @@ WHERE
         } else {
             http_response_code(200);
             echo json_encode(array("code" => $errorCode['unableToHandle']));
+            exit();
+        }
+    }
+
+    // Profile Details
+    public function getProfileDetails(array $data)
+    {
+        $uid = $data['userId'];
+        $sql = "SELECT * FROM dmc where dmcID=".$uid.";";
+        // SELECT * FROM gramaniladari g JOIN gndivision d ON g.gramaNiladariID=1 AND d.gramaNiladariID=1 JOIN division s ON d.dvId=s.dvId JOIN district t ON t.dsId=s.dsId;
+        $excute = $this->connection->query($sql);
+        while ($r = $excute->fetch_assoc()) {
+            $results[] = $r;
+        }
+        $json = json_encode($results);
+        echo $json;
+    }
+
+    protected function checkPassword(array $data)
+    {
+        $uid = $data['userId'];
+        // $username = md5($data['nic']);
+        $userType = $data['userType'];
+        $password = md5($data['password']);
+        $sql = "SELECT * FROM login l WHERE l.roleId ='$userType' AND l.empPassword ='$password' AND l.empId ='$uid'";
+        $excute = $this->connection->query($sql);
+        return $excute->num_rows > 0;
+    }
+
+    public function updateProfileDetails(array $data)
+    {
+        global $errorCode;
+
+        if ($this->checkPassword($data)) {
+            // print_r($data);
+            // exit;
+            $uid = $data['userId'];
+            $email = $data['email'];
+            $address = $data['add'];
+            $phone = $data['tel'];
+            
+            $sql = "UPDATE `dmc` SET `empAddress`='$address', `empEmail`='$email',`empTele`='$phone' WHERE `dmcID`='$uid' ";
+            
+            $this->connection->query($sql);
+            
+            if (!empty($data['npassword'])) {
+                $userType = $data['userType'];
+                $password = md5($data['npassword']);
+                $sql = "UPDATE `login` SET `empPassword`='$password' WHERE roleId ='$userType' AND empId ='$uid'";
+                $this->connection->query($sql);
+            }
+            echo json_encode(array("code" => $errorCode['success']));
+        } else {
+            echo json_encode(array("code" => $errorCode['attributeMissing']));
             exit();
         }
     }

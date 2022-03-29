@@ -178,7 +178,7 @@ a{
   
   th { 
       /* background: #f2f8f9;  */
-      background: #06318881; 
+      background: #426dca9f; 
       color: rgb(0, 0, 0); 
       font-weight: bold; 
       }
@@ -262,7 +262,7 @@ a{
   
   /* BUTTONS */
   input[type=submit]{
-    background-color:#66b0ff;
+    background-color:#1573d8;
     color:white;
     border:none;
     padding: 6px 15px;
@@ -273,7 +273,7 @@ a{
   }
   /* Reset Button: minimize the appearance */
   input[type=reset]{
-    margin-top: 15px;
+    /* margin-top: 15px; */
     border:none;
     cursor:pointer;
     padding: 6px 15px;

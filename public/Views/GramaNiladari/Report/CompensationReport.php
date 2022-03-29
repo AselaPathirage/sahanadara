@@ -32,7 +32,7 @@
                 <center>
                     <h1>Compensation Report</h1>
                 </center>
-                <form action="<?php echo HOST;?>/GramaNiladari/Report/ViewCompensation" target="_blank">
+                <form action="<?php echo HOST; ?>/GramaNiladari/Report/ViewCompensation" target="_blank">
                     <div class="row-content">
 
                         <h2>Select </h2>
@@ -48,11 +48,11 @@
                             </div>
                             <div class="col3">
                                 <label for="df">From</label>
-                                <input type="date" id="from" name="from">
+                                <input type="date" id="from" name="from" max="<?php echo date("Y-m-d"); ?>">
                             </div>
                             <div class="col3">
                                 <label for="crusttype">To</label>
-                                <input type="date" id="to" name="to">
+                                <input type="date" id="to" name="to" max="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
 
@@ -77,7 +77,11 @@
                 }
                 $(thisPage).addClass("active");
             });
-
+            $("#from").on("change", function() {
+                var from = $("#from").val();
+                var input = document.getElementById("to");
+                input.setAttribute("min", from);
+            });
         });
 
         let sidebar = document.querySelector(".sidebar");

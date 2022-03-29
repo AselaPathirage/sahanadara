@@ -237,10 +237,22 @@ WHERE
         if (!empty($report)) {
             if ($report == "Property") {
                 $sql = "UPDATE `propertycompensation` SET `dmcapproved`='$dmcapproved', `dmcremarks`='$dmcremarks' WHERE `propcomId`='$reportId'";
+                $sql0="SELECT propertycompensation.atpnumber FROM propertycompensation WHERE propertycompensation.propcomId=".$reportId;;
+                $tele="atpnumber";
+                $msg="Your propery compensation has been approved. Request number:PC00".$reportId;
             } else {
                 $sql = "UPDATE `deathcompensation` SET `dmcapproved`='$dmcapproved', `dmcremarks`='$dmcremarks' WHERE `deathId`='$reportId'";
+                $sql0="SELECT deathcompensation.atelno FROM deathcompensation WHERE deathcompensation.deathId=".$reportId;
+                $tele="atelno";
+                $msg="Your death compensation has been approved. Request number:DC00".$reportId;
             }
             $this->connection->query($sql);
+            $query=$this->connection->query($sql0);
+            $temp=$query->fetch_assoc();
+            $sms = new SMS($this->connection);
+            $contact = array($temp[$tele]);
+            $sms->addContact($contact,$msg);
+            $sms->sendAlert();
             echo json_encode(array("code" => $errorCode['success']));
         } else {
             echo json_encode(array("code" => $errorCode['attributeMissing']));
@@ -320,7 +332,8 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
-        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId WHERE s.safeHouseID=" . $safeId;
+        $safeId=SafeHouse::getId($safeId);
+        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.*,safehousestatus.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId JOIN safehousestatus ON safehousestatus.safehouseId=s.safeHouseID WHERE s.safeHouseID=$safeId ORDER BY safehousestatus.createdDate DESC LIMIT 1;";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $json = json_encode($r);
@@ -330,6 +343,7 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
+        $safeId=SafeHouse::getId($safeId);
         $sql = "SELECT s.*,t.* FROM safehouse s JOIN safehousestatus t ON t.safehouseId=s.safeHouseID where s.safehouseId=" . $safeId . " ORDER BY t.createdDate DESC LIMIT 1";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
@@ -340,6 +354,7 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
+        $safeId=SafeHouse::getId($safeId);
         $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID WHERE s.safehouseId=" . $safeId . "";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();

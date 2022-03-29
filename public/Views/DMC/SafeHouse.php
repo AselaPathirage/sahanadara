@@ -238,22 +238,22 @@
                                     if ((gnArea.id == gnVal) || (!districtVal || !divisionVal || !status || !gnVal)) {
                                         if (status == "Any") {
                                             if (safeHouse.active == "Yes") {
-                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
                                             } else {
-                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
                                             }
                                         } else if (status == 2 && safeHouse.active == "No") {
                                             if (safeHouse.active == "Yes") {
-                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
                                             } else {
-                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
                                             }
 
                                         } else if (status == 1 && safeHouse.active == "Yes") {
                                             if (safeHouse.active == "Yes") {
-                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>"
                                             } else {
-                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_active' style='position: absolute; top:15px;right:35px;'>Status : Active</a><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
+                                                display += "<div class='box row-content' style='position:relative;'><h4>" + safeHouse.id + ":" + safeHouse.name + "</h4><p>" + safeHouse.address + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block'><a class='btn_views' data-safeid='" + safeHouse.id + "'>View</a></div></div>";
                                             }
                                         }
                                     }

@@ -97,10 +97,11 @@ class Employee
             echo json_encode(array("code" => $errorCode['attributeMissing']));
             exit();
         }
-        $username = md5($data['username']);
+        $username1 = md5(strtolower($data['username']));
+        $username2 = md5(strtoupper($data['username']));
         $password = md5($data['password']);
-        $sql = "SELECT l.empId,r.roleId FROM login l, role r WHERE l.nid ='$username' AND l.empPassword ='$password' AND l.roleId = r.roleId";
-        $excute = $this->connection->query($sql);
+        $sql = "SELECT l.empId,r.roleId FROM login l, role r WHERE (l.nid ='$username1' OR l.nid ='$username2') AND l.empPassword ='$password' AND l.roleId = r.roleId";
+        $excute = $this->connection->query($sql);//echo $sql;
         if ($excute->num_rows > 0) {
             $secure = new Openssl_EncryptDecrypt();
             $data = $excute->fetch_assoc();

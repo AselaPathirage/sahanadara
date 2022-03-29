@@ -237,10 +237,22 @@ WHERE
         if (!empty($report)) {
             if ($report == "Property") {
                 $sql = "UPDATE `propertycompensation` SET `dmcapproved`='$dmcapproved', `dmcremarks`='$dmcremarks' WHERE `propcomId`='$reportId'";
+                $sql0="SELECT propertycompensation.atpnumber FROM propertycompensation WHERE propertycompensation.propcomId=".$reportId;;
+                $tele="atpnumber";
+                $msg="Your propery compensation has been approved. Request number:PC00".$reportId;
             } else {
                 $sql = "UPDATE `deathcompensation` SET `dmcapproved`='$dmcapproved', `dmcremarks`='$dmcremarks' WHERE `deathId`='$reportId'";
+                $sql0="SELECT deathcompensation.atelno FROM deathcompensation WHERE deathcompensation.deathId=".$reportId;
+                $tele="atelno";
+                $msg="Your death compensation has been approved. Request number:DC00".$reportId;
             }
             $this->connection->query($sql);
+            $query=$this->connection->query($sql0);
+            $temp=$query->fetch_assoc();
+            $sms = new SMS($this->connection);
+            $contact = array($temp[$tele]);
+            $sms->addContact($contact,$msg);
+            $sms->sendAlert();
             echo json_encode(array("code" => $errorCode['success']));
         } else {
             echo json_encode(array("code" => $errorCode['attributeMissing']));

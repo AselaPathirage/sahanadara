@@ -66,7 +66,7 @@
                                 <label for="firstname">First Name</label>
                             </div>
                             <div class="col9">
-                                <input type="text" id="firstname" name="firstname" placeholder="First Name">
+                                <input type="text" id="firstname" name="firstname" disabled='true' placeholder="First Name">
                             </div>
                         </div>
                         <div class="row">
@@ -74,7 +74,7 @@
                                 <label for="lastname">Last Name</label>
                             </div>
                             <div class="col9">
-                                <input type="text" id="lastname" name="lastname" placeholder="Last Name">
+                                <input type="text" id="lastname" name="lastname" disabled='true' placeholder="Last Name">
                             </div>
                         </div>
                         <div class="row">
@@ -112,7 +112,7 @@
                                 <label for="oldpassword">Current Password</label>
                             </div>
                             <div class="col9">
-                                <input type="password" id="oldpassword" name="oldpassword" placeholder="New Password">
+                                <input type="password" id="oldpassword" name="oldpassword" placeholder="Current Password">
                             </div>
                         </div>
                         <div class="row">
@@ -210,11 +210,12 @@
 					data: json,
 					cache: false,
 					success: function(result) {
-						$("#update").trigger('reset');
+						//$("#updatekey").trigger('reset');
                         $(".custom-model-main").removeClass('model-open');
                         console.log(result);
-                        if(result.code==806){
+                        if(result.key){
                             alertGen("Record Added Successfully!",1);
+                            $("#updatekey").trigger("reset");
                         }else{
                             alertGen("Unable to handle request.",2);
                         }

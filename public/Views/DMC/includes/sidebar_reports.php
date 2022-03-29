@@ -6,12 +6,12 @@
         <span class="logo_name">SAHANADARA</span>
     </div>
     <ul class="nav-links">
-        <li>
+        <!-- <li>
             <a href="<?php echo HOST; ?>/DMC/Report/UserReport" id="user">
                 <i class='bx bxs-report'></i>
                 <span class="links_name">User Report</span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="<?php echo HOST; ?>/DMC/Report/IncidentReport" id="incident">
                 <i class='bx bxs-report'></i>

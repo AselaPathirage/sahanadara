@@ -492,11 +492,11 @@
                     },
 					cache: false,
 					success: function(result) {
-                        $('#trow').empty();
-                        getResponsible();
-                        location.reload();
+                        //location.reload();
                         if(result.code==806){
                             alertGen("Record Updated Successfully!",1);
+                            $('#trow').empty();
+                            getResponsible();
                         }else{
                             alertGen("Unable to handle request.",2);
                         }

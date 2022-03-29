@@ -337,7 +337,7 @@ class DisasterOfficer extends Employee
             $email = $data['email'];
             $address = $data['address'];
             $TP_number = $data['TP_number'];
-            $safehouse = $data['safehouse'];
+            $safehouse = SafeHouse::getId($data['safehouse']);
 
             $mail = new mail();
             $name = $data['firstname'] . " " . $data['lastname'];

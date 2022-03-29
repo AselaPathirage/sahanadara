@@ -195,8 +195,8 @@
                                     <input type="text" id="itemName" name="itemName" placeholder="Item Name" title="Type " class="form-control" required='true'>
 
                                     <div class="row" style="justify-content: center;">
-                                        <input type="submit" value="Send" class="btn-alerts" />
-                                        <input type="reset" value="Reset" class="btn-alerts" />
+                                        <input type="submit" value="Send" class="form-control btn-alerts" />
+                                        <input type="reset" value="Reset" style="background-color: #eb6b34;" class="form-control btn-alerts" />
                                     </div>
                                 </div>
                             </form>
@@ -214,11 +214,11 @@
                             <div class="row-content">
                                 <table class="model-table" style="width: 100%;" border="0">
                                     <tr>
-                                        <td>
+                                        <td style="border:none;text-align: left;vertical-align: middle;">
                                             <label for="your_name">Old Name</label>
                                             <input type="text" id="oldName" value="" name="oldName" disabled="true" title="Type" class="form-control">
                                         </td>
-                                        <td>
+                                        <td style="border:none;text-align: left;vertical-align: middle;">
                                             <label class="unit" id="unit1"></label>
                                         </td>
                                     </tr>
@@ -226,19 +226,19 @@
                                 <form id='update' name="update" method="post">
                                     <table class="model-table" style="width: 100%;" border="0">
                                         <tr>
-                                            <td>
+                                            <td style="border:none;text-align: left;vertical-align: middle;">
                                                 <label for="your_name">New Name</label>
                                                 <input type="text" id="newName" name="newName" placeholder="Item Name" title="Type" class="form-control" required='true'>
                                             </td>
-                                            <td>
+                                            <td style="border:none;text-align: left;vertical-align: middle;">
                                                 <label class="unit" id="unit2"></label>
                                             </td>
                                         </tr>
                                     </table>
                                     <input type="hidden" id="item" value="">
                                     <div class="row" style="justify-content: center;">
-                                        <input type="submit" value="Update" class="btn-alerts" />
-                                        <input type="reset" value="Reset" class="btn-alerts" />
+                                        <input type="submit" value="Update" class="form-control btn-alerts" />
+                                        <input type="reset" value="Reset" style="background-color: #eb6b34;" class="form-control  btn-alerts" />
                                     </div>
                                 </form>
                             </div>

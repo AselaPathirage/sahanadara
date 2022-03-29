@@ -33,10 +33,11 @@
                         <thead>
                             <tr class="filters">
                                 <th>Approval Status
-                                    <select id="assigned-user-filter" class="form-control">
-                                        <option>All</option>
-                                        <option>Approved</option>
-                                        <option>Not Approved</option>
+                                    <select id="status" class="form-control">
+                                        <option value="Any">All</option>
+                                        <option value="1">Approved</option>
+                                        <option value="2">Pending</option>
+                                        <option value="3">Rejected</option>
 
                                     </select>
                                 </th>
@@ -230,9 +231,9 @@
         }
 
         function getDVbyId(i) {
-            output = $.parseJSON($.ajax({
+            var output2 = $.parseJSON($.ajax({
                 type: "GET",
-                url: "<?php echo API; ?>divisionbyid/"+i,
+                url: "<?php echo API; ?>divisionbyid/" + i,
                 dataType: "json",
                 headers: {
                     'HTTP_APIKEY': '<?php echo $_SESSION['key'] ?>'
@@ -240,9 +241,167 @@
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
-            return output['dvName'];
+            console.log(output2);
+            return output2['dvName'];
         }
+
+        $("#status").on('change', function() {
+            var status = $('#status').val();
+            console.log(status);
+            $("#tbodyid").empty();
+            var table = document.getElementById("tbodyid");
+            var $sample = "";
+            if (output == null) {
+                $sample += "<p>No records</p>";
+                $("#tbodyid").append($sample);
+            } else {
+                for (var i = 0; i < output.length; i++) {
+
+                    let obj = output[i];
+                    console.log(obj);
+
+                    if (status == "Any") {
+                        let row = table.insertRow(-1);
+                        let cell1 = row.insertCell(-1);
+                        let cell2 = row.insertCell(-1);
+                        let cell3 = row.insertCell(-1);
+                        let cell4 = row.insertCell(-1);
+                        let cell5 = row.insertCell(-1);
+
+                        var attribute = document.createElement("a");
+                        attribute.id = obj['dvfinalincidentId'];
+                        attribute.target = "_blank";
+                        attribute.href = "DVFinal/" + obj['dvfinalincidentId'];
+                        attribute.className = "btn_views";
+                        attribute.name = "view";
+                        attribute.innerHTML = "View";
+                        attribute.setAttribute("data-Id", obj['dvfinalincidentId'])
+
+                        cell1.innerHTML = obj['timestamp'].split(" ")[0];
+                        cell2.innerHTML = obj['disaster'];
+                        cell3.innerHTML = getDVbyId(obj['dvId']);
+
+                        let app = "";
+                        if (obj['dmcapproved'] == 'a') {
+                            app = "Approved";
+                        } else if (obj['dmcapproved'] == 'r') {
+                            app = "Rejected";
+                        } else {
+                            app = "Pending";
+                        }
+                        cell4.innerHTML = app;
+                        cell5.appendChild(attribute);
+
+                    } else if (status == "1") {
+                        console.log(obj['dmcapproved']);
+                        if (obj['dmcapproved'] == 'a') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['dvfinalincidentId'];
+                            attribute.target = "_blank";
+                            attribute.href = "DVFinal/" + obj['dvfinalincidentId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-Id", obj['dvfinalincidentId'])
+
+                            cell1.innerHTML = obj['timestamp'].split(" ")[0];
+                            cell2.innerHTML = obj['disaster'];
+                            cell3.innerHTML = getDVbyId(obj['dvId']);
+
+                            let app = "";
+                            if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            } else {
+                                app = "Pending";
+                            }
+                            cell4.innerHTML = app;
+                            cell5.appendChild(attribute);
+
+                        }
+                    } else if (status == "2") {
+                        if (obj['dmcapproved'] == 'p') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['dvfinalincidentId'];
+                            attribute.target = "_blank";
+                            attribute.href = "DVFinal/" + obj['dvfinalincidentId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-Id", obj['dvfinalincidentId'])
+
+                            cell1.innerHTML = obj['timestamp'].split(" ")[0];
+                            cell2.innerHTML = obj['disaster'];
+                            cell3.innerHTML = getDVbyId(obj['dvId']);
+
+                            let app = "";
+                            if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            } else {
+                                app = "Pending";
+                            }
+                            cell4.innerHTML = app;
+                            cell5.appendChild(attribute);
+
+                        }
+                    } else if (status == "3") {
+                        if (obj['dmcapproved'] == 'r') {
+                            let row = table.insertRow(-1);
+                            let cell1 = row.insertCell(-1);
+                            let cell2 = row.insertCell(-1);
+                            let cell3 = row.insertCell(-1);
+                            let cell4 = row.insertCell(-1);
+                            let cell5 = row.insertCell(-1);
+
+                            var attribute = document.createElement("a");
+                            attribute.id = obj['dvfinalincidentId'];
+                            attribute.target = "_blank";
+                            attribute.href = "DVFinal/" + obj['dvfinalincidentId'];
+                            attribute.className = "btn_views";
+                            attribute.name = "view";
+                            attribute.innerHTML = "View";
+                            attribute.setAttribute("data-Id", obj['dvfinalincidentId'])
+
+                            cell1.innerHTML = obj['timestamp'].split(" ")[0];
+                            cell2.innerHTML = obj['disaster'];
+                            cell3.innerHTML = getDVbyId(obj['dvId']);
+
+                            let app = "";
+                            if (obj['dmcapproved'] == 'a') {
+                                app = "Approved";
+                            } else if (obj['dmcapproved'] == 'r') {
+                                app = "Rejected";
+                            } else {
+                                app = "Pending";
+                            }
+                            cell4.innerHTML = app;
+                            cell5.appendChild(attribute);
+
+                        }
+                    }
+                }
+            }
+            // console.log($sample);
+
+
+        });
     </script>
 </body>
 

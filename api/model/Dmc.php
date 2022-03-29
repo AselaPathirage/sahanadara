@@ -319,7 +319,8 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
-        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId WHERE s.safeHouseID=" . $safeId;
+        $safeId=SafeHouse::getId($safeId);
+        $sql = "SELECT s.*,g.gndvId,g.gnDvName,d.dvId,d.dvName,district.*,safehousestatus.* FROM safehouse s JOIN gndivision g ON g.safeHouseID=s.safeHouseID JOIN division d ON d.dvId=g.dvId JOIN district ON district.dsId=d.dsId JOIN safehousestatus ON safehousestatus.safehouseId=s.safeHouseID WHERE s.safeHouseID=$safeId ORDER BY safehousestatus.createdDate DESC LIMIT 1;";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
         $json = json_encode($r);
@@ -329,6 +330,7 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
+        $safeId=SafeHouse::getId($safeId);
         $sql = "SELECT s.*,t.* FROM safehouse s JOIN safehousestatus t ON t.safehouseId=s.safeHouseID where s.safehouseId=" . $safeId . " ORDER BY t.createdDate DESC LIMIT 1";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
@@ -339,6 +341,7 @@ WHERE
     {
         $uid = $data['userId'];
         $safeId = $data['receivedParams'][0];
+        $safeId=SafeHouse::getId($safeId);
         $sql = "SELECT s.*,t.* FROM safehouse s JOIN responsibleperson t ON t.safeHouseID=s.safeHouseID WHERE s.safehouseId=" . $safeId . "";
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();

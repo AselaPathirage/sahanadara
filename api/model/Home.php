@@ -130,6 +130,11 @@ class Home{
             exit();
         }
     }
+    public function test(){
+        // $sms = new SMS($this->connection);
+        // $sms->addContact(['94765693894'],"ghghghfd");
+        // $sms->sendAlert();
+    }
     public function getfundraisingNotice(array $data){
         global  $errorCode;
         if(count($data['receivedParams'])==1){

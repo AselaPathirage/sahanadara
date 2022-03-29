@@ -98,42 +98,6 @@ if (empty($dis)) {
                         <img src="<?php echo HOST; ?>/public/assets/img/social-care (1).png" height="50" alt="LOGO">
                     </div>
                     <h1 class="text-center">Safehouse Report</h1>
-                    <div class="row">
-                        <div class="col6">
-                            <div class="row">
-                                <div class="col4" style="text-align: right;">
-                                    <label for="user role">District</label>
-                                </div>
-                                <div class="col8">
-                                    <input type="text" id="district" name="district" placeholder="Location of incident" readonly>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col6">
-                            <div class="row">
-                                <div class="col4" style="text-align: right;">
-                                    <label for="user role">DS Office</label>
-                                </div>
-                                <div class="col8">
-                                    <input type="text" id="ds" name="ds" placeholder="Location of incident" readonly>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row ">
-                        <div class="col6">
-                            <div class="row">
-                                <div class="col4" style="text-align: right;">
-                                    <label for="user role">GN division</label>
-                                </div>
-                                <div class="col8">
-                                    <input type="text" id="gn" name="gn" placeholder="Location of incident" readonly>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
                     <hr style="margin:10px;">
 
                     <div class="report-container">
@@ -145,8 +109,8 @@ if (empty($dis)) {
                                             <th style="width:130px;">Safehouse ID</th>
                                             <th class="text-center">Name</th>
                                             <th class="text-center">Address</th>
-                                            <th class="text-center">Contact</th>
-                                            <th class="text-right" style="width:120px;">GN Division</th>
+                                            <th class="text-center" style="width:130px;">Contact</th>
+                                            <th class="text-right" style="width:220px;">GN Division</th>
                                             <th class="text-right" style="width:120px;">Division</th>
                                             <th class="text-right" style="width:120px;">District</th>
                                             <!-- <th class="text-right" style="width:100px;">Injured</th> -->
@@ -197,16 +161,6 @@ if (empty($dis)) {
                             </div>
                         </div>
                     </div>
-
-
-
-
-
-
-
-
-
-
                 </div>
             </div>
 
@@ -240,12 +194,6 @@ if (empty($dis)) {
             getSafeHouse();
         });
 
-        let sidebar = document.querySelector(".sidebar");
-        let sidebarBtn = document.querySelector(".sidebarBtn");
-        sidebarBtn.onclick = function() {
-            sidebar.classList.toggle("active");
-        }
-
         function getSafeHouse() {
             output = $.parseJSON($.ajax({
                 type: "GET",
@@ -257,72 +205,33 @@ if (empty($dis)) {
                 cache: false,
                 async: false
             }).responseText);
-            console.log(output);
-            
-
-            // if(obj['disaster'])
-            // $('#dis').val(obj['disaster']);
-            console.log(obj);
-            obj = output['reports'];
-
-            if (obj !== null) {
-
-                for (var i = 0; i < obj.length; i++) {
-                    
-                    
-                    // console.log(ttt);
-                    if ((obj[i]['timestamp'].split(' ')[0] <= ttt && obj[i]['timestamp'].split(' ')[0] >= fff) && (di == "all" || di == obj[i]['report'])) {
-                        // console.log(ttt);
-                        // console.log(obj[i]['date']);
-                        // console.log(fff);
-
-                        var html = '';
-                        html += "<tr class='tr-secondary1'><td id='date" + i + "' class='text-center'>11/05/2018</td><td id='report" + i + "' class='text-center'>Inventory Starting Value</td><td id='aname" + i + "'>Bonnet/hood - Opening inventory</td>";
-                        html += "<td id='disaster" + i + "'>0</td><td id='dvapp" + i + "' class='text-right'>0</td><td id='dmcapp" + i + "' class='text-right'>0</td><td id='collected" + i + "' class='text-right'>0</td></tr>";
-                        $('#tbody').append(html);
-
-                        $('#date' + i).html(obj[i]['timestamp'].split(' ')[0]);
-                        $('#report' + i).html(obj[i]['report']);
-                        $('#aname' + i).html(obj[i]['aname']);
-                        $('#disaster' + i).html(obj[i]['disaster']);
-
-                        if (obj[i]['disapproved'] == 'p') {
-                            $('#dvapp' + i).html("Pending");
-                        } else if (obj[i]['disapproved'] == 'a') {
-                            $('#dvapp' + i).html("Approved");
-                        } else {
-                            $('#dvapp' + i).html("Rejected");
-                        }
-
-                        if (obj[i]['dmcapproved'] == 'p') {
-                            $('#dmcapp' + i).html("Pending");
-                        } else if (obj[i]['dmcapproved'] == 'a') {
-                            $('#dmcapp' + i).html("Approved");
-                        } else {
-                            $('#dmcapp' + i).html("Rejected");
-                        }
-
-                        if (obj[i]['collected'] == '0') {
-                            $('#collected' + i).html("No");
-                        } else {
-                            $('#collected' + i).html("Yes");
-                        }
-
-                        // $('#dvapp' + i).html(obj[i]['disapproved']);
-                        // $('#dmcapp' + i).html(obj[i]['dmcapproved']);
-                        // $('#collected' + i).html(parseFloat(obj[i]['collected']));
-
-                    }
-
-                }
-
+            let count = output.length;
+            if (count == 0) {
+                $('#tbody').text('No records');
             } else {
-                $('.nothing').text('No records');
+                var table = document.getElementById("tbody");
+                for (var i = 0; i < output.length; i++) {
+                    let obj = output[i];
+                    let row = table.insertRow(-1);
+                    let id = "data_" + i;
+                    row.id = id;
+                    row.className = "task-list-row";
+                    let cell1 = row.insertCell(-1);
+                    let cell2 = row.insertCell(-1);
+                    let cell3 = row.insertCell(-1);
+                    let cell4 = row.insertCell(-1);
+                    let cell5 = row.insertCell(-1);
+                    let cell6 = row.insertCell(-1);
+                    let cell7 = row.insertCell(-1);
+                    cell1.innerHTML = obj['safeHouseID'];
+                    cell2.innerHTML = obj['safeHouseName'];
+                    cell3.innerHTML = obj['safeHouseAddress'];
+                    cell4.innerHTML = obj['safeHouseTelno'];
+                    cell5.innerHTML = obj['gnDvName'];
+                    cell6.innerHTML = obj['dvName'];
+                    cell7.innerHTML = obj['dsName'];
+                }
             }
-
-
-
-
         }
 
         function getDisasterType(obj) {

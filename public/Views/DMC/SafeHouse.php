@@ -149,6 +149,7 @@
             // $('#view').html("<h3 class='text-center'>Select safehouse to view</h3>");
             $('.btn_views').on('click', function() {
                 let sfid = $(this).data('safeid');
+                sfid=sfid.substring(2, sfid.length);
                 console.log(sfid);
                 $('#nosafe').hide();
                 $('#details').show();

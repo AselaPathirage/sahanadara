@@ -140,7 +140,7 @@ class GramaNiladari extends ResponsiblePerson
         $sql = "SELECT * FROM `gndivision` WHERE `gramaNiladariID` =" . $uid;
         $excute = $this->connection->query($sql);
         $r = $excute->fetch_assoc();
-        $sql = "SELECT r.* FROM gnmsg r WHERE r.gndvId =" . $r['gndvId'] . " ORDER BY r.timestamp DESC";
+        $sql = "SELECT gnmsg.msgId,DATE_FORMAT(gnmsg.timestamp,'%Y-%m-%d %h:%i %p') AS timestamp,gnmsg.message,gnmsg.gndvId FROM gnmsg WHERE gnmsg.gndvId=" . $r['gndvId'] . " ORDER BY gnmsg.timestamp DESC";
         $excute = $this->connection->query($sql);
         $results = array();
         while ($r = $excute->fetch_assoc()) {

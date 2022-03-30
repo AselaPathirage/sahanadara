@@ -3,19 +3,15 @@
 define("DB_HOST", "localhost");
 define("DB_USER", "root");
 define("DB_PASS", "");
-/*
-define("DB_HOST", "sahanadara-new.ctwrngfezlnk.us-east-2.rds.amazonaws.com");
-define("DB_USER", "user");
-define("DB_PASS", "Qwer1234");
-*/
+
 define("DB_NAME", "newdbsahanadara");
 define("LOG_PATH", "/log");
 define("ENCRYPTION_KEY","AHkjghjvHJGKNKLlkBG54J");
-define("TRANSLATOR_KEY","AIzaSyDtcDT7w-D76oxrECf6qofOSRKMBDfOl40");
+define("TRANSLATOR_KEY","");
 
 //SMS
-define("SENDER", "94719867863"); 
-define("SMS_PASSWORD", "7170");
+define("SENDER", ""); 
+define("SMS_PASSWORD", "");
 $errorCode = array(
     	            'classNotFound' => 800,
                     'methodNotFound' => 801,

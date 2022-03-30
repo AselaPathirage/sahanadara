@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/dashboard_component.css">
     <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/style_admin.css">
+    <link rel="stylesheet" href="<?php echo HOST; ?>/public/assets/css/alert.css">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
@@ -60,7 +62,7 @@
                                     <label for="fname">Applicant Name</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="aname" name="aname" placeholder="">
+                                    <input type="text" id="aname" name="aname" placeholder="Applicant Name" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -68,7 +70,9 @@
                                     <label for="nic">NIC</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="anic" name="anic" placeholder="">
+                                    <input type="text" id="anic" name="anic" placeholder="NIC" maxlength="12" required>
+                                    <div id="nicCheck">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">
@@ -76,7 +80,7 @@
                                     <label for="address">Address</label>
                                 </div>
                                 <div class="col9">
-                                    <textarea type="text" id="aaddress" name="aaddress" placeholder=""></textarea>
+                                    <textarea type="text" id="aaddress" name="aaddress" placeholder="Address" required></textarea>
                                 </div>
                             </div>
                             <div class="row">
@@ -84,7 +88,7 @@
                                     <label for="TP number">Telephone Number</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="atpnumber" name="atpnumber" placeholder="">
+                                    <input type="number" id="atpnumber" name="atpnumber" placeholder="Telephone Number" max=10>
                                 </div>
                             </div>
                             <div class="row">
@@ -92,7 +96,7 @@
                                     <label for="relationship">Relationship</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="arelationship" name="arelationship" placeholder="">
+                                    <input type="text" id="arelationship" name="arelationship" placeholder="Relationship to the property" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -100,7 +104,7 @@
                                     <label for="TP number">Disaster</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="disaster" name="disaster" placeholder="">
+                                    <input type="text" id="disaster" name="disaster" placeholder="Disaster" required>
                                 </div>
                             </div>
 
@@ -118,7 +122,7 @@
                                     <label for="tla">Total Land Area</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="tla" name="tla" placeholder="">
+                                    <input type="text" id="tla" name="tla" placeholder="" min=0>
                                 </div>
                             </div>
                             <div class="row">
@@ -174,7 +178,7 @@
                                                     <label for="nic">Total Area</label>
                                                 </div>
                                                 <div class="col9">
-                                                    <input type="number" id="dpta0" name="dpta0" placeholder="1" class="dpta">
+                                                    <input type="number" id="dpta0" name="dpta0" placeholder="1" class="dpta" min=1>
                                                 </div>
                                             </div>
 
@@ -183,7 +187,7 @@
                                                     <label for="nic">Damaged Area</label>
                                                 </div>
                                                 <div class="col9">
-                                                    <input type="text" id="dpda0" name="dpda0" placeholder="0" class="dpda">
+                                                    <input type="number" id="dpda0" name="dpda0" placeholder="0" class="dpda" min=1>
                                                 </div>
                                             </div>
 
@@ -194,7 +198,7 @@
                                                     <label for="nic">Value of Damage</label>
                                                 </div>
                                                 <div class="col9">
-                                                    <input type="text" id="dpvod0" name="dpvod0" placeholder="" class="dpvod">
+                                                    <input type="number" id="dpvod0" name="dpvod0" placeholder="" class="dpvod" min=0 value=0>
                                                 </div>
                                             </div>
 
@@ -219,7 +223,7 @@
                                     <label for="nic"><b>Total Value (Rs)</b></label>
                                 </div>
                                 <div class="col10">
-                                    <input type="text" id="tvprop" name="tvprop" placeholder="0">
+                                    <input type="text" id="tvprop" name="tvprop" placeholder="0" min=0 readonly>
                                 </div>
                             </div>
                         </div>
@@ -269,7 +273,7 @@
                                                     <label for="nic">Estimated Value</label>
                                                 </div>
                                                 <div class="col9">
-                                                    <input type="number" id="dsev0" name="dsev0" placeholder="0" class="dsev">
+                                                    <input type="number" id="dsev0" name="dsev0" placeholder="0" class="dsev" min=0>
                                                 </div>
                                             </div>
                                         </div>
@@ -298,7 +302,7 @@
                                     <label for="nic"><b>Total Value (Rs)</b></label>
                                 </div>
                                 <div class="col10">
-                                    <input type="text" id="tvser" name="tvser" placeholder="0">
+                                    <input type="text" id="tvser" name="tvser" placeholder="0" min=0 readonly>
                                 </div>
                             </div>
 
@@ -332,7 +336,7 @@
                                                     <label for="nic">Estimated Value</label>
                                                 </div>
                                                 <div class="col9">
-                                                    <input type="number" id="deev0" name="deev0" placeholder="0" class="deev">
+                                                    <input type="number" id="deev0" name="deev0" placeholder="0" class="deev" min=0>
                                                 </div>
                                             </div>
                                         </div>
@@ -358,7 +362,7 @@
                                     <label for="nic"><b>Total Value (Rs)</b></label>
                                 </div>
                                 <div class="col10">
-                                    <input type="text" id="tvde" name="tvde" placeholder="">
+                                    <input type="text" id="tvde" name="tvde" placeholder="0" readonly min="0">
                                 </div>
                             </div>
 
@@ -370,7 +374,7 @@
                                     <label for="nic"><b>Total Compensation (Rs)</b></label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="totcomp" name="totcomp" placeholder="0">
+                                    <input type="text" id="totcomp" name="totcomp" placeholder="0" readonly>
                                 </div>
                             </div>
                             <!-- <div class="row " style="text-align:right;justify-content: right;">
@@ -387,7 +391,7 @@
                                     <label for="nic">Name</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="hname" name="hname" placeholder="">
+                                    <input type="text" id="hname" name="hname" placeholder="Name" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -395,7 +399,7 @@
                                     <label for="nic">Bank</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="hbank" name="hbank" placeholder="">
+                                    <input type="text" id="hbank" name="hbank" placeholder="Bank" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -403,7 +407,7 @@
                                     <label for="nic">Branch</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="hbranch" name="hbranch" placeholder="">
+                                    <input type="text" id="hbranch" name="hbranch" placeholder="Branch" required>
                                 </div>
                             </div>
                             <div class="row">
@@ -411,7 +415,7 @@
                                     <label for="nic">Account Number</label>
                                 </div>
                                 <div class="col9">
-                                    <input type="text" id="hacc" name="hacc" placeholder="">
+                                    <input type="text" id="hacc" name="hacc" placeholder="Account Number" required>
                                 </div>
                             </div>
 
@@ -561,7 +565,18 @@
 
                 });
             });
-
+            document.getElementById("anic").addEventListener("keyup", function(e) {
+                var nicNum = document.getElementById("anic").value;
+                var cnic_no_regex = new RegExp('^[0-9+]{9}[vV|xX]$');
+                var new_cnic_no_regex = new RegExp('^[0-9+]{12}$');
+                if (nicNum.length == 10 && cnic_no_regex.test(nicNum)) {
+                    $("#nicCheck").html("");
+                } else if (nicNum.length == 12 && new_cnic_no_regex.test(nicNum)) {
+                    $("#nicCheck").html("");
+                } else {
+                    $("#nicCheck").html("<lable style='color:red'>Please input valid NIC number.</lable>");
+                }
+            });
 
         });
 
@@ -571,8 +586,8 @@
             $(".deev").each(function() {
                 if ($(this).val() != NaN) {
                     $sum += parseFloat($(this).val());
-                }else{
-                    $sum +=0;
+                } else {
+                    $sum += 0;
                 }
                 console.log($sum);
                 $("#tvde").val($sum);
@@ -586,8 +601,8 @@
             $(".dsev").each(function() {
                 if ($(this).val() != NaN) {
                     $sum2 += parseFloat($(this).val());
-                }else{
-                    $sum2 +=0;
+                } else {
+                    $sum2 += 0;
                 }
                 console.log($sum2);
                 $("#tvser").val($sum2);
@@ -602,8 +617,8 @@
             $(".dpvod").each(function() {
                 if ($(this).val() != NaN) {
                     $sum3 += parseFloat($(this).val());
-                }else{
-                    $sum3 +=0;
+                } else {
+                    $sum3 += 0;
                 }
                 console.log($sum3);
                 $("#tvprop").val($sum3);
@@ -771,19 +786,19 @@
                 setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
-                }, 4000);
+                }, 2000);
             } else if ($type == 2) {
                 $("#alertBox").html("  <div class='alert warning-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
                 setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
-                }, 4000);
+                }, 2000);
             } else {
                 $("#alertBox").html("  <div class='alert danger-alert'><h3>" + $messege + "</h3><a id='closeMessege' class='closeMessege'>&times;</a></div>");
                 setTimeout(function() {
                     $(".alert").fadeOut(100)
                     $("#alertBox").html("");
-                }, 4000);
+                }, 2000);
             }
         }
     </script>

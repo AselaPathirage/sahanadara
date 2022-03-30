@@ -99,8 +99,8 @@
                                         <div class="row activelbl" style="text-align: right; margin: 0 auto;display:block">
                                             <a class="btn_active">Status : Active</a>
                                         </div>
-                                        <h4 class="name">Bellapitiya Maha Vidyalaya</h4>
-                                        <p class="address">Bellapitiya, Horana</p>
+                                        <h4 class="sfname" id="sfname">Bellapitiya Maha Vidyalaya</h4>
+                                        <p class="sfaddress" id="sfaddress">Bellapitiya, Horana</p>
                                         <!-- <p>Telephone Number - <span id="tel">0778765367</span> </p> -->
 
                                         <div id="responsible">
@@ -149,7 +149,7 @@
             // $('#view').html("<h3 class='text-center'>Select safehouse to view</h3>");
             $('.btn_views').on('click', function() {
                 let sfid = $(this).data('safeid');
-                sfid=sfid.substring(2, sfid.length);
+                sfid = sfid.substring(2, sfid.length);
                 console.log(sfid);
                 $('#nosafe').hide();
                 $('#details').show();
@@ -316,8 +316,8 @@
 
             } else {
                 console.log(output2['safeHouseName']);
-                $(".name").text(output2['safeHouseName'])
-                $(".address").text(output2['safeHouseAddress'])
+                $("#sfname").text(output2['safeHouseName'])
+                $("#sfaddress").text(output2['safeHouseAddress'])
                 if (output2['isUsing'] == 'n') {
                     $(".activelbl").hide();
                 }
@@ -369,6 +369,11 @@
                 async: false
             }).responseText);
             console.log(output4);
+            $("#sfname").text(output4['safeHouseName'])
+            $("#sfaddress").text(output4['safeHouseAddress'])
+            if (output4['isUsing'] == 'n') {
+                $(".activelbl").hide();
+            }
             if (output4 == null) {
                 $("#responsible").hide();
                 // var $sample = $(" <h4> Responsible person not assigned.</h4> ");

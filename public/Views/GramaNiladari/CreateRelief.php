@@ -37,56 +37,7 @@ $array = explode("/", $_GET["url"]);
                 <div class="box">
                     <div class="box1">
                         <h1 class="text-center">Relief Report</h1>
-                        <!-- <div class="row">
-                        <div class="col6">
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="user role">District</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col6">
-                            <div class="row">
-                                <div class="col3">
-                                    <label for="user role">DS Office</label>
-                                </div>
-                                <div class="col9">
-                                    <select id="District" name="District">
-                                        <option value="null">Kalutara</option>
-                                        <option value="Gampaha">Gampaha</option>
-                                        <option value="Colombo">Colombo</option>
-                                        <option value="Kaluthara">Kaluthara</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row text-center">
-
-                        <div class="row">
-                            <div class="col3">
-                                <label for="user role">GN division</label>
-                            </div>
-                            <div class="col9">
-                                <select id="District" name="District">
-                                    <option value="null">Kalutara</option>
-                                    <option value="Gampaha">Gampaha</option>
-                                    <option value="Colombo">Colombo</option>
-                                    <option value="Kaluthara">Kaluthara</option>
-                                </select>
-                            </div>
-                        </div>
-
-
-                    </div> -->
+                        
 
 
 
@@ -98,27 +49,7 @@ $array = explode("/", $_GET["url"]);
                                 <input type="date" id="datePicker" name="datePicker" class="datesInForms" max="<?php echo date("Y-m-d"); ?>">
                             </div>
                         </div>
-                        <!-- <div class="row">
-                            <div class="col3">
-                                <label for="user role">Disaster</label>
-                            </div>
-                            <div class="col9">
-                                <select id="District" name="District">
-                                    <option value="null">Flood</option>
-                                    <option value="Gampaha">Landslide</option>
-                                    <option value="Colombo">Lightening</option>
-
-                                </select>
-                            </div>
-                        </div> -->
-                        <!-- <div class="row">
-                            <div class="col3">
-                                <label for="fname">Location of incident</label>
-                            </div>
-                            <div class="col9">
-                                <input type="text" id="NIC" name="NIC" placeholder="Location of incident">
-                            </div>
-                        </div> -->
+                        
                         <div class="row">
                             <div class="col3">
                                 <label for="fname">Cause</label>
@@ -137,7 +68,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">1 member</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="number" id="m1" name="m1" placeholder="0">
+                                        <input type="number" id="m1" name="m1" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -145,7 +76,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">2 members</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="number" id="m2" name="m2" placeholder="0">
+                                        <input type="number" id="m2" name="m2" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -153,7 +84,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">3 members</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="number" id="m3" name="m3" placeholder="0">
+                                        <input type="number" id="m3" name="m3" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
 
@@ -165,7 +96,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">4 members</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="number" id="m4" name="m4" placeholder="0">
+                                        <input type="number" id="m4" name="m4" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -173,7 +104,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">5 members</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="number" id="m5" name="m5" placeholder="0">
+                                        <input type="number" id="m5" name="m5" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
 
@@ -188,7 +119,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">Cooked food</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="number" id="cooked" name="cooked" placeholder="Rs 0">
+                                        <input type="number" id="cooked" name="cooked" placeholder="Rs 0" min=0 >
                                     </div>
                                 </div>
                             </div>
@@ -198,7 +129,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">Emergency suppliess</label>
                                     </div>
                                     <div class="col7">
-                                        <input type="number" id="emer" name="emer" placeholder="Rs 0">
+                                        <input type="number" id="emer" name="emer" placeholder="Rs 0" min=0>
                                     </div>
                                 </div>
                             </div>
@@ -217,7 +148,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">Families</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="fam" name="fam" placeholder="0">
+                                        <input type="number" id="fam" name="fam" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -225,7 +156,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">People</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="people" name="people" placeholder="0">
+                                        <input type="number" id="people" name="people" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
 
@@ -236,7 +167,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">Deaths</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="deaths" name="deaths" placeholder="0">
+                                        <input type="number" id="deaths" name="deaths" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -244,7 +175,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">Injured</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="injured" name="injured" placeholder="0">
+                                        <input type="number" id="injured" name="injured" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -252,7 +183,7 @@ $array = explode("/", $_GET["url"]);
                                         <label for="TP number">Missing</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="missing" name="missing" placeholder="0">
+                                        <input type="number" id="missing" name="missing" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                             </div>
@@ -265,7 +196,7 @@ $array = explode("/", $_GET["url"]);
                                     <label for="remarks">Remarks</label>
                                 </div>
                                 <div class="col9">
-                                    <textarea type="text" id="remarks" name="remarks" placeholder="Remarks"></textarea>
+                                    <textarea type="text" id="remarks" name="remarks" placeholder="Remarks" required>Remarks</textarea>
                                 </div>
                             </div>
                         </div>

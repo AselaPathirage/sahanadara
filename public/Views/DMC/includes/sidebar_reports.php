@@ -18,12 +18,12 @@
                 <span class="links_name">Incident Report</span>
             </a>
         </li>
-        <li>
+        <!-- <li>
             <a href="<?php echo HOST; ?>/DMC/Report/CompensationReport" id="compensation">
                 <i class='bx bxs-report'></i>
                 <span class="links_name">Compensation </span>
             </a>
-        </li>
+        </li> -->
         <li>
             <a href="<?php echo HOST; ?>/DMC/Report/SafeHouseReport" id="safehouse">
                 <i class='bx bxs-report'></i>

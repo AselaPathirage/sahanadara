@@ -90,7 +90,7 @@
             </div>
 
 
-            <div class="help container text-center" id="help" style="background-color: aliceblue;margin-top: 80px;margin-bottom: 30px;padding-bottom: 80px">
+            <div class="help container text-center" id="help" style="background-color: #d4ecfa;margin-top: 80px;margin-bottom: 30px;padding-bottom: 80px">
                 <h1 id="topicTwo"></h1>
                 <div class="row text-center" style="justify-content: space-around;" id="box">
 
@@ -234,7 +234,7 @@
                     let currentAmout = obj['currentAmout'];
                     html += "<div class='card__inner js-expander'><div class='donation--container'><h1 id='donation--user" + i + "' class='donation--user'></h1><p id='donation--description" + i + "' style='padding-bottom: 10px'>Bellapitiya</p><span class='donation--title'>Reached:</span> <span id='donation--goal" + i + "' class='donation--goal'></span>";
                     html += "<div class='donation--bar'><div class='donation--rounded'><div id='donation--progress" + i + "' class='donation--progress' style='width: 0;'></div></div><div id='donation--number" + i + "' class='donation--number' style='left: 0;'></div><span id='donation--status" + i + "' class='donation--status'></span></div></div></div>";
-                    html += "<div class='card__expander'><i class='fa fa-close js-collapser'> </i><form class='form--container'><input id='donation--name' class='input_donate' type='text' placeholder='Enter name' name='donator'><input id='donation--amount" + i + "' class='input_donate' type='number' min='1' placeholder='Enter amount(Rs)' name='amount'><input id='donate" + i + "' class='button_donate' type='submit' value='Donate' data-frid='" + recordId + "'></form></div>";
+                    html += "<div class='card__expander'><i class='fa fa-close js-collapser'> </i><form method='POST' action='https://sandbox.payhere.lk/pay/checkout' class='form--container'><input id='donation--name' class='input_donate' type='text' placeholder='Enter name' name='donator'><input id='donation--amount" + i + "' class='input_donate' type='number' min='1' placeholder='Enter amount(Rs)' name='amount'><input id='donate" + i + "' class='button_donate' type='submit' value='Donate' data-frid='" + recordId + "'></form></div>";
                     div.innerHTML = html;
                     // if (val == 'si') {
                     //     div.innerHTML = "<h3>" + obj['recordId'] + "-" + obj['title'] + "</h3><address>" + obj['safeHouseAddress'] + "</address><p class='small'><b>දුරකතන අංකය -</b> " + obj['safeHouseTelno'] + "</p><p class='small'><b>අවතැන් වූ ප්‍රමානය -</b> 100</p><p class='small'>" + html + "</p><div class='go-corner' href='#'><div class='go-arrow'><i class='fas fa-hands-helping'></i></div></div>";

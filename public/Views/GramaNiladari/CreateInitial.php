@@ -133,7 +133,7 @@
                                         <label for="TP number">Families</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="afam" name="afam" placeholder="0">
+                                        <input type="number" id="afam" name="afam" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -141,7 +141,7 @@
                                         <label for="TP number">People</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="apeople" name="apeople" placeholder="0">
+                                        <input type="number" id="apeople" name="apeople" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
 
@@ -152,7 +152,7 @@
                                         <label for="TP number">Deaths</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="deaths" name="deaths" placeholder="0">
+                                        <input type="number" id="deaths" name="deaths" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -160,7 +160,7 @@
                                         <label for="TP number">Injured</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="injured" name="injured" placeholder="0">
+                                        <input type="number" id="injured" name="injured" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row" id="missingrow">
@@ -168,7 +168,7 @@
                                         <label for="TP number">Missing</label>
                                     </div>
                                     <div class="col9">
-                                        <input type="number" id="missing" name="missing" placeholder="0">
+                                        <input type="number" id="missing" name="missing" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                             </div>
@@ -185,7 +185,7 @@
                                         <label for="TP number">Fully</label>
                                     </div>
                                     <div class="col8">
-                                        <input type="number" id="hfull" name="hfull" placeholder="0">
+                                        <input type="number" id="hfull" name="hfull" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -193,7 +193,7 @@
                                         <label for="TP number">Partially</label>
                                     </div>
                                     <div class="col8">
-                                        <input type="number" id="hpartial" name="hpartial" placeholder="0">
+                                        <input type="number" id="hpartial" name="hpartial" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
 
@@ -209,7 +209,7 @@
                                         <label for="TP number">Enterprises </label>
                                     </div>
                                     <div class="col8">
-                                        <input type="number" id="enterprises" name="enterprises" placeholder="0">
+                                        <input type="number" id="enterprises" name="enterprises" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -218,7 +218,7 @@
                                         </label>
                                     </div>
                                     <div class="col8">
-                                        <input type="number" id="infra" name="infra" placeholder="0">
+                                        <input type="number" id="infra" name="infra" placeholder="0" min=0 step="1">
                                     </div>
                                 </div>
 
@@ -236,7 +236,7 @@
                                     <label for="TP number">Number of safe houses</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="safenum" name="safenum" placeholder="0">
+                                    <input type="number" id="safenum" name="safenum" placeholder="0" min=0 step="1">
                                 </div>
                             </div>
                             <div class="row">
@@ -244,7 +244,7 @@
                                     <label for="TP number">Families</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="sfam" name="sfam" placeholder="0">
+                                    <input type="number" id="sfam" name="sfam" placeholder="0" min=0 step="1">
                                 </div>
                             </div>
                             <div class="row">
@@ -252,7 +252,7 @@
                                     <label for="TP number">People</label>
                                 </div>
                                 <div class="col8">
-                                    <input type="number" id="speople" name="speople" placeholder="0">
+                                    <input type="number" id="speople" name="speople" placeholder="0" min=0 step="1">
                                 </div>
                             </div>
 
@@ -264,7 +264,7 @@
                                     <label for="remarks">Remarks</label>
                                 </div>
                                 <div class="col9">
-                                    <textarea type="text" id="remarks" name="remarks" placeholder="Remarks"></textarea>
+                                    <textarea type="text" id="remarks" name="remarks" placeholder="Remarks" required></textarea>
                                 </div>
                             </div>
                         </div>

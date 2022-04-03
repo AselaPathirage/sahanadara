@@ -1,0 +1,27 @@
+Useful git commands
+
+Create branch
+git checkout -b <new_branch_name>
+
+Name branch names according to features Eg: feature/login
+
+Change branch
+git checkout <branch_name>
+
+Work on your code
+
+Check the status
+git status
+
+Only add files that you have modified
+git add <file_names>
+
+Commit changes
+git commit -m "message"
+
+Push the code in your local repository to GitHub in the branch name
+git push -u origin <branch_name>
+
+Create a PULL REQUEST
+
+Merge existing branch with main git merge origin/main

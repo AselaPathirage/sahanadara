@@ -141,7 +141,7 @@
                                             <th style="width: 20%;"><button type="button" name="add" class="form-control add">Add</button></th>
                                         </tr>
                                     </thead>
-                                    <tbody></tbody>
+                                    <tbody id="trow"></tbody>
                                 </table>
                             </div>
                             <div style="float: right;width:30%">
@@ -225,6 +225,7 @@
                         if (result.code == 806) {
                             console.log("here");
                             $("#sendReport").trigger('reset');
+                            $("#trow").empty();
                             alertGen("Record Added Successfully!", 1);
                         } else {
                             alertGen("Unable to handle request.", 2);

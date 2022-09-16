@@ -126,7 +126,7 @@
                                                             <th style="width: 10%;"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody></tbody>
+                                                    <tbody id="trow"></tbody>
                                                 </table>
                                             </div>
                                             <div style="float: right;width:30%">
@@ -220,6 +220,7 @@
 					success: function(result) {
                         if(result.code==806){
                             $("#add").trigger('reset');
+                            $("#trow").empty();
                             alertGen("Record Added Successfully!",1);
                         }else{
                             alertGen("Unable to handle request.",2);

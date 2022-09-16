@@ -40,6 +40,7 @@
             height: 30px;
             width: 50px;
             border-radius: 15px;
+            background: #ff0000;
         }
 
         input.ios+label:before {
@@ -80,7 +81,7 @@
 
         input.ios:checked+label:after {
             left: 20px;
-            box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 0 0 1px #13bf11, 0 2px 4px rgba(5, 255, 5, 0.2);
         }
     </style>
 </head>
@@ -230,7 +231,7 @@
                             </table>
                         </div>
                         <div class="container" id="tbodyid">
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col6">
                                     <div class="box row-content">
                                         <h4>Flood in Millaniya</h4>
@@ -243,7 +244,7 @@
                                     </div>
                                 </div>
 
-                                <div class="col6">
+                                <div class="col6"> -->
                                     <!-- <div class="box row-content">
                                         <div class="button-row-container">
                                             
@@ -265,7 +266,7 @@
                                             <a href="<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView" class="btn_views">View</a>
                                         </div>
                                     </div> -->
-                                    <div class='box row-content' style='position:relative;'>
+                                    <!-- <div class='box row-content' style='position:relative;'>
                                         <div class='button-row-container' style='position: absolute; top:15px;right:35px;'>
                                             <div class='switch-container switch-ios'>
                                                 <input type='checkbox' name='ios1' id='ios1' class='ios' />
@@ -290,9 +291,9 @@
                                             <a href='http://localhost/sahanadara/sahanadara//DisasterOfficer/Dashboard/IncidentView/1' class='btn_views'>View</a>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
 
-                            </div>
+                            <!-- </div> -->
                             <!-- <div class="col6" style="overflow: auto">
                         <div class="box row-content">
                             <h4>Flood in Ingiriya</h4>
@@ -501,6 +502,9 @@
                     $sample += "/><label for='ios" + i + "'></label></div></div><h4>" + obj['title'] + "</h4><p>" + obj['description'] + "</p><div class='row' style='text-align: right; margin: 0 auto;display:block;'>";
                     if (obj['isActive'] == 1) {
                         $sample += "<a class='btn_active' style='position: absolute; top:33px;right:95px;'>Status : Active</a>";
+                    }
+                    if (obj['isActive'] == 0) {
+                        $sample += "<a class='btn_inactive' style='position: absolute; top:33px;right:95px;'>Status : Inactive</a>";
                     }
                     $sample += "<a href='<?php echo HOST; ?>/DisasterOfficer/Dashboard/IncidentView/" + obj['incidentId'] + "' class='btn_views'>View</a></div></div></div>";
                     if ((i % 2 == 1) || (i == output.length - 1)) {
